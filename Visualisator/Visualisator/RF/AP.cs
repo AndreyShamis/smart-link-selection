@@ -17,7 +17,7 @@ namespace Visualisator
         
         private Int32 _BeaconPeriod = 500;
 
-        private Int32 _AP_MAX_SEND_PERIOD = 600;
+        private Int32 _AP_MAX_SEND_PERIOD = 150;
         private Int32 _AP_MIN_SEND_PERIOD = 100;
         private static Random rnadomBeacon = new Random();
         private String _SSID = "";

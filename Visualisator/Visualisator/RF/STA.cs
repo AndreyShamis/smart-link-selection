@@ -495,13 +495,13 @@ namespace Visualisator
             String prev_band = this.getOperateBand();
 
             
+           // for (int i = 1; i < 15; i++)
+           // {
+           //     ScanOneChannel(i, 100, "N");
+          //  }
             for (int i = 1; i < 15; i++)
             {
-                ScanOneChannel(i, 100, "N");
-            }
-            for (int i = 1; i < 15; i++)
-            {
-                ScanOneChannel(i, 400, "N");
+                ScanOneChannel(i, 320, "N");
             }
             /*
             ArrayList Achannels = _MEDIUM.getBandAChannels();
