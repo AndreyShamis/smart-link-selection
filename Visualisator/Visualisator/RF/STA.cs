@@ -417,7 +417,7 @@ namespace Visualisator
                 dataPack.PacketID = SQID;
                 
                 SendData(dataPack);
-                int retrCounter = 10;
+                int retrCounter = 20;
                 ackReceived = false;
                 while (!ackReceived )
                 {
@@ -425,7 +425,7 @@ namespace Visualisator
                     Thread.Sleep(10);
                     if (retrCounter < 0)
                     {
-                        retrCounter = 10;
+                        retrCounter = 20;
                         SendData(dataPack);
                         _DataRetransmited++;
                     }

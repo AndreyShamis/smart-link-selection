@@ -150,7 +150,7 @@ namespace Visualisator
             _MEDIUM.SendData(pack);
             //Thread.Sleep(ran.Next(1, 2));
             //Thread.Sleep(1);
-            Thread.Sleep(new TimeSpan(100));
+            //Thread.Sleep(new TimeSpan(100));
             RF_STATUS = "NONE";
             
     
