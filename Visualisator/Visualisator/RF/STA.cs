@@ -55,6 +55,7 @@ namespace Visualisator
         //*********************************************************************
         public void Enable()
         {
+            CreateFolder();
             _Enabled = true;
             Thread newThread = new Thread(new ThreadStart(Listen));
             newThread.Start();
@@ -232,6 +233,19 @@ namespace Visualisator
             }
         }
 
+        private void CreateFolder()
+        {
+            // Specify a name for your top-level folder. 
+            string folderName = @"C:\simulator";
+
+            // To create a string that specifies the path to a subfolder under your  
+            // top-level folder, add a name for the subfolder to folderName. 
+            String mac = this.getMACAddress();
+            mac = mac.Replace(":", "-");
+            string pathString = System.IO.Path.Combine(folderName, mac);
+            
+            System.IO.Directory.CreateDirectory(pathString);
+        }
         //*********************************************************************
         public void ParseReceivedPacket(IPacket pack)
         {
