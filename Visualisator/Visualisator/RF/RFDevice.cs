@@ -72,6 +72,19 @@ namespace Visualisator
 
             return (ret);
         }
+
+        public bool RFWorking()
+        {
+            if (!RF_STATUS.Equals("NONE"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public MAC getMAC()
         {
             return _address;

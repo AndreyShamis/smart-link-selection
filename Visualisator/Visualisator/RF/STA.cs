@@ -28,6 +28,8 @@ namespace Visualisator
             get { return _DataRetransmited; }
             set { _DataRetransmited = value; }
         }
+
+        
         private bool ackReceived = false;
        /* public STA(Medium med)
         {

@@ -34,7 +34,7 @@ namespace Visualisator
         private Int32 _RADIUS = 50;
 
         static Random rand = new Random();
-        private Int32 _BOARDX = 600;
+        private Int32 _BOARDX = 680;
         private Int32 _BOARDY = 360;
         private enum SelectedObjectType
         {
@@ -275,24 +275,27 @@ namespace Visualisator
                 throw;
             }
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            DrowOnBoard();
-        }
-        
+ 
         public void refr()
         {
             gr.Clear(BoardColor);
 
+            Pen RadiusForApPen = null;
+            Pen RadiusForStaPen = null;
 
             for (int i = 0; i < _objects.Count; i++)
             {
                 if (_objects[i].GetType() == typeof(STA))
                 {
                     STA _tsta = (STA)_objects[i];
+                    
+                    if (_tsta.RFWorking())
+                        RadiusForStaPen = new Pen(System.Drawing.Color.SandyBrown);
+                    else
+                        RadiusForStaPen = new Pen(System.Drawing.Color.SpringGreen);
 
                     gr.DrawPie(new Pen(_tsta.VColor), (float)_tsta.x-5, (float)_tsta.y-5, 10, 10, 1, 360);
-                    gr.DrawPie(new Pen(System.Drawing.Color.SpringGreen), (float)_tsta.x - _RADIUS, (float)_tsta.y - _RADIUS, _RADIUS * 2, _RADIUS * 2, 1, 360);
+                    gr.DrawPie(RadiusForStaPen, (float)_tsta.x - _RADIUS, (float)_tsta.y - _RADIUS, _RADIUS * 2, _RADIUS * 2, 1, 360);
                     string drawString = "STA:" +_tsta.getOperateChannel() + " " + _tsta.getMACAddress();
                     System.Drawing.Font drawFont = new System.Drawing.Font(
                         "Arial", 7);
@@ -307,7 +310,13 @@ namespace Visualisator
                 {
                     AP _tap = (AP)_objects[i];
                     Rectangle myRectangle = new Rectangle((int)_tap.x-5, (int)_tap.y-5, 10, 10);
-                    gr.DrawPie(new Pen(System.Drawing.Color.Ivory), (float)_tap.x - _RADIUS, (float)_tap.y - _RADIUS, _RADIUS * 2, _RADIUS * 2, 1, 360);
+                    
+                    if(_tap.RFWorking())
+                        RadiusForApPen = new Pen(System.Drawing.Color.Coral);
+                    else
+                        RadiusForApPen = new Pen(System.Drawing.Color.Ivory);
+
+                    gr.DrawPie(RadiusForApPen, (float)_tap.x - _RADIUS, (float)_tap.y - _RADIUS, _RADIUS * 2, _RADIUS * 2, 1, 360);
                     gr.DrawRectangle(new Pen(_tap.VColor), myRectangle);
 
 
@@ -476,6 +485,27 @@ namespace Visualisator
         private void tmrGUISlow_Tick(object sender, EventArgs e)
         {
             DrowOnBoard();
+            lblUpdateIntervalDescr.Text = "Update Interval:" + tmrGUISlow.Interval;
+        }
+
+        private void btnSetUpdateInterval_Click(object sender, EventArgs e)
+        {
+            Int32 updateInterval = 100;
+
+            try
+            {
+
+                updateInterval = Convert.ToInt32(txtUpdateInterval.Text);
+                tmrGUISlow.Interval = updateInterval;
+            }
+            catch(Exception)
+            {
+            }
+        }
+
+        private void txtUpdateInterval_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
 

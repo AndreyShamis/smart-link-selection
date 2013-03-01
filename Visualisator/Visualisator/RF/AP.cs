@@ -42,6 +42,7 @@ namespace Visualisator
            return _AssociatedDevices; 
         }
 
+
         //*********************************************************************
         private string RandomString(int size)
         {
