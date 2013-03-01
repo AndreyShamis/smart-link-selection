@@ -35,7 +35,7 @@ namespace Visualisator
 
         static Random rand = new Random();
         private Int32 _BOARDX = 600;
-        private Int32 _BOARDY = 340;
+        private Int32 _BOARDY = 360;
         private enum SelectedObjectType
         {
             STA,
@@ -292,8 +292,8 @@ namespace Visualisator
                     STA _tsta = (STA)_objects[i];
 
                     gr.DrawPie(new Pen(_tsta.VColor), (float)_tsta.x-5, (float)_tsta.y-5, 10, 10, 1, 360);
-                    gr.DrawPie(new Pen(System.Drawing.Color.Purple), (float)_tsta.x - _RADIUS, (float)_tsta.y - _RADIUS, _RADIUS * 2, _RADIUS * 2, 1, 360);
-                    string drawString = _tsta.getOperateChannel() + " " + _tsta.getMACAddress();
+                    gr.DrawPie(new Pen(System.Drawing.Color.SpringGreen), (float)_tsta.x - _RADIUS, (float)_tsta.y - _RADIUS, _RADIUS * 2, _RADIUS * 2, 1, 360);
+                    string drawString = "STA:" +_tsta.getOperateChannel() + " " + _tsta.getMACAddress();
                     System.Drawing.Font drawFont = new System.Drawing.Font(
                         "Arial", 7);
                     System.Drawing.SolidBrush drawBrush = new
@@ -307,13 +307,13 @@ namespace Visualisator
                 {
                     AP _tap = (AP)_objects[i];
                     Rectangle myRectangle = new Rectangle((int)_tap.x-5, (int)_tap.y-5, 10, 10);
-                    gr.DrawPie(new Pen(System.Drawing.Color.Purple), (float)_tap.x - _RADIUS, (float)_tap.y - _RADIUS, _RADIUS * 2, _RADIUS * 2, 1, 360);
+                    gr.DrawPie(new Pen(System.Drawing.Color.Ivory), (float)_tap.x - _RADIUS, (float)_tap.y - _RADIUS, _RADIUS * 2, _RADIUS * 2, 1, 360);
                     gr.DrawRectangle(new Pen(_tap.VColor), myRectangle);
 
 
-                    string drawString = _tap.getOperateChannel() + " " + _tap.SSID + " " + _tap.getMACAddress();
+                    string drawString = "AP:" +  _tap.getOperateChannel() + " " + _tap.SSID + " " + _tap.getMACAddress();
                     System.Drawing.Font drawFont = new System.Drawing.Font(
-                        "Arial", 7);
+                        "Arial", 8);
                     System.Drawing.SolidBrush drawBrush = new
                         System.Drawing.SolidBrush(System.Drawing.Color.White);
 
@@ -324,13 +324,6 @@ namespace Visualisator
                 }
             }
             
-            for (int i = 0; i < APs_SIZE; i++)
-            {
-            }
-
-            for (int i = 0; i < STA_SIZE; i++)
-            {
-            }
             gr.DrawPie(new Pen(Color.Yellow), 500 / 2, 500 / 2, 1, 1, 1, 360);
             piB.Image = bm;
         }

@@ -80,10 +80,10 @@ namespace Visualisator
             {
                 btnScan.Enabled = true;
             }
-            else
-            {
-                txtDumpAll.Text = _sta.DumpAll();
-            }
+          
+          //      txtDumpAll.Text = _sta.DumpAll();
+            
+
             txtDataReceeived.Text = _sta.getDataRecieved().ToString();
             lblSent.Text = _sta.getDataSent().ToString();
             lblAssociatedAP.Text =  _sta.getAssociatedAP_SSID();
@@ -116,6 +116,11 @@ namespace Visualisator
         private void cmdReset_Click(object sender, EventArgs e)
         {
             _sta.ResetCounters();
+        }
+
+        private void tmrFast_Tick(object sender, EventArgs e)
+        {
+            txtDumpAll.Text = _sta.DumpAll();
         }
     }
 }

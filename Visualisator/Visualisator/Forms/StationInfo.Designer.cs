@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblRetransmited = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblAckReceived = new System.Windows.Forms.Label();
             this.cmdReset = new System.Windows.Forms.Button();
@@ -52,8 +54,7 @@
             this.btnDumpAll = new System.Windows.Forms.Button();
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblRetransmited = new System.Windows.Forms.Label();
+            this.tmrFast = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -88,10 +89,28 @@
             this.groupBox1.Text = "Cennect Info";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(168, 87);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Retransmitted";
+            // 
+            // lblRetransmited
+            // 
+            this.lblRetransmited.AutoSize = true;
+            this.lblRetransmited.Location = new System.Drawing.Point(269, 87);
+            this.lblRetransmited.Name = "lblRetransmited";
+            this.lblRetransmited.Size = new System.Drawing.Size(35, 13);
+            this.lblRetransmited.TabIndex = 19;
+            this.lblRetransmited.Text = "label2";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(394, 69);
+            this.label4.Location = new System.Drawing.Point(168, 71);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 13);
             this.label4.TabIndex = 18;
@@ -100,7 +119,7 @@
             // lblAckReceived
             // 
             this.lblAckReceived.AutoSize = true;
-            this.lblAckReceived.Location = new System.Drawing.Point(495, 69);
+            this.lblAckReceived.Location = new System.Drawing.Point(269, 71);
             this.lblAckReceived.Name = "lblAckReceived";
             this.lblAckReceived.Size = new System.Drawing.Size(35, 13);
             this.lblAckReceived.TabIndex = 17;
@@ -108,9 +127,10 @@
             // 
             // cmdReset
             // 
-            this.cmdReset.Location = new System.Drawing.Point(232, 44);
+            this.cmdReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.cmdReset.Location = new System.Drawing.Point(310, 68);
             this.cmdReset.Name = "cmdReset";
-            this.cmdReset.Size = new System.Drawing.Size(53, 22);
+            this.cmdReset.Size = new System.Drawing.Size(47, 20);
             this.cmdReset.TabIndex = 16;
             this.cmdReset.Text = "Reset";
             this.cmdReset.UseVisualStyleBackColor = true;
@@ -119,7 +139,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(232, 69);
+            this.label3.Location = new System.Drawing.Point(6, 71);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 13);
             this.label3.TabIndex = 15;
@@ -128,7 +148,7 @@
             // lblSent
             // 
             this.lblSent.AutoSize = true;
-            this.lblSent.Location = new System.Drawing.Point(291, 69);
+            this.lblSent.Location = new System.Drawing.Point(65, 71);
             this.lblSent.Name = "lblSent";
             this.lblSent.Size = new System.Drawing.Size(35, 13);
             this.lblSent.TabIndex = 14;
@@ -137,7 +157,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(232, 82);
+            this.label2.Location = new System.Drawing.Point(6, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 13;
@@ -146,7 +166,7 @@
             // txtDataReceeived
             // 
             this.txtDataReceeived.AutoSize = true;
-            this.txtDataReceeived.Location = new System.Drawing.Point(291, 82);
+            this.txtDataReceeived.Location = new System.Drawing.Point(65, 84);
             this.txtDataReceeived.Name = "txtDataReceeived";
             this.txtDataReceeived.Size = new System.Drawing.Size(35, 13);
             this.txtDataReceeived.TabIndex = 12;
@@ -154,23 +174,23 @@
             // 
             // txtMAC
             // 
-            this.txtMAC.Location = new System.Drawing.Point(18, 82);
+            this.txtMAC.Location = new System.Drawing.Point(8, 48);
             this.txtMAC.Name = "txtMAC";
             this.txtMAC.Size = new System.Drawing.Size(183, 20);
             this.txtMAC.TabIndex = 11;
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(247, 104);
+            this.txtDestination.Location = new System.Drawing.Point(115, 104);
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(189, 20);
             this.txtDestination.TabIndex = 10;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(451, 104);
+            this.button1.Location = new System.Drawing.Point(310, 94);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 30);
+            this.button1.Size = new System.Drawing.Size(76, 30);
             this.button1.TabIndex = 9;
             this.button1.Text = "Send Data";
             this.button1.UseVisualStyleBackColor = true;
@@ -181,7 +201,7 @@
             this.lblAssociatedAP.AutoSize = true;
             this.lblAssociatedAP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lblAssociatedAP.ForeColor = System.Drawing.Color.Green;
-            this.lblAssociatedAP.Location = new System.Drawing.Point(429, 39);
+            this.lblAssociatedAP.Location = new System.Drawing.Point(319, 39);
             this.lblAssociatedAP.Name = "lblAssociatedAP";
             this.lblAssociatedAP.Size = new System.Drawing.Size(116, 16);
             this.lblAssociatedAP.TabIndex = 8;
@@ -191,7 +211,7 @@
             // 
             this.ConnectedToLabel.AutoSize = true;
             this.ConnectedToLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.ConnectedToLabel.Location = new System.Drawing.Point(316, 39);
+            this.ConnectedToLabel.Location = new System.Drawing.Point(206, 39);
             this.ConnectedToLabel.Name = "ConnectedToLabel";
             this.ConnectedToLabel.Size = new System.Drawing.Size(107, 16);
             this.ConnectedToLabel.TabIndex = 7;
@@ -210,7 +230,7 @@
             // lblMac
             // 
             this.lblMac.AutoSize = true;
-            this.lblMac.Location = new System.Drawing.Point(16, 53);
+            this.lblMac.Location = new System.Drawing.Point(6, 32);
             this.lblMac.Name = "lblMac";
             this.lblMac.Size = new System.Drawing.Size(35, 13);
             this.lblMac.TabIndex = 6;
@@ -218,9 +238,9 @@
             // 
             // btnScan
             // 
-            this.btnScan.Location = new System.Drawing.Point(420, 14);
+            this.btnScan.Location = new System.Drawing.Point(392, 14);
             this.btnScan.Name = "btnScan";
-            this.btnScan.Size = new System.Drawing.Size(86, 22);
+            this.btnScan.Size = new System.Drawing.Size(57, 22);
             this.btnScan.TabIndex = 5;
             this.btnScan.Text = "Scan";
             this.btnScan.UseVisualStyleBackColor = true;
@@ -230,7 +250,7 @@
             // 
             this.btnConnectToBSS.Location = new System.Drawing.Point(319, 14);
             this.btnConnectToBSS.Name = "btnConnectToBSS";
-            this.btnConnectToBSS.Size = new System.Drawing.Size(86, 21);
+            this.btnConnectToBSS.Size = new System.Drawing.Size(67, 21);
             this.btnConnectToBSS.TabIndex = 3;
             this.btnConnectToBSS.Text = "Connect";
             this.btnConnectToBSS.UseVisualStyleBackColor = true;
@@ -250,7 +270,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Location = new System.Drawing.Point(5, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(175, 16);
             this.label1.TabIndex = 1;
@@ -290,26 +310,13 @@
             // tmrGUI
             // 
             this.tmrGUI.Enabled = true;
-            this.tmrGUI.Interval = 20;
             this.tmrGUI.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label5
+            // tmrFast
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(394, 85);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 13);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "Retransmitted";
-            // 
-            // lblRetransmited
-            // 
-            this.lblRetransmited.AutoSize = true;
-            this.lblRetransmited.Location = new System.Drawing.Point(495, 85);
-            this.lblRetransmited.Name = "lblRetransmited";
-            this.lblRetransmited.Size = new System.Drawing.Size(35, 13);
-            this.lblRetransmited.TabIndex = 19;
-            this.lblRetransmited.Text = "label2";
+            this.tmrFast.Enabled = true;
+            this.tmrFast.Interval = 2;
+            this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
             // StationInfo
             // 
@@ -356,5 +363,6 @@
         private System.Windows.Forms.Label lblAckReceived;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblRetransmited;
+        private System.Windows.Forms.Timer tmrFast;
     }
 }
