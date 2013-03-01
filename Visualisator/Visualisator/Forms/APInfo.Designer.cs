@@ -42,6 +42,12 @@
             this.tbrGUISlow = new System.Windows.Forms.Timer(this.components);
             this.lblKeepAliveReceived = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.lblDataReceived = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblDataAckReceived = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tmrFast = new System.Windows.Forms.Timer(this.components);
+            this.listStations = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -159,11 +165,66 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "KeepAlive Recieved";
             // 
+            // lblDataReceived
+            // 
+            this.lblDataReceived.AutoSize = true;
+            this.lblDataReceived.Location = new System.Drawing.Point(191, 147);
+            this.lblDataReceived.Name = "lblDataReceived";
+            this.lblDataReceived.Size = new System.Drawing.Size(13, 13);
+            this.lblDataReceived.TabIndex = 13;
+            this.lblDataReceived.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(25, 147);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(79, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Data Received";
+            // 
+            // lblDataAckReceived
+            // 
+            this.lblDataAckReceived.AutoSize = true;
+            this.lblDataAckReceived.Location = new System.Drawing.Point(191, 169);
+            this.lblDataAckReceived.Name = "lblDataAckReceived";
+            this.lblDataAckReceived.Size = new System.Drawing.Size(13, 13);
+            this.lblDataAckReceived.TabIndex = 15;
+            this.lblDataAckReceived.Text = "0";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(25, 169);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(100, 13);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "DataACK Recieved";
+            // 
+            // tmrFast
+            // 
+            this.tmrFast.Enabled = true;
+            this.tmrFast.Interval = 5;
+            this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
+            // 
+            // listStations
+            // 
+            this.listStations.FormattingEnabled = true;
+            this.listStations.Location = new System.Drawing.Point(373, 0);
+            this.listStations.Name = "listStations";
+            this.listStations.Size = new System.Drawing.Size(206, 342);
+            this.listStations.TabIndex = 16;
+            // 
             // APInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(501, 343);
+            this.ClientSize = new System.Drawing.Size(581, 343);
+            this.Controls.Add(this.listStations);
+            this.Controls.Add(this.lblDataAckReceived);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lblDataReceived);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.lblKeepAliveReceived);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblChannel);
@@ -199,5 +260,11 @@
         private System.Windows.Forms.Timer tbrGUISlow;
         private System.Windows.Forms.Label lblKeepAliveReceived;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblDataReceived;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblDataAckReceived;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Timer tmrFast;
+        private System.Windows.Forms.ListBox listStations;
     }
 }

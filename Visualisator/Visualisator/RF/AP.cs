@@ -37,6 +37,11 @@ namespace Visualisator
             set { _KeepAliveReceived = value; }
         }
 
+        public ArrayListCounted getAssociatedDevices()
+        {
+           return _AssociatedDevices; 
+        }
+
         //*********************************************************************
         private string RandomString(int size)
         {
@@ -242,7 +247,8 @@ namespace Visualisator
                 _wp.X = this.x;
                 _wp.Y = this.y;
                 SendData(_wp);
-                
+                DataReceived++;
+
             }
             else if (Pt == typeof(DataAck))
             {
@@ -257,6 +263,7 @@ namespace Visualisator
                 _wp.X = this.x;
                 _wp.Y = this.y;
                 SendData(_wp);
+                DataAckReceived++;
             }
             else
             {

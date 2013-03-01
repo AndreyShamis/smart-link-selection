@@ -36,6 +36,22 @@ namespace Visualisator
             lblSSID.Text = _ap.SSID;
             lblConnectedSTA.Text = _ap.CenntedDevicesCount().ToString();
             lblKeepAliveReceived.Text = _ap.KeepAliveReceived.ToString();
+
+            ArrayListCounted devicesList = _ap.getAssociatedDevices();
+            listStations.Items.Clear();
+            foreach (object __o in devicesList)
+            {
+                string s = (string)__o;
+                listStations.Items.Add(s);
+                // loop body
+            }
+            
+        }
+
+        private void tmrFast_Tick(object sender, EventArgs e)
+        {
+            lblDataReceived.Text = _ap.getDataRecieved().ToString();
+            lblDataAckReceived.Text = _ap.getDataAckRecieved().ToString();
         }
     }
 }
