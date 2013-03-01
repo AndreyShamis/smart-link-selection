@@ -58,7 +58,6 @@
             this.txtConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtConsole.Size = new System.Drawing.Size(253, 97);
             this.txtConsole.TabIndex = 1;
-            this.txtConsole.TextChanged += new System.EventHandler(this.txtConsole_TextChanged);
             // 
             // btn_AddAP
             // 
@@ -68,7 +67,6 @@
             this.btn_AddAP.TabIndex = 2;
             this.btn_AddAP.Text = "Add AP";
             this.btn_AddAP.UseVisualStyleBackColor = true;
-            this.btn_AddAP.Click += new System.EventHandler(this.btn_AddAP_Click);
             // 
             // btn_AddSTA
             // 
@@ -78,7 +76,6 @@
             this.btn_AddSTA.TabIndex = 3;
             this.btn_AddSTA.Text = "Add STA";
             this.btn_AddSTA.UseVisualStyleBackColor = true;
-            this.btn_AddSTA.Click += new System.EventHandler(this.btn_AddSTA_Click);
             // 
             // label1
             // 
@@ -88,7 +85,6 @@
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Console";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnStopMedium
             // 
@@ -123,7 +119,7 @@
             // openDLGOpenSimulationSettings
             // 
             this.openDLGOpenSimulationSettings.FileName = "openFileDialog1";
-            this.openDLGOpenSimulationSettings.FileOk += new System.ComponentModel.CancelEventHandler(this.openDLGOpenSimulationSettings_FileOk);
+
             // 
             // button4
             // 
@@ -168,7 +164,6 @@
             this.txtUpdateInterval.TabIndex = 11;
             this.txtUpdateInterval.Text = "100";
             this.txtUpdateInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtUpdateInterval.TextChanged += new System.EventHandler(this.txtUpdateInterval_TextChanged);
             // 
             // btnSetUpdateInterval
             // 
@@ -200,7 +195,6 @@
             this.Name = "MainForm";
             this.Text = "SLS - Smart Link Selection - Visualisator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Leave += new System.EventHandler(this.Form1_Leave);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
