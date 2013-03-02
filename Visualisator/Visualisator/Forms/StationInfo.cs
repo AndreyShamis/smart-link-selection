@@ -132,6 +132,14 @@ namespace Visualisator
         private void tmrFast_Tick(object sender, EventArgs e)
         {
             txtDumpAll.Text = _sta.DumpAll();
+            if(_sta.WaitingForAck)
+            {
+                lblWaitingForAck.BackColor = Color.Chartreuse;
+            }
+            else
+            {
+                lblWaitingForAck.BackColor = Color.Black;
+            }
         }
 
         private void btnSaveData_Click(object sender, EventArgs e)

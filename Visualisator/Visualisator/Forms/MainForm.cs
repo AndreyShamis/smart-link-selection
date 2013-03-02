@@ -402,6 +402,11 @@ namespace Visualisator
               gr = Graphics.FromImage(bm);
               */
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblMediumPacketsCount.Text = _MEDIUM.getPacketsFound().ToString();
+        }
        
     }
 }

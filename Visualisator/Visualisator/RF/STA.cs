@@ -25,6 +25,8 @@ namespace Visualisator
         private int _DataRetransmited = 0;
         private int _DataAckRetransmitted = 0;
         private String DOCpath = "";
+
+        private bool _WaitingForAck = false;
         private StringBuilder DataReceivedContainer = new StringBuilder();
 
 
@@ -43,6 +45,12 @@ namespace Visualisator
         {
             get { return _DataAckRetransmitted; }
             set { _DataAckRetransmitted = value; }
+        }
+
+        public bool WaitingForAck
+        {
+            get { return _WaitingForAck; }
+            set { _WaitingForAck = value; }
         }
 
 
@@ -353,9 +361,10 @@ namespace Visualisator
 
                     if (PrevDataAckID != dat.PacketID){
                         _DataAckReceived++;
+                        ackReceived = true;
+                        PrevDataAckID = dat.PacketID;
                     }
-                    ackReceived = true;
-                PrevDataAckID = dat.PacketID;
+
             }
             else
             {
@@ -395,23 +404,23 @@ namespace Visualisator
         //*********************************************************************
         public void SendData(SimulatorPacket PacketToSend)
         {
-            Random ran = new Random((int)DateTime.Now.Ticks);
+            //Random ran = new Random((int)DateTime.Now.Ticks);
             SpinWait.SpinUntil(RF_Ready);
            // while(RF_STATUS != "NONE")
             //    Thread.Sleep(ran.Next(1, 3));
       
             RF_STATUS = "TX";
-            while (!_MEDIUM.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y))
+           /* while (!_MEDIUM.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y))
             {
                 RF_STATUS = "NONE";
-                Thread.Sleep(new TimeSpan(100));
+                Thread.Sleep(new TimeSpan(20));
                 //Thread.Sleep(ran.Next(1, 3));
                 SpinWait.SpinUntil(RF_Ready);
                 //while (RF_STATUS != "NONE")
                 //    Thread.Sleep(ran.Next(1, 3));
                 RF_STATUS = "TX";
             }
-             
+             */
             // Now scanning process running
             if (_scanning)
             {
@@ -419,7 +428,7 @@ namespace Visualisator
             }
             _MEDIUM.SendData(PacketToSend);
 
-            Thread.Sleep(1);
+            //Thread.Sleep(1);
             RF_STATUS = "NONE";
             
             if (PacketToSend.GetType() == typeof(Data))
@@ -457,6 +466,7 @@ namespace Visualisator
 
         public void ThreadAbleReadFile(String fileName)
         {
+
             string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\_DATA_TO_SEND\input.txt");
             AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
             Data dataPack = new Data(CreatePacket());
@@ -478,24 +488,27 @@ namespace Visualisator
                 SQID++;
                 dataPack.setData(line);
                 dataPack.PacketID = SQID;
-                
-                SendData(dataPack);
-                int retrCounter = 20;
+
                 ackReceived = false;
+                SendData(dataPack);
+                WaitingForAck = true;
+                int retrCounter = 10;
+                Thread.Sleep(6);
                 while (!ackReceived )
                 {
                     retrCounter--;
                     Thread.Sleep(10);
                     if (retrCounter < 0)
                     {
-                        retrCounter = 20;
+                        retrCounter = 10;
                         SendData(dataPack);
                         _DataRetransmited++;
                     }
                 }
+                WaitingForAck = false;
                 //SpinWait.SpinUntil(() => { return ackReceived; });
-                
-               // Thread.Sleep(3);
+
+                // Thread.Sleep(3);
                 //Console.WriteLine("\t" + line);
             }
         }

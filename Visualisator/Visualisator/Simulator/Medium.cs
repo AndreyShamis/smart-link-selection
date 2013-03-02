@@ -117,6 +117,11 @@ namespace Visualisator
             }
             return (true);
         }
+
+        public int getPacketsFound()
+        {
+            return  _packets.Count;
+        }
         //*********************************************************************
 
         private void AddToLog(String data){
@@ -275,6 +280,10 @@ namespace Visualisator
         //*********************************************************************
         public Boolean MediumHaveAIRWork(RFDevice device)
         {
+            if(this.getPacketsFound() < 1)
+            {
+                return false;
+            }
                 Key Pk = new Key(device.getOperateBand(), device.getOperateChannel(),device.getMACAddress());
                 Key Pk2 = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
                 if (_packets != null && (_packets.ContainsKey(Pk) || _packets.ContainsKey(Pk2)))

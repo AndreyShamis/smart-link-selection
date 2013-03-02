@@ -44,6 +44,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtUpdateInterval = new System.Windows.Forms.TextBox();
             this.btnSetUpdateInterval = new System.Windows.Forms.Button();
+            this.lblMediumPacketsCount = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // txtConsole
@@ -119,7 +121,6 @@
             // openDLGOpenSimulationSettings
             // 
             this.openDLGOpenSimulationSettings.FileName = "openFileDialog1";
-
             // 
             // button4
             // 
@@ -175,11 +176,27 @@
             this.btnSetUpdateInterval.UseVisualStyleBackColor = true;
             this.btnSetUpdateInterval.Click += new System.EventHandler(this.btnSetUpdateInterval_Click);
             // 
+            // lblMediumPacketsCount
+            // 
+            this.lblMediumPacketsCount.AutoSize = true;
+            this.lblMediumPacketsCount.Location = new System.Drawing.Point(735, 252);
+            this.lblMediumPacketsCount.Name = "lblMediumPacketsCount";
+            this.lblMediumPacketsCount.Size = new System.Drawing.Size(35, 13);
+            this.lblMediumPacketsCount.TabIndex = 13;
+            this.lblMediumPacketsCount.Text = "label2";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 375);
+            this.Controls.Add(this.lblMediumPacketsCount);
             this.Controls.Add(this.btnSetUpdateInterval);
             this.Controls.Add(this.txtUpdateInterval);
             this.Controls.Add(this.lblUpdateIntervalDescr);
@@ -220,6 +237,8 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TextBox txtUpdateInterval;
         private System.Windows.Forms.Button btnSetUpdateInterval;
+        private System.Windows.Forms.Label lblMediumPacketsCount;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
