@@ -7,6 +7,7 @@ using System.Threading;
 using System.Collections;
 using Visualisator.Packets;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Visualisator
 {
@@ -22,6 +23,10 @@ namespace Visualisator
         private int PrevDataID = 0;
         private int PrevDataAckID = 0;
         private int _DataRetransmited = 0;
+
+        private String DOCpath = "";
+        private StringBuilder DataReceivedContainer = new StringBuilder();
+
 
         public int DataRetransmited
         {
@@ -243,8 +248,28 @@ namespace Visualisator
             String mac = this.getMACAddress();
             mac = mac.Replace(":", "-");
             string pathString = System.IO.Path.Combine(folderName, mac);
-            
+            DOCpath = pathString;
             System.IO.Directory.CreateDirectory(pathString);
+        }
+
+
+        public void SaveReceivedDataIntoFile()
+        {
+            string mydocpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            StringBuilder sb = new StringBuilder();
+
+
+
+            using (StreamWriter outfile = new StreamWriter(DOCpath + @"\received.txt"))
+            {
+                outfile.Write(DataReceivedContainer.ToString());
+            } 
+        }
+
+        public Int32 getSizeOfReceivedData()
+        {
+
+            return DataReceivedContainer.Length;
         }
         //*********************************************************************
         public void ParseReceivedPacket(IPacket pack)
@@ -268,44 +293,53 @@ namespace Visualisator
                     _AccessPoint.Add(bec.SSID);
                 }
                 _AccessPoint.Increase(bec.SSID);
-                Thread.Sleep(2);
+                //Thread.Sleep(2);
             }
 
             else if (_Pt == typeof(Packets.Data))
             {
                 Packets.Data dat = (Packets.Data)pack;
-                bool recieve = false;
-
-                    if (dat.PacketID != PrevDataID)
-                    {
-                        recieve = true;
-                    }
+                bool recieve = dat.PacketID != PrevDataID;
 
                 if (recieve)
                 {
-
-
                     _DataReceived++;
-                }
+                
 
-                DataAck da = new DataAck(CreatePacket());
-                PrevDataID = dat.PacketID;
-                AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
-                da.Destination = _connecttoAP.getMACAddress();
-                da.PacketChannel = this.getOperateChannel();
-                da.PacketBand = this.getOperateBand();
-                da.Reciver = dat.Source;
-                //Thread.Sleep(2);
-                da.PacketID = dat.PacketID;
-                SendData(da);   
+                    DataAck da = new DataAck(CreatePacket());
+                    PrevDataID = dat.PacketID;
+                    AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+                    da.Destination = _connecttoAP.getMACAddress();
+                    da.PacketChannel = this.getOperateChannel();
+                    da.PacketBand = this.getOperateBand();
+                    da.Reciver = dat.Source;
+                    DataReceivedContainer.Append(dat.getData() + "\r\n");
+                    //Thread.Sleep(2);
+                    da.PacketID = dat.PacketID;
+                    SendData(da);
+                }
+                else
+                {
+                    //  ACK Not received
+                    AddToLog("ACK Not received :" + dat.PacketID);
+                    DataAck da = new DataAck(CreatePacket());
+                    //PrevDataID = dat.PacketID;
+                    AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+                    da.Destination = _connecttoAP.getMACAddress();
+                    da.PacketChannel = this.getOperateChannel();
+                    da.PacketBand = this.getOperateBand();
+                    da.Reciver = dat.Source;
+                    //DataReceivedContainer.Append(dat.getData() + "\r\n");
+                    //Thread.Sleep(2);
+                    da.PacketID = dat.PacketID;
+                    SendData(da);
+                }
             }
             else if (_Pt == typeof(Packets.DataAck))
             {
                 Packets.DataAck dat = (Packets.DataAck)pack;
 
-                    if (PrevDataAckID != dat.PacketID)
-                    {
-                        
+                    if (PrevDataAckID != dat.PacketID){
                         _DataAckReceived++;
                     }
                     ackReceived = true;

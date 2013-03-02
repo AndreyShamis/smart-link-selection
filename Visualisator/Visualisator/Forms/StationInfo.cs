@@ -24,7 +24,7 @@ namespace Visualisator
 
         private void StationInfo_Load(object sender, EventArgs e)
         {
-            lblMac.Text = _sta.getMACAddress();
+           // lblMac.Text = _sta.getMACAddress();
             lblCoordinates.Text = "X:" + (int)_sta.x + " Y:" + (int)_sta.y; 
             PrintAPList();
             txtMAC.Text = _sta.getMACAddress();
@@ -80,7 +80,11 @@ namespace Visualisator
             {
                 btnScan.Enabled = true;
             }
-          
+
+            if (_sta.getSizeOfReceivedData() > 1)
+            {
+                btnSaveData.Enabled = true;
+            }
           //      txtDumpAll.Text = _sta.DumpAll();
             
 
@@ -121,6 +125,11 @@ namespace Visualisator
         private void tmrFast_Tick(object sender, EventArgs e)
         {
             txtDumpAll.Text = _sta.DumpAll();
+        }
+
+        private void btnSaveData_Click(object sender, EventArgs e)
+        {
+            _sta.SaveReceivedDataIntoFile();
         }
     }
 }

@@ -163,10 +163,10 @@ namespace Visualisator
     
         }
         //*********************************************************************
-        public Packets.IPacket ReceiveData(IRFDevice ThisDevice)
-        {
-            throw new NotImplementedException();
-        }
+       // public Packets.IPacket ReceiveData(IRFDevice ThisDevice)
+        //{
+         //   throw new NotImplementedException();
+       // }
         private bool checkIfHaveDataReceive()
         {
             return _MEDIUM.MediumHaveAIRWork(this);
