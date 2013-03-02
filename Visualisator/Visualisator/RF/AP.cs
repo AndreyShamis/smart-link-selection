@@ -147,6 +147,7 @@ namespace Visualisator
                 RF_STATUS = "NONE";
                 //Thread.Sleep(ran.Next(1, 2));
                 Thread.Sleep(new TimeSpan(20));
+                Thread.Sleep(1);
                 SpinWait.SpinUntil(RF_Ready);
                
                 //while (RF_STATUS != "NONE")
@@ -242,8 +243,8 @@ namespace Visualisator
             {
                 Data _wp        = (Data)pack;
                 // Update Keep Alive
-                Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
-                newThread.Start();
+                //Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
+                //newThread.Start();
 
                 _wp.Destination = _wp.Reciver;
                 _wp.X = this.x;

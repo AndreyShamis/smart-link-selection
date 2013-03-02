@@ -416,11 +416,12 @@ namespace Visualisator
                 RF_STATUS = "NONE";
                 Thread.Sleep(new TimeSpan(20));
                 //Thread.Sleep(ran.Next(1, 3));
-                if (trys > 20)
+                if (trys > 10)
                 {
                     Thread.Sleep(2);
                     trys = 0;
                 }
+                trys++;
                 SpinWait.SpinUntil(RF_Ready);
                 //while (RF_STATUS != "NONE")
                 //    Thread.Sleep(ran.Next(1, 3));
@@ -436,7 +437,7 @@ namespace Visualisator
 
             //Thread.Sleep(1);
             RF_STATUS = "NONE";
-            
+            Thread.Sleep(2);
             if (PacketToSend.GetType() == typeof(Data))
             {
                 _DataSent++;
@@ -498,15 +499,15 @@ namespace Visualisator
                 ackReceived = false;
                 SendData(dataPack);
                 WaitingForAck = true;
-                int retrCounter = 40;
+                int retrCounter = 60;
                 Thread.Sleep(6);
                 while (!ackReceived )
                 {
                     retrCounter--;
-                    Thread.Sleep(1);
+                    Thread.Sleep(2);
                     if (retrCounter < 0)
                     {
-                        retrCounter = 100;
+                        retrCounter = 60;
                         SendData(dataPack);
                         _DataRetransmited++;
                     }

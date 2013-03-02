@@ -91,15 +91,12 @@ namespace Visualisator
             {
                 btnSaveData.Enabled = true;
             }
+
+            txtDumpAll.Text = _sta.DumpAll();
           //      txtDumpAll.Text = _sta.DumpAll();
             
 
-            txtDataReceeived.Text = _sta.getDataRecieved().ToString();
-            lblSent.Text = _sta.getDataSent().ToString();
-            lblAssociatedAP.Text =  _sta.getAssociatedAP_SSID();
-            lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
-            lblRetransmited.Text = _sta.DataRetransmited.ToString();
-            lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
+
         }
 
         private void btnConnectToBSS_Click(object sender, EventArgs e)
@@ -131,7 +128,7 @@ namespace Visualisator
 
         private void tmrFast_Tick(object sender, EventArgs e)
         {
-            txtDumpAll.Text = _sta.DumpAll();
+            
             if(_sta.WaitingForAck)
             {
                 lblWaitingForAck.BackColor = Color.Chartreuse;
@@ -140,6 +137,12 @@ namespace Visualisator
             {
                 lblWaitingForAck.BackColor = Color.Black;
             }
+            txtDataReceeived.Text = _sta.getDataRecieved().ToString();
+            lblSent.Text = _sta.getDataSent().ToString();
+            lblAssociatedAP.Text = _sta.getAssociatedAP_SSID();
+            lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
+            lblRetransmited.Text = _sta.DataRetransmited.ToString();
+            lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
         }
 
         private void btnSaveData_Click(object sender, EventArgs e)
