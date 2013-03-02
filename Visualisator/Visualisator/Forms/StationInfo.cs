@@ -76,9 +76,13 @@ namespace Visualisator
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (!_scanning)
+            if (!_sta.getScanStatus())
             {
                 btnScan.Enabled = true;
+            }
+            else
+            {
+                btnScan.Enabled = false;
             }
 
             if (_sta.getSizeOfReceivedData() > 1)

@@ -52,7 +52,7 @@ namespace Visualisator
         private ArrayList _Mfrequency = new ArrayList();
         private ArrayList _MChannels = new ArrayList();
         private Boolean _mediumWork = true;
-
+        private const string DUMP_FILE_PATH = @"c:\simulator\_MEDIUM\dump.txt";
         private Int32 _ConnectCounter = 0;
         private Int32 _ConnectAckCounter = 0;
 
@@ -150,8 +150,8 @@ namespace Visualisator
         private Double getDistance(Double x1, Double y1, Double x2, Double y2)
         {
             Double ret = 0;
-            Double x = (x1 - x2);
-            Double y = (y1 - y2);
+            int x = (int) (x1 - x2);
+            int y = (int) (y1 - y2);
             ret = Math.Sqrt(x*x + y*y);
 
             return (ret);
@@ -160,32 +160,33 @@ namespace Visualisator
         public String getMediumInfo()
         {
             String ret = "";
+            //ret += ObjectDumper.Dump(this);
 
-            ret = ObjectDumper.Dump(this);
-            ret += "_packets\r\n";
-            ret += ObjectDumper.Dump(_packets);
-            ret += "_MChannels\r\n";
-            ret += ObjectDumper.Dump(_MChannels);
-            ret += "_Mfrequency\r\n";
-            ret += ObjectDumper.Dump(_Mfrequency);
-            ret += "_MBands\r\n";
-            ret += ObjectDumper.Dump(_MBands);
-            ret += "_LOG\r\n";
+            ret += "\r\n_LOG\r\n";
             ret += ObjectDumper.Dump(_LOG.ToString());
-            ret += "STA\r\n";
+            ret += "\r\n_packets\r\n";
+            ret += ObjectDumper.Dump(_packets);
+            ret += "\r\n_MChannels\r\n";
+            ret += ObjectDumper.Dump(_MChannels);
+            ret += "\r\n_Mfrequency\r\n";
+            ret += ObjectDumper.Dump(_Mfrequency);
+            ret += "\r\n_MBands\r\n";
+            ret += ObjectDumper.Dump(_MBands);
+            ret += "\r\nSTA\r\n";
             ret += ObjectDumper.Dump(_objects);
             return (ret);
         }
 
-
+        //*********************************************************************
         public ArrayList getBandAChannels()
         {
             return BandAChannels;
         }
-
-                public void setMediumObj(ArrayList _obj){
-                     _objects = _obj;
-                }
+        //*********************************************************************
+        public void setMediumObj(ArrayList _obj)
+        {
+                _objects = _obj;
+        }
         //*********************************************************************
         public Medium(){
 
@@ -268,6 +269,7 @@ namespace Visualisator
             while (_mediumWork)
             {                
                 Thread.Sleep(3000);
+                SaveDumpToFile();
             }
         }
         //*********************************************************************
@@ -288,6 +290,23 @@ namespace Visualisator
         public Int32 getConnectAckCounter()
         {
             return (_ConnectAckCounter);
+        }
+
+        public void SaveDumpToFile()
+        {
+            StringBuilder sb = new StringBuilder();
+
+
+
+            using (StreamWriter outfile = new StreamWriter(DUMP_FILE_PATH))
+            {
+                try
+                {
+                    outfile.Write(getMediumInfo() + "\r\n===================== Packets DUMP =====================\r\n" + 
+                        this.DumpPackets());
+                }
+                catch (Exception) { }
+            } 
         }
         //*********************************************************************
         public void SendData(SimulatorPacket pack)
@@ -376,29 +395,35 @@ namespace Visualisator
         //*********************************************************************
         public IPacket ReceiveData(RFDevice device)
         {
+            Key Pk = null;
+            String errPrefix = "";
             try
             {
                 if (_packets != null)
                 {
-                    Key Pk = new Key(device.getOperateBand(), device.getOperateChannel(),device.getMACAddress());
-                    if (_packets.ContainsKey(Pk))
+                    lock (_packets)
                     {
-                        ArrayList LocalPackets = (ArrayList)_packets[Pk];
-                        foreach (object pack in LocalPackets)
+                        errPrefix = " Packets ";
+                        Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
+                        if (_packets.ContainsKey(Pk))
                         {
-                            if (pack != null)
+                            ArrayList LocalPackets = (ArrayList) _packets[Pk];
+                            foreach (object pack in LocalPackets)
                             {
-                                SimulatorPacket _LocalPack = (SimulatorPacket)pack;
-                                if (_LocalPack.Source != device.getMACAddress() &&
-                                 
-                                    getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius + _Radius)
+                                if (pack != null)
                                 {
-                                    //LocalPackets.Remove(pack);
-                                    return (_LocalPack);
-                     
+                                    SimulatorPacket _LocalPack = (SimulatorPacket) pack;
+                                    if (_LocalPack.Source != device.getMACAddress() &&
+
+                                        getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius + _Radius)
+                                    {
+                                        //LocalPackets.Remove(pack);
+                                        return (_LocalPack);
+
+                                    }
                                 }
+                                // loop body
                             }
-                            // loop body
                         }
                     }
 
@@ -406,6 +431,7 @@ namespace Visualisator
                     Pk = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
                     if (_packets.ContainsKey(Pk))
                     {
+                        errPrefix = " Beacons ";
                         ArrayList LocalPackets = (ArrayList)_packets[Pk];
                         foreach (object pack in LocalPackets)
                         {
@@ -428,7 +454,7 @@ namespace Visualisator
                     }
                 }
             }
-            catch (Exception ex) { AddToLog("[ReceiveData] Exception:" + ex.Message); }
+            catch (Exception ex) { AddToLog("[ReceiveData][" + errPrefix + "]:" + ex.Message); }
             return (null);
         }
 

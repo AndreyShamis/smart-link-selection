@@ -6,12 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Visualisator
 {
      partial class MediumInfo : Form
     {
         private Medium _MEDIUM;
+
+         
         public MediumInfo(Medium _mediumL)
         {
             _MEDIUM = _mediumL;
@@ -53,6 +56,12 @@ namespace Visualisator
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnSaveDump_Click(object sender, EventArgs e)
+        {
+            _MEDIUM.SaveDumpToFile();
 
         }
     }

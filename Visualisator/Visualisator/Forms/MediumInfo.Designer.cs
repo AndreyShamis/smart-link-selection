@@ -39,6 +39,7 @@
             this.lblConnectCounter = new System.Windows.Forms.Label();
             this.lblConnectAckCounter = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnSaveDump = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -57,7 +58,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(368, 491);
+            this.textBox1.Size = new System.Drawing.Size(550, 491);
             this.textBox1.TabIndex = 1;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -69,11 +70,11 @@
             // 
             // txtPacketsDump
             // 
-            this.txtPacketsDump.Location = new System.Drawing.Point(393, 33);
+            this.txtPacketsDump.Location = new System.Drawing.Point(568, 33);
             this.txtPacketsDump.Multiline = true;
             this.txtPacketsDump.Name = "txtPacketsDump";
             this.txtPacketsDump.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPacketsDump.Size = new System.Drawing.Size(461, 445);
+            this.txtPacketsDump.Size = new System.Drawing.Size(286, 445);
             this.txtPacketsDump.TabIndex = 2;
             // 
             // label1
@@ -131,11 +132,22 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Connect ACK counter";
             // 
+            // btnSaveDump
+            // 
+            this.btnSaveDump.Location = new System.Drawing.Point(568, 7);
+            this.btnSaveDump.Name = "btnSaveDump";
+            this.btnSaveDump.Size = new System.Drawing.Size(94, 23);
+            this.btnSaveDump.TabIndex = 9;
+            this.btnSaveDump.Text = "Save Dump";
+            this.btnSaveDump.UseVisualStyleBackColor = true;
+            this.btnSaveDump.Click += new System.EventHandler(this.btnSaveDump_Click);
+            // 
             // MediumInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(882, 527);
+            this.Controls.Add(this.btnSaveDump);
             this.Controls.Add(this.lblConnectAckCounter);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblConnectCounter);
@@ -165,5 +177,6 @@
         private System.Windows.Forms.Label lblConnectCounter;
         private System.Windows.Forms.Label lblConnectAckCounter;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnSaveDump;
     }
 }

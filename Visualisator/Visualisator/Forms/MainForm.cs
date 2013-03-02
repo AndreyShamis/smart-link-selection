@@ -88,6 +88,7 @@ namespace Visualisator
                 _sta.Scan();
             }
             _MEDIUM.setMediumObj(_objects);
+            _MEDIUM.Enable();
         }
         //====================================================================================================
         private void BoardDblClick(object sender, MouseEventArgs e)

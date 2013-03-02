@@ -28,6 +28,11 @@ namespace Visualisator
         private StringBuilder DataReceivedContainer = new StringBuilder();
 
 
+
+        public bool getScanStatus()
+        {
+            return _scanning;
+        }
         public int DataRetransmited
         {
             get { return _DataRetransmited; }
@@ -444,7 +449,7 @@ namespace Visualisator
 
         public void ThreadAbleReadFile(String fileName)
         {
-            string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\input.txt");
+            string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\_DATA_TO_SEND\input.txt");
             AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
             Data dataPack = new Data(CreatePacket());
             dataPack.SSID = _connecttoAP.SSID;
