@@ -135,25 +135,25 @@ namespace Visualisator
         public void SendData(SimulatorPacket pack)
         {
 
-            Random ran = new Random((int)DateTime.Now.Ticks);
+            //Random ran = new Random((int)DateTime.Now.Ticks);
             //while (RF_STATUS != "NONE")
             //{
                 //Thread.Sleep(ran.Next(3,10));
             //}
             SpinWait.SpinUntil(RF_Ready);
             RF_STATUS = "TX";
-           /* while (!_MEDIUM.Registration(this.getOperateBand(),this.getOperateChannel(),this.x,this.y))
+            while (!_MEDIUM.Registration(this.getOperateBand(),this.getOperateChannel(),this.x,this.y))
             {
                 RF_STATUS = "NONE";
                 //Thread.Sleep(ran.Next(1, 2));
-                Thread.Sleep(new TimeSpan(100));
+                Thread.Sleep(new TimeSpan(20));
                 SpinWait.SpinUntil(RF_Ready);
                
                 //while (RF_STATUS != "NONE")
                 //    Thread.Sleep(ran.Next(1, 3));
                 RF_STATUS = "TX";
             }
-            * */
+         
             _MEDIUM.SendData(pack);
             //Thread.Sleep(ran.Next(1, 2));
             //Thread.Sleep(1);
