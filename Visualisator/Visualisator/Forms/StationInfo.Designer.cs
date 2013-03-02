@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblWaitingForAck = new System.Windows.Forms.Label();
+            this.lblDataAckRetransmited = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnSaveData = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.lblRetransmited = new System.Windows.Forms.Label();
@@ -55,14 +58,13 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.lblDataAckRetransmited = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblWaitingForAck);
             this.groupBox1.Controls.Add(this.lblDataAckRetransmited);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.btnSaveData);
@@ -93,10 +95,39 @@
             this.groupBox1.Text = "Cennect Info";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // lblWaitingForAck
+            // 
+            this.lblWaitingForAck.AutoSize = true;
+            this.lblWaitingForAck.BackColor = System.Drawing.Color.Black;
+            this.lblWaitingForAck.ForeColor = System.Drawing.Color.Coral;
+            this.lblWaitingForAck.Location = new System.Drawing.Point(10, 84);
+            this.lblWaitingForAck.Name = "lblWaitingForAck";
+            this.lblWaitingForAck.Size = new System.Drawing.Size(83, 13);
+            this.lblWaitingForAck.TabIndex = 24;
+            this.lblWaitingForAck.Text = "Waiting For Ack";
+            // 
+            // lblDataAckRetransmited
+            // 
+            this.lblDataAckRetransmited.Location = new System.Drawing.Point(209, 69);
+            this.lblDataAckRetransmited.Name = "lblDataAckRetransmited";
+            this.lblDataAckRetransmited.Size = new System.Drawing.Size(55, 13);
+            this.lblDataAckRetransmited.TabIndex = 23;
+            this.lblDataAckRetransmited.Text = "0";
+            this.lblDataAckRetransmited.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(117, 70);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Ack Retransmitted";
+            // 
             // btnSaveData
             // 
             this.btnSaveData.Enabled = false;
-            this.btnSaveData.Location = new System.Drawing.Point(346, 86);
+            this.btnSaveData.Location = new System.Drawing.Point(442, 83);
             this.btnSaveData.Name = "btnSaveData";
             this.btnSaveData.Size = new System.Drawing.Size(126, 23);
             this.btnSaveData.TabIndex = 21;
@@ -199,16 +230,16 @@
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(69, 85);
+            this.txtDestination.Location = new System.Drawing.Point(169, 84);
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(189, 20);
             this.txtDestination.TabIndex = 10;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(264, 85);
+            this.button1.Location = new System.Drawing.Point(364, 84);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 24);
+            this.button1.Size = new System.Drawing.Size(76, 22);
             this.button1.TabIndex = 9;
             this.button1.Text = "Send Data";
             this.button1.UseVisualStyleBackColor = true;
@@ -330,24 +361,6 @@
             this.tmrFast.Interval = 2;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(117, 70);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 13);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "Ack Retransmitted";
-            // 
-            // lblDataAckRetransmited
-            // 
-            this.lblDataAckRetransmited.Location = new System.Drawing.Point(209, 69);
-            this.lblDataAckRetransmited.Name = "lblDataAckRetransmited";
-            this.lblDataAckRetransmited.Size = new System.Drawing.Size(55, 13);
-            this.lblDataAckRetransmited.TabIndex = 23;
-            this.lblDataAckRetransmited.Text = "0";
-            this.lblDataAckRetransmited.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -396,5 +409,6 @@
         private System.Windows.Forms.Button btnSaveData;
         private System.Windows.Forms.Label lblDataAckRetransmited;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblWaitingForAck;
     }
 }

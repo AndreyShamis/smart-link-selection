@@ -68,6 +68,13 @@ namespace Visualisator
         {
             Key Tk = new Key(Band,Channel);
 
+            if(_packets.Count == 0)
+            {
+                lock (_T)
+                {
+                    _T.Clear();
+                } 
+            }
             try
             {
                 if (_T.ContainsKey(Tk))
@@ -87,7 +94,10 @@ namespace Visualisator
 
                         RFDevice ver = new RFDevice(x, y, 0);
                         _temp.Add(ver);
-                        _T[Tk] = _temp;
+                        lock (_T)
+                        {
+                            _T[Tk] = _temp;
+                        }
                         Thread newThread = new Thread(() => Unregister(Tk, ver));
                         newThread.Start();
                     }
@@ -96,7 +106,11 @@ namespace Visualisator
                         ArrayList _tempArrL = new ArrayList();
                         RFDevice ver = new RFDevice(x, y, 0);
                         _tempArrL.Add(ver);
-                        _T.Add(Tk, _tempArrL);
+
+                        lock (_T)
+                        {
+                            _T.Add(Tk, _tempArrL);
+                        }
                         Thread newThread = new Thread(() => Unregister(Tk, ver));
                         newThread.Start();
                     }
@@ -105,8 +119,11 @@ namespace Visualisator
                 {
                     ArrayList _tempArrL = new ArrayList();
                     RFDevice ver = new RFDevice(x, y, 0);
-                    _tempArrL.Add(ver);
-                    _T.Add(Tk, _tempArrL);
+                    _tempArrL.Add(ver); 
+                    lock (_T)
+                    {
+                        _T.Add(Tk, _tempArrL);
+                    }
                     Thread newThread = new Thread(() => Unregister(Tk, ver));
                     newThread.Start();
                 }
@@ -116,6 +133,11 @@ namespace Visualisator
                 return false; 
             }
             return (true);
+        }
+
+        public int getPacketsFound()
+        {
+            return  _packets.Count;
         }
         //*********************************************************************
 
@@ -142,8 +164,11 @@ namespace Visualisator
            catch (Exception ex) { 
                Console.WriteLine("Unregister:" + ex.Message);
                AddToLog("Unregister:" + ex.Message);
+               _T.Remove(Tk);
+               _T.Clear();
            
            }
+            
         }
 
         //*********************************************************************
@@ -286,12 +311,34 @@ namespace Visualisator
             while (_mediumWork)
             {                
                 Thread.Sleep(3000);
+
+                int PacketsCount = _packets.Count;
+                if (PacketsCount > 0)
+                {
+                    for (int i = 0; i < 20; i++)
+                    {
+
+                        Thread.Sleep(1);
+                        if (PacketsCount != _packets.Count)
+                        {
+                            break;
+                        }
+                        if (i == 19)
+                        {
+                            _packets.Clear();
+                        }
+                    }
+                }
                 SaveDumpToFile();
             }
         }
         //*********************************************************************
         public Boolean MediumHaveAIRWork(RFDevice device)
         {
+            if(this.getPacketsFound() < 1)
+            {
+                return false;
+            }
                 Key Pk = new Key(device.getOperateBand(), device.getOperateChannel(),device.getMACAddress());
                 Key Pk2 = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
                 if (_packets != null && (_packets.ContainsKey(Pk) || _packets.ContainsKey(Pk2)))
@@ -313,17 +360,18 @@ namespace Visualisator
         {
             StringBuilder sb = new StringBuilder();
 
-
+         try
+                {
 
             using (StreamWriter outfile = new StreamWriter(DUMP_FILE_PATH))
             {
-                try
-                {
-                    outfile.Write(getMediumInfo() + "\r\n===================== Packets DUMP =====================\r\n" + 
-                        this.DumpPackets());
+
+                outfile.Write(getMediumInfo() + "\r\n===================== Packets DUMP =====================\r\n" + this.DumpPackets());
+
+            } 
+                                   
                 }
                 catch (Exception) { }
-            } 
         }
         //*********************************************************************
         public void SendData(SimulatorPacket pack)
@@ -390,7 +438,7 @@ namespace Visualisator
             int Rate = p.getTransmitRate();
             int sleep = GetObjectSize(p) / Rate;
             //Thread.Sleep(sleep);
-            Thread.Sleep(new TimeSpan(sleep * 1000));
+            Thread.Sleep(new TimeSpan(sleep * 2000));
             //AddToLog("Sleep for :" + sleep);
             if (_temp != null)
             {
