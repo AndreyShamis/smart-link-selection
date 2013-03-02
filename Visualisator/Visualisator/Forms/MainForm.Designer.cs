@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.txtConsole = new System.Windows.Forms.TextBox();
-            this.btn_AddAP = new System.Windows.Forms.Button();
-            this.btn_AddSTA = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnStopMedium = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -44,6 +42,11 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtUpdateInterval = new System.Windows.Forms.TextBox();
             this.btnSetUpdateInterval = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sTAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtConsole
@@ -58,24 +61,6 @@
             this.txtConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtConsole.Size = new System.Drawing.Size(253, 97);
             this.txtConsole.TabIndex = 1;
-            // 
-            // btn_AddAP
-            // 
-            this.btn_AddAP.Location = new System.Drawing.Point(827, 2);
-            this.btn_AddAP.Name = "btn_AddAP";
-            this.btn_AddAP.Size = new System.Drawing.Size(55, 23);
-            this.btn_AddAP.TabIndex = 2;
-            this.btn_AddAP.Text = "Add AP";
-            this.btn_AddAP.UseVisualStyleBackColor = true;
-            // 
-            // btn_AddSTA
-            // 
-            this.btn_AddSTA.Location = new System.Drawing.Point(888, 2);
-            this.btn_AddSTA.Name = "btn_AddSTA";
-            this.btn_AddSTA.Size = new System.Drawing.Size(59, 23);
-            this.btn_AddSTA.TabIndex = 3;
-            this.btn_AddSTA.Text = "Add STA";
-            this.btn_AddSTA.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -119,7 +104,6 @@
             // openDLGOpenSimulationSettings
             // 
             this.openDLGOpenSimulationSettings.FileName = "openFileDialog1";
-
             // 
             // button4
             // 
@@ -175,11 +159,43 @@
             this.btnSetUpdateInterval.UseVisualStyleBackColor = true;
             this.btnSetUpdateInterval.Click += new System.EventHandler(this.btnSetUpdateInterval_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aPToolStripMenuItem,
+            this.sTAToolStripMenuItem});
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addToolStripMenuItem.Text = "Add";
+            // 
+            // aPToolStripMenuItem
+            // 
+            this.aPToolStripMenuItem.CheckOnClick = true;
+            this.aPToolStripMenuItem.Name = "aPToolStripMenuItem";
+            this.aPToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.aPToolStripMenuItem.Text = "Access Point";
+            this.aPToolStripMenuItem.Click += new System.EventHandler(this.aPToolStripMenuItem_Click);
+            // 
+            // sTAToolStripMenuItem
+            // 
+            this.sTAToolStripMenuItem.Name = "sTAToolStripMenuItem";
+            this.sTAToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.sTAToolStripMenuItem.Text = "Station";
+            this.sTAToolStripMenuItem.Click += new System.EventHandler(this.sTAToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 375);
+            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.btnSetUpdateInterval);
             this.Controls.Add(this.txtUpdateInterval);
             this.Controls.Add(this.lblUpdateIntervalDescr);
@@ -189,8 +205,6 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnStopMedium);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btn_AddSTA);
-            this.Controls.Add(this.btn_AddAP);
             this.Controls.Add(this.txtConsole);
             this.Name = "MainForm";
             this.Text = "SLS - Smart Link Selection - Visualisator";
@@ -198,6 +212,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Leave += new System.EventHandler(this.Form1_Leave);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,8 +221,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtConsole;
-        private System.Windows.Forms.Button btn_AddAP;
-        private System.Windows.Forms.Button btn_AddSTA;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnStopMedium;
         private System.Windows.Forms.Button button2;
@@ -220,6 +233,10 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TextBox txtUpdateInterval;
         private System.Windows.Forms.Button btnSetUpdateInterval;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sTAToolStripMenuItem;
     }
 }
 

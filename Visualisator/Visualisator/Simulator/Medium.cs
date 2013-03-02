@@ -188,6 +188,18 @@ namespace Visualisator
                 _objects = _obj;
         }
         //*********************************************************************
+        public void addObjToMedium(ArrayList _obj)
+        {
+            if (_objects != null)
+            {
+                _objects.AddRange(_obj);
+            }
+            else
+            {
+                _objects = _obj;
+            }
+        }
+        //*********************************************************************
         public Medium(){
 
             AddToLog("Load Band.");
@@ -256,6 +268,11 @@ namespace Visualisator
             _mediumWork = true;
             Thread newThread = new Thread(new ThreadStart(Run));
             newThread.Start();
+        }
+        //*********************************************************************
+        public bool IsEnabled()
+        {
+            return _mediumWork;
         }
         //*********************************************************************
         public void Disable()

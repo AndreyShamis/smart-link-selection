@@ -25,6 +25,8 @@ namespace Visualisator
         private float SelectedX = 0;
         private float SelectedY = 0;
         private float SelectedZ = 0;
+        private float MouseX = 0;
+        private float MouseY = 0;
         public ArrayList _objects = new ArrayList();
         private Medium _MEDIUM = new Medium();
         private Int32 _RADIUS = 50;
@@ -91,6 +93,36 @@ namespace Visualisator
             _MEDIUM.Enable();
         }
         //====================================================================================================
+        private void CreateAP()
+        {
+            AP _ap = new AP(_MEDIUM);
+            _ap.setOperateChannel(rand.Next(1, 14));
+            _ap.SetVertex(MouseX, MouseY, rand.NextDouble() * 500);
+            _objects.Add(_ap);
+
+            _MEDIUM.addObjToMedium(_objects);
+            if (!_MEDIUM.IsEnabled())
+            {
+                _MEDIUM.Enable();
+            }
+        }
+        //====================================================================================================
+        private void CreateSTA()
+        {
+
+            STA _sta = new STA(_MEDIUM, _objects);
+            _sta.setOperateChannel(0);// (rand.Next(1, 14));       //  TODO delete this line
+            _sta.SetVertex(MouseX, MouseY, rand.NextDouble() * 500);
+            _objects.Add(_sta);
+            _sta.Scan();
+
+            _MEDIUM.addObjToMedium(_objects);
+            if (!_MEDIUM.IsEnabled())
+            {
+                _MEDIUM.Enable();
+            }
+        }
+        //====================================================================================================
         private void BoardDblClick(object sender, MouseEventArgs e)
         {
             txtConsole.Text = "X = " + e.X + "    Y = " + e.Y + "\r\n" + txtConsole.Text;
@@ -155,6 +187,9 @@ namespace Visualisator
         //====================================================================================================
         private void btnImage_MouseUp(object sender, MouseEventArgs e)
         {
+            MouseX = e.X;
+            MouseY = e.Y;
+
            // txtConsole.Text = "X = " + e.X + "    Y = " + e.Y + "\r\n" + txtConsole.Text;
             if(SelectedVertex <0) {
                 //ConsolePrint("No object selected for move");
@@ -178,6 +213,11 @@ namespace Visualisator
                 }        
             }else{
                 ConsolePrint("Object not moved: Simple click");
+            }
+
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(this, new Point(e.X, e.Y));
             }
 
             SelectedVertex = -1;
@@ -402,6 +442,39 @@ namespace Visualisator
               gr = Graphics.FromImage(bm);
               */
         }
+        //====================================================================================================
+        private void btn_AddSTA_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateAP();
+            DrowOnBoard();
+
+        }
+
+        private void sTAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateSTA();
+            DrowOnBoard();
+        }
+
+
+        //private void mnuContext(object sender, EventArgs e)
+        //{
+        //    ContextMenu myContextMenu = new ContextMenu();
+        //    MenuItem menuItem1 = new MenuItem("Add Station");
+        //    MenuItem menuItem2 = new MenuItem("Add Access Point");
+
+
+        //    // Clear all previously added MenuItems.
+        //    myContextMenu.MenuItems.Clear();
+
+        //    myContextMenu.MenuItems.Add(menuItem1);
+        //    myContextMenu.MenuItems.Add(menuItem2);
+        //}
        
     }
 }
