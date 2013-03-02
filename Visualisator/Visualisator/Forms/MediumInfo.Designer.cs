@@ -74,7 +74,7 @@
             this.txtPacketsDump.Multiline = true;
             this.txtPacketsDump.Name = "txtPacketsDump";
             this.txtPacketsDump.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPacketsDump.Size = new System.Drawing.Size(286, 445);
+            this.txtPacketsDump.Size = new System.Drawing.Size(315, 493);
             this.txtPacketsDump.TabIndex = 2;
             // 
             // label1

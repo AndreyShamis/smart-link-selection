@@ -185,10 +185,12 @@
             // 
             // txtMAC
             // 
+            this.txtMAC.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtMAC.ForeColor = System.Drawing.Color.DarkGreen;
             this.txtMAC.Location = new System.Drawing.Point(9, 19);
             this.txtMAC.Name = "txtMAC";
             this.txtMAC.ReadOnly = true;
-            this.txtMAC.Size = new System.Drawing.Size(183, 20);
+            this.txtMAC.Size = new System.Drawing.Size(183, 23);
             this.txtMAC.TabIndex = 11;
             // 
             // txtDestination

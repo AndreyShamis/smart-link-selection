@@ -111,7 +111,7 @@ namespace Visualisator
                     AP _tap = (AP)_objects[i];
                     if (_tap.x >= e.X - _rad_size && _tap.x <= e.X + _rad_size && _tap.y >= e.Y - _rad_size && _tap.y <= e.Y + _rad_size){
                         //txtConsole.Text = "AP selected for move :" + i.ToString() + "\r\n" + txtConsole.Text;
-                        APInfo apInf = new APInfo(_tap);
+                        APInfo apInf = new APInfo(_tap,_objects);
                         apInf.Show();   
                         return;
                     }

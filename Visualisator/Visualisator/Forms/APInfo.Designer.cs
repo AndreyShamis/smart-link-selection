@@ -98,63 +98,68 @@
             // 
             // lblChannel
             // 
-            this.lblChannel.AutoSize = true;
-            this.lblChannel.Location = new System.Drawing.Point(191, 101);
+            this.lblChannel.Location = new System.Drawing.Point(227, 101);
             this.lblChannel.Name = "lblChannel";
             this.lblChannel.Size = new System.Drawing.Size(63, 13);
             this.lblChannel.TabIndex = 9;
             this.lblChannel.Text = "AP Channel";
+            this.lblChannel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblBand
             // 
-            this.lblBand.AutoSize = true;
-            this.lblBand.Location = new System.Drawing.Point(191, 78);
+            this.lblBand.Location = new System.Drawing.Point(241, 78);
             this.lblBand.Name = "lblBand";
             this.lblBand.Size = new System.Drawing.Size(49, 13);
             this.lblBand.TabIndex = 8;
             this.lblBand.Text = "AP Band";
+            this.lblBand.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblSSID
             // 
-            this.lblSSID.AutoSize = true;
-            this.lblSSID.Location = new System.Drawing.Point(191, 32);
+            this.lblSSID.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblSSID.ForeColor = System.Drawing.Color.Navy;
+            this.lblSSID.Location = new System.Drawing.Point(142, 32);
             this.lblSSID.Name = "lblSSID";
-            this.lblSSID.Size = new System.Drawing.Size(49, 13);
+            this.lblSSID.Size = new System.Drawing.Size(148, 13);
             this.lblSSID.TabIndex = 7;
             this.lblSSID.Text = "AP SSID";
+            this.lblSSID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblConnectedSTA
             // 
-            this.lblConnectedSTA.AutoSize = true;
-            this.lblConnectedSTA.Location = new System.Drawing.Point(191, 54);
+            this.lblConnectedSTA.Location = new System.Drawing.Point(161, 54);
             this.lblConnectedSTA.Name = "lblConnectedSTA";
-            this.lblConnectedSTA.Size = new System.Drawing.Size(99, 13);
+            this.lblConnectedSTA.Size = new System.Drawing.Size(129, 13);
             this.lblConnectedSTA.TabIndex = 6;
             this.lblConnectedSTA.Text = "AP STA connected";
+            this.lblConnectedSTA.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblMAC
             // 
-            this.lblMAC.AutoSize = true;
-            this.lblMAC.Location = new System.Drawing.Point(191, 9);
+            this.lblMAC.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblMAC.ForeColor = System.Drawing.Color.Green;
+            this.lblMAC.Location = new System.Drawing.Point(139, 9);
             this.lblMAC.Name = "lblMAC";
-            this.lblMAC.Size = new System.Drawing.Size(47, 13);
+            this.lblMAC.Size = new System.Drawing.Size(151, 13);
             this.lblMAC.TabIndex = 5;
             this.lblMAC.Text = "AP MAC";
+            this.lblMAC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tbrGUISlow
             // 
             this.tbrGUISlow.Enabled = true;
-            this.tbrGUISlow.Interval = 500;
+            this.tbrGUISlow.Interval = 1000;
             this.tbrGUISlow.Tick += new System.EventHandler(this.tbrGUISlow_Tick);
             // 
             // lblKeepAliveReceived
             // 
-            this.lblKeepAliveReceived.AutoSize = true;
-            this.lblKeepAliveReceived.Location = new System.Drawing.Point(191, 123);
+            this.lblKeepAliveReceived.ForeColor = System.Drawing.Color.Maroon;
+            this.lblKeepAliveReceived.Location = new System.Drawing.Point(243, 123);
             this.lblKeepAliveReceived.Name = "lblKeepAliveReceived";
-            this.lblKeepAliveReceived.Size = new System.Drawing.Size(13, 13);
+            this.lblKeepAliveReceived.Size = new System.Drawing.Size(47, 13);
             this.lblKeepAliveReceived.TabIndex = 11;
             this.lblKeepAliveReceived.Text = "0";
+            this.lblKeepAliveReceived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label7
             // 
@@ -167,12 +172,13 @@
             // 
             // lblDataReceived
             // 
-            this.lblDataReceived.AutoSize = true;
-            this.lblDataReceived.Location = new System.Drawing.Point(191, 147);
+            this.lblDataReceived.ForeColor = System.Drawing.Color.Teal;
+            this.lblDataReceived.Location = new System.Drawing.Point(246, 147);
             this.lblDataReceived.Name = "lblDataReceived";
-            this.lblDataReceived.Size = new System.Drawing.Size(13, 13);
+            this.lblDataReceived.Size = new System.Drawing.Size(44, 13);
             this.lblDataReceived.TabIndex = 13;
             this.lblDataReceived.Text = "0";
+            this.lblDataReceived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label8
             // 
@@ -185,12 +191,13 @@
             // 
             // lblDataAckReceived
             // 
-            this.lblDataAckReceived.AutoSize = true;
-            this.lblDataAckReceived.Location = new System.Drawing.Point(191, 169);
+            this.lblDataAckReceived.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblDataAckReceived.Location = new System.Drawing.Point(249, 169);
             this.lblDataAckReceived.Name = "lblDataAckReceived";
-            this.lblDataAckReceived.Size = new System.Drawing.Size(13, 13);
+            this.lblDataAckReceived.Size = new System.Drawing.Size(41, 13);
             this.lblDataAckReceived.TabIndex = 15;
             this.lblDataAckReceived.Text = "0";
+            this.lblDataAckReceived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label10
             // 
@@ -214,6 +221,8 @@
             this.listStations.Name = "listStations";
             this.listStations.Size = new System.Drawing.Size(206, 342);
             this.listStations.TabIndex = 16;
+            this.listStations.SelectedIndexChanged += new System.EventHandler(this.listStations_SelectedIndexChanged);
+            this.listStations.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listStations_MouseDoubleClick);
             // 
             // APInfo
             // 

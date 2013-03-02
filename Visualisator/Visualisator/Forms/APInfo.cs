@@ -6,16 +6,19 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace Visualisator
 {
     partial class APInfo : Form
     {
         private AP _ap = null;
-        public APInfo(AP apP)
+        public ArrayList _objects = null;
+        public APInfo(AP apP,ArrayList _obj)
         {
             InitializeComponent();
             _ap = apP;
+            _objects = _obj;
         }
 
         private void APInfo_Load(object sender, EventArgs e)
@@ -34,8 +37,7 @@ namespace Visualisator
             lblChannel.Text = _ap.getOperateChannel().ToString();
             lblBand.Text = _ap.getOperateBand();
             lblSSID.Text = _ap.SSID;
-            lblConnectedSTA.Text = _ap.CenntedDevicesCount().ToString();
-            lblKeepAliveReceived.Text = _ap.KeepAliveReceived.ToString();
+
 
             ArrayListCounted devicesList = _ap.getAssociatedDevices();
             listStations.Items.Clear();
@@ -52,6 +54,33 @@ namespace Visualisator
         {
             lblDataReceived.Text = _ap.getDataRecieved().ToString();
             lblDataAckReceived.Text = _ap.getDataAckRecieved().ToString();
+            lblConnectedSTA.Text = _ap.CenntedDevicesCount().ToString();
+            lblKeepAliveReceived.Text = _ap.KeepAliveReceived.ToString();
+        }
+
+        private void listStations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listStations_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            
+            for (int i = 0; i < _objects.Count; i++)
+            {
+                
+                if (_objects[i].GetType() == typeof (STA))
+                {
+                    STA _tsta = (STA) _objects[i];
+                    if (_tsta.getMACAddress().Equals(listStations.Text))
+                    {
+                        //txtConsole.Text = "Station selected for view :" + i.ToString() + "\r\n" + txtConsole.Text;
+                        StationInfo staForm = new StationInfo(_tsta);
+                        staForm.Show();
+                        return;
+                    }
+                }
+            }
         }
     }
 }
