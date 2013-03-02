@@ -75,7 +75,7 @@ namespace Visualisator
                     if (_tsta.getMACAddress().Equals(listStations.Text))
                     {
                         //txtConsole.Text = "Station selected for view :" + i.ToString() + "\r\n" + txtConsole.Text;
-                        StationInfo staForm = new StationInfo(_tsta);
+                        StationInfo staForm = new StationInfo(_tsta,_objects);
                         staForm.Show();
                         return;
                     }

@@ -101,7 +101,7 @@ namespace Visualisator
                     STA _tsta = (STA)_objects[i];
                     if (_tsta.x >= e.X - _rad_size && _tsta.x <= e.X + _rad_size && _tsta.y >= e.Y - _rad_size && _tsta.y <= e.Y + _rad_size){
                         //txtConsole.Text = "Station selected for view :" + i.ToString() + "\r\n" + txtConsole.Text;
-                        StationInfo staForm = new StationInfo(_tsta);
+                        StationInfo staForm = new StationInfo(_tsta,_objects);
                         staForm.Show();
                         return;
                     }

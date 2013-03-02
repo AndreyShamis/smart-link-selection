@@ -14,12 +14,14 @@ namespace Visualisator
     partial class StationInfo : Form
     {
         STA _sta = null;
+        public ArrayList _objects = null;
         private Boolean _scanning = false;
-        public StationInfo(STA st)
+        public StationInfo(STA st,ArrayList _obj)
         {
             
             InitializeComponent();
             _sta = st;
+            _objects = _obj;
         }
 
         private void StationInfo_Load(object sender, EventArgs e)
@@ -134,6 +136,30 @@ namespace Visualisator
         private void btnSaveData_Click(object sender, EventArgs e)
         {
             _sta.SaveReceivedDataIntoFile();
+        }
+
+        private void lblAssociatedAP_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAssociatedAP_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            for (int i = 0; i < _objects.Count; i++)
+            {
+                if (_objects[i].GetType() == typeof(AP))
+                {
+
+                    AP _tap = (AP)_objects[i];
+                    if (lblAssociatedAP.Text.ToString().Equals(_tap.SSID.ToString()))
+                    {
+                        //txtConsole.Text = "AP selected for move :" + i.ToString() + "\r\n" + txtConsole.Text;
+                        APInfo apInf = new APInfo(_tap, _objects);
+                        apInf.Show();
+                        return;
+                    }
+                }
+            }
         }
     }
 }

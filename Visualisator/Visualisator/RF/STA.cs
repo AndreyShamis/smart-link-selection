@@ -158,7 +158,7 @@ namespace Visualisator
             String ret = "";
 
             foreach (var ap in _AssociatedWithAPList)
-                ret += ap.ToString() + " ";
+                ret += ap.ToString() + "";
 
             return ret;
         }

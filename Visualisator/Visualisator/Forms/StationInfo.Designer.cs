@@ -220,6 +220,8 @@
             this.lblAssociatedAP.Size = new System.Drawing.Size(116, 16);
             this.lblAssociatedAP.TabIndex = 8;
             this.lblAssociatedAP.Text = "XXXXXXXXXXXX";
+            this.lblAssociatedAP.Click += new System.EventHandler(this.lblAssociatedAP_Click);
+            this.lblAssociatedAP.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblAssociatedAP_MouseDoubleClick);
             // 
             // ConnectedToLabel
             // 
