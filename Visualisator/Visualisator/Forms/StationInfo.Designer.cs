@@ -55,12 +55,16 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblDataAckRetransmited = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblDataAckRetransmited);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.btnSaveData);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.lblRetransmited);
@@ -111,12 +115,12 @@
             // 
             // lblRetransmited
             // 
-            this.lblRetransmited.AutoSize = true;
-            this.lblRetransmited.Location = new System.Drawing.Point(218, 57);
+            this.lblRetransmited.Location = new System.Drawing.Point(206, 57);
             this.lblRetransmited.Name = "lblRetransmited";
-            this.lblRetransmited.Size = new System.Drawing.Size(35, 13);
+            this.lblRetransmited.Size = new System.Drawing.Size(58, 13);
             this.lblRetransmited.TabIndex = 19;
-            this.lblRetransmited.Text = "label2";
+            this.lblRetransmited.Text = "0";
+            this.lblRetransmited.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
             // 
@@ -129,12 +133,12 @@
             // 
             // lblAckReceived
             // 
-            this.lblAckReceived.AutoSize = true;
-            this.lblAckReceived.Location = new System.Drawing.Point(218, 41);
+            this.lblAckReceived.Location = new System.Drawing.Point(209, 41);
             this.lblAckReceived.Name = "lblAckReceived";
-            this.lblAckReceived.Size = new System.Drawing.Size(35, 13);
+            this.lblAckReceived.Size = new System.Drawing.Size(55, 16);
             this.lblAckReceived.TabIndex = 17;
-            this.lblAckReceived.Text = "label2";
+            this.lblAckReceived.Text = "0";
+            this.lblAckReceived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmdReset
             // 
@@ -158,12 +162,12 @@
             // 
             // lblSent
             // 
-            this.lblSent.AutoSize = true;
-            this.lblSent.Location = new System.Drawing.Point(69, 44);
+            this.lblSent.Location = new System.Drawing.Point(62, 45);
             this.lblSent.Name = "lblSent";
-            this.lblSent.Size = new System.Drawing.Size(35, 13);
+            this.lblSent.Size = new System.Drawing.Size(49, 13);
             this.lblSent.TabIndex = 14;
-            this.lblSent.Text = "label2";
+            this.lblSent.Text = "0";
+            this.lblSent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
             // 
@@ -176,12 +180,12 @@
             // 
             // txtDataReceeived
             // 
-            this.txtDataReceeived.AutoSize = true;
-            this.txtDataReceeived.Location = new System.Drawing.Point(69, 57);
+            this.txtDataReceeived.Location = new System.Drawing.Point(59, 58);
             this.txtDataReceeived.Name = "txtDataReceeived";
-            this.txtDataReceeived.Size = new System.Drawing.Size(35, 13);
+            this.txtDataReceeived.Size = new System.Drawing.Size(52, 12);
             this.txtDataReceeived.TabIndex = 12;
-            this.txtDataReceeived.Text = "label2";
+            this.txtDataReceeived.Text = "0";
+            this.txtDataReceeived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtMAC
             // 
@@ -195,14 +199,14 @@
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(13, 83);
+            this.txtDestination.Location = new System.Drawing.Point(69, 85);
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(189, 20);
             this.txtDestination.TabIndex = 10;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(208, 79);
+            this.button1.Location = new System.Drawing.Point(264, 85);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(76, 24);
             this.button1.TabIndex = 9;
@@ -326,6 +330,24 @@
             this.tmrFast.Interval = 2;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(117, 70);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Ack Retransmitted";
+            // 
+            // lblDataAckRetransmited
+            // 
+            this.lblDataAckRetransmited.Location = new System.Drawing.Point(209, 69);
+            this.lblDataAckRetransmited.Name = "lblDataAckRetransmited";
+            this.lblDataAckRetransmited.Size = new System.Drawing.Size(55, 13);
+            this.lblDataAckRetransmited.TabIndex = 23;
+            this.lblDataAckRetransmited.Text = "0";
+            this.lblDataAckRetransmited.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -372,5 +394,7 @@
         private System.Windows.Forms.Label lblRetransmited;
         private System.Windows.Forms.Timer tmrFast;
         private System.Windows.Forms.Button btnSaveData;
+        private System.Windows.Forms.Label lblDataAckRetransmited;
+        private System.Windows.Forms.Label label6;
     }
 }

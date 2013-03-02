@@ -23,7 +23,7 @@ namespace Visualisator
         private int PrevDataID = 0;
         private int PrevDataAckID = 0;
         private int _DataRetransmited = 0;
-
+        private int _DataAckRetransmitted = 0;
         private String DOCpath = "";
         private StringBuilder DataReceivedContainer = new StringBuilder();
 
@@ -39,7 +39,13 @@ namespace Visualisator
             set { _DataRetransmited = value; }
         }
 
-        
+        public int DataAckRetransmitted
+        {
+            get { return _DataAckRetransmitted; }
+            set { _DataAckRetransmitted = value; }
+        }
+
+
         private bool ackReceived = false;
        /* public STA(Medium med)
         {
@@ -336,6 +342,7 @@ namespace Visualisator
                     da.Reciver = dat.Source;
                     //DataReceivedContainer.Append(dat.getData() + "\r\n");
                     //Thread.Sleep(2);
+                    DataAckRetransmitted++;
                     da.PacketID = dat.PacketID;
                     SendData(da);
                 }
@@ -427,6 +434,7 @@ namespace Visualisator
             _DataReceived = 0;
             _DataAckReceived = 0;
             _DataRetransmited = 0;
+            _DataAckRetransmitted = 0;
         }
         //*********************************************************************
         public RFDevice GetRFDeviceByMAC(String _mac)
