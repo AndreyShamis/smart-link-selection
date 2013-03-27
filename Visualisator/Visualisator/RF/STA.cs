@@ -25,6 +25,7 @@ namespace Visualisator
         private int _DataRetransmited = 0;
         private int _DataAckRetransmitted = 0;
         private String DOCpath = "";
+        private int _RSSI = 0;
 
         private bool _WaitingForAck = false;
         private StringBuilder DataReceivedContainer = new StringBuilder();
@@ -51,6 +52,12 @@ namespace Visualisator
         {
             get { return _WaitingForAck; }
             set { _WaitingForAck = value; }
+        }
+
+        public int Rssi
+        {
+            get { return _RSSI; }
+            set { _RSSI = value; }
         }
 
 
@@ -290,9 +297,15 @@ namespace Visualisator
 
             return DataReceivedContainer.Length;
         }
+
+
+
         //*********************************************************************
         public void ParseReceivedPacket(IPacket pack)
         {
+            SimulatorPacket locPack = (SimulatorPacket) pack;
+            Rssi = GetRSSI(locPack.X, locPack.Y);
+                                
             Type _Pt = pack.GetType();
             if (_Pt  == typeof(Packets.ConnectionACK))
             {

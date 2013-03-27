@@ -7,6 +7,7 @@ using Visualisator.Packets;
 using System.Collections;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+
 namespace Visualisator
 {
     [Serializable()]
@@ -83,6 +84,23 @@ namespace Visualisator
             {
                 return false;
             }
+        }
+
+
+        protected int GetRSSI(double x, double y)
+        {
+            double dist = GetSTADist(x, y);
+
+            if (dist > 0 && dist < 100)
+            {
+                return Convert.ToInt32(Math.Round(-15 * Math.Log(dist, 2)));
+            }
+            return 0;
+        }
+
+        protected double GetSTADist(double x,double y)
+        {
+            return Math.Sqrt(    Math.Pow(x - this._x, 2)  +   Math.Pow(y - this._y, 2)      );
         }
 
         public MAC getMAC()

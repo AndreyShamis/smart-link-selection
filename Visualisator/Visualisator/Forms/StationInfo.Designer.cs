@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblRSSI = new System.Windows.Forms.Label();
+            this.PresentRSSI = new System.Windows.Forms.Label();
             this.lblWaitingForAck = new System.Windows.Forms.Label();
             this.lblDataAckRetransmited = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -64,6 +66,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblRSSI);
+            this.groupBox1.Controls.Add(this.PresentRSSI);
             this.groupBox1.Controls.Add(this.lblWaitingForAck);
             this.groupBox1.Controls.Add(this.lblDataAckRetransmited);
             this.groupBox1.Controls.Add(this.label6);
@@ -94,6 +98,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // lblRSSI
+            // 
+            this.lblRSSI.AutoSize = true;
+            this.lblRSSI.Location = new System.Drawing.Point(98, 70);
+            this.lblRSSI.Name = "lblRSSI";
+            this.lblRSSI.Size = new System.Drawing.Size(13, 13);
+            this.lblRSSI.TabIndex = 26;
+            this.lblRSSI.Text = "0";
+            this.lblRSSI.Click += new System.EventHandler(this.label8_Click);
+            // 
+            // PresentRSSI
+            // 
+            this.PresentRSSI.AutoSize = true;
+            this.PresentRSSI.Location = new System.Drawing.Point(10, 70);
+            this.PresentRSSI.Name = "PresentRSSI";
+            this.PresentRSSI.Size = new System.Drawing.Size(32, 13);
+            this.PresentRSSI.TabIndex = 25;
+            this.PresentRSSI.Text = "RSSI";
+            this.PresentRSSI.Click += new System.EventHandler(this.label7_Click);
             // 
             // lblWaitingForAck
             // 
@@ -170,6 +194,7 @@
             this.lblAckReceived.TabIndex = 17;
             this.lblAckReceived.Text = "0";
             this.lblAckReceived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblAckReceived.Click += new System.EventHandler(this.lblAckReceived_Click);
             // 
             // cmdReset
             // 
@@ -199,6 +224,7 @@
             this.lblSent.TabIndex = 14;
             this.lblSent.Text = "0";
             this.lblSent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblSent.Click += new System.EventHandler(this.lblSent_Click);
             // 
             // label2
             // 
@@ -217,6 +243,7 @@
             this.txtDataReceeived.TabIndex = 12;
             this.txtDataReceeived.Text = "0";
             this.txtDataReceeived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.txtDataReceeived.Click += new System.EventHandler(this.txtDataReceeived_Click);
             // 
             // txtMAC
             // 
@@ -410,5 +437,7 @@
         private System.Windows.Forms.Label lblDataAckRetransmited;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblWaitingForAck;
+        private System.Windows.Forms.Label PresentRSSI;
+        private System.Windows.Forms.Label lblRSSI;
     }
 }

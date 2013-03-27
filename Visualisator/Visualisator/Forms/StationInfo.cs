@@ -128,7 +128,9 @@ namespace Visualisator
 
         private void tmrFast_Tick(object sender, EventArgs e)
         {
-            
+
+            lblRSSI.Text = _sta.Rssi.ToString();
+
             if(_sta.WaitingForAck)
             {
                 lblWaitingForAck.BackColor = Color.Chartreuse;
@@ -172,6 +174,31 @@ namespace Visualisator
                     }
                 }
             }
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDataReceeived_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblSent_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAckReceived_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
