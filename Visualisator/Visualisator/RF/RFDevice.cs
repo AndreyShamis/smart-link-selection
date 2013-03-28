@@ -90,8 +90,8 @@ namespace Visualisator
         protected int GetRSSI(double x, double y)
         {
             double dist = GetSTADist(x, y);
-
-            if (dist > 0 && dist < 100)
+          
+            if (dist > 0 && dist < _MEDIUM.Radius)
             {
                 return Convert.ToInt32(Math.Round(-15 * Math.Log(dist, 2)));
             }

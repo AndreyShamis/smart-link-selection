@@ -29,7 +29,7 @@ namespace Visualisator
         private float MouseY = 0;
         public ArrayList _objects = new ArrayList();
         private Medium _MEDIUM = new Medium();
-        private Int32 _RADIUS = 50;
+        private Int32 _RADIUS = 100;
         static Random rand = new Random();
         private Int32 _BOARDX = 680;
         private Int32 _BOARDY = 360;
@@ -271,7 +271,7 @@ namespace Visualisator
             Pen RadiusForStaPen = null;
 
             int DoubleRadius = _RADIUS*2;
-
+            int HalfRadius = _RADIUS ;
             for (int i = 0; i < _objects.Count; i++)
             {
                 if (_objects[i].GetType() == typeof(STA))
@@ -284,7 +284,7 @@ namespace Visualisator
                         RadiusForStaPen = new Pen(System.Drawing.Color.SpringGreen);
 
                     gr.DrawPie(new Pen(_tsta.VColor), (float)_tsta.x-5, (float)_tsta.y-5, 10, 10, 1, 360);
-                    gr.DrawPie(RadiusForStaPen, (float)_tsta.x - _RADIUS, (float)_tsta.y - _RADIUS, DoubleRadius, DoubleRadius, 1, 360);
+                    gr.DrawPie(RadiusForStaPen, (float)_tsta.x - HalfRadius, (float)_tsta.y - HalfRadius, DoubleRadius, DoubleRadius, 1, 360);
                     string drawString = "STA:" +_tsta.getOperateChannel() + " " + _tsta.getMACAddress();
                     System.Drawing.Font drawFont = new System.Drawing.Font(
                         "Arial", 7);
@@ -305,7 +305,7 @@ namespace Visualisator
                     else
                         RadiusForApPen = new Pen(System.Drawing.Color.Ivory);
 
-                    gr.DrawPie(RadiusForApPen, (float)_tap.x - _RADIUS, (float)_tap.y - _RADIUS, DoubleRadius, DoubleRadius, 1, 360);
+                    gr.DrawPie(RadiusForApPen, (float)_tap.x - HalfRadius, (float)_tap.y - HalfRadius, DoubleRadius, DoubleRadius, 1, 360);
                     gr.DrawRectangle(new Pen(_tap.VColor), myRectangle);
 
 

@@ -56,7 +56,13 @@ namespace Visualisator
         private Int32 _ConnectCounter = 0;
         private Int32 _ConnectAckCounter = 0;
 
-        private Double _Radius = 50;
+        private Double _Radius = 100;
+
+        public Double Radius
+        {
+            get { return _Radius; }
+            set { _Radius = value; }
+        }
         private ArrayList BandAChannels = new ArrayList();
         private Hashtable _packets = new Hashtable(new ByteArrayComparer());
         private Hashtable _T = new Hashtable(new ByteArrayComparer()) ;
@@ -85,7 +91,7 @@ namespace Visualisator
                         foreach (var obj in _temp)
                         {
                             RFDevice _tV = (RFDevice)obj;
-                            if (getDistance(x, y, _tV.x, _tV.y) < _Radius + _Radius)
+                            if (getDistance(x, y, _tV.x, _tV.y) < _Radius)
                             {
                                 return (false);
                             }
@@ -480,7 +486,7 @@ namespace Visualisator
                                     SimulatorPacket _LocalPack = (SimulatorPacket) pack;
                                     if (_LocalPack.Source != device.getMACAddress() &&
 
-                                        getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius + _Radius)
+                                        getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius )
                                     {
                                         //LocalPackets.Remove(pack);
                                         return (_LocalPack);
@@ -505,7 +511,7 @@ namespace Visualisator
                                 SimulatorPacket _LocalPack = (SimulatorPacket)pack;
 
                                 if (_LocalPack.Source != device.getMACAddress() &&
-                                    getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius + _Radius)
+                                    getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius )
                                 {
                                     return (_LocalPack);
                                 }
