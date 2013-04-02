@@ -168,44 +168,9 @@ namespace Visualisator
         //{
          //   throw new NotImplementedException();
        // }
-        private bool checkIfHaveDataReceive()
-        {
-            return _MEDIUM.MediumHaveAIRWork(this);
-        }
+
         //*********************************************************************
-        public void Listen()
-        {
-            while (_Enabled)
-            {
-                Packets.IPacket pack = null;
-                Random ran = new Random((int)DateTime.Now.Ticks);
-                //while (RF_STATUS != "NONE")
-                //{
-                //    Thread.Sleep(ran.Next(1,4));
-               // }
 
-                SpinWait.SpinUntil(checkIfHaveDataReceive);
-                SpinWait.SpinUntil(RF_Ready);
-                lock (RF_STATUS)
-                {
-                    RF_STATUS = "RX";
-                    pack = _MEDIUM.ReceiveData(this);
-                    RF_STATUS = "NONE";
-                }
-                /*SpinWait.SpinUntil(RF_Ready);
-                //lock (RF_STATUS)
-                //{
-                    RF_STATUS = "RX";
-                    if (_MEDIUM.MediumHaveAIRWork(this))
-                        pack = _MEDIUM.ReceiveData(this);
-                    RF_STATUS = "NONE";
-               // }*/
-                if (pack != null)
-                    ParseReceivedPacket(pack);
-
-                //Thread.Sleep(1);
-            }
-        }
 
         private void UpdateSTAKeepAliveInfoOnReceive(String STA_MAC)
         {
@@ -220,7 +185,7 @@ namespace Visualisator
             }
         }
         //*********************************************************************
-        public void ParseReceivedPacket(IPacket pack)
+        public override void ParseReceivedPacket(IPacket pack)
         {
             Type Pt = pack.GetType();
             if (Pt == typeof(Connect))

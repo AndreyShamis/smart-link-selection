@@ -206,39 +206,6 @@ namespace Visualisator
             return (false);
         }
 
-        private bool checkIfHaveDataReceive()
-        {
-            return _MEDIUM.MediumHaveAIRWork(this);
-        }
-        //*********************************************************************
-        public void Listen()
-        {
-            Packets.IPacket pack = null;
-
-            while (_Enabled)
-            {
-                    
-
-
-                    SpinWait.SpinUntil(checkIfHaveDataReceive);
-                    SpinWait.SpinUntil(RF_Ready);
-                    lock (RF_STATUS)
-                    {
-                        RF_STATUS = "RX";
-                        pack = _MEDIUM.ReceiveData(this);
-                        RF_STATUS = "NONE";
-                    }
-                    
-               
-                if (pack != null)
-                    ParseReceivedPacket(pack);
-
-                //Thread.Sleep(1);
-                //Thread.Sleep(new TimeSpan(100));
-                //Thread.Sleep(new TimeSpan(10));
-            }
-        }
-
         //*********************************************************************
         public void ListenDisabled()
         {
@@ -301,7 +268,7 @@ namespace Visualisator
 
 
         //*********************************************************************
-        public void ParseReceivedPacket(IPacket pack)
+        public override void ParseReceivedPacket(IPacket pack)
         {
             SimulatorPacket locPack = (SimulatorPacket) pack;
             Rssi = GetRSSI(locPack.X, locPack.Y);
@@ -450,7 +417,7 @@ namespace Visualisator
 
             //Thread.Sleep(1);
             RF_STATUS = "NONE";
-            Thread.Sleep(2);
+           // Thread.Sleep(2);  // TODO: consider to delete or decrise
             if (PacketToSend.GetType() == typeof(Data))
             {
                 _DataSent++;

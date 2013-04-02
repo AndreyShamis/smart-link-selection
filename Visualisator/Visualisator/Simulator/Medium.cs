@@ -486,7 +486,7 @@ namespace Visualisator
                                     SimulatorPacket _LocalPack = (SimulatorPacket) pack;
                                     if (_LocalPack.Source != device.getMACAddress() &&
 
-                                        getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius )
+                                        getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius*2 )
                                     {
                                         //LocalPackets.Remove(pack);
                                         return (_LocalPack);
@@ -511,7 +511,7 @@ namespace Visualisator
                                 SimulatorPacket _LocalPack = (SimulatorPacket)pack;
 
                                 if (_LocalPack.Source != device.getMACAddress() &&
-                                    getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius )
+                                    getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius*2 )
                                 {
                                     return (_LocalPack);
                                 }

@@ -7,6 +7,7 @@ using Visualisator.Packets;
 using System.Collections;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Threading;
 
 namespace Visualisator
 {
@@ -27,7 +28,7 @@ namespace Visualisator
 
         protected ArrayList _AssociatedWithAPList = new ArrayList();
         protected ArrayList _PointerToAllRfDevices = null;
-
+        //protected Hashtable _RSSI_all = new Hashtable(new ByteArrayComparer());
 
         protected Int32 _DataReceived = 0;
         protected Int32 _DataAckReceived = 0;
@@ -91,9 +92,12 @@ namespace Visualisator
         {
             double dist = GetSTADist(x, y);
           
-            if (dist > 0 && dist < _MEDIUM.Radius)
+            if (dist >= 0 )
             {
-                return Convert.ToInt32(Math.Round(-15 * Math.Log(dist, 2)));
+                // formula for wolfram: plot [y= -15*log_2(x),{y,16,-95},{x,60,0}] 
+                // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-15*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
+
+                return Convert.ToInt32(Math.Round(-13 * Math.Log(dist, 2)));
             }
             return 0;
         }
@@ -242,9 +246,43 @@ namespace Visualisator
 
 
 
-        public void ParseReceivedPacket(IPacket pack)
+        public virtual void ParseReceivedPacket(IPacket pack) { }
+
+        private bool checkIfHaveDataReceive()
         {
-            throw new NotImplementedException();
+            return _MEDIUM.MediumHaveAIRWork(this);
+        }
+
+        //*********************************************************************
+        public void Listen()
+        {
+            Packets.IPacket pack = null;
+
+            while (_Enabled)
+            {
+
+
+
+                //SpinWait.SpinUntil(checkIfHaveDataReceive);
+                //SpinWait.SpinUntil(RF_Ready);
+                SpinWait.SpinUntil(ListenCondition);
+                lock (RF_STATUS)
+                {
+                    RF_STATUS = "RX";
+                    pack = _MEDIUM.ReceiveData(this);
+                    RF_STATUS = "NONE";
+                }
+
+
+                if (pack != null)
+                    ParseReceivedPacket(pack);
+
+            }
+        }
+        //*********************************************************************
+        private bool ListenCondition()
+        {
+            return (checkIfHaveDataReceive() && RF_Ready());
         }
     }
 }
