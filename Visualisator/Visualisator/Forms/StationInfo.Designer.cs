@@ -60,6 +60,8 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblDoubleReceived = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -388,11 +390,31 @@
             this.tmrFast.Interval = 2;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(252, 4);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(90, 13);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "Double Recieved";
+            // 
+            // lblDoubleReceived
+            // 
+            this.lblDoubleReceived.AutoSize = true;
+            this.lblDoubleReceived.Location = new System.Drawing.Point(358, 5);
+            this.lblDoubleReceived.Name = "lblDoubleReceived";
+            this.lblDoubleReceived.Size = new System.Drawing.Size(35, 13);
+            this.lblDoubleReceived.TabIndex = 28;
+            this.lblDoubleReceived.Text = "label8";
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(585, 436);
+            this.Controls.Add(this.lblDoubleReceived);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "StationInfo";
@@ -403,6 +425,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -439,5 +462,7 @@
         private System.Windows.Forms.Label lblWaitingForAck;
         private System.Windows.Forms.Label PresentRSSI;
         private System.Windows.Forms.Label lblRSSI;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblDoubleReceived;
     }
 }

@@ -145,6 +145,7 @@ namespace Visualisator
             lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
             lblRetransmited.Text = _sta.DataRetransmited.ToString();
             lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
+            lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
         }
 
         private void btnSaveData_Click(object sender, EventArgs e)

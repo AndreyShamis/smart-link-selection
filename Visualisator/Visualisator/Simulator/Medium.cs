@@ -444,7 +444,7 @@ namespace Visualisator
             int Rate = p.getTransmitRate();
             int sleep = GetObjectSize(p) / Rate;
             //Thread.Sleep(sleep);
-            Thread.Sleep(new TimeSpan(sleep * 500));
+            Thread.Sleep(new TimeSpan(sleep * 50));
             //AddToLog("Sleep for :" + sleep);
             if (_temp != null)
             {

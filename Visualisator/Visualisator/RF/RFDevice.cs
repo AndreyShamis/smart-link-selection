@@ -25,7 +25,17 @@ namespace Visualisator
         private Int32           _OperateChannel =   0;
         private String          _OperateBand    =   "";
         private MAC             _address        =   new MAC();
+        private Int32 _DoubleRecieved = 0;
 
+        protected Int32 DoubleRecieved
+        {
+            get { return _DoubleRecieved; }
+            set { _DoubleRecieved = value; }
+        }
+        public Int32 getDoubleRecieved()
+        {
+            return DoubleRecieved;
+        }
         protected ArrayList _AssociatedWithAPList = new ArrayList();
         protected ArrayList _PointerToAllRfDevices = null;
         //protected Hashtable _RSSI_all = new Hashtable(new ByteArrayComparer());
@@ -308,13 +318,17 @@ namespace Visualisator
 
                 if (pack != null && prev_guid != ((SimulatorPacket)pack).GuidD)
                 {
-
                     //ParseReceivedPacket(pack);
                     IPacket temp = pack;
                     prev_guid = ((SimulatorPacket)temp).GuidD;
                     Thread newThread = new Thread(() => ParseReceivedPacket(temp));
                     newThread.Start();
-                    
+                    Thread.Sleep(1);
+                }
+                else if (pack != null)
+                {
+                    _DoubleRecieved++;
+                    Thread.Sleep(1);
                 }
 
             }

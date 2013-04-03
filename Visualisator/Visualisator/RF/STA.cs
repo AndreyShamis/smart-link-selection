@@ -431,6 +431,7 @@ namespace Visualisator
             _DataAckReceived = 0;
             _DataRetransmited = 0;
             _DataAckRetransmitted = 0;
+            this.DoubleRecieved = 0;
         }
         //*********************************************************************
         public RFDevice GetRFDeviceByMAC(String _mac)
