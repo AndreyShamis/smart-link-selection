@@ -329,8 +329,9 @@ namespace Visualisator
                 }
                 else if (pack != null)
                 {
-                    _DoubleRecieved++;
-                    Thread.Sleep(1);
+                    //if (pack.GetType() != typeof(Packets.Beacon))
+                        _DoubleRecieved++;
+                    Thread.Sleep(2);
                 }
 
             }

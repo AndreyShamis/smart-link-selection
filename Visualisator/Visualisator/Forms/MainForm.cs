@@ -463,7 +463,7 @@ namespace Visualisator
 
         private void btnSetMediumSendRatio_Click(object sender, EventArgs e)
         {
-            Int32 mediumSendRatio = 50;
+            Int32 mediumSendRatio = 8000;
 
             try
             {

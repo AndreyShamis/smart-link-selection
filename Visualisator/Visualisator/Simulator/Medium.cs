@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using Visualisator.Packets;
+using System.Runtime.CompilerServices;
 
 namespace Visualisator
 {
@@ -47,6 +48,7 @@ namespace Visualisator
             }
         }
 
+        private bool LockWasToken = false;
         public ArrayList _objects = null;
         private ArrayList _MBands = new ArrayList();
         private ArrayList _Mfrequency = new ArrayList();
@@ -56,7 +58,7 @@ namespace Visualisator
         private Int32 _ConnectCounter = 0;
         private Int32 _ConnectAckCounter = 0;
 
-        private Int32 _MediumSendDataRatio = 50;
+        private Int32 _MediumSendDataRatio = 8000;
 
         public Int32 MediumSendDataRatio
         {
@@ -78,6 +80,7 @@ namespace Visualisator
 
         private StringBuilder _LOG = new StringBuilder();
         //*********************************************************************
+        //[MethodImpl(MethodImplOptions.Synchronized)]
         public Boolean Registration(String Band, Int32 Channel, Double x, Double y)
         {
             Key Tk = new Key(Band,Channel);
@@ -160,6 +163,7 @@ namespace Visualisator
             _LOG.Append(data + "\r\n");
         }
         //*********************************************************************
+
         private void Unregister(Key Tk,object rem)
         {
            Thread.Sleep(1);
@@ -445,6 +449,7 @@ namespace Visualisator
             return size;
         }
         //*********************************************************************
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private void ThreadableSendData(Key _Pk,object _ref)
         {
             ArrayList _temp = (ArrayList)_packets[_Pk];
@@ -454,33 +459,48 @@ namespace Visualisator
             //Thread.Sleep(sleep);
             Thread.Sleep(new TimeSpan(sleep * _MediumSendDataRatio));
             //AddToLog("Sleep for :" + sleep);
-            if (_temp != null)
+            LockWasToken = false;
+            Monitor.Enter(_packets, ref LockWasToken);
+            try
             {
-                lock (_packets)
+                if (_temp != null)
                 {
-                   // if (_temp != null)
+                    
                    // {
+                        // if (_temp != null)
+                        // {
                         if (_temp.Contains(_ref))
                             _temp.Remove((SimulatorPacket)_ref);
-  
+
                         if (_temp.Count > 0)
                             _packets[_Pk] = _temp;
                         else
                             _packets.Remove(_Pk);
+                        // }
                    // }
                 }
             }
+            catch(Exception){}
+            finally
+            {
+                if(LockWasToken) Monitor.Exit(_packets);
+            }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteReceivedPacket(RFDevice device,Guid packet_id)
         {
             Key Pk = null;
             String errPrefix = "";
+            bool LockTokan = false;
+            if (_packets != null)
+            {
+                return ;
+            }
             try
             {
-                if (_packets != null)
-                {
-                    lock (_packets)
+
+                Monitor.Enter(_packets, ref LockTokan);
                     {
                         errPrefix = " Packets ";
                         Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
@@ -495,11 +515,11 @@ namespace Visualisator
                                     if (
                                         //_LocalPack.Source != device.getMACAddress() &&
                                         _LocalPack.GuidD == packet_id)
-                                       // getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius * 2)
+                                    // getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius * 2)
                                     {
                                         LocalPackets.Remove(pack);
                                         return;
-                                       // return (_LocalPack);
+                                        // return (_LocalPack);
 
                                     }
                                 }
@@ -507,74 +527,96 @@ namespace Visualisator
                             }
                         }
                     }
-                }
+               
             }
             catch (Exception ex) { AddToLog("[DeleteReceivedPacket][" + errPrefix + "]:" + ex.Message); }
+            finally
+            {
+                if (LockTokan) Monitor.Exit(_packets);
+            }
         }
         //*********************************************************************
+
         public IPacket ReceiveData(RFDevice device)
         {
             Key Pk = null;
             String errPrefix = "";
+
+            IPacket retvalue = null;
+            if (_packets == null)
+            { 
+                return null;
+            }
             try
             {
-                if (_packets != null)
-                {
-                    lock (_packets)
+
+                    Monitor.Enter(_packets);
                     {
                         errPrefix = " Packets ";
                         Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
                         if (_packets.ContainsKey(Pk))
                         {
-                            ArrayList LocalPackets = (ArrayList) _packets[Pk];
+                            ArrayList LocalPackets = (ArrayList)_packets[Pk];
                             foreach (object pack in LocalPackets)
                             {
                                 if (pack != null)
                                 {
-                                    SimulatorPacket _LocalPack = (SimulatorPacket) pack;
+                                    SimulatorPacket _LocalPack = (SimulatorPacket)pack;
                                     if (_LocalPack.Source != device.getMACAddress() &&
 
-                                        getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius*2 )
+                                        getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius * 2)
                                     {
                                         //LocalPackets.Remove(pack);
-                                        return (_LocalPack);
+                                        retvalue = _LocalPack;
+                                        break;
+                                        //return (_LocalPack);
 
                                     }
                                 }
                                 // loop body
                             }
                         }
-                    }
 
 
-                    Pk = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
-                    if (_packets.ContainsKey(Pk))
-                    {
-                        errPrefix = " Beacons ";
-                        ArrayList LocalPackets = (ArrayList)_packets[Pk];
-                        foreach (object pack in LocalPackets)
+                        if (retvalue == null)
                         {
-                            if (pack != null)
-                            {
-                                SimulatorPacket _LocalPack = (SimulatorPacket)pack;
 
-                                if (_LocalPack.Source != device.getMACAddress() &&
-                                    getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius*2 )
+                            Pk = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
+                            if (_packets.ContainsKey(Pk))
+                            {
+                                errPrefix = " Beacons ";
+                                ArrayList LocalPackets = (ArrayList)_packets[Pk];
+                                foreach (object pack in LocalPackets)
                                 {
-                                    return (_LocalPack);
+                                    if (pack != null)
+                                    {
+                                        SimulatorPacket _LocalPack = (SimulatorPacket)pack;
+
+                                        if (_LocalPack.Source != device.getMACAddress() &&
+                                            getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius * 2)
+                                        {
+                                            retvalue = _LocalPack;
+                                            break;
+                                            //return (_LocalPack);
+                                        }
+                                    }
+                                    // loop body
                                 }
                             }
-                            // loop body
+                            else
+                            {
+                                //AddToLog("Packet not found");
+                            }
                         }
                     }
-                    else
-                    {
-                        //AddToLog("Packet not found");
-                    }
-                }
+                
             }
             catch (Exception ex) { AddToLog("[ReceiveData][" + errPrefix + "]:" + ex.Message); }
-            return (null);
+            finally
+            {
+                Monitor.Exit(_packets);
+            }
+            return (retvalue);
         }
 
        // public Boolean MediumClean

@@ -480,12 +480,12 @@ namespace Visualisator
                 ackReceived = false;
                 SendData(dataPack);
                 WaitingForAck = true;
-                int retrCounter = 60;
+                int retrCounter = 50;
                 Thread.Sleep(6);
                 while (!ackReceived )
                 {
                     retrCounter--;
-                    Thread.Sleep(2);
+                    Thread.Sleep(3);
                     if (retrCounter < 0)
                     {
                         retrCounter = 60;
