@@ -46,6 +46,9 @@
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sTAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSetMediumSendRatio = new System.Windows.Forms.Button();
+            this.txtMediumSendRatio = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -190,12 +193,44 @@
             this.sTAToolStripMenuItem.Text = "Station";
             this.sTAToolStripMenuItem.Click += new System.EventHandler(this.sTAToolStripMenuItem_Click);
             // 
+            // btnSetMediumSendRatio
+            // 
+            this.btnSetMediumSendRatio.Location = new System.Drawing.Point(917, 209);
+            this.btnSetMediumSendRatio.Name = "btnSetMediumSendRatio";
+            this.btnSetMediumSendRatio.Size = new System.Drawing.Size(42, 23);
+            this.btnSetMediumSendRatio.TabIndex = 15;
+            this.btnSetMediumSendRatio.Text = "Set";
+            this.btnSetMediumSendRatio.UseVisualStyleBackColor = true;
+            this.btnSetMediumSendRatio.Click += new System.EventHandler(this.btnSetMediumSendRatio_Click);
+            // 
+            // txtMediumSendRatio
+            // 
+            this.txtMediumSendRatio.Location = new System.Drawing.Point(854, 211);
+            this.txtMediumSendRatio.Name = "txtMediumSendRatio";
+            this.txtMediumSendRatio.Size = new System.Drawing.Size(57, 20);
+            this.txtMediumSendRatio.TabIndex = 14;
+            this.txtMediumSendRatio.Text = "100";
+            this.txtMediumSendRatio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(700, 212);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(120, 16);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Medium Send ratio";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 375);
             this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.btnSetMediumSendRatio);
+            this.Controls.Add(this.txtMediumSendRatio);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnSetUpdateInterval);
             this.Controls.Add(this.txtUpdateInterval);
             this.Controls.Add(this.lblUpdateIntervalDescr);
@@ -237,6 +272,9 @@
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sTAToolStripMenuItem;
+        private System.Windows.Forms.Button btnSetMediumSendRatio;
+        private System.Windows.Forms.TextBox txtMediumSendRatio;
+        private System.Windows.Forms.Label label2;
     }
 }
 

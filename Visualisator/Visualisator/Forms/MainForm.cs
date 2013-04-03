@@ -461,6 +461,19 @@ namespace Visualisator
             DrowOnBoard();
         }
 
+        private void btnSetMediumSendRatio_Click(object sender, EventArgs e)
+        {
+            Int32 mediumSendRatio = 50;
+
+            try
+            {
+                mediumSendRatio = Convert.ToInt32(txtMediumSendRatio.Text);
+                _MEDIUM.MediumSendDataRatio = mediumSendRatio;
+               // tmrGUISlow.Interval = updateInterval;
+            }
+            catch (Exception) { }
+        }
+
 
         //private void mnuContext(object sender, EventArgs e)
         //{

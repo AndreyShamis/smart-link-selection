@@ -56,6 +56,14 @@ namespace Visualisator
         private Int32 _ConnectCounter = 0;
         private Int32 _ConnectAckCounter = 0;
 
+        private Int32 _MediumSendDataRatio = 50;
+
+        public Int32 MediumSendDataRatio
+        {
+            get { return _MediumSendDataRatio; }
+            set { _MediumSendDataRatio = value; }
+        }
+
         private Double _Radius = 100;
 
         public Double Radius
@@ -444,7 +452,7 @@ namespace Visualisator
             int Rate = p.getTransmitRate();
             int sleep = GetObjectSize(p) / Rate;
             //Thread.Sleep(sleep);
-            Thread.Sleep(new TimeSpan(sleep * 50));
+            Thread.Sleep(new TimeSpan(sleep * _MediumSendDataRatio));
             //AddToLog("Sleep for :" + sleep);
             if (_temp != null)
             {
