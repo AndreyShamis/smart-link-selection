@@ -72,6 +72,7 @@ namespace Visualisator
         public STA(Medium med,ArrayList RfObjects)
         {
             this._MEDIUM = med;
+            ListenBeacon = true;
             this.VColor = Color.RoyalBlue;
             _PointerToAllRfDevices = RfObjects;
             Enable();
@@ -207,6 +208,7 @@ namespace Visualisator
         }
 
         //*********************************************************************
+        /*
         public void ListenDisabled()
         {
             Packets.IPacket pack = null;
@@ -217,7 +219,7 @@ namespace Visualisator
                 lock (RF_STATUS)
                 {
                     RF_STATUS = "RX";
-                    if (_MEDIUM.MediumHaveAIRWork(this))
+                    if (_MEDIUM.MediumHaveAIRWork(this,true))
                         pack = _MEDIUM.ReceiveData(this);
                     
                     RF_STATUS = "NONE";
@@ -230,7 +232,7 @@ namespace Visualisator
                 //Thread.Sleep(new TimeSpan(10));
             }
         }
-
+        */
         private void CreateFolder()
         {
             // Specify a name for your top-level folder. 
@@ -481,7 +483,7 @@ namespace Visualisator
                 SendData(dataPack);
                 WaitingForAck = true;
                 int retrCounter = 60;
-                Thread.Sleep(5);
+                Thread.Sleep(3);
                 while (!ackReceived )
                 {
                     retrCounter--;

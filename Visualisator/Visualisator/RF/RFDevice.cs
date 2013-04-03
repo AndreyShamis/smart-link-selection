@@ -26,6 +26,12 @@ namespace Visualisator
         private String          _OperateBand    =   "";
         private MAC             _address        =   new MAC();
         private Int32 _DoubleRecieved = 0;
+        protected bool ListenBeacon = false;
+
+        public bool getListenBeacon()
+        {
+            return ListenBeacon;
+        }
 
         protected Int32 DoubleRecieved
         {
@@ -294,7 +300,7 @@ namespace Visualisator
 
         private bool checkIfHaveDataReceive()
         {
-            return _MEDIUM.MediumHaveAIRWork(this);
+            return _MEDIUM.MediumHaveAIRWork(this, ListenBeacon);
         }
 
         //*********************************************************************
@@ -323,6 +329,10 @@ namespace Visualisator
                     prev_guid = ((SimulatorPacket)temp).GuidD;
                     if (pack.GetType() != typeof(Packets.Beacon))
                         _MEDIUM.DeleteReceivedPacket(this, prev_guid);
+                    else
+                    {
+                        Thread.Sleep(1);
+                    }
                     Thread newThread = new Thread(() => ParseReceivedPacket(temp));
                     newThread.Start();
                     Thread.Sleep(1);

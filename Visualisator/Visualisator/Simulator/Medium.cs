@@ -351,16 +351,29 @@ namespace Visualisator
             }
         }
         //*********************************************************************
-        public Boolean MediumHaveAIRWork(RFDevice device)
+        public Boolean MediumHaveAIRWork(RFDevice device, bool CheckBeacons)
         {
             if(this.getPacketsFound() < 1)
             {
                 return false;
             }
                 Key Pk = new Key(device.getOperateBand(), device.getOperateChannel(),device.getMACAddress());
-                Key Pk2 = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
-                if (_packets != null && (_packets.ContainsKey(Pk) || _packets.ContainsKey(Pk2)))
-                    return true;
+                Key Pk2 = null;
+                if (CheckBeacons)
+                {
+                     Pk2 = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
+                }
+
+                if (CheckBeacons)
+                {
+                    if (_packets != null && (_packets.ContainsKey(Pk) || _packets.ContainsKey(Pk2)))
+                        return true;
+                }
+                else
+                {
+                    if (_packets != null && _packets.ContainsKey(Pk) )
+                        return true;
+                }
                 return false;
         }
 
@@ -578,7 +591,7 @@ namespace Visualisator
                         }
 
 
-                        if (retvalue == null)
+                        if (device.getListenBeacon() && retvalue == null)
                         {
 
                             Pk = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
