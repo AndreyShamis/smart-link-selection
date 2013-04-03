@@ -106,14 +106,22 @@ namespace Visualisator
 
         protected int GetRSSI(double x, double y)
         {
-            double dist = GetSTADist(x, y);
-          
-            if (dist >= 0 )
+            try
             {
-                // formula for wolfram: plot [y= -15*log_2(x),{y,16,-95},{x,60,0}] 
-                // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-15*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
 
-                return Convert.ToInt32(Math.Round(-13 * Math.Log(dist, 2)));
+
+                double dist = GetSTADist(x, y);
+
+                if (dist >= 0)
+                {
+                    // formula for wolfram: plot [y= -15*log_2(x),{y,16,-95},{x,60,0}] 
+                    // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-15*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
+
+                    return Convert.ToInt32(Math.Round(-13*Math.Log(dist, 2)));
+                }
+            }
+            catch(Exception)
+            {
             }
             return 0;
         }
@@ -214,29 +222,35 @@ namespace Visualisator
             //{
             //Thread.Sleep(ran.Next(3,10));
             //}
-            SpinWait.SpinUntil(RF_Ready);
-            RF_STATUS = "TX";
-            while (!_MEDIUM.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y))
-            {
-                RF_STATUS = "NONE";
-                //Thread.Sleep(ran.Next(1, 2));
-                //Thread.Sleep(new TimeSpan(20));
-                Thread.Sleep(1);
-                SpinWait.SpinUntil(RF_Ready);
-
-                //while (RF_STATUS != "NONE")
-                //    Thread.Sleep(ran.Next(1, 3));
-                RF_STATUS = "TX";
-            }
-
+            //
             CheckScanConditionOnSend();
+            lock (RF_STATUS)
+            {
+                //SpinWait.SpinUntil(RF_Ready);
+                RF_STATUS = "TX";
+
+                while (!_MEDIUM.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y))
+                {
+                   // RF_STATUS = "NONE";
+                    //Thread.Sleep(ran.Next(1, 2));
+                    //Thread.Sleep(new TimeSpan(20));
+                   // Thread.Sleep(1);
+                 //   SpinWait.SpinUntil(RF_Ready);
+
+                    //while (RF_STATUS != "NONE")
+                    //    Thread.Sleep(ran.Next(1, 3));
+                //    RF_STATUS = "TX";
+                }
+           
+            
             _MEDIUM.SendData(pack);
             //Thread.Sleep(ran.Next(1, 2));
             //Thread.Sleep(1);
             //Thread.Sleep(new TimeSpan(100));
             RF_STATUS = "NONE";
+            }
 
-            // Thread.Sleep(2);  // TODO: consider to delete or decrise
+             Thread.Sleep(3);  // TODO: consider to delete or decrise
             if (pack.GetType() == typeof(Data))
             {
                 _DataSent++;
@@ -263,35 +277,6 @@ namespace Visualisator
         public void AddToLog(string newLogEntry)
         {
             _LOG.Append( "[" + this.getMACAddress() + "]" + newLogEntry + "\r\n");
-        }
-
-        public double x
-        {
-            get { return _x; }
-            set { _x = value; }
-        }
-        public double y
-        {
-            get { return _y; }
-            set { _y = value; }
-        }
-        public double z
-        {
-            get { return _z; }
-            set { _z = value; }
-        }
-
-        public Color VColor
-        {
-            get { return _vColor; }
-            set { _vColor = value; }
-        }
-
-        public void SetVertex(Double x, Double y, Double z)
-        {
-            _x = x;
-            _y = y;
-            _z = z;
         }
 
 
@@ -321,29 +306,38 @@ namespace Visualisator
 
                 }
 
-
-                if (pack != null && prev_guid != ((SimulatorPacket)pack).GuidD)
+                if (pack == null)
+                {
+                   // Thread.Sleep(1); 
+                }
+                else if (pack != null && prev_guid != ((SimulatorPacket)pack).GuidD)
                 {
                     //ParseReceivedPacket(pack);
                     IPacket temp = pack;
                     prev_guid = ((SimulatorPacket)temp).GuidD;
                     if (pack.GetType() != typeof(Packets.Beacon))
                         _MEDIUM.DeleteReceivedPacket(this, prev_guid);
-                    else
-                    {
-                        Thread.Sleep(1);
-                    }
+                    //else
+                    //{
+                        //Thread.Sleep(1); 
+                   // }
                     Thread newThread = new Thread(() => ParseReceivedPacket(temp));
                     newThread.Start();
-                    Thread.Sleep(1);
+
+                 //   Thread.Sleep(1);
                    
                 }
                 else if (pack != null)
                 {
-                    //if (pack.GetType() != typeof(Packets.Beacon))
+                    if (pack.GetType() != typeof(Packets.Beacon))
                         _DoubleRecieved++;
-                    Thread.Sleep(1);
+                   // else
+                  //  {
+                    //    Thread.Sleep(new TimeSpan(4000));
+                   // }
+                  //  Thread.Sleep(1);
                 }
+                
 
             }
         }
@@ -351,6 +345,36 @@ namespace Visualisator
         private bool ListenCondition()
         {
             return (checkIfHaveDataReceive() && RF_Ready());
+        }
+
+
+        public double x
+        {
+            get { return _x; }
+            set { _x = value; }
+        }
+        public double y
+        {
+            get { return _y; }
+            set { _y = value; }
+        }
+        public double z
+        {
+            get { return _z; }
+            set { _z = value; }
+        }
+
+        public Color VColor
+        {
+            get { return _vColor; }
+            set { _vColor = value; }
+        }
+
+        public void SetVertex(Double x, Double y, Double z)
+        {
+            _x = x;
+            _y = y;
+            _z = z;
         }
     }
 }

@@ -209,7 +209,7 @@
             this.txtMediumSendRatio.Name = "txtMediumSendRatio";
             this.txtMediumSendRatio.Size = new System.Drawing.Size(57, 20);
             this.txtMediumSendRatio.TabIndex = 14;
-            this.txtMediumSendRatio.Text = "8000";
+            this.txtMediumSendRatio.Text = "2000";
             this.txtMediumSendRatio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2

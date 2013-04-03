@@ -29,7 +29,7 @@ namespace Visualisator
 
         private bool _WaitingForAck = false;
         private StringBuilder DataReceivedContainer = new StringBuilder();
-
+        private Int32 _StatisticRetransmitTime = 0;
 
 
         public bool getScanStatus()
@@ -58,6 +58,12 @@ namespace Visualisator
         {
             get { return _RSSI; }
             set { _RSSI = value; }
+        }
+
+        public int StatisticRetransmitTime
+        {
+            get { return _StatisticRetransmitTime; }
+            set { _StatisticRetransmitTime = value; }
         }
 
 
@@ -459,6 +465,11 @@ namespace Visualisator
 
             string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\_DATA_TO_SEND\input.txt");
             AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+
+            if (_connecttoAP == null)
+            {
+                return;
+            }
             Data dataPack = new Data(CreatePacket());
             dataPack.SSID = _connecttoAP.SSID;
             dataPack.Destination = _connecttoAP.getMACAddress();
@@ -483,20 +494,26 @@ namespace Visualisator
                 SendData(dataPack);
                 WaitingForAck = true;
                 int retrCounter = 60;
-                Thread.Sleep(3);
-                while (!ackReceived )
+                int loops = 1;
+                Thread.Sleep(14);
+                while (!ackReceived  )
                 {
                     retrCounter--;
-                    Thread.Sleep(3);
+                    Thread.Sleep(2);
                     if (retrCounter < 0)
                     {
                         retrCounter = 60;
                         SendData(dataPack);
                         _DataRetransmited++;
-                        Thread.Sleep(5);
+                        loops = loops + 1;
+                        if(!_Enabled)
+                            return;
+                        //Thread.Sleep(1);
                     }
                 }
+                
                 WaitingForAck = false;
+                _StatisticRetransmitTime =loops* 60-  retrCounter;
                 //SpinWait.SpinUntil(() => { return ackReceived; });
 
                 // Thread.Sleep(3);

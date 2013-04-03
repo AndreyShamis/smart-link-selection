@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblCounterToretransmit = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblDoubleReceived = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.lblRSSI = new System.Windows.Forms.Label();
             this.PresentRSSI = new System.Windows.Forms.Label();
             this.lblWaitingForAck = new System.Windows.Forms.Label();
@@ -60,14 +64,16 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblDoubleReceived = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblCounterToretransmit);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.lblDoubleReceived);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.lblRSSI);
             this.groupBox1.Controls.Add(this.PresentRSSI);
             this.groupBox1.Controls.Add(this.lblWaitingForAck);
@@ -95,11 +101,47 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(10, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(574, 115);
+            this.groupBox1.Size = new System.Drawing.Size(574, 161);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // lblCounterToretransmit
+            // 
+            this.lblCounterToretransmit.AutoSize = true;
+            this.lblCounterToretransmit.Location = new System.Drawing.Point(116, 137);
+            this.lblCounterToretransmit.Name = "lblCounterToretransmit";
+            this.lblCounterToretransmit.Size = new System.Drawing.Size(35, 13);
+            this.lblCounterToretransmit.TabIndex = 32;
+            this.lblCounterToretransmit.Text = "label8";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(10, 136);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(109, 13);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Counter to Retransmit";
+            // 
+            // lblDoubleReceived
+            // 
+            this.lblDoubleReceived.AutoSize = true;
+            this.lblDoubleReceived.Location = new System.Drawing.Point(116, 114);
+            this.lblDoubleReceived.Name = "lblDoubleReceived";
+            this.lblDoubleReceived.Size = new System.Drawing.Size(35, 13);
+            this.lblDoubleReceived.TabIndex = 30;
+            this.lblDoubleReceived.Text = "label8";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(10, 113);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(90, 13);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Double Recieved";
             // 
             // lblRSSI
             // 
@@ -126,7 +168,7 @@
             this.lblWaitingForAck.AutoSize = true;
             this.lblWaitingForAck.BackColor = System.Drawing.Color.Black;
             this.lblWaitingForAck.ForeColor = System.Drawing.Color.Coral;
-            this.lblWaitingForAck.Location = new System.Drawing.Point(10, 84);
+            this.lblWaitingForAck.Location = new System.Drawing.Point(485, 145);
             this.lblWaitingForAck.Name = "lblWaitingForAck";
             this.lblWaitingForAck.Size = new System.Drawing.Size(83, 13);
             this.lblWaitingForAck.TabIndex = 24;
@@ -351,9 +393,9 @@
             // 
             this.groupBox2.Controls.Add(this.btnDumpAll);
             this.groupBox2.Controls.Add(this.txtDumpAll);
-            this.groupBox2.Location = new System.Drawing.Point(12, 129);
+            this.groupBox2.Location = new System.Drawing.Point(12, 175);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(559, 305);
+            this.groupBox2.Size = new System.Drawing.Size(559, 259);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Send Data";
@@ -387,34 +429,14 @@
             // tmrFast
             // 
             this.tmrFast.Enabled = true;
-            this.tmrFast.Interval = 20;
+            this.tmrFast.Interval = 5;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(252, 4);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(90, 13);
-            this.label7.TabIndex = 27;
-            this.label7.Text = "Double Recieved";
-            // 
-            // lblDoubleReceived
-            // 
-            this.lblDoubleReceived.AutoSize = true;
-            this.lblDoubleReceived.Location = new System.Drawing.Point(358, 5);
-            this.lblDoubleReceived.Name = "lblDoubleReceived";
-            this.lblDoubleReceived.Size = new System.Drawing.Size(35, 13);
-            this.lblDoubleReceived.TabIndex = 28;
-            this.lblDoubleReceived.Text = "label8";
             // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(585, 436);
-            this.Controls.Add(this.lblDoubleReceived);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "StationInfo";
@@ -425,7 +447,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -462,7 +483,9 @@
         private System.Windows.Forms.Label lblWaitingForAck;
         private System.Windows.Forms.Label PresentRSSI;
         private System.Windows.Forms.Label lblRSSI;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblCounterToretransmit;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblDoubleReceived;
+        private System.Windows.Forms.Label label7;
     }
 }

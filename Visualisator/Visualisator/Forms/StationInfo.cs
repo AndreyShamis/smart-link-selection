@@ -146,6 +146,7 @@ namespace Visualisator
             lblRetransmited.Text = _sta.DataRetransmited.ToString();
             lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
             lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
+            lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString() + " | " + lblCounterToretransmit.Text.Substring(0,2);
         }
 
         private void btnSaveData_Click(object sender, EventArgs e)
