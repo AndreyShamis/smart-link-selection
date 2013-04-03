@@ -281,7 +281,7 @@ namespace Visualisator
                 {
                     _AssociatedWithAPList.Add(_ack.SSID);
 
-                    Thread.Sleep(5);
+                    //Thread.Sleep(5);
                 }
             }
             else if (_Pt == typeof(Packets.Beacon))
@@ -340,8 +340,8 @@ namespace Visualisator
                 Packets.DataAck dat = (Packets.DataAck)pack;
 
                     if (PrevDataAckID != dat.PacketID){
-                        _DataAckReceived++;
                         ackReceived = true;
+                        _DataAckReceived++;
                         PrevDataAckID = dat.PacketID;
                     }
 
@@ -480,8 +480,8 @@ namespace Visualisator
                 ackReceived = false;
                 SendData(dataPack);
                 WaitingForAck = true;
-                int retrCounter = 50;
-                Thread.Sleep(6);
+                int retrCounter = 60;
+                Thread.Sleep(5);
                 while (!ackReceived )
                 {
                     retrCounter--;
@@ -491,6 +491,7 @@ namespace Visualisator
                         retrCounter = 60;
                         SendData(dataPack);
                         _DataRetransmited++;
+                        Thread.Sleep(5);
                     }
                 }
                 WaitingForAck = false;

@@ -387,7 +387,7 @@
             // tmrFast
             // 
             this.tmrFast.Enabled = true;
-            this.tmrFast.Interval = 2;
+            this.tmrFast.Interval = 20;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
             // label7

@@ -306,7 +306,7 @@ namespace Visualisator
             {
                 //SpinWait.SpinUntil(checkIfHaveDataReceive);
                 //SpinWait.SpinUntil(RF_Ready);
-                SpinWait.SpinUntil(ListenCondition);
+                SpinWait.SpinUntil(ListenCondition);//,1);
                 lock (RF_STATUS)
                 {
                     RF_STATUS = "RX";
@@ -321,17 +321,18 @@ namespace Visualisator
                     //ParseReceivedPacket(pack);
                     IPacket temp = pack;
                     prev_guid = ((SimulatorPacket)temp).GuidD;
-                    _MEDIUM.DeleteReceivedPacket(this, prev_guid);
+                    if (pack.GetType() != typeof(Packets.Beacon))
+                        _MEDIUM.DeleteReceivedPacket(this, prev_guid);
                     Thread newThread = new Thread(() => ParseReceivedPacket(temp));
                     newThread.Start();
-                    //Thread.Sleep(1);
+                    Thread.Sleep(1);
                    
                 }
                 else if (pack != null)
                 {
                     //if (pack.GetType() != typeof(Packets.Beacon))
                         _DoubleRecieved++;
-                    Thread.Sleep(2);
+                    Thread.Sleep(1);
                 }
 
             }
