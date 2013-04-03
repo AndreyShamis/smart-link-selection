@@ -15,6 +15,13 @@ namespace Visualisator.Packets
         private int _TransmitRate = 64;
         private int _PacketID = 0;
 
+        private Guid _guid = new Guid();
+
+        public Guid GuidD
+        {
+            get { return _guid; }
+            set { _guid = value; }
+        }
         public int PacketID
         {
             get { return _PacketID; }
@@ -50,6 +57,7 @@ namespace Visualisator.Packets
 
         public SimulatorPacket(Int32 Channel, String Band)
         {
+            _guid = Guid.NewGuid();
             _PacketBand = Band;
             _PacketChannel = Channel;
 

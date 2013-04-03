@@ -189,10 +189,44 @@ namespace Visualisator
             throw new NotImplementedException();
         }
 
-        public void SendData(SimulatorPacket PacketToSend)
+
+        //*********************************************************************
+        public void SendData(SimulatorPacket pack)
         {
-            throw new NotImplementedException();
+            //Random ran = new Random((int)DateTime.Now.Ticks);
+            //while (RF_STATUS != "NONE")
+            //{
+            //Thread.Sleep(ran.Next(3,10));
+            //}
+            SpinWait.SpinUntil(RF_Ready);
+            RF_STATUS = "TX";
+            while (!_MEDIUM.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y))
+            {
+                RF_STATUS = "NONE";
+                //Thread.Sleep(ran.Next(1, 2));
+                //Thread.Sleep(new TimeSpan(20));
+                Thread.Sleep(1);
+                SpinWait.SpinUntil(RF_Ready);
+
+                //while (RF_STATUS != "NONE")
+                //    Thread.Sleep(ran.Next(1, 3));
+                RF_STATUS = "TX";
+            }
+
+            CheckScanConditionOnSend();
+            _MEDIUM.SendData(pack);
+            //Thread.Sleep(ran.Next(1, 2));
+            //Thread.Sleep(1);
+            //Thread.Sleep(new TimeSpan(100));
+            RF_STATUS = "NONE";
+
+            // Thread.Sleep(2);  // TODO: consider to delete or decrise
+            if (pack.GetType() == typeof(Data))
+            {
+                _DataSent++;
+            }
         }
+        public virtual void CheckScanConditionOnSend(){}
 
         public IPacket ReceiveData(IRFDevice ThisDevice)
         {
@@ -256,13 +290,10 @@ namespace Visualisator
         //*********************************************************************
         public void Listen()
         {
+            Guid prev_guid = new Guid();
             Packets.IPacket pack = null;
-
             while (_Enabled)
             {
-
-
-
                 //SpinWait.SpinUntil(checkIfHaveDataReceive);
                 //SpinWait.SpinUntil(RF_Ready);
                 SpinWait.SpinUntil(ListenCondition);
@@ -271,11 +302,20 @@ namespace Visualisator
                     RF_STATUS = "RX";
                     pack = _MEDIUM.ReceiveData(this);
                     RF_STATUS = "NONE";
+
                 }
 
 
-                if (pack != null)
-                    ParseReceivedPacket(pack);
+                if (pack != null && prev_guid != ((SimulatorPacket)pack).GuidD)
+                {
+
+                    //ParseReceivedPacket(pack);
+                    IPacket temp = pack;
+                    prev_guid = ((SimulatorPacket)temp).GuidD;
+                    Thread newThread = new Thread(() => ParseReceivedPacket(temp));
+                    newThread.Start();
+                    
+                }
 
             }
         }

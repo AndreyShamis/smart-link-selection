@@ -382,7 +382,7 @@ namespace Visualisator
             }
         }*/
         //*********************************************************************
-        public void SendData(SimulatorPacket PacketToSend)
+  /*      public override void SendData(SimulatorPacket PacketToSend)
         {
             //Random ran = new Random((int)DateTime.Now.Ticks);
             SpinWait.SpinUntil(RF_Ready);
@@ -408,22 +408,22 @@ namespace Visualisator
                 RF_STATUS = "TX";
             }
              
-            // Now scanning process running
-            if (_scanning)
-            {
-                SpinWait.SpinUntil (() => { return (bool)!_scanning;} );
-            }
+ 
             _MEDIUM.SendData(PacketToSend);
 
             //Thread.Sleep(1);
             RF_STATUS = "NONE";
-           // Thread.Sleep(2);  // TODO: consider to delete or decrise
-            if (PacketToSend.GetType() == typeof(Data))
+
+        }*/
+
+        public override void CheckScanConditionOnSend()
+        {
+            // Now scanning process running
+            if (_scanning)
             {
-                _DataSent++;
+                SpinWait.SpinUntil(() => { return (bool)!_scanning; });
             }
         }
-                
         public void ResetCounters()
         {
             _DataSent = 0;

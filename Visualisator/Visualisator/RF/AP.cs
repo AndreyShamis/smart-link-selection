@@ -13,7 +13,7 @@ namespace Visualisator
     [Serializable()]
     class AP :  RFDevice, IBoardObjects,IRFDevice,ISerializable
     {
-        const int _UPDATE_KEEP_ALIVE_PERIOD = 15; //sec
+        const int _UPDATE_KEEP_ALIVE_PERIOD = 25; //sec
         
         private Int32 _BeaconPeriod = 500;
 
@@ -131,38 +131,7 @@ namespace Visualisator
                 //Thread.Sleep(_BeaconPeriod);
             //}
         }
-        //*********************************************************************
-        public void SendData(SimulatorPacket pack)
-        {
 
-            //Random ran = new Random((int)DateTime.Now.Ticks);
-            //while (RF_STATUS != "NONE")
-            //{
-                //Thread.Sleep(ran.Next(3,10));
-            //}
-            SpinWait.SpinUntil(RF_Ready);
-            RF_STATUS = "TX";
-            while (!_MEDIUM.Registration(this.getOperateBand(),this.getOperateChannel(),this.x,this.y))
-            {
-                RF_STATUS = "NONE";
-                //Thread.Sleep(ran.Next(1, 2));
-                Thread.Sleep(new TimeSpan(20));
-                Thread.Sleep(1);
-                SpinWait.SpinUntil(RF_Ready);
-               
-                //while (RF_STATUS != "NONE")
-                //    Thread.Sleep(ran.Next(1, 3));
-                RF_STATUS = "TX";
-            }
-         
-            _MEDIUM.SendData(pack);
-            //Thread.Sleep(ran.Next(1, 2));
-            //Thread.Sleep(1);
-            //Thread.Sleep(new TimeSpan(100));
-            RF_STATUS = "NONE";
-            
-    
-        }
         //*********************************************************************
        // public Packets.IPacket ReceiveData(IRFDevice ThisDevice)
         //{
