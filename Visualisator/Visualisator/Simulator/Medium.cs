@@ -463,6 +463,46 @@ namespace Visualisator
                 }
             }
         }
+
+        public void DeleteReceivedPacket(RFDevice device,Guid packet_id)
+        {
+            Key Pk = null;
+            String errPrefix = "";
+            try
+            {
+                if (_packets != null)
+                {
+                    lock (_packets)
+                    {
+                        errPrefix = " Packets ";
+                        Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
+                        if (_packets.ContainsKey(Pk))
+                        {
+                            ArrayList LocalPackets = (ArrayList)_packets[Pk];
+                            foreach (object pack in LocalPackets)
+                            {
+                                if (pack != null)
+                                {
+                                    SimulatorPacket _LocalPack = (SimulatorPacket)pack;
+                                    if (
+                                        //_LocalPack.Source != device.getMACAddress() &&
+                                        _LocalPack.GuidD == packet_id)
+                                       // getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius * 2)
+                                    {
+                                        LocalPackets.Remove(pack);
+                                        return;
+                                       // return (_LocalPack);
+
+                                    }
+                                }
+                                // loop body
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { AddToLog("[DeleteReceivedPacket][" + errPrefix + "]:" + ex.Message); }
+        }
         //*********************************************************************
         public IPacket ReceiveData(RFDevice device)
         {

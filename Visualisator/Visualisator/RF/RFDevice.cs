@@ -321,9 +321,11 @@ namespace Visualisator
                     //ParseReceivedPacket(pack);
                     IPacket temp = pack;
                     prev_guid = ((SimulatorPacket)temp).GuidD;
+                    _MEDIUM.DeleteReceivedPacket(this, prev_guid);
                     Thread newThread = new Thread(() => ParseReceivedPacket(temp));
                     newThread.Start();
-                    Thread.Sleep(1);
+                    //Thread.Sleep(1);
+                   
                 }
                 else if (pack != null)
                 {
