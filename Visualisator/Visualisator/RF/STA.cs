@@ -8,6 +8,7 @@ using System.Collections;
 using Visualisator.Packets;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace Visualisator
 {
@@ -206,7 +207,8 @@ namespace Visualisator
                 }
                 else
                 {
-                    AddToLog("Cannot find AP with SSID:" + SSID);
+                    if(DebugLogEnabled)
+                        AddToLog("Cannot find AP with SSID:" + SSID);
                     
                 }
             }
@@ -328,7 +330,8 @@ namespace Visualisator
                 else
                 {
                     //  ACK Not received
-                    AddToLog("ACK Not received :" + dat.PacketID);
+                    if (DebugLogEnabled)
+                        AddToLog("ACK Not received :" + dat.PacketID);
                     DataAck da = new DataAck(CreatePacket());
                     //PrevDataID = dat.PacketID;
                     AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
@@ -470,6 +473,11 @@ namespace Visualisator
             {
                 return;
             }
+
+            Stopwatch sw = Stopwatch.StartNew();
+            // Do work
+ 
+
             Data dataPack = new Data(CreatePacket());
             dataPack.SSID = _connecttoAP.SSID;
             dataPack.Destination = _connecttoAP.getMACAddress();
@@ -495,7 +503,7 @@ namespace Visualisator
                 WaitingForAck = true;
                 int retrCounter = 60;
                 int loops = 1;
-                Thread.Sleep(14);
+                Thread.Sleep(10);
                 while (!ackReceived  )
                 {
                     retrCounter--;
@@ -519,6 +527,11 @@ namespace Visualisator
                 // Thread.Sleep(3);
                 //Console.WriteLine("\t" + line);
             }
+
+            sw.Stop();
+            TimeSpan elapsedTime = sw.Elapsed;
+
+            MessageBox.Show(elapsedTime.TotalSeconds.ToString());
         }
         //*********************************************************************
         public AP GetAPBySSID(String _SSID)

@@ -8,6 +8,7 @@ using System.Collections;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace Visualisator
 {
@@ -26,6 +27,9 @@ namespace Visualisator
         private String          _OperateBand    =   "";
         private MAC             _address        =   new MAC();
         private Int32 _DoubleRecieved = 0;
+
+
+        protected const bool DebugLogEnabled = false;
         protected bool ListenBeacon = false;
 
         public bool getListenBeacon()
@@ -226,6 +230,7 @@ namespace Visualisator
             CheckScanConditionOnSend();
             lock (RF_STATUS)
             {
+ 
                 //SpinWait.SpinUntil(RF_Ready);
                 RF_STATUS = "TX";
 
@@ -250,7 +255,7 @@ namespace Visualisator
             RF_STATUS = "NONE";
             }
 
-             Thread.Sleep(3);  // TODO: consider to delete or decrise
+             Thread.Sleep(1);  // TODO: consider to delete or decrise
             if (pack.GetType() == typeof(Data))
             {
                 _DataSent++;
@@ -300,6 +305,7 @@ namespace Visualisator
                 SpinWait.SpinUntil(ListenCondition);//,1);
                 lock (RF_STATUS)
                 {
+
                     RF_STATUS = "RX";
                     pack = _MEDIUM.ReceiveData(this);
                     RF_STATUS = "NONE";
@@ -308,6 +314,7 @@ namespace Visualisator
 
                 if (pack == null)
                 {
+                    //Thread.Sleep(new TimeSpan(4000));
                    // Thread.Sleep(1); 
                 }
                 else if (pack != null && prev_guid != ((SimulatorPacket)pack).GuidD)

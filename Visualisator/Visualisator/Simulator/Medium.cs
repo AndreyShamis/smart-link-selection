@@ -19,22 +19,24 @@ namespace Visualisator
         class Key
         {
             private String _band;
-            private Int32 _channel;
+            private short  _channel;
             private String _Destination;
+
+
             public Key(String band, Int32 Channel)
             {
                 _band = band;
-                _channel = Channel;
+                _channel = (short)Channel;
             }
             public Key(String band, Int32 Channel,String dest)
             {
                 _band = band;
-                _channel = Channel;
+                _channel = (short)Channel;
                 _Destination = dest;
             }
         }
 
-        [Serializable()]
+        /*[Serializable()]
         class PacketKey
         {
             private String _band;
@@ -47,7 +49,8 @@ namespace Visualisator
                 _type = _t;
             }
         }
-
+        */
+        private const bool DebugLogEnabled = false;
         private bool LockWasToken = false;
         public ArrayList _objects = null;
         private ArrayList _MBands = new ArrayList();
@@ -83,6 +86,10 @@ namespace Visualisator
         //[MethodImpl(MethodImplOptions.Synchronized)]
         public Boolean Registration(String Band, Int32 Channel, Double x, Double y)
         {
+            if (Band.Equals("") || Channel == 0)
+            {
+                return false;
+            }
             Key Tk = new Key(Band,Channel);
 
             if(_packets.Count == 0)
@@ -146,7 +153,9 @@ namespace Visualisator
                 }
             }
             catch (Exception ex) {
-                AddToLog("[Registration] Exception:" + ex.Message);
+                if (DebugLogEnabled){
+                    AddToLog("[Registration] Exception:" + ex.Message);
+                }
                 return false; 
             }
             return (true);
@@ -180,8 +189,10 @@ namespace Visualisator
                }
            }
            catch (Exception ex) { 
-               Console.WriteLine("Unregister:" + ex.Message);
-               AddToLog("Unregister:" + ex.Message);
+               if(DebugLogEnabled){
+                   Console.WriteLine("Unregister:" + ex.Message);
+                   AddToLog("Unregister:" + ex.Message);
+               }
                _T.Remove(Tk);
                _T.Clear();
            
@@ -259,7 +270,7 @@ namespace Visualisator
             }
 
 
-            BandAChannels.Add(183);
+        /*    BandAChannels.Add(183);
             BandAChannels.Add(184);
             BandAChannels.Add(185);
             BandAChannels.Add(187);
@@ -300,7 +311,7 @@ namespace Visualisator
             BandAChannels.Add(153);
             BandAChannels.Add(157);
             BandAChannels.Add(161);
-            BandAChannels.Add(165);
+            BandAChannels.Add(165);*/
             AddToLog("Enable Medium.");
             Enable();
         }
@@ -410,16 +421,18 @@ namespace Visualisator
             Key _Pk = new Key(pack.PacketBand, pack.PacketChannel,pack.Destination);
             try
             {
+                Type packet_type = null; 
                 if (pack != null)
                 {
-                    if (pack.GetType() == typeof(Connect))
+                    packet_type = pack.GetType();
+                    if (packet_type == typeof(Connect))
                     {
                         _ConnectCounter++;
 
                         if (_ConnectCounter == 36000)
                             _ConnectCounter = 0;
                     }
-                    else if (pack.GetType() == typeof(ConnectionACK))
+                    else if (packet_type == typeof(ConnectionACK))
                     {
                         _ConnectAckCounter++;
 
@@ -444,12 +457,17 @@ namespace Visualisator
                         LocalPackets.Add(pack);
                         _packets.Add(_Pk, LocalPackets);
                     }
-
+                    Thread newThread = new Thread(() => ThreadableSendData(_Pk, pack));
+                    newThread.Start();
                 }
-                Thread newThread = new Thread(() => ThreadableSendData(_Pk,pack));
-                newThread.Start();
+
             }
-            catch (Exception ex) { AddToLog("[SendData] Exception:" + ex.Message); }
+            catch (Exception ex) {
+                if (DebugLogEnabled)
+                {
+                    AddToLog("[SendData] Exception:" + ex.Message);
+                }
+            }
         }
 
         private static int GetObjectSize(object obj)
@@ -465,7 +483,7 @@ namespace Visualisator
         [MethodImpl(MethodImplOptions.Synchronized)]
         private void ThreadableSendData(Key _Pk,object _ref)
         {
-            ArrayList _temp = (ArrayList)_packets[_Pk];
+            
             SimulatorPacket p = (SimulatorPacket)_ref;
             int Rate = p.getTransmitRate();
             int sleep = GetObjectSize(p) / Rate;
@@ -474,6 +492,7 @@ namespace Visualisator
             //AddToLog("Sleep for :" + sleep);
             LockWasToken = false;
             Monitor.Enter(_packets, ref LockWasToken);
+            ArrayList _temp = (ArrayList)_packets[_Pk];
             try
             {
                 if (_temp != null)
@@ -484,9 +503,9 @@ namespace Visualisator
                         // {
                         if (_temp.Contains(_ref))
                             _temp.Remove((SimulatorPacket)_ref);
-
+                        
                         if (_temp.Count > 0)
-                            _packets[_Pk] = _temp;
+                           ;// _packets[_Pk] = _temp;
                         else
                             _packets.Remove(_Pk);
                         // }
@@ -542,7 +561,11 @@ namespace Visualisator
                     }
                
             }
-            catch (Exception ex) { AddToLog("[DeleteReceivedPacket][" + errPrefix + "]:" + ex.Message); }
+            catch (Exception ex) {
+                if(DebugLogEnabled){
+                AddToLog("[DeleteReceivedPacket][" + errPrefix + "]:" + ex.Message);
+                }
+            }
             finally
             {
                 if (LockTokan) Monitor.Exit(_packets);
@@ -597,6 +620,7 @@ namespace Visualisator
                             Pk = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
                             if (_packets.ContainsKey(Pk))
                             {
+                            
                                 errPrefix = " Beacons ";
                                 ArrayList LocalPackets = (ArrayList)_packets[Pk];
                                 foreach (object pack in LocalPackets)
@@ -624,7 +648,11 @@ namespace Visualisator
                     }
                 
             }
-            catch (Exception ex) { AddToLog("[ReceiveData][" + errPrefix + "]:" + ex.Message); }
+            catch (Exception ex) { 
+                if(DebugLogEnabled){
+                    AddToLog("[ReceiveData][" + errPrefix + "]:" + ex.Message); 
+                }
+            }
             finally
             {
                 Monitor.Exit(_packets);
