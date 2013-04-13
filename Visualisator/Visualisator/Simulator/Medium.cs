@@ -604,6 +604,7 @@ namespace Visualisator
                                     {
                                         //LocalPackets.Remove(pack);
                                         retvalue = _LocalPack;
+                                        LocalPackets.Remove(pack);
                                         break;
                                         //return (_LocalPack);
 

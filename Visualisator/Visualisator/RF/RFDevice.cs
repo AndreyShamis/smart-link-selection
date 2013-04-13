@@ -322,8 +322,8 @@ namespace Visualisator
                     //ParseReceivedPacket(pack);
                     IPacket temp = pack;
                     prev_guid = ((SimulatorPacket)temp).GuidD;
-                    if (pack.GetType() != typeof(Packets.Beacon))
-                        _MEDIUM.DeleteReceivedPacket(this, prev_guid);
+                   // if (pack.GetType() != typeof(Packets.Beacon))
+                   //     _MEDIUM.DeleteReceivedPacket(this, prev_guid);
                     //else
                     //{
                         //Thread.Sleep(1); 
