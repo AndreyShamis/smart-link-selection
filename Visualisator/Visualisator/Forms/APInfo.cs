@@ -82,5 +82,15 @@ namespace Visualisator
                 }
             }
         }
+
+        private void listStations_DoubleClick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void listStations_MouseClick(object sender, MouseEventArgs e)
+        {
+            lblQueue.Text = _ap.getQueueSize(listStations.Text).ToString();
+        }
     }
 }

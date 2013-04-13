@@ -7,6 +7,7 @@ using System.Threading;
 using Visualisator.Packets;
 using System.Collections;
 using System.Windows.Forms;
+using System.Runtime.CompilerServices;
 
 namespace Visualisator
 {
@@ -23,6 +24,7 @@ namespace Visualisator
         private Int32               _KeepAliveReceived = 0;
         private static Random       random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
         private Hashtable _packet_queues = new Hashtable(new ByteArrayComparer());
+        private string Sync = "sync";
 
         //*********************************************************************
         public String SSID
@@ -89,8 +91,14 @@ namespace Visualisator
 
             Thread newThreadKeepAliveDecrease = new Thread(new ThreadStart(UpdateKeepAlive));
             newThreadKeepAliveDecrease.Start();
-        }
 
+            Thread newQueueElemntsSendDecision = new Thread(new ThreadStart(QueueElemntsSendDecision));
+            newQueueElemntsSendDecision.Start();
+
+            Thread queue = new Thread(new ThreadStart(queueT));
+            queue.Start();
+        }
+        
         //*********************************************************************
         private void UpdateKeepAlive()
         {
@@ -100,7 +108,21 @@ namespace Visualisator
                 Thread.Sleep(_UPDATE_KEEP_ALIVE_PERIOD * 1000); // sec *
             }
         }
-
+                //*********************************************************************
+        private void queueT()
+        {
+            while (_Enabled)
+            {
+                if (_packet_queues.Count > 0)
+                {
+                    lock (Sync)
+                    {
+                        Monitor.PulseAll(Sync);
+                    }
+                }
+                Thread.Sleep(100); // sec *
+            }
+        }
         //*********************************************************************
         public void Disable()
         {
@@ -116,10 +138,21 @@ namespace Visualisator
                 _beac.Destination = "FF:FF:FF:FF:FF:FF";
                 //_beac.setTransmitRate(300);
                 this.SendData(_beac);
-                Thread.Sleep(_BeaconPeriod);               
+                Thread.Sleep(_BeaconPeriod);
+
             }
         }
 
+
+        public Int32 getQueueSize(string mac)
+        {
+            Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[mac];
+            if (temporaryQ != null )
+            {
+                return temporaryQ.Count;
+            }
+            return 0;
+        }
         //*********************************************************************
         public void SendConnectionACK(String DEST_MAN)
         {
@@ -146,6 +179,7 @@ namespace Visualisator
             }
         }
         //*********************************************************************
+        //[MethodImpl(MethodImplOptions.Synchronized)]
         public override void ParseReceivedPacket(IPacket pack)
         {
             Type Pt = pack.GetType();
@@ -155,7 +189,11 @@ namespace Visualisator
                 if (!_AssociatedDevices.Contains(_conn.Source))
                     _AssociatedDevices.Add(_conn.Source);
                 SendConnectionACK(_conn.Source);
-                _packet_queues.Add(_conn.Source,new Queue<Packets.Data>(1000)); //TODO : Check 1000?
+                try
+                {
+                    _packet_queues.Add(_conn.Source, new Queue<Packets.Data>(1000)); //TODO : Check 1000?
+                }
+                catch (Exception) { }
             }
             else if (Pt == typeof(KeepAlive))
             {
@@ -178,7 +216,7 @@ namespace Visualisator
                 resendedData.Y = this.y;
                 resendedData.Source = this.getMACAddress().ToString();
 
-                Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Source];
+                Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Reciver];
 
                 bool add = true;
                 foreach (Data value in temporaryQ)
@@ -191,9 +229,14 @@ namespace Visualisator
                 }
                 if (add)
                 {
-                    temporaryQ.Enqueue(resendedData);
-                    SendData(resendedData);/////////////////////////////////////
+                    
 
+                    //SendData(resendedData);/////////////////////////////////////
+                    lock (Sync)
+                    {
+                        temporaryQ.Enqueue(resendedData);
+                        Monitor.PulseAll(Sync);
+                    }
                     DataReceived++;
                 }
 
@@ -205,7 +248,12 @@ namespace Visualisator
                 //Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Source];
                 try
                 {
-                    ((Queue<Packets.Data>)_packet_queues[_wp.Source]).Dequeue();
+                    
+                    lock (Sync)
+                    {
+                        ((Queue<Packets.Data>)_packet_queues[_wp.Source]).Dequeue();
+                        Monitor.PulseAll(Sync);
+                    }
                 }
                 catch (Exception) { } // TODO : to fix multiple acks
 
@@ -228,6 +276,36 @@ namespace Visualisator
         public void RegisterToMedium(int x, int y, int Channel, string Band, int Radius)
         {
             //
+        }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        private void QueueElemntsSendDecision()
+        {
+            while (_Enabled)
+            {
+                try
+                {
+                    lock (Sync)
+                    {
+                        Monitor.Wait(Sync);
+                        if (_packet_queues.Count > 0)
+                        {
+                            foreach (string sta in _AssociatedDevices)
+                            {
+                                Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[sta];
+                                if (temporaryQ != null && temporaryQ.Count > 0)
+                                {
+                                    SendData(temporaryQ.Peek());
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                Thread.Sleep(1);
+            }
         }
     }
 }

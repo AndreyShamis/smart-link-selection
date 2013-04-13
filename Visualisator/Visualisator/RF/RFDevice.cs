@@ -278,6 +278,7 @@ namespace Visualisator
             da.Destination = Destination;
             da.PacketChannel = this.getOperateChannel();
             da.PacketBand = this.getOperateBand();
+            da.Source = this.getMACAddress().ToString();
             this.SendData(da);
             
         }
@@ -350,7 +351,10 @@ namespace Visualisator
                 else if (pack != null)
                 {
                     if (pack.GetType() != typeof(Packets.Beacon))
+                    {
                         _DoubleRecieved++;
+                        //prev_guid = Guid.NewGuid();
+                    }
                    // else
                   //  {
                     //    Thread.Sleep(new TimeSpan(4000));

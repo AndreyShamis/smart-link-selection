@@ -48,6 +48,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
             this.listStations = new System.Windows.Forms.ListBox();
+            this.lblQueue = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -221,14 +223,37 @@
             this.listStations.Name = "listStations";
             this.listStations.Size = new System.Drawing.Size(206, 342);
             this.listStations.TabIndex = 16;
+            this.listStations.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listStations_MouseClick);
             this.listStations.SelectedIndexChanged += new System.EventHandler(this.listStations_SelectedIndexChanged);
+            this.listStations.DoubleClick += new System.EventHandler(this.listStations_DoubleClick);
             this.listStations.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listStations_MouseDoubleClick);
+            // 
+            // lblQueue
+            // 
+            this.lblQueue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblQueue.Location = new System.Drawing.Point(249, 191);
+            this.lblQueue.Name = "lblQueue";
+            this.lblQueue.Size = new System.Drawing.Size(41, 13);
+            this.lblQueue.TabIndex = 18;
+            this.lblQueue.Text = "0";
+            this.lblQueue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(25, 191);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Queue";
             // 
             // APInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 343);
+            this.Controls.Add(this.lblQueue);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.listStations);
             this.Controls.Add(this.lblDataAckReceived);
             this.Controls.Add(this.label10);
@@ -275,5 +300,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Timer tmrFast;
         private System.Windows.Forms.ListBox listStations;
+        private System.Windows.Forms.Label lblQueue;
+        private System.Windows.Forms.Label label9;
     }
 }
