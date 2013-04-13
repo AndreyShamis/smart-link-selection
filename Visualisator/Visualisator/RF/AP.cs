@@ -22,7 +22,7 @@ namespace Visualisator
         private ArrayListCounted    _AssociatedDevices = new ArrayListCounted();
         private Int32               _KeepAliveReceived = 0;
         private static Random       random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
-       // private Hashtable _packet_queues = new Hashtable(new ByteArrayComparer());
+        private Hashtable _packet_queues = new Hashtable(new ByteArrayComparer());
 
         //*********************************************************************
         public String SSID
@@ -155,6 +155,7 @@ namespace Visualisator
                 if (!_AssociatedDevices.Contains(_conn.Source))
                     _AssociatedDevices.Add(_conn.Source);
                 SendConnectionACK(_conn.Source);
+                _packet_queues.Add(_conn.Source,new Queue<Packets.Data>(1000)); //TODO : Check 1000?
             }
             else if (Pt == typeof(KeepAlive))
             {
@@ -171,25 +172,51 @@ namespace Visualisator
 
                 MACsandACK(_wp.Source);
 
-
                 Data resendedData = new Data(_wp);
                 resendedData.Destination = _wp.Reciver;
                 resendedData.X = this.x;
                 resendedData.Y = this.y;
                 resendedData.Source = this.getMACAddress().ToString();
-                SendData(resendedData);
-                DataReceived++;
+
+                Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Source];
+
+                bool add = true;
+                foreach (Data value in temporaryQ)
+                {
+                    if (value.GuidD.Equals(_wp.GuidD))
+                    {
+                        add = false;
+                        break;
+                    }
+                }
+                if (add)
+                {
+                    temporaryQ.Enqueue(resendedData);
+                    SendData(resendedData);/////////////////////////////////////
+
+                    DataReceived++;
+                }
+
             }
             else if (Pt == typeof(DataAck))
             {
                 DataAck _wp     = (DataAck)pack;
+
+                //Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Source];
+                try
+                {
+                    ((Queue<Packets.Data>)_packet_queues[_wp.Source]).Dequeue();
+                }
+                catch (Exception) { } // TODO : to fix multiple acks
+
+                //temporaryQ.Dequeue();
                 // Update Keep Alive
                 //Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
                 //newThread.Start();
-                _wp.Destination = _wp.Reciver;
-                _wp.X = this.x;
-                _wp.Y = this.y;
-                SendData(_wp);
+               // _wp.Destination = _wp.Reciver;
+               // _wp.X = this.x;
+                //_wp.Y = this.y;
+                //SendData(_wp);
                 DataAckReceived++;
             }
             else
