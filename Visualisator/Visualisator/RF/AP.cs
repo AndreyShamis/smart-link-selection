@@ -13,35 +13,35 @@ namespace Visualisator
     [Serializable()]
     class AP :  RFDevice, IBoardObjects,IRFDevice,ISerializable
     {
-        const int _UPDATE_KEEP_ALIVE_PERIOD = 25; //sec
-        
-        private Int32 _BeaconPeriod = 500;
+        const int                   _UPDATE_KEEP_ALIVE_PERIOD = 25; //sec
+        private Int32               _BeaconPeriod = 500;
+        private Int32               _AP_MAX_SEND_PERIOD = 150;
+        private Int32               _AP_MIN_SEND_PERIOD = 100;
+        private static Random       rnadomBeacon = new Random();
+        private String              _SSID = "";
+        private ArrayListCounted    _AssociatedDevices = new ArrayListCounted();
+        private Int32               _KeepAliveReceived = 0;
+        private static Random       random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
 
-        private Int32 _AP_MAX_SEND_PERIOD = 150;
-        private Int32 _AP_MIN_SEND_PERIOD = 100;
-        private static Random rnadomBeacon = new Random();
-        private String _SSID = "";
-        private ArrayListCounted _AssociatedDevices = new ArrayListCounted();
-        private Int32 _KeepAliveReceived = 0;
-
-        private static Random random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
-
+        //*********************************************************************
         public String SSID
         {
             get { return _SSID; }
             set { _SSID = value; }
         }
+
+        //*********************************************************************
         public Int32 KeepAliveReceived
         {
             get { return _KeepAliveReceived; }
             set { _KeepAliveReceived = value; }
         }
 
+        //*********************************************************************
         public ArrayListCounted getAssociatedDevices()
         {
            return _AssociatedDevices; 
         }
-
 
         //*********************************************************************
         private string RandomString(int size)
@@ -53,11 +53,10 @@ namespace Visualisator
                 ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
                 builder.Append(ch);
             }
-
             return builder.ToString();
         }
 
-
+        //*********************************************************************
         public Int32 CenntedDevicesCount()
         {
             return _AssociatedDevices.Count;
@@ -68,8 +67,7 @@ namespace Visualisator
             this._MEDIUM = med;
             this.VColor = Color.YellowGreen;
             this._SSID = RandomString(8);
-            _BeaconPeriod = rnadomBeacon.Next(_AP_MIN_SEND_PERIOD, _AP_MAX_SEND_PERIOD);
-            
+            _BeaconPeriod = rnadomBeacon.Next(_AP_MIN_SEND_PERIOD, _AP_MAX_SEND_PERIOD);    
             Enable();
         }
         //*********************************************************************
@@ -85,22 +83,21 @@ namespace Visualisator
             Thread newThread = new Thread(new ThreadStart(SendBeacon));
             newThread.Start();
 
-          Thread newThreadListen = new Thread(new ThreadStart(Listen));
-          newThreadListen.Start();
+            Thread newThreadListen = new Thread(new ThreadStart(Listen));
+            newThreadListen.Start();
 
-          Thread newThreadKeepAliveDecrease = new Thread(new ThreadStart(UpdateKeepAlive));
-          newThreadKeepAliveDecrease.Start();
+            Thread newThreadKeepAliveDecrease = new Thread(new ThreadStart(UpdateKeepAlive));
+            newThreadKeepAliveDecrease.Start();
         }
 
+        //*********************************************************************
         private void UpdateKeepAlive()
         {
             while (_Enabled)
             {
                 _AssociatedDevices.DecreaseAll();
-              
                 Thread.Sleep(_UPDATE_KEEP_ALIVE_PERIOD * 1000); // sec *
             }
-
         }
 
         //*********************************************************************
@@ -108,6 +105,7 @@ namespace Visualisator
         {
             _Enabled = false;
         }
+
         //*********************************************************************
         public void SendBeacon()
         {
@@ -120,6 +118,7 @@ namespace Visualisator
                 Thread.Sleep(_BeaconPeriod);               
             }
         }
+
         //*********************************************************************
         public void SendConnectionACK(String DEST_MAN)
         {
@@ -133,14 +132,6 @@ namespace Visualisator
         }
 
         //*********************************************************************
-       // public Packets.IPacket ReceiveData(IRFDevice ThisDevice)
-        //{
-         //   throw new NotImplementedException();
-       // }
-
-        //*********************************************************************
-
-
         private void UpdateSTAKeepAliveInfoOnReceive(String STA_MAC)
         {
             if (_AssociatedDevices.Contains(STA_MAC))
@@ -163,13 +154,10 @@ namespace Visualisator
                 if (!_AssociatedDevices.Contains(_conn.Source))
                     _AssociatedDevices.Add(_conn.Source);
                 SendConnectionACK(_conn.Source);
-
             }
             else if (Pt == typeof(KeepAlive))
             {
                 KeepAlive _wp   = (KeepAlive)pack;
-     
-
                 Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
                 newThread.Start();
             }
@@ -179,23 +167,18 @@ namespace Visualisator
                 // Update Keep Alive
                 //Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
                 //newThread.Start();
-
                 _wp.Destination = _wp.Reciver;
                 _wp.X = this.x;
                 _wp.Y = this.y;
                 SendData(_wp);
                 DataReceived++;
-
             }
             else if (Pt == typeof(DataAck))
             {
-
                 DataAck _wp     = (DataAck)pack;
-
                 // Update Keep Alive
                 //Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
                 //newThread.Start();
-
                 _wp.Destination = _wp.Reciver;
                 _wp.X = this.x;
                 _wp.Y = this.y;
@@ -204,7 +187,6 @@ namespace Visualisator
             }
             else
             {
-
                 //Console.WriteLine("[" + getMACAddress() + "]" + " listening.");
             }
         }
@@ -213,8 +195,5 @@ namespace Visualisator
         {
             //
         }
-
-
-
     }
 }

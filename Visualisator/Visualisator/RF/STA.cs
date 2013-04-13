@@ -19,19 +19,20 @@ namespace Visualisator
         protected ArrayListCounted _AccessPoint = new ArrayListCounted();
         //protected Hashtable _AccessPointTimeCounter = new Hashtable(new ByteArrayComparer());
 
-        private Boolean _scanning = false;
+        private Boolean         _scanning               = false;
+        private int             PrevDataID              = 0;
+        private int             PrevDataAckID           = 0;
+        private int             _DataRetransmited       = 0;
+        private int             _DataAckRetransmitted   = 0;
+        private String          DOCpath                 = "";
+        private int             _RSSI                   = 0;
+        private bool            _WaitingForAck          = false;
+        private StringBuilder   DataReceivedContainer   = new StringBuilder();
+        private Int32           _StatisticRetransmitTime = 0;
 
-        private int PrevDataID = 0;
-        private int PrevDataAckID = 0;
-        private int _DataRetransmited = 0;
-        private int _DataAckRetransmitted = 0;
-        private String DOCpath = "";
-        private int _RSSI = 0;
-
-        private bool _WaitingForAck = false;
-        private StringBuilder DataReceivedContainer = new StringBuilder();
-        private Int32 _StatisticRetransmitTime = 0;
-
+        //*********************************************************************
+        //*********************************************************************
+        //*********************************************************************
 
         public bool getScanStatus()
         {
@@ -75,6 +76,7 @@ namespace Visualisator
             this.VColor = Color.RoyalBlue;
             Enable();
         }*/
+
         //*********************************************************************
         public STA(Medium med,ArrayList RfObjects)
         {
@@ -111,67 +113,59 @@ namespace Visualisator
         {
             while (_Enabled)
             {
-
                 if (!getAssociatedAP_SSID().Equals(""))
                 {
-                    KeepAlive keepAl = new KeepAlive(CreatePacket());
-                    AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
-                    Data dataPack = new Data(CreatePacket());
+                    KeepAlive keepAl        = new KeepAlive(CreatePacket());
+                    AP _connecttoAP         = GetAPBySSID(_AccessPoint[0].ToString());
+                    Data dataPack           = new Data(CreatePacket());
 
-                    keepAl.SSID = _connecttoAP.SSID;
-                    keepAl.Destination = _connecttoAP.getMACAddress();
-                    keepAl.PacketChannel = this.getOperateChannel();
-                    keepAl.PacketBand = this.getOperateBand();
-                    keepAl.Reciver = _connecttoAP.getMACAddress();
+                    keepAl.SSID             = _connecttoAP.SSID;
+                    keepAl.Destination      = _connecttoAP.getMACAddress();
+                    keepAl.PacketChannel    = this.getOperateChannel();
+                    keepAl.PacketBand       = this.getOperateBand();
+                    keepAl.Reciver          = _connecttoAP.getMACAddress();
                     SendData(keepAl);
                     Thread.Sleep(3000);
                 }
-                else
-                {
+                else{
                     Thread.Sleep(10000);
-                }
-                
- 
+                }   
             }
         }
+
         //*********************************************************************
         private void ThreadableConnectToAP(String SSID, Connect _conn, AP _connecttoAP)
         {
 
             bool connectSuccess = false;
             _AssociatedWithAPList.Clear();
-            Int32 tRYStOcONNECT = 0;
-            _conn.SSID = _connecttoAP.SSID;
-            _conn.Destination = _connecttoAP.getMACAddress();
-            _conn.PacketChannel = _connecttoAP.getOperateChannel();
-            _conn.PacketBand = _connecttoAP.getOperateBand();
-            _conn.Reciver = _connecttoAP.getMACAddress();
+            Int32 tRYStOcONNECT                 = 0;
+            _conn.SSID                          = _connecttoAP.SSID;
+            _conn.Destination                   = _connecttoAP.getMACAddress();
+            _conn.PacketChannel                 = _connecttoAP.getOperateChannel();
+            _conn.PacketBand                    = _connecttoAP.getOperateBand();
+            _conn.Reciver                       = _connecttoAP.getMACAddress();
             this.setOperateChannel(_connecttoAP.getOperateChannel());
             this.setOperateBand(_connecttoAP.getOperateBand());
             while (!connectSuccess )
             {
                 if (!_AssociatedWithAPList.Contains(SSID))
                 {
-                    if (tRYStOcONNECT < 10)
-                    {
+                    if (tRYStOcONNECT < 10){
                         SendData(_conn);
                         tRYStOcONNECT++;
                         Thread.Sleep(1000);
                     }
                 }
-                else
-                {
+                else{
                     connectSuccess = true;
                 }
             }
             if (connectSuccess && _scanning)
             {
-
-          
                 SpinWait.SpinUntil
                 (() =>
                     {
-
                         return (bool)!_scanning;
                     }
                 );
@@ -199,17 +193,14 @@ namespace Visualisator
             {
                 Connect _conn = new Connect(CreatePacket());
                 AP _connecttoAP = GetAPBySSID(SSID);
-                if (_connecttoAP != null)
-                {
+
+                if (_connecttoAP != null){
                     Thread newThread = new Thread(() => ThreadableConnectToAP(SSID, _conn, _connecttoAP));
                     newThread.Start();
                     return (true);
-                }
-                else
-                {
+                }else{
                     if(DebugLogEnabled)
                         AddToLog("Cannot find AP with SSID:" + SSID);
-                    
                 }
             }
             return (false);
@@ -241,6 +232,8 @@ namespace Visualisator
             }
         }
         */
+
+        //*********************************************************************
         private void CreateFolder()
         {
             // Specify a name for your top-level folder. 
@@ -248,63 +241,53 @@ namespace Visualisator
 
             // To create a string that specifies the path to a subfolder under your  
             // top-level folder, add a name for the subfolder to folderName. 
-            String mac = this.getMACAddress();
-            mac = mac.Replace(":", "-");
-            string pathString = System.IO.Path.Combine(folderName, mac);
-            DOCpath = pathString;
+            String mac          = this.getMACAddress();
+            mac                 = mac.Replace(":", "-");
+            string pathString   = System.IO.Path.Combine(folderName, mac);
+            DOCpath             = pathString;
             System.IO.Directory.CreateDirectory(pathString);
         }
 
-
+        //*********************************************************************
         public void SaveReceivedDataIntoFile()
         {
             string mydocpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             StringBuilder sb = new StringBuilder();
-
-
-
             using (StreamWriter outfile = new StreamWriter(DOCpath + @"\received.txt"))
             {
                 outfile.Write(DataReceivedContainer.ToString());
             } 
         }
 
+        //*********************************************************************
         public Int32 getSizeOfReceivedData()
         {
-
             return DataReceivedContainer.Length;
         }
-
-
 
         //*********************************************************************
         public override void ParseReceivedPacket(IPacket pack)
         {
             SimulatorPacket locPack = (SimulatorPacket) pack;
-            Rssi = GetRSSI(locPack.X, locPack.Y);
-                                
+            Rssi = GetRSSI(locPack.X, locPack.Y);             
             Type _Pt = pack.GetType();
+
             if (_Pt  == typeof(Packets.ConnectionACK))
             {
                 Packets.ConnectionACK _ack = (Packets.ConnectionACK)pack;
-                if (!_AssociatedWithAPList.Contains(_ack.SSID))
-                {
+                if (!_AssociatedWithAPList.Contains(_ack.SSID)){
                     _AssociatedWithAPList.Add(_ack.SSID);
-
-                    //Thread.Sleep(5);
                 }
             }
             else if (_Pt == typeof(Packets.Beacon))
             {
                 Packets.Beacon bec = (Packets.Beacon)pack;
-                if (!_AccessPoint.Contains(bec.SSID))
-                {
+                if (!_AccessPoint.Contains(bec.SSID)){
                     _AccessPoint.Add(bec.SSID);
                 }
                 _AccessPoint.Increase(bec.SSID);
                 //Thread.Sleep(2);
             }
-
             else if (_Pt == typeof(Packets.Data))
             {
                 Packets.Data dat = (Packets.Data)pack;
@@ -313,8 +296,6 @@ namespace Visualisator
                 if (recieve)
                 {
                     _DataReceived++;
-                
-
                     DataAck da = new DataAck(CreatePacket());
                     PrevDataID = dat.PacketID;
                     AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
@@ -349,13 +330,11 @@ namespace Visualisator
             else if (_Pt == typeof(Packets.DataAck))
             {
                 Packets.DataAck dat = (Packets.DataAck)pack;
-
-                    if (PrevDataAckID != dat.PacketID){
-                        ackReceived = true;
-                        _DataAckReceived++;
-                        PrevDataAckID = dat.PacketID;
-                    }
-
+                if (PrevDataAckID != dat.PacketID){
+                    ackReceived = true;
+                    _DataAckReceived++;
+                    PrevDataAckID = dat.PacketID;
+                }
             }
             else
             {
@@ -363,6 +342,7 @@ namespace Visualisator
             }
         }
 
+        //*********************************************************************
         private bool tryToRegister()
         {
             return (_MEDIUM.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y));
@@ -427,6 +407,7 @@ namespace Visualisator
 
         }*/
 
+        //*********************************************************************
         public override void CheckScanConditionOnSend()
         {
             // Now scanning process running
@@ -435,6 +416,8 @@ namespace Visualisator
                 SpinWait.SpinUntil(() => { return (bool)!_scanning; });
             }
         }
+
+        //*********************************************************************
         public void ResetCounters()
         {
             _DataSent = 0;
@@ -444,6 +427,7 @@ namespace Visualisator
             _DataAckRetransmitted = 0;
             this.DoubleRecieved = 0;
         }
+
         //*********************************************************************
         public RFDevice GetRFDeviceByMAC(String _mac)
         {
@@ -456,13 +440,14 @@ namespace Visualisator
             return (null);
         }
 
+        //*********************************************************************
         public void rfile(String fileName)
         {
-
             Thread newThread = new Thread(() => ThreadAbleReadFile(fileName));
-                newThread.Start();
+            newThread.Start();
         }
 
+        //*********************************************************************
         public void ThreadAbleReadFile(String fileName)
         {
 
@@ -512,6 +497,7 @@ namespace Visualisator
                     {
                         retrCounter = 60;
                         SendData(dataPack);
+                        Thread.Sleep(15);
                         _DataRetransmited++;
                         loops = loops + 1;
                         if(!_Enabled)
@@ -533,6 +519,7 @@ namespace Visualisator
 
             MessageBox.Show(elapsedTime.TotalSeconds.ToString());
         }
+
         //*********************************************************************
         public AP GetAPBySSID(String _SSID)
         {
@@ -547,14 +534,15 @@ namespace Visualisator
             }
             return (null);
         }
+
         //*********************************************************************
         public void Scan()
         {
             Thread newThread = new Thread(new ThreadStart(ThreadableScan));
             newThread.Start();
-
         }
 
+        //*********************************************************************
         private void ScanOneChannel(int chann, int TimeForListen, String Band)
         {
             Int32 perv_channel = this.getOperateChannel();
@@ -580,18 +568,16 @@ namespace Visualisator
                 _scanning = false;
             }
             Thread.Sleep(3);
-
         }
+
+        //*********************************************************************
         public void ThreadableScan()
         {
             //_AccessPoint.Clear();
             _AccessPoint.DecreaseAll();
             //_AccessPointTimeCounter.Clear();
-
             Int32 perv_channel = this.getOperateChannel();
             String prev_band = this.getOperateBand();
-
-            
            // for (int i = 1; i < 15; i++)
            // {
            //     ScanOneChannel(i, 100, "N");
@@ -608,7 +594,6 @@ namespace Visualisator
                 setOperateChannel(i);
                 Thread.Sleep(400);
             }*/
-
         }
 
         //*********************************************************************
@@ -636,8 +621,6 @@ namespace Visualisator
         }
     }
 }
-
-
 
 /*
     if (_AccessPointTimeCounter.ContainsKey(bec.SSID)){
