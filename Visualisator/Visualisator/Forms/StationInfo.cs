@@ -118,7 +118,16 @@ namespace Visualisator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _sta.rfile(txtDestination.Text);
+            if (txtDestination.Text.Length > 10)
+            {
+                _sta.rfile(txtDestination.Text);
+                txtDestination.BackColor = Color.White;
+            }
+            else
+            {
+                txtDestination.BackColor = Color.IndianRed;
+            }
+                
         }
 
         private void cmdReset_Click(object sender, EventArgs e)
@@ -199,6 +208,11 @@ namespace Visualisator
         }
 
         private void lblAckReceived_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDestination_TextChanged(object sender, EventArgs e)
         {
 
         }

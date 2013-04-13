@@ -305,6 +305,7 @@
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(189, 20);
             this.txtDestination.TabIndex = 10;
+            this.txtDestination.TextChanged += new System.EventHandler(this.txtDestination_TextChanged);
             // 
             // button1
             // 
