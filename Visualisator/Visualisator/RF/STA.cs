@@ -291,8 +291,11 @@ namespace Visualisator
             else if (_Pt == typeof(Packets.Data))
             {
                 Packets.Data dat = (Packets.Data)pack;
-                bool recieve = dat.PacketID != PrevDataID;
-
+                MACsandACK(dat.Source);
+                _DataReceived++;
+                DataReceivedContainer.Append(dat.getData() + "\r\n");
+                //bool recieve = dat.PacketID != PrevDataID;
+                /*
                 if (recieve)
                 {
                     _DataReceived++;
@@ -326,15 +329,18 @@ namespace Visualisator
                     da.PacketID = dat.PacketID;
                     SendData(da);
                 }
+                 * */
             }
             else if (_Pt == typeof(Packets.DataAck))
             {
+
+
                 Packets.DataAck dat = (Packets.DataAck)pack;
-                if (PrevDataAckID != dat.PacketID){
+          //      if (PrevDataAckID != dat.PacketID){
                     ackReceived = true;
                     _DataAckReceived++;
-                    PrevDataAckID = dat.PacketID;
-                }
+           //         PrevDataAckID = dat.PacketID;
+          //      }
             }
             else
             {

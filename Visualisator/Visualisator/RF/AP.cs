@@ -22,6 +22,7 @@ namespace Visualisator
         private ArrayListCounted    _AssociatedDevices = new ArrayListCounted();
         private Int32               _KeepAliveReceived = 0;
         private static Random       random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
+       // private Hashtable _packet_queues = new Hashtable(new ByteArrayComparer());
 
         //*********************************************************************
         public String SSID
@@ -167,10 +168,16 @@ namespace Visualisator
                 // Update Keep Alive
                 //Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
                 //newThread.Start();
-                _wp.Destination = _wp.Reciver;
-                _wp.X = this.x;
-                _wp.Y = this.y;
-                SendData(_wp);
+
+                MACsandACK(_wp.Source);
+
+
+                Data resendedData = new Data(_wp);
+                resendedData.Destination = _wp.Reciver;
+                resendedData.X = this.x;
+                resendedData.Y = this.y;
+                resendedData.Source = this.getMACAddress().ToString();
+                SendData(resendedData);
                 DataReceived++;
             }
             else if (Pt == typeof(DataAck))
