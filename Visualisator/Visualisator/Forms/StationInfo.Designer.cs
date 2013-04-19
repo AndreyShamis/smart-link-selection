@@ -116,9 +116,9 @@
             this.lblCounterToretransmit.AutoSize = true;
             this.lblCounterToretransmit.Location = new System.Drawing.Point(116, 137);
             this.lblCounterToretransmit.Name = "lblCounterToretransmit";
-            this.lblCounterToretransmit.Size = new System.Drawing.Size(35, 13);
+            this.lblCounterToretransmit.Size = new System.Drawing.Size(13, 13);
             this.lblCounterToretransmit.TabIndex = 32;
-            this.lblCounterToretransmit.Text = "label8";
+            this.lblCounterToretransmit.Text = "0";
             // 
             // label9
             // 
@@ -134,9 +134,9 @@
             this.lblDoubleReceived.AutoSize = true;
             this.lblDoubleReceived.Location = new System.Drawing.Point(116, 114);
             this.lblDoubleReceived.Name = "lblDoubleReceived";
-            this.lblDoubleReceived.Size = new System.Drawing.Size(35, 13);
+            this.lblDoubleReceived.Size = new System.Drawing.Size(13, 13);
             this.lblDoubleReceived.TabIndex = 30;
-            this.lblDoubleReceived.Text = "label8";
+            this.lblDoubleReceived.Text = "0";
             // 
             // label7
             // 
