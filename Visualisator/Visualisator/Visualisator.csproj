@@ -55,6 +55,14 @@
     <Compile Include="Packets\Data.cs" />
     <Compile Include="Packets\DataAck.cs" />
     <Compile Include="Packets\KeepAlive.cs" />
+    <Compile Include="Packets\TDLSChannelSwitchRequest.cs" />
+    <Compile Include="Packets\TDLSChannelSwitchResponse.cs" />
+    <Compile Include="Packets\TDLSDiscovery.cs" />
+    <Compile Include="Packets\TDLSResponse.cs" />
+    <Compile Include="Packets\TDLSSetupConfirm.cs" />
+    <Compile Include="Packets\TDLSSetupRequest.cs" />
+    <Compile Include="Packets\TDLSSetupResponse.cs" />
+    <Compile Include="Packets\TDLSTearDown.cs" />
     <Compile Include="Simulator\ArrayListCounted.cs" />
     <Compile Include="Simulator\ByteArrayComparer.cs" />
     <Compile Include="Packets\Connect.cs" />
