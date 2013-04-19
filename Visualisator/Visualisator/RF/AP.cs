@@ -267,6 +267,24 @@ namespace Visualisator
                 //SendData(_wp);
                 DataAckReceived++;
             }
+            else if (Pt == typeof(TDLSSetupRequest))
+            {
+                TDLSSetupRequest _wp = (TDLSSetupRequest)pack;
+                // Update Keep Alive
+                //Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
+                //newThread.Start();
+
+                //MACsandACK(_wp.Source);
+
+                TDLSSetupRequest resendedData = new TDLSSetupRequest(_wp);
+                resendedData.Destination = _wp.Reciver;
+                resendedData.X = this.x;
+                resendedData.Y = this.y;
+                resendedData.Source = this.getMACAddress().ToString();
+
+                SendData(resendedData);
+
+            }
             else
             {
                 //Console.WriteLine("[" + getMACAddress() + "]" + " listening.");

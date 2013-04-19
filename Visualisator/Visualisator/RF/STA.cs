@@ -30,6 +30,10 @@ namespace Visualisator
         private StringBuilder   DataReceivedContainer   = new StringBuilder();
         private Int32           _StatisticRetransmitTime = 0;
 
+        private bool            _TDLS_enabled           = true;
+        private bool            _TDLS_work              = false;
+
+
         //*********************************************************************
         //*********************************************************************
         //*********************************************************************
@@ -66,6 +70,16 @@ namespace Visualisator
         {
             get { return _StatisticRetransmitTime; }
             set { _StatisticRetransmitTime = value; }
+        }
+
+        public bool TDLSisEnabled
+        {
+            get { return _TDLS_enabled; }
+        }
+
+        public bool TDLSisWork
+        {
+            get { return _TDLS_work; }
         }
 
 
@@ -265,6 +279,43 @@ namespace Visualisator
             return DataReceivedContainer.Length;
         }
 
+        public void TDLS_SendDiscoveryRequest()
+        {
+            
+        }
+        public void TDLS_SendDiscoveryResponse(string MAC)
+        {
+
+        }
+        public void TDLS_SendSetupRequest(string MAC)
+        {
+            Packets.TDLSSetupRequest _tdlsSetupR = new TDLSSetupRequest(CreatePacket());
+
+            AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+
+            _tdlsSetupR.SSID            = _connecttoAP.SSID;
+            _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
+            _tdlsSetupR.PacketChannel   = this.getOperateChannel();
+            _tdlsSetupR.PacketBand      = this.getOperateBand();
+            _tdlsSetupR.Reciver         = MAC;
+
+            SendData(_tdlsSetupR);
+            
+        }
+        public void TDLS_SendSetupResponse(string MAC)
+        {
+            Packets.TDLSSetupRequest _tdlsSetupR = new TDLSSetupRequest(CreatePacket());
+
+            AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+
+            _tdlsSetupR.SSID            = _connecttoAP.SSID;
+            _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
+            _tdlsSetupR.PacketChannel   = this.getOperateChannel();
+            _tdlsSetupR.PacketBand      = this.getOperateBand();
+            _tdlsSetupR.Reciver         = MAC;
+
+            SendData(_tdlsSetupR);
+        }
         //*********************************************************************
         public override void ParseReceivedPacket(IPacket pack)
         {
@@ -344,6 +395,14 @@ namespace Visualisator
             }
             else
             {
+                // TDLS Parsing
+                if(_TDLS_enabled)
+                {
+                    if (_Pt == typeof(Packets.TDLSSetupRequest))
+                    {
+                        MessageBox.Show("We received TDLS Setup Request");
+                    }
+                }
                 //Console.WriteLine("[" + getMACAddress() + "]" + " listening.");
             }
         }

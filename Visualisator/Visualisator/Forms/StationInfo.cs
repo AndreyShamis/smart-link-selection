@@ -30,6 +30,7 @@ namespace Visualisator
             lblCoordinates.Text = "X:" + (int)_sta.x + " Y:" + (int)_sta.y; 
             PrintAPList();
             txtMAC.Text = _sta.getMACAddress();
+            txtTDLSDiscoveryResponse.Text = "";
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -78,6 +79,7 @@ namespace Visualisator
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            lblCoordinates.Text = "X:" + (int)_sta.x + " Y:" + (int)_sta.y; 
             if (!_sta.getScanStatus())
             {
                 btnScan.Enabled = true;
@@ -93,6 +95,23 @@ namespace Visualisator
             }
 
             txtDumpAll.Text = _sta.DumpAll();
+            if(_sta.TDLSisEnabled)
+            {
+                lblTDLStatus.Text = "On";
+            }
+            else
+            {
+                lblTDLStatus.Text = "Off";
+            }
+
+            if (_sta.TDLSisWork)
+            {
+                lblTDLSisWork.Text = "On";
+            }
+            else
+            {
+                lblTDLSisWork.Text = "Off";
+            }
           //      txtDumpAll.Text = _sta.DumpAll();
             
 
@@ -137,25 +156,31 @@ namespace Visualisator
 
         private void tmrFast_Tick(object sender, EventArgs e)
         {
-
-            lblRSSI.Text = _sta.Rssi.ToString();
-
-            if(_sta.WaitingForAck)
+            try
             {
-                lblWaitingForAck.BackColor = Color.Chartreuse;
+                lblRSSI.Text = _sta.Rssi.ToString();
+
+                if (_sta.WaitingForAck)
+                {
+                    lblWaitingForAck.BackColor = Color.Chartreuse;
+                }
+                else
+                {
+                    lblWaitingForAck.BackColor = Color.Black;
+                }
+                txtDataReceeived.Text = _sta.getDataRecieved().ToString();
+                lblSent.Text = _sta.getDataSent().ToString();
+                lblAssociatedAP.Text = _sta.getAssociatedAP_SSID();
+                lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
+                lblRetransmited.Text = _sta.DataRetransmited.ToString();
+                lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
+                lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
+                lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString() + " | " +
+                                              lblCounterToretransmit.Text.Substring(0, 2);
             }
-            else
+            catch(Exception)
             {
-                lblWaitingForAck.BackColor = Color.Black;
             }
-            txtDataReceeived.Text = _sta.getDataRecieved().ToString();
-            lblSent.Text = _sta.getDataSent().ToString();
-            lblAssociatedAP.Text = _sta.getAssociatedAP_SSID();
-            lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
-            lblRetransmited.Text = _sta.DataRetransmited.ToString();
-            lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
-            lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
-            lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString() + " | " + lblCounterToretransmit.Text.Substring(0,2);
         }
 
         private void btnSaveData_Click(object sender, EventArgs e)
@@ -215,6 +240,44 @@ namespace Visualisator
         private void txtDestination_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnTDLSDiscoveryResponse_Click(object sender, EventArgs e)
+        {
+            String TDLSDiscoveryResponseMac = "";
+
+            if(txtTDLSDiscoveryResponse.Text.Length > 10)
+            {
+                TDLSDiscoveryResponseMac = txtTDLSDiscoveryResponse.Text;
+                _sta.TDLS_SendDiscoveryResponse(TDLSDiscoveryResponseMac);
+            }
+        }
+
+        private void btnTDLSDiscoveryRequest_Click(object sender, EventArgs e)
+        {
+            _sta.TDLS_SendDiscoveryRequest();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            String txtTDLSSetupRequest = "";
+
+            if (txtTDLSSetupRequestMAC.Text.Length > 10)
+            {
+                txtTDLSSetupRequest = txtTDLSSetupRequestMAC.Text;
+                _sta.TDLS_SendSetupRequest(txtTDLSSetupRequest);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            String txtTDLSSetupResponse = "";
+
+            if (txtTDLSSetupRequestMAC.Text.Length > 10)
+            {
+                txtTDLSSetupResponse = txtTDLSSetupRequestMAC.Text;
+                _sta.TDLS_SendSetupResponse(txtTDLSSetupResponse);
+            }
         }
     }
 }
