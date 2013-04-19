@@ -105,7 +105,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(10, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(574, 161);
+            this.groupBox1.Size = new System.Drawing.Size(574, 228);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
@@ -377,7 +377,7 @@
             // cmbAPList
             // 
             this.cmbAPList.FormattingEnabled = true;
-            this.cmbAPList.Location = new System.Drawing.Point(346, 30);
+            this.cmbAPList.Location = new System.Drawing.Point(364, 30);
             this.cmbAPList.Name = "cmbAPList";
             this.cmbAPList.Size = new System.Drawing.Size(126, 21);
             this.cmbAPList.TabIndex = 2;
@@ -398,18 +398,18 @@
             // 
             this.groupBox2.Controls.Add(this.btnDumpAll);
             this.groupBox2.Controls.Add(this.txtDumpAll);
-            this.groupBox2.Location = new System.Drawing.Point(12, 175);
+            this.groupBox2.Location = new System.Drawing.Point(12, 242);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(559, 259);
+            this.groupBox2.Size = new System.Drawing.Size(559, 192);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Send Data";
             // 
             // btnDumpAll
             // 
-            this.btnDumpAll.Location = new System.Drawing.Point(70, 0);
+            this.btnDumpAll.Location = new System.Drawing.Point(63, 0);
             this.btnDumpAll.Name = "btnDumpAll";
-            this.btnDumpAll.Size = new System.Drawing.Size(103, 23);
+            this.btnDumpAll.Size = new System.Drawing.Size(103, 20);
             this.btnDumpAll.TabIndex = 1;
             this.btnDumpAll.Text = "DumpAll";
             this.btnDumpAll.UseVisualStyleBackColor = true;
@@ -417,11 +417,11 @@
             // 
             // txtDumpAll
             // 
-            this.txtDumpAll.Location = new System.Drawing.Point(6, 29);
+            this.txtDumpAll.Location = new System.Drawing.Point(11, 19);
             this.txtDumpAll.Multiline = true;
             this.txtDumpAll.Name = "txtDumpAll";
             this.txtDumpAll.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDumpAll.Size = new System.Drawing.Size(547, 270);
+            this.txtDumpAll.Size = new System.Drawing.Size(547, 163);
             this.txtDumpAll.TabIndex = 0;
             this.txtDumpAll.TextChanged += new System.EventHandler(this.txtDumpAll_TextChanged);
             // 
