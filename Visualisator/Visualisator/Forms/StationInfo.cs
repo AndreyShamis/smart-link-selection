@@ -107,9 +107,14 @@ namespace Visualisator
             if (_sta.TDLSisWork)
             {
                 lblTDLSisWork.Text = "On";
+                btnChangeTDLSStatus.Enabled = true;
+                btnChangeTDLSStatusOn.Enabled = false;
+
             }
             else
             {
+                btnChangeTDLSStatus.Enabled = false;
+                btnChangeTDLSStatusOn.Enabled = true;
                 lblTDLSisWork.Text = "Off";
             }
           //      txtDumpAll.Text = _sta.DumpAll();
@@ -175,8 +180,8 @@ namespace Visualisator
                 lblRetransmited.Text = _sta.DataRetransmited.ToString();
                 lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
                 lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
-                lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString() + " | " +
-                                              lblCounterToretransmit.Text.Substring(0, 2);
+                lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
+                                         //     lblCounterToretransmit.Text.Substring(0, 2);
             }
             catch(Exception)
             {
@@ -278,6 +283,16 @@ namespace Visualisator
                 txtTDLSSetupResponse = txtTDLSSetupRequestMAC.Text;
                 _sta.TDLS_SendSetupResponse(txtTDLSSetupResponse);
             }
+        }
+
+        private void btnChangeTDLSStatus_Click(object sender, EventArgs e)
+        {
+            _sta.DisableTDLS();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            _sta.EnableTDLS();
         }
     }
 }

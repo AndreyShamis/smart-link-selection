@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnChangeTDLSStatusOn = new System.Windows.Forms.Button();
+            this.btnChangeTDLSStatus = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.txtTDLSSetupRequestMAC = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.lblTDLSisWork = new System.Windows.Forms.Label();
@@ -74,13 +77,14 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnChangeTDLSStatusOn);
+            this.groupBox1.Controls.Add(this.btnChangeTDLSStatus);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.txtTDLSSetupRequestMAC);
             this.groupBox1.Controls.Add(this.button2);
@@ -129,11 +133,43 @@
             this.groupBox1.Text = "Cennect Info";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // btnChangeTDLSStatusOn
+            // 
+            this.btnChangeTDLSStatusOn.Enabled = false;
+            this.btnChangeTDLSStatusOn.Location = new System.Drawing.Point(375, 159);
+            this.btnChangeTDLSStatusOn.Name = "btnChangeTDLSStatusOn";
+            this.btnChangeTDLSStatusOn.Size = new System.Drawing.Size(65, 21);
+            this.btnChangeTDLSStatusOn.TabIndex = 45;
+            this.btnChangeTDLSStatusOn.Text = "SLS On";
+            this.btnChangeTDLSStatusOn.UseVisualStyleBackColor = true;
+            this.btnChangeTDLSStatusOn.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // btnChangeTDLSStatus
+            // 
+            this.btnChangeTDLSStatus.Enabled = false;
+            this.btnChangeTDLSStatus.Location = new System.Drawing.Point(321, 158);
+            this.btnChangeTDLSStatus.Name = "btnChangeTDLSStatus";
+            this.btnChangeTDLSStatus.Size = new System.Drawing.Size(48, 21);
+            this.btnChangeTDLSStatus.TabIndex = 44;
+            this.btnChangeTDLSStatus.Text = "SLS";
+            this.btnChangeTDLSStatus.UseVisualStyleBackColor = true;
+            this.btnChangeTDLSStatus.Click += new System.EventHandler(this.btnChangeTDLSStatus_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(181, 159);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(133, 19);
+            this.button3.TabIndex = 43;
+            this.button3.Text = "TDLS Setup Response";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // txtTDLSSetupRequestMAC
             // 
             this.txtTDLSSetupRequestMAC.BackColor = System.Drawing.Color.YellowGreen;
             this.txtTDLSSetupRequestMAC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTDLSSetupRequestMAC.Location = new System.Drawing.Point(449, 162);
+            this.txtTDLSSetupRequestMAC.Location = new System.Drawing.Point(321, 133);
             this.txtTDLSSetupRequestMAC.Name = "txtTDLSSetupRequestMAC";
             this.txtTDLSSetupRequestMAC.Size = new System.Drawing.Size(102, 20);
             this.txtTDLSSetupRequestMAC.TabIndex = 42;
@@ -142,7 +178,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(307, 161);
+            this.button2.Location = new System.Drawing.Point(181, 134);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(133, 19);
             this.button2.TabIndex = 41;
@@ -165,7 +201,7 @@
             // 
             this.txtTDLSDiscoveryResponse.BackColor = System.Drawing.Color.YellowGreen;
             this.txtTDLSDiscoveryResponse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTDLSDiscoveryResponse.Location = new System.Drawing.Point(125, 190);
+            this.txtTDLSDiscoveryResponse.Location = new System.Drawing.Point(416, 206);
             this.txtTDLSDiscoveryResponse.Name = "txtTDLSDiscoveryResponse";
             this.txtTDLSDiscoveryResponse.Size = new System.Drawing.Size(102, 20);
             this.txtTDLSDiscoveryResponse.TabIndex = 39;
@@ -174,7 +210,7 @@
             // 
             // btnTDLSDiscoveryResponse
             // 
-            this.btnTDLSDiscoveryResponse.Location = new System.Drawing.Point(125, 208);
+            this.btnTDLSDiscoveryResponse.Location = new System.Drawing.Point(449, 203);
             this.btnTDLSDiscoveryResponse.Name = "btnTDLSDiscoveryResponse";
             this.btnTDLSDiscoveryResponse.Size = new System.Drawing.Size(147, 22);
             this.btnTDLSDiscoveryResponse.TabIndex = 38;
@@ -184,7 +220,7 @@
             // 
             // btnTDLSDiscoveryRequest
             // 
-            this.btnTDLSDiscoveryRequest.Location = new System.Drawing.Point(125, 162);
+            this.btnTDLSDiscoveryRequest.Location = new System.Drawing.Point(446, 203);
             this.btnTDLSDiscoveryRequest.Name = "btnTDLSDiscoveryRequest";
             this.btnTDLSDiscoveryRequest.Size = new System.Drawing.Size(147, 22);
             this.btnTDLSDiscoveryRequest.TabIndex = 37;
@@ -194,7 +230,7 @@
             // 
             // btnTDLStearDown
             // 
-            this.btnTDLStearDown.Location = new System.Drawing.Point(16, 190);
+            this.btnTDLStearDown.Location = new System.Drawing.Point(465, 206);
             this.btnTDLStearDown.Name = "btnTDLStearDown";
             this.btnTDLStearDown.Size = new System.Drawing.Size(103, 22);
             this.btnTDLStearDown.TabIndex = 36;
@@ -203,7 +239,7 @@
             // 
             // btnTDLSSetup
             // 
-            this.btnTDLSSetup.Location = new System.Drawing.Point(16, 162);
+            this.btnTDLSSetup.Location = new System.Drawing.Point(465, 190);
             this.btnTDLSSetup.Name = "btnTDLSSetup";
             this.btnTDLSSetup.Size = new System.Drawing.Size(103, 22);
             this.btnTDLSSetup.TabIndex = 35;
@@ -556,16 +592,6 @@
             this.tmrFast.Interval = 5;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(307, 186);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(133, 19);
-            this.button3.TabIndex = 43;
-            this.button3.Text = "TDLS Setup Response";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -632,5 +658,7 @@
         private System.Windows.Forms.TextBox txtTDLSSetupRequestMAC;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnChangeTDLSStatus;
+        private System.Windows.Forms.Button btnChangeTDLSStatusOn;
     }
 }

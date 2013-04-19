@@ -305,14 +305,24 @@ namespace Visualisator
         public void TDLS_SendSetupResponse(string MAC)
         {
             Packets.TDLSSetupResponse _tdlsSetupR = new TDLSSetupResponse(CreatePacket());
-
             AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
-
             _tdlsSetupR.SSID            = _connecttoAP.SSID;
             _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
             _tdlsSetupR.PacketChannel   = this.getOperateChannel();
             _tdlsSetupR.PacketBand      = this.getOperateBand();
             _tdlsSetupR.Reciver         = MAC;
+
+            SendData(_tdlsSetupR);
+        }
+        public void TDLS_SendSetupConfirm(string MAC)
+        {
+            Packets.TDLSSetupConfirm _tdlsSetupR = new TDLSSetupConfirm(CreatePacket());
+            AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+            _tdlsSetupR.SSID = _connecttoAP.SSID;
+            _tdlsSetupR.Destination = _connecttoAP.getMACAddress();
+            _tdlsSetupR.PacketChannel = this.getOperateChannel();
+            _tdlsSetupR.PacketBand = this.getOperateBand();
+            _tdlsSetupR.Reciver = MAC;
 
             SendData(_tdlsSetupR);
         }
@@ -407,13 +417,30 @@ namespace Visualisator
                     }
                     else if (_Pt == typeof(Packets.TDLSSetupResponse))
                     {
+                        _TDLS_work = true;
+                        Packets.TDLSSetupResponse TDLSreq = (Packets.TDLSSetupResponse)pack;
                         MessageBox.Show("We received TDLS Setup Response!!!");
+                        TDLS_SendSetupConfirm(TDLSreq.Source);
+                    }
+                    else if (_Pt == typeof(Packets.TDLSSetupConfirm))
+                    {
+                        _TDLS_work = true;
+                        MessageBox.Show("We received TDLS Setup Confirm!!!");
                     }
                 }
                 //Console.WriteLine("[" + getMACAddress() + "]" + " listening.");
             }
         }
 
+        public void DisableTDLS()
+        {
+            _TDLS_work = false;
+        }
+
+        public void EnableTDLS()
+        {
+            _TDLS_work = true;
+        }
         //*********************************************************************
         private bool tryToRegister()
         {
@@ -547,10 +574,19 @@ namespace Visualisator
                 // Use a tab to indent each line of the file.
                 dataPack = new Data(CreatePacket());
                 dataPack.SSID = _connecttoAP.SSID;
-                dataPack.Destination = _connecttoAP.getMACAddress();
+                
+                if(TDLSisWork)
+                {
+                    dataPack.Destination = fileName;// TDLS TODO 
+                }else
+                {
+                    dataPack.Destination = _connecttoAP.getMACAddress();// TDLS TODO
+                }
+   
+                dataPack.Reciver = fileName;                        // TDLS TODO
                 dataPack.PacketChannel = this.getOperateChannel();
                 dataPack.PacketBand = this.getOperateBand();
-                dataPack.Reciver = fileName;
+                
                 SQID++;
                 dataPack.setData(line);
                 dataPack.PacketID = SQID;
@@ -560,16 +596,30 @@ namespace Visualisator
                 WaitingForAck = true;
                 int retrCounter = 60;
                 int loops = 1;
-                Thread.Sleep(10);
+
+                if (TDLSisWork){
+                    Thread.Sleep(5);
+                }else{
+                    Thread.Sleep(10); 
+                }
+                
                 while (!ackReceived  )
                 {
                     retrCounter--;
-                    Thread.Sleep(2);
+                    if (TDLSisWork){
+                        Thread.Sleep(1);}
+                    else{
+                        Thread.Sleep(2);
+                    }
                     if (retrCounter < 0)
                     {
                         retrCounter = 60;
                         SendData(dataPack);
-                        Thread.Sleep(15);
+                        if (TDLSisWork) {
+                            Thread.Sleep(10);
+                        }else{
+                            Thread.Sleep(15);
+                        }
                         _DataRetransmited++;
                         loops = loops + 1;
                         if(!_Enabled)
