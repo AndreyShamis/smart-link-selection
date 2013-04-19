@@ -64,12 +64,16 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblTDLStatus = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblTDLStatus);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.lblCounterToretransmit);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.lblDoubleReceived);
@@ -433,6 +437,24 @@
             this.tmrFast.Interval = 5;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(203, 113);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(68, 13);
+            this.label8.TabIndex = 33;
+            this.label8.Text = "TDLS Status";
+            // 
+            // lblTDLStatus
+            // 
+            this.lblTDLStatus.AutoSize = true;
+            this.lblTDLStatus.Location = new System.Drawing.Point(277, 113);
+            this.lblTDLStatus.Name = "lblTDLStatus";
+            this.lblTDLStatus.Size = new System.Drawing.Size(21, 13);
+            this.lblTDLStatus.TabIndex = 34;
+            this.lblTDLStatus.Text = "Off";
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -488,5 +510,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblDoubleReceived;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblTDLStatus;
+        private System.Windows.Forms.Label label8;
     }
 }
