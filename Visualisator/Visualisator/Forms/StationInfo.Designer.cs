@@ -32,15 +32,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnChangeTDLSStatusOn = new System.Windows.Forms.Button();
             this.btnChangeTDLSStatus = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.txtTDLSSetupRequestMAC = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.lblTDLSisWork = new System.Windows.Forms.Label();
-            this.txtTDLSDiscoveryResponse = new System.Windows.Forms.TextBox();
-            this.btnTDLSDiscoveryResponse = new System.Windows.Forms.Button();
-            this.btnTDLSDiscoveryRequest = new System.Windows.Forms.Button();
-            this.btnTDLStearDown = new System.Windows.Forms.Button();
-            this.btnTDLSSetup = new System.Windows.Forms.Button();
             this.lblTDLStatus = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.lblCounterToretransmit = new System.Windows.Forms.Label();
@@ -85,15 +79,9 @@
             // 
             this.groupBox1.Controls.Add(this.btnChangeTDLSStatusOn);
             this.groupBox1.Controls.Add(this.btnChangeTDLSStatus);
-            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.txtTDLSSetupRequestMAC);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.lblTDLSisWork);
-            this.groupBox1.Controls.Add(this.txtTDLSDiscoveryResponse);
-            this.groupBox1.Controls.Add(this.btnTDLSDiscoveryResponse);
-            this.groupBox1.Controls.Add(this.btnTDLSDiscoveryRequest);
-            this.groupBox1.Controls.Add(this.btnTDLStearDown);
-            this.groupBox1.Controls.Add(this.btnTDLSSetup);
             this.groupBox1.Controls.Add(this.lblTDLStatus);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.lblCounterToretransmit);
@@ -131,14 +119,14 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnChangeTDLSStatusOn
             // 
             this.btnChangeTDLSStatusOn.Enabled = false;
-            this.btnChangeTDLSStatusOn.Location = new System.Drawing.Point(375, 159);
+            this.btnChangeTDLSStatusOn.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnChangeTDLSStatusOn.Location = new System.Drawing.Point(59, 168);
             this.btnChangeTDLSStatusOn.Name = "btnChangeTDLSStatusOn";
-            this.btnChangeTDLSStatusOn.Size = new System.Drawing.Size(65, 21);
+            this.btnChangeTDLSStatusOn.Size = new System.Drawing.Size(52, 21);
             this.btnChangeTDLSStatusOn.TabIndex = 45;
             this.btnChangeTDLSStatusOn.Text = "SLS On";
             this.btnChangeTDLSStatusOn.UseVisualStyleBackColor = true;
@@ -147,29 +135,20 @@
             // btnChangeTDLSStatus
             // 
             this.btnChangeTDLSStatus.Enabled = false;
-            this.btnChangeTDLSStatus.Location = new System.Drawing.Point(321, 158);
+            this.btnChangeTDLSStatus.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnChangeTDLSStatus.Location = new System.Drawing.Point(18, 168);
             this.btnChangeTDLSStatus.Name = "btnChangeTDLSStatus";
-            this.btnChangeTDLSStatus.Size = new System.Drawing.Size(48, 21);
+            this.btnChangeTDLSStatus.Size = new System.Drawing.Size(38, 21);
             this.btnChangeTDLSStatus.TabIndex = 44;
             this.btnChangeTDLSStatus.Text = "SLS";
             this.btnChangeTDLSStatus.UseVisualStyleBackColor = true;
             this.btnChangeTDLSStatus.Click += new System.EventHandler(this.btnChangeTDLSStatus_Click);
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(181, 159);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(133, 19);
-            this.button3.TabIndex = 43;
-            this.button3.Text = "TDLS Setup Response";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // txtTDLSSetupRequestMAC
             // 
             this.txtTDLSSetupRequestMAC.BackColor = System.Drawing.Color.YellowGreen;
             this.txtTDLSSetupRequestMAC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTDLSSetupRequestMAC.Location = new System.Drawing.Point(321, 133);
+            this.txtTDLSSetupRequestMAC.Location = new System.Drawing.Point(157, 144);
             this.txtTDLSSetupRequestMAC.Name = "txtTDLSSetupRequestMAC";
             this.txtTDLSSetupRequestMAC.Size = new System.Drawing.Size(102, 20);
             this.txtTDLSSetupRequestMAC.TabIndex = 42;
@@ -178,7 +157,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(181, 134);
+            this.button2.Location = new System.Drawing.Point(18, 143);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(133, 19);
             this.button2.TabIndex = 41;
@@ -191,67 +170,18 @@
             this.lblTDLSisWork.AutoSize = true;
             this.lblTDLSisWork.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblTDLSisWork.ForeColor = System.Drawing.Color.Olive;
-            this.lblTDLSisWork.Location = new System.Drawing.Point(345, 114);
+            this.lblTDLSisWork.Location = new System.Drawing.Point(159, 128);
             this.lblTDLSisWork.Name = "lblTDLSisWork";
             this.lblTDLSisWork.Size = new System.Drawing.Size(24, 13);
             this.lblTDLSisWork.TabIndex = 40;
             this.lblTDLSisWork.Text = "Off";
-            // 
-            // txtTDLSDiscoveryResponse
-            // 
-            this.txtTDLSDiscoveryResponse.BackColor = System.Drawing.Color.YellowGreen;
-            this.txtTDLSDiscoveryResponse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTDLSDiscoveryResponse.Location = new System.Drawing.Point(416, 206);
-            this.txtTDLSDiscoveryResponse.Name = "txtTDLSDiscoveryResponse";
-            this.txtTDLSDiscoveryResponse.Size = new System.Drawing.Size(102, 20);
-            this.txtTDLSDiscoveryResponse.TabIndex = 39;
-            this.txtTDLSDiscoveryResponse.Text = "00:00:00:00:00:00";
-            this.txtTDLSDiscoveryResponse.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btnTDLSDiscoveryResponse
-            // 
-            this.btnTDLSDiscoveryResponse.Location = new System.Drawing.Point(449, 203);
-            this.btnTDLSDiscoveryResponse.Name = "btnTDLSDiscoveryResponse";
-            this.btnTDLSDiscoveryResponse.Size = new System.Drawing.Size(147, 22);
-            this.btnTDLSDiscoveryResponse.TabIndex = 38;
-            this.btnTDLSDiscoveryResponse.Text = "TDLS Discovery Response";
-            this.btnTDLSDiscoveryResponse.UseVisualStyleBackColor = true;
-            this.btnTDLSDiscoveryResponse.Click += new System.EventHandler(this.btnTDLSDiscoveryResponse_Click);
-            // 
-            // btnTDLSDiscoveryRequest
-            // 
-            this.btnTDLSDiscoveryRequest.Location = new System.Drawing.Point(446, 203);
-            this.btnTDLSDiscoveryRequest.Name = "btnTDLSDiscoveryRequest";
-            this.btnTDLSDiscoveryRequest.Size = new System.Drawing.Size(147, 22);
-            this.btnTDLSDiscoveryRequest.TabIndex = 37;
-            this.btnTDLSDiscoveryRequest.Text = "TDLS Discovery Request";
-            this.btnTDLSDiscoveryRequest.UseVisualStyleBackColor = true;
-            this.btnTDLSDiscoveryRequest.Click += new System.EventHandler(this.btnTDLSDiscoveryRequest_Click);
-            // 
-            // btnTDLStearDown
-            // 
-            this.btnTDLStearDown.Location = new System.Drawing.Point(465, 206);
-            this.btnTDLStearDown.Name = "btnTDLStearDown";
-            this.btnTDLStearDown.Size = new System.Drawing.Size(103, 22);
-            this.btnTDLStearDown.TabIndex = 36;
-            this.btnTDLStearDown.Text = "TDLS TearDown";
-            this.btnTDLStearDown.UseVisualStyleBackColor = true;
-            // 
-            // btnTDLSSetup
-            // 
-            this.btnTDLSSetup.Location = new System.Drawing.Point(465, 190);
-            this.btnTDLSSetup.Name = "btnTDLSSetup";
-            this.btnTDLSSetup.Size = new System.Drawing.Size(103, 22);
-            this.btnTDLSSetup.TabIndex = 35;
-            this.btnTDLSSetup.Text = "TDLS Discovery";
-            this.btnTDLSSetup.UseVisualStyleBackColor = true;
             // 
             // lblTDLStatus
             // 
             this.lblTDLStatus.AutoSize = true;
             this.lblTDLStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblTDLStatus.ForeColor = System.Drawing.Color.DarkSeaGreen;
-            this.lblTDLStatus.Location = new System.Drawing.Point(318, 114);
+            this.lblTDLStatus.Location = new System.Drawing.Point(132, 128);
             this.lblTDLStatus.Name = "lblTDLStatus";
             this.lblTDLStatus.Size = new System.Drawing.Size(24, 13);
             this.lblTDLStatus.TabIndex = 34;
@@ -260,7 +190,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(203, 113);
+            this.label8.Location = new System.Drawing.Point(17, 127);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(111, 13);
             this.label8.TabIndex = 33;
@@ -269,7 +199,7 @@
             // lblCounterToretransmit
             // 
             this.lblCounterToretransmit.AutoSize = true;
-            this.lblCounterToretransmit.Location = new System.Drawing.Point(116, 137);
+            this.lblCounterToretransmit.Location = new System.Drawing.Point(126, 106);
             this.lblCounterToretransmit.Name = "lblCounterToretransmit";
             this.lblCounterToretransmit.Size = new System.Drawing.Size(13, 13);
             this.lblCounterToretransmit.TabIndex = 32;
@@ -278,7 +208,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 136);
+            this.label9.Location = new System.Drawing.Point(10, 106);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(109, 13);
             this.label9.TabIndex = 31;
@@ -287,7 +217,7 @@
             // lblDoubleReceived
             // 
             this.lblDoubleReceived.AutoSize = true;
-            this.lblDoubleReceived.Location = new System.Drawing.Point(116, 114);
+            this.lblDoubleReceived.Location = new System.Drawing.Point(126, 93);
             this.lblDoubleReceived.Name = "lblDoubleReceived";
             this.lblDoubleReceived.Size = new System.Drawing.Size(13, 13);
             this.lblDoubleReceived.TabIndex = 30;
@@ -296,7 +226,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 113);
+            this.label7.Location = new System.Drawing.Point(10, 93);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(90, 13);
             this.label7.TabIndex = 29;
@@ -310,7 +240,6 @@
             this.lblRSSI.Size = new System.Drawing.Size(13, 13);
             this.lblRSSI.TabIndex = 26;
             this.lblRSSI.Text = "0";
-            this.lblRSSI.Click += new System.EventHandler(this.label8_Click);
             // 
             // PresentRSSI
             // 
@@ -320,14 +249,13 @@
             this.PresentRSSI.Size = new System.Drawing.Size(32, 13);
             this.PresentRSSI.TabIndex = 25;
             this.PresentRSSI.Text = "RSSI";
-            this.PresentRSSI.Click += new System.EventHandler(this.label7_Click);
             // 
             // lblWaitingForAck
             // 
             this.lblWaitingForAck.AutoSize = true;
             this.lblWaitingForAck.BackColor = System.Drawing.Color.Black;
             this.lblWaitingForAck.ForeColor = System.Drawing.Color.Coral;
-            this.lblWaitingForAck.Location = new System.Drawing.Point(485, 145);
+            this.lblWaitingForAck.Location = new System.Drawing.Point(491, 70);
             this.lblWaitingForAck.Name = "lblWaitingForAck";
             this.lblWaitingForAck.Size = new System.Drawing.Size(83, 13);
             this.lblWaitingForAck.TabIndex = 24;
@@ -354,11 +282,11 @@
             // btnSaveData
             // 
             this.btnSaveData.Enabled = false;
-            this.btnSaveData.Location = new System.Drawing.Point(442, 83);
+            this.btnSaveData.Location = new System.Drawing.Point(467, 88);
             this.btnSaveData.Name = "btnSaveData";
-            this.btnSaveData.Size = new System.Drawing.Size(126, 23);
+            this.btnSaveData.Size = new System.Drawing.Size(101, 23);
             this.btnSaveData.TabIndex = 21;
-            this.btnSaveData.Text = "Save Received Data";
+            this.btnSaveData.Text = "Save Recv Data";
             this.btnSaveData.UseVisualStyleBackColor = true;
             this.btnSaveData.Click += new System.EventHandler(this.btnSaveData_Click);
             // 
@@ -397,7 +325,6 @@
             this.lblAckReceived.TabIndex = 17;
             this.lblAckReceived.Text = "0";
             this.lblAckReceived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblAckReceived.Click += new System.EventHandler(this.lblAckReceived_Click);
             // 
             // cmdReset
             // 
@@ -427,7 +354,6 @@
             this.lblSent.TabIndex = 14;
             this.lblSent.Text = "0";
             this.lblSent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblSent.Click += new System.EventHandler(this.lblSent_Click);
             // 
             // label2
             // 
@@ -446,7 +372,6 @@
             this.txtDataReceeived.TabIndex = 12;
             this.txtDataReceeived.Text = "0";
             this.txtDataReceeived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.txtDataReceeived.Click += new System.EventHandler(this.txtDataReceeived_Click);
             // 
             // txtMAC
             // 
@@ -460,15 +385,14 @@
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(169, 84);
+            this.txtDestination.Location = new System.Drawing.Point(389, 117);
             this.txtDestination.Name = "txtDestination";
-            this.txtDestination.Size = new System.Drawing.Size(189, 20);
+            this.txtDestination.Size = new System.Drawing.Size(179, 20);
             this.txtDestination.TabIndex = 10;
-            this.txtDestination.TextChanged += new System.EventHandler(this.txtDestination_TextChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(364, 84);
+            this.button1.Location = new System.Drawing.Point(389, 89);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(76, 22);
             this.button1.TabIndex = 9;
@@ -486,7 +410,6 @@
             this.lblAssociatedAP.Size = new System.Drawing.Size(116, 16);
             this.lblAssociatedAP.TabIndex = 8;
             this.lblAssociatedAP.Text = "XXXXXXXXXXXX";
-            this.lblAssociatedAP.Click += new System.EventHandler(this.lblAssociatedAP_Click);
             this.lblAssociatedAP.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblAssociatedAP_MouseDoubleClick);
             // 
             // ConnectedToLabel
@@ -511,9 +434,9 @@
             // 
             // btnScan
             // 
-            this.btnScan.Location = new System.Drawing.Point(524, 9);
+            this.btnScan.Location = new System.Drawing.Point(510, 12);
             this.btnScan.Name = "btnScan";
-            this.btnScan.Size = new System.Drawing.Size(44, 22);
+            this.btnScan.Size = new System.Drawing.Size(58, 19);
             this.btnScan.TabIndex = 5;
             this.btnScan.Text = "Scan";
             this.btnScan.UseVisualStyleBackColor = true;
@@ -534,18 +457,17 @@
             this.cmbAPList.FormattingEnabled = true;
             this.cmbAPList.Location = new System.Drawing.Point(364, 30);
             this.cmbAPList.Name = "cmbAPList";
-            this.cmbAPList.Size = new System.Drawing.Size(126, 21);
+            this.cmbAPList.Size = new System.Drawing.Size(138, 21);
             this.cmbAPList.TabIndex = 2;
-            this.cmbAPList.SelectedIndexChanged += new System.EventHandler(this.cmbAPList_SelectedIndexChanged);
             this.cmbAPList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAPList_MouseClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label1.Location = new System.Drawing.Point(343, 12);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(361, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(175, 16);
+            this.label1.Size = new System.Drawing.Size(141, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Choose BSS[AP] to connect";
             // 
@@ -553,9 +475,9 @@
             // 
             this.groupBox2.Controls.Add(this.btnDumpAll);
             this.groupBox2.Controls.Add(this.txtDumpAll);
-            this.groupBox2.Location = new System.Drawing.Point(12, 242);
+            this.groupBox2.Location = new System.Drawing.Point(12, 250);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(559, 192);
+            this.groupBox2.Size = new System.Drawing.Size(559, 184);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Send Data";
@@ -578,18 +500,18 @@
             this.txtDumpAll.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtDumpAll.Size = new System.Drawing.Size(547, 163);
             this.txtDumpAll.TabIndex = 0;
-            this.txtDumpAll.TextChanged += new System.EventHandler(this.txtDumpAll_TextChanged);
+ 
             // 
             // tmrGUI
             // 
             this.tmrGUI.Enabled = true;
-            this.tmrGUI.Interval = 1000;
+            this.tmrGUI.Interval = 700;
             this.tmrGUI.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // tmrFast
             // 
             this.tmrFast.Enabled = true;
-            this.tmrFast.Interval = 5;
+            this.tmrFast.Interval = 90;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
             // StationInfo
@@ -649,15 +571,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblTDLStatus;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnTDLStearDown;
-        private System.Windows.Forms.Button btnTDLSSetup;
-        private System.Windows.Forms.Button btnTDLSDiscoveryResponse;
-        private System.Windows.Forms.Button btnTDLSDiscoveryRequest;
-        private System.Windows.Forms.TextBox txtTDLSDiscoveryResponse;
         private System.Windows.Forms.Label lblTDLSisWork;
         private System.Windows.Forms.TextBox txtTDLSSetupRequestMAC;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnChangeTDLSStatus;
         private System.Windows.Forms.Button btnChangeTDLSStatusOn;
     }

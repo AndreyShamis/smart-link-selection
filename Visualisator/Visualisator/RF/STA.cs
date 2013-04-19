@@ -298,7 +298,7 @@ namespace Visualisator
             _tdlsSetupR.PacketChannel   = this.getOperateChannel();
             _tdlsSetupR.PacketBand      = this.getOperateBand();
             _tdlsSetupR.Reciver         = MAC;
-
+          //  _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
             
         }
@@ -311,7 +311,7 @@ namespace Visualisator
             _tdlsSetupR.PacketChannel   = this.getOperateChannel();
             _tdlsSetupR.PacketBand      = this.getOperateBand();
             _tdlsSetupR.Reciver         = MAC;
-
+           // _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
         }
         public void TDLS_SendSetupConfirm(string MAC)
@@ -323,7 +323,7 @@ namespace Visualisator
             _tdlsSetupR.PacketChannel = this.getOperateChannel();
             _tdlsSetupR.PacketBand = this.getOperateBand();
             _tdlsSetupR.Reciver = MAC;
-
+           // _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
         }
         //*********************************************************************
@@ -568,6 +568,7 @@ namespace Visualisator
             dataPack.PacketChannel = this.getOperateChannel();
             dataPack.PacketBand = this.getOperateBand();
             dataPack.Reciver = fileName;
+            //dataPack.setTransmitRate(144);
             Int32 SQID = 0;
             foreach (string line in lines)
             {
