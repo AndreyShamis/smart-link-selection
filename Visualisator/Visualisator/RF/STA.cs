@@ -304,7 +304,7 @@ namespace Visualisator
         }
         public void TDLS_SendSetupResponse(string MAC)
         {
-            Packets.TDLSSetupRequest _tdlsSetupR = new TDLSSetupRequest(CreatePacket());
+            Packets.TDLSSetupResponse _tdlsSetupR = new TDLSSetupResponse(CreatePacket());
 
             AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
 
@@ -400,7 +400,14 @@ namespace Visualisator
                 {
                     if (_Pt == typeof(Packets.TDLSSetupRequest))
                     {
+                        Packets.TDLSSetupRequest TDLSreq = (Packets.TDLSSetupRequest)pack;
                         MessageBox.Show("We received TDLS Setup Request");
+                        TDLS_SendSetupResponse(TDLSreq.Source);
+                        
+                    }
+                    else if (_Pt == typeof(Packets.TDLSSetupResponse))
+                    {
+                        MessageBox.Show("We received TDLS Setup Response!!!");
                     }
                 }
                 //Console.WriteLine("[" + getMACAddress() + "]" + " listening.");

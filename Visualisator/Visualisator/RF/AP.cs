@@ -267,23 +267,32 @@ namespace Visualisator
                 //SendData(_wp);
                 DataAckReceived++;
             }
-            else if (Pt == typeof(TDLSSetupRequest))
+            else if (Pt == typeof(TDLSSetupRequest) )
             {
                 TDLSSetupRequest _wp = (TDLSSetupRequest)pack;
-                // Update Keep Alive
-                //Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
-                //newThread.Start();
-
-                //MACsandACK(_wp.Source);
-
                 TDLSSetupRequest resendedData = new TDLSSetupRequest(_wp);
                 resendedData.Destination = _wp.Reciver;
                 resendedData.X = this.x;
                 resendedData.Y = this.y;
-                resendedData.Source = this.getMACAddress().ToString();
-
                 SendData(resendedData);
-
+            }
+            else if ( Pt == typeof(TDLSSetupResponse) )
+            {
+                TDLSSetupResponse _wp = (TDLSSetupResponse)pack;
+                TDLSSetupResponse resendedData = new TDLSSetupResponse(_wp);
+                resendedData.Destination = _wp.Reciver;
+                resendedData.X = this.x;
+                resendedData.Y = this.y;
+                SendData(resendedData);
+            }
+            else if ( Pt == typeof(TDLSSetupConfirm))
+            {
+                TDLSSetupConfirm _wp = (TDLSSetupConfirm)pack;
+                TDLSSetupConfirm resendedData = new TDLSSetupConfirm(_wp);
+                resendedData.Destination = _wp.Reciver;
+                resendedData.X = this.x;
+                resendedData.Y = this.y;
+                SendData(resendedData);
             }
             else
             {
