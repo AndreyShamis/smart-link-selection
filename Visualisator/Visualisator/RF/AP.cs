@@ -227,7 +227,7 @@ namespace Visualisator
                 //Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
                 //newThread.Start();
 
-                MACsandACK(_wp.Source);
+                MACsandACK(_wp.Source,_wp.GuidD);
 
                 Data resendedData = new Data(_wp);
                 resendedData.Destination = _wp.Reciver;

@@ -269,17 +269,14 @@ namespace Visualisator
             throw new NotImplementedException();
         }
 
-        public void MACsandACK(string Destination)
+        public void MACsandACK(string Destination , Guid _DataGuid)
         {
-
-
-
-
             DataAck da = new DataAck(CreatePacket());
             da.Destination = Destination;
             da.PacketChannel = this.getOperateChannel();
             da.PacketBand = this.getOperateBand();
             da.Source = this.getMACAddress().ToString();
+            da.GuiDforDataPacket = _DataGuid;
             this.SendData(da);
             
         }
