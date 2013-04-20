@@ -143,6 +143,7 @@
             // tmrGUISlow
             // 
             this.tmrGUISlow.Enabled = true;
+            this.tmrGUISlow.Interval = 1000;
             this.tmrGUISlow.Tick += new System.EventHandler(this.tmrGUISlow_Tick);
             // 
             // lblUpdateIntervalDescr
@@ -165,7 +166,7 @@
             this.txtUpdateInterval.Name = "txtUpdateInterval";
             this.txtUpdateInterval.Size = new System.Drawing.Size(57, 21);
             this.txtUpdateInterval.TabIndex = 11;
-            this.txtUpdateInterval.Text = "100";
+            this.txtUpdateInterval.Text = "1000";
             this.txtUpdateInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnSetUpdateInterval

@@ -372,7 +372,7 @@ namespace Visualisator
                 }
             }
 
-            gr.DrawPie(new Pen(Color.Yellow), 500/2, 500/2, 1, 1, 1, 360);
+            //gr.DrawPie(new Pen(Color.Yellow), 500/2, 500/2, 1, 1, 1, 360);
             piB.Image = bm;
         }
 
@@ -499,7 +499,7 @@ namespace Visualisator
         //====================================================================================================
         private void btnSetUpdateInterval_Click(object sender, EventArgs e)
         {
-            Int32 updateInterval = 100;
+            Int32 updateInterval = 1000;
 
             try
             {
