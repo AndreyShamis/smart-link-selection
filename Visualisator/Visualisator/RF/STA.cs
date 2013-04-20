@@ -412,6 +412,8 @@ namespace Visualisator
         }
         public void TDLS_SendSetupRequest(string MAC)
         {
+            try
+            {
             Packets.TDLSSetupRequest _tdlsSetupR = new TDLSSetupRequest(CreatePacket());
 
             AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
@@ -424,23 +426,35 @@ namespace Visualisator
           //  _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
             TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestSended;
+                        }
+            catch(Exception)
+            {
+            }
             
         }
         public void TDLS_SendSetupResponse(string MAC)
         {
-            Packets.TDLSSetupResponse _tdlsSetupR = new TDLSSetupResponse(CreatePacket());
-            AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
-            _tdlsSetupR.SSID            = _connecttoAP.SSID;
-            _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
-            _tdlsSetupR.PacketChannel   = this.getOperateChannel();
-            _tdlsSetupR.PacketBand      = this.getOperateBand();
-            _tdlsSetupR.Reciver         = MAC;
-           // _tdlsSetupR.setTransmitRate(11);
-            SendData(_tdlsSetupR);
-            TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
+            try
+            {
+                Packets.TDLSSetupResponse _tdlsSetupR = new TDLSSetupResponse(CreatePacket());
+                AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
+                _tdlsSetupR.SSID = _connecttoAP.SSID;
+                _tdlsSetupR.Destination = _connecttoAP.getMACAddress();
+                _tdlsSetupR.PacketChannel = this.getOperateChannel();
+                _tdlsSetupR.PacketBand = this.getOperateBand();
+                _tdlsSetupR.Reciver = MAC;
+                // _tdlsSetupR.setTransmitRate(11);
+                SendData(_tdlsSetupR);
+                TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
+            }
+            catch(Exception)
+            {
+            }
         }
         public void TDLS_SendSetupConfirm(string MAC)
         {
+            try
+            {
             Packets.TDLSSetupConfirm _tdlsSetupR = new TDLSSetupConfirm(CreatePacket());
             AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
             _tdlsSetupR.SSID = _connecttoAP.SSID;
@@ -451,6 +465,10 @@ namespace Visualisator
            // _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
             TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
+                        }
+            catch(Exception)
+            {
+            }
         }
         //*********************************************************************
         public override void ParseReceivedPacket(IPacket pack)
@@ -756,9 +774,18 @@ namespace Visualisator
 
         private string getBSS_SSID()
         {
-            AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
-            
-            return _connecttoAP.SSID;
+            string ret = "";
+
+            try
+            {
+                AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
+
+                ret = _connecttoAP.SSID;
+            }catch(Exception)
+            {
+            }
+
+            return ret;
         }
         public ArrayList getAssociatedDevicesInBSS()
         {

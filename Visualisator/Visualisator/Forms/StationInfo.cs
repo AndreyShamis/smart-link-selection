@@ -249,6 +249,7 @@ namespace Visualisator
         {
             ArrayList _des = _sta.getAssociatedDevicesInBSS();
             string _selfMac = _sta.getMACAddress();
+            cmbAssociatedDevicesInBSS.Items.Clear();
             if (_des != null)
             {
                 foreach (string de in _des)
