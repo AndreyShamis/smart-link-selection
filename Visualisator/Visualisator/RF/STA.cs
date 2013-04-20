@@ -405,9 +405,15 @@ namespace Visualisator
             else if (_Pt == typeof(Packets.Data))
             {
                 Packets.Data dat = (Packets.Data)pack;
+                if (!dat.IsReceivedRetransmit)
+                {
+                    _DataReceived++;
+                    DataReceivedContainer.Append(dat.getData() + "\r\n");
+                }else
+                {
+                    DataAckRetransmitted++;
+                }
                 MACsandACK(dat.Source);
-                _DataReceived++;
-                DataReceivedContainer.Append(dat.getData() + "\r\n");
                 //bool recieve = dat.PacketID != PrevDataID;
                 /*
                 if (recieve)
@@ -673,6 +679,7 @@ namespace Visualisator
                     }
                     if (retrCounter < 0)
                     {
+                        dataPack.IsRetransmit = true;       //  This is retrasmition
                         retrCounter = 60;
                         SendData(dataPack);
                         if (TDLSisWork) {

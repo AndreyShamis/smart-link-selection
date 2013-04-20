@@ -332,9 +332,15 @@ namespace Visualisator
                     //Thread.Sleep(new TimeSpan(4000));
                    // Thread.Sleep(1); 
                 }
-                else if (pack != null && prev_guid != ((SimulatorPacket)pack).GuidD)
+                else if (pack != null && (prev_guid != ((SimulatorPacket)pack).GuidD || ((SimulatorPacket)pack).IsRetransmit))
                 {
                     //ParseReceivedPacket(pack);
+                    //  Only if we have received packet before
+                    //  but flag Rentransmit is UP
+                    if(prev_guid == ((SimulatorPacket)pack).GuidD)
+                    {
+                        ((SimulatorPacket) pack).IsReceivedRetransmit = true;
+                    }
                     IPacket temp = pack;
                     prev_guid = ((SimulatorPacket)temp).GuidD;
                    // if (pack.GetType() != typeof(Packets.Beacon))

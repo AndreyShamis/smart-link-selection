@@ -15,6 +15,9 @@ namespace Visualisator.Packets
         private int _TransmitRate = 64;
         private int _PacketID = 0;
 
+        private bool _isRetransmit              =       false;
+        private bool _isReceivedRetransmit      =       false;
+
         private Guid _guid = new Guid();
 
         public Guid GuidD
@@ -175,6 +178,18 @@ namespace Visualisator.Packets
         {
             get { return _MAX_SupportedRate; }
             set { _MAX_SupportedRate = value; }
+        }
+
+        public bool IsRetransmit
+        {
+            get { return _isRetransmit; }
+            set { _isRetransmit = value; }
+        }
+
+        public bool IsReceivedRetransmit
+        {
+            get { return _isReceivedRetransmit; }
+            set { _isReceivedRetransmit = value; }
         }
     }
 }
