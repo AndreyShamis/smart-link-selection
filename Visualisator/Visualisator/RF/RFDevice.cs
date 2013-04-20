@@ -262,13 +262,17 @@ namespace Visualisator
                 _DataSent++;
             }
         }
+
+        //=====================================================================
         public virtual void CheckScanConditionOnSend(){}
 
+        //=====================================================================
         public IPacket ReceiveData(IRFDevice ThisDevice)
         {
             throw new NotImplementedException();
         }
 
+        //=====================================================================
         public void MACsandACK(string Destination , Guid _DataGuid)
         {
             DataAck da = new DataAck(CreatePacket());
@@ -280,26 +284,29 @@ namespace Visualisator
             this.SendData(da);
             
         }
+
+        //=====================================================================
         public void Disable()
         {
             throw new NotImplementedException();
         }
 
+        //=====================================================================
         public void RegisterToMedium(int x, int y, int Channel, string Band, int Radius)
         {
             throw new NotImplementedException();
         }
 
-
+        //=====================================================================
         public void AddToLog(string newLogEntry)
         {
             _LOG.Append( "[" + this.getMACAddress() + "]" + newLogEntry + "\r\n");
         }
 
-
-
+        //=====================================================================
         public virtual void ParseReceivedPacket(IPacket pack) { }
 
+        //=====================================================================
         private bool checkIfHaveDataReceive()
         {
             return _MEDIUM.MediumHaveAIRWork(this, ListenBeacon);

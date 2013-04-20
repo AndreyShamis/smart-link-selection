@@ -77,12 +77,14 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.btnGetDevicesInBSS);
             this.groupBox1.Controls.Add(this.cmbAssociatedDevicesInBSS);
             this.groupBox1.Controls.Add(this.lblTDLSSetupStatus);
@@ -581,6 +583,16 @@
             this.tmrFast.Interval = 90;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(365, 199);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(84, 22);
+            this.button3.TabIndex = 52;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -649,5 +661,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnGetDevicesInBSS;
         private System.Windows.Forms.ComboBox cmbAssociatedDevicesInBSS;
+        private System.Windows.Forms.Button button3;
     }
 }

@@ -34,7 +34,7 @@ namespace Visualisator
         private bool            _TDLS_work              = false;
         private int _delayInBSS     = 10;
         private int _delayInTDLS    = 5;
-
+        private int[] _channels = new int[14];  // now it's a 20-element array
         /**
          * 0 = anything
          * 1 = TDLSSetup Request Sended
@@ -157,6 +157,13 @@ namespace Visualisator
             this._scanning = false;
    
             this._WaitingForAck = false;
+
+
+            for (int i = 0; i < _channels.Length; i++)
+            {
+                _channels[i] = -100;
+            }
+
             Thread newThread = new Thread(new ThreadStart(Listen));
             newThread.Start();
 
@@ -329,6 +336,71 @@ namespace Visualisator
             }
         }
 
+        public void LookIntoChannels()
+        {
+            MessageBox.Show(_channels.Count().ToString());
+            
+        }
+
+        public int getBestChannel()
+        {
+            const double neighborsWeight = 2;
+            const double neighborsofNeighborsWeight = 4;
+            double[] resultArr   = new double[14];
+            int[] pCh = new int[14];
+
+            for (int i = 0; i <14; i++)
+            {
+                pCh[i] = Math.Abs(_channels[i]);
+            }
+            for (int i = 0; i <14; i++)
+            {
+                if (i==0)
+                {
+                    resultArr[i] = pCh[i] + pCh[i + 1]/neighborsWeight + pCh[i + 2]/neighborsofNeighborsWeight + 75;
+                }
+                else if(i==_channels.Length-1)
+                {
+                    resultArr[i] = pCh[i] + pCh[i - 1] / neighborsWeight + pCh[i - 2] / neighborsofNeighborsWeight + 75;
+                }
+                else if (i==1)
+                {
+                    resultArr[i] = pCh[i] + pCh[i - 1] / neighborsWeight + pCh[i + 1] / neighborsWeight +
+                                   pCh[i + 2]/neighborsofNeighborsWeight + 25;
+                }
+                else if (i==_channels.Length-2)
+                {
+                    resultArr[i] = pCh[i] + pCh[i - 1] / neighborsWeight + pCh[i + 1] / neighborsWeight +
+                                   pCh[i - 2]/neighborsofNeighborsWeight + 25;
+                }
+                else
+                {
+                    resultArr[i] = pCh[i] + pCh[i - 1] / neighborsWeight + pCh[i + 1] / neighborsWeight +
+                                   pCh[i - 2]/neighborsofNeighborsWeight + pCh[i + 2]/neighborsofNeighborsWeight;
+                }
+            }
+            return MaxIndex(resultArr) +1;
+        }
+
+        public static int MaxIndex<T>(IEnumerable<T> sequence)
+        where T : IComparable<T>
+        {
+            int maxIndex = -1;
+            T maxValue = default(T); // Immediately overwritten anyway
+
+            int index = 0;
+            foreach (T value in sequence)
+            {
+                if (value.CompareTo(maxValue) > 0 || maxIndex == -1)
+                {
+                    maxIndex = index;
+                    maxValue = value;
+                }
+                index++;
+            }
+            return maxIndex;
+        }
+
         public void TDLS_SendDiscoveryRequest()
         {
             
@@ -399,6 +471,7 @@ namespace Visualisator
                 if (!_AccessPoint.Contains(bec.SSID)){
                     _AccessPoint.Add(bec.SSID);
                 }
+                _channels[bec.PacketChannel-1] = Math.Max(-100, Rssi);
                 _AccessPoint.Increase(bec.SSID);
             }
             else if (_Pt == typeof(Packets.Data))

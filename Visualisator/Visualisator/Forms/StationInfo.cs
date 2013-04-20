@@ -267,5 +267,12 @@ namespace Visualisator
                 txtTDLSSetupRequestMAC.Text = cmbAssociatedDevicesInBSS.Text;
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            _sta.LookIntoChannels();
+
+            MessageBox.Show(_sta.getBestChannel().ToString());
+        }
     }
 }
