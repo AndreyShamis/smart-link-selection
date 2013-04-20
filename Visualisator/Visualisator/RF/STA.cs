@@ -716,9 +716,16 @@ namespace Visualisator
                 }else{
                     Thread.Sleep(DelayInBss); 
                 }
-                
+
+                if (getScanStatus())
+                {
+                    SpinWait.SpinUntil(getScanStatus);
+                }
+
+                int maxRetrays = 10;
                 while (!ackReceived  )
                 {
+
                     retrCounter--;
                     if (TDLSisWork){
                         Thread.Sleep(1);}
@@ -740,6 +747,11 @@ namespace Visualisator
                         if(!_Enabled)
                             return;
                         //Thread.Sleep(1);
+                        maxRetrays--;
+                    }
+                    if(maxRetrays == 0)
+                    {
+                        break;
                     }
                 }
                 
