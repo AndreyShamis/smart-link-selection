@@ -113,12 +113,19 @@ namespace Visualisator
         {
             while (_Enabled)
             {
-                if (_packet_queues.Count > 0)
+                if (_packet_queues != null)
                 {
-                    lock (Sync)
+                    if (_packet_queues.Count > 0)
                     {
-                        Monitor.PulseAll(Sync);
+                        lock (Sync)
+                        {
+                            Monitor.PulseAll(Sync);
+                        }
                     }
+                }
+                else
+                {
+                    Thread.Sleep(1000); // sec * 
                 }
                 Thread.Sleep(100); // sec *
             }

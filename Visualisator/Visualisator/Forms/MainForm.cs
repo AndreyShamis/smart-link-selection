@@ -391,11 +391,21 @@ namespace Visualisator
         //====================================================================================================
         private void button2_Click(object sender, EventArgs e)
         {
-            var serializer = new BinaryFormatter();
-            SimulationContainer _container = new SimulationContainer(_objects, _MEDIUM);
-            using (var stream = File.OpenWrite("test.dat"))
+
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Visualisator SLS|*.sls|Visualisator TDLS|*.tdls";
+            saveFileDialog1.Title = "Save Visualisator Simulation File";
+            saveFileDialog1.ShowDialog();
+            // If the file name is not an empty string open it for saving.
+            if (saveFileDialog1.FileName != "")
             {
-                serializer.Serialize(stream, _container);
+                var serializer = new BinaryFormatter();
+                SimulationContainer _container = new SimulationContainer(_objects, _MEDIUM);
+                using (var stream = File.OpenWrite(saveFileDialog1.FileName))
+                {
+                    serializer.Serialize(stream, _container);
+                }
             }
         }
 
@@ -437,9 +447,10 @@ namespace Visualisator
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex2)
             {
                 //AddToErrorLog(ex.Message);
+                MessageBox.Show(ex2.Message);
             }
             DrowOnBoard();
         }

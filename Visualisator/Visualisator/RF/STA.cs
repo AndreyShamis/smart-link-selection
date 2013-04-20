@@ -126,6 +126,9 @@ namespace Visualisator
         {
             CreateFolder();
             _Enabled = true;
+            this._scanning = false;
+   
+            this._WaitingForAck = false;
             Thread newThread = new Thread(new ThreadStart(Listen));
             newThread.Start();
 
@@ -290,7 +293,12 @@ namespace Visualisator
         //*********************************************************************
         public Int32 getSizeOfReceivedData()
         {
-            return DataReceivedContainer.Length;
+            if (DataReceivedContainer != null)
+                return DataReceivedContainer.Length;
+            else
+            {
+                return 0;
+            }
         }
 
         public void TDLS_SendDiscoveryRequest()

@@ -91,7 +91,7 @@ namespace Visualisator
                 btnSaveData.Enabled = true;
             }
 
-            txtDumpAll.Text = _sta.DumpAll();
+            //txtDumpAll.Text = _sta.DumpAll();
             if(_sta.TDLSisEnabled)
             {
                 lblTDLStatus.Text = "On";
