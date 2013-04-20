@@ -184,7 +184,7 @@ namespace Visualisator
                 _KeepAliveReceived++;
                 _AssociatedDevices.Increase(STA_MAC);
             }else{
-                MessageBox.Show(STA_MAC + " not associated UpdateSTAKeepAliveInfo");
+                MessageBox.Show(STA_MAC + " not associated UpdateSTAKeepAliveInfo",this.getMACAddress());
             }
         }
 

@@ -314,66 +314,76 @@ namespace Visualisator
         //====================================================================================================
         public void refr()
         {
-            gr.Clear(BoardColor);
-            Pen RadiusForApPen = null;
-            Pen RadiusForStaPen = null;
-
-            int DoubleRadius = _RADIUS*2;
-            int HalfRadius = _RADIUS;
-            for (int i = 0; i < _objects.Count; i++)
+            try
             {
-                if (_objects[i].GetType() == typeof (STA))
+                gr.Clear(BoardColor);
+                Pen RadiusForApPen = null;
+                Pen RadiusForStaPen = null;
+
+                int DoubleRadius = _RADIUS*2;
+                int HalfRadius = _RADIUS;
+                for (int i = 0; i < _objects.Count; i++)
                 {
-                    STA _tsta = (STA) _objects[i];
+                    if (_objects[i].GetType() == typeof (STA))
+                    {
+                        STA _tsta = (STA) _objects[i];
 
-                    if (_tsta.RFWorking())
-                        RadiusForStaPen = new Pen(System.Drawing.Color.SandyBrown);
-                    else
-                        RadiusForStaPen = new Pen(System.Drawing.Color.SpringGreen);
+                        if (_tsta.RFWorking())
+                            RadiusForStaPen = new Pen(System.Drawing.Color.SandyBrown);
+                        else
+                            RadiusForStaPen = new Pen(System.Drawing.Color.SpringGreen);
 
-                    gr.DrawPie(new Pen(_tsta.VColor), (float) _tsta.x - 5, (float) _tsta.y - 5, 10, 10, 1, 360);
-                    gr.DrawPie(RadiusForStaPen, (float) _tsta.x - HalfRadius, (float) _tsta.y - HalfRadius, DoubleRadius,
-                               DoubleRadius, 1, 360);
-                    string drawString = "STA:" + _tsta.getOperateChannel() + " " + _tsta.getMACAddress();
-                    System.Drawing.Font drawFont = new System.Drawing.Font(
-                        "Arial", 7);
-                    System.Drawing.SolidBrush drawBrush = new
-                        System.Drawing.SolidBrush(System.Drawing.Color.YellowGreen);
+                        gr.DrawPie(new Pen(_tsta.VColor), (float) _tsta.x - 5, (float) _tsta.y - 5, 10, 10, 1, 360);
+                        gr.DrawPie(RadiusForStaPen, (float) _tsta.x - HalfRadius, (float) _tsta.y - HalfRadius,
+                                   DoubleRadius,
+                                   DoubleRadius, 1, 360);
+                        string drawString = "STA:" + _tsta.getOperateChannel() + " " + _tsta.getMACAddress();
+                        System.Drawing.Font drawFont = new System.Drawing.Font(
+                            "Arial", 7);
+                        System.Drawing.SolidBrush drawBrush = new
+                            System.Drawing.SolidBrush(System.Drawing.Color.YellowGreen);
 
-                    gr.DrawString(drawString, drawFont, drawBrush, (int) _tsta.x + 10, (int) _tsta.y + 10);
-                    drawFont.Dispose();
-                    drawBrush.Dispose();
+                        gr.DrawString(drawString, drawFont, drawBrush, (int) _tsta.x + 10, (int) _tsta.y + 10);
+                        drawFont.Dispose();
+                        drawBrush.Dispose();
+                    }
+                    else if (_objects[i].GetType() == typeof (AP))
+                    {
+                        AP _tap = (AP) _objects[i];
+                        Rectangle myRectangle = new Rectangle((int) _tap.x - 5, (int) _tap.y - 5, 10, 10);
+
+                        if (_tap.RFWorking())
+                            RadiusForApPen = new Pen(System.Drawing.Color.Coral);
+                        else
+                            RadiusForApPen = new Pen(System.Drawing.Color.Ivory);
+
+                        gr.DrawPie(RadiusForApPen, (float) _tap.x - HalfRadius, (float) _tap.y - HalfRadius,
+                                   DoubleRadius,
+                                   DoubleRadius, 1, 360);
+                        gr.DrawRectangle(new Pen(_tap.VColor), myRectangle);
+
+
+                        string drawString = "AP:" + _tap.getOperateChannel() + " " + _tap.SSID + " " +
+                                            _tap.getMACAddress();
+                        System.Drawing.Font drawFont = new System.Drawing.Font(
+                            "Arial", 8);
+                        System.Drawing.SolidBrush drawBrush = new
+                            System.Drawing.SolidBrush(System.Drawing.Color.White);
+
+                        gr.DrawString(drawString, drawFont, drawBrush, (int) _tap.x + 10, (int) _tap.y - 10);
+                        drawFont.Dispose();
+                        drawBrush.Dispose();
+
+                    }
                 }
-                else if (_objects[i].GetType() == typeof (AP))
-                {
-                    AP _tap = (AP) _objects[i];
-                    Rectangle myRectangle = new Rectangle((int) _tap.x - 5, (int) _tap.y - 5, 10, 10);
 
-                    if (_tap.RFWorking())
-                        RadiusForApPen = new Pen(System.Drawing.Color.Coral);
-                    else
-                        RadiusForApPen = new Pen(System.Drawing.Color.Ivory);
-
-                    gr.DrawPie(RadiusForApPen, (float) _tap.x - HalfRadius, (float) _tap.y - HalfRadius, DoubleRadius,
-                               DoubleRadius, 1, 360);
-                    gr.DrawRectangle(new Pen(_tap.VColor), myRectangle);
-
-
-                    string drawString = "AP:" + _tap.getOperateChannel() + " " + _tap.SSID + " " + _tap.getMACAddress();
-                    System.Drawing.Font drawFont = new System.Drawing.Font(
-                        "Arial", 8);
-                    System.Drawing.SolidBrush drawBrush = new
-                        System.Drawing.SolidBrush(System.Drawing.Color.White);
-
-                    gr.DrawString(drawString, drawFont, drawBrush, (int) _tap.x + 10, (int) _tap.y - 10);
-                    drawFont.Dispose();
-                    drawBrush.Dispose();
-
-                }
+                //gr.DrawPie(new Pen(Color.Yellow), 500/2, 500/2, 1, 1, 1, 360);
+                piB.Image = bm;
             }
-
-            //gr.DrawPie(new Pen(Color.Yellow), 500/2, 500/2, 1, 1, 1, 360);
-            piB.Image = bm;
+            catch (Exception ex)
+            {
+                MessageBox.Show("refr:" + ex.Message);
+            }
         }
 
         //====================================================================================================

@@ -5,6 +5,7 @@ using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace Visualisator
 {
@@ -27,12 +28,21 @@ namespace Visualisator
 
           private byte[] ObjectToByteArray(Object obj)
           {
-              if (obj == null)
-                  return null;
-              BinaryFormatter bf = new BinaryFormatter();
-              MemoryStream ms = new MemoryStream();
-              bf.Serialize(ms, obj);
-              return ms.ToArray();
+              try
+              {
+
+                  if (obj == null)
+                      return null;
+                  BinaryFormatter bf = new BinaryFormatter();
+                  MemoryStream ms = new MemoryStream();
+                  bf.Serialize(ms, obj);
+                  return ms.ToArray();
+              }
+              catch(Exception ex)
+              {
+                  MessageBox.Show("ObjectToByteArray:" + ex.Message);
+              }
+              return null;
           }
     
     }

@@ -34,7 +34,8 @@ namespace Visualisator
         private bool            _TDLS_work              = false;
         private int _delayInBSS     = 10;
         private int _delayInTDLS    = 5;
-        private int[] _channels = new int[14];  // now it's a 20-element array
+        private const int max_channel = 13;
+        private int[] _channels = new int[max_channel];  // now it's a 20-element array
         /**
          * 0 = anything
          * 1 = TDLSSetup Request Sended
@@ -182,7 +183,7 @@ namespace Visualisator
                 if (!getAssociatedAP_SSID().Equals(""))
                 {
                     KeepAlive keepAl        = new KeepAlive(CreatePacket());
-                    AP _connecttoAP         = GetAPBySSID(_AccessPoint[0].ToString());
+                    AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
                     Data dataPack           = new Data(CreatePacket());
 
                     keepAl.SSID             = _connecttoAP.SSID;
@@ -346,14 +347,14 @@ namespace Visualisator
         {
             const double neighborsWeight = 2;
             const double neighborsofNeighborsWeight = 4;
-            double[] resultArr   = new double[14];
-            int[] pCh = new int[14];
+            double[] resultArr = new double[max_channel];
+            int[] pCh = new int[max_channel];
 
-            for (int i = 0; i <14; i++)
+            for (int i = 0; i < max_channel; i++)
             {
                 pCh[i] = Math.Abs(_channels[i]);
             }
-            for (int i = 0; i <14; i++)
+            for (int i = 0; i < max_channel; i++)
             {
                 if (i==0)
                 {
@@ -413,7 +414,7 @@ namespace Visualisator
         {
             Packets.TDLSSetupRequest _tdlsSetupR = new TDLSSetupRequest(CreatePacket());
 
-            AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+            AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
 
             _tdlsSetupR.SSID            = _connecttoAP.SSID;
             _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
@@ -428,7 +429,7 @@ namespace Visualisator
         public void TDLS_SendSetupResponse(string MAC)
         {
             Packets.TDLSSetupResponse _tdlsSetupR = new TDLSSetupResponse(CreatePacket());
-            AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+            AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
             _tdlsSetupR.SSID            = _connecttoAP.SSID;
             _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
             _tdlsSetupR.PacketChannel   = this.getOperateChannel();
@@ -441,7 +442,7 @@ namespace Visualisator
         public void TDLS_SendSetupConfirm(string MAC)
         {
             Packets.TDLSSetupConfirm _tdlsSetupR = new TDLSSetupConfirm(CreatePacket());
-            AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+            AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
             _tdlsSetupR.SSID = _connecttoAP.SSID;
             _tdlsSetupR.Destination = _connecttoAP.getMACAddress();
             _tdlsSetupR.PacketChannel = this.getOperateChannel();
@@ -645,7 +646,7 @@ namespace Visualisator
         {
 
             string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\_DATA_TO_SEND\input.txt");
-            AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+            AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
 
             if (_connecttoAP == null)
             {
@@ -755,7 +756,7 @@ namespace Visualisator
 
         private string getBSS_SSID()
         {
-            AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+            AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
             
             return _connecttoAP.SSID;
         }
