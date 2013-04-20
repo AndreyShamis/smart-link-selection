@@ -73,12 +73,16 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
+            this.lblTDLSSetupStatus = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblTDLSSetupStatus);
+            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.lblAllReceivedPackets);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.btnChangeTDLSStatusOn);
@@ -535,6 +539,24 @@
             this.tmrFast.Interval = 90;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
+            // lblTDLSSetupStatus
+            // 
+            this.lblTDLSSetupStatus.AutoSize = true;
+            this.lblTDLSSetupStatus.Location = new System.Drawing.Point(131, 192);
+            this.lblTDLSSetupStatus.Name = "lblTDLSSetupStatus";
+            this.lblTDLSSetupStatus.Size = new System.Drawing.Size(13, 13);
+            this.lblTDLSSetupStatus.TabIndex = 49;
+            this.lblTDLSSetupStatus.Text = "0";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(15, 192);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(99, 13);
+            this.label12.TabIndex = 48;
+            this.label12.Text = "TDLS Setup Status";
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -599,5 +621,7 @@
         private System.Windows.Forms.Button btnChangeTDLSStatusOn;
         private System.Windows.Forms.Label lblAllReceivedPackets;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblTDLSSetupStatus;
+        private System.Windows.Forms.Label label12;
     }
 }

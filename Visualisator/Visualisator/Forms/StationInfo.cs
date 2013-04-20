@@ -138,6 +138,7 @@ namespace Visualisator
             {
                 _sta.rfile(txtDestination.Text);
                 txtDestination.BackColor = Color.White;
+                txtTDLSSetupRequestMAC.Text = txtDestination.Text;
             }
             else
             {
@@ -171,6 +172,8 @@ namespace Visualisator
                 lblAllReceivedPackets.Text = _sta.AllReceivedPackets.ToString();
                 lblAssociatedAP.Text = _sta.getAssociatedAP_SSID();
                 lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
+
+                lblTDLSSetupStatus.Text = _sta.TDLSSetupInfo.ToString() + " [" + _sta.TDLSSetupInfo.GetHashCode().ToString() + "]";
                 lblRetransmited.Text = _sta.DataRetransmited.ToString();
                 lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
                 lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();

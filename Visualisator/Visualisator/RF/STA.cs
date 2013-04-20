@@ -35,10 +35,36 @@ namespace Visualisator
         private int _delayInBSS     = 10;
         private int _delayInTDLS    = 5;
 
+        /**
+         * 0 = anything
+         * 1 = TDLSSetup Request Sended
+         * 2 = TDLSSetup Request Received
+         * 3 = TDLSSetup Response Sened
+         * 4 = TDLSSetup Response Received
+         * 5 = TDLSSetup Confirm Sended
+         * 6 = TDLSSetup Confirm Received
+         */
+
+        internal enum TDLSSetupStatus
+        {
+            TDLSSetupDisabled = 0, 
+            TDLSSetupRequestSended, 
+            TDLSSetupRequestReceived, 
+            TDLSSetupResponseSened, 
+            TDLSSetupResponseReceived, 
+            TDLSSetupConfirmSended, 
+            TDLSSetupConfirmReceived
+        };
+        private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;   
 
         //*********************************************************************
         //*********************************************************************
         //*********************************************************************
+        public TDLSSetupStatus TDLSSetupInfo
+        {
+            get { return _TDLSSetupStatus; }
+            set { _TDLSSetupStatus = value; }
+        }
 
         public bool getScanStatus()
         {
@@ -95,6 +121,8 @@ namespace Visualisator
             get { return _delayInTDLS; }
             set { _delayInTDLS = value; }
         }
+
+
 
 
         private bool ackReceived = false;
@@ -322,6 +350,7 @@ namespace Visualisator
             _tdlsSetupR.Reciver         = MAC;
           //  _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
+            TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestSended;
             
         }
         public void TDLS_SendSetupResponse(string MAC)
@@ -335,6 +364,7 @@ namespace Visualisator
             _tdlsSetupR.Reciver         = MAC;
            // _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
+            TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
         }
         public void TDLS_SendSetupConfirm(string MAC)
         {
@@ -347,6 +377,7 @@ namespace Visualisator
             _tdlsSetupR.Reciver = MAC;
            // _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
+            TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
         }
         //*********************************************************************
         public override void ParseReceivedPacket(IPacket pack)
@@ -432,22 +463,27 @@ namespace Visualisator
                 {
                     if (_Pt == typeof(Packets.TDLSSetupRequest))
                     {
+                        TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestReceived;
                         Packets.TDLSSetupRequest TDLSreq = (Packets.TDLSSetupRequest)pack;
-                        MessageBox.Show("We received TDLS Setup Request");
+                        //MessageBox.Show("We received TDLS Setup Request");
                         TDLS_SendSetupResponse(TDLSreq.Source);
+                        TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
                         
                     }
                     else if (_Pt == typeof(Packets.TDLSSetupResponse))
                     {
+                        TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseReceived;
                         _TDLS_work = true;
                         Packets.TDLSSetupResponse TDLSreq = (Packets.TDLSSetupResponse)pack;
-                        MessageBox.Show("We received TDLS Setup Response!!!");
+                        //MessageBox.Show("We received TDLS Setup Response!!!");
                         TDLS_SendSetupConfirm(TDLSreq.Source);
+                        TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
                     }
                     else if (_Pt == typeof(Packets.TDLSSetupConfirm))
                     {
                         _TDLS_work = true;
-                        MessageBox.Show("We received TDLS Setup Confirm!!!");
+                        //MessageBox.Show("We received TDLS Setup Confirm!!!");
+                        TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmReceived;
                     }
                 }
                 //Console.WriteLine("[" + getMACAddress() + "]" + " listening.");
