@@ -50,6 +50,8 @@
             this.listStations = new System.Windows.Forms.ListBox();
             this.lblQueue = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.lblAllReceivedPackets = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -213,7 +215,7 @@
             // tmrFast
             // 
             this.tmrFast.Enabled = true;
-            this.tmrFast.Interval = 5;
+            this.tmrFast.Interval = 20;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
             // listStations
@@ -247,11 +249,32 @@
             this.label9.TabIndex = 17;
             this.label9.Text = "Queue";
             // 
+            // lblAllReceivedPackets
+            // 
+            this.lblAllReceivedPackets.ForeColor = System.Drawing.Color.Teal;
+            this.lblAllReceivedPackets.Location = new System.Drawing.Point(246, 213);
+            this.lblAllReceivedPackets.Name = "lblAllReceivedPackets";
+            this.lblAllReceivedPackets.Size = new System.Drawing.Size(44, 13);
+            this.lblAllReceivedPackets.TabIndex = 20;
+            this.lblAllReceivedPackets.Text = "0";
+            this.lblAllReceivedPackets.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(25, 213);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(119, 13);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "Received Packets Sum";
+            // 
             // APInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 343);
+            this.Controls.Add(this.lblAllReceivedPackets);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.lblQueue);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.listStations);
@@ -302,5 +325,7 @@
         private System.Windows.Forms.ListBox listStations;
         private System.Windows.Forms.Label lblQueue;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblAllReceivedPackets;
+        private System.Windows.Forms.Label label11;
     }
 }

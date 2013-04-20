@@ -538,6 +538,7 @@ namespace Visualisator
             _DataAckReceived = 0;
             _DataRetransmited = 0;
             _DataAckRetransmitted = 0;
+            AllReceivedPackets = 0;
             this.DoubleRecieved = 0;
         }
 

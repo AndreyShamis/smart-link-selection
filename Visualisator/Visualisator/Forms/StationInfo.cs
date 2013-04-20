@@ -168,6 +168,7 @@ namespace Visualisator
                 }
                 txtDataReceeived.Text = _sta.getDataRecieved().ToString();
                 lblSent.Text = _sta.getDataSent().ToString();
+                lblAllReceivedPackets.Text = _sta.AllReceivedPackets.ToString();
                 lblAssociatedAP.Text = _sta.getAssociatedAP_SSID();
                 lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
                 lblRetransmited.Text = _sta.DataRetransmited.ToString();

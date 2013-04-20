@@ -182,6 +182,8 @@ namespace Visualisator
         //[MethodImpl(MethodImplOptions.Synchronized)]
         public override void ParseReceivedPacket(IPacket pack)
         {
+            
+
             Type Pt = pack.GetType();
             if (Pt == typeof(Connect))
             {

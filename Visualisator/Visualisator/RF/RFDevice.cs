@@ -27,6 +27,7 @@ namespace Visualisator
         private String          _OperateBand    =   "";
         private MAC             _address        =   new MAC();
         private Int32 _DoubleRecieved = 0;
+        private Int32 _AllReceivedPackets = 0;
 
 
         protected const bool DebugLogEnabled = false;
@@ -342,6 +343,7 @@ namespace Visualisator
                     //{
                         //Thread.Sleep(1); 
                    // }
+                    AllReceivedPackets += 1;
                     Thread newThread = new Thread(() => ParseReceivedPacket(temp));
                     newThread.Start();
 
@@ -392,6 +394,12 @@ namespace Visualisator
         {
             get { return _vColor; }
             set { _vColor = value; }
+        }
+
+        public int AllReceivedPackets
+        {
+            get { return _AllReceivedPackets; }
+            set { _AllReceivedPackets = value; }
         }
 
         public void SetVertex(Double x, Double y, Double z)

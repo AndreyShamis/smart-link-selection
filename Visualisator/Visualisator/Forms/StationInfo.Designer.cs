@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblAllReceivedPackets = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.btnChangeTDLSStatusOn = new System.Windows.Forms.Button();
             this.btnChangeTDLSStatus = new System.Windows.Forms.Button();
             this.txtTDLSSetupRequestMAC = new System.Windows.Forms.TextBox();
@@ -77,6 +79,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblAllReceivedPackets);
+            this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.btnChangeTDLSStatusOn);
             this.groupBox1.Controls.Add(this.btnChangeTDLSStatus);
             this.groupBox1.Controls.Add(this.txtTDLSSetupRequestMAC);
@@ -119,6 +123,24 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
+            // 
+            // lblAllReceivedPackets
+            // 
+            this.lblAllReceivedPackets.Location = new System.Drawing.Point(209, 82);
+            this.lblAllReceivedPackets.Name = "lblAllReceivedPackets";
+            this.lblAllReceivedPackets.Size = new System.Drawing.Size(86, 14);
+            this.lblAllReceivedPackets.TabIndex = 47;
+            this.lblAllReceivedPackets.Text = "0";
+            this.lblAllReceivedPackets.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(92, 83);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(119, 13);
+            this.label11.TabIndex = 46;
+            this.label11.Text = "Received Packets Sum";
             // 
             // btnChangeTDLSStatusOn
             // 
@@ -500,7 +522,6 @@
             this.txtDumpAll.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtDumpAll.Size = new System.Drawing.Size(547, 163);
             this.txtDumpAll.TabIndex = 0;
- 
             // 
             // tmrGUI
             // 
@@ -576,5 +597,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnChangeTDLSStatus;
         private System.Windows.Forms.Button btnChangeTDLSStatusOn;
+        private System.Windows.Forms.Label lblAllReceivedPackets;
+        private System.Windows.Forms.Label label11;
     }
 }

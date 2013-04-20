@@ -56,6 +56,7 @@ namespace Visualisator
             lblDataAckReceived.Text = _ap.getDataAckRecieved().ToString();
             lblConnectedSTA.Text = _ap.CenntedDevicesCount().ToString();
             lblKeepAliveReceived.Text = _ap.KeepAliveReceived.ToString();
+            lblAllReceivedPackets.Text = _ap.AllReceivedPackets.ToString();
         }
 
         private void listStations_SelectedIndexChanged(object sender, EventArgs e)
