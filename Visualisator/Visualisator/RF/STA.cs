@@ -717,6 +717,30 @@ namespace Visualisator
             return (null);
         }
 
+        private string getBSS_SSID()
+        {
+            AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
+            
+            return _connecttoAP.SSID;
+        }
+        public ArrayList getAssociatedDevicesInBSS()
+        {
+            string _SSID = "";
+            _SSID = getBSS_SSID();
+            foreach (var obj in _PointerToAllRfDevices)
+            {
+                if (obj.GetType() == typeof(AP))
+                {
+                    AP _tV = (AP)obj;
+                    if (_tV.SSID.Equals(_SSID))
+                    {
+                        return _tV.getAssociatedDevicesinAP();
+                    }
+                }
+            }
+            return null;
+        }
+
         //*********************************************************************
         public void Scan()
         {

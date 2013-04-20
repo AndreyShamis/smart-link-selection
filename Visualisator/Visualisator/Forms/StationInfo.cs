@@ -122,7 +122,6 @@ namespace Visualisator
         {
             if (cmbAPList.Text.Length > 0)
                 _sta.ConnectToAP(cmbAPList.Text);
-           
         }
 
         //=====================================================================
@@ -239,6 +238,34 @@ namespace Visualisator
         private void button4_Click(object sender, EventArgs e)
         {
             _sta.EnableTDLS();
+        }
+
+        private void btnGetDevicesInBSS_Click(object sender, EventArgs e)
+        {
+            GetDevicesInBSS();
+        }
+
+        private void GetDevicesInBSS()
+        {
+            ArrayList _des = _sta.getAssociatedDevicesInBSS();
+            string _selfMac = _sta.getMACAddress();
+            if (_des != null)
+            {
+                foreach (string de in _des)
+                {
+                    if (!_selfMac.Equals(de))
+                        cmbAssociatedDevicesInBSS.Items.Add(de);
+                }
+            }  
+        }
+
+        private void cmbAssociatedDevicesInBSS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbAssociatedDevicesInBSS.Text.Length > 5)
+            {
+                txtDestination.Text = cmbAssociatedDevicesInBSS.Text;
+                txtTDLSSetupRequestMAC.Text = cmbAssociatedDevicesInBSS.Text;
+            }
         }
     }
 }

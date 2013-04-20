@@ -34,6 +34,16 @@ namespace Visualisator
         }
 
         //*********************************************************************
+        public ArrayList getAssociatedDevicesinAP()
+        {
+            ArrayList ret = new ArrayList();
+            foreach (string associatedDevice in _AssociatedDevices)
+            {
+                ret.Add(associatedDevice);
+            }
+            return ret;
+        }
+        //*********************************************************************
         public Int32 KeepAliveReceived
         {
             get { return _KeepAliveReceived; }

@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnGetDevicesInBSS = new System.Windows.Forms.Button();
+            this.cmbAssociatedDevicesInBSS = new System.Windows.Forms.ComboBox();
+            this.lblTDLSSetupStatus = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.lblAllReceivedPackets = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.btnChangeTDLSStatusOn = new System.Windows.Forms.Button();
@@ -73,14 +77,14 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
-            this.lblTDLSSetupStatus = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnGetDevicesInBSS);
+            this.groupBox1.Controls.Add(this.cmbAssociatedDevicesInBSS);
             this.groupBox1.Controls.Add(this.lblTDLSSetupStatus);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.lblAllReceivedPackets);
@@ -127,6 +131,44 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
+            // 
+            // btnGetDevicesInBSS
+            // 
+            this.btnGetDevicesInBSS.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnGetDevicesInBSS.Location = new System.Drawing.Point(504, 141);
+            this.btnGetDevicesInBSS.Name = "btnGetDevicesInBSS";
+            this.btnGetDevicesInBSS.Size = new System.Drawing.Size(64, 18);
+            this.btnGetDevicesInBSS.TabIndex = 51;
+            this.btnGetDevicesInBSS.Text = "BSS Devs";
+            this.btnGetDevicesInBSS.UseVisualStyleBackColor = true;
+            this.btnGetDevicesInBSS.Click += new System.EventHandler(this.btnGetDevicesInBSS_Click);
+            // 
+            // cmbAssociatedDevicesInBSS
+            // 
+            this.cmbAssociatedDevicesInBSS.FormattingEnabled = true;
+            this.cmbAssociatedDevicesInBSS.Location = new System.Drawing.Point(389, 140);
+            this.cmbAssociatedDevicesInBSS.Name = "cmbAssociatedDevicesInBSS";
+            this.cmbAssociatedDevicesInBSS.Size = new System.Drawing.Size(113, 21);
+            this.cmbAssociatedDevicesInBSS.TabIndex = 50;
+            this.cmbAssociatedDevicesInBSS.SelectedIndexChanged += new System.EventHandler(this.cmbAssociatedDevicesInBSS_SelectedIndexChanged);
+            // 
+            // lblTDLSSetupStatus
+            // 
+            this.lblTDLSSetupStatus.AutoSize = true;
+            this.lblTDLSSetupStatus.Location = new System.Drawing.Point(131, 192);
+            this.lblTDLSSetupStatus.Name = "lblTDLSSetupStatus";
+            this.lblTDLSSetupStatus.Size = new System.Drawing.Size(13, 13);
+            this.lblTDLSSetupStatus.TabIndex = 49;
+            this.lblTDLSSetupStatus.Text = "0";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(15, 192);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(99, 13);
+            this.label12.TabIndex = 48;
+            this.label12.Text = "TDLS Setup Status";
             // 
             // lblAllReceivedPackets
             // 
@@ -308,7 +350,7 @@
             // btnSaveData
             // 
             this.btnSaveData.Enabled = false;
-            this.btnSaveData.Location = new System.Drawing.Point(467, 88);
+            this.btnSaveData.Location = new System.Drawing.Point(467, 112);
             this.btnSaveData.Name = "btnSaveData";
             this.btnSaveData.Size = new System.Drawing.Size(101, 23);
             this.btnSaveData.TabIndex = 21;
@@ -411,14 +453,14 @@
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(389, 117);
+            this.txtDestination.Location = new System.Drawing.Point(389, 86);
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(179, 20);
             this.txtDestination.TabIndex = 10;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(389, 89);
+            this.button1.Location = new System.Drawing.Point(389, 113);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(76, 22);
             this.button1.TabIndex = 9;
@@ -539,24 +581,6 @@
             this.tmrFast.Interval = 90;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
-            // lblTDLSSetupStatus
-            // 
-            this.lblTDLSSetupStatus.AutoSize = true;
-            this.lblTDLSSetupStatus.Location = new System.Drawing.Point(131, 192);
-            this.lblTDLSSetupStatus.Name = "lblTDLSSetupStatus";
-            this.lblTDLSSetupStatus.Size = new System.Drawing.Size(13, 13);
-            this.lblTDLSSetupStatus.TabIndex = 49;
-            this.lblTDLSSetupStatus.Text = "0";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(15, 192);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(99, 13);
-            this.label12.TabIndex = 48;
-            this.label12.Text = "TDLS Setup Status";
-            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -623,5 +647,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lblTDLSSetupStatus;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btnGetDevicesInBSS;
+        private System.Windows.Forms.ComboBox cmbAssociatedDevicesInBSS;
     }
 }
