@@ -400,67 +400,23 @@ namespace Visualisator
                     _AccessPoint.Add(bec.SSID);
                 }
                 _AccessPoint.Increase(bec.SSID);
-                //Thread.Sleep(2);
             }
             else if (_Pt == typeof(Packets.Data))
             {
                 Packets.Data dat = (Packets.Data)pack;
-                if (!dat.IsReceivedRetransmit)
-                {
+                if (!dat.IsReceivedRetransmit){
                     _DataReceived++;
                     DataReceivedContainer.Append(dat.getData() + "\r\n");
-                }else
-                {
+                }else{
                     DataAckRetransmitted++;
                 }
                 MACsandACK(dat.Source);
-                //bool recieve = dat.PacketID != PrevDataID;
-                /*
-                if (recieve)
-                {
-                    _DataReceived++;
-                    DataAck da = new DataAck(CreatePacket());
-                    PrevDataID = dat.PacketID;
-                    AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
-                    da.Destination = _connecttoAP.getMACAddress();
-                    da.PacketChannel = this.getOperateChannel();
-                    da.PacketBand = this.getOperateBand();
-                    da.Reciver = dat.Source;
-                    DataReceivedContainer.Append(dat.getData() + "\r\n");
-                    //Thread.Sleep(2);
-                    da.PacketID = dat.PacketID;
-                    SendData(da);
-                }
-                else
-                {
-                    //  ACK Not received
-                    if (DebugLogEnabled)
-                        AddToLog("ACK Not received :" + dat.PacketID);
-                    DataAck da = new DataAck(CreatePacket());
-                    //PrevDataID = dat.PacketID;
-                    AP _connecttoAP = GetAPBySSID(_AccessPoint[0].ToString());
-                    da.Destination = _connecttoAP.getMACAddress();
-                    da.PacketChannel = this.getOperateChannel();
-                    da.PacketBand = this.getOperateBand();
-                    da.Reciver = dat.Source;
-                    //DataReceivedContainer.Append(dat.getData() + "\r\n");
-                    //Thread.Sleep(2);
-                    DataAckRetransmitted++;
-                    da.PacketID = dat.PacketID;
-                    SendData(da);
-                }
-                 * */
             }
             else if (_Pt == typeof(Packets.DataAck))
             {
-
-
                 Packets.DataAck dat = (Packets.DataAck)pack;
-          //      if (PrevDataAckID != dat.PacketID){
-                    ackReceived = true;
-                    _DataAckReceived++;
-           //         PrevDataAckID = dat.PacketID;
-          //      }
+                ackReceived = true;
+                _DataAckReceived++;
             }
             else
             {
