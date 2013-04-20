@@ -556,6 +556,50 @@ namespace Visualisator
             catch (Exception) { }
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int delay_in_bss = 0;
+
+            try
+            {
+                delay_in_bss = Convert.ToInt32(txtBSSSendDelay.Text);
+            }
+            catch(Exception){}
+            if(delay_in_bss > -1)
+            {
+                for (int i = 0; i < _objects.Count; i++)
+                {
+                    if (_objects[i].GetType() == typeof (STA))
+                    {
+                        STA _tsta = (STA) _objects[i];
+                        _tsta.DelayInBss = delay_in_bss;
+                    }
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int delay_in_tdls = 0;
+
+            try
+            {
+                delay_in_tdls = Convert.ToInt32(txtTDLSSendDelay.Text);
+            }
+            catch (Exception) { }
+            if (delay_in_tdls > -1)
+            {
+                for (int i = 0; i < _objects.Count; i++)
+                {
+                    if (_objects[i].GetType() == typeof(STA))
+                    {
+                        STA _tsta = (STA)_objects[i];
+                        _tsta.DelayInTDLS = delay_in_tdls;
+                    }
+                }
+            }
+        }
+
     //private void mnuContext(object sender, EventArgs e)
         //{
         //    ContextMenu myContextMenu = new ContextMenu();

@@ -32,6 +32,8 @@ namespace Visualisator
 
         private bool            _TDLS_enabled           = true;
         private bool            _TDLS_work              = false;
+        private int _delayInBSS     = 10;
+        private int _delayInTDLS    = 5;
 
 
         //*********************************************************************
@@ -80,6 +82,18 @@ namespace Visualisator
         public bool TDLSisWork
         {
             get { return _TDLS_work; }
+        }
+
+        public int DelayInBss
+        {
+            get { return _delayInBSS; }
+            set { _delayInBSS = value; }
+        }
+
+        public int DelayInTDLS
+        {
+            get { return _delayInTDLS; }
+            set { _delayInTDLS = value; }
         }
 
 
@@ -599,9 +613,9 @@ namespace Visualisator
                 int loops = 1;
 
                 if (TDLSisWork){
-                    Thread.Sleep(5);
+                    Thread.Sleep(DelayInTDLS);
                 }else{
-                    Thread.Sleep(10); 
+                    Thread.Sleep(DelayInBss); 
                 }
                 
                 while (!ackReceived  )
@@ -617,9 +631,9 @@ namespace Visualisator
                         retrCounter = 60;
                         SendData(dataPack);
                         if (TDLSisWork) {
-                            Thread.Sleep(10);
+                            Thread.Sleep(DelayInTDLS + 5);
                         }else{
-                            Thread.Sleep(15);
+                            Thread.Sleep(DelayInBss + 5);
                         }
                         _DataRetransmited++;
                         loops = loops + 1;
