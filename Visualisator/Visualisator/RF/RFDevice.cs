@@ -16,7 +16,7 @@ namespace Visualisator
     class RFDevice: ISerializable,IRFDevice
     { 
         public  String RF_STATUS = "NONE";
-        protected Medium _MEDIUM = null;
+        //protected Medium _MEDIUM = null;
         protected Boolean _Enabled = true;
         private StringBuilder   _LOG            =   new StringBuilder();
         private Double          _x;
@@ -235,7 +235,7 @@ namespace Visualisator
                 //SpinWait.SpinUntil(RF_Ready);
                 RF_STATUS = "TX";
 
-                while (!_MEDIUM.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y))
+                while (!Medium.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y))
                 {
                    // RF_STATUS = "NONE";
                     //Thread.Sleep(ran.Next(1, 2));
@@ -247,9 +247,9 @@ namespace Visualisator
                     //    Thread.Sleep(ran.Next(1, 3));
                 //    RF_STATUS = "TX";
                 }
-           
-            
-            _MEDIUM.SendData(pack);
+
+
+                Medium.SendData(pack);
             //Thread.Sleep(ran.Next(1, 2));
             //Thread.Sleep(1);
             //Thread.Sleep(new TimeSpan(100));
@@ -309,7 +309,7 @@ namespace Visualisator
         //=====================================================================
         private bool checkIfHaveDataReceive()
         {
-            return _MEDIUM.MediumHaveAIRWork(this, ListenBeacon);
+            return Medium.MediumHaveAIRWork(this, ListenBeacon);
         }
 
         //*********************************************************************
@@ -326,7 +326,7 @@ namespace Visualisator
                 {
 
                     RF_STATUS = "RX";
-                    pack = _MEDIUM.ReceiveData(this);
+                    pack = Medium.ReceiveData(this);
                     RF_STATUS = "NONE";
 
                 }

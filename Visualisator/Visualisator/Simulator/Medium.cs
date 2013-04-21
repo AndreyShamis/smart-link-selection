@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace Visualisator
 {
     [Serializable()]
-    class Medium :ISerializable
+    static class Medium 
     {
         [Serializable()]
         class Key
@@ -51,41 +51,41 @@ namespace Visualisator
             }
         }
         */
-        private const bool DebugLogEnabled = false;
-        private bool LockWasToken = false;
-        public ArrayList _objects = null;
-        private ArrayList _MBands = new ArrayList();
-        private ArrayList _Mfrequency = new ArrayList();
-        private ArrayList _MChannels = new ArrayList();
-        private Boolean _mediumWork = true;
+        private  const bool DebugLogEnabled = false;
+        private static bool LockWasToken = false;
+        public static ArrayList _objects = null;
+        private static ArrayList _MBands = new ArrayList();
+        private static ArrayList _Mfrequency = new ArrayList();
+        private static ArrayList _MChannels = new ArrayList();
+        private static Boolean _mediumWork = true;
         private const string DUMP_FILE_PATH = @"c:\simulator\_MEDIUM\dump.txt";
-        private Int32 _ConnectCounter = 0;
-        private Int32 _ConnectAckCounter = 0;
+        private static Int32 _ConnectCounter = 0;
+        private static Int32 _ConnectAckCounter = 0;
 
-        private Int32 _MediumSendDataRatio = 8000;
+        private static Int32 _MediumSendDataRatio = 8000;
 
-        public Int32 MediumSendDataRatio
+        public static Int32 MediumSendDataRatio
         {
             get { return _MediumSendDataRatio; }
             set { _MediumSendDataRatio = value; }
         }
 
-        private Double _Radius = 100;
+        private static Double _Radius = 100;
 
-        public Double Radius
+        public static Double Radius
         {
             get { return _Radius; }
             set { _Radius = value; }
         }
-        private ArrayList BandAChannels = new ArrayList();
-        private Hashtable _packets = new Hashtable(new ByteArrayComparer());
-        private Hashtable _T = new Hashtable(new ByteArrayComparer()) ;
-        private ArrayList _B = new ArrayList();
+        private static ArrayList BandAChannels = new ArrayList();
+        private static Hashtable _packets = new Hashtable(new ByteArrayComparer());
+        private static Hashtable _T = new Hashtable(new ByteArrayComparer());
+        private static ArrayList _B = new ArrayList();
 
-        private StringBuilder _LOG = new StringBuilder();
+        private static StringBuilder _LOG = new StringBuilder();
         //*********************************************************************
         //[MethodImpl(MethodImplOptions.Synchronized)]
-        public Boolean Registration(String Band, Int32 Channel, Double x, Double y)
+        public static Boolean Registration(String Band, Int32 Channel, Double x, Double y)
         {
 
             if (Band.Equals("") || Channel == 0)
@@ -203,19 +203,20 @@ namespace Visualisator
             return (true);
         }
 
-        public int getPacketsFound()
+        public static int getPacketsFound()
         {
             return  _packets.Count;
         }
         //*********************************************************************
 
-        private void AddToLog(String data){
+        private static void AddToLog(String data)
+        {
 
             _LOG.Append(data + "\r\n");
         }
         //*********************************************************************
 
-        private void Unregister(Key Tk,object rem)
+        private static void Unregister(Key Tk, object rem)
         {
            Thread.Sleep(1);
            ArrayList _temp = (ArrayList)_T[Tk];
@@ -243,7 +244,7 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        private Double getDistance(Double x1, Double y1, Double x2, Double y2)
+        private static Double getDistance(Double x1, Double y1, Double x2, Double y2)
         {
             Double ret = 0;
             int x = (int) (x1 - x2);
@@ -253,7 +254,7 @@ namespace Visualisator
             return (ret);
         }
         //*********************************************************************
-        public String getMediumInfo()
+        public static String getMediumInfo()
         {
             String ret = "";
             //ret += ObjectDumper.Dump(this);
@@ -274,17 +275,17 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        public ArrayList getBandAChannels()
+        public static ArrayList getBandAChannels()
         {
             return BandAChannels;
         }
         //*********************************************************************
-        public void setMediumObj(ArrayList _obj)
+        public static void setMediumObj(ArrayList _obj)
         {
                 _objects = _obj;
         }
         //*********************************************************************
-        public void addObjToMedium(ArrayList _obj)
+        public static void addObjToMedium(ArrayList _obj)
         {
             if (_objects != null)
             {
@@ -296,7 +297,7 @@ namespace Visualisator
             }
         }
         //*********************************************************************
-        public Medium(){
+        public static void MediumStart(){
 
             AddToLog("Load Band.");
             _MBands.Add("G");
@@ -359,25 +360,25 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        public void Enable()
+        public static void Enable()
         {
             _mediumWork = true;
             Thread newThread = new Thread(new ThreadStart(Run));
             newThread.Start();
         }
         //*********************************************************************
-        public bool IsEnabled()
+        public static bool IsEnabled()
         {
             return _mediumWork;
         }
         //*********************************************************************
-        public void Disable()
+        public static void Disable()
         {
             AddToLog("Disable Medium.");
             _mediumWork = false;
         }
         //*********************************************************************
-        public void Run() 
+        public static void Run() 
         {
             while (_mediumWork)
             {                
@@ -404,9 +405,10 @@ namespace Visualisator
             }
         }
         //*********************************************************************
-        public Boolean MediumHaveAIRWork(RFDevice device, bool CheckBeacons)
+        public static Boolean MediumHaveAIRWork(RFDevice device, bool CheckBeacons)
         {
-            if(this.getPacketsFound() < 1)
+            
+            if (Medium.getPacketsFound() < 1)
             {
                 return false;
             }
@@ -431,16 +433,16 @@ namespace Visualisator
         }
 
 
-        public Int32 getConnectCounter()
+        public static Int32 getConnectCounter()
         {
             return (_ConnectCounter);
         }
-        public Int32 getConnectAckCounter()
+        public static Int32 getConnectAckCounter()
         {
             return (_ConnectAckCounter);
         }
 
-        public void SaveDumpToFile()
+        public static void SaveDumpToFile()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -450,7 +452,7 @@ namespace Visualisator
             using (StreamWriter outfile = new StreamWriter(DUMP_FILE_PATH))
             {
 
-                outfile.Write(getMediumInfo() + "\r\n===================== Packets DUMP =====================\r\n" + this.DumpPackets());
+                outfile.Write(getMediumInfo() + "\r\n===================== Packets DUMP =====================\r\n" + Medium.DumpPackets());
 
             } 
                                    
@@ -458,7 +460,7 @@ namespace Visualisator
                 catch (Exception) { }
         }
         //*********************************************************************
-        public void SendData(SimulatorPacket pack)
+        public static void SendData(SimulatorPacket pack)
         {
             Key _Pk = new Key(pack.PacketBand, pack.PacketChannel,pack.Destination);
             try
@@ -512,7 +514,7 @@ namespace Visualisator
             }
         }
 
-        private static int GetObjectSize(object obj)
+        private static  int GetObjectSize(object obj)
         {
             var bf = new BinaryFormatter();
             var ms = new MemoryStream();
@@ -523,7 +525,7 @@ namespace Visualisator
         }
         //*********************************************************************
         [MethodImpl(MethodImplOptions.Synchronized)]
-        private void ThreadableSendData(Key _Pk,object _ref)
+        private static void ThreadableSendData(Key _Pk, object _ref)
         {
             
             SimulatorPacket p = (SimulatorPacket)_ref;
@@ -562,7 +564,7 @@ namespace Visualisator
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void DeleteReceivedPacket(RFDevice device,Guid packet_id)
+        public static void DeleteReceivedPacket(RFDevice device, Guid packet_id)
         {
             Key Pk = null;
             String errPrefix = "";
@@ -615,7 +617,7 @@ namespace Visualisator
         }
         //*********************************************************************
 
-        public IPacket ReceiveData(RFDevice device)
+        public static IPacket ReceiveData(RFDevice device)
         {
             Key Pk = null;
             String errPrefix = "";
@@ -709,14 +711,14 @@ namespace Visualisator
       //      set { _mediumClean = value; }
      //   }
 
-        public Boolean StopMedium
+        public static Boolean StopMedium
         {
             get { return _mediumWork; }
             set { _mediumWork = value; }
         }
 
 
-        internal string DumpPackets()
+        internal static string DumpPackets()
         {
             String ret = "";
             //ret += "_packets\r\n";

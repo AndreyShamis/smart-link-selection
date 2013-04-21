@@ -12,12 +12,12 @@ namespace Visualisator
 {
      partial class MediumInfo : Form
     {
-        private Medium _MEDIUM;
+        //private Medium _MEDIUM;
 
          
-        public MediumInfo(Medium _mediumL)
+        public MediumInfo()
         {
-            _MEDIUM = _mediumL;
+           // _MEDIUM = _mediumL;
             InitializeComponent();
         }
 
@@ -30,7 +30,7 @@ namespace Visualisator
         {
             try
             {
-                textBox1.Text = _MEDIUM.getMediumInfo();
+                textBox1.Text = Medium.getMediumInfo();
             }
             catch (Exception ex) { Console.WriteLine("getMediumInfo :" + ex.Message); }
         }
@@ -39,9 +39,9 @@ namespace Visualisator
         {
             try
             {
-                lblConnectCounter.Text = _MEDIUM.getConnectCounter().ToString();
-                lblConnectAckCounter.Text = _MEDIUM.getConnectAckCounter().ToString();
-                String data = _MEDIUM.DumpPackets();
+                lblConnectCounter.Text = Medium.getConnectCounter().ToString();
+                lblConnectAckCounter.Text = Medium.getConnectAckCounter().ToString();
+                String data = Medium.DumpPackets();
                 if (data.Length > 0)
                     txtPacketsDump.Text = data;
             }
@@ -61,7 +61,7 @@ namespace Visualisator
 
         private void btnSaveDump_Click(object sender, EventArgs e)
         {
-            _MEDIUM.SaveDumpToFile();
+            Medium.SaveDumpToFile();
 
         }
     }

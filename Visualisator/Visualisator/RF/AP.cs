@@ -76,9 +76,9 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        public AP(Medium med)
+        public AP()
         {
-            this._MEDIUM = med;
+           
             this.VColor = Color.YellowGreen;
             this._SSID = RandomString(8);
             _BeaconPeriod = rnadomBeacon.Next(_AP_MIN_SEND_PERIOD, _AP_MAX_SEND_PERIOD);    

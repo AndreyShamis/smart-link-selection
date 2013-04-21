@@ -17,18 +17,18 @@ namespace Visualisator
             get { return _objects; }
             set { _objects = value; }
         }
-        private Medium _MEDIUM;
+       // private Medium _MEDIUM;
 
-        internal Medium MEDIUM
-        {
-            get { return _MEDIUM; }
-            set { _MEDIUM = value; }
-        }
+        //internal Medium MEDIUM
+       // {
+       //     get { return _MEDIUM; }
+       //     set { _MEDIUM = value; }
+       // }
 
-        public SimulationContainer(ArrayList _objs, Medium _med)
+        public SimulationContainer(ArrayList _objs)
         {
             _objects = _objs;
-            _MEDIUM = _med;
+            //_MEDIUM = _med;
         }
     }
 }

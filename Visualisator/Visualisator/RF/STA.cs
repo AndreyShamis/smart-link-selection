@@ -135,9 +135,9 @@ namespace Visualisator
         }*/
 
         //*********************************************************************
-        public STA(Medium med,ArrayList RfObjects)
+        public STA(ArrayList RfObjects)
         {
-            this._MEDIUM = med;
+        
             ListenBeacon = true;
             this.VColor = Color.RoyalBlue;
             _PointerToAllRfDevices = RfObjects;
@@ -556,7 +556,7 @@ namespace Visualisator
         //*********************************************************************
         private bool tryToRegister()
         {
-            return (_MEDIUM.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y));
+            return (Medium.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y));
         }
 
         //*********************************************************************

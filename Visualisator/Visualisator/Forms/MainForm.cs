@@ -28,7 +28,7 @@ namespace Visualisator
         private float MouseX = 0;
         private float MouseY = 0;
         public ArrayList _objects = new ArrayList();
-        private Medium _MEDIUM = new Medium();
+        //static private Medium _MEDIUM ;
         private Int32 _RADIUS = 100;
         private static Random rand = new Random();
         private Int32 _BOARDX = 680;
@@ -85,36 +85,36 @@ namespace Visualisator
 
             for (int i = 0; i < APs_SIZE; i++)
             {
-                AP _ap = new AP(_MEDIUM);
+                AP _ap = new AP();
                 _ap.setOperateChannel(rand.Next(1, 14));
                 _ap.SetVertex(RandomC(_BOARDX), RandomC(_BOARDY), rand.NextDouble()*500);
                 _objects.Add(_ap);
             }
             for (int i = 0; i < STA_SIZE; i++)
             {
-                STA _sta = new STA(_MEDIUM, _objects);
+                STA _sta = new STA( _objects);
                 _sta.setOperateChannel(0); // (rand.Next(1, 14));       //  TODO delete this line
                 _sta.SetVertex(RandomC(_BOARDX), RandomC(_BOARDY), rand.NextDouble()*500);
                 _objects.Add(_sta);
                 _sta.Scan();
             }
-            _MEDIUM.setMediumObj(_objects);
+            Medium.setMediumObj(_objects);
             SetMedioRatio();
-                _MEDIUM.Enable();
+            Medium.Enable();
         }
 
         //====================================================================================================
         private void CreateAP()
         {
-            AP _ap = new AP(_MEDIUM);
+            AP _ap = new AP();
             _ap.setOperateChannel(rand.Next(1, 14));
             _ap.SetVertex(MouseX, MouseY, rand.NextDouble()*500);
             _objects.Add(_ap);
 
-            _MEDIUM.addObjToMedium(_objects);
-            if (!_MEDIUM.IsEnabled())
+            Medium.addObjToMedium(_objects);
+            if (!Medium.IsEnabled())
             {
-                _MEDIUM.Enable();
+                Medium.Enable();
             }
         }
 
@@ -122,16 +122,16 @@ namespace Visualisator
         private void CreateSTA()
         {
 
-            STA _sta = new STA(_MEDIUM, _objects);
+            STA _sta = new STA(_objects);
             _sta.setOperateChannel(0); // (rand.Next(1, 14));       //  TODO delete this line
             _sta.SetVertex(MouseX, MouseY, rand.NextDouble()*500);
             _objects.Add(_sta);
             _sta.Scan();
 
-            _MEDIUM.addObjToMedium(_objects);
-            if (!_MEDIUM.IsEnabled())
+            Medium.addObjToMedium(_objects);
+            if (!Medium.IsEnabled())
             {
-                _MEDIUM.Enable();
+                Medium.Enable();
             }
         }
 
@@ -389,13 +389,13 @@ namespace Visualisator
         //====================================================================================================
         private void Form1_Leave(object sender, EventArgs e)
         {
-            _MEDIUM.StopMedium = true;
+            Medium.StopMedium = true;
         }
 
         //====================================================================================================
-        private void BtnStopMediumClick(object sender, EventArgs e)
+        private  void BtnStopMediumClick(object sender, EventArgs e)
         {
-            _MEDIUM.StopMedium = false;
+            Medium.StopMedium = false;
         }
 
         //====================================================================================================
@@ -411,7 +411,7 @@ namespace Visualisator
             if (saveFileDialog1.FileName != "")
             {
                 var serializer = new BinaryFormatter();
-                SimulationContainer _container = new SimulationContainer(_objects, _MEDIUM);
+                SimulationContainer _container = new SimulationContainer(_objects);
                 using (var stream = File.OpenWrite(saveFileDialog1.FileName))
                 {
                     serializer.Serialize(stream, _container);
@@ -435,13 +435,13 @@ namespace Visualisator
                         try
                         {
                             var serializer = new BinaryFormatter();
-                            SimulationContainer _container = new SimulationContainer(null, null);
+                            SimulationContainer _container = new SimulationContainer(null);
                             using (var stream = File.OpenRead(file))
                             {
                                 _container = (SimulationContainer) serializer.Deserialize(stream);
                                 _objects = _container.Objects;
-                                _MEDIUM = _container.MEDIUM;
-                                _MEDIUM.Enable();
+                                //_MEDIUM = _container.MEDIUM;
+                                Medium.Enable();
                             }
                         }
                         catch (Exception ex)
@@ -474,7 +474,7 @@ namespace Visualisator
                 _dev.Disable();
                 _dev = null;
             }
-            _MEDIUM.Disable();
+            Medium.Disable();
             _objects.Clear();
         }
 
@@ -495,7 +495,7 @@ namespace Visualisator
         //====================================================================================================
         private void btnShowMediumInfo_Click(object sender, EventArgs e)
         {
-            MediumInfo mediumForm = new MediumInfo(_MEDIUM);
+            MediumInfo mediumForm = new MediumInfo();
             mediumForm.Show();
         }
 
@@ -571,7 +571,7 @@ namespace Visualisator
             try
             {
                 mediumSendRatio = Convert.ToInt32(txtMediumSendRatio.Text);
-                _MEDIUM.MediumSendDataRatio = mediumSendRatio;
+                Medium.MediumSendDataRatio = mediumSendRatio;
                 // tmrGUISlow.Interval = updateInterval;
             }
             catch (Exception) { }
