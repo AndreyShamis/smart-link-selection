@@ -381,42 +381,47 @@ namespace Visualisator
         public static void Run() 
         {
             while (_mediumWork)
-            {                
-                Thread.Sleep(3000);
-
-                int PacketsCount = _packets.Count;
-                if (PacketsCount > 0)
+            {
+                try
                 {
-                    for (int i = 0; i < 20; i++)
-                    {
+                    Thread.Sleep(3000);
 
-                        Thread.Sleep(1);
-                        if (PacketsCount != _packets.Count)
+                    int PacketsCount = _packets.Count;
+                    if (PacketsCount > 0)
+                    {
+                        for (int i = 0; i < 20; i++)
                         {
-                            break;
-                        }
-                        if (i == 19)
-                        {
-                            _packets.Clear();
+
+                            Thread.Sleep(1);
+                            if (PacketsCount != _packets.Count)
+                            {
+                                break;
+                            }
+                            if (i == 19)
+                            {
+                                _packets.Clear();
+                            }
                         }
                     }
+                    SaveDumpToFile();
                 }
-                SaveDumpToFile();
+                catch (Exception) { }
             }
         }
         //*********************************************************************
         public static Boolean MediumHaveAIRWork(RFDevice device, bool CheckBeacons)
         {
-            
-            if (Medium.getPacketsFound() < 1)
+            try
             {
-                return false;
-            }
-                Key Pk = new Key(device.getOperateBand(), device.getOperateChannel(),device.getMACAddress());
+                if (Medium.getPacketsFound() < 1)
+                {
+                    return false;
+                }
+                Key Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
                 Key Pk2 = null;
                 if (CheckBeacons)
                 {
-                     Pk2 = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
+                    Pk2 = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
                 }
 
                 if (CheckBeacons)
@@ -426,9 +431,11 @@ namespace Visualisator
                 }
                 else
                 {
-                    if (_packets != null && _packets.ContainsKey(Pk) )
+                    if (_packets != null && _packets.ContainsKey(Pk))
                         return true;
                 }
+            }
+            catch (Exception) { }
                 return false;
         }
 

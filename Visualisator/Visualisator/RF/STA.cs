@@ -486,23 +486,32 @@ namespace Visualisator
             }
             else if (_Pt == typeof(Packets.Beacon))
             {
-                Packets.Beacon bec = (Packets.Beacon)pack;
-                if (!_AccessPoint.Contains(bec.SSID)){
-                    _AccessPoint.Add(bec.SSID);
+                try
+                {
+                    Packets.Beacon bec = (Packets.Beacon)pack;
+                    if (!_AccessPoint.Contains(bec.SSID))
+                    {
+                        _AccessPoint.Add(bec.SSID);
+                    }
+                    _channels[bec.PacketChannel - 1] = Math.Max(-100, Rssi);
+                    _AccessPoint.Increase(bec.SSID);
                 }
-                _channels[bec.PacketChannel-1] = Math.Max(-100, Rssi);
-                _AccessPoint.Increase(bec.SSID);
+                catch (Exception) { }
             }
             else if (_Pt == typeof(Packets.Data))
             {
-                Packets.Data dat = (Packets.Data)pack;
-                if (!dat.IsReceivedRetransmit){
-                    _DataReceived++;
-                    DataReceivedContainer.Append(dat.getData() + "\r\n");
-                }else{
-                    DataAckRetransmitted++;
+                try
+                {
+                    Packets.Data dat = (Packets.Data)pack;
+                    if (!dat.IsReceivedRetransmit){
+                        _DataReceived++;
+                        DataReceivedContainer.Append(dat.getData() + "\r\n");
+                    }else{
+                        DataAckRetransmitted++;
+                    }
+                    MACsandACK(dat.Source,dat.GuidD);
                 }
-                MACsandACK(dat.Source,dat.GuidD);
+                catch (Exception) { }
             }
             else if (_Pt == typeof(Packets.DataAck))
             {

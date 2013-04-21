@@ -481,6 +481,8 @@ namespace Visualisator
         //====================================================================================================
         private void button4_Click(object sender, EventArgs e)
         {
+            Medium.Disable();
+            Medium.MediumStart();
             CreateRandomSimulation();
             DrowOnBoard();
         }
