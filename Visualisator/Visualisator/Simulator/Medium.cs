@@ -9,6 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using Visualisator.Packets;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 
 namespace Visualisator
 {
@@ -86,12 +87,14 @@ namespace Visualisator
         //[MethodImpl(MethodImplOptions.Synchronized)]
         public Boolean Registration(String Band, Int32 Channel, Double x, Double y)
         {
+
             if (Band.Equals("") || Channel == 0)
             {
                 return false;
             }
             Key Tk = new Key(Band,Channel);
-
+            bool ret = false;
+            RFDevice ver = null;
             if(_packets.Count == 0)
             {
                 lock (_T)
@@ -116,47 +119,86 @@ namespace Visualisator
                             //Console.WriteLine(y);
                         }
 
-                        RFDevice ver = new RFDevice(x, y, 0);
+                        ver = new RFDevice(x, y, 0);
                         _temp.Add(ver);
                         lock (_T)
                         {
                             _T[Tk] = _temp;
                         }
-                        Thread newThread = new Thread(() => Unregister(Tk, ver));
-                        newThread.Start();
+                        ret = true;
+                        return ret;
+                        //Thread newThread = new Thread(() => Unregister(Tk, ver));
+                        //newThread.Start();
                     }
                     else
                     {
                         ArrayList _tempArrL = new ArrayList();
-                        RFDevice ver = new RFDevice(x, y, 0);
+                        ver = new RFDevice(x, y, 0);
                         _tempArrL.Add(ver);
 
                         lock (_T)
                         {
                             _T.Add(Tk, _tempArrL);
                         }
-                        Thread newThread = new Thread(() => Unregister(Tk, ver));
-                        newThread.Start();
+                        ret = true;
+                        return ret;
+                        //Thread newThread = new Thread(() => Unregister(Tk, ver));
+                        //newThread.Start();
                     }
                 }
                 else
                 {
                     ArrayList _tempArrL = new ArrayList();
-                    RFDevice ver = new RFDevice(x, y, 0);
-                    _tempArrL.Add(ver); 
+                    ver = new RFDevice(x, y, 0);
+                    _tempArrL.Add(ver);
                     lock (_T)
                     {
                         _T.Add(Tk, _tempArrL);
                     }
-                    Thread newThread = new Thread(() => Unregister(Tk, ver));
-                    newThread.Start();
+                    ret = true;
+                    return ret;
+                    //Thread newThread = new Thread(() => Unregister(Tk, ver));
+                    //newThread.Start();
                 }
             }
-            catch (Exception ex) {
-                if (DebugLogEnabled){
+            catch (Exception ex)
+            {
+                if (DebugLogEnabled)
+                {
                     AddToLog("[Registration] Exception:" + ex.Message);
                 }
-                return false; 
+                return false;
+            }
+            finally
+            {
+                if (ret)
+                {
+                    Thread.Sleep(1);
+                    ArrayList _temp = (ArrayList)_T[Tk];
+                    try
+                    {
+                        lock (_T)
+                        {
+                            _temp.Remove((RFDevice)ver);
+                            if (_temp.Count > 0)
+                                _T[Tk] = _temp;
+                            else
+                                _T.Remove(Tk);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (DebugLogEnabled)
+                        {
+                            //Console.WriteLine("Unregister:" + ex.Message);
+                            MessageBox.Show("Unregister:" + ex.Message);
+                            AddToLog("Unregister:" + ex.Message);
+                        }
+                        _T.Remove(Tk);
+                        _T.Clear();
+
+                    }
+                }
             }
             return (true);
         }

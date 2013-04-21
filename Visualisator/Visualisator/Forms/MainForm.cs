@@ -20,7 +20,7 @@ namespace Visualisator
         private Graphics gr;
 
         private Int32 STA_SIZE = 2;
-        private Int32 APs_SIZE = 3;
+        private Int32 APs_SIZE = 1;
         private Int32 SelectedVertex = -1;
         private float SelectedX = 0;
         private float SelectedY = 0;
