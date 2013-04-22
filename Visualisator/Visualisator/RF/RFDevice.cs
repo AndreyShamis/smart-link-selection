@@ -322,10 +322,14 @@ namespace Visualisator
             //{
             //SpinWait.SpinUntil(checkIfHaveDataReceive);
             //SpinWait.SpinUntil(RF_Ready);
-
-            SpinWait.SpinUntil(ListenCondition);//,1);
-            if (( this.GetType() == typeof(STA)  && ((SimulatorPacket)sender).Destination.Equals("FF:FF:FF:FF:FF:FF")) || ((SimulatorPacket)sender).Destination.Equals(this.getMACAddress()))
+            if (((SimulatorPacket)sender).PacketChannel != this.getOperateChannel())
+                return;
+            if (((SimulatorPacket)sender).PacketBand != this.getOperateBand())
+                return;
+            String _dest = ((SimulatorPacket)sender).Destination;
+            if ((this.GetType() == typeof(STA) && _dest.Equals("FF:FF:FF:FF:FF:FF")) || _dest.Equals(this.getMACAddress()))
             {
+                SpinWait.SpinUntil(ListenCondition);//,1);
                 Guid prev_guid = new Guid();
                 Packets.IPacket pack = null;
                 lock (RF_STATUS)
