@@ -234,11 +234,19 @@ namespace Visualisator
                 Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Reciver];
 
                 bool add = true;
-                foreach (Data value in temporaryQ){
-                    if (value.GuidD.Equals(_wp.GuidD)){
-                        add = false;
-                        break;
+                try
+                {
+                    foreach (Data value in temporaryQ)
+                    {
+                        if (value.GuidD.Equals(_wp.GuidD))
+                        {
+                            add = false;
+                            break;
+                        }
                     }
+                }catch(Exception )
+                {
+
                 }
                 if (add){
                     lock (Sync){
