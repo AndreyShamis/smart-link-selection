@@ -372,6 +372,7 @@ namespace Visualisator
         {
             _mediumWork = true;
             Thread newThread = new Thread(new ThreadStart(Run));
+            newThread.Name = "Medium Main Process";
             newThread.Start();
         }
         //*********************************************************************
@@ -517,6 +518,7 @@ namespace Visualisator
                         _packets.Add(_Pk, LocalPackets);
                     }
                     Thread newThread = new Thread(() => ThreadableSendData(_Pk, pack));
+                    newThread.Name = "ThreadableSendData ";
                     newThread.Start();
                 }
 

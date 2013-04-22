@@ -170,6 +170,8 @@ namespace Visualisator
             Medium.WeHavePacketsToSend += new EventHandler(Listen);
 
             Thread newThreadKeepAl = new Thread(new ThreadStart(SendKeepAlive));
+            newThreadKeepAl.Name = "Send keep Alive of " + this.getMACAddress();
+            newThreadKeepAl.Priority = ThreadPriority.Lowest;
             newThreadKeepAl.Start();
             /*
             Thread newThreadSTACleaner = new Thread(new ThreadStart(STACleaner));
@@ -666,6 +668,7 @@ namespace Visualisator
         public void rfile(String fileName)
         {
             Thread newThread = new Thread(() => ThreadAbleReadFile(fileName));
+            newThread.Name = "ThreadAbleReadFile";
             newThread.Start();
         }
 
@@ -831,6 +834,7 @@ namespace Visualisator
         public void Scan()
         {
             Thread newThread = new Thread(new ThreadStart(ThreadableScan));
+            newThread.Name = "ThreadableScan of" + this.getMACAddress();
             newThread.Start();
         }
 

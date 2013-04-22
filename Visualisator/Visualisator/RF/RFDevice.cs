@@ -324,7 +324,7 @@ namespace Visualisator
             //SpinWait.SpinUntil(RF_Ready);
 
             SpinWait.SpinUntil(ListenCondition);//,1);
-            if (((SimulatorPacket)sender).Destination.Equals("FF:FF:FF:FF:FF:FF") || ((SimulatorPacket)sender).Destination.Equals(this.getMACAddress()))
+            if (( this.GetType() == typeof(STA)  && ((SimulatorPacket)sender).Destination.Equals("FF:FF:FF:FF:FF:FF")) || ((SimulatorPacket)sender).Destination.Equals(this.getMACAddress()))
             {
                 Guid prev_guid = new Guid();
                 Packets.IPacket pack = null;
@@ -360,7 +360,9 @@ namespace Visualisator
                     //Thread.Sleep(1); 
                     // }
                     AllReceivedPackets += 1;
+
                     Thread newThread = new Thread(() => ParseReceivedPacket(temp));
+                    newThread.Name = "ParseReceivedPacket of " + this.getMACAddress();
                     newThread.Start();
 
                     //   Thread.Sleep(1);

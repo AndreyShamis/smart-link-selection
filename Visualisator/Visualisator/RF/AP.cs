@@ -8,6 +8,7 @@ using Visualisator.Packets;
 using System.Collections;
 using System.Windows.Forms;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace Visualisator
 {
@@ -97,15 +98,19 @@ namespace Visualisator
             RF_STATUS = "NONE";
             _Enabled = true;
             Thread newThread = new Thread(new ThreadStart(SendBeacon));
+            newThread.Name ="Send Beacon Thread of" + this.getMACAddress();
+            newThread.Priority = ThreadPriority.Lowest;
             newThread.Start();
 
             //Thread newThreadListen = new Thread(new ThreadStart(Listen));
             //newThreadListen.Start();
             Medium.WeHavePacketsToSend += new EventHandler(Listen);
             Thread newThreadKeepAliveDecrease = new Thread(new ThreadStart(UpdateKeepAlive));
+            newThreadKeepAliveDecrease.Name = "UpdateKeepAlive of" + this.getMACAddress();
             newThreadKeepAliveDecrease.Start();
 
             Thread newQueueElemntsSendDecision = new Thread(new ThreadStart(QueueElemntsSendDecision));
+            newQueueElemntsSendDecision.Name = "newQueueElemntsSendDecision of" + this.getMACAddress();
             newQueueElemntsSendDecision.Start();
 
             Thread queue = new Thread(new ThreadStart(queueT));
@@ -155,6 +160,7 @@ namespace Visualisator
                 _beac.Destination = "FF:FF:FF:FF:FF:FF";
                 //_beac.setTransmitRate(300);
                 this.SendData(_beac);
+                
                 Thread.Sleep(_BeaconPeriod);
             }
         }
