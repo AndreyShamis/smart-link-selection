@@ -165,8 +165,9 @@ namespace Visualisator
                 _channels[i] = -100;
             }
 
-            Thread newThread = new Thread(new ThreadStart(Listen));
-            newThread.Start();
+            //Thread newThread = new Thread(new ThreadStart(Listen));
+            //newThread.Start();
+            Medium.WeHavePacketsToSend += new EventHandler(Listen);
 
             Thread newThreadKeepAl = new Thread(new ThreadStart(SendKeepAlive));
             newThreadKeepAl.Start();

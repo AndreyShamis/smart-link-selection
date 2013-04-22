@@ -29,6 +29,7 @@ namespace Visualisator
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
 
+ 
 
         protected const bool DebugLogEnabled = false;
         protected bool ListenBeacon = false;
@@ -228,6 +229,7 @@ namespace Visualisator
             //Thread.Sleep(ran.Next(3,10));
             //}
             //
+ 
             CheckScanConditionOnSend();
             lock (RF_STATUS)
             {
@@ -313,14 +315,85 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        public void Listen()
+        public void Listen(object sender, EventArgs args)
+        {
+
+            //while (_Enabled)
+            //{
+            //SpinWait.SpinUntil(checkIfHaveDataReceive);
+            //SpinWait.SpinUntil(RF_Ready);
+
+            SpinWait.SpinUntil(ListenCondition);//,1);
+            if (((SimulatorPacket)sender).Destination.Equals("FF:FF:FF:FF:FF:FF") || ((SimulatorPacket)sender).Destination.Equals(this.getMACAddress()))
+            {
+                Guid prev_guid = new Guid();
+                Packets.IPacket pack = null;
+                lock (RF_STATUS)
+                {
+
+                    RF_STATUS = "RX";
+                    pack = Medium.ReceiveData(this);
+                    RF_STATUS = "NONE";
+
+                }
+
+                if (pack == null)
+                {
+                    //Thread.Sleep(new TimeSpan(4000));
+                    // Thread.Sleep(1); 
+                }
+                else if (pack != null && (prev_guid != ((SimulatorPacket)pack).GuidD || ((SimulatorPacket)pack).IsRetransmit))
+                {
+                    //ParseReceivedPacket(pack);
+                    //  Only if we have received packet before
+                    //  but flag Rentransmit is UP
+                    if (prev_guid == ((SimulatorPacket)pack).GuidD)
+                    {
+                        ((SimulatorPacket)pack).IsReceivedRetransmit = true;
+                    }
+                    IPacket temp = pack;
+                    prev_guid = ((SimulatorPacket)temp).GuidD;
+                    // if (pack.GetType() != typeof(Packets.Beacon))
+                    //     _MEDIUM.DeleteReceivedPacket(this, prev_guid);
+                    //else
+                    //{
+                    //Thread.Sleep(1); 
+                    // }
+                    AllReceivedPackets += 1;
+                    Thread newThread = new Thread(() => ParseReceivedPacket(temp));
+                    newThread.Start();
+
+                    //   Thread.Sleep(1);
+
+                }
+                else if (pack != null)
+                {
+                    if (pack.GetType() != typeof(Packets.Beacon))
+                    {
+                        _DoubleRecieved++;
+                        //prev_guid = Guid.NewGuid();
+                    }
+                    // else
+                    //  {
+                    //    Thread.Sleep(new TimeSpan(4000));
+                    // }
+                    //  Thread.Sleep(1);
+                }
+
+            }
+
+            //}
+        }
+        //*********************************************************************
+        public void Listen2()
         {
             Guid prev_guid = new Guid();
             Packets.IPacket pack = null;
-            while (_Enabled)
-            {
+            //while (_Enabled)
+            //{
                 //SpinWait.SpinUntil(checkIfHaveDataReceive);
                 //SpinWait.SpinUntil(RF_Ready);
+
                 SpinWait.SpinUntil(ListenCondition);//,1);
                 lock (RF_STATUS)
                 {
@@ -375,12 +448,13 @@ namespace Visualisator
                 }
                 
 
-            }
+            //}
         }
         //*********************************************************************
         private bool ListenCondition()
         {
-            return (checkIfHaveDataReceive() && RF_Ready());
+            return ( RF_Ready());
+            //checkIfHaveDataReceive() &&
         }
 
 

@@ -19,22 +19,22 @@ namespace Visualisator
         private Bitmap bm;
         private Graphics gr;
 
-        private Int32 STA_SIZE = 2;
-        private Int32 APs_SIZE = 1;
-        private Int32 SelectedVertex = -1;
-        private float SelectedX = 0;
-        private float SelectedY = 0;
-        private float SelectedZ = 0;
-        private float MouseX = 0;
-        private float MouseY = 0;
-        public ArrayList _objects = new ArrayList();
+        private static Int32 STA_SIZE = 2;
+        private static Int32 APs_SIZE = 1;
+        private static Int32 SelectedVertex = -1;
+        private static float SelectedX = 0;
+        private static float SelectedY = 0;
+        private static float SelectedZ = 0;
+        private static float MouseX = 0;
+        private static float MouseY = 0;
+        public static ArrayList _objects = new ArrayList();
         //static private Medium _MEDIUM ;
-        private Int32 _RADIUS = 100;
+        private static Int32 _RADIUS = 100;
         private static Random rand = new Random();
-        private Int32 _BOARDX = 680;
-        private Int32 _BOARDY = 360;
+        private static Int32 _BOARDX = 680;
+        private static Int32 _BOARDY = 360;
         private SelectedObjectType _ob;
-        private Color BoardColor = Color.Black;
+        private static Color BoardColor = Color.Black;
 
         private enum SelectedObjectType
         {
@@ -67,7 +67,7 @@ namespace Visualisator
         }
 
         //====================================================================================================
-        private Double RandomC(Double perc)
+        private static Double RandomC(Double perc)
         {
             Double _kefel = rand.NextDouble();
 

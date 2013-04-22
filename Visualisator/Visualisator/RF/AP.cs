@@ -99,9 +99,9 @@ namespace Visualisator
             Thread newThread = new Thread(new ThreadStart(SendBeacon));
             newThread.Start();
 
-            Thread newThreadListen = new Thread(new ThreadStart(Listen));
-            newThreadListen.Start();
-
+            //Thread newThreadListen = new Thread(new ThreadStart(Listen));
+            //newThreadListen.Start();
+            Medium.WeHavePacketsToSend += new EventHandler(Listen);
             Thread newThreadKeepAliveDecrease = new Thread(new ThreadStart(UpdateKeepAlive));
             newThreadKeepAliveDecrease.Start();
 

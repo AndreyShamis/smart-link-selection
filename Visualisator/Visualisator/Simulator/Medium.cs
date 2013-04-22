@@ -62,6 +62,7 @@ namespace Visualisator
         private static Int32 _ConnectCounter = 0;
         private static Int32 _ConnectAckCounter = 0;
 
+        private static AutoResetEvent _ev = new AutoResetEvent(true);
         private static Int32 _MediumSendDataRatio = 8000;
 
         public static Int32 MediumSendDataRatio
@@ -70,6 +71,12 @@ namespace Visualisator
             set { _MediumSendDataRatio = value; }
         }
 
+        public static event EventHandler WeHavePacketsToSend = new EventHandler(evh);
+
+        public static void evh(object sender, EventArgs args)
+        {
+            
+        }
         private static Double _Radius = 100;
 
         public static Double Radius
@@ -84,7 +91,7 @@ namespace Visualisator
 
         private static StringBuilder _LOG = new StringBuilder();
         //*********************************************************************
-        //[MethodImpl(MethodImplOptions.Synchronized)]
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static Boolean Registration(String Band, Int32 Channel, Double x, Double y)
         {
 
@@ -173,7 +180,8 @@ namespace Visualisator
             {
                 if (ret)
                 {
-                    Thread.Sleep(1);
+                    //Thread.Sleep(1);
+                    Thread.Sleep(new TimeSpan(_MediumSendDataRatio));
                     ArrayList _temp = (ArrayList)_T[Tk];
                     try
                     {
@@ -531,10 +539,14 @@ namespace Visualisator
             return size;
         }
         //*********************************************************************
-        [MethodImpl(MethodImplOptions.Synchronized)]
+       // [MethodImpl(MethodImplOptions.Synchronized)]
         private static void ThreadableSendData(Key _Pk, object _ref)
         {
+
+            EventArgs e = new EventArgs();
             
+         
+            WeHavePacketsToSend(_ref, e);
             SimulatorPacket p = (SimulatorPacket)_ref;
             int Rate = p.getTransmitRate();
             int sleep = GetObjectSize(p) / Rate;
@@ -542,7 +554,8 @@ namespace Visualisator
             Thread.Sleep(new TimeSpan(sleep * _MediumSendDataRatio));
             //AddToLog("Sleep for :" + sleep);
             LockWasToken = false;
-            Monitor.Enter(_packets, ref LockWasToken);
+            _ev.WaitOne();
+            //Monitor.Enter(_packets, ref LockWasToken);
             ArrayList _temp = (ArrayList)_packets[_Pk];
             try
             {
@@ -566,11 +579,12 @@ namespace Visualisator
             catch(Exception){}
             finally
             {
-                if(LockWasToken) Monitor.Exit(_packets);
+                _ev.Set();
+                //if(LockWasToken) Monitor.Exit(_packets);
             }
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
+       // [MethodImpl(MethodImplOptions.Synchronized)]
         public static void DeleteReceivedPacket(RFDevice device, Guid packet_id)
         {
             Key Pk = null;
@@ -582,9 +596,9 @@ namespace Visualisator
             }
             try
             {
-
-                Monitor.Enter(_packets, ref LockTokan);
-                    {
+                _ev.WaitOne();
+                //Monitor.Enter(_packets, ref LockTokan);
+                    //{
                         errPrefix = " Packets ";
                         Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
                         if (_packets.ContainsKey(Pk))
@@ -609,7 +623,7 @@ namespace Visualisator
                                 // loop body
                             }
                         }
-                    }
+                 //   }
                
             }
             catch (Exception ex) {
@@ -619,7 +633,8 @@ namespace Visualisator
             }
             finally
             {
-                if (LockTokan) Monitor.Exit(_packets);
+                _ev.Set();
+               // if (LockTokan) Monitor.Exit(_packets);
             }
         }
         //*********************************************************************
@@ -637,8 +652,9 @@ namespace Visualisator
             try
             {
 
-                    Monitor.Enter(_packets);
-                    {
+                    _ev.WaitOne();
+                    //Monitor.Enter(_packets);
+                    //{
                         errPrefix = " Packets ";
                         Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
                         if (_packets.ContainsKey(Pk))
@@ -697,7 +713,7 @@ namespace Visualisator
                                 //AddToLog("Packet not found");
                             }
                         }
-                    }
+                    //}
                 
             }
             catch (Exception ex) { 
@@ -707,7 +723,8 @@ namespace Visualisator
             }
             finally
             {
-                Monitor.Exit(_packets);
+                _ev.Set();
+                //Monitor.Exit(_packets);
             }
             return (retvalue);
         }
