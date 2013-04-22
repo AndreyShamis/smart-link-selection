@@ -725,9 +725,15 @@ namespace Visualisator
                 int loops = 1;
 
                 if (TDLSisWork){
-                    Thread.Sleep(DelayInTDLS);
+                    if (DelayInTDLS > 0)
+                    {
+                        Thread.Sleep(DelayInTDLS);
+                    }
                 }else{
-                    Thread.Sleep(DelayInBss); 
+                    if (DelayInBss > 0)
+                    {
+                        Thread.Sleep(DelayInBss);
+                    }
                 }
 
                 if (getScanStatus())
