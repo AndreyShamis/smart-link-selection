@@ -43,9 +43,9 @@ namespace Visualisator.Packets
             set { _y = value; }
         }
 
-        Int32 _PacketChannel = 0;
+        short _PacketChannel = 0;
 
-        public Int32 PacketChannel
+        public short PacketChannel
         {
             get { return _PacketChannel; }
             set { _PacketChannel = value; }
@@ -58,7 +58,7 @@ namespace Visualisator.Packets
             set { _PacketBand = value; }
         }
 
-        public SimulatorPacket(Int32 Channel, String Band)
+        public SimulatorPacket(short Channel, string Band)
         {
             _guid = Guid.NewGuid();
             _PacketBand = Band;

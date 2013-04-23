@@ -19,17 +19,17 @@ namespace Visualisator
         [Serializable()]
         class Key
         {
-            private String _band;
+            private string _band;
             private short  _channel;
-            private String _Destination;
+            private string _Destination;
 
 
-            public Key(String band, Int32 Channel)
+            public Key(string band, short Channel)
             {
                 _band = band;
                 _channel = (short)Channel;
             }
-            public Key(String band, Int32 Channel,String dest)
+            public Key(string band, short Channel, String dest)
             {
                 _band = band;
                 _channel = (short)Channel;
@@ -63,6 +63,7 @@ namespace Visualisator
         private static Int32 _ConnectAckCounter = 0;
 
         private static AutoResetEvent _ev = new AutoResetEvent(true);
+
         private static Int32 _MediumSendDataRatio = 8000;
 
         public static Int32 MediumSendDataRatio
@@ -92,7 +93,7 @@ namespace Visualisator
         private static StringBuilder _LOG = new StringBuilder();
         //*********************************************************************
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static Boolean Registration(String Band, Int32 Channel, Double x, Double y)
+        public static Boolean Registration(string Band, short Channel, Double x, Double y)
         {
 
             if (Band.Equals("") || Channel == 0)

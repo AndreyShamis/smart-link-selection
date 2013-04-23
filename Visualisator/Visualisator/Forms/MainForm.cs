@@ -19,8 +19,8 @@ namespace Visualisator
         private Bitmap bm;
         private Graphics gr;
 
-        private static Int32 STA_SIZE = 2;
-        private static Int32 APs_SIZE = 1;
+        private static Int32 STA_SIZE = 20;
+        private static Int32 APs_SIZE = 50;
         private static Int32 SelectedVertex = -1;
         private static float SelectedX = 0;
         private static float SelectedY = 0;
@@ -86,7 +86,7 @@ namespace Visualisator
             for (int i = 0; i < APs_SIZE; i++)
             {
                 AP _ap = new AP();
-                _ap.setOperateChannel(rand.Next(1, 14));
+                _ap.setOperateChannel((short)rand.Next(1, 14));
                 _ap.SetVertex(RandomC(_BOARDX), RandomC(_BOARDY), rand.NextDouble()*500);
                 _objects.Add(_ap);
             }
@@ -107,7 +107,7 @@ namespace Visualisator
         private void CreateAP()
         {
             AP _ap = new AP();
-            _ap.setOperateChannel(rand.Next(1, 14));
+            _ap.setOperateChannel((short)rand.Next(1, 14));
             _ap.SetVertex(MouseX, MouseY, rand.NextDouble()*500);
             _objects.Add(_ap);
 

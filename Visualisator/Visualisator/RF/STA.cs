@@ -839,10 +839,10 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        private void ScanOneChannel(int chann, int TimeForListen, String Band)
+        private void ScanOneChannel(short chann, int TimeForListen, string Band)
         {
-            Int32 perv_channel = this.getOperateChannel();
-            String prev_band = this.getOperateBand();
+            short perv_channel = this.getOperateChannel();
+            string prev_band = this.getOperateBand();
 
             setOperateBand(Band);
             _scanning = true;
@@ -872,13 +872,13 @@ namespace Visualisator
             //_AccessPoint.Clear();
             _AccessPoint.DecreaseAll();
             //_AccessPointTimeCounter.Clear();
-            Int32 perv_channel = this.getOperateChannel();
-            String prev_band = this.getOperateBand();
+            short perv_channel = this.getOperateChannel();
+            string prev_band = this.getOperateBand();
            // for (int i = 1; i < 15; i++)
            // {
            //     ScanOneChannel(i, 100, "N");
           //  }
-            for (int i = 1; i < 15; i++)
+            for (short i = 1; i < 15; i++)
             {
                 ScanOneChannel(i, 320, "N");
             }

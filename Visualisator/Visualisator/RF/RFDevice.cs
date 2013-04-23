@@ -19,17 +19,17 @@ namespace Visualisator
         //protected Medium _MEDIUM = null;
         protected Boolean _Enabled = true;
         private StringBuilder   _LOG            =   new StringBuilder();
-        private Double          _x;
-        private Double          _y;
-        private Double          _z;
+        private double          _x;
+        private double          _y;
+        private double          _z;
         private Color           _vColor;
-        private Int32           _OperateChannel =   0;
-        private String          _OperateBand    =   "";
+        private short           _OperateChannel =   0;
+        private string          _OperateBand    =   "";
         private MAC             _address        =   new MAC();
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
 
- 
+        private  AutoResetEvent _ev = new AutoResetEvent(true);
 
         protected const bool DebugLogEnabled = false;
         protected bool ListenBeacon = false;
@@ -141,7 +141,7 @@ namespace Visualisator
         {
             return _address;
         }
-        public String getMACAddress()
+        public string getMACAddress()
         {
             return _address.getMAC();
         }
@@ -181,7 +181,7 @@ namespace Visualisator
             return(pack);
         }
 
-        public void setOperateChannel(int NewChannel)
+        public void setOperateChannel(short NewChannel)
         {
             _OperateChannel = NewChannel;
             if (NewChannel > 0 && NewChannel < 15)
@@ -194,7 +194,7 @@ namespace Visualisator
             }
         }
 
-        public int getOperateChannel()
+        public short getOperateChannel()
         {
             return (_OperateChannel);
         }
@@ -231,9 +231,10 @@ namespace Visualisator
             //
  
             CheckScanConditionOnSend();
-            lock (RF_STATUS)
-            {
- 
+            //lock (RF_STATUS)
+            //{
+                     _ev.WaitOne();
+                    
                 //SpinWait.SpinUntil(RF_Ready);
                 RF_STATUS = "TX";
 
@@ -256,9 +257,10 @@ namespace Visualisator
             //Thread.Sleep(1);
             //Thread.Sleep(new TimeSpan(100));
             RF_STATUS = "NONE";
-            }
+            _ev.Set();
+            //}
 
-             Thread.Sleep(1);  // TODO: consider to delete or decrise
+            // Thread.Sleep(1);  // TODO: consider to delete or decrise
             if (pack.GetType() == typeof(Data))
             {
                 _DataSent++;
@@ -329,17 +331,16 @@ namespace Visualisator
             String _dest = ((SimulatorPacket)sender).Destination;
             if ((this.GetType() == typeof(STA) && _dest.Equals("FF:FF:FF:FF:FF:FF")) || _dest.Equals(this.getMACAddress()))
             {
-                SpinWait.SpinUntil(ListenCondition);//,1);
+                //SpinWait.SpinUntil(ListenCondition);//,1);
                 Guid prev_guid = new Guid();
                 Packets.IPacket pack = null;
-                lock (RF_STATUS)
-                {
+                    _ev.WaitOne();
 
                     RF_STATUS = "RX";
                     pack = Medium.ReceiveData(this);
                     RF_STATUS = "NONE";
 
-                }
+                    _ev.Set();
 
                 if (pack == null)
                 {
