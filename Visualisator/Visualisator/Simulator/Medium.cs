@@ -224,7 +224,7 @@ namespace Visualisator
             _LOG.Append(data + "\r\n");
         }
         //*********************************************************************
-
+        /*
         private static void Unregister(Key Tk, object rem)
         {
            Thread.Sleep(1);
@@ -251,7 +251,7 @@ namespace Visualisator
            }
             
         }
-
+        */
         //*********************************************************************
         private static Double getDistance(Double x1, Double y1, Double x2, Double y2)
         {
@@ -586,12 +586,12 @@ namespace Visualisator
                 //if(LockWasToken) Monitor.Exit(_packets);
             }
         }
-
+        /*
        // [MethodImpl(MethodImplOptions.Synchronized)]
         public static void DeleteReceivedPacket(RFDevice device, Guid packet_id)
         {
             Key Pk = null;
-            String errPrefix = "";
+           // String errPrefix = "";
             bool LockTokan = false;
             if (_packets != null)
             {
@@ -602,7 +602,7 @@ namespace Visualisator
                 _ev.WaitOne();
                 //Monitor.Enter(_packets, ref LockTokan);
                     //{
-                        errPrefix = " Packets ";
+                       // errPrefix = " Packets ";
                         Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
                         if (_packets.ContainsKey(Pk))
                         {
@@ -631,7 +631,7 @@ namespace Visualisator
             }
             catch (Exception ex) {
                 if(DebugLogEnabled){
-                AddToLog("[DeleteReceivedPacket][" + errPrefix + "]:" + ex.Message);
+                    AddToLog("[DeleteReceivedPacket] " +  ex.Message);
                 }
             }
             finally
@@ -640,12 +640,13 @@ namespace Visualisator
                // if (LockTokan) Monitor.Exit(_packets);
             }
         }
+         * */
         //*********************************************************************
 
         public static IPacket ReceiveData(RFDevice device)
         {
             Key Pk = null;
-            String errPrefix = "";
+            //String errPrefix = "";
 
             IPacket retvalue = null;
             if (_packets == null)
@@ -658,7 +659,7 @@ namespace Visualisator
                     _ev.WaitOne();
                     //Monitor.Enter(_packets);
                     //{
-                        errPrefix = " Packets ";
+                      // errPrefix = " Packets ";
                         Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
                         if (_packets.ContainsKey(Pk))
                         {
@@ -692,7 +693,7 @@ namespace Visualisator
                             if (_packets.ContainsKey(Pk))
                             {
                             
-                                errPrefix = " Beacons ";
+                               // errPrefix = " Beacons ";
                                 ArrayList LocalPackets = (ArrayList)_packets[Pk];
                                 foreach (object pack in LocalPackets)
                                 {
@@ -711,17 +712,13 @@ namespace Visualisator
                                     // loop body
                                 }
                             }
-                            else
-                            {
-                                //AddToLog("Packet not found");
-                            }
                         }
                     //}
                 
             }
             catch (Exception ex) { 
                 if(DebugLogEnabled){
-                    AddToLog("[ReceiveData][" + errPrefix + "]:" + ex.Message); 
+                    AddToLog("[ReceiveData] " + ex.Message); 
                 }
             }
             finally

@@ -151,8 +151,6 @@ namespace Visualisator
             _address = _mac;
         }
 
-
-
         public RFDevice(Double x, Double y, Double z)
         {
             this.SetVertex(x,y,z);
