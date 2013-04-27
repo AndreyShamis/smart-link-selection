@@ -28,7 +28,8 @@ namespace Visualisator
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
 
-        private string BSSID { set; get; }
+        public string SSID { set; get; }
+        public string BSSID { set; get; }
 
         //[MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateRFPeers()

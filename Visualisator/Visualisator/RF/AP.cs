@@ -20,7 +20,6 @@ namespace Visualisator
         private Int32               _AP_MAX_SEND_PERIOD = 150;
         private Int32               _AP_MIN_SEND_PERIOD = 100;
         private static Random       rnadomBeacon = new Random();
-        private String              _SSID = "";
         private ArrayListCounted    _AssociatedDevices = new ArrayListCounted();
         private Int32               _KeepAliveReceived = 0;
         private static Random       random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
@@ -28,11 +27,6 @@ namespace Visualisator
         private string Sync = "sync";
 
         //*********************************************************************
-        public String SSID
-        {
-            get { return _SSID; }
-            set { _SSID = value; }
-        }
 
         //*********************************************************************
         public ArrayList getAssociatedDevicesinAP()
@@ -81,7 +75,7 @@ namespace Visualisator
         {
            
             this.VColor = Color.YellowGreen;
-            this._SSID = RandomString(8);
+            this.SSID = RandomString(8);
             _BeaconPeriod = rnadomBeacon.Next(_AP_MIN_SEND_PERIOD, _AP_MAX_SEND_PERIOD);    
             Enable();
         }
