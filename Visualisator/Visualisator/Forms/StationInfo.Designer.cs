@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.btnGetDevicesInBSS = new System.Windows.Forms.Button();
             this.cmbAssociatedDevicesInBSS = new System.Windows.Forms.ComboBox();
             this.lblTDLSSetupStatus = new System.Windows.Forms.Label();
@@ -77,13 +78,16 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
-            this.button3 = new System.Windows.Forms.Button();
+            this.lblLastTransmitRate = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblLastTransmitRate);
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.btnGetDevicesInBSS);
             this.groupBox1.Controls.Add(this.cmbAssociatedDevicesInBSS);
@@ -133,6 +137,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(365, 199);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(84, 22);
+            this.button3.TabIndex = 52;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnGetDevicesInBSS
             // 
@@ -583,15 +597,23 @@
             this.tmrFast.Interval = 90;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
-            // button3
+            // lblLastTransmitRate
             // 
-            this.button3.Location = new System.Drawing.Point(365, 199);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(84, 22);
-            this.button3.TabIndex = 52;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.lblLastTransmitRate.AutoSize = true;
+            this.lblLastTransmitRate.Location = new System.Drawing.Point(133, 208);
+            this.lblLastTransmitRate.Name = "lblLastTransmitRate";
+            this.lblLastTransmitRate.Size = new System.Drawing.Size(13, 13);
+            this.lblLastTransmitRate.TabIndex = 54;
+            this.lblLastTransmitRate.Text = "0";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(17, 208);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(91, 13);
+            this.label13.TabIndex = 53;
+            this.label13.Text = "Last Transmit rate";
             // 
             // StationInfo
             // 
@@ -662,5 +684,7 @@
         private System.Windows.Forms.Button btnGetDevicesInBSS;
         private System.Windows.Forms.ComboBox cmbAssociatedDevicesInBSS;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label lblLastTransmitRate;
+        private System.Windows.Forms.Label label13;
     }
 }

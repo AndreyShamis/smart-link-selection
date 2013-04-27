@@ -72,6 +72,7 @@ namespace Visualisator
         public static int ReceiveDistance { set; get; }
         public static int WaitBeforeRetransmit { set; get; }
         public static int TrysToRetransmit { set; get; }
+        public static int RetransmitWindow { set; get; }
 
         //*********************************************************************
         private static ArrayList BandAChannels = new ArrayList();

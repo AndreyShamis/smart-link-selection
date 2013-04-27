@@ -28,6 +28,9 @@ namespace Visualisator
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
 
+
+        public int MACLastTrnsmitRate { set; get; }
+
         public string SSID { set; get; }
         public string BSSID { set; get; }
 
@@ -285,7 +288,7 @@ namespace Visualisator
                 //    RF_STATUS = "TX";
                 }
 
-
+            this.MACLastTrnsmitRate = pack.getTransmitRate();
                 Medium.SendData(pack);
             //Thread.Sleep(ran.Next(1, 2));
             //Thread.Sleep(1);

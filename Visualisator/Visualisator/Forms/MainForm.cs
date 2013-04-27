@@ -68,6 +68,7 @@ namespace Visualisator
             Medium.ListenDistance = 200;
             Medium.WaitBeforeRetransmit = 60;
             Medium.TrysToRetransmit = 10;
+            Medium.RetransmitWindow = 2000;
         }
 
         //====================================================================================================

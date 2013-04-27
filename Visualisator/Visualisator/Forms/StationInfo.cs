@@ -175,6 +175,8 @@ namespace Visualisator
                 lblTDLSSetupStatus.Text = _sta.TDLSSetupInfo.ToString() + " [" + _sta.TDLSSetupInfo.GetHashCode().ToString() + "]";
                 lblRetransmited.Text = _sta.DataRetransmited.ToString();
                 lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
+
+                lblLastTransmitRate.Text = _sta.MACLastTrnsmitRate.ToString();
                 lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
                 lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
                                          //     lblCounterToretransmit.Text.Substring(0, 2);

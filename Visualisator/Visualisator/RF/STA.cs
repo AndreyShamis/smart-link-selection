@@ -647,7 +647,7 @@ namespace Visualisator
             {
                 return;
             }
-
+            int SuccessContinuous = 0;
             Stopwatch sw = Stopwatch.StartNew();
             // Do work
             TimeSpan timeWindow = sw.Elapsed;
@@ -658,7 +658,7 @@ namespace Visualisator
             dataPack.PacketChannel = this.getOperateChannel();
             dataPack.PacketBand = this.getOperateBand();
             dataPack.Reciver = fileName;
-            //dataPack.setTransmitRate(144);
+            int transmitRate = 144;
             Int32 SQID = 0;
             foreach (string line in lines)
             {
@@ -679,6 +679,7 @@ namespace Visualisator
                 dataPack.PacketBand = this.getOperateBand();
                 
                 SQID++;
+                dataPack.setTransmitRate(transmitRate);
                 dataPack.setData(line);
                 dataPack.PacketID = SQID;
 
@@ -703,6 +704,7 @@ namespace Visualisator
                 }
 
                 int maxRetrays = Medium.TrysToRetransmit;
+                bool ThePacketWasRetransmited = false;
                 while (!ackReceived  )
                 {
 
@@ -716,18 +718,15 @@ namespace Visualisator
                     {
                         long timeNew = sw.ElapsedMilliseconds;
                         long timeOld = timeWindow.Milliseconds;
-                        if (timeNew - timeOld < 2000)
-                        {
-
+                        if (timeNew - timeOld < Medium.RetransmitWindow){
                             ((RFpeer)this._RFpeers[dataPack.Destination]).RetransmitionCounter++;
-                        }
-                        else
-                        {
+                        } else{ 
                             timeWindow = sw.Elapsed;
                             ((RFpeer)this._RFpeers[dataPack.Destination]).RetransmitionCounter++;
                         }
                         dataPack.IsRetransmit = true;       //  This is retrasmition
                         retrCounter = Medium.WaitBeforeRetransmit;
+                        ThePacketWasRetransmited = true;
                         SendData(dataPack);
                         if (TDLSisWork) {
                             Thread.Sleep(DelayInTDLS + 5);
@@ -745,6 +744,25 @@ namespace Visualisator
                     {
                         break;
                     }
+
+                }
+                if(!ThePacketWasRetransmited)
+                {
+                    SuccessContinuous++;
+                }
+                else
+                {
+                    SuccessContinuous = 0;
+                }
+                if (!ThePacketWasRetransmited && ackReceived && SuccessContinuous>10)
+                {
+                    ((RFpeer)this._RFpeers[dataPack.Destination]).RetransmitionCounter = 0;
+                }
+                if (retrCounter <= Medium.WaitBeforeRetransmit && retrCounter>= 50){
+                    transmitRate = 144;
+                }
+                else{
+                    transmitRate = 64;
                 }
                 
                 WaitingForAck = false;
