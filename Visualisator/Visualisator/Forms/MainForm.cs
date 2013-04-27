@@ -66,6 +66,8 @@ namespace Visualisator
             gr = Graphics.FromImage(bm);
             Medium.ReceiveDistance = 100;
             Medium.ListenDistance = 200;
+            Medium.WaitBeforeRetransmit = 60;
+            Medium.TrysToRetransmit = 10;
         }
 
         //====================================================================================================

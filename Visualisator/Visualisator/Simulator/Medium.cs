@@ -37,20 +37,6 @@ namespace Visualisator
             }
         }
 
-        /*[Serializable()]
-        class PacketKey
-        {
-            private String _band;
-            private Int32 _channel;
-            private Type _type;
-            public PacketKey(String band, Int32 Channel, Type _t)
-            {
-                _band = band;
-                _channel = Channel;
-                _type = _t;
-            }
-        }
-        */
         private  const bool DebugLogEnabled = false;
         private static bool LockWasToken = false;
         public static ArrayList _objects = null;
@@ -59,6 +45,8 @@ namespace Visualisator
         private static ArrayList _MChannels = new ArrayList();
         private static Boolean _mediumWork = true;
         private const string DUMP_FILE_PATH = @"c:\simulator\_MEDIUM\dump.txt";
+
+
         private static Int32 _ConnectCounter = 0;
         private static Int32 _ConnectAckCounter = 0;
 
@@ -78,34 +66,38 @@ namespace Visualisator
         {
             
         }
-
+        //*********************************************************************
+        //  Simulator settigs
         public static int ListenDistance { set; get; }
         public static int ReceiveDistance { set; get; }
+        public static int WaitBeforeRetransmit { set; get; }
+        public static int TrysToRetransmit { set; get; }
 
+        //*********************************************************************
         private static ArrayList BandAChannels = new ArrayList();
         private static Hashtable _packets = new Hashtable(new ByteArrayComparer());
         private static Hashtable _T = new Hashtable(new ByteArrayComparer());
         private static ArrayList _B = new ArrayList();
-
         private static StringBuilder _LOG = new StringBuilder();
         //*********************************************************************
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static Boolean Registration(string Band, short Channel, Double x, Double y)
+        public static Boolean Registration(string band, short channel, Double x, Double y)
         {
 
-            if (Band.Equals("") || Channel == 0)
+            if (band.Equals("") || channel == 0)
             {
                 return false;
             }
-            Key Tk = new Key(Band,Channel);
+            Key Tk = new Key(band,channel);
             bool ret = false;
             RFDevice ver = null;
             if(_packets.Count == 0)
             {
-                lock (_T)
-                {
-                    _T.Clear();
-                } 
+                if (_T != null)
+                    lock (_T)
+                    {
+                        _T.Clear();
+                    }
             }
             try
             {

@@ -650,7 +650,7 @@ namespace Visualisator
 
             Stopwatch sw = Stopwatch.StartNew();
             // Do work
- 
+            TimeSpan timeWindow = sw.Elapsed;
 
             Data dataPack = new Data(CreatePacket());
             dataPack.SSID = _connecttoAP.SSID;
@@ -685,27 +685,24 @@ namespace Visualisator
                 ackReceived = false;
                 SendData(dataPack);
                 WaitingForAck = true;
-                int retrCounter = 60;
+                int retrCounter = Medium.WaitBeforeRetransmit;
                 int loops = 1;
 
                 if (TDLSisWork){
-                    if (DelayInTDLS > 0)
-                    {
+                    if (DelayInTDLS > 0){
                         Thread.Sleep(DelayInTDLS);
                     }
                 }else{
-                    if (DelayInBss > 0)
-                    {
+                    if (DelayInBss > 0){
                         Thread.Sleep(DelayInBss);
                     }
                 }
 
-                if (getScanStatus())
-                {
+                if (getScanStatus()) {
                     SpinWait.SpinUntil(getScanStatus);
                 }
 
-                int maxRetrays = 10;
+                int maxRetrays = Medium.TrysToRetransmit;
                 while (!ackReceived  )
                 {
 
@@ -717,8 +714,20 @@ namespace Visualisator
                     }
                     if (retrCounter < 0)
                     {
+                        long timeNew = sw.ElapsedMilliseconds;
+                        long timeOld = timeWindow.Milliseconds;
+                        if (timeNew - timeOld < 2000)
+                        {
+
+                            ((RFpeer)this._RFpeers[dataPack.Destination]).RetransmitionCounter++;
+                        }
+                        else
+                        {
+                            timeWindow = sw.Elapsed;
+                            ((RFpeer)this._RFpeers[dataPack.Destination]).RetransmitionCounter++;
+                        }
                         dataPack.IsRetransmit = true;       //  This is retrasmition
-                        retrCounter = 60;
+                        retrCounter = Medium.WaitBeforeRetransmit;
                         SendData(dataPack);
                         if (TDLSisWork) {
                             Thread.Sleep(DelayInTDLS + 5);

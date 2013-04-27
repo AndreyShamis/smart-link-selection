@@ -13,7 +13,7 @@ namespace Visualisator
     { 
         public  String RF_STATUS = "NONE";
 
-        private Hashtable _RFpeers = new Hashtable(new ByteArrayComparer());
+        protected Hashtable _RFpeers = new Hashtable(new ByteArrayComparer());
 
         //protected Medium _MEDIUM = null;
         protected Boolean _Enabled = true;
