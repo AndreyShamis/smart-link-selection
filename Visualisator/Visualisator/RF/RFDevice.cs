@@ -37,21 +37,23 @@ namespace Visualisator
             try
             {
             ArrayList _devs = Medium._objects;
-  
+                double dist = 0;
                 foreach (var dev in _devs)
                 {
                     RFDevice devi = (RFDevice) dev;
                     if(devi.getMACAddress().Equals(this.getMACAddress()))
                         continue;
 
-                    RFpeer _peer = new RFpeer();
-                    _peer.MAC       = devi.getMACAddress();
-                    _peer.Band      = devi.getOperateBand();
-                    _peer.Channel   = devi.getOperateChannel();
-                    _peer.Distance  = GetSTADist(this.x, this.y, devi.x, devi.y);
-                    _peer.BSSID     = devi.BSSID;
-                    if (_peer.Distance <= 200)
+                    dist = GetSTADist(this.x, this.y, devi.x, devi.y);
+
+                    if (dist <= 200)
                     {
+                        RFpeer _peer = new RFpeer();
+                        _peer.Distance = dist;
+                        _peer.BSSID = devi.BSSID;
+                        _peer.MAC = devi.getMACAddress();
+                        _peer.Band = devi.getOperateBand();
+                        _peer.Channel = devi.getOperateChannel();
                         _peer.RSSI = GetRSSI(devi.x, devi.y);
                         
                         if (_RFpeers.Contains(_peer.MAC)){
