@@ -509,7 +509,7 @@ namespace Visualisator
             {
                 try
                 {
-                    Packets.Data dat = (Packets.Data)pack;
+                    Data dat = (Data)pack;
                     if (!dat.IsReceivedRetransmit){
                         _DataReceived++;
                         DataReceivedContainer.Append(dat.getData() + "\r\n");
@@ -520,9 +520,9 @@ namespace Visualisator
                 }
                 catch (Exception) { }
             }
-            else if (_Pt == typeof(Packets.DataAck))
+            else if (_Pt == typeof(DataAck))
             {
-                Packets.DataAck dat = (Packets.DataAck)pack;
+                var dat = (DataAck)pack;
                 ackReceived = true;
                 _DataAckReceived++;
             }
@@ -531,25 +531,25 @@ namespace Visualisator
                 // TDLS Parsing
                 if(_TDLS_enabled)
                 {
-                    if (_Pt == typeof(Packets.TDLSSetupRequest))
+                    if (_Pt == typeof(TDLSSetupRequest))
                     {
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestReceived;
-                        Packets.TDLSSetupRequest TDLSreq = (Packets.TDLSSetupRequest)pack;
+                        var tdlSreq = (TDLSSetupRequest)pack;
                         //MessageBox.Show("We received TDLS Setup Request");
-                        TDLS_SendSetupResponse(TDLSreq.Source);
+                        TDLS_SendSetupResponse(tdlSreq.Source);
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
                         
                     }
-                    else if (_Pt == typeof(Packets.TDLSSetupResponse))
+                    else if (_Pt == typeof(TDLSSetupResponse))
                     {
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseReceived;
                         _TDLS_work = true;
-                        Packets.TDLSSetupResponse TDLSreq = (Packets.TDLSSetupResponse)pack;
+                        var tdlSreq = (TDLSSetupResponse)pack;
                         //MessageBox.Show("We received TDLS Setup Response!!!");
-                        TDLS_SendSetupConfirm(TDLSreq.Source);
+                        TDLS_SendSetupConfirm(tdlSreq.Source);
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
                     }
-                    else if (_Pt == typeof(Packets.TDLSSetupConfirm))
+                    else if (_Pt == typeof(TDLSSetupConfirm))
                     {
                         _TDLS_work = true;
                         //MessageBox.Show("We received TDLS Setup Confirm!!!");
@@ -562,118 +562,78 @@ namespace Visualisator
 
         public void DisableTDLS()
         {
-            _TDLS_work = false;
+            try
+            {
+                _TDLS_work = false;
+            }
+            catch (Exception) { throw; }
         }
 
         public void EnableTDLS()
         {
-            _TDLS_work = true;
-        }
-        //*********************************************************************
-        private bool tryToRegister()
-        {
-            return (Medium.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y));
+            try
+            {
+                _TDLS_work = true;
+            }
+            catch (Exception) { throw; }
         }
 
         //*********************************************************************
-       /* public void SendData(SimulatorPacket PacketToSend)
+        public override void CheckScanConditionOnSend()
         {
-            //Random ran = new Random((int)DateTime.Now.Ticks);
-            SpinWait.SpinUntil(RF_Ready);
-            SpinWait.SpinUntil(tryToRegister);
-            lock (RF_STATUS)
+            try
             {
-                
                 // Now scanning process running
                 if (_scanning)
                 {
                     SpinWait.SpinUntil(() => { return (bool)!_scanning; });
                 }
-                RF_STATUS = "TX";
-                _MEDIUM.SendData(PacketToSend);
-                RF_STATUS = "NONE";
             }
-
-            if (PacketToSend.GetType() == typeof(Data))
-            {
-                _DataSent++;
-            }
-        }*/
-        //*********************************************************************
-  /*      public override void SendData(SimulatorPacket PacketToSend)
-        {
-            //Random ran = new Random((int)DateTime.Now.Ticks);
-            SpinWait.SpinUntil(RF_Ready);
-           // while(RF_STATUS != "NONE")
-            //    Thread.Sleep(ran.Next(1, 3));
-      
-            RF_STATUS = "TX";
-            int trys = 0;
-            while (!_MEDIUM.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y))
-            {
-                RF_STATUS = "NONE";
-                Thread.Sleep(new TimeSpan(20));
-                //Thread.Sleep(ran.Next(1, 3));
-                if (trys > 10)
-                {
-                    Thread.Sleep(2);
-                    trys = 0;
-                }
-                trys++;
-                SpinWait.SpinUntil(RF_Ready);
-                //while (RF_STATUS != "NONE")
-                //    Thread.Sleep(ran.Next(1, 3));
-                RF_STATUS = "TX";
-            }
-             
- 
-            _MEDIUM.SendData(PacketToSend);
-
-            //Thread.Sleep(1);
-            RF_STATUS = "NONE";
-
-        }*/
-
-        //*********************************************************************
-        public override void CheckScanConditionOnSend()
-        {
-            // Now scanning process running
-            if (_scanning)
-            {
-                SpinWait.SpinUntil(() => { return (bool)!_scanning; });
-            }
+            catch (Exception) { throw; }
         }
 
         //*********************************************************************
         public void ResetCounters()
         {
-            _DataSent = 0;
-            _DataReceived = 0;
-            _DataAckReceived = 0;
-            _DataRetransmited = 0;
-            _DataAckRetransmitted = 0;
-            AllReceivedPackets = 0;
-            this.DoubleRecieved = 0;
+            try
+            {
+                _DataSent = 0;
+                _DataReceived = 0;
+                _DataAckReceived = 0;
+                _DataRetransmited = 0;
+                _DataAckRetransmitted = 0;
+                AllReceivedPackets = 0;
+                this.DoubleRecieved = 0;
+            }
+            catch (Exception) { throw; }
         }
 
         //*********************************************************************
         public RFDevice GetRFDeviceByMAC(String _mac)
         {
-            foreach (var obj in _AccessPoint)
+            try
             {
-                RFDevice _tV = (RFDevice)obj;
-                if (_tV.getMACAddress().Equals(_mac))
-                    return (_tV);
+                foreach (var obj in _AccessPoint)
+                {
+                    RFDevice _tV = (RFDevice)obj;
+                    if (_tV.getMACAddress().Equals(_mac))
+                        return (_tV);
+                }
             }
+            catch (Exception) { throw; }
             return (null);
         }
 
         //*********************************************************************
         public void rfile(String fileName)
         {
-            Thread newThread = new Thread(() => ThreadAbleReadFile(fileName));
-            newThread.Name = "ThreadAbleReadFile";
-            newThread.Start();
+            try
+            {
+                Thread newThread = new Thread(() => ThreadAbleReadFile(fileName));
+                newThread.Name = "ThreadAbleReadFile";
+                newThread.Start();
+            }
+            catch (Exception) { throw; }
         }
 
         //*********************************************************************
@@ -795,15 +755,19 @@ namespace Visualisator
         //*********************************************************************
         public AP GetAPBySSID(String _SSID)
         {
-            foreach (var obj in _PointerToAllRfDevices)
+            try
             {
-                if(obj.GetType() == typeof(AP))
+                foreach (var obj in _PointerToAllRfDevices)
                 {
-                    AP _tV = (AP)obj;
-                    if (_tV.SSID.Equals(_SSID))
-                        return (_tV);
+                    if (obj.GetType() == typeof(AP))
+                    {
+                        AP _tV = (AP)obj;
+                        if (_tV.SSID.Equals(_SSID))
+                            return (_tV);
+                    }
                 }
             }
+            catch (Exception) { throw; }
             return (null);
         }
 
@@ -824,94 +788,124 @@ namespace Visualisator
         }
         public ArrayList getAssociatedDevicesInBSS()
         {
-            string _SSID = "";
-            _SSID = getBSS_SSID();
-            foreach (var obj in _PointerToAllRfDevices)
+            try
             {
-                if (obj.GetType() == typeof(AP))
+                string _SSID = "";
+                _SSID = getBSS_SSID();
+                foreach (var obj in _PointerToAllRfDevices)
                 {
-                    AP _tV = (AP)obj;
-                    if (_tV.SSID.Equals(_SSID))
+                    if (obj.GetType() == typeof(AP))
                     {
-                        return _tV.getAssociatedDevicesinAP();
+                        AP _tV = (AP)obj;
+                        if (_tV.SSID.Equals(_SSID))
+                        {
+                            return _tV.getAssociatedDevicesinAP();
+                        }
                     }
                 }
             }
+            catch (Exception) { throw; }
+
             return null;
         }
 
         //*********************************************************************
         public void Scan()
         {
-            Thread newThread = new Thread(new ThreadStart(ThreadableScan));
-            newThread.Name = "ThreadableScan of" + this.getMACAddress();
-            newThread.Start();
+            try
+            {
+                Thread newThread = new Thread(new ThreadStart(ThreadableScan));
+                newThread.Name = "ThreadableScan of" + this.getMACAddress();
+                newThread.Start();
+            }
+            catch (Exception){throw;}
         }
 
         //*********************************************************************
         private void ScanOneChannel(short chann, int TimeForListen, string Band)
         {
-            short perv_channel = this.getOperateChannel();
-            string prev_band = this.getOperateBand();
+            try
+            {
+                short perv_channel = this.getOperateChannel();
+                string prev_band = this.getOperateBand();
 
-            setOperateBand(Band);
-            _scanning = true;
-            setOperateChannel(chann);
-            Thread.Sleep(TimeForListen);
-            if (this.getOperateChannel() != chann)
-            {
-                //  Scan on this channel was desturbed
-                //  Try again
-                _scanning = false;
-                ScanOneChannel(chann, TimeForListen, Band);
+                setOperateBand(Band);
+                _scanning = true;
+                setOperateChannel(chann);
+                Thread.Sleep(TimeForListen);
+                if (this.getOperateChannel() != chann)
+                {
+                    //  Scan on this channel was desturbed
+                    //  Try again
+                    _scanning = false;
+                    ScanOneChannel(chann, TimeForListen, Band);
+                }
+                else
+                {
+                    //  Scan on this channel success
+                    //  Return back work parameters
+                    setOperateChannel(perv_channel);
+                    setOperateBand(prev_band);
+                    _scanning = false;
+                }
+                Thread.Sleep(3);
             }
-            else
-            {
-                //  Scan on this channel success
-                //  Return back work parameters
-                setOperateChannel(perv_channel);
-                setOperateBand(prev_band);
-                _scanning = false;
-            }
-            Thread.Sleep(3);
+            catch (Exception) { throw; }
         }
 
         //*********************************************************************
         public void ThreadableScan()
         {
-            //_AccessPoint.Clear();
-            _AccessPoint.DecreaseAll();
-            //_AccessPointTimeCounter.Clear();
-            short perv_channel = this.getOperateChannel();
-            string prev_band = this.getOperateBand();
-           // for (int i = 1; i < 15; i++)
-           // {
-           //     ScanOneChannel(i, 100, "N");
-          //  }
-            for (short i = 1; i < 15; i++)
+            try
             {
-                ScanOneChannel(i, 320, "N");
+                //_AccessPoint.Clear();
+                _AccessPoint.DecreaseAll();
+                //_AccessPointTimeCounter.Clear();
+                short perv_channel = this.getOperateChannel();
+                string prev_band = this.getOperateBand();
+                // for (int i = 1; i < 15; i++)
+                // {
+                //     ScanOneChannel(i, 100, "N");
+                //  }
+                for (short i = 1; i < 15; i++)
+                {
+                    ScanOneChannel(i, 320, "N");
+                }
+                /*
+                ArrayList Achannels = _MEDIUM.getBandAChannels();
+                setOperateBand("N");
+                foreach (int i in Achannels)
+                {
+                    setOperateChannel(i);
+                    Thread.Sleep(400);
+                }*/
             }
-            /*
-            ArrayList Achannels = _MEDIUM.getBandAChannels();
-            setOperateBand("N");
-            foreach (int i in Achannels)
-            {
-                setOperateChannel(i);
-                Thread.Sleep(400);
-            }*/
+            catch (Exception) { throw; }
         }
 
         //*********************************************************************
         public ArrayList ScanList()
         {
-            return (_AccessPoint);
+            try
+            {
+                return (_AccessPoint);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
         //*********************************************************************
         public void Disable()
         {
-            _Enabled = false;
+            try
+            {
+                _Enabled = false;
+            }
+            catch (Exception) { throw; }
         }
 
         //*********************************************************************
@@ -927,44 +921,3 @@ namespace Visualisator
         }
     }
 }
-
-/*
-    if (_AccessPointTimeCounter.ContainsKey(bec.SSID)){
-        int counter = (int)_AccessPointTimeCounter[bec.SSID];
-        if (counter < 15 && counter>=5)
-            counter++;
-        else if (counter < 5)
-            counter = 10;
-        _AccessPointTimeCounter[bec.SSID] = counter;
-    } else{
-        _AccessPointTimeCounter.Add(bec.SSID, 10);
-    }      
- * 
- 
-         /*
-        private void STACleaner()
-        {
-            while (_Enabled)
-            {
-                List<string> keys = new List<string>();
-                foreach (System.Collections.DictionaryEntry de in _AccessPointTimeCounter)
-                    keys.Add(de.Key.ToString());
-
-                foreach (string key in keys)
-                {
-
-                    int c = (int)_AccessPointTimeCounter[key];
-                    c--;
-                    if (c < 0)
-                    {
-                        _AccessPointTimeCounter.Remove(key);
-                        _AccessPoint.Remove(key);
-                    }
-                    else
-                        _AccessPointTimeCounter[key] = c;
-                }
-                Thread.Sleep(300);
-            }
-        }
-
-        */
