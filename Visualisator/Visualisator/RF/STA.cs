@@ -637,7 +637,7 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        public void ThreadAbleReadFile(String fileName)
+        public void ThreadAbleReadFile(String DestinationMacAddress)
         {
 
             string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\_DATA_TO_SEND\input.txt");
@@ -657,9 +657,13 @@ namespace Visualisator
             dataPack.Destination = _connecttoAP.getMACAddress();
             dataPack.PacketChannel = this.getOperateChannel();
             dataPack.PacketBand = this.getOperateBand();
-            dataPack.Reciver = fileName;
+            dataPack.Reciver = DestinationMacAddress;
             int transmitRate = 144;
             Int32 SQID = 0;
+            if (!_RFpeers.Contains(dataPack.Destination) || !_RFpeers.Contains(DestinationMacAddress))
+            {
+                this.UpdateRFPeers();
+            }
             foreach (string line in lines)
             {
                 // Use a tab to indent each line of the file.
@@ -668,13 +672,13 @@ namespace Visualisator
                 
                 if(TDLSisWork)
                 {
-                    dataPack.Destination = fileName;// TDLS TODO 
+                    dataPack.Destination = DestinationMacAddress;// TDLS TODO 
                 }else
                 {
                     dataPack.Destination = _connecttoAP.getMACAddress();// TDLS TODO
                 }
    
-                dataPack.Reciver = fileName;                        // TDLS TODO
+                dataPack.Reciver = DestinationMacAddress;                        // TDLS TODO
                 dataPack.PacketChannel = this.getOperateChannel();
                 dataPack.PacketBand = this.getOperateBand();
                 
@@ -709,11 +713,13 @@ namespace Visualisator
                 {
 
                     retrCounter--;
-                    if (TDLSisWork){
+                    /*if (TDLSisWork){
                         Thread.Sleep(1);}
                     else{
                         Thread.Sleep(2);
-                    }
+                    }*/
+                    Thread.Sleep(1);
+                    //Thread.Sleep(new TimeSpan(10000));
                     if (retrCounter < 0)
                     {
                         long timeNew = sw.ElapsedMilliseconds;
@@ -778,6 +784,7 @@ namespace Visualisator
 
             MessageBox.Show(elapsedTime.TotalSeconds.ToString());
         }
+
 
         //*********************************************************************
         public AP GetAPBySSID(String _SSID)

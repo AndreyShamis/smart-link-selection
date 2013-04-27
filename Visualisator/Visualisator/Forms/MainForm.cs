@@ -27,7 +27,7 @@ namespace Visualisator
         private static float SelectedZ = 0;
         private static float MouseX = 0;
         private static float MouseY = 0;
-        public static ArrayList _objects = new ArrayList();
+        public  ArrayList _objects = new ArrayList();
         //static private Medium _MEDIUM ;
         private static Int32 _RADIUS = 100;
         private static Random rand = new Random();
@@ -468,6 +468,7 @@ namespace Visualisator
                 MessageBox.Show(ex2.Message);
             }
             DrowOnBoard();
+            Medium._objects = _objects;
         }
 
         //====================================================================================================

@@ -71,7 +71,7 @@ namespace Visualisator
             catch(Exception){}
         }
 
-        private  AutoResetEvent _ev = new AutoResetEvent(true);
+        //protected  AutoResetEvent _ev = new AutoResetEvent(true);
 
         protected const bool DebugLogEnabled = false;
         protected bool ListenBeacon = false;
@@ -154,20 +154,14 @@ namespace Visualisator
 
         protected int GetRSSI(double x, double y)
         {
-            try
-            {
-                
+            try{
                 double dist = GetSTADist( this.x,this.y, x, y);
-                if (dist >= 0)
-                {
+                if (dist >= 0){
                     // formula for wolfram: plot [y= -15*log_2(x),{y,16,-95},{x,60,0}] 
                     // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-15*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
                     return Convert.ToInt32(Math.Round(-13*Math.Log(dist, 2)));
                 }
-            }
-            catch(Exception)
-            {
-            }
+            }catch(Exception){}
             return 0;
         }
 
@@ -260,46 +254,22 @@ namespace Visualisator
         //*********************************************************************
         public void SendData(SimulatorPacket pack)
         {
-            //Random ran = new Random((int)DateTime.Now.Ticks);
-            //while (RF_STATUS != "NONE")
-            //{
-            //Thread.Sleep(ran.Next(3,10));
-            //}
-            //
- 
             CheckScanConditionOnSend();
-            //lock (RF_STATUS)
-            //{
-                     _ev.WaitOne();
-                    
-                //SpinWait.SpinUntil(RF_Ready);
-                RF_STATUS = "TX";
+            lock (RF_STATUS)
+            {
 
+                //_ev.WaitOne();
+                RF_STATUS = "TX";
                 while (!Medium.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y))
                 {
-                   // RF_STATUS = "NONE";
-                    //Thread.Sleep(ran.Next(1, 2));
-                    //Thread.Sleep(new TimeSpan(20));
-                   // Thread.Sleep(1);
-                 //   SpinWait.SpinUntil(RF_Ready);
-
-                    //while (RF_STATUS != "NONE")
-                    //    Thread.Sleep(ran.Next(1, 3));
-                //    RF_STATUS = "TX";
+                    Thread.Sleep(new TimeSpan(100));
                 }
-
-            this.MACLastTrnsmitRate = pack.getTransmitRate();
+                this.MACLastTrnsmitRate = pack.getTransmitRate();
                 Medium.SendData(pack);
-            //Thread.Sleep(ran.Next(1, 2));
-            //Thread.Sleep(1);
-            //Thread.Sleep(new TimeSpan(100));
-            RF_STATUS = "NONE";
-            _ev.Set();
-            //}
-
-            // Thread.Sleep(1);  // TODO: consider to delete or decrise
-            if (pack.GetType() == typeof(Data))
-            {
+                RF_STATUS = "NONE";
+            }
+            //_ev.Set();
+            if (pack.GetType() == typeof(Data)){
                 _DataSent++;
             }
         }
@@ -371,13 +341,15 @@ namespace Visualisator
                 //SpinWait.SpinUntil(ListenCondition);//,1);
                 Guid prev_guid = new Guid();
                 Packets.IPacket pack = null;
-                    _ev.WaitOne();
+                   // _ev.WaitOne();
 
+                lock (RF_STATUS)
+                {
                     RF_STATUS = "RX";
                     pack = Medium.ReceiveData(this);
                     RF_STATUS = "NONE";
-
-                    _ev.Set();
+                }
+                // _ev.Set();
 
                 if (pack == null)
                 {
@@ -429,78 +401,11 @@ namespace Visualisator
             //}
         }
         //*********************************************************************
-        public void Listen2()
-        {
-            Guid prev_guid = new Guid();
-            Packets.IPacket pack = null;
-            //while (_Enabled)
-            //{
-                //SpinWait.SpinUntil(checkIfHaveDataReceive);
-                //SpinWait.SpinUntil(RF_Ready);
-
-                SpinWait.SpinUntil(ListenCondition);//,1);
-                lock (RF_STATUS)
-                {
-
-                    RF_STATUS = "RX";
-                    pack = Medium.ReceiveData(this);
-                    RF_STATUS = "NONE";
-
-                }
-
-                if (pack == null)
-                {
-                    //Thread.Sleep(new TimeSpan(4000));
-                   // Thread.Sleep(1); 
-                }
-                else if (pack != null && (prev_guid != ((SimulatorPacket)pack).GuidD || ((SimulatorPacket)pack).IsRetransmit))
-                {
-                    //ParseReceivedPacket(pack);
-                    //  Only if we have received packet before
-                    //  but flag Rentransmit is UP
-                    if(prev_guid == ((SimulatorPacket)pack).GuidD)
-                    {
-                        ((SimulatorPacket) pack).IsReceivedRetransmit = true;
-                    }
-                    IPacket temp = pack;
-                    prev_guid = ((SimulatorPacket)temp).GuidD;
-                   // if (pack.GetType() != typeof(Packets.Beacon))
-                   //     _MEDIUM.DeleteReceivedPacket(this, prev_guid);
-                    //else
-                    //{
-                        //Thread.Sleep(1); 
-                   // }
-                    AllReceivedPackets += 1;
-                    Thread newThread = new Thread(() => ParseReceivedPacket(temp));
-                    newThread.Start();
-
-                 //   Thread.Sleep(1);
-                   
-                }
-                else if (pack != null)
-                {
-                    if (pack.GetType() != typeof(Packets.Beacon))
-                    {
-                        _DoubleRecieved++;
-                        //prev_guid = Guid.NewGuid();
-                    }
-                   // else
-                  //  {
-                    //    Thread.Sleep(new TimeSpan(4000));
-                   // }
-                  //  Thread.Sleep(1);
-                }
-                
-
-            //}
-        }
-        //*********************************************************************
         private bool ListenCondition()
         {
             return ( RF_Ready());
             //checkIfHaveDataReceive() &&
         }
-
 
         public double x
         {
