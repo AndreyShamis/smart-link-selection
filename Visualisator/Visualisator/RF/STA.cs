@@ -210,6 +210,7 @@ namespace Visualisator
             bool connectSuccess = false;
             _AssociatedWithAPList.Clear();
             Int32 tRYStOcONNECT                 = 0;
+            
             _conn.SSID                          = _connecttoAP.SSID;
             _conn.Destination                   = _connecttoAP.getMACAddress();
             _conn.PacketChannel                 = _connecttoAP.getOperateChannel();
@@ -228,6 +229,7 @@ namespace Visualisator
                     }
                 }
                 else{
+                    this.SSID = _connecttoAP.SSID; 
                     connectSuccess = true;
                 }
             }
