@@ -27,6 +27,43 @@ namespace Visualisator
         private MAC             _address        =   new MAC();
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void UpdateRFPeers()
+        {
+            try
+            {
+            ArrayList _devs = Medium._objects;
+  
+                foreach (var dev in _devs)
+                {
+                    RFDevice devi = (RFDevice) dev;
+                    if(devi.getMACAddress().Equals(this.getMACAddress()))
+                        continue;
+
+                    RFpeer _peer = new RFpeer();
+                    _peer.MAC = devi.getMACAddress();
+                    _peer.Band = devi.getOperateBand();
+                    _peer.Channel = devi.getOperateChannel();
+                    _peer.Distance = GetSTADist(this.x, this.y, devi.x, devi.y);
+                    //_peer.BSSID
+                    if (_peer.Distance <= 200)
+                    {
+                        _peer.RSSI = GetRSSI(devi.x, devi.y);
+                        
+                        if (_RFpeers.Contains(_peer.MAC))
+                        {
+                            _RFpeers[_peer.MAC] = _peer;
+                        }
+                        else
+                        {
+                            _RFpeers.Add(_peer.MAC, _peer);
+                        }
+                    }
+
+                }
+            }
+            catch(Exception){}
+        }
 
         private string BSSID { set; get; }
 
