@@ -64,6 +64,8 @@ namespace Visualisator
             this.piB.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BoardDblClick);
             bm = new Bitmap(piB.Width, piB.Height);
             gr = Graphics.FromImage(bm);
+            Medium.ReceiveDistance = 100;
+            Medium.ListenDistance = 200;
         }
 
         //====================================================================================================
@@ -623,6 +625,27 @@ namespace Visualisator
             }
         }
 
+        private void btnUpdateMediumRecDist_Click(object sender, EventArgs e)
+        {
+            Medium.ReceiveDistance = ConvertStringToInt(txtMediumReceiveDistance.Text);
+            _RADIUS = Medium.ReceiveDistance;
+        }
+
+        public int ConvertStringToInt(string str)
+        {
+            int ret = 0;
+            try
+            {
+                ret = Convert.ToInt32(str);
+            }
+            catch (Exception) { }
+            return ret;
+        }
+
+        private void btnUpdateMediumListenDist_Click(object sender, EventArgs e)
+        {
+            Medium.ListenDistance = ConvertStringToInt(txtMediumListenDistance.Text);
+        }
     //private void mnuContext(object sender, EventArgs e)
         //{
         //    ContextMenu myContextMenu = new ContextMenu();

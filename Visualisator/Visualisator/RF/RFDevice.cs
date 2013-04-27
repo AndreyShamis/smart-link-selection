@@ -46,7 +46,7 @@ namespace Visualisator
 
                     dist = GetSTADist(this.x, this.y, devi.x, devi.y);
 
-                    if (dist <= 200)
+                    if (dist <= Medium.ListenDistance)
                     {
                         RFpeer _peer = new RFpeer();
                         _peer.Distance = dist;

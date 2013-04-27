@@ -78,13 +78,10 @@ namespace Visualisator
         {
             
         }
-        private static Double _Radius = 100;
 
-        public static Double Radius
-        {
-            get { return _Radius; }
-            set { _Radius = value; }
-        }
+        public static int ListenDistance { set; get; }
+        public static int ReceiveDistance { set; get; }
+
         private static ArrayList BandAChannels = new ArrayList();
         private static Hashtable _packets = new Hashtable(new ByteArrayComparer());
         private static Hashtable _T = new Hashtable(new ByteArrayComparer());
@@ -120,7 +117,7 @@ namespace Visualisator
                         foreach (var obj in _temp)
                         {
                             RFDevice _tV = (RFDevice)obj;
-                            if (getDistance(x, y, _tV.x, _tV.y) < _Radius)
+                            if (getDistance(x, y, _tV.x, _tV.y) < ReceiveDistance)
                             {
                                 return (false);
                             }
@@ -671,7 +668,7 @@ namespace Visualisator
                                     SimulatorPacket _LocalPack = (SimulatorPacket)pack;
                                     if (_LocalPack.Source != device.getMACAddress() &&
 
-                                        getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius * 2)
+                                        getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < ReceiveDistance)
                                     {
                                         //LocalPackets.Remove(pack);
                                         retvalue = _LocalPack;
@@ -702,7 +699,7 @@ namespace Visualisator
                                         SimulatorPacket _LocalPack = (SimulatorPacket)pack;
 
                                         if (_LocalPack.Source != device.getMACAddress() &&
-                                            getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius * 2)
+                                            getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < ReceiveDistance)
                                         {
                                             retvalue = _LocalPack;
                                             break;
