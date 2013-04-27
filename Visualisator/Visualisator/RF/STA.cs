@@ -153,13 +153,10 @@ namespace Visualisator
         //*********************************************************************
         public void Enable()
         {
+            base.Enable();
             CreateFolder();
-            _Enabled = true;
             this._scanning = false;
-   
             this._WaitingForAck = false;
-
-
             for (int i = 0; i < _channels.Length; i++)
             {
                 _channels[i] = -100;
@@ -640,6 +637,8 @@ namespace Visualisator
         public void ThreadAbleReadFile(String DestinationMacAddress)
         {
 
+
+
             string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\_DATA_TO_SEND\input.txt");
             AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
 
@@ -647,6 +646,8 @@ namespace Visualisator
             {
                 return;
             }
+
+            this.Passive = false;
             int SuccessContinuous = 0;
             Stopwatch sw = Stopwatch.StartNew();
             // Do work
@@ -778,7 +779,7 @@ namespace Visualisator
                 // Thread.Sleep(3);
                 //Console.WriteLine("\t" + line);
             }
-
+            this.Passive = true;
             sw.Stop();
             TimeSpan elapsedTime = sw.Elapsed;
 

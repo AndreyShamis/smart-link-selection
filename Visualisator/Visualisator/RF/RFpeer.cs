@@ -44,6 +44,11 @@ namespace Visualisator
         /// BSSID
         /// </summary>
         public string   BSSID { set; get; }
+
+        /// <summary>
+        /// Show if device active or passive now
+        /// </summary>
+        public bool isPassive { set; get; }
         #endregion
 
 

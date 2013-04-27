@@ -90,8 +90,10 @@ namespace Visualisator
         //*********************************************************************
         public void Enable()
         {
+            base.Enable();
+            
             RF_STATUS = "NONE";
-            _Enabled = true;
+            
             Thread newThread = new Thread(new ThreadStart(SendBeacon));
             newThread.Name ="Send Beacon Thread of" + this.getMACAddress();
             newThread.Priority = ThreadPriority.Lowest;

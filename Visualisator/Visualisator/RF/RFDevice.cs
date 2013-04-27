@@ -28,7 +28,7 @@ namespace Visualisator
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
 
-
+        public bool Passive { set; get; }
         public int MACLastTrnsmitRate { set; get; }
 
         public string SSID { set; get; }
@@ -85,6 +85,7 @@ namespace Visualisator
                         _peer.Band = devi.getOperateBand();
                         _peer.Channel = devi.getOperateChannel();
                         _peer.RSSI = GetRSSI(devi.x, devi.y);
+                        _peer.isPassive = devi.Passive;
                         
                         if (_RFpeers.Contains(_peer.MAC)){
                             _RFpeers[_peer.MAC] = _peer;
@@ -274,7 +275,8 @@ namespace Visualisator
 
         public void Enable()
         {
-            throw new NotImplementedException();
+            this.Passive = true;
+            _Enabled = true;
         }
 
 
