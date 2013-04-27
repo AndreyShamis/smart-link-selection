@@ -114,15 +114,11 @@ namespace Visualisator
         {
             try
             {
-
-
-                double dist = GetSTADist(x, y);
-
+                double dist = GetSTADist( this.x,this.y, x, y);
                 if (dist >= 0)
                 {
                     // formula for wolfram: plot [y= -15*log_2(x),{y,16,-95},{x,60,0}] 
                     // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-15*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
-
                     return Convert.ToInt32(Math.Round(-13*Math.Log(dist, 2)));
                 }
             }
@@ -132,9 +128,9 @@ namespace Visualisator
             return 0;
         }
 
-        protected double GetSTADist(double x,double y)
+        static protected double GetSTADist(double myX,double myY, double x,double y)
         {
-            return Math.Sqrt(    Math.Pow(x - this._x, 2)  +   Math.Pow(y - this._y, 2)      );
+            return Math.Sqrt(Math.Pow(x - myX, 2)  + Math.Pow(y - myY, 2));
         }
 
         public MAC getMAC()
