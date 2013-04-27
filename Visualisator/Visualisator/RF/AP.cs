@@ -76,6 +76,7 @@ namespace Visualisator
            
             this.VColor = Color.YellowGreen;
             this.SSID = RandomString(8);
+            this.BSSID = this.getMACAddress();
             _BeaconPeriod = rnadomBeacon.Next(_AP_MIN_SEND_PERIOD, _AP_MAX_SEND_PERIOD);    
             Enable();
         }

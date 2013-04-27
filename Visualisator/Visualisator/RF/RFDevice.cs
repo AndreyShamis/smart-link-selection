@@ -49,7 +49,7 @@ namespace Visualisator
                     _peer.Band      = devi.getOperateBand();
                     _peer.Channel   = devi.getOperateChannel();
                     _peer.Distance  = GetSTADist(this.x, this.y, devi.x, devi.y);
-                    //_peer.BSSID
+                    _peer.BSSID     = devi.BSSID;
                     if (_peer.Distance <= 200)
                     {
                         _peer.RSSI = GetRSSI(devi.x, devi.y);

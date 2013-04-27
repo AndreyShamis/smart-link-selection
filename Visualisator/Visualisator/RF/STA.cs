@@ -229,7 +229,8 @@ namespace Visualisator
                     }
                 }
                 else{
-                    this.SSID = _connecttoAP.SSID; 
+                    this.SSID = _connecttoAP.SSID;
+                    this.BSSID = _connecttoAP.getMACAddress();
                     connectSuccess = true;
                 }
             }
