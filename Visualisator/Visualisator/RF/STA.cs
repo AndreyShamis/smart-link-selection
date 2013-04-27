@@ -346,7 +346,7 @@ namespace Visualisator
         public void LookIntoChannels()
         {
             UpdateRFPeers();
-            MessageBox.Show(_channels.Count().ToString());
+            //MessageBox.Show(_channels.Count().ToString());
             
         }
 

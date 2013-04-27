@@ -34,6 +34,33 @@ namespace Visualisator
         public string SSID { set; get; }
         public string BSSID { set; get; }
 
+        #region Noise
+        /// <summary>
+        /// Noise Level
+        /// </summary>
+        public double NoiseLevel { set; get; }
+
+        /// <summary>
+        /// Effect of distance between us and the device that we working with it currently
+        /// </summary>
+        public double NoiseRSSI { set; get; }
+        /// <summary>
+        /// Effect of noise of devices working on the same channel as our channel but in other BSSS
+        /// </summary>
+        public double NoiseOnSameChannel { set; get; }
+
+        /// <summary>
+        /// Effect of noise of device working on the nearest channels. Example: if we on channel 6 so the nearest channel is 5,7
+        /// </summary>
+        public double NoiseNearestChannels { set; get; }
+
+        /// <summary>
+        /// Effect of noise of device working on the near channels. Example: if we on channel 6 so the nearest channel is 4,8
+        /// </summary>
+        public double NoiseNeartChannels { set; get; }
+        #endregion
+
+
         //[MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateRFPeers()
         {
@@ -400,6 +427,77 @@ namespace Visualisator
 
             //}
         }
+
+
+        //*********************************************************************       
+        static protected bool MissPacket(string MAC)
+        {
+            //Medium._objects;
+
+            short myRSSI = 0;
+            double destSameChanDevises = 0;
+            double destNearestChanDevises = 0;
+            double destNearChanDevices = 0;
+
+            return false;
+        }
+        //*********************************************************************
+        static protected short GetTXRate(string MAC)
+        {
+            short retransCount = 0;
+
+
+            return 64;
+        }
+
+        //*********************************************************************
+        protected double GetNoiseRSSI(string MAC)
+        {
+            if (!_RFpeers.Contains(MAC))
+                UpdateRFPeers();
+            if (_RFpeers.Contains(MAC))
+            {
+                RFpeer _peer = (RFpeer)_RFpeers[MAC];
+
+                if (_peer.RSSI <= 55)
+                {
+                    // formula for wolfram: plot [y= -15*log_2(x),{y,16,-95},{x,60,0}] 
+                    // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-15*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
+                    return -13 * Math.Log(_peer.RSSI, 2);
+                }
+                else
+                {
+                    // formula for wolfram: plot [y= -15*log_2(x),{y,16,-95},{x,60,0}] 
+                    // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-15*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
+                    return -13 * Math.Log(_peer.RSSI, 2);
+                }
+            }
+            return 0; 
+        }
+        //*********************************************************************
+        public double GetNoiseOnSameChannel()
+        {
+            short devisesCounter = 0;
+            UpdateRFPeers();
+
+            int points = 0;
+            double val = 0;
+            foreach (DictionaryEntry device in _RFpeers)
+            {
+                RFpeer dev = (RFpeer)((DictionaryEntry)device).Value;
+                if (dev.Channel == getOperateChannel())
+                {
+                    // formula for wolfram: plot [y= -15*log_2(x),{y,16,-95},{x,60,0}] 
+                    // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-15*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
+
+                    val += Medium.ListenDistance - dev.Distance;
+                    points++;
+                }
+
+            }
+            return val/points;
+        }
+
         //*********************************************************************
         private bool ListenCondition()
         {

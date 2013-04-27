@@ -276,6 +276,8 @@ namespace Visualisator
             _sta.LookIntoChannels();
 
             MessageBox.Show(_sta.getBestChannel().ToString());
+
+            MessageBox.Show(_sta.GetNoiseOnSameChannel().ToString());
         }
     }
 }

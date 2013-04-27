@@ -19,8 +19,8 @@ namespace Visualisator
         private Bitmap bm;
         private Graphics gr;
 
-        private static Int32 STA_SIZE = 4;
-        private static Int32 APs_SIZE = 2;
+        private static Int32 STA_SIZE = 10;
+        private static Int32 APs_SIZE = 10;
         private static Int32 SelectedVertex = -1;
         private static float SelectedX = 0;
         private static float SelectedY = 0;
