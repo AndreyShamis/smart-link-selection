@@ -31,7 +31,16 @@ namespace Visualisator
         }
         public String getMAC()
         {
-            return _MAC;
+            try
+            {
+                return _MAC;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
     }
