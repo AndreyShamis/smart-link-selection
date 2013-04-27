@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Drawing;
 using Visualisator.Packets;
 using System.Collections;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 using System.Threading;
-using System.Windows.Forms;
+using System.Runtime.CompilerServices;
 
 namespace Visualisator
 {
@@ -16,6 +12,9 @@ namespace Visualisator
     class RFDevice: ISerializable,IRFDevice
     { 
         public  String RF_STATUS = "NONE";
+
+        private Hashtable _RFpeers = new Hashtable(new ByteArrayComparer());
+
         //protected Medium _MEDIUM = null;
         protected Boolean _Enabled = true;
         private StringBuilder   _LOG            =   new StringBuilder();
@@ -28,6 +27,43 @@ namespace Visualisator
         private MAC             _address        =   new MAC();
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void UpdateRFPeers()
+        {
+            try
+            {
+            ArrayList _devs = Medium._objects;
+  
+                foreach (var dev in _devs)
+                {
+                    RFDevice devi = (RFDevice) dev;
+                    if(devi.getMACAddress().Equals(this.getMACAddress()))
+                        continue;
+
+                    RFpeer _peer = new RFpeer();
+                    _peer.MAC = devi.getMACAddress();
+                    _peer.Band = devi.getOperateBand();
+                    _peer.Channel = devi.getOperateChannel();
+                    _peer.Distance = GetSTADist(this.x, this.y, devi.x, devi.y);
+                    //_peer.BSSID
+                    if (_peer.Distance <= 200)
+                    {
+                        _peer.RSSI = GetRSSI(devi.x, devi.y);
+                        
+                        if (_RFpeers.Contains(_peer.MAC))
+                        {
+                            _RFpeers[_peer.MAC] = _peer;
+                        }
+                        else
+                        {
+                            _RFpeers.Add(_peer.MAC, _peer);
+                        }
+                    }
+
+                }
+            }
+            catch(Exception){}
+        }
 
         private  AutoResetEvent _ev = new AutoResetEvent(true);
 
@@ -114,6 +150,7 @@ namespace Visualisator
         {
             try
             {
+                
                 double dist = GetSTADist( this.x,this.y, x, y);
                 if (dist >= 0)
                 {
