@@ -35,6 +35,7 @@ namespace Visualisator
             }
         }
 
+        private const string _BROADCAST = "FF:FF:FF:FF:FF:FF";
         private  const bool DebugLogEnabled = false;
         private static bool LockWasToken = false;
         public static ArrayList _objects = null;
@@ -78,6 +79,10 @@ namespace Visualisator
         private static Hashtable _T = new Hashtable(new ByteArrayComparer());
         private static ArrayList _B = new ArrayList();
         private static StringBuilder _LOG = new StringBuilder();
+
+
+        //=====================================================================
+        //=====================================================================
         //*********************************************************************
         [MethodImpl(MethodImplOptions.Synchronized)]
         public static Boolean Registration(string band, short channel, Double x, Double y)
@@ -199,16 +204,15 @@ namespace Visualisator
             }
             return (true);
         }
-
+        //=====================================================================
         public static int getPacketsFound()
         {
             return  _packets.Count;
         }
-        //*********************************************************************
 
+        //*********************************************************************
         private static void AddToLog(String data)
         {
-
             _LOG.Append(data + "\r\n");
         }
         //*********************************************************************
@@ -364,17 +368,20 @@ namespace Visualisator
             newThread.Name = "Medium Main Process";
             newThread.Start();
         }
+
         //*********************************************************************
         public static bool IsEnabled()
         {
             return _mediumWork;
         }
+
         //*********************************************************************
         public static void Disable()
         {
             AddToLog("Disable Medium.");
             _mediumWork = false;
         }
+
         //*********************************************************************
         public static void Run() 
         {
@@ -389,7 +396,6 @@ namespace Visualisator
                     {
                         for (int i = 0; i < 20; i++)
                         {
-
                             Thread.Sleep(1);
                             if (PacketsCount != _packets.Count)
                             {
@@ -406,6 +412,7 @@ namespace Visualisator
                 catch (Exception) { }
             }
         }
+
         //*********************************************************************
         public static Boolean MediumHaveAIRWork(RFDevice device, bool CheckBeacons)
         {
@@ -419,7 +426,7 @@ namespace Visualisator
                 Key Pk2 = null;
                 if (CheckBeacons)
                 {
-                    Pk2 = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
+                    Pk2 = new Key(device.getOperateBand(), device.getOperateChannel(), _BROADCAST);
                 }
 
                 if (CheckBeacons)
@@ -437,33 +444,33 @@ namespace Visualisator
                 return false;
         }
 
-
+        //=====================================================================
         public static Int32 getConnectCounter()
         {
             return (_ConnectCounter);
         }
+
+        //=====================================================================
         public static Int32 getConnectAckCounter()
         {
             return (_ConnectAckCounter);
         }
 
+        //=====================================================================
         public static void SaveDumpToFile()
         {
             StringBuilder sb = new StringBuilder();
 
-         try
-                {
-
-            using (StreamWriter outfile = new StreamWriter(DUMP_FILE_PATH))
+            try
             {
-
-                outfile.Write(getMediumInfo() + "\r\n===================== Packets DUMP =====================\r\n" + Medium.DumpPackets());
-
-            } 
-                                   
-                }
-                catch (Exception) { }
+                using (StreamWriter outfile = new StreamWriter(DUMP_FILE_PATH))
+                {
+                    outfile.Write(getMediumInfo() + "\r\n===================== Packets DUMP =====================\r\n" + Medium.DumpPackets());
+                }                    
+            }
+            catch (Exception) { }
         }
+
         //*********************************************************************
         public static void SendData(SimulatorPacket pack)
         {
@@ -520,6 +527,7 @@ namespace Visualisator
             }
         }
 
+        //=====================================================================
         private static  int GetObjectSize(object obj)
         {
             var bf = new BinaryFormatter();
@@ -529,42 +537,33 @@ namespace Visualisator
             ms.Dispose();
             return size;
         }
+
         //*********************************************************************
        // [MethodImpl(MethodImplOptions.Synchronized)]
         private static void ThreadableSendData(Key _Pk, object _ref)
         {
-
             EventArgs e = new EventArgs();
-            
-         
             WeHavePacketsToSend(_ref, e);
             SimulatorPacket p = (SimulatorPacket)_ref;
             int Rate = p.getTransmitRate();
             int sleep = GetObjectSize(p) / Rate;
-            //Thread.Sleep(sleep);
             Thread.Sleep(new TimeSpan(sleep * _MediumSendDataRatio));
             //AddToLog("Sleep for :" + sleep);
             LockWasToken = false;
             _ev.WaitOne();
-            //Monitor.Enter(_packets, ref LockWasToken);
+
             ArrayList _temp = (ArrayList)_packets[_Pk];
             try
             {
                 if (_temp != null)
                 {
-                    
-                   // {
-                        // if (_temp != null)
-                        // {
-                        if (_temp.Contains(_ref))
-                            _temp.Remove((SimulatorPacket)_ref);
+                    if (_temp.Contains(_ref))
+                        _temp.Remove((SimulatorPacket)_ref);
                         
-                        if (_temp.Count > 0)
-                           ;// _packets[_Pk] = _temp;
-                        else
-                            _packets.Remove(_Pk);
-                        // }
-                   // }
+                    if (_temp.Count > 0)
+                        ;// _packets[_Pk] = _temp;
+                    else
+                        _packets.Remove(_Pk);
                 }
             }
             catch(Exception){}
@@ -574,154 +573,67 @@ namespace Visualisator
                 //if(LockWasToken) Monitor.Exit(_packets);
             }
         }
-        /*
-       // [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void DeleteReceivedPacket(RFDevice device, Guid packet_id)
-        {
-            Key Pk = null;
-           // String errPrefix = "";
-            bool LockTokan = false;
-            if (_packets != null)
-            {
-                return ;
-            }
-            try
-            {
-                _ev.WaitOne();
-                //Monitor.Enter(_packets, ref LockTokan);
-                    //{
-                       // errPrefix = " Packets ";
-                        Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
-                        if (_packets.ContainsKey(Pk))
-                        {
-                            ArrayList LocalPackets = (ArrayList)_packets[Pk];
-                            foreach (object pack in LocalPackets)
-                            {
-                                if (pack != null)
-                                {
-                                    SimulatorPacket _LocalPack = (SimulatorPacket)pack;
-                                    if (
-                                        //_LocalPack.Source != device.getMACAddress() &&
-                                        _LocalPack.GuidD == packet_id)
-                                    // getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < _Radius * 2)
-                                    {
-                                        LocalPackets.Remove(pack);
-                                        return;
-                                        // return (_LocalPack);
 
-                                    }
-                                }
-                                // loop body
-                            }
-                        }
-                 //   }
-               
-            }
-            catch (Exception ex) {
-                if(DebugLogEnabled){
-                    AddToLog("[DeleteReceivedPacket] " +  ex.Message);
-                }
-            }
-            finally
-            {
-                _ev.Set();
-               // if (LockTokan) Monitor.Exit(_packets);
-            }
-        }
-         * */
         //*********************************************************************
-
         public static IPacket ReceiveData(RFDevice device)
         {
             Key Pk = null;
-            //String errPrefix = "";
-
             IPacket retvalue = null;
-            if (_packets == null)
-            { 
+
+            if (_packets == null){ 
                 return null;
             }
             try
             {
-
-                    _ev.WaitOne();
-                    //Monitor.Enter(_packets);
-                    //{
-                      // errPrefix = " Packets ";
-                        Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
-                        if (_packets.ContainsKey(Pk))
-                        {
-                            ArrayList LocalPackets = (ArrayList)_packets[Pk];
-                            foreach (object pack in LocalPackets)
+                _ev.WaitOne();
+                //  Private packets
+                Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
+                if (_packets.ContainsKey(Pk)){
+                    ArrayList LocalPackets = (ArrayList)_packets[Pk];
+                    foreach (object pack in LocalPackets)
+                    {
+                        if (pack != null){
+                            SimulatorPacket _LocalPack = (SimulatorPacket)pack;
+                            if (_LocalPack.Source != device.getMACAddress() &&
+                                getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < ReceiveDistance)
                             {
-                                if (pack != null)
-                                {
-                                    SimulatorPacket _LocalPack = (SimulatorPacket)pack;
-                                    if (_LocalPack.Source != device.getMACAddress() &&
-
-                                        getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < ReceiveDistance)
-                                    {
-                                        //LocalPackets.Remove(pack);
-                                        retvalue = _LocalPack;
-                                        LocalPackets.Remove(pack);
-                                        break;
-                                        //return (_LocalPack);
-
-                                    }
-                                }
-                                // loop body
+                                retvalue = _LocalPack;
+                                LocalPackets.Remove(pack);
+                                break;
                             }
                         }
+                    }
+                }
 
-
-                        if (device.getListenBeacon() && retvalue == null)
-                        {
-
-                            Pk = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
-                            if (_packets.ContainsKey(Pk))
-                            {
-                            
-                               // errPrefix = " Beacons ";
-                                ArrayList LocalPackets = (ArrayList)_packets[Pk];
-                                foreach (object pack in LocalPackets)
-                                {
-                                    if (pack != null)
-                                    {
-                                        SimulatorPacket _LocalPack = (SimulatorPacket)pack;
-
-                                        if (_LocalPack.Source != device.getMACAddress() &&
-                                            getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < ReceiveDistance)
-                                        {
-                                            retvalue = _LocalPack;
-                                            break;
-                                            //return (_LocalPack);
-                                        }
-                                    }
-                                    // loop body
+                // Broadcast packets
+                if (device.getListenBeacon() && retvalue == null){
+                    Pk = new Key(device.getOperateBand(), device.getOperateChannel(), _BROADCAST);
+                    if (_packets.ContainsKey(Pk)){
+                        ArrayList LocalPackets = (ArrayList)_packets[Pk];
+                        foreach (object pack in LocalPackets){
+                            if (pack != null){
+                                SimulatorPacket _LocalPack = (SimulatorPacket)pack;
+                                if (_LocalPack.Source != device.getMACAddress() &&
+                                    getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < ReceiveDistance){
+                                    retvalue = _LocalPack;
+                                    break;
                                 }
                             }
                         }
-                    //}
-                
+                    }
+                }
+
             }
             catch (Exception ex) { 
                 if(DebugLogEnabled){
                     AddToLog("[ReceiveData] " + ex.Message); 
                 }
             }
-            finally
-            {
+            finally{
                 _ev.Set();
-                //Monitor.Exit(_packets);
             }
             return (retvalue);
         }
-
-       // public Boolean MediumClean
-       // {
-       //     get { return _mediumClean; }
-      //      set { _mediumClean = value; }
-     //   }
 
         public static Boolean StopMedium
         {
@@ -729,17 +641,12 @@ namespace Visualisator
             set { _mediumWork = value; }
         }
 
-
         internal static string DumpPackets()
         {
             String ret = "";
-            //ret += "_packets\r\n";
 
             foreach (DictionaryEntry p in _packets)
-            {
-               // ret += ObjectDumper.Dump(p.Key );
                 ret += ObjectDumper.Dump(p.Value);
-            }
             
             return (ret);
         }

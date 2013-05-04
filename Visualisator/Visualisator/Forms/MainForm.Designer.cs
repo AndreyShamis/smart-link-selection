@@ -238,7 +238,7 @@
             this.txtMediumSendRatio.Name = "txtMediumSendRatio";
             this.txtMediumSendRatio.Size = new System.Drawing.Size(57, 18);
             this.txtMediumSendRatio.TabIndex = 14;
-            this.txtMediumSendRatio.Text = "2000";
+            this.txtMediumSendRatio.Text = "1000";
             this.txtMediumSendRatio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
@@ -272,7 +272,7 @@
             this.txtTDLSSendDelay.Name = "txtTDLSSendDelay";
             this.txtTDLSSendDelay.Size = new System.Drawing.Size(57, 18);
             this.txtTDLSSendDelay.TabIndex = 20;
-            this.txtTDLSSendDelay.Text = "5";
+            this.txtTDLSSendDelay.Text = "1";
             this.txtTDLSSendDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
@@ -306,7 +306,7 @@
             this.txtBSSSendDelay.Name = "txtBSSSendDelay";
             this.txtBSSSendDelay.Size = new System.Drawing.Size(57, 18);
             this.txtBSSSendDelay.TabIndex = 17;
-            this.txtBSSSendDelay.Text = "10";
+            this.txtBSSSendDelay.Text = "1";
             this.txtBSSSendDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
