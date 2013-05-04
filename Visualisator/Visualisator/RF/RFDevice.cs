@@ -128,32 +128,69 @@ namespace Visualisator
         protected Int32 _DataAckReceived = 0;
         protected Int32 _DataSent = 0;
 
+        #region SeterGeter
+        public double x
+        {
+            get { return _x; }
+            set { _x = value; }
+        }
+        public double y
+        {
+            get { return _y; }
+            set { _y = value; }
+        }
+        public double z
+        {
+            get { return _z; }
+            set { _z = value; }
+        }
+
+        public Color VColor
+        {
+            get { return _vColor; }
+            set { _vColor = value; }
+        }
+
+        public int AllReceivedPackets
+        {
+            get { return _AllReceivedPackets; }
+            set { _AllReceivedPackets = value; }
+        }
+        //=====================================================================
         protected Int32 DataSent
         {
             get { return _DataSent; }
             set { _DataSent = value; }
         }
+        //=====================================================================
         protected Int32 DataReceived
         {
             get { return _DataReceived; }
             set { _DataReceived = value; }
         }
+        //=====================================================================
         protected Int32 DataAckReceived
         {
             get { return _DataAckReceived; }
             set { _DataAckReceived = value; }
         }
+        //=====================================================================
         public Int32 getDataRecieved(){
             return DataReceived;
         }
+        //=====================================================================
         public Int32 getDataAckRecieved()
         {
             return DataAckReceived;
         }
+        //=====================================================================
         public Int32 getDataSent()
         {
             return DataSent;
         }
+
+        #endregion
+        //=====================================================================
         public string DumpAll()
         {
             String ret = "";
@@ -168,7 +205,7 @@ namespace Visualisator
 
             return (ret);
         }
-
+        //=====================================================================
         public bool RFWorking()
         {
             if (!RF_STATUS.Equals("NONE"))
@@ -181,52 +218,92 @@ namespace Visualisator
             }
         }
 
-
+        //=====================================================================
         protected int GetRSSI(double x, double y)
         {
             try{
                 double dist = GetSTADist( this.x,this.y, x, y);
                 if (dist >= 0){
-                    // formula for wolfram: plot [y= -15*log_2(x),{y,16,-95},{x,60,0}] 
-                    // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-15*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
+                    // formula for wolfram: plot [y= -13*log_2(x),{y,16,-95},{x,60,0}] 
+                    // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-13*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
                     return Convert.ToInt32(Math.Round(-13*Math.Log(dist, 2)));
                 }
             }catch(Exception){}
             return 0;
         }
 
+        //=====================================================================
+        /// <summary>
+        /// Independ on RSSI return Noize level
+        /// </summary>
+        /// <param name="MAC">Macc address</param>
+        /// <returns>Return NOIZE level</returns>
+        protected double GetNoiseRSSI(string MAC)
+        {
+            if (!_RFpeers.Contains(MAC))
+                UpdateRFPeers();
+            if (_RFpeers.Contains(MAC))
+            {
+                RFpeer _peer = (RFpeer)_RFpeers[MAC];
+
+                if (_peer.RSSI <= 75)
+                {
+                    // formula for wolfram: plot [y=x^2 +150x +(75^2) ,{y,0,100},{x,-60,-100}] 
+                    // http://www.wolframalpha.com/input/?i=plot+%5By%3Dx%5E2+%2B150x+%2B%2875%5E2%29+%2C%7By%2C0%2C100%7D%2C%7Bx%2C-60%2C-100%7D%5D+
+                    return Math.Pow(_peer.RSSI, 2) + 150 * _peer.RSSI + Math.Pow(75, 2);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            return 0;
+        }
+        //=====================================================================
         static protected double GetSTADist(double myX,double myY, double x,double y)
         {
             return Math.Sqrt(Math.Pow(x - myX, 2)  + Math.Pow(y - myY, 2));
         }
 
+        //=====================================================================
         public MAC getMAC()
         {
             return _address;
         }
+
+        //=====================================================================
         public string getMACAddress()
         {
             return _address.getMAC();
         }
 
+        //=====================================================================
         public void setMAC(MAC _mac)
         {
             _address = _mac;
         }
 
+        #region Constructot
+        //=====================================================================
         public RFDevice(Double x, Double y, Double z)
         {
             this.SetVertex(x,y,z);
         }
+
+        //=====================================================================
         public RFDevice(RFDevice ver)
         {
             this.SetVertex(ver.x, ver.y, ver.z);
         }
+
+        //=====================================================================
         public RFDevice()
         {
             this.SetVertex(0, 0, 0);
         }
+        #endregion
 
+        //=====================================================================
         public SimulatorPacket CreatePacket()
         {
             SimulatorPacket pack = new SimulatorPacket(getOperateChannel(), getOperateBand());
@@ -242,6 +319,7 @@ namespace Visualisator
             return(pack);
         }
 
+        //=====================================================================
         public void setOperateChannel(short NewChannel)
         {
             _OperateChannel = NewChannel;
@@ -255,26 +333,31 @@ namespace Visualisator
             }
         }
 
+        //=====================================================================
         public short getOperateChannel()
         {
             return (_OperateChannel);
         }
 
+        //=====================================================================
         public void setOperateBand(string NewBand)
         {
             _OperateBand = NewBand;
         }
 
+        //=====================================================================
         public string getOperateBand()
         {
             return (_OperateBand);
         }
 
+        //=====================================================================
         protected bool RF_Ready()
         {
             return RF_STATUS.Equals("NONE");
         }
 
+        //=====================================================================
         public void Enable()
         {
             this.Passive = true;
@@ -355,6 +438,11 @@ namespace Visualisator
         }
 
         //*********************************************************************
+        /// <summary>
+        /// Function for Listen And Receive Packets
+        /// </summary>
+        /// <param name="sender">Value for know info about received packets</param>
+        /// <param name="args">Not used - needed by event</param>
         public void Listen(object sender, EventArgs args)
         {
 
@@ -454,33 +542,7 @@ namespace Visualisator
             return 64;
         }
 
-        //*********************************************************************
-        /// <summary>
-        /// Independ on RSSI return Noize level
-        /// </summary>
-        /// <param name="MAC">Macc address</param>
-        /// <returns>Return NOIZE level</returns>
-        protected double GetNoiseRSSI(string MAC)
-        {
-            if (!_RFpeers.Contains(MAC))
-                UpdateRFPeers();
-            if (_RFpeers.Contains(MAC))
-            {
-                RFpeer _peer = (RFpeer)_RFpeers[MAC];
 
-                if (_peer.RSSI <= 75)
-                {
-                    // formula for wolfram: plot [y=x^2 +150x +(75^2) ,{y,0,100},{x,-60,-100}] 
-                    // http://www.wolframalpha.com/input/?i=plot+%5By%3Dx%5E2+%2B150x+%2B%2875%5E2%29+%2C%7By%2C0%2C100%7D%2C%7Bx%2C-60%2C-100%7D%5D+
-                    return Math.Pow(_peer.RSSI, 2) + 150 * _peer.RSSI + Math.Pow(75,2);
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            return 0; 
-        }
         //*********************************************************************
         public double GetNoiseOnSameChannel()
         {
@@ -510,34 +572,6 @@ namespace Visualisator
         {
             return ( RF_Ready());
             //checkIfHaveDataReceive() &&
-        }
-
-        public double x
-        {
-            get { return _x; }
-            set { _x = value; }
-        }
-        public double y
-        {
-            get { return _y; }
-            set { _y = value; }
-        }
-        public double z
-        {
-            get { return _z; }
-            set { _z = value; }
-        }
-
-        public Color VColor
-        {
-            get { return _vColor; }
-            set { _vColor = value; }
-        }
-
-        public int AllReceivedPackets
-        {
-            get { return _AllReceivedPackets; }
-            set { _AllReceivedPackets = value; }
         }
 
         public void SetVertex(Double x, Double y, Double z)
