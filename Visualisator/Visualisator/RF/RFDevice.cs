@@ -28,6 +28,8 @@ namespace Visualisator
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
 
+        protected  static Random randomWait = new Random();
+
         public bool Passive { set; get; }
         public int MACLastTrnsmitRate { set; get; }
 
@@ -291,7 +293,7 @@ namespace Visualisator
                 RF_STATUS = "TX";
                 while (!Medium.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y))
                 {
-                    Thread.Sleep(new TimeSpan(100));
+                    Thread.Sleep(new TimeSpan(randomWait.Next(20,50)));
                 }
                 this.MACLastTrnsmitRate = pack.getTransmitRate();
                 Medium.SendData(pack);
