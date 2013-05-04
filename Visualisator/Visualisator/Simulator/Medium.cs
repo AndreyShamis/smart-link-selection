@@ -35,6 +35,7 @@ namespace Visualisator
             }
         }
 
+        private const string _BROADCAST = "FF:FF:FF:FF:FF:FF";
         private  const bool DebugLogEnabled = false;
         private static bool LockWasToken = false;
         public static ArrayList _objects = null;
@@ -419,7 +420,7 @@ namespace Visualisator
                 Key Pk2 = null;
                 if (CheckBeacons)
                 {
-                    Pk2 = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
+                    Pk2 = new Key(device.getOperateBand(), device.getOperateChannel(), _BROADCAST);
                 }
 
                 if (CheckBeacons)
@@ -677,7 +678,7 @@ namespace Visualisator
                         if (device.getListenBeacon() && retvalue == null)
                         {
 
-                            Pk = new Key(device.getOperateBand(), device.getOperateChannel(), "FF:FF:FF:FF:FF:FF");
+                            Pk = new Key(device.getOperateBand(), device.getOperateChannel(), _BROADCAST);
                             if (_packets.ContainsKey(Pk))
                             {
                             
