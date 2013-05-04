@@ -180,6 +180,8 @@ namespace Visualisator
                 lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
                 lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
                                          //     lblCounterToretransmit.Text.Substring(0, 2);
+
+                lblNoiseRssi.Text = _sta.guiNoiseRssi.ToString();
             }
             catch(Exception)
             {
@@ -278,6 +280,11 @@ namespace Visualisator
             MessageBox.Show(_sta.getBestChannel().ToString());
 
             MessageBox.Show(_sta.GetNoiseOnSameChannel().ToString());
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
