@@ -455,6 +455,11 @@ namespace Visualisator
         }
 
         //*********************************************************************
+        /// <summary>
+        /// Independ on RSSI return Noize level
+        /// </summary>
+        /// <param name="MAC">Macc address</param>
+        /// <returns>Return NOIZE level</returns>
         protected double GetNoiseRSSI(string MAC)
         {
             if (!_RFpeers.Contains(MAC))
