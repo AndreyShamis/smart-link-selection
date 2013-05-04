@@ -19,8 +19,8 @@ namespace Visualisator
         private Bitmap bm;
         private Graphics gr;
 
-        private static Int32 STA_SIZE = 10;
-        private static Int32 APs_SIZE = 10;
+        private static Int32 STA_SIZE = 5;
+        private static Int32 APs_SIZE = 2;
         private static Int32 SelectedVertex = -1;
         private static float SelectedX = 0;
         private static float SelectedY = 0;
@@ -69,6 +69,9 @@ namespace Visualisator
             Medium.WaitBeforeRetransmit = 60;
             Medium.TrysToRetransmit = 10;
             Medium.RetransmitWindow = 2000;
+            SetMedioRatio();
+            SetBSSDelay();
+            SetTDLSDelay();
         }
 
         //====================================================================================================
@@ -587,27 +590,32 @@ namespace Visualisator
 
         private void button5_Click(object sender, EventArgs e)
         {
+            SetBSSDelay();
+        }
+
+        private  void SetBSSDelay()
+        {
             int delay_in_bss = 0;
 
             try
             {
                 delay_in_bss = Convert.ToInt32(txtBSSSendDelay.Text);
             }
-            catch(Exception){}
-            if(delay_in_bss > -1)
+            catch (Exception) { }
+            if (delay_in_bss > -1)
             {
                 for (int i = 0; i < _objects.Count; i++)
                 {
-                    if (_objects[i].GetType() == typeof (STA))
+                    if (_objects[i].GetType() == typeof(STA))
                     {
-                        STA _tsta = (STA) _objects[i];
+                        STA _tsta = (STA)_objects[i];
                         _tsta.DelayInBss = delay_in_bss;
                     }
                 }
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void SetTDLSDelay()
         {
             int delay_in_tdls = 0;
 
@@ -627,6 +635,10 @@ namespace Visualisator
                     }
                 }
             }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SetTDLSDelay();
         }
 
         private void btnUpdateMediumRecDist_Click(object sender, EventArgs e)

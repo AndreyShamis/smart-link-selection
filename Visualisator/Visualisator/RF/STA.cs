@@ -32,8 +32,8 @@ namespace Visualisator
 
         private bool            _TDLS_enabled           = true;
         private bool            _TDLS_work              = false;
-        private int _delayInBSS     = 10;
-        private int _delayInTDLS    = 5;
+        private int _delayInBSS     = 1;
+        private int _delayInTDLS    = 1;
         private const int max_channel = 13;
         private int[] _channels = new int[max_channel];  // now it's a 20-element array
         /**
