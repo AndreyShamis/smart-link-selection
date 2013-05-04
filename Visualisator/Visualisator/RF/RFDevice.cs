@@ -28,10 +28,14 @@ namespace Visualisator
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
 
+
         protected  static Random randomWait = new Random();
+        protected static Random randomRssi = new Random();
+
 
         public bool Passive { set; get; }
         public int MACLastTrnsmitRate { set; get; }
+        public double guiNoiseRssi { set; get; }
 
         public string SSID { set; get; }
         public string BSSID { set; get; }
@@ -231,7 +235,21 @@ namespace Visualisator
             }catch(Exception){}
             return 0;
         }
+        //*********************************************************************       
+        static protected bool MissPacket(double NoiseRssi)
+        {
+            bool ret = true;
 
+            if (NoiseRssi > 1)
+            {
+                int given_chance = randomRssi.Next(10, 100);
+                int chance = randomRssi.Next(1, (int) NoiseRssi);
+
+                if (chance >= given_chance)
+                    ret = false;
+            }
+            return ret;
+        }
         //=====================================================================
         /// <summary>
         /// Independ on RSSI return Noize level
@@ -240,25 +258,38 @@ namespace Visualisator
         /// <returns>Return NOIZE level</returns>
         protected double GetNoiseRSSI(string MAC)
         {
+            double retVale = 0;
             if (!_RFpeers.Contains(MAC))
                 UpdateRFPeers();
             if (_RFpeers.Contains(MAC))
             {
                 RFpeer _peer = (RFpeer)_RFpeers[MAC];
 
-                if (_peer.RSSI <= 75)
+                // formula for wolfram: plot [y=x^2 +150x +(75^2) ,{y,0,100},{x,-60,-100}] 
+                // http://www.wolframalpha.com/input/?i=plot+%5By%3Dx%5E2+%2B150x+%2B%2875%5E2%29+%2C%7By%2C0%2C100%7D%2C%7Bx%2C-60%2C-100%7D%5D+
+                double NoiseRssi = Math.Pow(_peer.RSSI , 2) + 150 * _peer.RSSI + Math.Pow(75, 2);
+
+                if (_peer.RSSI <= -75)
                 {
-                    // formula for wolfram: plot [y=x^2 +150x +(75^2) ,{y,0,100},{x,-60,-100}] 
-                    // http://www.wolframalpha.com/input/?i=plot+%5By%3Dx%5E2+%2B150x+%2B%2875%5E2%29+%2C%7By%2C0%2C100%7D%2C%7Bx%2C-60%2C-100%7D%5D+
-                    return Math.Pow(_peer.RSSI, 2) + 150 * _peer.RSSI + Math.Pow(75, 2);
+                    if (NoiseRssi > 100)
+                    {
+                        retVale = 100;
+                    }
+                    else
+                    {
+                        retVale = NoiseRssi;
+                    }
                 }
                 else
                 {
-                    return 0;
+                    retVale = 0;
                 }
             }
-            return 0;
+        
+            guiNoiseRssi = retVale;
+            return retVale;
         }
+
         //=====================================================================
         static protected double GetSTADist(double myX,double myY, double x,double y)
         {
@@ -455,6 +486,15 @@ namespace Visualisator
             if (((SimulatorPacket)sender).PacketBand != this.getOperateBand())
                 return;
             String _dest = ((SimulatorPacket)sender).Destination;
+
+            double dist = GetSTADist(((SimulatorPacket) sender).X, ((SimulatorPacket) sender).Y, this.x, this.y);
+            if(dist > Medium.ReceiveDistance)
+                return;
+            if (sender.GetType() == typeof(Data))
+            {
+                if (!MissPacket(GetNoiseRSSI(((SimulatorPacket) sender).Source)))
+                    return;
+            }
             if ((this.GetType() == typeof(STA) && _dest.Equals("FF:FF:FF:FF:FF:FF")) || _dest.Equals(this.getMACAddress()))
             {
                 //SpinWait.SpinUntil(ListenCondition);//,1);
@@ -521,18 +561,7 @@ namespace Visualisator
         }
 
 
-        //*********************************************************************       
-        static protected bool MissPacket(string MAC)
-        {
-            //Medium._objects;
 
-            short myRSSI = 0;
-            double destSameChanDevises = 0;
-            double destNearestChanDevises = 0;
-            double destNearChanDevices = 0;
-
-            return false;
-        }
         //*********************************************************************
         static protected short GetTXRate(string MAC)
         {
