@@ -461,17 +461,15 @@ namespace Visualisator
             {
                 RFpeer _peer = (RFpeer)_RFpeers[MAC];
 
-                if (_peer.RSSI <= 55)
+                if (_peer.RSSI <= 75)
                 {
-                    // formula for wolfram: plot [y= -15*log_2(x),{y,16,-95},{x,60,0}] 
-                    // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-15*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
-                    return -13 * Math.Log(_peer.RSSI, 2);
+                    // formula for wolfram: plot [y=x^2 +150x +(75^2) ,{y,0,100},{x,-60,-100}] 
+                    // http://www.wolframalpha.com/input/?i=plot+%5By%3Dx%5E2+%2B150x+%2B%2875%5E2%29+%2C%7By%2C0%2C100%7D%2C%7Bx%2C-60%2C-100%7D%5D+
+                    return Math.Pow(_peer.RSSI, 2) + 150 * _peer.RSSI + Math.Pow(75,2);
                 }
                 else
                 {
-                    // formula for wolfram: plot [y= -15*log_2(x),{y,16,-95},{x,60,0}] 
-                    // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-15*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
-                    return -13 * Math.Log(_peer.RSSI, 2);
+                    return 0;
                 }
             }
             return 0; 
