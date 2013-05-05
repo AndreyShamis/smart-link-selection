@@ -21,6 +21,11 @@ namespace Visualisator
         public short    RetransmitionCounter { set; get; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public long TransmitCounter { set; get; }
+
+        /// <summary>
         /// RSSI of this device
         /// </summary>
         public double   RSSI { set; get; }

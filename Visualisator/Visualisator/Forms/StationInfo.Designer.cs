@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblRetransmittionRate = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lblNoiseRssi = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.lblLastTransmitRate = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
@@ -80,14 +84,14 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
-            this.label10 = new System.Windows.Forms.Label();
-            this.lblNoiseRssi = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblRetransmittionRate);
+            this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.lblNoiseRssi);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.lblLastTransmitRate);
@@ -141,6 +145,46 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
+            // 
+            // lblRetransmittionRate
+            // 
+            this.lblRetransmittionRate.AutoSize = true;
+            this.lblRetransmittionRate.Location = new System.Drawing.Point(333, 168);
+            this.lblRetransmittionRate.Name = "lblRetransmittionRate";
+            this.lblRetransmittionRate.Size = new System.Drawing.Size(13, 13);
+            this.lblRetransmittionRate.TabIndex = 58;
+            this.lblRetransmittionRate.Text = "0";
+            // 
+            // label15
+            // 
+            this.label15.AccessibleDescription = "";
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(265, 168);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(53, 13);
+            this.label15.TabIndex = 57;
+            this.label15.Tag = "";
+            this.label15.Text = "Retr Rate";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
+            // 
+            // lblNoiseRssi
+            // 
+            this.lblNoiseRssi.AutoSize = true;
+            this.lblNoiseRssi.Location = new System.Drawing.Point(333, 181);
+            this.lblNoiseRssi.Name = "lblNoiseRssi";
+            this.lblNoiseRssi.Size = new System.Drawing.Size(13, 13);
+            this.lblNoiseRssi.TabIndex = 56;
+            this.lblNoiseRssi.Text = "0";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(265, 181);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(62, 13);
+            this.label10.TabIndex = 55;
+            this.label10.Text = "Noise RSSI";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // lblLastTransmitRate
             // 
@@ -619,25 +663,6 @@
             this.tmrFast.Interval = 90;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(179, 176);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(62, 13);
-            this.label10.TabIndex = 55;
-            this.label10.Text = "Noise RSSI";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
-            // 
-            // lblNoiseRssi
-            // 
-            this.lblNoiseRssi.AutoSize = true;
-            this.lblNoiseRssi.Location = new System.Drawing.Point(246, 176);
-            this.lblNoiseRssi.Name = "lblNoiseRssi";
-            this.lblNoiseRssi.Size = new System.Drawing.Size(13, 13);
-            this.lblNoiseRssi.TabIndex = 56;
-            this.lblNoiseRssi.Text = "0";
-            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -682,7 +707,6 @@
         private System.Windows.Forms.Label lblAckReceived;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblRetransmited;
-        private System.Windows.Forms.Timer tmrFast;
         private System.Windows.Forms.Button btnSaveData;
         private System.Windows.Forms.Label lblDataAckRetransmited;
         private System.Windows.Forms.Label label6;
@@ -711,5 +735,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblNoiseRssi;
+        private System.Windows.Forms.Label lblRetransmittionRate;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Timer tmrFast;
     }
 }

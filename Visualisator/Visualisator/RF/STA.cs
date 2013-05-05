@@ -660,11 +660,15 @@ namespace Visualisator
             dataPack.PacketBand = this.getOperateBand();
             dataPack.Reciver = DestinationMacAddress;
             int transmitRate = 144;
+
+            
             Int32 SQID = 0;
             if (!_RFpeers.Contains(dataPack.Destination) || !_RFpeers.Contains(DestinationMacAddress))
             {
                 this.UpdateRFPeers();
             }
+            RFpeer workPeer = (RFpeer)_RFpeers[DestinationMacAddress];
+            MACOfAnotherPeer = DestinationMacAddress;
             foreach (string line in lines)
             {
                 // Use a tab to indent each line of the file.
@@ -712,24 +716,20 @@ namespace Visualisator
                 bool ThePacketWasRetransmited = false;
                 while (!ackReceived  )
                 {
-
                     retrCounter--;
-                    /*if (TDLSisWork){
-                        Thread.Sleep(1);}
-                    else{
-                        Thread.Sleep(2);
-                    }*/
                     Thread.Sleep(1);
-                    //Thread.Sleep(new TimeSpan(10000));
                     if (retrCounter < 0)
                     {
+
+                        workPeer = (RFpeer)_RFpeers[DestinationMacAddress];
+
                         long timeNew = sw.ElapsedMilliseconds;
                         long timeOld = timeWindow.Milliseconds;
                         if (timeNew - timeOld < Medium.RetransmitWindow){
-                            ((RFpeer)this._RFpeers[dataPack.Destination]).RetransmitionCounter++;
+                            workPeer.RetransmitionCounter++;
                         } else{ 
                             timeWindow = sw.Elapsed;
-                            ((RFpeer)this._RFpeers[dataPack.Destination]).RetransmitionCounter++;
+                          //  workPeer.RetransmitionCounter++;
                         }
                         dataPack.IsRetransmit = true;       //  This is retrasmition
                         retrCounter = Medium.WaitBeforeRetransmit;
@@ -753,17 +753,21 @@ namespace Visualisator
                     }
 
                 }
+
                 if(!ThePacketWasRetransmited)
                 {
                     SuccessContinuous++;
+                    workPeer.TransmitCounter++;   
                 }
                 else
                 {
+                    workPeer.RetransmitionCounter++;
                     SuccessContinuous = 0;
                 }
                 if (!ThePacketWasRetransmited && ackReceived && SuccessContinuous>10)
                 {
-                    ((RFpeer)this._RFpeers[dataPack.Destination]).RetransmitionCounter = 0;
+                    workPeer.TransmitCounter = 0;
+                    workPeer.RetransmitionCounter = 0;
                 }
                 if (retrCounter <= Medium.WaitBeforeRetransmit && retrCounter>= 50){
                     transmitRate = 144;

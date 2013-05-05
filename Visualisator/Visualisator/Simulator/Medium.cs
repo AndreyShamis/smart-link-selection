@@ -85,7 +85,7 @@ namespace Visualisator
         //=====================================================================
         //*********************************************************************
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static Boolean Registration(string band, short channel, Double x, Double y)
+        public static Boolean Registration(string band, short channel, int x, int y)
         {
 
             if (band.Equals("") || channel == 0)

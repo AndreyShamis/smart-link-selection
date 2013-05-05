@@ -181,6 +181,7 @@ namespace Visualisator
                 lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
                                          //     lblCounterToretransmit.Text.Substring(0, 2);
 
+                lblRetransmittionRate.Text = _sta.getRetransmitionRate().ToString();
                 lblNoiseRssi.Text = _sta.guiNoiseRssi.ToString();
             }
             catch(Exception)
@@ -277,12 +278,17 @@ namespace Visualisator
         {
             _sta.LookIntoChannels();
 
-            MessageBox.Show(_sta.getBestChannel().ToString());
+           // MessageBox.Show(_sta.getBestChannel().ToString());
 
-            MessageBox.Show(_sta.GetNoiseOnSameChannel().ToString());
+           // MessageBox.Show(_sta.GetNoiseOnSameChannel().ToString());
         }
 
         private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
         {
 
         }

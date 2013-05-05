@@ -18,9 +18,10 @@ namespace Visualisator
         //protected Medium _MEDIUM = null;
         protected Boolean _Enabled = true;
         private StringBuilder   _LOG            =   new StringBuilder();
-        private double          _x;
-        private double          _y;
-        private double          _z;
+
+        public int x { set; get; }
+        public int y { set; get; }
+        public int z { set; get; }
         private Color           _vColor;
         private short           _OperateChannel =   0;
         private string          _OperateBand    =   "";
@@ -28,7 +29,7 @@ namespace Visualisator
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
 
-
+        public string MACOfAnotherPeer { set; get; } //mac of another device with him we working now
         protected  static Random randomWait = new Random();
         protected static Random randomRssi = new Random();
 
@@ -82,7 +83,7 @@ namespace Visualisator
 
                     dist = GetSTADist(this.x, this.y, devi.x, devi.y);
 
-                    if (dist <= Medium.ListenDistance)
+                    if (dist <= Medium.ListenDistance*2)
                     {
                         RFpeer _peer = new RFpeer();
                         _peer.Distance = dist;
@@ -124,6 +125,20 @@ namespace Visualisator
         {
             return DoubleRecieved;
         }
+
+        public double getRetransmitionRate()
+        {
+            RFpeer tempPeer = (RFpeer)_RFpeers[MACOfAnotherPeer];
+
+            short Recounter = tempPeer.RetransmitionCounter;
+            long counter = tempPeer.TransmitCounter;
+
+            if (counter == 0)
+                return 0;
+
+            return 100*Recounter/counter;
+
+        }
         protected ArrayList _AssociatedWithAPList = new ArrayList();
         protected ArrayList _PointerToAllRfDevices = null;
         //protected Hashtable _RSSI_all = new Hashtable(new ByteArrayComparer());
@@ -133,21 +148,8 @@ namespace Visualisator
         protected Int32 _DataSent = 0;
 
         #region SeterGeter
-        public double x
-        {
-            get { return _x; }
-            set { _x = value; }
-        }
-        public double y
-        {
-            get { return _y; }
-            set { _y = value; }
-        }
-        public double z
-        {
-            get { return _z; }
-            set { _z = value; }
-        }
+
+
 
         public Color VColor
         {
@@ -264,26 +266,20 @@ namespace Visualisator
             if (_RFpeers.Contains(MAC))
             {
                 RFpeer _peer = (RFpeer)_RFpeers[MAC];
-
                 //TODO :: Need optimize 
-
                 // formula for wolfram: plot [y=x^2 +150x +(75^2) ,{y,0,100},{x,-60,-100}] 
                 // http://www.wolframalpha.com/input/?i=plot+%5By%3Dx%5E2+%2B150x+%2B%2875%5E2%29+%2C%7By%2C0%2C100%7D%2C%7Bx%2C-60%2C-100%7D%5D+
                 double NoiseRssi = Math.Pow(_peer.RSSI , 2) + 150 * _peer.RSSI + Math.Pow(75, 2);
 
                 if (_peer.RSSI <= -75)
                 {
-                    if (NoiseRssi > 100)
-                    {
+                    if (NoiseRssi > 100){
                         retVale = 100;
-                    }
-                    else
-                    {
+                    }else{
                         retVale = NoiseRssi;
                     }
                 }
-                else
-                {
+                else{
                     retVale = 0;
                 }
             }
@@ -318,7 +314,7 @@ namespace Visualisator
 
         #region Constructot
         //=====================================================================
-        public RFDevice(Double x, Double y, Double z)
+        public RFDevice(int x, int y, int z)
         {
             this.SetVertex(x,y,z);
         }
@@ -492,13 +488,16 @@ namespace Visualisator
             double dist = GetSTADist(((SimulatorPacket) sender).X, ((SimulatorPacket) sender).Y, this.x, this.y);
             if(dist > Medium.ReceiveDistance)
                 return;
-            if (sender.GetType() == typeof(Data))
-            {
-                if (!MissPacket(GetNoiseRSSI(((SimulatorPacket) sender).Source)))
-                    return;
-            }
+
             if ((this.GetType() == typeof(STA) && _dest.Equals("FF:FF:FF:FF:FF:FF")) || _dest.Equals(this.getMACAddress()))
             {
+                double t = GetNoiseRSSI(((SimulatorPacket) sender).Source);
+                if (sender.GetType() == typeof(Data))
+                {
+                    if (!MissPacket(t))
+                        return;
+                }
+
                 //SpinWait.SpinUntil(ListenCondition);//,1);
                 Guid prev_guid = new Guid();
                 Packets.IPacket pack = null;
@@ -578,7 +577,7 @@ namespace Visualisator
         public double GetNoiseOnSameChannel()
         {
             short devisesCounter = 0;
-            UpdateRFPeers();
+            //UpdateRFPeers();
 
             int points = 0;
             double val = 0;
@@ -598,6 +597,8 @@ namespace Visualisator
             return val/points;
         }
 
+
+
         //*********************************************************************
         private bool ListenCondition()
         {
@@ -605,11 +606,12 @@ namespace Visualisator
             //checkIfHaveDataReceive() &&
         }
 
-        public void SetVertex(Double x, Double y, Double z)
+        public void SetVertex(int x, int y, int z)
         {
-            _x = x;
-            _y = y;
-            _z = z;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            UpdateRFPeers();
         }
     }
 }

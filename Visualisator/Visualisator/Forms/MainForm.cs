@@ -19,8 +19,8 @@ namespace Visualisator
         private Bitmap bm;
         private Graphics gr;
 
-        private static Int32 STA_SIZE = 5;
-        private static Int32 APs_SIZE = 2;
+        private static Int32 STA_SIZE = 2;
+        private static Int32 APs_SIZE = 1;
         private static Int32 SelectedVertex = -1;
         private static float SelectedX = 0;
         private static float SelectedY = 0;
@@ -68,7 +68,7 @@ namespace Visualisator
             Medium.ListenDistance = 200;
             Medium.WaitBeforeRetransmit = 60;
             Medium.TrysToRetransmit = 10;
-            Medium.RetransmitWindow = 2000;
+            Medium.RetransmitWindow = 100;
             SetMedioRatio();
             SetBSSDelay();
             SetTDLSDelay();
@@ -95,14 +95,14 @@ namespace Visualisator
             {
                 AP _ap = new AP();
                 _ap.setOperateChannel((short)rand.Next(1, 14));
-                _ap.SetVertex(RandomC(_BOARDX), RandomC(_BOARDY), rand.NextDouble()*500);
+                _ap.SetVertex((int)RandomC(_BOARDX), (int)RandomC(_BOARDY), 0);
                 _objects.Add(_ap);
             }
             for (int i = 0; i < STA_SIZE; i++)
             {
                 STA _sta = new STA( _objects);
                 _sta.setOperateChannel(0); // (rand.Next(1, 14));       //  TODO delete this line
-                _sta.SetVertex(RandomC(_BOARDX), RandomC(_BOARDY), rand.NextDouble()*500);
+                _sta.SetVertex((int)RandomC(_BOARDX), (int)RandomC(_BOARDY), 0);
                 _objects.Add(_sta);
                 _sta.Scan();
             }
@@ -116,7 +116,7 @@ namespace Visualisator
         {
             AP _ap = new AP();
             _ap.setOperateChannel((short)rand.Next(1, 14));
-            _ap.SetVertex(MouseX, MouseY, rand.NextDouble()*500);
+            _ap.SetVertex((int)MouseX, (int)MouseY, 0);
             _objects.Add(_ap);
 
             Medium.addObjToMedium(_objects);
@@ -132,7 +132,7 @@ namespace Visualisator
 
             STA _sta = new STA(_objects);
             _sta.setOperateChannel(0); // (rand.Next(1, 14));       //  TODO delete this line
-            _sta.SetVertex(MouseX, MouseY, rand.NextDouble()*500);
+            _sta.SetVertex((int)MouseX, (int)MouseY, 0);
             _objects.Add(_sta);
             _sta.Scan();
 
@@ -241,15 +241,13 @@ namespace Visualisator
                 {
                     AP _tAP = (AP) _objects[SelectedVertex];
                     // ConsolePrint("Drawing " + _tAP.getMAC().getMAC());
-                    _tAP.x = e.X;
-                    _tAP.y = e.Y;
+                    _tAP.SetVertex(e.X, e.Y,0);
                 }
                 if (_ob == SelectedObjectType.STA)
                 {
                     STA _tsta = (STA) _objects[SelectedVertex];
                     // ConsolePrint("Drawing " + _tsta.getMACAddress());
-                    _tsta.x = e.X;
-                    _tsta.y = e.Y;
+                    _tsta.SetVertex(e.X, e.Y,0);
                 }
             }
             else
