@@ -36,8 +36,7 @@ namespace Visualisator
         }
 
         private const string _BROADCAST = "FF:FF:FF:FF:FF:FF";
-        private  const bool DebugLogEnabled = false;
-        private static bool LockWasToken = false;
+        private static bool DebugLogEnabled = false;
         public static ArrayList _objects = null;
         private static ArrayList _MBands = new ArrayList();
         private static ArrayList _Mfrequency = new ArrayList();
@@ -202,7 +201,7 @@ namespace Visualisator
                     }
                 }
             }
-            return (true);
+           // return (true);
         }
         //=====================================================================
         public static int getPacketsFound()
@@ -549,7 +548,6 @@ namespace Visualisator
             int sleep = GetObjectSize(p) / Rate;
             Thread.Sleep(new TimeSpan(sleep * _MediumSendDataRatio));
             //AddToLog("Sleep for :" + sleep);
-            LockWasToken = false;
             _ev.WaitOne();
 
             ArrayList _temp = (ArrayList)_packets[_Pk];
@@ -560,9 +558,9 @@ namespace Visualisator
                     if (_temp.Contains(_ref))
                         _temp.Remove((SimulatorPacket)_ref);
                         
-                    if (_temp.Count > 0)
-                        ;// _packets[_Pk] = _temp;
-                    else
+                    //if (_temp.Count > 0)
+                    //    ;// _packets[_Pk] = _temp;
+                    if (_temp.Count == 0)
                         _packets.Remove(_Pk);
                 }
             }

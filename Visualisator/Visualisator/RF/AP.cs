@@ -88,7 +88,7 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        public void Enable()
+        public new void Enable()
         {
             base.Enable();
             
@@ -140,12 +140,6 @@ namespace Visualisator
                 }
                 Thread.Sleep(100); // sec *
             }
-        }
-
-        //*********************************************************************
-        public void Disable()
-        {
-            _Enabled = false;
         }
 
         //*********************************************************************
@@ -295,12 +289,6 @@ namespace Visualisator
             {
                 //Console.WriteLine("[" + getMACAddress() + "]" + " listening.");
             }
-        }
-
-        //*********************************************************************
-        public void RegisterToMedium(int x, int y, int Channel, string Band, int Radius)
-        {
-            //
         }
 
         //=====================================================================

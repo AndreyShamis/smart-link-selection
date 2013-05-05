@@ -15,7 +15,6 @@ namespace Visualisator
     {
         STA _sta = null;
         public ArrayList _objects = null;
-        private Boolean _scanning = false;
         //=====================================================================
         //=====================================================================
         //=====================================================================
@@ -41,7 +40,6 @@ namespace Visualisator
             Thread newThread = new Thread(new ThreadStart(Scan));
             newThread.Start();
             btnScan.Enabled = false;
-            _scanning = true;
             PrintAPList();
         }
 
@@ -49,8 +47,7 @@ namespace Visualisator
         private void Scan()
         {
             _sta.Scan();
-            _scanning = false;
-           // btnScan.Enabled = true;
+            // btnScan.Enabled = true;
         }
 
         //=====================================================================

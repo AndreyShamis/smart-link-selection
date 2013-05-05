@@ -108,7 +108,7 @@ namespace Visualisator
 
         //protected  AutoResetEvent _ev = new AutoResetEvent(true);
 
-        protected const bool DebugLogEnabled = false;
+        protected  bool DebugLogEnabled = false;
         protected bool ListenBeacon = false;
 
         public bool getListenBeacon()
@@ -238,7 +238,7 @@ namespace Visualisator
             return 0;
         }
         //*********************************************************************       
-        static protected bool MissPacket(double NoiseRssi)
+        static protected bool MissPacket(double NoiseRssi, int Rate)
         {
             bool ret = true;
 
@@ -442,7 +442,7 @@ namespace Visualisator
         //=====================================================================
         public void Disable()
         {
-            throw new NotImplementedException();
+            _Enabled = false;
         }
 
         //=====================================================================
@@ -494,7 +494,7 @@ namespace Visualisator
                 double t = GetNoiseRSSI(((SimulatorPacket) sender).Source);
                 if (sender.GetType() == typeof(Data))
                 {
-                    if (!MissPacket(t))
+                    if (!MissPacket(t, ((SimulatorPacket)sender).getTransmitRate() ))
                         return;
                 }
 
@@ -566,7 +566,7 @@ namespace Visualisator
         //*********************************************************************
         static protected short GetTXRate(string MAC)
         {
-            short retransCount = 0;
+            //short retransCount = 0;
 
 
             return 64;
@@ -576,7 +576,7 @@ namespace Visualisator
         //*********************************************************************
         public double GetNoiseOnSameChannel()
         {
-            short devisesCounter = 0;
+            //short devisesCounter = 0;
             //UpdateRFPeers();
 
             int points = 0;

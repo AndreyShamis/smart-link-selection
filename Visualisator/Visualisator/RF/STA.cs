@@ -20,8 +20,8 @@ namespace Visualisator
         //protected Hashtable _AccessPointTimeCounter = new Hashtable(new ByteArrayComparer());
 
         private Boolean         _scanning               = false;
-        private int             PrevDataID              = 0;
-        private int             PrevDataAckID           = 0;
+       // private int             PrevDataID              = 0;
+        //private int             PrevDataAckID           = 0;
         private int             _DataRetransmited       = 0;
         private int             _DataAckRetransmitted   = 0;
         private String          DOCpath                 = "";
@@ -151,7 +151,7 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        public void Enable()
+        public new void Enable()
         {
             base.Enable();
             CreateFolder();
@@ -935,28 +935,6 @@ namespace Visualisator
                 throw;
             }
             
-        }
-
-        //*********************************************************************
-        public void Disable()
-        {
-            try
-            {
-                _Enabled = false;
-            }
-            catch (Exception) { throw; }
-        }
-
-        //*********************************************************************
-        public Packets.IPacket ReceiveData(IRFDevice ThisDevice)
-        {
-            throw new NotImplementedException();
-        }
-
-        //*********************************************************************
-        public void RegisterToMedium(int x, int y, int Channel, string Band, int Radius)
-        {
-            throw new NotImplementedException();
         }
     }
 }
