@@ -62,6 +62,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.lblStandart = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.cmdShowLog = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -404,11 +405,23 @@
             this.label15.TabIndex = 30;
             this.label15.Text = "AP Standart";
             // 
+            // cmdShowLog
+            // 
+            this.cmdShowLog.Enabled = false;
+            this.cmdShowLog.Location = new System.Drawing.Point(296, 72);
+            this.cmdShowLog.Name = "cmdShowLog";
+            this.cmdShowLog.Size = new System.Drawing.Size(71, 21);
+            this.cmdShowLog.TabIndex = 32;
+            this.cmdShowLog.Text = "Show Log";
+            this.cmdShowLog.UseVisualStyleBackColor = true;
+            this.cmdShowLog.Click += new System.EventHandler(this.cmdShowLog_Click);
+            // 
             // APInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 343);
+            this.ClientSize = new System.Drawing.Size(581, 319);
+            this.Controls.Add(this.cmdShowLog);
             this.Controls.Add(this.lblStandart);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.lblBandwith);
@@ -483,5 +496,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblStandart;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button cmdShowLog;
     }
 }

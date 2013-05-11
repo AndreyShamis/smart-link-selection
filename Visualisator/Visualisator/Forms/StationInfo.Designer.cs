@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmdShowLog = new System.Windows.Forms.Button();
             this.lblRetransmittionRate = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.lblNoiseRssi = new System.Windows.Forms.Label();
@@ -84,12 +85,14 @@
             this.txtDumpAll = new System.Windows.Forms.TextBox();
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
+            this.tmrSlow = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmdShowLog);
             this.groupBox1.Controls.Add(this.lblRetransmittionRate);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.lblNoiseRssi);
@@ -145,6 +148,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
+            // 
+            // cmdShowLog
+            // 
+            this.cmdShowLog.Enabled = false;
+            this.cmdShowLog.Location = new System.Drawing.Point(497, 186);
+            this.cmdShowLog.Name = "cmdShowLog";
+            this.cmdShowLog.Size = new System.Drawing.Size(64, 22);
+            this.cmdShowLog.TabIndex = 59;
+            this.cmdShowLog.Text = "Show Log";
+            this.cmdShowLog.UseVisualStyleBackColor = true;
+            this.cmdShowLog.Click += new System.EventHandler(this.cmdShowLog_Click);
             // 
             // lblRetransmittionRate
             // 
@@ -663,6 +677,12 @@
             this.tmrFast.Interval = 90;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
+            // tmrSlow
+            // 
+            this.tmrSlow.Enabled = true;
+            this.tmrSlow.Interval = 2000;
+            this.tmrSlow.Tick += new System.EventHandler(this.tmrSlow_Tick);
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -738,5 +758,7 @@
         private System.Windows.Forms.Label lblRetransmittionRate;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Timer tmrFast;
+        private System.Windows.Forms.Button cmdShowLog;
+        private System.Windows.Forms.Timer tmrSlow;
     }
 }

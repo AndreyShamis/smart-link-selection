@@ -52,6 +52,11 @@ namespace Visualisator
                 listStations.Items.Add(s);
                 // loop body
             }
+
+            if(_ap._LOG.Length > 0)
+            {
+                cmdShowLog.Enabled = true;
+            }
             
         }
 
@@ -129,6 +134,12 @@ namespace Visualisator
 
             cmbWorkChannel.SelectedIndex = 1;
             
+        }
+
+        private void cmdShowLog_Click(object sender, EventArgs e)
+        {
+            ShowLog LogForm = new ShowLog((RFDevice)_ap);
+            LogForm.Show();
         }
     }
 }

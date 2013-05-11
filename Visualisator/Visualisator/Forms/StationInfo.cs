@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Collections;
 using System.Threading;
 
+
 namespace Visualisator
 {
     partial class StationInfo : Form
@@ -289,6 +290,20 @@ namespace Visualisator
         private void label15_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmdShowLog_Click(object sender, EventArgs e)
+        {
+            ShowLog LogForm = new ShowLog((RFDevice)_sta);
+            LogForm.Show();
+        }
+
+        private void tmrSlow_Tick(object sender, EventArgs e)
+        {
+            if (_sta._LOG.Length > 0)
+            {
+                cmdShowLog.Enabled = true;
+            }
         }
     }
 }

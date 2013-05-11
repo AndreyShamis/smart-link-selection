@@ -516,8 +516,7 @@ namespace Visualisator
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Parse Received Packeyt" + ex.Message);
-
+                    AddToLog("Parse Received Packet - Data " + ex.Message);
                 }
             }
             else if (_Pt == typeof(DataAck))

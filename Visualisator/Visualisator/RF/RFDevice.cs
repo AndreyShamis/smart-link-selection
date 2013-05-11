@@ -18,7 +18,7 @@ namespace Visualisator
 
         //protected Medium _MEDIUM = null;
         protected Boolean _Enabled = true;
-        private StringBuilder   _LOG            =   new StringBuilder();
+        public StringBuilder   _LOG            =   new StringBuilder();
 
         public int x { set; get; }
         public int y { set; get; }
@@ -473,7 +473,7 @@ namespace Visualisator
         //=====================================================================
         public void AddToLog(string newLogEntry)
         {
-            _LOG.Append( "[" + this.getMACAddress() + "]" + newLogEntry + "\r\n");
+            _LOG.Append( "[" + this.getMACAddress() + "] - " + newLogEntry + "\r\n");
         }
 
         //=====================================================================

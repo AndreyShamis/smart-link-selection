@@ -201,7 +201,7 @@ namespace Visualisator
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("ParseReceivedPacket Conn " + ex.Message);
+                    AddToLog("Parse Received Packet - Connection " + ex.Message);
                 }
             }
             else if (Pt == typeof(KeepAlive))
@@ -213,10 +213,6 @@ namespace Visualisator
             else if (Pt == typeof(Data))
             {
                 Data _wp        = (Data)pack;
-                // Update Keep Alive
-                //Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
-                //newThread.Start();
-
                 MACsandACK(_wp.Source,_wp.GuidD);
 
                 Data resendedData = new Data(_wp);
@@ -243,7 +239,7 @@ namespace Visualisator
                     }
                 }catch(Exception ex )
                 {
-                    MessageBox.Show("ParseReceivedPacket  Data" + ex.Message);
+                    AddToLog("Parse Received Packet - Data " + ex.Message);
                 }
                 if (add){
                     lock (Sync){
@@ -258,7 +254,7 @@ namespace Visualisator
                 //Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Source];
                 try
                 {
-                    if (_packet_queues.Count > 0)
+                    if ( ((Queue<Packets.Data>) _packet_queues[_wp.Source]).Count > 0)
                     {
                         lock (Sync)
                         {
@@ -269,7 +265,7 @@ namespace Visualisator
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("ParseReceivedPacket DataAck" + ex.Message);
+                    AddToLog("Parse Received Packet - Data Ack " + ex.Message);
                 }
                 DataAckReceived++;
             }

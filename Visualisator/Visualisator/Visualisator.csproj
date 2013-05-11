@@ -52,6 +52,12 @@
     <Compile Include="Forms\APInfo.Designer.cs">
       <DependentUpon>APInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ShowLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ShowLog.Designer.cs">
+      <DependentUpon>ShowLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Packets\Data.cs" />
     <Compile Include="Packets\DataAck.cs" />
     <Compile Include="Packets\KeepAlive.cs" />
@@ -111,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MediumInfo.resx">
       <DependentUpon>MediumInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ShowLog.resx">
+      <DependentUpon>ShowLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

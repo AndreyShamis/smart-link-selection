@@ -263,19 +263,19 @@ namespace Visualisator
             String ret = "";
             //ret += ObjectDumper.Dump(this);
 
-            ret += "\r\n_LOG\r\n";
-            ret += ObjectDumper.Dump(_LOG.ToString());
+            ret += "LOG\r\n";
+            ret += _LOG.ToString();
             ret += "\r\n _____________________________________________________ \r\n";
-            ret += "\r\n_packets\r\n";
-            ret += ObjectDumper.Dump(_packets);
-            ret += "\r\n_MChannels\r\n";
-            ret += ObjectDumper.Dump(_MChannels);
-            ret += "\r\n_Mfrequency\r\n";
-            ret += ObjectDumper.Dump(_Mfrequency);
-            ret += "\r\n_MBands\r\n";
-            ret += ObjectDumper.Dump(_MBands);
-            ret += "\r\nSTA\r\n";
-            ret += ObjectDumper.Dump(_objects);
+            //ret += "\r\n_packets\r\n";
+           // ret += ObjectDumper.Dump(_packets);
+            //ret += "\r\n_MChannels\r\n";
+            //ret += ObjectDumper.Dump(_MChannels);
+           // ret += "\r\n_Mfrequency\r\n";
+           // ret += ObjectDumper.Dump(_Mfrequency);
+            //ret += "\r\n_MBands\r\n";
+            //ret += ObjectDumper.Dump(_MBands);
+            //ret += "\r\nSTA\r\n";
+            //ret += ObjectDumper.Dump(_objects);
             return (ret);
         }
 
@@ -407,7 +407,10 @@ namespace Visualisator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Medium SaveDumpToFile" + ex.Message);
+                if (DebugLogEnabled)
+                {
+                    AddToLog("Medium SaveDumpToFile " + ex.Message);
+                }
             }
         }
 
