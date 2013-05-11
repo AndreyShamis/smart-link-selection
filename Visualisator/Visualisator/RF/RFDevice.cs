@@ -597,7 +597,29 @@ namespace Visualisator
             return val/points;
         }
 
+        static short get2_4RSSIrange(short RSSI)
+        {
+            short retVal = -64;
 
+            if (RSSI >= -64)
+                retVal = -64;
+            else if (RSSI == -65)
+                retVal = RSSI;
+            else if (RSSI == -66)
+                retVal = RSSI;
+            else if (RSSI < -66 && RSSI >= -70)
+                retVal = -70;
+            else if (RSSI < -70 && RSSI >= -74)
+                retVal = -74;
+            else if (RSSI < -74 && RSSI >= -77)
+                retVal = -77;
+            else if (RSSI < -77 && RSSI >= -79)
+                retVal = -79;
+            else if (RSSI < -79)// && RSSI >= -82)
+                retVal = -82;
+
+            return retVal;
+        }
 
         //*********************************************************************
         private bool ListenCondition()
