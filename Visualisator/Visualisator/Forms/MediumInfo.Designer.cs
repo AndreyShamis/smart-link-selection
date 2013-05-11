@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnShowDump = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.txtPacketsDump = new System.Windows.Forms.TextBox();
@@ -42,15 +42,15 @@
             this.btnSaveDump = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnShowDump
             // 
-            this.button1.Location = new System.Drawing.Point(12, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 26);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "show";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnShowDump.Location = new System.Drawing.Point(12, 3);
+            this.btnShowDump.Name = "btnShowDump";
+            this.btnShowDump.Size = new System.Drawing.Size(126, 26);
+            this.btnShowDump.TabIndex = 0;
+            this.btnShowDump.Text = "show";
+            this.btnShowDump.UseVisualStyleBackColor = true;
+            this.btnShowDump.Click += new System.EventHandler(this.btnShowDump_Click);
             // 
             // textBox1
             // 
@@ -60,7 +60,6 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(550, 491);
             this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // timer1
             // 
@@ -156,10 +155,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtPacketsDump);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnShowDump);
             this.Name = "MediumInfo";
             this.Text = "MediumInfo";
-            this.Load += new System.EventHandler(this.MediumInfo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,7 +165,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnShowDump;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox txtPacketsDump;
