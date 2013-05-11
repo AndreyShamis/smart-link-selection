@@ -29,11 +29,14 @@ namespace Visualisator
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
 
-        public string MACOfAnotherPeer { set; get; } //mac of another device with him we working now
         protected  static Random randomWait = new Random();
         protected static Random randomRssi = new Random();
 
+        public Frequency Freq { set; get; }
+        public Bandwidth BandWidth { set; get; }
+        public Standart80211 Stand80211 { set; get; }
 
+        public string MACOfAnotherPeer { set; get; } //mac of another device with him we working now
         public bool Passive { set; get; }
         public int MACLastTrnsmitRate { set; get; }
         public double guiNoiseRssi { set; get; }
@@ -89,7 +92,9 @@ namespace Visualisator
                         _peer.Distance = dist;
                         _peer.BSSID = devi.BSSID;
                         _peer.MAC = devi.getMACAddress();
-                        _peer.Band = devi.getOperateBand();
+                        _peer.Freq = devi.Freq;
+                        _peer.Stand80211 = devi.Stand80211;
+                        _peer.BandWidth = devi.BandWidth;
                         _peer.Channel = devi.getOperateChannel();
                         _peer.RSSI = GetRSSI(devi.x, devi.y);
                         _peer.isPassive = devi.Passive;
@@ -622,14 +627,14 @@ namespace Visualisator
             {
                 RFpeer _peer = (RFpeer)_RFpeers[MAC];
 
-                if (_peer.Band == "A")
+                if (_peer.Freq == Frequency._5200GHz)
                 {
                     if (_peer.BandWidth == Bandwidth._20MHz)
                         retVale = getRateOn5_2RSSI20M(_peer.RSSI);
                     else if (_peer.BandWidth == Bandwidth._40Mhz)
                         retVale = getRateOn5_2RSSI40M(_peer.RSSI);
                 }
-                else if (_peer.Band == "N")
+                else if (_peer.Freq == Frequency._2400GHz)
                 {
                     if (_peer.BandWidth == Bandwidth._20MHz)
                         retVale = getRateOn2_4RSSI20M(_peer.RSSI);

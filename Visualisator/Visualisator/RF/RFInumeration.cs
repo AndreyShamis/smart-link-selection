@@ -11,6 +11,22 @@ namespace Visualisator
         _40Mhz,
     };
 
+    internal enum Frequency
+    {
+        _2400GHz,
+        _5200GHz,
+    };
+
+    internal enum Standart80211
+    {
+        _11a,
+        _11b,
+        _11g,
+        _11n,
+        _11ac,
+    };
+
+
     /**
  * 0 = anything
  * 1 = TDLSSetup Request Sended

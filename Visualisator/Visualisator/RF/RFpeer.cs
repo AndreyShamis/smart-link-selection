@@ -43,7 +43,12 @@ namespace Visualisator
         /// <summary>
         /// Band of device Example: A or N
         /// </summary>
-        public string   Band { set; get; }
+        public Frequency Freq { set; get; }
+
+        /// <summary>
+        /// 802.11 standart used by peer device
+        /// </summary>
+        public Standart80211 Stand80211 { set; get; }
 
         /// <summary>
         /// Bandwidth of the peer device
