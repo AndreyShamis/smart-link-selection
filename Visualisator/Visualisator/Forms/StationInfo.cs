@@ -181,8 +181,9 @@ namespace Visualisator
                 lblRetransmittionRate.Text = _sta.getRetransmitionRate().ToString();
                 lblNoiseRssi.Text = _sta.guiNoiseRssi.ToString();
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                MessageBox.Show("STA INFO tmrFast_Tick" + ex.Message);
             }
         }
 

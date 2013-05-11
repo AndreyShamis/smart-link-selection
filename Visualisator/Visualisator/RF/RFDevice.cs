@@ -5,6 +5,7 @@ using Visualisator.Packets;
 using System.Collections;
 using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 
 namespace Visualisator
 {
@@ -132,16 +133,26 @@ namespace Visualisator
 
         public double getRetransmitionRate()
         {
-            RFpeer tempPeer = (RFpeer)_RFpeers[MACOfAnotherPeer];
+            if (MACOfAnotherPeer == null)
+                return -1;
+            try
+            {
+                RFpeer tempPeer = (RFpeer)_RFpeers[MACOfAnotherPeer];
 
-            short Recounter = tempPeer.RetransmitionCounter;
-            long counter = tempPeer.TransmitCounter;
+                short Recounter = tempPeer.RetransmitionCounter;
+                long counter = tempPeer.TransmitCounter;
 
-            if (counter == 0)
-                return 0;
+                if (counter == 0)
+                    return 0;
 
-            return 100*Recounter/counter;
+                return 100 * Recounter / counter; 
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("getRetransmitionRate" + ex.Message);
+            }
 
+            return -1;
         }
         protected ArrayList _AssociatedWithAPList = new ArrayList();
         protected ArrayList _PointerToAllRfDevices = null;

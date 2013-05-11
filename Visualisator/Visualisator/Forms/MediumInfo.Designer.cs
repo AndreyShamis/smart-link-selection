@@ -58,13 +58,13 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(550, 491);
+            this.textBox1.Size = new System.Drawing.Size(550, 349);
             this.textBox1.TabIndex = 1;
             // 
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 10;
+            this.timer1.Interval = 90;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // txtPacketsDump
@@ -73,7 +73,7 @@
             this.txtPacketsDump.Multiline = true;
             this.txtPacketsDump.Name = "txtPacketsDump";
             this.txtPacketsDump.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPacketsDump.Size = new System.Drawing.Size(315, 493);
+            this.txtPacketsDump.Size = new System.Drawing.Size(320, 351);
             this.txtPacketsDump.TabIndex = 2;
             // 
             // label1
@@ -145,7 +145,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(882, 527);
+            this.ClientSize = new System.Drawing.Size(893, 387);
             this.Controls.Add(this.btnSaveDump);
             this.Controls.Add(this.lblConnectAckCounter);
             this.Controls.Add(this.label4);
