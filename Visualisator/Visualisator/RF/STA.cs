@@ -514,7 +514,11 @@ namespace Visualisator
                     }
                     MACsandACK(dat.Source,dat.GuidD);
                 }
-                catch (Exception) { }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Parse Received Packeyt" + ex.Message);
+
+                }
             }
             else if (_Pt == typeof(DataAck))
             {

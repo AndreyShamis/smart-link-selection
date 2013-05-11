@@ -246,14 +246,19 @@ namespace Visualisator
         //=====================================================================
         protected short GetRSSI(double x, double y)
         {
+            short ret = 0;
             try{
                 double dist = GetSTADist( this.x,this.y, x, y);
                 if (dist >= 0){
                     // formula for wolfram: plot [y= -13*log_2(x),{y,16,-95},{x,60,0}] 
                     // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-13*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
-                    return (short)Convert.ToInt32(Math.Round(-13*Math.Log(dist, 2)));
+                    ret = (short)Convert.ToInt32(Math.Round(-13*Math.Log(dist, 2)));
                 }
-            }catch(Exception){}
+            }catch(Exception ex)
+            {
+
+                MessageBox.Show("GETRRSI " + ex.Message);
+            }
             return 0;
         }
         //*********************************************************************       
@@ -405,13 +410,21 @@ namespace Visualisator
             {
 
                 //_ev.WaitOne();
-                RF_STATUS = "TX";
-                while (!Medium.Registration(this.Freq, this.getOperateChannel(), this.x, this.y))
+                try
                 {
-                    Thread.Sleep(new TimeSpan(randomWait.Next(20,50)));
+                    RF_STATUS = "TX";
+                    while (!Medium.Registration(this.Freq, this.getOperateChannel(), this.x, this.y))
+                    {
+                        Thread.Sleep(new TimeSpan(randomWait.Next(20, 50)));
+                    }
+                    this.MACLastTrnsmitRate = pack.getTransmitRate();
+                    Medium.SendData(pack);   
                 }
-                this.MACLastTrnsmitRate = pack.getTransmitRate();
-                Medium.SendData(pack);
+                catch(Exception ex)
+                {
+                    MessageBox.Show("SendData :" + ex.Message);
+                }
+
                 RF_STATUS = "NONE";
             }
             //_ev.Set();

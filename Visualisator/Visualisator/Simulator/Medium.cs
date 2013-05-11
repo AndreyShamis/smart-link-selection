@@ -20,8 +20,6 @@ namespace Visualisator
             private Frequency _band;
             private short  _channel;
             private string _Destination;
-
-
             public Key(Frequency band, short Channel)
             {
                 _band = band;
@@ -34,7 +32,29 @@ namespace Visualisator
                 _Destination = dest;
             }
         }
+        [Serializable()]
+        class RegKey
+        {
+            private Frequency _band;
+            private short _channel;
+            public RegKey(Frequency band, short Channel)
+            {
+                _band = band;
+                _channel = (short)Channel;
+            }
+        }
 
+        [Serializable()]
+        class RegVal
+        {
+            public int x;
+            public int y;
+            public RegVal(int x, int y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+        }
         private const string _BROADCAST = "FF:FF:FF:FF:FF:FF";
         private static bool DebugLogEnabled = true;
         public static ArrayList _objects = null;
@@ -87,74 +107,56 @@ namespace Visualisator
         public static Boolean Registration(Frequency band, short channel, int x, int y)
         {
 
-            if (band.Equals("") || channel == 0)
-            {
+            if ( channel == 0)      //  In case if trys to send data in incorrect channel
                 return false;
-            }
-            Key Tk = new Key(band,channel);
+
+            RegKey Tk = null;
+            
             bool ret = false;
-            RFDevice ver = null;
-            if(_packets.Count == 0)
-            {
-                if (_T != null)
-                    lock (_T)
-                    {
-                        _T.Clear();
-                    }
-            }
+            RegVal ver = null;
+
             try
             {
+                if (_packets.Count == 0)
+                {
+                    if (_T != null)
+                        lock (_T)
+                        {
+                            _T.Clear();
+                        }
+                }
+                Tk = new RegKey(band, channel);
                 if (_T.ContainsKey(Tk))
                 {
                     ArrayList _temp = (ArrayList)_T[Tk];
                     if (_temp != null)
                     {
-                        foreach (var obj in _temp)
-                        {
-                            RFDevice _tV = (RFDevice)obj;
+                        foreach (var obj in _temp){
+                            RegVal _tV = (RegVal)obj;
                             if (getDistance(x, y, _tV.x, _tV.y) < ReceiveDistance)
-                            {
                                 return (false);
-                            }
-                            //Console.WriteLine(y);
                         }
 
-                        ver = new RFDevice(x, y, 0);
+                        ver = new RegVal(x, y);
                         _temp.Add(ver);
-                        lock (_T)
-                        {
-                            _T[Tk] = _temp;
-                        }
+                        lock (_T) { _T[Tk] = _temp; }
                         ret = true;
                         return ret;
-                        //Thread newThread = new Thread(() => Unregister(Tk, ver));
-                        //newThread.Start();
-                    }
-                    else
-                    {
+                    }else{
                         ArrayList _tempArrL = new ArrayList();
-                        ver = new RFDevice(x, y, 0);
+                        ver = new RegVal(x, y);
                         _tempArrL.Add(ver);
-
-                        lock (_T)
-                        {
-                            _T.Add(Tk, _tempArrL);
-                        }
+                        lock (_T){ _T.Add(Tk, _tempArrL);}
                         ret = true;
                         return ret;
-                        //Thread newThread = new Thread(() => Unregister(Tk, ver));
-                        //newThread.Start();
                     }
                 }
                 else
                 {
                     ArrayList _tempArrL = new ArrayList();
-                    ver = new RFDevice(x, y, 0);
+                    ver = new RegVal(x, y);
                     _tempArrL.Add(ver);
-                    lock (_T)
-                    {
-                        _T.Add(Tk, _tempArrL);
-                    }
+                    lock (_T){  _T.Add(Tk, _tempArrL);}
                     ret = true;
                     return ret;
                     //Thread newThread = new Thread(() => Unregister(Tk, ver));
@@ -180,9 +182,11 @@ namespace Visualisator
                     {
                         lock (_T)
                         {
-                            _temp.Remove((RFDevice)ver);
+                            _temp.Remove((RegVal)ver);
                             if (_temp.Count > 0)
                                 _T[Tk] = _temp;
+                            else if (_T.Count == 1)
+                                _T.Clear();
                             else
                                 _T.Remove(Tk);
                         }
@@ -201,7 +205,7 @@ namespace Visualisator
                     }
                 }
             }
-           // return (true);
+            return (true);
         }
         //=====================================================================
         public static int getPacketsFound()
@@ -244,7 +248,7 @@ namespace Visualisator
         }
         */
         //*********************************************************************
-        private static Double getDistance(Double x1, Double y1, Double x2, Double y2)
+        private static Double getDistance(int x1, int y1, int x2, int y2)
         {
             Double ret = 0;
             int x = (int) (x1 - x2);
@@ -349,7 +353,10 @@ namespace Visualisator
                     }
                     SaveDumpToFile();
                 }
-                catch (Exception) { }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Medium Run" + ex.Message);
+                }
             }
         }
 
@@ -380,7 +387,10 @@ namespace Visualisator
                         return true;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Medium MediumHaveAIRWork" + ex.Message);
+            }
                 return false;
         }
 
@@ -408,7 +418,10 @@ namespace Visualisator
                     outfile.Write(getMediumInfo() + "\r\n===================== Packets DUMP =====================\r\n" + Medium.DumpPackets());
                 }                    
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Medium SaveDumpToFile" + ex.Message);
+            }
         }
 
         //*********************************************************************
@@ -483,10 +496,19 @@ namespace Visualisator
         private static void ThreadableSendData(Key _Pk, object _ref)
         {
             EventArgs e = new EventArgs();
-            WeHavePacketsToSend(_ref, e);
-            SimulatorPacket p = (SimulatorPacket)_ref;
-            int Rate = p.getTransmitRate();
-            int sleep = GetObjectSize(p) / Rate;
+            int sleep = 0;
+            try
+            {
+                
+                WeHavePacketsToSend(_ref, e);
+                SimulatorPacket p = (SimulatorPacket)_ref;
+                int Rate = p.getTransmitRate();
+                sleep = GetObjectSize(p) / Rate;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Medium 1 ThreadableSendData" + ex.Message);
+            }
             Thread.Sleep(new TimeSpan(sleep * _MediumSendDataRatio));
             //AddToLog("Sleep for :" + sleep);
             _ev.WaitOne();
@@ -505,7 +527,10 @@ namespace Visualisator
                         _packets.Remove(_Pk);
                 }
             }
-            catch(Exception){}
+            catch (Exception ex)
+            {
+                MessageBox.Show("Medium ThreadableSendData" + ex.Message);
+            }
             finally
             {
                 _ev.Set();

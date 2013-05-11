@@ -149,7 +149,7 @@ namespace Visualisator
             {
                 Beacon _beac = new Beacon(CreatePacket());
                 _beac.Destination = "FF:FF:FF:FF:FF:FF";
-                //_beac.setTransmitRate(300);
+                //_beac.setTransmitRate(11);
                 this.SendData(_beac);
                 
                 Thread.Sleep(_BeaconPeriod);
@@ -199,7 +199,10 @@ namespace Visualisator
                 try{
                     _packet_queues.Add(_conn.Source, new Queue<Packets.Data>(1000)); //TODO : Check 1000?
                 }
-                catch (Exception) { }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("ParseReceivedPacket Conn " + ex.Message);
+                }
             }
             else if (Pt == typeof(KeepAlive))
             {
@@ -227,17 +230,20 @@ namespace Visualisator
                 bool add = true;
                 try
                 {
-                    foreach (Data value in temporaryQ)
+                    if (temporaryQ != null)
                     {
-                        if (value.GuidD.Equals(_wp.GuidD))
+                        foreach (Data value in temporaryQ)
                         {
-                            add = false;
-                            break;
+                            if (value.GuidD.Equals(_wp.GuidD))
+                            {
+                                add = false;
+                                break;
+                            }
                         }
                     }
-                }catch(Exception )
+                }catch(Exception ex )
                 {
-
+                    MessageBox.Show("ParseReceivedPacket  Data" + ex.Message);
                 }
                 if (add){
                     lock (Sync){
@@ -252,13 +258,19 @@ namespace Visualisator
                 //Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Source];
                 try
                 {
-                    lock (Sync)
+                    if (_packet_queues.Count > 0)
                     {
-                        ((Queue<Packets.Data>)_packet_queues[_wp.Source]).Dequeue();
-                        Monitor.PulseAll(Sync);
+                        lock (Sync)
+                        {
+                            ((Queue<Packets.Data>) _packet_queues[_wp.Source]).Dequeue();
+                            Monitor.PulseAll(Sync);
+                        }
                     }
                 }
-                catch (Exception) { } // TODO : to fix multiple acks
+                catch (Exception ex)
+                {
+                    MessageBox.Show("ParseReceivedPacket DataAck" + ex.Message);
+                }
                 DataAckReceived++;
             }
             else if (Pt == typeof(TDLSSetupRequest) ){
@@ -315,8 +327,9 @@ namespace Visualisator
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    MessageBox.Show("QueueElemntsSendDecision " + ex.Message);
                 }
                 Thread.Sleep(1);
             }

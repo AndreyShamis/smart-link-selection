@@ -11,7 +11,7 @@ namespace Visualisator.Packets
         private String _Reciver = "00:33:33:22:11:fa";
         private String _Destination = "FF:FF:FF:FF:FF:FF";
         private String _Source = "AA:AA:AA:AA:AA:AA";
-        private Double _x;
+
         private int _TransmitRate = 64;
         private int _PacketID = 0;
 
@@ -32,40 +32,20 @@ namespace Visualisator.Packets
             get { return _PacketID; }
             set { _PacketID = value; }
         }
-        public Double X
-        {
-            get { return _x; }
-            set { _x = value; }
-        }
-        private Double _y;
 
-        public Double Y
-        {
-            get { return _y; }
-            set { _y = value; }
-        }
-
-        short _PacketChannel = 0;
-
-        public short PacketChannel
-        {
-            get { return _PacketChannel; }
-            set { _PacketChannel = value; }
-        }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public short PacketChannel { get; set; }
         public SimulatorPacket(short Channel, Frequency freq)
         {
             _guid = Guid.NewGuid();
             this.PacketFrequency = freq;
-            _PacketChannel = Channel;
-
-          //  this._Type = "";
-          //  this._SubType = "";
+            this.PacketChannel = Channel;;
             this._SSID = "";
             this._Source = "";
             this._Reciver = "";
             this._Duration = "";
             this._Destination = "";
-       //     this._FramControllFlags = "";
             this._MAX_SupportedRate = "64";
             _TransmitRate = 64;
         }
