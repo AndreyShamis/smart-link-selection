@@ -28,7 +28,7 @@ namespace Visualisator
         /// <summary>
         /// RSSI of this device
         /// </summary>
-        public double   RSSI { set; get; }
+        public short   RSSI { set; get; }
 
         /// <summary>
         /// Distance to this device
@@ -44,6 +44,11 @@ namespace Visualisator
         /// Band of device Example: A or N
         /// </summary>
         public string   Band { set; get; }
+
+        /// <summary>
+        /// Bandwidth of the peer device
+        /// </summary>
+        public Bandwidth BandWidth { set; get; }
         
         /// <summary>
         /// BSSID
