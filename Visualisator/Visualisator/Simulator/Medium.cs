@@ -493,14 +493,14 @@ namespace Visualisator
                 WeHavePacketsToSend(_ref, e);
                 SimulatorPacket p = (SimulatorPacket)_ref;
                 int Rate = p.getTransmitRate();
-                long ps = GetObjectSize(p);
-                sleep = (int)(ps / Rate);
+                //long ps = GetObjectSize(p);
+                sleep = (int)(600 / Rate);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Medium 1 ThreadableSendData" + ex.Message);
             }
-            Thread.Sleep(new TimeSpan(sleep * _MediumSendDataRatio));
+            Thread.Sleep(new TimeSpan(sleep * _MediumSendDataRatio * 100));
             //AddToLog("Sleep for :" + sleep);
             _ev.WaitOne();
 

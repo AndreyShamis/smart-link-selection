@@ -179,6 +179,13 @@ namespace Visualisator
             txtConsole.Text = "X = " + e.X + "    Y = " + e.Y + "\r\n" + txtConsole.Text;
             const int _rad_size = 12;
 
+
+
+            for (int i = 0; i < _objects.Count; i++)
+            {
+                ((RFDevice)_objects[i]).UpdateRFPeers();
+            }
+
             for (int i = 0; i < _objects.Count; i++)
             {
                 if (_objects[i].GetType() == typeof (STA))
