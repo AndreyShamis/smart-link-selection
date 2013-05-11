@@ -624,7 +624,7 @@ namespace Visualisator
         /// </summary>
         /// <param name="RSSI"></param>
         /// <returns></returns>
-        static short getRateOn2_4RSSIrange(short RSSI)
+        static short getRateOn2_4RSSI20M(short RSSI)
         {
             short retVal = -64;
 
@@ -654,7 +654,37 @@ namespace Visualisator
         /// </summary>
         /// <param name="RSSI"></param>
         /// <returns></returns>
-        static short getRateOn5_2RSSIrange(short RSSI)
+        static short getRateOn2_4RSSI40M(short RSSI)
+        {
+            short retVal = -64;
+
+            if (RSSI >= -64)
+                retVal = 300;
+            else if (RSSI == -65)
+                retVal = 270;
+            else if (RSSI == -66)
+                retVal = 240;
+            else if (RSSI < -66 && RSSI >= -70)
+                retVal = 180;
+            else if (RSSI < -70 && RSSI >= -74)
+                retVal = 120;
+            else if (RSSI < -74 && RSSI >= -77)
+                retVal = 90;
+            else if (RSSI < -77 && RSSI >= -79)
+                retVal = 60;
+            else if (RSSI < -79)// && RSSI >= -82)
+                retVal = 30;
+
+            return retVal;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="RSSI"></param>
+        /// <returns></returns>
+        static short getRateOn5_2RSSI20M(short RSSI)
         {
             short retVal = -61;
 
@@ -674,6 +704,36 @@ namespace Visualisator
                 retVal = 28;
             else if (RSSI < -76)// && RSSI >= -79)
                 retVal = 14;
+
+            return retVal;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="RSSI"></param>
+        /// <returns></returns>
+        static short getRateOn5_2RSSI40M(short RSSI)
+        {
+            short retVal = -61;
+
+            if (RSSI >= -61)
+                retVal = 300;
+            else if (RSSI == -62)
+                retVal = 270;
+            else if (RSSI == -63)
+                retVal = 240;
+            else if (RSSI < -63 && RSSI >= -67)
+                retVal = 180;
+            else if (RSSI < -67 && RSSI >= -71)
+                retVal = 120;
+            else if (RSSI < -71 && RSSI >= -74)
+                retVal = 90;
+            else if (RSSI < -74 && RSSI >= -76)
+                retVal = 60;
+            else if (RSSI < -76)// && RSSI >= -79)
+                retVal = 30;
 
             return retVal;
 
