@@ -119,7 +119,7 @@ namespace Visualisator
             _ap.setOperateChannel((short)rand.Next(1, 14));
             _ap.SetVertex((int)MouseX, (int)MouseY, 0);
             _objects.Add(_ap);
-
+            Medium.setMediumObj(_objects);
         }
 
         //====================================================================================================
@@ -131,7 +131,7 @@ namespace Visualisator
             _sta.SetVertex((int)MouseX, (int)MouseY, 0);
             _objects.Add(_sta);
             _sta.Scan();
-
+            Medium.setMediumObj(_objects);
             //Medium.addObjToMedium(_objects);
 
         }

@@ -289,19 +289,6 @@ namespace Visualisator
         {
                 _objects = _obj;
         }
-        //*********************************************************************
-        //public static void addObjToMedium(ArrayList _obj)
-        //{
-        //    if (_objects != null)
-        //    {
-        //        _objects.AddRange(_obj);
-        //    }
-        //    else
-        //    {
-        //        _objects = _obj;
-        //    }
-        //}
-
 
         //*********************************************************************
         public static void Enable()
