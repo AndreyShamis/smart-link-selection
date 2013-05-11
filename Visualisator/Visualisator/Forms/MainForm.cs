@@ -483,7 +483,7 @@ namespace Visualisator
         {
             
             //Medium.Disable();
-            Medium.MediumStart();
+            
             CreateRandomSimulation();
             DrowOnBoard();
 
