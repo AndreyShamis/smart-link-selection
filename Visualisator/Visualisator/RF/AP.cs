@@ -149,7 +149,7 @@ namespace Visualisator
             {
                 Beacon _beac = new Beacon(CreatePacket());
                 _beac.Destination = "FF:FF:FF:FF:FF:FF";
-                //_beac.setTransmitRate(11);
+                _beac.setTransmitRate(6);
                 this.SendData(_beac);
                 
                 Thread.Sleep(_BeaconPeriod);
@@ -213,12 +213,13 @@ namespace Visualisator
             else if (Pt == typeof(Data))
             {
                 Data _wp        = (Data)pack;
-                MACsandACK(_wp.Source,_wp.GuidD);
+                MACsandACK(_wp.Source, _wp.GuidD, _wp.getTransmitRate());
 
                 Data resendedData = new Data(_wp);
                 resendedData.Destination = _wp.Reciver;
                 resendedData.X = this.x;
                 resendedData.Y = this.y;
+                resendedData.setTransmitRate(_wp.getTransmitRate());
                 resendedData.Source = this.getMACAddress().ToString();
 
                 Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Reciver];

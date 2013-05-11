@@ -95,7 +95,6 @@
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "AP SSID";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -257,8 +256,6 @@
             this.listStations.Size = new System.Drawing.Size(207, 225);
             this.listStations.TabIndex = 16;
             this.listStations.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listStations_MouseClick);
-            this.listStations.SelectedIndexChanged += new System.EventHandler(this.listStations_SelectedIndexChanged);
-            this.listStations.DoubleClick += new System.EventHandler(this.listStations_DoubleClick);
             this.listStations.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listStations_MouseDoubleClick);
             // 
             // lblQueue

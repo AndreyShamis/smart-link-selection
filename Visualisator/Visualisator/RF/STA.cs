@@ -512,7 +512,7 @@ namespace Visualisator
                     }else{
                         DataAckRetransmitted++;
                     }
-                    MACsandACK(dat.Source,dat.GuidD);
+                    MACsandACK(dat.Source, dat.GuidD, dat.getTransmitRate());
                 }
                 catch (Exception ex)
                 {
@@ -696,7 +696,8 @@ namespace Visualisator
                 dataPack.PacketFrequency = this.Freq;
                 
                 SQID++;
-                dataPack.setTransmitRate(transmitRate);
+                short tem = GetTXRate(dataPack.Destination);
+                dataPack.setTransmitRate(tem);
                 dataPack.setData(line);
                 dataPack.PacketID = SQID;
 
