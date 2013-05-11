@@ -67,9 +67,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(77, 0);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.Color.Maroon;
+            this.label1.Location = new System.Drawing.Point(71, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "AP MAC";
             // 
@@ -85,9 +87,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(283, 0);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.Maroon;
+            this.label3.Location = new System.Drawing.Point(255, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "AP SSID";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -95,46 +99,60 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 35);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label4.Location = new System.Drawing.Point(38, 37);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.Size = new System.Drawing.Size(86, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "AP Frequency";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(77, 35);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label5.Location = new System.Drawing.Point(112, 37);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 13);
+            this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 4;
             this.label5.Text = "AP Channel";
             // 
             // lblChannel
             // 
-            this.lblChannel.Location = new System.Drawing.Point(77, 48);
+            this.lblChannel.BackColor = System.Drawing.Color.White;
+            this.lblChannel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblChannel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lblChannel.Location = new System.Drawing.Point(121, 50);
             this.lblChannel.Name = "lblChannel";
-            this.lblChannel.Size = new System.Drawing.Size(63, 13);
+            this.lblChannel.Size = new System.Drawing.Size(50, 15);
             this.lblChannel.TabIndex = 9;
             this.lblChannel.Text = "CHANNEL";
             this.lblChannel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblBand
             // 
-            this.lblBand.Location = new System.Drawing.Point(3, 48);
+            this.lblBand.BackColor = System.Drawing.Color.White;
+            this.lblBand.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblBand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblBand.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lblBand.Location = new System.Drawing.Point(52, 50);
             this.lblBand.Name = "lblBand";
-            this.lblBand.Size = new System.Drawing.Size(49, 13);
+            this.lblBand.Size = new System.Drawing.Size(50, 15);
             this.lblBand.TabIndex = 8;
             this.lblBand.Text = "FREQ";
             this.lblBand.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblSSID
             // 
+            this.lblSSID.BackColor = System.Drawing.Color.White;
+            this.lblSSID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblSSID.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblSSID.ForeColor = System.Drawing.Color.Navy;
-            this.lblSSID.Location = new System.Drawing.Point(219, 13);
+            this.lblSSID.Location = new System.Drawing.Point(197, 13);
             this.lblSSID.Name = "lblSSID";
-            this.lblSSID.Size = new System.Drawing.Size(148, 13);
+            this.lblSSID.Size = new System.Drawing.Size(170, 18);
             this.lblSSID.TabIndex = 7;
             this.lblSSID.Text = "AP SSID";
             this.lblSSID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -150,11 +168,13 @@
             // 
             // lblMAC
             // 
+            this.lblMAC.BackColor = System.Drawing.Color.White;
+            this.lblMAC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMAC.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblMAC.ForeColor = System.Drawing.Color.Green;
-            this.lblMAC.Location = new System.Drawing.Point(25, 13);
+            this.lblMAC.Location = new System.Drawing.Point(6, 13);
             this.lblMAC.Name = "lblMAC";
-            this.lblMAC.Size = new System.Drawing.Size(151, 13);
+            this.lblMAC.Size = new System.Drawing.Size(187, 18);
             this.lblMAC.TabIndex = 5;
             this.lblMAC.Text = "AP MAC";
             this.lblMAC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -338,9 +358,13 @@
             // 
             // lblBandwith
             // 
-            this.lblBandwith.Location = new System.Drawing.Point(146, 48);
+            this.lblBandwith.BackColor = System.Drawing.Color.White;
+            this.lblBandwith.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblBandwith.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblBandwith.ForeColor = System.Drawing.Color.Teal;
+            this.lblBandwith.Location = new System.Drawing.Point(197, 50);
             this.lblBandwith.Name = "lblBandwith";
-            this.lblBandwith.Size = new System.Drawing.Size(63, 13);
+            this.lblBandwith.Size = new System.Drawing.Size(50, 15);
             this.lblBandwith.TabIndex = 29;
             this.lblBandwith.Text = "BANDWITH";
             this.lblBandwith.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -348,17 +372,23 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(146, 35);
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label14.Location = new System.Drawing.Point(181, 37);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(68, 13);
+            this.label14.Size = new System.Drawing.Size(79, 13);
             this.label14.TabIndex = 28;
             this.label14.Text = "AP Bandwith";
             // 
             // lblStandart
             // 
-            this.lblStandart.Location = new System.Drawing.Point(220, 48);
+            this.lblStandart.BackColor = System.Drawing.Color.White;
+            this.lblStandart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStandart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblStandart.ForeColor = System.Drawing.Color.Teal;
+            this.lblStandart.Location = new System.Drawing.Point(272, 50);
             this.lblStandart.Name = "lblStandart";
-            this.lblStandart.Size = new System.Drawing.Size(63, 13);
+            this.lblStandart.Size = new System.Drawing.Size(50, 15);
             this.lblStandart.TabIndex = 31;
             this.lblStandart.Text = "STAN80211";
             this.lblStandart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -366,9 +396,11 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(220, 35);
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label15.Location = new System.Drawing.Point(255, 37);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(64, 13);
+            this.label15.Size = new System.Drawing.Size(75, 13);
             this.label15.TabIndex = 30;
             this.label15.Text = "AP Standart";
             // 
