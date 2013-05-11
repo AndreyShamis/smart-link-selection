@@ -43,6 +43,8 @@ namespace Visualisator
 
         public string SSID { set; get; }
         public string BSSID { set; get; }
+        public Color DefaultColor { set; get; }
+    
 
         #region Noise
         /// <summary>

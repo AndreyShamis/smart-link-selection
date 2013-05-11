@@ -25,7 +25,7 @@ namespace Visualisator
         private static Random       random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
         private Hashtable _packet_queues = new Hashtable(new ByteArrayComparer());
         private string Sync = "sync";
-
+        
         //*********************************************************************
 
         //*********************************************************************
@@ -73,8 +73,8 @@ namespace Visualisator
         //*********************************************************************
         public AP()
         {
-           
-            this.VColor = Color.YellowGreen;
+            DefaultColor = Color.YellowGreen;
+            this.VColor = DefaultColor;
             this.SSID = RandomString(8);
             this.BSSID = this.getMACAddress();
             _BeaconPeriod = rnadomBeacon.Next(AP_MIN_SEND_PERIOD, AP_MAX_SEND_PERIOD);    

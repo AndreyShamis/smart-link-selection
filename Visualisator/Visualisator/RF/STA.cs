@@ -118,9 +118,9 @@ namespace Visualisator
         //*********************************************************************
         public STA(ArrayList RfObjects)
         {
-        
+            DefaultColor = Color.RoyalBlue;
             ListenBeacon = true;
-            this.VColor = Color.RoyalBlue;
+            this.VColor = DefaultColor;
             _PointerToAllRfDevices = RfObjects;
             Enable();
         }

@@ -179,13 +179,6 @@ namespace Visualisator
             txtConsole.Text = "X = " + e.X + "    Y = " + e.Y + "\r\n" + txtConsole.Text;
             const int _rad_size = 12;
 
-
-
-            for (int i = 0; i < _objects.Count; i++)
-            {
-                ((RFDevice)_objects[i]).UpdateRFPeers();
-            }
-
             for (int i = 0; i < _objects.Count; i++)
             {
                 if (_objects[i].GetType() == typeof (STA))
@@ -200,6 +193,7 @@ namespace Visualisator
                         SelectedY = e.Y;
                         SelectedZ = e.X + e.Y;
                         _ob = SelectedObjectType.STA;
+                        _tsta.VColor = Color.Red;
                         return;
                     }
                 }
@@ -214,6 +208,7 @@ namespace Visualisator
                         SelectedX = e.X;
                         SelectedY = e.Y;
                         SelectedZ = e.X + e.Y;
+                        _tap.VColor = Color.Red;
                         _ob = SelectedObjectType.AP;
                         return;
                     }
@@ -236,30 +231,26 @@ namespace Visualisator
 
             if (SelectedX != e.X && SelectedY != e.Y)
             {
-                //ConsolePrint("Start move object");
-                if (_ob == SelectedObjectType.AP)
-                {
-                    AP _tAP = (AP) _objects[SelectedVertex];
+
+                     
                     // ConsolePrint("Drawing " + _tAP.getMAC().getMAC());
-                    _tAP.SetVertex(e.X, e.Y,0);
-                }
-                if (_ob == SelectedObjectType.STA)
-                {
-                    STA _tsta = (STA) _objects[SelectedVertex];
-                    // ConsolePrint("Drawing " + _tsta.getMACAddress());
-                    _tsta.SetVertex(e.X, e.Y,0);
-                }
+                    ((RFDevice) _objects[SelectedVertex]).SetVertex(e.X, e.Y,0);
+
             }
             else
             {
+                
                 ConsolePrint("Object not moved: Simple click");
             }
-
+            ((RFDevice)_objects[SelectedVertex]).VColor = ((RFDevice)_objects[SelectedVertex]).DefaultColor;
             if (e.Button == MouseButtons.Right)
             {
                 contextMenuStrip1.Show(this, new Point(e.X, e.Y));
             }
-
+            for (int i = 0; i < _objects.Count; i++)
+            {
+                ((RFDevice)_objects[i]).UpdateRFPeers();
+            }
             SelectedVertex = -1;
             refr();
         }
