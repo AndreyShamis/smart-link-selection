@@ -52,6 +52,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.lblAllReceivedPackets = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.cmbWorkChannel = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmdSetChannel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -223,7 +226,7 @@
             this.listStations.FormattingEnabled = true;
             this.listStations.Location = new System.Drawing.Point(373, 0);
             this.listStations.Name = "listStations";
-            this.listStations.Size = new System.Drawing.Size(206, 342);
+            this.listStations.Size = new System.Drawing.Size(207, 225);
             this.listStations.TabIndex = 16;
             this.listStations.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listStations_MouseClick);
             this.listStations.SelectedIndexChanged += new System.EventHandler(this.listStations_SelectedIndexChanged);
@@ -268,11 +271,41 @@
             this.label11.TabIndex = 19;
             this.label11.Text = "Received Packets Sum";
             // 
+            // cmbWorkChannel
+            // 
+            this.cmbWorkChannel.FormattingEnabled = true;
+            this.cmbWorkChannel.Location = new System.Drawing.Point(206, 229);
+            this.cmbWorkChannel.Name = "cmbWorkChannel";
+            this.cmbWorkChannel.Size = new System.Drawing.Size(84, 21);
+            this.cmbWorkChannel.TabIndex = 21;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(25, 235);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(64, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Set channel";
+            // 
+            // cmdSetChannel
+            // 
+            this.cmdSetChannel.Location = new System.Drawing.Point(296, 229);
+            this.cmdSetChannel.Name = "cmdSetChannel";
+            this.cmdSetChannel.Size = new System.Drawing.Size(46, 19);
+            this.cmdSetChannel.TabIndex = 23;
+            this.cmdSetChannel.Text = "Set";
+            this.cmdSetChannel.UseVisualStyleBackColor = true;
+            this.cmdSetChannel.Click += new System.EventHandler(this.cmdSetChannel_Click);
+            // 
             // APInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 343);
+            this.Controls.Add(this.cmdSetChannel);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cmbWorkChannel);
             this.Controls.Add(this.lblAllReceivedPackets);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.lblQueue);
@@ -327,5 +360,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblAllReceivedPackets;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmbWorkChannel;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button cmdSetChannel;
     }
 }

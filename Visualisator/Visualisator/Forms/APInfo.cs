@@ -23,7 +23,12 @@ namespace Visualisator
 
         private void APInfo_Load(object sender, EventArgs e)
         {
+            for (int i = 1; i < 14; i++)
+            {
+                cmbWorkChannel.Items.Add(i);
+            }
 
+            cmbWorkChannel.SelectedText = _ap.getOperateChannel().ToString();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -92,6 +97,16 @@ namespace Visualisator
         private void listStations_MouseClick(object sender, MouseEventArgs e)
         {
             lblQueue.Text = _ap.getQueueSize(listStations.Text).ToString();
+        }
+
+        private void cmdSetChannel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ap.setOperateChannel((short)Convert.ToInt32(cmbWorkChannel.SelectedItem.ToString()));  
+            }
+            catch(Exception){}
+            
         }
     }
 }
