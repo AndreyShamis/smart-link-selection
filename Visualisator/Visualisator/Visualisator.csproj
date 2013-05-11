@@ -63,7 +63,6 @@
     <Compile Include="Packets\TDLSSetupRequest.cs" />
     <Compile Include="Packets\TDLSSetupResponse.cs" />
     <Compile Include="Packets\TDLSTearDown.cs" />
-    <Compile Include="Simulator\RateTable.cs" />
     <Compile Include="RF\RFpeer.cs" />
     <Compile Include="Simulator\ArrayListCounted.cs" />
     <Compile Include="Simulator\ByteArrayComparer.cs" />

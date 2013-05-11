@@ -613,5 +613,70 @@ namespace Visualisator
             this.z = z;
             UpdateRFPeers();
         }
+
+
+
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="RSSI"></param>
+        /// <returns></returns>
+        static short getRateOn2_4RSSIrange(short RSSI)
+        {
+            short retVal = -64;
+
+            if (RSSI >= -64)
+                retVal = 144;
+            else if (RSSI == -65)
+                retVal = 130;
+            else if (RSSI == -66)
+                retVal = 115;
+            else if (RSSI < -66 && RSSI >= -70)
+                retVal = 86;
+            else if (RSSI < -70 && RSSI >= -74)
+                retVal = 57;
+            else if (RSSI < -74 && RSSI >= -77)
+                retVal = 43;
+            else if (RSSI < -77 && RSSI >= -79)
+                retVal = 28;
+            else if (RSSI < -79)// && RSSI >= -82)
+                retVal = 14;
+
+            return retVal;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="RSSI"></param>
+        /// <returns></returns>
+        static short getRateOn5_2RSSIrange(short RSSI)
+        {
+            short retVal = -61;
+
+            if (RSSI >= -61)
+                retVal = 144;
+            else if (RSSI == -62)
+                retVal = 130;
+            else if (RSSI == -63)
+                retVal = 115;
+            else if (RSSI < -63 && RSSI >= -67)
+                retVal = 86;
+            else if (RSSI < -67 && RSSI >= -71)
+                retVal = 57;
+            else if (RSSI < -71 && RSSI >= -74)
+                retVal = 43;
+            else if (RSSI < -74 && RSSI >= -76)
+                retVal = 28;
+            else if (RSSI < -76)// && RSSI >= -79)
+                retVal = 14;
+
+            return retVal;
+
+        }
     }
 }
