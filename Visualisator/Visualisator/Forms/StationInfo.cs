@@ -175,7 +175,7 @@ namespace Visualisator
                 lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
 
                 lblLastTransmitRate.Text = _sta.MACLastTrnsmitRate.ToString();
-                lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
+                
                 lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
                                          //     lblCounterToretransmit.Text.Substring(0, 2);
 
@@ -304,6 +304,8 @@ namespace Visualisator
             {
                 cmdShowLog.Enabled = true;
             }
+
+            lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
         }
     }
 }

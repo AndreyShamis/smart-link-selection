@@ -163,7 +163,7 @@
             // lblRetransmittionRate
             // 
             this.lblRetransmittionRate.AutoSize = true;
-            this.lblRetransmittionRate.Location = new System.Drawing.Point(333, 168);
+            this.lblRetransmittionRate.Location = new System.Drawing.Point(344, 165);
             this.lblRetransmittionRate.Name = "lblRetransmittionRate";
             this.lblRetransmittionRate.Size = new System.Drawing.Size(13, 13);
             this.lblRetransmittionRate.TabIndex = 58;
@@ -173,7 +173,7 @@
             // 
             this.label15.AccessibleDescription = "";
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(265, 168);
+            this.label15.Location = new System.Drawing.Point(274, 165);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 13);
             this.label15.TabIndex = 57;
@@ -184,7 +184,7 @@
             // lblNoiseRssi
             // 
             this.lblNoiseRssi.AutoSize = true;
-            this.lblNoiseRssi.Location = new System.Drawing.Point(333, 181);
+            this.lblNoiseRssi.Location = new System.Drawing.Point(344, 178);
             this.lblNoiseRssi.Name = "lblNoiseRssi";
             this.lblNoiseRssi.Size = new System.Drawing.Size(13, 13);
             this.lblNoiseRssi.TabIndex = 56;
@@ -193,7 +193,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(265, 181);
+            this.label10.Location = new System.Drawing.Point(274, 178);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(62, 13);
             this.label10.TabIndex = 55;
@@ -203,7 +203,7 @@
             // lblLastTransmitRate
             // 
             this.lblLastTransmitRate.AutoSize = true;
-            this.lblLastTransmitRate.Location = new System.Drawing.Point(133, 208);
+            this.lblLastTransmitRate.Location = new System.Drawing.Point(344, 143);
             this.lblLastTransmitRate.Name = "lblLastTransmitRate";
             this.lblLastTransmitRate.Size = new System.Drawing.Size(13, 13);
             this.lblLastTransmitRate.TabIndex = 54;
@@ -212,7 +212,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(17, 208);
+            this.label13.Location = new System.Drawing.Point(230, 143);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(91, 13);
             this.label13.TabIndex = 53;
@@ -251,7 +251,7 @@
             // lblTDLSSetupStatus
             // 
             this.lblTDLSSetupStatus.AutoSize = true;
-            this.lblTDLSSetupStatus.Location = new System.Drawing.Point(131, 192);
+            this.lblTDLSSetupStatus.Location = new System.Drawing.Point(344, 127);
             this.lblTDLSSetupStatus.Name = "lblTDLSSetupStatus";
             this.lblTDLSSetupStatus.Size = new System.Drawing.Size(13, 13);
             this.lblTDLSSetupStatus.TabIndex = 49;
@@ -260,7 +260,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(15, 192);
+            this.label12.Location = new System.Drawing.Point(228, 127);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(99, 13);
             this.label12.TabIndex = 48;
@@ -288,7 +288,7 @@
             // 
             this.btnChangeTDLSStatusOn.Enabled = false;
             this.btnChangeTDLSStatusOn.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnChangeTDLSStatusOn.Location = new System.Drawing.Point(59, 168);
+            this.btnChangeTDLSStatusOn.Location = new System.Drawing.Point(56, 211);
             this.btnChangeTDLSStatusOn.Name = "btnChangeTDLSStatusOn";
             this.btnChangeTDLSStatusOn.Size = new System.Drawing.Size(52, 21);
             this.btnChangeTDLSStatusOn.TabIndex = 45;
@@ -300,9 +300,9 @@
             // 
             this.btnChangeTDLSStatus.Enabled = false;
             this.btnChangeTDLSStatus.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnChangeTDLSStatus.Location = new System.Drawing.Point(18, 168);
+            this.btnChangeTDLSStatus.Location = new System.Drawing.Point(15, 211);
             this.btnChangeTDLSStatus.Name = "btnChangeTDLSStatus";
-            this.btnChangeTDLSStatus.Size = new System.Drawing.Size(38, 21);
+            this.btnChangeTDLSStatus.Size = new System.Drawing.Size(35, 21);
             this.btnChangeTDLSStatus.TabIndex = 44;
             this.btnChangeTDLSStatus.Text = "SLS";
             this.btnChangeTDLSStatus.UseVisualStyleBackColor = true;
@@ -312,7 +312,7 @@
             // 
             this.txtTDLSSetupRequestMAC.BackColor = System.Drawing.Color.YellowGreen;
             this.txtTDLSSetupRequestMAC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTDLSSetupRequestMAC.Location = new System.Drawing.Point(157, 144);
+            this.txtTDLSSetupRequestMAC.Location = new System.Drawing.Point(15, 185);
             this.txtTDLSSetupRequestMAC.Name = "txtTDLSSetupRequestMAC";
             this.txtTDLSSetupRequestMAC.Size = new System.Drawing.Size(102, 20);
             this.txtTDLSSetupRequestMAC.TabIndex = 42;
@@ -321,7 +321,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(18, 143);
+            this.button2.Location = new System.Drawing.Point(13, 162);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(133, 19);
             this.button2.TabIndex = 41;
@@ -334,7 +334,7 @@
             this.lblTDLSisWork.AutoSize = true;
             this.lblTDLSisWork.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblTDLSisWork.ForeColor = System.Drawing.Color.Olive;
-            this.lblTDLSisWork.Location = new System.Drawing.Point(159, 128);
+            this.lblTDLSisWork.Location = new System.Drawing.Point(154, 147);
             this.lblTDLSisWork.Name = "lblTDLSisWork";
             this.lblTDLSisWork.Size = new System.Drawing.Size(24, 13);
             this.lblTDLSisWork.TabIndex = 40;
@@ -345,7 +345,7 @@
             this.lblTDLStatus.AutoSize = true;
             this.lblTDLStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblTDLStatus.ForeColor = System.Drawing.Color.DarkSeaGreen;
-            this.lblTDLStatus.Location = new System.Drawing.Point(132, 128);
+            this.lblTDLStatus.Location = new System.Drawing.Point(127, 147);
             this.lblTDLStatus.Name = "lblTDLStatus";
             this.lblTDLStatus.Size = new System.Drawing.Size(24, 13);
             this.lblTDLStatus.TabIndex = 34;
@@ -354,7 +354,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(17, 127);
+            this.label8.Location = new System.Drawing.Point(12, 146);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(111, 13);
             this.label8.TabIndex = 33;
@@ -363,7 +363,7 @@
             // lblCounterToretransmit
             // 
             this.lblCounterToretransmit.AutoSize = true;
-            this.lblCounterToretransmit.Location = new System.Drawing.Point(126, 106);
+            this.lblCounterToretransmit.Location = new System.Drawing.Point(122, 112);
             this.lblCounterToretransmit.Name = "lblCounterToretransmit";
             this.lblCounterToretransmit.Size = new System.Drawing.Size(13, 13);
             this.lblCounterToretransmit.TabIndex = 32;
@@ -372,7 +372,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 106);
+            this.label9.Location = new System.Drawing.Point(6, 112);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(109, 13);
             this.label9.TabIndex = 31;
@@ -381,7 +381,7 @@
             // lblDoubleReceived
             // 
             this.lblDoubleReceived.AutoSize = true;
-            this.lblDoubleReceived.Location = new System.Drawing.Point(126, 93);
+            this.lblDoubleReceived.Location = new System.Drawing.Point(122, 99);
             this.lblDoubleReceived.Name = "lblDoubleReceived";
             this.lblDoubleReceived.Size = new System.Drawing.Size(13, 13);
             this.lblDoubleReceived.TabIndex = 30;
@@ -390,7 +390,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 93);
+            this.label7.Location = new System.Drawing.Point(6, 99);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(90, 13);
             this.label7.TabIndex = 29;
@@ -674,7 +674,7 @@
             // tmrFast
             // 
             this.tmrFast.Enabled = true;
-            this.tmrFast.Interval = 90;
+            this.tmrFast.Interval = 50;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
             // tmrSlow
