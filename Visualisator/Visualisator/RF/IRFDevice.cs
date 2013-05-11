@@ -16,9 +16,6 @@ namespace Visualisator
         void setOperateChannel(short NewChannel);
         short getOperateChannel();
 
-        void setOperateBand(string NewBand);
-        string getOperateBand();
-
         void RegisterToMedium(Int32 x, Int32 y, Int32 Channel, String Band, Int32 Radius);
         void AddToLog(String newLogEntry);
         String DumpAll();

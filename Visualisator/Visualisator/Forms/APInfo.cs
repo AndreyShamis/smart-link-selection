@@ -40,7 +40,7 @@ namespace Visualisator
         {
             lblMAC.Text = _ap.getMACAddress();
             lblChannel.Text = _ap.getOperateChannel().ToString();
-            lblBand.Text = _ap.getOperateBand();
+            lblBand.Text = _ap.Freq.ToString() + " " + _ap.Stand80211.ToString();
             lblSSID.Text = _ap.SSID;
 
 

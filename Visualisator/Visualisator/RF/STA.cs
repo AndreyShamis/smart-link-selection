@@ -170,7 +170,11 @@ namespace Visualisator
                     keepAl.SSID             = _connecttoAP.SSID;
                     keepAl.Destination      = _connecttoAP.getMACAddress();
                     keepAl.PacketChannel    = this.getOperateChannel();
-                    keepAl.PacketBand       = this.getOperateBand();
+                    //keepAl.PacketBand = this.getOperateBand();
+                    keepAl.PacketBandWith   = this.BandWidth;
+                    keepAl.PacketStandart   = this.Stand80211;
+                    keepAl.PacketFrequency  = this.Freq;
+                
                     keepAl.Reciver          = _connecttoAP.getMACAddress();
                     SendData(keepAl);
                     Thread.Sleep(3000);
@@ -192,10 +196,15 @@ namespace Visualisator
             _conn.SSID                          = _connecttoAP.SSID;
             _conn.Destination                   = _connecttoAP.getMACAddress();
             _conn.PacketChannel                 = _connecttoAP.getOperateChannel();
-            _conn.PacketBand                    = _connecttoAP.getOperateBand();
+            _conn.PacketBandWith = _connecttoAP.BandWidth;
+            _conn.PacketFrequency = _connecttoAP.Freq;
+            _conn.PacketStandart = _connecttoAP.Stand80211;
+
             _conn.Reciver                       = _connecttoAP.getMACAddress();
             this.setOperateChannel(_connecttoAP.getOperateChannel());
-            this.setOperateBand(_connecttoAP.getOperateBand());
+            this.Freq = _connecttoAP.Freq;
+            this.BandWidth = _connecttoAP.BandWidth;
+            this.Stand80211 = _connecttoAP.Stand80211;
             while (!connectSuccess )
             {
                 if (!_AssociatedWithAPList.Contains(SSID))
@@ -221,7 +230,10 @@ namespace Visualisator
                     }
                 );
                 this.setOperateChannel(_connecttoAP.getOperateChannel());
-                this.setOperateBand(_connecttoAP.getOperateBand());
+               // this.setOperateBand(_connecttoAP.getOperateBand());
+                this.Freq = _connecttoAP.Freq;
+                
+
             }
             //  Fix Work Channel under scan
         }
@@ -406,7 +418,9 @@ namespace Visualisator
             _tdlsSetupR.SSID            = _connecttoAP.SSID;
             _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
             _tdlsSetupR.PacketChannel   = this.getOperateChannel();
-            _tdlsSetupR.PacketBand      = this.getOperateBand();
+            _tdlsSetupR.PacketFrequency = this.Freq;
+            _tdlsSetupR.PacketBandWith = this.BandWidth;
+            _tdlsSetupR.PacketStandart = this.Stand80211;
             _tdlsSetupR.Reciver         = MAC;
           //  _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
@@ -426,7 +440,9 @@ namespace Visualisator
                 _tdlsSetupR.SSID = _connecttoAP.SSID;
                 _tdlsSetupR.Destination = _connecttoAP.getMACAddress();
                 _tdlsSetupR.PacketChannel = this.getOperateChannel();
-                _tdlsSetupR.PacketBand = this.getOperateBand();
+                _tdlsSetupR.PacketFrequency = this.Freq;
+                _tdlsSetupR.PacketBandWith = this.BandWidth;
+                _tdlsSetupR.PacketStandart = this.Stand80211;
                 _tdlsSetupR.Reciver = MAC;
                 // _tdlsSetupR.setTransmitRate(11);
                 SendData(_tdlsSetupR);
@@ -445,7 +461,9 @@ namespace Visualisator
             _tdlsSetupR.SSID = _connecttoAP.SSID;
             _tdlsSetupR.Destination = _connecttoAP.getMACAddress();
             _tdlsSetupR.PacketChannel = this.getOperateChannel();
-            _tdlsSetupR.PacketBand = this.getOperateBand();
+            _tdlsSetupR.PacketFrequency = this.Freq;
+            _tdlsSetupR.PacketBandWith = this.BandWidth;
+            _tdlsSetupR.PacketStandart = this.Stand80211;
             _tdlsSetupR.Reciver = MAC;
            // _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
@@ -638,7 +656,10 @@ namespace Visualisator
             dataPack.SSID = _connecttoAP.SSID;
             dataPack.Destination = _connecttoAP.getMACAddress();
             dataPack.PacketChannel = this.getOperateChannel();
-            dataPack.PacketBand = this.getOperateBand();
+            //dataPack.PacketBand = this.getOperateBand();
+            dataPack.PacketBandWith = this.BandWidth;
+            dataPack.PacketStandart = this.Stand80211;
+            dataPack.PacketFrequency = this.Freq;
             dataPack.Reciver = DestinationMacAddress;
             int transmitRate = 144;
 
@@ -666,7 +687,10 @@ namespace Visualisator
    
                 dataPack.Reciver = DestinationMacAddress;                        // TDLS TODO
                 dataPack.PacketChannel = this.getOperateChannel();
-                dataPack.PacketBand = this.getOperateBand();
+                //dataPack.PacketBand = this.getOperateBand();
+                dataPack.PacketBandWith = this.BandWidth;
+                dataPack.PacketStandart = this.Stand80211;
+                dataPack.PacketFrequency = this.Freq;
                 
                 SQID++;
                 dataPack.setTransmitRate(transmitRate);
@@ -842,14 +866,14 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        private void ScanOneChannel(short chann, int TimeForListen, string Band)
+        private void ScanOneChannel(short chann, int TimeForListen, Frequency freq)
         {
             try
             {
                 short perv_channel = this.getOperateChannel();
-                string prev_band = this.getOperateBand();
+                Frequency prev_band = this.Freq;
 
-                setOperateBand(Band);
+                this.Freq = freq;
                 _scanning = true;
                 setOperateChannel(chann);
                 Thread.Sleep(TimeForListen);
@@ -858,14 +882,14 @@ namespace Visualisator
                     //  Scan on this channel was desturbed
                     //  Try again
                     _scanning = false;
-                    ScanOneChannel(chann, TimeForListen, Band);
+                    ScanOneChannel(chann, TimeForListen, freq);
                 }
                 else
                 {
                     //  Scan on this channel success
                     //  Return back work parameters
                     setOperateChannel(perv_channel);
-                    setOperateBand(prev_band);
+                    this.Freq = prev_band;
                     _scanning = false;
                 }
                 Thread.Sleep(3);
@@ -882,14 +906,14 @@ namespace Visualisator
                 _AccessPoint.DecreaseAll();
                 //_AccessPointTimeCounter.Clear();
                 short perv_channel = this.getOperateChannel();
-                string prev_band = this.getOperateBand();
+                Frequency prev_band = this.Freq;
                 // for (int i = 1; i < 15; i++)
                 // {
                 //     ScanOneChannel(i, 100, "N");
                 //  }
                 for (short i = 1; i < 15; i++)
                 {
-                    ScanOneChannel(i, 320, "N");
+                    ScanOneChannel(i, 320, Frequency._2400GHz);
                 }
                 /*
                 ArrayList Achannels = _MEDIUM.getBandAChannels();

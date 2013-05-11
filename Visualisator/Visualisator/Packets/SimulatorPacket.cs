@@ -17,7 +17,9 @@ namespace Visualisator.Packets
 
         private bool _isRetransmit              =       false;
         private bool _isReceivedRetransmit      =       false;
-
+        public Frequency PacketFrequency { set; get; }
+        public Bandwidth PacketBandWith { set; get; }
+        public Standart80211 PacketStandart { set; get; }
         private Guid _guid = new Guid();
 
         public Guid GuidD
@@ -50,18 +52,10 @@ namespace Visualisator.Packets
             get { return _PacketChannel; }
             set { _PacketChannel = value; }
         }
-        String _PacketBand = "";
-
-        public String PacketBand
-        {
-            get { return _PacketBand; }
-            set { _PacketBand = value; }
-        }
-
-        public SimulatorPacket(short Channel, string Band)
+        public SimulatorPacket(short Channel, Frequency freq)
         {
             _guid = Guid.NewGuid();
-            _PacketBand = Band;
+            this.PacketFrequency = freq;
             _PacketChannel = Channel;
 
           //  this._Type = "";

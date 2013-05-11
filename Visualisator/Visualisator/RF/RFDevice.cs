@@ -24,7 +24,6 @@ namespace Visualisator
         public int z { set; get; }
         private Color           _vColor;
         private short           _OperateChannel =   0;
-        private string          _OperateBand    =   "";
         private MAC             _address        =   new MAC();
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
@@ -209,8 +208,12 @@ namespace Visualisator
             ret = ObjectDumper.Dump(this);
             ret += "_OperateChannel\r\n";
             ret += ObjectDumper.Dump(_OperateChannel);
-            ret += "_OperateBand\r\n";
-            ret += ObjectDumper.Dump(_OperateBand);
+            ret += "Frequency\r\n";
+            ret += ObjectDumper.Dump(this.Freq);
+            ret += "Bandwith\r\n";
+            ret += ObjectDumper.Dump(this.BandWidth);
+            ret += "80211 Standart\r\n";
+            ret += ObjectDumper.Dump(this.Stand80211);
             ret += "_address\r\n";
             ret += ObjectDumper.Dump(_address);
 
@@ -340,7 +343,7 @@ namespace Visualisator
         //=====================================================================
         public SimulatorPacket CreatePacket()
         {
-            SimulatorPacket pack = new SimulatorPacket(getOperateChannel(), getOperateBand());
+            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel(), this.Freq);
             pack.Source = getMACAddress();
             if (this.GetType() == typeof(AP))
             {
@@ -358,31 +361,15 @@ namespace Visualisator
         {
             _OperateChannel = NewChannel;
             if (NewChannel > 0 && NewChannel < 15)
-            {
-                setOperateBand("N");
-            }
+                this.Freq = Frequency._2400GHz;
             else
-            {
-                setOperateBand("A");
-            }
+                this.Freq = Frequency._5200GHz;
         }
 
         //=====================================================================
         public short getOperateChannel()
         {
             return (_OperateChannel);
-        }
-
-        //=====================================================================
-        public void setOperateBand(string NewBand)
-        {
-            _OperateBand = NewBand;
-        }
-
-        //=====================================================================
-        public string getOperateBand()
-        {
-            return (_OperateBand);
         }
 
         //=====================================================================
@@ -408,7 +395,7 @@ namespace Visualisator
 
                 //_ev.WaitOne();
                 RF_STATUS = "TX";
-                while (!Medium.Registration(this.getOperateBand(), this.getOperateChannel(), this.x, this.y))
+                while (!Medium.Registration(this.Freq, this.getOperateChannel(), this.x, this.y))
                 {
                     Thread.Sleep(new TimeSpan(randomWait.Next(20,50)));
                 }
@@ -437,7 +424,10 @@ namespace Visualisator
             DataAck da = new DataAck(CreatePacket());
             da.Destination = Destination;
             da.PacketChannel = this.getOperateChannel();
-            da.PacketBand = this.getOperateBand();
+            //da.PacketBand = this.getOperateBand();
+            da.PacketBandWith = this.BandWidth;
+            da.PacketStandart = this.Stand80211;
+            da.PacketFrequency = this.Freq;
             da.Source = this.getMACAddress().ToString();
             da.GuiDforDataPacket = _DataGuid;
             this.SendData(da);
@@ -486,7 +476,7 @@ namespace Visualisator
             //SpinWait.SpinUntil(RF_Ready);
             if (((SimulatorPacket)sender).PacketChannel != this.getOperateChannel())
                 return;
-            if (((SimulatorPacket)sender).PacketBand != this.getOperateBand())
+            if (((SimulatorPacket)sender).PacketFrequency != this.Freq)
                 return;
             String _dest = ((SimulatorPacket)sender).Destination;
 

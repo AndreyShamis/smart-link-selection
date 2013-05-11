@@ -17,17 +17,17 @@ namespace Visualisator
         [Serializable()]
         class Key
         {
-            private string _band;
+            private Frequency _band;
             private short  _channel;
             private string _Destination;
 
 
-            public Key(string band, short Channel)
+            public Key(Frequency band, short Channel)
             {
                 _band = band;
                 _channel = (short)Channel;
             }
-            public Key(string band, short Channel, String dest)
+            public Key(Frequency band, short Channel, String dest)
             {
                 _band = band;
                 _channel = (short)Channel;
@@ -84,7 +84,7 @@ namespace Visualisator
         //=====================================================================
         //*********************************************************************
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static Boolean Registration(string band, short channel, int x, int y)
+        public static Boolean Registration(Frequency band, short channel, int x, int y)
         {
 
             if (band.Equals("") || channel == 0)
@@ -421,11 +421,11 @@ namespace Visualisator
                 {
                     return false;
                 }
-                Key Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
+                Key Pk = new Key(device.Freq, device.getOperateChannel(), device.getMACAddress());
                 Key Pk2 = null;
                 if (CheckBeacons)
                 {
-                    Pk2 = new Key(device.getOperateBand(), device.getOperateChannel(), _BROADCAST);
+                    Pk2 = new Key(device.Freq, device.getOperateChannel(), _BROADCAST);
                 }
 
                 if (CheckBeacons)
@@ -473,7 +473,7 @@ namespace Visualisator
         //*********************************************************************
         public static void SendData(SimulatorPacket pack)
         {
-            Key _Pk = new Key(pack.PacketBand, pack.PacketChannel,pack.Destination);
+            Key _Pk = new Key(pack.PacketFrequency, pack.PacketChannel,pack.Destination);
             try
             {
                 Type packet_type = null; 
@@ -585,7 +585,7 @@ namespace Visualisator
             {
                 _ev.WaitOne();
                 //  Private packets
-                Pk = new Key(device.getOperateBand(), device.getOperateChannel(), device.getMACAddress());
+                Pk = new Key(device.Freq, device.getOperateChannel(), device.getMACAddress());
                 if (_packets.ContainsKey(Pk)){
                     ArrayList LocalPackets = (ArrayList)_packets[Pk];
                     foreach (object pack in LocalPackets)
@@ -605,7 +605,7 @@ namespace Visualisator
 
                 // Broadcast packets
                 if (device.getListenBeacon() && retvalue == null){
-                    Pk = new Key(device.getOperateBand(), device.getOperateChannel(), _BROADCAST);
+                    Pk = new Key(device.Freq, device.getOperateChannel(), _BROADCAST);
                     if (_packets.ContainsKey(Pk)){
                         ArrayList LocalPackets = (ArrayList)_packets[Pk];
                         foreach (object pack in LocalPackets){
