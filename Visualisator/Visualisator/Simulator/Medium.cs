@@ -661,11 +661,11 @@ namespace Visualisator
                 BandAChannels.Add(132);
                 BandAChannels.Add(136);
                 BandAChannels.Add(140);
-                BandAChannels.Add(149);
-                BandAChannels.Add(153);
-                BandAChannels.Add(157);
-                BandAChannels.Add(161);
-                BandAChannels.Add(165);
+                //BandAChannels.Add(149);
+               // BandAChannels.Add(153);
+               // BandAChannels.Add(157);
+                //BandAChannels.Add(161);
+               // BandAChannels.Add(165);
             AddToLog("Enable Medium.");
             Enable();
         }
