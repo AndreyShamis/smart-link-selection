@@ -62,6 +62,8 @@ namespace Visualisator
             lblConnectedSTA.Text = _ap.CenntedDevicesCount().ToString();
             lblKeepAliveReceived.Text = _ap.KeepAliveReceived.ToString();
             lblAllReceivedPackets.Text = _ap.AllReceivedPackets.ToString();
+            lblStandart.Text = _ap.Stand80211.ToString();
+            lblBandwith.Text = _ap.BandWidth.ToString();
         }
 
         private void listStations_SelectedIndexChanged(object sender, EventArgs e)
@@ -107,6 +109,16 @@ namespace Visualisator
             }
             catch(Exception){}
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _ap.Freq = Frequency._2400GHz;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _ap.Freq = Frequency._5200GHz;
         }
     }
 }
