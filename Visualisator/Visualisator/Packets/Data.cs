@@ -12,18 +12,16 @@ namespace Visualisator.Packets
                         // TODO check if this work corectlly
 
 
-        public short FrameSize { set; get; }
+        public int FrameSize { set; get; }
 
-        private String _data = "";
+        public byte[] _data = new byte[500];
+        //public void setData(String data){
+        //    _data = data;
+        //}
 
-        public void setData(String data){
-            _data = data;
-        }
+        public StreamingStatus streamStatus { set; get; }
+        public Guid streamID { set; get; }
 
-        public String getData()
-        {
-            return _data;
-        }
         public Data(SimulatorPacket pack)
         {
             Type t = typeof(SimulatorPacket);

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 
+
 namespace Visualisator
 {
     [Serializable()]
@@ -18,6 +19,8 @@ namespace Visualisator
 
         protected ArrayListCounted _AccessPoint = new ArrayListCounted();
         //protected Hashtable _AccessPointTimeCounter = new Hashtable(new ByteArrayComparer());
+
+        protected Hashtable _StreamsHash = new Hashtable(new ByteArrayComparer());
 
         private Boolean         _scanning               = false;
        // private int             PrevDataID              = 0;
@@ -474,6 +477,92 @@ namespace Visualisator
             }
         }
         //*********************************************************************
+        public void AddDataStream(Data packet)
+        {
+            try
+            {
+                StreamHandle dstream = new StreamHandle(packet);
+                _StreamsHash.Add(packet.streamID, dstream);
+            }
+            catch (Exception ex)
+            {
+                AddToLog("File Stream: " + ex.Message);
+            }
+        }
+        //*********************************************************************
+        public void DeleteDataStream(Data packet)
+        {
+            try
+            {
+                if (_StreamsHash.Contains(packet.streamID))
+                {
+
+                    _StreamsHash.Remove(packet.streamID);
+                }
+                else
+                {
+                    MessageBox.Show("File Stream: Tryed to remove stream that not exist at the stream hash");
+                }
+            }
+            catch (Exception ex)
+            {
+                AddToLog("File Stream: " + ex.Message);
+            }
+
+        }
+
+        //*********************************************************************
+        public void HandleDataStream(Data packet)
+        {
+            StreamHandle dstream = null;
+
+            if (_StreamsHash.Contains(packet.streamID))
+            {
+                lock (_StreamsHash)
+                {
+                    try
+                    {
+                        if (packet.streamStatus == StreamingStatus.Ended)
+                        {
+                            DeleteDataStream(packet);
+                        }
+                        else
+                        {
+                            dstream = _StreamsHash[packet.streamID] as StreamHandle;
+                            dstream.hendlePacket(packet);
+                        }
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        AddToLog("File Stream: " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    //if (packet.streamStatus == StreamingStatus.Started)
+                    //AddDataStream(packet);
+                    lock (_StreamsHash)
+                    {
+                        StreamHandle dstream222 = new StreamHandle(packet);
+                        dstream222.hendlePacket(packet);
+                        _StreamsHash.Add(packet.streamID, dstream222);
+                    }
+                    //dstream = _StreamsHash[packet.streamID] as StreamHandle;
+                    //dstream.hendlePacket(packet);
+                }
+                catch (Exception ex)
+                {
+                    AddToLog("File Stream: " + ex.Message);
+                }
+            }
+        }
+
+        //*********************************************************************
         public override void ParseReceivedPacket(IPacket pack)
         {
             SimulatorPacket locPack = (SimulatorPacket) pack;
@@ -506,13 +595,23 @@ namespace Visualisator
                 try
                 {
                     Data dat = (Data)pack;
+                    MACsandACK(dat.Source, dat.GuidD, dat.getTransmitRate());
                     if (!dat.IsReceivedRetransmit){
                         _DataReceived++;
-                        DataReceivedContainer.Append(dat.getData() + "\r\n");
+                        try
+                        {
+                            HandleDataStream(dat);
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+
+                        //DataReceivedContainer.Append(dat.getData() + "\r\n");
                     }else{
                         DataAckRetransmitted++;
                     }
-                    MACsandACK(dat.Source, dat.GuidD, dat.getTransmitRate());
+                    
                 }
                 catch (Exception ex)
                 {
@@ -639,8 +738,12 @@ namespace Visualisator
         public void ThreadAbleReadFile(String DestinationMacAddress)
         {
 
-            short buf_size = 500, numOfReadBytes = 0;
+            int buf_size = 500, numOfReadBytes = 0;
             byte[] buffer = new byte[buf_size];
+            bool exit_loop = false;
+            Guid streamID = new Guid();
+            streamID = Guid.NewGuid();
+            int packetCounter = 0;
             FileStream fsSource = new FileStream(@"C:\simulator\_DATA_TO_SEND\input.txt",
                     FileMode.Open, FileAccess.Read);
             try
@@ -679,11 +782,32 @@ namespace Visualisator
                 }
                 RFpeer workPeer = (RFpeer)_RFpeers[DestinationMacAddress];
                 MACOfAnotherPeer = DestinationMacAddress;
-                foreach (string line in lines)
+
+
+
+                while (!exit_loop)
                 {
-                    // Use a tab to indent each line of the file.
+                    if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0)
+                    {
+                        exit_loop = true;
+                        dataPack.streamStatus = StreamingStatus.Ended;
+                    }
+
                     dataPack = new Data(CreatePacket());
                     dataPack.SSID = _connecttoAP.SSID;
+                    dataPack.FrameSize = numOfReadBytes;
+                    dataPack.streamID = streamID;
+                    dataPack._data = buffer;
+
+                    if (packetCounter == 0 && !exit_loop)
+                    {
+                        dataPack.streamStatus = StreamingStatus.Started;
+                    }
+                    else if (packetCounter > 0 && numOfReadBytes > 0)
+                    {
+                        dataPack.streamStatus = StreamingStatus.active;
+                    }
+                    packetCounter++;
 
                     if (TDLSisWork)
                     {
@@ -704,7 +828,8 @@ namespace Visualisator
                     SQID++;
                     short tem = GetTXRate(dataPack.Destination);
                     dataPack.setTransmitRate(tem);
-                    dataPack.setData(line);
+                    //dataPack.setData(line);
+
                     dataPack.PacketID = SQID;
 
                     ackReceived = false;
@@ -817,6 +942,10 @@ namespace Visualisator
                 TimeSpan elapsedTime = sw.Elapsed;
 
                 MessageBox.Show(elapsedTime.TotalSeconds.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("File Stream: " + ex.Message);
             }
             finally
             {
