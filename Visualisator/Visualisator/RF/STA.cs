@@ -638,164 +638,190 @@ namespace Visualisator
         //*********************************************************************
         public void ThreadAbleReadFile(String DestinationMacAddress)
         {
-
-
-
-            string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\_DATA_TO_SEND\input.txt");
-            AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
-
-            if (_connecttoAP == null)
+            short buf_size = 500, numOfReadBytes = 0;
+            byte[] buffer = new byte[buf_size];
+            FileStream fsSource = new FileStream(@"C:\simulator\_DATA_TO_SEND\input.txt",
+                    FileMode.Open, FileAccess.Read);
+            try
             {
-                return;
-            }
-
-            this.Passive = false;
-            int SuccessContinuous = 0;
-            Stopwatch sw = Stopwatch.StartNew();
-            // Do work
-            TimeSpan timeWindow = sw.Elapsed;
-
-            Data dataPack = new Data(CreatePacket());
-            dataPack.SSID = _connecttoAP.SSID;
-            dataPack.Destination = _connecttoAP.getMACAddress();
-            dataPack.PacketChannel = this.getOperateChannel();
-            //dataPack.PacketBand = this.getOperateBand();
-            dataPack.PacketBandWith = this.BandWidth;
-            dataPack.PacketStandart = this.Stand80211;
-            dataPack.PacketFrequency = this.Freq;
-            dataPack.Reciver = DestinationMacAddress;
-            int transmitRate = 144;
-
-            
-            Int32 SQID = 0;
-            if (!_RFpeers.Contains(dataPack.Destination) || !_RFpeers.Contains(DestinationMacAddress))
-            {
-                this.UpdateRFPeers();
-            }
-            RFpeer workPeer = (RFpeer)_RFpeers[DestinationMacAddress];
-            MACOfAnotherPeer = DestinationMacAddress;
-            foreach (string line in lines)
-            {
-                // Use a tab to indent each line of the file.
-                dataPack = new Data(CreatePacket());
-                dataPack.SSID = _connecttoAP.SSID;
                 
-                if(TDLSisWork)
+                
+
+                string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\_DATA_TO_SEND\input.txt");
+                AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
+
+                if (_connecttoAP == null)
                 {
-                    dataPack.Destination = DestinationMacAddress;// TDLS TODO 
-                }else
-                {
-                    dataPack.Destination = _connecttoAP.getMACAddress();// TDLS TODO
+                    return;
                 }
-   
-                dataPack.Reciver = DestinationMacAddress;                        // TDLS TODO
+
+                this.Passive = false;
+                int SuccessContinuous = 0;
+                Stopwatch sw = Stopwatch.StartNew();
+                // Do work
+                TimeSpan timeWindow = sw.Elapsed;
+
+                Data dataPack = new Data(CreatePacket());
+                dataPack.SSID = _connecttoAP.SSID;
+                dataPack.Destination = _connecttoAP.getMACAddress();
                 dataPack.PacketChannel = this.getOperateChannel();
                 //dataPack.PacketBand = this.getOperateBand();
                 dataPack.PacketBandWith = this.BandWidth;
                 dataPack.PacketStandart = this.Stand80211;
                 dataPack.PacketFrequency = this.Freq;
-                
-                SQID++;
-                dataPack.setTransmitRate(transmitRate);
-                dataPack.setData(line);
-                dataPack.PacketID = SQID;
+                dataPack.Reciver = DestinationMacAddress;
+                int transmitRate = 144;
 
-                ackReceived = false;
-                SendData(dataPack);
-                WaitingForAck = true;
-                int retrCounter = Medium.WaitBeforeRetransmit;
-                int loops = 1;
 
-                if (TDLSisWork){
-                    if (DelayInTDLS > 0){
-                        Thread.Sleep(DelayInTDLS);
-                    }
-                }else{
-                    if (DelayInBss > 0){
-                        Thread.Sleep(DelayInBss);
-                    }
-                }
-
-                if (getScanStatus()) {
-                    SpinWait.SpinUntil(getScanStatus);
-                }
-
-                int maxRetrays = Medium.TrysToRetransmit;
-                bool ThePacketWasRetransmited = false;
-                while (!ackReceived  )
+                Int32 SQID = 0;
+                if (!_RFpeers.Contains(dataPack.Destination) || !_RFpeers.Contains(DestinationMacAddress))
                 {
-                    retrCounter--;
-                    Thread.Sleep(1);
-                    if (retrCounter < 0)
+                    this.UpdateRFPeers();
+                }
+                RFpeer workPeer = (RFpeer)_RFpeers[DestinationMacAddress];
+                MACOfAnotherPeer = DestinationMacAddress;
+                foreach (string line in lines)
+                {
+                    // Use a tab to indent each line of the file.
+                    dataPack = new Data(CreatePacket());
+                    dataPack.SSID = _connecttoAP.SSID;
+
+                    if (TDLSisWork)
                     {
-
-                        workPeer = (RFpeer)_RFpeers[DestinationMacAddress];
-
-                        long timeNew = sw.ElapsedMilliseconds;
-                        long timeOld = timeWindow.Milliseconds;
-                        if (timeNew - timeOld < Medium.RetransmitWindow){
-                            workPeer.RetransmitionCounter++;
-                        } else{ 
-                            timeWindow = sw.Elapsed;
-                          //  workPeer.RetransmitionCounter++;
-                        }
-                        dataPack.IsRetransmit = true;       //  This is retrasmition
-                        retrCounter = Medium.WaitBeforeRetransmit;
-                        ThePacketWasRetransmited = true;
-                        SendData(dataPack);
-                        if (TDLSisWork) {
-                            Thread.Sleep(DelayInTDLS + 5);
-                        }else{
-                            Thread.Sleep(DelayInBss + 5);
-                        }
-                        _DataRetransmited++;
-                        loops = loops + 1;
-                        if(!_Enabled)
-                            return;
-                        //Thread.Sleep(1);
-                        maxRetrays--;
+                        dataPack.Destination = DestinationMacAddress;// TDLS TODO 
                     }
-                    if(maxRetrays == 0)
+                    else
                     {
-                        break;
+                        dataPack.Destination = _connecttoAP.getMACAddress();// TDLS TODO
                     }
 
-                }
+                    dataPack.Reciver = DestinationMacAddress;                        // TDLS TODO
+                    dataPack.PacketChannel = this.getOperateChannel();
+                    //dataPack.PacketBand = this.getOperateBand();
+                    dataPack.PacketBandWith = this.BandWidth;
+                    dataPack.PacketStandart = this.Stand80211;
+                    dataPack.PacketFrequency = this.Freq;
 
-                if(!ThePacketWasRetransmited)
-                {
-                    SuccessContinuous++;
-                    workPeer.TransmitCounter++;   
-                }
-                else
-                {
-                    workPeer.RetransmitionCounter++;
-                    SuccessContinuous = 0;
-                }
-                if (!ThePacketWasRetransmited && ackReceived && SuccessContinuous>10)
-                {
-                    workPeer.TransmitCounter = 0;
-                    workPeer.RetransmitionCounter = 0;
-                }
-                if (retrCounter <= Medium.WaitBeforeRetransmit && retrCounter>= 50){
-                    transmitRate = 144;
-                }
-                else{
-                    transmitRate = 64;
-                }
-                
-                WaitingForAck = false;
-                _StatisticRetransmitTime =loops* 60-  retrCounter;
-                //SpinWait.SpinUntil(() => { return ackReceived; });
+                    SQID++;
+                    dataPack.setTransmitRate(transmitRate);
+                    dataPack.setData(line);
+                    dataPack.PacketID = SQID;
 
-                // Thread.Sleep(3);
-                //Console.WriteLine("\t" + line);
+                    ackReceived = false;
+                    SendData(dataPack);
+                    WaitingForAck = true;
+                    int retrCounter = Medium.WaitBeforeRetransmit;
+                    int loops = 1;
+
+                    if (TDLSisWork)
+                    {
+                        if (DelayInTDLS > 0)
+                        {
+                            Thread.Sleep(DelayInTDLS);
+                        }
+                    }
+                    else
+                    {
+                        if (DelayInBss > 0)
+                        {
+                            Thread.Sleep(DelayInBss);
+                        }
+                    }
+
+                    if (getScanStatus())
+                    {
+                        SpinWait.SpinUntil(getScanStatus);
+                    }
+
+                    int maxRetrays = Medium.TrysToRetransmit;
+                    bool ThePacketWasRetransmited = false;
+                    while (!ackReceived)
+                    {
+                        retrCounter--;
+                        Thread.Sleep(1);
+                        if (retrCounter < 0)
+                        {
+
+                            workPeer = (RFpeer)_RFpeers[DestinationMacAddress];
+
+                            long timeNew = sw.ElapsedMilliseconds;
+                            long timeOld = timeWindow.Milliseconds;
+                            if (timeNew - timeOld < Medium.RetransmitWindow)
+                            {
+                                workPeer.RetransmitionCounter++;
+                            }
+                            else
+                            {
+                                timeWindow = sw.Elapsed;
+                                //  workPeer.RetransmitionCounter++;
+                            }
+                            dataPack.IsRetransmit = true;       //  This is retrasmition
+                            retrCounter = Medium.WaitBeforeRetransmit;
+                            ThePacketWasRetransmited = true;
+                            SendData(dataPack);
+                            if (TDLSisWork)
+                            {
+                                Thread.Sleep(DelayInTDLS + 5);
+                            }
+                            else
+                            {
+                                Thread.Sleep(DelayInBss + 5);
+                            }
+                            _DataRetransmited++;
+                            loops = loops + 1;
+                            if (!_Enabled)
+                                return;
+                            //Thread.Sleep(1);
+                            maxRetrays--;
+                        }
+                        if (maxRetrays == 0)
+                        {
+                            break;
+                        }
+
+                    }
+
+                    if (!ThePacketWasRetransmited)
+                    {
+                        SuccessContinuous++;
+                        workPeer.TransmitCounter++;
+                    }
+                    else
+                    {
+                        workPeer.RetransmitionCounter++;
+                        SuccessContinuous = 0;
+                    }
+                    if (!ThePacketWasRetransmited && ackReceived && SuccessContinuous > 10)
+                    {
+                        workPeer.TransmitCounter = 0;
+                        workPeer.RetransmitionCounter = 0;
+                    }
+                    if (retrCounter <= Medium.WaitBeforeRetransmit && retrCounter >= 50)
+                    {
+                        transmitRate = 144;
+                    }
+                    else
+                    {
+                        transmitRate = 64;
+                    }
+
+                    WaitingForAck = false;
+                    _StatisticRetransmitTime = loops * 60 - retrCounter;
+                    //SpinWait.SpinUntil(() => { return ackReceived; });
+
+                    // Thread.Sleep(3);
+                    //Console.WriteLine("\t" + line);
+                }
+                this.Passive = true;
+                sw.Stop();
+                TimeSpan elapsedTime = sw.Elapsed;
+
+                MessageBox.Show(elapsedTime.TotalSeconds.ToString());
             }
-            this.Passive = true;
-            sw.Stop();
-            TimeSpan elapsedTime = sw.Elapsed;
-
-            MessageBox.Show(elapsedTime.TotalSeconds.ToString());
+            finally
+            {
+                fsSource.Close();
+            }
         }
 
 

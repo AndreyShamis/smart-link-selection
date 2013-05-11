@@ -11,6 +11,9 @@ namespace Visualisator.Packets
     {
                         // TODO check if this work corectlly
 
+
+        public short FrameSize { set; get; }
+
         private String _data = "";
 
         public void setData(String data){
