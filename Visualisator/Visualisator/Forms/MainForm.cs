@@ -120,11 +120,6 @@ namespace Visualisator
             _ap.SetVertex((int)MouseX, (int)MouseY, 0);
             _objects.Add(_ap);
 
-            Medium.addObjToMedium(_objects);
-            if (!Medium.IsEnabled())
-            {
-                Medium.Enable();
-            }
         }
 
         //====================================================================================================
@@ -137,11 +132,8 @@ namespace Visualisator
             _objects.Add(_sta);
             _sta.Scan();
 
-            Medium.addObjToMedium(_objects);
-            if (!Medium.IsEnabled())
-            {
-                Medium.Enable();
-            }
+            //Medium.addObjToMedium(_objects);
+
         }
 
         //====================================================================================================
@@ -489,10 +481,12 @@ namespace Visualisator
         //====================================================================================================
         private void button4_Click(object sender, EventArgs e)
         {
+            
             //Medium.Disable();
             Medium.MediumStart();
             CreateRandomSimulation();
             DrowOnBoard();
+
         }
 
         //====================================================================================================
