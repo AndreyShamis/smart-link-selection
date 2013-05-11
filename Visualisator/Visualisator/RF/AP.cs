@@ -17,8 +17,8 @@ namespace Visualisator
     {
         const int                   _UPDATE_KEEP_ALIVE_PERIOD = 25; //sec
         private Int32               _BeaconPeriod = 500;
-        private Int32               _AP_MAX_SEND_PERIOD = 150;
-        private Int32               _AP_MIN_SEND_PERIOD = 100;
+        private const Int32               AP_MAX_SEND_PERIOD = 150;
+        private const Int32               AP_MIN_SEND_PERIOD = 100;
         private static Random       rnadomBeacon = new Random();
         private ArrayListCounted    _AssociatedDevices = new ArrayListCounted();
         private Int32               _KeepAliveReceived = 0;
@@ -77,7 +77,7 @@ namespace Visualisator
             this.VColor = Color.YellowGreen;
             this.SSID = RandomString(8);
             this.BSSID = this.getMACAddress();
-            _BeaconPeriod = rnadomBeacon.Next(_AP_MIN_SEND_PERIOD, _AP_MAX_SEND_PERIOD);    
+            _BeaconPeriod = rnadomBeacon.Next(AP_MIN_SEND_PERIOD, AP_MAX_SEND_PERIOD);    
             Enable();
         }
 
