@@ -36,26 +36,7 @@ namespace Visualisator
         private int _delayInTDLS    = 1;
         private const int max_channel = 13;
         private int[] _channels = new int[max_channel];  // now it's a 20-element array
-        /**
-         * 0 = anything
-         * 1 = TDLSSetup Request Sended
-         * 2 = TDLSSetup Request Received
-         * 3 = TDLSSetup Response Sened
-         * 4 = TDLSSetup Response Received
-         * 5 = TDLSSetup Confirm Sended
-         * 6 = TDLSSetup Confirm Received
-         */
 
-        internal enum TDLSSetupStatus
-        {
-            TDLSSetupDisabled = 0, 
-            TDLSSetupRequestSended, 
-            TDLSSetupRequestReceived, 
-            TDLSSetupResponseSened, 
-            TDLSSetupResponseReceived, 
-            TDLSSetupConfirmSended, 
-            TDLSSetupConfirmReceived
-        };
         private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;   
 
         //*********************************************************************

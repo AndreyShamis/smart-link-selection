@@ -225,14 +225,14 @@ namespace Visualisator
         }
 
         //=====================================================================
-        protected int GetRSSI(double x, double y)
+        protected short GetRSSI(double x, double y)
         {
             try{
                 double dist = GetSTADist( this.x,this.y, x, y);
                 if (dist >= 0){
                     // formula for wolfram: plot [y= -13*log_2(x),{y,16,-95},{x,60,0}] 
                     // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-13*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
-                    return Convert.ToInt32(Math.Round(-13*Math.Log(dist, 2)));
+                    return (short)Convert.ToInt32(Math.Round(-13*Math.Log(dist, 2)));
                 }
             }catch(Exception){}
             return 0;
@@ -562,17 +562,6 @@ namespace Visualisator
         }
 
 
-
-        //*********************************************************************
-        static protected short GetTXRate(string MAC)
-        {
-            //short retransCount = 0;
-
-
-            return 64;
-        }
-
-
         //*********************************************************************
         public double GetNoiseOnSameChannel()
         {
@@ -616,6 +605,41 @@ namespace Visualisator
 
 
 
+
+        
+        //*********************************************************************
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="MAC"></param>
+        /// <returns></returns>
+        protected short GetTXRate(string MAC)
+        {
+            short retVale = 0;
+            if (!_RFpeers.Contains(MAC))
+                UpdateRFPeers();
+            if (_RFpeers.Contains(MAC))
+            {
+                RFpeer _peer = (RFpeer)_RFpeers[MAC];
+
+                if (_peer.Band == "A")
+                {
+                    if (_peer.BandWidth == Bandwidth._20MHz)
+                        retVale = getRateOn5_2RSSI20M(_peer.RSSI);
+                    else if (_peer.BandWidth == Bandwidth._40Mhz)
+                        retVale = getRateOn5_2RSSI40M(_peer.RSSI);
+                }
+                else if (_peer.Band == "N")
+                {
+                    if (_peer.BandWidth == Bandwidth._20MHz)
+                        retVale = getRateOn2_4RSSI20M(_peer.RSSI);
+                    else if (_peer.BandWidth == Bandwidth._40Mhz)
+                        retVale = getRateOn2_4RSSI40M(_peer.RSSI);
+                }
+             }  
+
+            return retVale;
+        }
 
 
 
