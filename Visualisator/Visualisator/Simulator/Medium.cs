@@ -70,7 +70,7 @@ namespace Visualisator
 
         private static AutoResetEvent _ev = new AutoResetEvent(true);
 
-        private static Int32 _MediumSendDataRatio = 8000;
+        private static Int32 _MediumSendDataRatio = 1000;
 
         public static Int32 MediumSendDataRatio
         {
@@ -493,13 +493,14 @@ namespace Visualisator
                 WeHavePacketsToSend(_ref, e);
                 SimulatorPacket p = (SimulatorPacket)_ref;
                 int Rate = p.getTransmitRate();
-                sleep = GetObjectSize(p) / Rate;
+                //long ps = GetObjectSize(p);
+                sleep = (int)(600 / Rate);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Medium 1 ThreadableSendData" + ex.Message);
             }
-            Thread.Sleep(new TimeSpan(sleep * _MediumSendDataRatio));
+            Thread.Sleep(new TimeSpan(sleep * _MediumSendDataRatio * 100));
             //AddToLog("Sleep for :" + sleep);
             _ev.WaitOne();
 

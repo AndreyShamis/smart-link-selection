@@ -259,7 +259,7 @@ namespace Visualisator
 
                 MessageBox.Show("GETRRSI " + ex.Message);
             }
-            return 0;
+            return ret;
         }
         //*********************************************************************       
         static protected bool MissPacket(double NoiseRssi, int Rate)
@@ -443,7 +443,7 @@ namespace Visualisator
         }
 
         //=====================================================================
-        public void MACsandACK(string Destination , Guid _DataGuid)
+        public void MACsandACK(string Destination , Guid _DataGuid,int TXrate)
         {
             DataAck da = new DataAck(CreatePacket());
             da.Destination = Destination;
@@ -454,6 +454,7 @@ namespace Visualisator
             da.PacketFrequency = this.Freq;
             da.Source = this.getMACAddress().ToString();
             da.GuiDforDataPacket = _DataGuid;
+            da.setTransmitRate(TXrate);
             this.SendData(da);
             
         }
@@ -655,8 +656,10 @@ namespace Visualisator
                     else if (_peer.BandWidth == Bandwidth._40Mhz)
                         retVale = getRateOn2_4RSSI40M(_peer.RSSI);
                 }
-             }  
-
+                if (_peer.BandWidth == Bandwidth._40Mhz)
+                    retVale*=2;
+            }  
+          
             return retVale;
         }
 

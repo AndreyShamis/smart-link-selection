@@ -512,7 +512,7 @@ namespace Visualisator
                     }else{
                         DataAckRetransmitted++;
                     }
-                    MACsandACK(dat.Source,dat.GuidD);
+                    MACsandACK(dat.Source, dat.GuidD, dat.getTransmitRate());
                 }
                 catch (Exception ex)
                 {
@@ -638,14 +638,13 @@ namespace Visualisator
         //*********************************************************************
         public void ThreadAbleReadFile(String DestinationMacAddress)
         {
+
             short buf_size = 500, numOfReadBytes = 0;
             byte[] buffer = new byte[buf_size];
             FileStream fsSource = new FileStream(@"C:\simulator\_DATA_TO_SEND\input.txt",
                     FileMode.Open, FileAccess.Read);
             try
             {
-                
-                
 
                 string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\_DATA_TO_SEND\input.txt");
                 AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
@@ -703,7 +702,8 @@ namespace Visualisator
                     dataPack.PacketFrequency = this.Freq;
 
                     SQID++;
-                    dataPack.setTransmitRate(transmitRate);
+                    short tem = GetTXRate(dataPack.Destination);
+                    dataPack.setTransmitRate(tem);
                     dataPack.setData(line);
                     dataPack.PacketID = SQID;
 
