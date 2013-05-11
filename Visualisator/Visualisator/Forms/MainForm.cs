@@ -69,6 +69,7 @@ namespace Visualisator
             Medium.WaitBeforeRetransmit = 60;
             Medium.TrysToRetransmit = 10;
             Medium.RetransmitWindow = 100;
+            Medium.MediumStart();
             SetMedioRatio();
             SetBSSDelay();
             SetTDLSDelay();
@@ -481,14 +482,14 @@ namespace Visualisator
                 _dev.Disable();
                 _dev = null;
             }
-            Medium.Disable();
+           // Medium.Disable();
             _objects.Clear();
         }
 
         //====================================================================================================
         private void button4_Click(object sender, EventArgs e)
         {
-            Medium.Disable();
+            //Medium.Disable();
             Medium.MediumStart();
             CreateRandomSimulation();
             DrowOnBoard();

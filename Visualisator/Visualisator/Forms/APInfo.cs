@@ -119,6 +119,16 @@ namespace Visualisator
         private void button2_Click(object sender, EventArgs e)
         {
             _ap.Freq = Frequency._5200GHz;
+            cmbWorkChannel.Items.Clear();
+            ArrayList Achannels = Medium.getBandAChannels();
+            foreach (var i in Achannels)
+            {
+                int temp_val = (int)i;
+                cmbWorkChannel.Items.Add(temp_val);
+            }
+
+            cmbWorkChannel.SelectedIndex = 1;
+            
         }
     }
 }

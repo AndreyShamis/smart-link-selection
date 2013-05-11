@@ -296,72 +296,12 @@ namespace Visualisator
                 _objects = _obj;
             }
         }
-        //*********************************************************************
-        public static void MediumStart(){
 
-            AddToLog("Load Band.");
-            _MBands.Add("G");
-            _MBands.Add("N");
-            _MBands.Add("A");
-            AddToLog("Load frequency.");
-            _Mfrequency.Add(2400);
-            _Mfrequency.Add(5000);
-            AddToLog("Load channels.");
-            for (int i = 1; i < 15; i++)
-            {
-                _MChannels.Add(i);
-            }
-
-
-        /*    BandAChannels.Add(183);
-            BandAChannels.Add(184);
-            BandAChannels.Add(185);
-            BandAChannels.Add(187);
-            BandAChannels.Add(188);
-            BandAChannels.Add(189);
-            BandAChannels.Add(192);
-            BandAChannels.Add(196);
-            BandAChannels.Add(7);
-            BandAChannels.Add(8);
-            BandAChannels.Add(9);
-            BandAChannels.Add(11);
-            BandAChannels.Add(12);
-            BandAChannels.Add(16);
-            BandAChannels.Add(34);
-            BandAChannels.Add(36);
-            BandAChannels.Add(38);
-            BandAChannels.Add(40);
-            BandAChannels.Add(42);
-            BandAChannels.Add(44);
-            BandAChannels.Add(46);
-            BandAChannels.Add(48);
-            BandAChannels.Add(52);
-            BandAChannels.Add(56);
-            BandAChannels.Add(60);
-            BandAChannels.Add(64);
-            BandAChannels.Add(100);
-            BandAChannels.Add(104);
-            BandAChannels.Add(108);
-            BandAChannels.Add(112);
-            BandAChannels.Add(116);
-            BandAChannels.Add(120);
-            BandAChannels.Add(124);
-            BandAChannels.Add(128);
-            BandAChannels.Add(132);
-            BandAChannels.Add(136);
-            BandAChannels.Add(140);
-            BandAChannels.Add(149);
-            BandAChannels.Add(153);
-            BandAChannels.Add(157);
-            BandAChannels.Add(161);
-            BandAChannels.Add(165);*/
-            AddToLog("Enable Medium.");
-            Enable();
-        }
 
         //*********************************************************************
         public static void Enable()
         {
+
             _mediumWork = true;
             Thread newThread = new Thread(new ThreadStart(Run));
             newThread.Name = "Medium Main Process";
@@ -643,10 +583,91 @@ namespace Visualisator
         {
             String ret = "";
 
-            foreach (DictionaryEntry p in _packets)
-                ret += ObjectDumper.Dump(p.Value);
-            
+            try
+            {
+                foreach (DictionaryEntry p in _packets)
+                    ret += ObjectDumper.Dump(p.Value);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("DumpPackets:" + ex.Message);
+            }
+
             return (ret);
+        }
+
+
+
+
+
+
+
+
+
+
+
+        //*********************************************************************
+        public static void MediumStart()
+        {
+
+            AddToLog("Load Band.");
+            _MBands.Add("G");
+            _MBands.Add("N");
+            _MBands.Add("A");
+            AddToLog("Load frequency.");
+            _Mfrequency.Add(2400);
+            _Mfrequency.Add(5000);
+            AddToLog("Load channels.");
+            for (int i = 1; i < 15; i++)
+            {
+                _MChannels.Add(i);
+            }
+
+
+            /*    BandAChannels.Add(183);
+                BandAChannels.Add(184);
+                BandAChannels.Add(185);
+                BandAChannels.Add(187);
+                BandAChannels.Add(188);
+                BandAChannels.Add(189);
+                BandAChannels.Add(192);
+                BandAChannels.Add(196);
+                BandAChannels.Add(7);
+                BandAChannels.Add(8);
+                BandAChannels.Add(9);
+                BandAChannels.Add(11);
+                BandAChannels.Add(12);
+                BandAChannels.Add(16);
+                BandAChannels.Add(34);
+                BandAChannels.Add(36);
+                BandAChannels.Add(38);
+                BandAChannels.Add(40);
+                BandAChannels.Add(42);
+                BandAChannels.Add(44);
+                BandAChannels.Add(46);
+                BandAChannels.Add(48);
+                BandAChannels.Add(52);
+                BandAChannels.Add(56);*/
+                BandAChannels.Add(60);
+                BandAChannels.Add(64);
+                BandAChannels.Add(100);
+                BandAChannels.Add(104);
+                BandAChannels.Add(108);
+                BandAChannels.Add(112);
+                BandAChannels.Add(116);
+                BandAChannels.Add(120);
+                BandAChannels.Add(124);
+                BandAChannels.Add(128);
+                BandAChannels.Add(132);
+                BandAChannels.Add(136);
+                BandAChannels.Add(140);
+                BandAChannels.Add(149);
+                BandAChannels.Add(153);
+                BandAChannels.Add(157);
+                BandAChannels.Add(161);
+                BandAChannels.Add(165);
+            AddToLog("Enable Medium.");
+            Enable();
         }
     }
 }

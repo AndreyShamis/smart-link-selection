@@ -911,18 +911,21 @@ namespace Visualisator
                 // {
                 //     ScanOneChannel(i, 100, "N");
                 //  }
+
+
+
+
                 for (short i = 1; i < 15; i++)
                 {
                     ScanOneChannel(i, 320, Frequency._2400GHz);
                 }
-                /*
-                ArrayList Achannels = _MEDIUM.getBandAChannels();
-                setOperateBand("N");
-                foreach (int i in Achannels)
+                ArrayList Achannels = Medium.getBandAChannels();
+                foreach (var i in Achannels)
                 {
-                    setOperateChannel(i);
-                    Thread.Sleep(400);
-                }*/
+                    int temp_val = (int)i;
+                    ScanOneChannel((short)temp_val, 320, Frequency._5200GHz);
+                }
+
             }
             catch (Exception) { throw; }
         }
