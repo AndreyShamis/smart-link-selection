@@ -67,6 +67,8 @@
             this.btnUpdateMediumRecDist = new System.Windows.Forms.Button();
             this.txtMediumReceiveDistance = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.cmdCreateOneAPTwoSta = new System.Windows.Forms.Button();
+            this.cmdAdd1APforSTA = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,9 +96,9 @@
             // 
             // btnStopMedium
             // 
-            this.btnStopMedium.Location = new System.Drawing.Point(694, 3);
+            this.btnStopMedium.Location = new System.Drawing.Point(802, 3);
             this.btnStopMedium.Name = "btnStopMedium";
-            this.btnStopMedium.Size = new System.Drawing.Size(62, 23);
+            this.btnStopMedium.Size = new System.Drawing.Size(62, 19);
             this.btnStopMedium.TabIndex = 5;
             this.btnStopMedium.Text = "Stop Med";
             this.btnStopMedium.UseVisualStyleBackColor = true;
@@ -104,9 +106,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(854, 32);
+            this.button2.Location = new System.Drawing.Point(870, 28);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(77, 19);
+            this.button2.Size = new System.Drawing.Size(76, 19);
             this.button2.TabIndex = 6;
             this.button2.Text = "Save";
             this.button2.UseVisualStyleBackColor = true;
@@ -114,7 +116,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(771, 31);
+            this.button3.Location = new System.Drawing.Point(870, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(77, 19);
             this.button3.TabIndex = 7;
@@ -128,9 +130,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(694, 32);
+            this.button4.Location = new System.Drawing.Point(694, 3);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(71, 19);
+            this.button4.Size = new System.Drawing.Size(78, 19);
             this.button4.TabIndex = 8;
             this.button4.Text = "Create";
             this.button4.UseVisualStyleBackColor = true;
@@ -138,9 +140,9 @@
             // 
             // btnShowMediumInfo
             // 
-            this.btnShowMediumInfo.Location = new System.Drawing.Point(762, 3);
+            this.btnShowMediumInfo.Location = new System.Drawing.Point(802, 28);
             this.btnShowMediumInfo.Name = "btnShowMediumInfo";
-            this.btnShowMediumInfo.Size = new System.Drawing.Size(62, 22);
+            this.btnShowMediumInfo.Size = new System.Drawing.Size(62, 19);
             this.btnShowMediumInfo.TabIndex = 9;
             this.btnShowMediumInfo.Text = "Medium";
             this.btnShowMediumInfo.UseVisualStyleBackColor = true;
@@ -149,7 +151,7 @@
             // tmrGUISlow
             // 
             this.tmrGUISlow.Enabled = true;
-            this.tmrGUISlow.Interval = 1000;
+            this.tmrGUISlow.Interval = 500;
             this.tmrGUISlow.Tick += new System.EventHandler(this.tmrGUISlow_Tick);
             // 
             // lblUpdateIntervalDescr
@@ -172,7 +174,7 @@
             this.txtUpdateInterval.Name = "txtUpdateInterval";
             this.txtUpdateInterval.Size = new System.Drawing.Size(57, 18);
             this.txtUpdateInterval.TabIndex = 11;
-            this.txtUpdateInterval.Text = "1000";
+            this.txtUpdateInterval.Text = "500";
             this.txtUpdateInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnSetUpdateInterval
@@ -219,7 +221,7 @@
             // 
             // btnSetMediumSendRatio
             // 
-            this.btnSetMediumSendRatio.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSetMediumSendRatio.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnSetMediumSendRatio.Location = new System.Drawing.Point(905, 200);
             this.btnSetMediumSendRatio.Name = "btnSetMediumSendRatio";
             this.btnSetMediumSendRatio.Size = new System.Drawing.Size(39, 18);
@@ -232,22 +234,22 @@
             // 
             this.txtMediumSendRatio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.txtMediumSendRatio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMediumSendRatio.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtMediumSendRatio.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtMediumSendRatio.ForeColor = System.Drawing.Color.Navy;
             this.txtMediumSendRatio.Location = new System.Drawing.Point(842, 200);
             this.txtMediumSendRatio.Name = "txtMediumSendRatio";
             this.txtMediumSendRatio.Size = new System.Drawing.Size(57, 18);
             this.txtMediumSendRatio.TabIndex = 14;
-            this.txtMediumSendRatio.Text = "1000";
+            this.txtMediumSendRatio.Text = "10";
             this.txtMediumSendRatio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(700, 200);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 13;
             this.label2.Text = "Medium Send ratio";
             // 
@@ -457,12 +459,34 @@
             this.label8.TabIndex = 28;
             this.label8.Text = "Medium Receive Distance";
             // 
+            // cmdCreateOneAPTwoSta
+            // 
+            this.cmdCreateOneAPTwoSta.Location = new System.Drawing.Point(694, 28);
+            this.cmdCreateOneAPTwoSta.Name = "cmdCreateOneAPTwoSta";
+            this.cmdCreateOneAPTwoSta.Size = new System.Drawing.Size(36, 19);
+            this.cmdCreateOneAPTwoSta.TabIndex = 34;
+            this.cmdCreateOneAPTwoSta.Text = "1/2";
+            this.cmdCreateOneAPTwoSta.UseVisualStyleBackColor = true;
+            this.cmdCreateOneAPTwoSta.Click += new System.EventHandler(this.cmdCreateOneAPTwoSta_Click);
+            // 
+            // cmdAdd1APforSTA
+            // 
+            this.cmdAdd1APforSTA.Location = new System.Drawing.Point(736, 28);
+            this.cmdAdd1APforSTA.Name = "cmdAdd1APforSTA";
+            this.cmdAdd1APforSTA.Size = new System.Drawing.Size(36, 19);
+            this.cmdAdd1APforSTA.TabIndex = 35;
+            this.cmdAdd1APforSTA.Text = "1/4";
+            this.cmdAdd1APforSTA.UseVisualStyleBackColor = true;
+            this.cmdAdd1APforSTA.Click += new System.EventHandler(this.cmdAdd1APforSTA_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 375);
             this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.cmdAdd1APforSTA);
+            this.Controls.Add(this.cmdCreateOneAPTwoSta);
             this.Controls.Add(this.btnUpdateMediumListenDist);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.txtMediumListenDistance);
@@ -490,10 +514,10 @@
             this.Controls.Add(this.btnShowMediumInfo);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.btnStopMedium);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtConsole);
+            this.Controls.Add(this.button2);
             this.Name = "MainForm";
             this.Text = "SLS - Smart Link Selection - Visualisator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -546,6 +570,8 @@
         private System.Windows.Forms.Button btnUpdateMediumRecDist;
         private System.Windows.Forms.TextBox txtMediumReceiveDistance;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button cmdCreateOneAPTwoSta;
+        private System.Windows.Forms.Button cmdAdd1APforSTA;
     }
 }
 

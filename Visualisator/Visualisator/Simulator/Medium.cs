@@ -70,7 +70,7 @@ namespace Visualisator
 
         private static AutoResetEvent _ev = new AutoResetEvent(true);
 
-        private static Int32 _MediumSendDataRatio = 1000;
+        private static Int32 _MediumSendDataRatio = 10;
 
         public static Int32 MediumSendDataRatio
         {
