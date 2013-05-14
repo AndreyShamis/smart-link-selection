@@ -461,6 +461,7 @@
             // 
             // cmdCreateOneAPTwoSta
             // 
+            this.cmdCreateOneAPTwoSta.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmdCreateOneAPTwoSta.Location = new System.Drawing.Point(694, 28);
             this.cmdCreateOneAPTwoSta.Name = "cmdCreateOneAPTwoSta";
             this.cmdCreateOneAPTwoSta.Size = new System.Drawing.Size(36, 19);
@@ -471,6 +472,7 @@
             // 
             // cmdAdd1APforSTA
             // 
+            this.cmdAdd1APforSTA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmdAdd1APforSTA.Location = new System.Drawing.Point(736, 28);
             this.cmdAdd1APforSTA.Name = "cmdAdd1APforSTA";
             this.cmdAdd1APforSTA.Size = new System.Drawing.Size(36, 19);
@@ -486,8 +488,8 @@
             this.ClientSize = new System.Drawing.Size(958, 375);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.cmdAdd1APforSTA);
-            this.Controls.Add(this.cmdCreateOneAPTwoSta);
             this.Controls.Add(this.btnUpdateMediumListenDist);
+            this.Controls.Add(this.cmdCreateOneAPTwoSta);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.txtMediumListenDistance);
             this.Controls.Add(this.label7);
