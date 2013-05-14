@@ -349,5 +349,10 @@ namespace Visualisator
 
         }
 
+        private void cmdLogsClear_Click(object sender, EventArgs e)
+        {
+            _sta.ClearLog();
+        }
+
     }
 }
