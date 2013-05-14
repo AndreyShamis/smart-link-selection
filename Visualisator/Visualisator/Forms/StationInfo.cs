@@ -8,13 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using System.Threading;
+using Visualisator.Properties;
 
 
 namespace Visualisator
 {
     partial class StationInfo : Form
     {
-        STA _sta = null;
+        private STA _sta = null;
         public ArrayList _objects = null;
         //=====================================================================
         //=====================================================================
@@ -24,7 +25,7 @@ namespace Visualisator
             InitializeComponent();
             _sta = st;
             _objects = _obj;
-            this.Text = "Station Info :" + _sta.getMACAddress();
+            this.Text = Resources.StationInfo_StationInfo_Station_Info__ + _sta.getMACAddress();
         }
 
         //=====================================================================
