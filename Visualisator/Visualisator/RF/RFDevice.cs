@@ -244,7 +244,13 @@ namespace Visualisator
         }
 
         //=====================================================================
-        protected short GetRSSI(double x, double y)
+        /// <summary>
+        /// Function for calculate RSSI by coordinates of another peer
+        /// </summary>
+        /// <param name="x">Coordinates of Another device</param>
+        /// <param name="y">Coordinates of Another device</param>
+        /// <returns>RSSI - short</returns>
+        protected short GetRSSI(int x, int y)
         {
             short ret = 0;
             try{
@@ -256,12 +262,18 @@ namespace Visualisator
                 }
             }catch(Exception ex)
             {
-
                 MessageBox.Show("GETRRSI " + ex.Message);
             }
             return ret;
         }
-        //*********************************************************************       
+
+        //=====================================================================    
+        /// <summary>
+        /// Function for check if need to skip received packet
+        /// </summary>
+        /// <param name="NoiseRssi">Given Noisr RSSI</param>
+        /// <param name="Rate">Rate of Packet</param>
+        /// <returns>Return true in need to skip packet</returns>
         static protected bool MissPacket(double NoiseRssi, int Rate)
         {
             bool ret = true;
@@ -276,6 +288,7 @@ namespace Visualisator
             }
             return ret;
         }
+
         //=====================================================================
         /// <summary>
         /// Independ on RSSI return Noize level
@@ -297,11 +310,10 @@ namespace Visualisator
 
                 if (_peer.RSSI <= -75)
                 {
-                    if (NoiseRssi > 100){
+                    if (NoiseRssi > 100)
                         retVale = 100;
-                    }else{
+                    else
                         retVale = NoiseRssi;
-                    }
                 }
                 else{
                     retVale = 0;
@@ -313,7 +325,15 @@ namespace Visualisator
         }
 
         //=====================================================================
-        static protected double GetSTADist(double myX,double myY, double x,double y)
+        /// <summary>
+        /// Calculate distance between two given coordinates
+        /// </summary>
+        /// <param name="myX">Coordiantes of this device</param>
+        /// <param name="myY">Coordiantes of this device</param>
+        /// <param name="x">Coordiantes of other device</param>
+        /// <param name="y">Coordiantes of other device</param>
+        /// <returns>Distance between two given devices</returns>
+        static protected double GetSTADist(int myX,int myY, int x,int y)
         {
             return Math.Sqrt(Math.Pow(x - myX, 2)  + Math.Pow(y - myY, 2));
         }
