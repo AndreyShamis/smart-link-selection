@@ -150,6 +150,9 @@ namespace Visualisator
                 Beacon _beac = new Beacon(CreatePacket());
                 _beac.Destination = "FF:FF:FF:FF:FF:FF";
                 _beac.setTransmitRate(6);
+                _beac.FrequencySupport = this.FrequencySupport;
+                _beac.BandWithSupport = this.BandWithSupport;
+                _beac.StandartSupport = this.StandartSupport;
                 this.SendData(_beac);
                 
                 Thread.Sleep(_BeaconPeriod);

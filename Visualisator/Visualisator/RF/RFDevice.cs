@@ -14,12 +14,9 @@ namespace Visualisator
     { 
         public  String RF_STATUS = "NONE";
 
-        protected Hashtable _RFpeers = new Hashtable(new ByteArrayComparer());
-
-        //protected Medium _MEDIUM = null;
-        protected Boolean _Enabled = true;
-        public StringBuilder   _LOG            =   new StringBuilder();
-
+        protected Hashtable     _RFpeers = new Hashtable(new ByteArrayComparer());
+        protected Boolean       _Enabled = true;
+        public StringBuilder    _LOG            =   new StringBuilder();
         public int x { set; get; }
         public int y { set; get; }
         public int z { set; get; }
@@ -35,6 +32,11 @@ namespace Visualisator
         public Frequency Freq { set; get; }
         public Bandwidth BandWidth { set; get; }
         public Standart80211 Stand80211 { set; get; }
+
+        public ArrayList FrequencySupport   = new ArrayList();
+        public ArrayList BandWithSupport    = new ArrayList();
+        public ArrayList StandartSupport    = new ArrayList();
+
 
         public string MACOfAnotherPeer { set; get; } //mac of another device with him we working now
         public bool Passive { set; get; }
@@ -362,15 +364,14 @@ namespace Visualisator
         public SimulatorPacket CreatePacket()
         {
             SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel(), this.Freq);
+
+            pack.SSID = this.SSID;
             pack.Source = getMACAddress();
-            if (this.GetType() == typeof(AP))
-            {
-                AP _ap = (AP)this;
-                pack.SSID = _ap.SSID;
-            }
             pack.X = this.x;
             pack.Y = this.y;
-
+            pack.PacketFrequency    = this.Freq;
+            pack.PacketStandart     = this.Stand80211;
+            pack.PacketBandWith     = this.BandWidth;
             return(pack);
         }
 

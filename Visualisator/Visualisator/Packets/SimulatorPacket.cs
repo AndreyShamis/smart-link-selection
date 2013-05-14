@@ -41,13 +41,8 @@ namespace Visualisator.Packets
             _guid = Guid.NewGuid();
             this.PacketFrequency = freq;
             this.PacketChannel = Channel;;
-            this._SSID = "";
-            this._Source = "";
-            this._Reciver = "";
-            this._Duration = "";
-            this._Destination = "";
             this._MAX_SupportedRate = "64";
-            _TransmitRate = 64;
+            _TransmitRate = 1;
         }
 
         public void setTransmitRate(int r)
