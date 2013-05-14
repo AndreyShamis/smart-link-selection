@@ -86,6 +86,7 @@
             this.tmrGUI = new System.Windows.Forms.Timer(this.components);
             this.tmrFast = new System.Windows.Forms.Timer(this.components);
             this.tmrSlow = new System.Windows.Forms.Timer(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -142,9 +143,9 @@
             this.groupBox1.Controls.Add(this.btnConnectToBSS);
             this.groupBox1.Controls.Add(this.cmbAPList);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(10, 8);
+            this.groupBox1.Location = new System.Drawing.Point(1, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(574, 236);
+            this.groupBox1.Size = new System.Drawing.Size(583, 244);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
@@ -202,21 +203,25 @@
             // 
             // lblLastTransmitRate
             // 
-            this.lblLastTransmitRate.AutoSize = true;
-            this.lblLastTransmitRate.Location = new System.Drawing.Point(344, 143);
+            this.lblLastTransmitRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblLastTransmitRate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblLastTransmitRate.Location = new System.Drawing.Point(74, 83);
             this.lblLastTransmitRate.Name = "lblLastTransmitRate";
-            this.lblLastTransmitRate.Size = new System.Drawing.Size(13, 13);
+            this.lblLastTransmitRate.Size = new System.Drawing.Size(36, 16);
             this.lblLastTransmitRate.TabIndex = 54;
             this.lblLastTransmitRate.Text = "0";
+            this.lblLastTransmitRate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(230, 143);
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label13.Location = new System.Drawing.Point(4, 83);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(91, 13);
+            this.label13.Size = new System.Drawing.Size(70, 13);
             this.label13.TabIndex = 53;
-            this.label13.Text = "Last Transmit rate";
+            this.label13.Text = "Last TX Rate";
+            this.toolTip1.SetToolTip(this.label13, "Last Transmitted Packet Rate");
             // 
             // button3
             // 
@@ -231,7 +236,7 @@
             // btnGetDevicesInBSS
             // 
             this.btnGetDevicesInBSS.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnGetDevicesInBSS.Location = new System.Drawing.Point(504, 141);
+            this.btnGetDevicesInBSS.Location = new System.Drawing.Point(504, 113);
             this.btnGetDevicesInBSS.Name = "btnGetDevicesInBSS";
             this.btnGetDevicesInBSS.Size = new System.Drawing.Size(64, 18);
             this.btnGetDevicesInBSS.TabIndex = 51;
@@ -242,7 +247,7 @@
             // cmbAssociatedDevicesInBSS
             // 
             this.cmbAssociatedDevicesInBSS.FormattingEnabled = true;
-            this.cmbAssociatedDevicesInBSS.Location = new System.Drawing.Point(389, 140);
+            this.cmbAssociatedDevicesInBSS.Location = new System.Drawing.Point(389, 112);
             this.cmbAssociatedDevicesInBSS.Name = "cmbAssociatedDevicesInBSS";
             this.cmbAssociatedDevicesInBSS.Size = new System.Drawing.Size(113, 21);
             this.cmbAssociatedDevicesInBSS.TabIndex = 50;
@@ -251,16 +256,18 @@
             // lblTDLSSetupStatus
             // 
             this.lblTDLSSetupStatus.AutoSize = true;
-            this.lblTDLSSetupStatus.Location = new System.Drawing.Point(344, 127);
+            this.lblTDLSSetupStatus.ForeColor = System.Drawing.Color.Teal;
+            this.lblTDLSSetupStatus.Location = new System.Drawing.Point(102, 133);
             this.lblTDLSSetupStatus.Name = "lblTDLSSetupStatus";
-            this.lblTDLSSetupStatus.Size = new System.Drawing.Size(13, 13);
+            this.lblTDLSSetupStatus.Size = new System.Drawing.Size(120, 13);
             this.lblTDLSSetupStatus.TabIndex = 49;
-            this.lblTDLSSetupStatus.Text = "0";
+            this.lblTDLSSetupStatus.Text = "TDLS SETUP STATUS";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(228, 127);
+            this.label12.ForeColor = System.Drawing.Color.Teal;
+            this.label12.Location = new System.Drawing.Point(12, 133);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(99, 13);
             this.label12.TabIndex = 48;
@@ -268,9 +275,10 @@
             // 
             // lblAllReceivedPackets
             // 
-            this.lblAllReceivedPackets.Location = new System.Drawing.Point(209, 82);
+            this.lblAllReceivedPackets.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblAllReceivedPackets.Location = new System.Drawing.Point(202, 79);
             this.lblAllReceivedPackets.Name = "lblAllReceivedPackets";
-            this.lblAllReceivedPackets.Size = new System.Drawing.Size(86, 14);
+            this.lblAllReceivedPackets.Size = new System.Drawing.Size(62, 14);
             this.lblAllReceivedPackets.TabIndex = 47;
             this.lblAllReceivedPackets.Text = "0";
             this.lblAllReceivedPackets.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -278,11 +286,12 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(92, 83);
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label11.Location = new System.Drawing.Point(117, 80);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(119, 13);
+            this.label11.Size = new System.Drawing.Size(79, 13);
             this.label11.TabIndex = 46;
-            this.label11.Text = "Received Packets Sum";
+            this.label11.Text = "Rec Pack Sum";
             // 
             // btnChangeTDLSStatusOn
             // 
@@ -398,21 +407,26 @@
             // 
             // lblRSSI
             // 
-            this.lblRSSI.AutoSize = true;
-            this.lblRSSI.Location = new System.Drawing.Point(98, 70);
+            this.lblRSSI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRSSI.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblRSSI.Location = new System.Drawing.Point(65, 70);
             this.lblRSSI.Name = "lblRSSI";
-            this.lblRSSI.Size = new System.Drawing.Size(13, 13);
+            this.lblRSSI.Size = new System.Drawing.Size(45, 13);
             this.lblRSSI.TabIndex = 26;
             this.lblRSSI.Text = "0";
+            this.lblRSSI.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // PresentRSSI
             // 
             this.PresentRSSI.AutoSize = true;
-            this.PresentRSSI.Location = new System.Drawing.Point(10, 70);
+            this.PresentRSSI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PresentRSSI.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.PresentRSSI.Location = new System.Drawing.Point(3, 70);
             this.PresentRSSI.Name = "PresentRSSI";
-            this.PresentRSSI.Size = new System.Drawing.Size(32, 13);
+            this.PresentRSSI.Size = new System.Drawing.Size(36, 13);
             this.PresentRSSI.TabIndex = 25;
             this.PresentRSSI.Text = "RSSI";
+            this.toolTip1.SetToolTip(this.PresentRSSI, "RSSI From Last Received Packet");
             // 
             // lblWaitingForAck
             // 
@@ -427,7 +441,8 @@
             // 
             // lblDataAckRetransmited
             // 
-            this.lblDataAckRetransmited.Location = new System.Drawing.Point(209, 69);
+            this.lblDataAckRetransmited.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblDataAckRetransmited.Location = new System.Drawing.Point(209, 66);
             this.lblDataAckRetransmited.Name = "lblDataAckRetransmited";
             this.lblDataAckRetransmited.Size = new System.Drawing.Size(55, 13);
             this.lblDataAckRetransmited.TabIndex = 23;
@@ -437,7 +452,8 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(117, 70);
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label6.Location = new System.Drawing.Point(117, 67);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(94, 13);
             this.label6.TabIndex = 22;
@@ -446,7 +462,7 @@
             // btnSaveData
             // 
             this.btnSaveData.Enabled = false;
-            this.btnSaveData.Location = new System.Drawing.Point(467, 112);
+            this.btnSaveData.Location = new System.Drawing.Point(479, 215);
             this.btnSaveData.Name = "btnSaveData";
             this.btnSaveData.Size = new System.Drawing.Size(101, 23);
             this.btnSaveData.TabIndex = 21;
@@ -457,7 +473,8 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(117, 57);
+            this.label5.ForeColor = System.Drawing.Color.Teal;
+            this.label5.Location = new System.Drawing.Point(117, 54);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 20;
@@ -465,7 +482,8 @@
             // 
             // lblRetransmited
             // 
-            this.lblRetransmited.Location = new System.Drawing.Point(206, 57);
+            this.lblRetransmited.ForeColor = System.Drawing.Color.Teal;
+            this.lblRetransmited.Location = new System.Drawing.Point(206, 54);
             this.lblRetransmited.Name = "lblRetransmited";
             this.lblRetransmited.Size = new System.Drawing.Size(58, 13);
             this.lblRetransmited.TabIndex = 19;
@@ -475,6 +493,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Navy;
             this.label4.Location = new System.Drawing.Point(117, 41);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 13);
@@ -483,6 +502,7 @@
             // 
             // lblAckReceived
             // 
+            this.lblAckReceived.ForeColor = System.Drawing.Color.Navy;
             this.lblAckReceived.Location = new System.Drawing.Point(209, 41);
             this.lblAckReceived.Name = "lblAckReceived";
             this.lblAckReceived.Size = new System.Drawing.Size(55, 16);
@@ -493,7 +513,7 @@
             // cmdReset
             // 
             this.cmdReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.cmdReset.Location = new System.Drawing.Point(206, 18);
+            this.cmdReset.Location = new System.Drawing.Point(209, 96);
             this.cmdReset.Name = "cmdReset";
             this.cmdReset.Size = new System.Drawing.Size(47, 20);
             this.cmdReset.TabIndex = 16;
@@ -504,7 +524,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 44);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label3.Location = new System.Drawing.Point(3, 44);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 13);
             this.label3.TabIndex = 15;
@@ -512,6 +533,7 @@
             // 
             // lblSent
             // 
+            this.lblSent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.lblSent.Location = new System.Drawing.Point(62, 45);
             this.lblSent.Name = "lblSent";
             this.lblSent.Size = new System.Drawing.Size(49, 13);
@@ -522,7 +544,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 57);
+            this.label2.ForeColor = System.Drawing.Color.Purple;
+            this.label2.Location = new System.Drawing.Point(3, 57);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 13;
@@ -530,6 +553,7 @@
             // 
             // txtDataReceeived
             // 
+            this.txtDataReceeived.ForeColor = System.Drawing.Color.Purple;
             this.txtDataReceeived.Location = new System.Drawing.Point(59, 58);
             this.txtDataReceeived.Name = "txtDataReceeived";
             this.txtDataReceeived.Size = new System.Drawing.Size(52, 12);
@@ -541,22 +565,25 @@
             // 
             this.txtMAC.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtMAC.ForeColor = System.Drawing.Color.DarkGreen;
-            this.txtMAC.Location = new System.Drawing.Point(9, 19);
+            this.txtMAC.Location = new System.Drawing.Point(6, 12);
             this.txtMAC.Name = "txtMAC";
             this.txtMAC.ReadOnly = true;
-            this.txtMAC.Size = new System.Drawing.Size(183, 23);
+            this.txtMAC.Size = new System.Drawing.Size(140, 23);
             this.txtMAC.TabIndex = 11;
+            this.txtMAC.Text = "00:00:00:00:00:00";
             // 
             // txtDestination
             // 
             this.txtDestination.Location = new System.Drawing.Point(389, 86);
             this.txtDestination.Name = "txtDestination";
-            this.txtDestination.Size = new System.Drawing.Size(179, 20);
+            this.txtDestination.Size = new System.Drawing.Size(113, 20);
             this.txtDestination.TabIndex = 10;
+            this.txtDestination.Text = "00:00:00:00:00:00";
+            this.toolTip1.SetToolTip(this.txtDestination, "Enter MAC address of peer that you want to send data to him");
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(389, 113);
+            this.button1.Location = new System.Drawing.Point(504, 86);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(76, 22);
             this.button1.TabIndex = 9;
@@ -574,6 +601,7 @@
             this.lblAssociatedAP.Size = new System.Drawing.Size(116, 16);
             this.lblAssociatedAP.TabIndex = 8;
             this.lblAssociatedAP.Text = "XXXXXXXXXXXX";
+            this.toolTip1.SetToolTip(this.lblAssociatedAP, "SSID of your BSS");
             this.lblAssociatedAP.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblAssociatedAP_MouseDoubleClick);
             // 
             // ConnectedToLabel
@@ -641,7 +669,7 @@
             this.groupBox2.Controls.Add(this.txtDumpAll);
             this.groupBox2.Location = new System.Drawing.Point(12, 250);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(559, 184);
+            this.groupBox2.Size = new System.Drawing.Size(559, 136);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Send Data";
@@ -662,7 +690,7 @@
             this.txtDumpAll.Multiline = true;
             this.txtDumpAll.Name = "txtDumpAll";
             this.txtDumpAll.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDumpAll.Size = new System.Drawing.Size(547, 163);
+            this.txtDumpAll.Size = new System.Drawing.Size(547, 106);
             this.txtDumpAll.TabIndex = 0;
             // 
             // tmrGUI
@@ -687,7 +715,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(585, 436);
+            this.ClientSize = new System.Drawing.Size(585, 389);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "StationInfo";
@@ -760,5 +788,6 @@
         private System.Windows.Forms.Timer tmrFast;
         private System.Windows.Forms.Button cmdShowLog;
         private System.Windows.Forms.Timer tmrSlow;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

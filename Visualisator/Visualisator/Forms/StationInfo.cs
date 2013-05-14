@@ -307,5 +307,6 @@ namespace Visualisator
 
             lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
         }
+
     }
 }
