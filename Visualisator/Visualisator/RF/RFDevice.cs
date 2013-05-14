@@ -491,7 +491,7 @@ namespace Visualisator
                 return;
             if (((SimulatorPacket)sender).PacketFrequency != this.Freq)
                 return;
-            String _dest = ((SimulatorPacket)sender).Destination;
+            string _dest = ((SimulatorPacket)sender).Destination;
 
             double dist = GetSTADist(((SimulatorPacket) sender).X, ((SimulatorPacket) sender).Y, this.x, this.y);
             if(dist > Medium.ReceiveDistance)
