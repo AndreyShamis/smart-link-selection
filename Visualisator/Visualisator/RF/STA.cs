@@ -649,7 +649,6 @@ namespace Visualisator
         //*********************************************************************
         public void ThreadAbleReadFile(String DestinationMacAddress)
         {
-
             int buf_size = 500, numOfReadBytes = 0;
             byte[] buffer = new byte[buf_size];
             bool exit_loop = false;
@@ -664,71 +663,49 @@ namespace Visualisator
                 string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\_DATA_TO_SEND\input.txt");
                 AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
 
-                if (_connecttoAP == null)
-                {
-                    return;
-                }
+                if (_connecttoAP == null)    return;
 
                 this.Passive = false;
                 int SuccessContinuous = 0;
                 Stopwatch sw = Stopwatch.StartNew();
-                // Do work
-                TimeSpan timeWindow = sw.Elapsed;
 
+                TimeSpan timeWindow = sw.Elapsed;// Do work
                 Data dataPack = new Data(CreatePacket());
                 dataPack.SSID = _connecttoAP.SSID;
                 dataPack.Destination = _connecttoAP.getMACAddress();
                 //dataPack.PacketBand = this.getOperateBand();
                 dataPack.Reciver = DestinationMacAddress;
                 int transmitRate = 144;
-
-
                 Int32 SQID = 0;
-                if (!_RFpeers.Contains(dataPack.Destination) || !_RFpeers.Contains(DestinationMacAddress))
-                {
-                    this.UpdateRFPeers();
-                }
+                if (!_RFpeers.Contains(dataPack.Destination) || !_RFpeers.Contains(DestinationMacAddress))  this.UpdateRFPeers();
                 RFpeer workPeer = (RFpeer)_RFpeers[DestinationMacAddress];
                 MACOfAnotherPeer = DestinationMacAddress;
-
-
-
                 while (!exit_loop)
                 {
-                    if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0)
-                    {
+                    if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
                     }
-
-                    dataPack = new Data(CreatePacket());
-                    dataPack.SSID = _connecttoAP.SSID;
-                    dataPack.FrameSize = numOfReadBytes;
-                    dataPack.streamID = streamID;
-                    dataPack._data = buffer;
-
-                    if (packetCounter == 0 && !exit_loop)
-                        dataPack.streamStatus = StreamingStatus.Started;
-                    else if (packetCounter > 0 && numOfReadBytes > 0)
-                        dataPack.streamStatus = StreamingStatus.active;
+                    dataPack = new Data(CreatePacket());    //  TODO this should be before last lines
+                    dataPack.SSID       = _connecttoAP.SSID;
+                    dataPack.FrameSize  = numOfReadBytes;
+                    dataPack.streamID   = streamID;
+                    dataPack._data      = buffer;
+                    if (packetCounter == 0 && !exit_loop)    dataPack.streamStatus = StreamingStatus.Started;
+                    else if (packetCounter > 0 && numOfReadBytes > 0)    dataPack.streamStatus = StreamingStatus.active;
 
                     packetCounter++;
 
-                    if (TDLSisWork)
-                        dataPack.Destination = DestinationMacAddress;// TDLS TODO 
-                    else
-                        dataPack.Destination = _connecttoAP.getMACAddress();// TDLS TODO
+                    if (TDLSisWork)    dataPack.Destination = DestinationMacAddress;// TDLS TODO 
+                    else    dataPack.Destination = _connecttoAP.getMACAddress();// TDLS TODO
 
                     dataPack.Reciver = DestinationMacAddress;                        // TDLS TODO
 
                     SQID++;
                     short tem = GetTXRate(dataPack.Destination);
                     dataPack.setTransmitRate(tem);
-                    //dataPack.setData(line);
-
-                    dataPack.PacketID = SQID;
-
-                    ackReceived = false;
+                    dataPack.PacketID   = SQID;
+                    ackReceived         = false;
                     SendData(dataPack);
                     WaitingForAck = true;
                     int retrCounter = Medium.WaitBeforeRetransmit;
@@ -747,69 +724,43 @@ namespace Visualisator
                         Thread.Sleep(1);
                         if (retrCounter < 0)
                         {
-
                             workPeer = (RFpeer)_RFpeers[DestinationMacAddress];
-
                             long timeNew = sw.ElapsedMilliseconds;
                             long timeOld = timeWindow.Milliseconds;
-                            if (timeNew - timeOld < Medium.RetransmitWindow)
-                                workPeer.RetransmitionCounter++;
-                            else
-                                timeWindow = sw.Elapsed;
-                                //  workPeer.RetransmitionCounter++;
-  
+                            if (timeNew - timeOld < Medium.RetransmitWindow)    workPeer.RetransmitionCounter++;
+                            else                                                timeWindow = sw.Elapsed;
+
                             dataPack.IsRetransmit = true;       //  This is retrasmition
                             retrCounter = Medium.WaitBeforeRetransmit;
                             ThePacketWasRetransmited = true;
                             SendData(dataPack);
-                            if (TDLSisWork)
-                                Thread.Sleep(DelayInTDLS + 5);
-                            else
-                                Thread.Sleep(DelayInBss + 5);
+
+                            if (TDLSisWork)     Thread.Sleep(DelayInTDLS + 5);
+                            else                Thread.Sleep(DelayInBss + 5);
+
                             _DataRetransmited++;
                             loops = loops + 1;
-                            if (!_Enabled)
-                                return;
-                            //Thread.Sleep(1);
+                            if (!_Enabled)  return;
                             maxRetrays--;
                         }
-                        if (maxRetrays == 0)
-                        {
-                            break;
-                        }
+                        if (maxRetrays == 0)  break;
 
                     }
 
-                    if (!ThePacketWasRetransmited)
-                    {
+                    if (!ThePacketWasRetransmited){
                         SuccessContinuous++;
                         workPeer.TransmitCounter++;
-                    }
-                    else
-                    {
+                    }else{
                         workPeer.RetransmitionCounter++;
                         SuccessContinuous = 0;
                     }
-                    if (!ThePacketWasRetransmited && ackReceived && SuccessContinuous > 10)
-                    {
+                    if (!ThePacketWasRetransmited && ackReceived && SuccessContinuous > 10){
                         workPeer.TransmitCounter = 0;
                         workPeer.RetransmitionCounter = 0;
-                    }
-                    if (retrCounter <= Medium.WaitBeforeRetransmit && retrCounter >= 50)
-                    {
-                        transmitRate = 144;
-                    }
-                    else
-                    {
-                        transmitRate = 64;
                     }
 
                     WaitingForAck = false;
                     _StatisticRetransmitTime = loops * 60 - retrCounter;
-                    //SpinWait.SpinUntil(() => { return ackReceived; });
-
-                    // Thread.Sleep(3);
-                    //Console.WriteLine("\t" + line);
                 }
                 this.Passive = true;
                 sw.Stop();
@@ -818,8 +769,7 @@ namespace Visualisator
                 MessageBox.Show(elapsedTime.TotalSeconds.ToString());
             }
             catch (Exception ex) { AddToLog("ThreadAbleReadFile: " + ex.Message); }
-            finally
-            {
+            finally {
                 fsSource.Close();
             }
         }
