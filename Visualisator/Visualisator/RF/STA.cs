@@ -40,6 +40,8 @@ namespace Visualisator
         private const int max_channel = 13;
         private int[] _channels = new int[max_channel];  // now it's a 20-element array
 
+        private bool StopScan { set; get; }
+
         private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;   
 
         //*********************************************************************
@@ -106,17 +108,7 @@ namespace Visualisator
             get { return _delayInTDLS; }
             set { _delayInTDLS = value; }
         }
-
-
-
-
         private bool ackReceived = false;
-       /* public STA(Medium med)
-        {
-            this._MEDIUM = med;
-            this.VColor = Color.RoyalBlue;
-            Enable();
-        }*/
 
         //*********************************************************************
         public STA(ArrayList RfObjects)
@@ -137,6 +129,7 @@ namespace Visualisator
         //*********************************************************************
         public new void Enable()
         {
+            StopScan = false;
             base.Enable();
             CreateFolder();
             this._scanning = false;
@@ -1016,6 +1009,7 @@ namespace Visualisator
         {
             try
             {
+                StopScan = false;
                 Thread newThread = new Thread(new ThreadStart(ThreadableScan));
                 newThread.Name = "ThreadableScan of" + this.getMACAddress();
                 newThread.Start();
@@ -1076,12 +1070,16 @@ namespace Visualisator
                 for (short i = 1; i < 15; i++)
                 {
                     ScanOneChannel(i, 320, Frequency._2400GHz);
+                    if(!StopScan)
+                        return;
                 }
                 ArrayList Achannels = Medium.getBandAChannels();
                 foreach (var i in Achannels)
                 {
                     int temp_val = (int)i;
                     ScanOneChannel((short)temp_val, 320, Frequency._5200GHz);
+                    if (!StopScan)
+                        return;
                 }
 
             }
