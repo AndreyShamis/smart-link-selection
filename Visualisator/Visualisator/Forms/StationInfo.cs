@@ -311,5 +311,20 @@ namespace Visualisator
             lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
         }
 
+        private void cmdLogsUpdate_Click(object sender, EventArgs e)
+        {
+            txtErrorsLogFromCode.Text = _sta._LOG.ToString();
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmdLogsClear_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
