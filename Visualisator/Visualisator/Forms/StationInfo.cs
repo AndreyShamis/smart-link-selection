@@ -306,7 +306,7 @@ namespace Visualisator
 
         private void SelectSSIDIfHaveOneInList()
         {
-            if(cmbAPList.Items.Count == 1)
+            if (cmbAPList.SelectedIndex == -1 && cmbAPList.Items.Count == 1)
             {
                 cmbAPList.SelectedIndex = 0;
             }
@@ -340,6 +340,11 @@ namespace Visualisator
         private void cmbAssociatedDevicesInBSS_MouseClick(object sender, MouseEventArgs e)
         {
             GetDevicesInBSS();
+        }
+
+        private void chkbAutoStartTdls_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

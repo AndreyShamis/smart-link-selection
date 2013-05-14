@@ -98,6 +98,7 @@
             this.txtErrorsLogFromCode = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
+            this.chkbAutoStartTdls = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -258,6 +259,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkbAutoStartTdls);
             this.groupBox1.Controls.Add(this.cmdSelectFileToSend);
             this.groupBox1.Controls.Add(this.cmdShowLog);
             this.groupBox1.Controls.Add(this.lblRetransmittionRate);
@@ -425,7 +427,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.Color.Teal;
-            this.label12.Location = new System.Drawing.Point(12, 133);
+            this.label12.Location = new System.Drawing.Point(3, 133);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(99, 13);
             this.label12.TabIndex = 48;
@@ -501,29 +503,33 @@
             this.lblTDLSisWork.AutoSize = true;
             this.lblTDLSisWork.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblTDLSisWork.ForeColor = System.Drawing.Color.Olive;
-            this.lblTDLSisWork.Location = new System.Drawing.Point(154, 147);
+            this.lblTDLSisWork.Location = new System.Drawing.Point(168, 148);
             this.lblTDLSisWork.Name = "lblTDLSisWork";
             this.lblTDLSisWork.Size = new System.Drawing.Size(24, 13);
             this.lblTDLSisWork.TabIndex = 40;
             this.lblTDLSisWork.Text = "Off";
+            this.toolTip1.SetToolTip(this.lblTDLSisWork, "If TDLS is work Right now");
             // 
             // lblTDLStatus
             // 
             this.lblTDLStatus.AutoSize = true;
             this.lblTDLStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblTDLStatus.ForeColor = System.Drawing.Color.DarkSeaGreen;
-            this.lblTDLStatus.Location = new System.Drawing.Point(127, 147);
+            this.lblTDLStatus.Location = new System.Drawing.Point(149, 148);
             this.lblTDLStatus.Name = "lblTDLStatus";
             this.lblTDLStatus.Size = new System.Drawing.Size(24, 13);
             this.lblTDLStatus.TabIndex = 34;
             this.lblTDLStatus.Text = "Off";
+            this.toolTip1.SetToolTip(this.lblTDLStatus, "TDLS Status");
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 146);
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.label8.Location = new System.Drawing.Point(3, 146);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(111, 13);
+            this.label8.Size = new System.Drawing.Size(129, 13);
             this.label8.TabIndex = 33;
             this.label8.Text = "TDLS(Enabled/Work)";
             // 
@@ -839,6 +845,17 @@
             this.tabPage4.Text = "Statistic";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // chkbAutoStartTdls
+            // 
+            this.chkbAutoStartTdls.AutoSize = true;
+            this.chkbAutoStartTdls.Location = new System.Drawing.Point(152, 164);
+            this.chkbAutoStartTdls.Name = "chkbAutoStartTdls";
+            this.chkbAutoStartTdls.Size = new System.Drawing.Size(104, 17);
+            this.chkbAutoStartTdls.TabIndex = 61;
+            this.chkbAutoStartTdls.Text = "Auto Start TDLS";
+            this.chkbAutoStartTdls.UseVisualStyleBackColor = true;
+            this.chkbAutoStartTdls.CheckedChanged += new System.EventHandler(this.chkbAutoStartTdls_CheckedChanged);
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -932,5 +949,6 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Button cmdSelectFileToSend;
         private System.Windows.Forms.OpenFileDialog openFileToSend;
+        private System.Windows.Forms.CheckBox chkbAutoStartTdls;
     }
 }

@@ -8,6 +8,7 @@ using System.Reflection;
 
 namespace Visualisator
 {
+    [Serializable()]
     class ObjectDumper
     {
         private int _level;

@@ -5,18 +5,19 @@ using System.Text;
 
 namespace Visualisator
 {
+    [Serializable()]
     internal enum Bandwidth
     {
         _20MHz,
         _40Mhz,
     };
-
+    [Serializable()]
     internal enum Frequency
     {
         _2400GHz,
         _5200GHz,
     };
-
+    [Serializable()]
     internal enum Standart80211
     {
         _11a,
@@ -36,7 +37,7 @@ namespace Visualisator
  * 5 = TDLSSetup Confirm Sended
  * 6 = TDLSSetup Confirm Received
  */
-
+    [Serializable()]
     internal enum TDLSSetupStatus
     {
         TDLSSetupDisabled = 0,
