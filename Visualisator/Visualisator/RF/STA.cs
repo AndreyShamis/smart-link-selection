@@ -27,7 +27,7 @@ namespace Visualisator
         //private int             PrevDataAckID           = 0;
         private int             _DataRetransmited       = 0;
         private int             _DataAckRetransmitted   = 0;
-        private String          DOCpath                 = "";
+        
         private int             _RSSI                   = 0;
         private bool            _WaitingForAck          = false;
         private StringBuilder   DataReceivedContainer   = new StringBuilder();
@@ -267,47 +267,7 @@ namespace Visualisator
             return (false);
         }
 
-        //*********************************************************************
-        /*
-        public void ListenDisabled()
-        {
-            Packets.IPacket pack = null;
 
-            while (_Enabled)
-            {
-                SpinWait.SpinUntil(RF_Ready);
-                lock (RF_STATUS)
-                {
-                    RF_STATUS = "RX";
-                    if (_MEDIUM.MediumHaveAIRWork(this,true))
-                        pack = _MEDIUM.ReceiveData(this);
-                    
-                    RF_STATUS = "NONE";
-                }
-                if (pack != null)
-                    ParseReceivedPacket(pack);
-
-                //Thread.Sleep(1);
-                Thread.Sleep(new TimeSpan(100));
-                //Thread.Sleep(new TimeSpan(10));
-            }
-        }
-        */
-
-        //*********************************************************************
-        private void CreateFolder()
-        {
-            // Specify a name for your top-level folder. 
-            string folderName = @"C:\simulator";
-
-            // To create a string that specifies the path to a subfolder under your  
-            // top-level folder, add a name for the subfolder to folderName. 
-            String mac          = this.getMACAddress();
-            mac                 = mac.Replace(":", "-");
-            string pathString   = System.IO.Path.Combine(folderName, mac);
-            DOCpath             = pathString;
-            System.IO.Directory.CreateDirectory(pathString);
-        }
 
         //*********************************************************************
         public void SaveReceivedDataIntoFile()
@@ -409,24 +369,22 @@ namespace Visualisator
         {
             try
             {
-            Packets.TDLSSetupRequest _tdlsSetupR = new TDLSSetupRequest(CreatePacket());
+                Packets.TDLSSetupRequest _tdlsSetupR = new TDLSSetupRequest(CreatePacket());
 
-            AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
+                AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
 
-            _tdlsSetupR.SSID            = _connecttoAP.SSID;
-            _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
-            _tdlsSetupR.PacketChannel   = this.getOperateChannel();
-            _tdlsSetupR.PacketFrequency = this.Freq;
-            _tdlsSetupR.PacketBandWith = this.BandWidth;
-            _tdlsSetupR.PacketStandart = this.Stand80211;
-            _tdlsSetupR.Reciver         = MAC;
-          //  _tdlsSetupR.setTransmitRate(11);
-            SendData(_tdlsSetupR);
-            TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestSended;
-                        }
-            catch(Exception)
-            {
+                _tdlsSetupR.SSID            = _connecttoAP.SSID;
+                _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
+                _tdlsSetupR.PacketChannel   = this.getOperateChannel();
+                _tdlsSetupR.PacketFrequency = this.Freq;
+                _tdlsSetupR.PacketBandWith = this.BandWidth;
+                _tdlsSetupR.PacketStandart = this.Stand80211;
+                _tdlsSetupR.Reciver         = MAC;
+              //  _tdlsSetupR.setTransmitRate(11);
+                SendData(_tdlsSetupR);
+                TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestSended;
             }
+            catch (Exception ex) { AddToLog("TDLS_SendSetupRequest: " + ex.Message); }
             
         }
         public void TDLS_SendSetupResponse(string MAC)
@@ -446,9 +404,7 @@ namespace Visualisator
                 SendData(_tdlsSetupR);
                 TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
             }
-            catch(Exception)
-            {
-            }
+            catch (Exception ex) { AddToLog("TDLS_SendSetupResponse: " + ex.Message); }
         }
         public void TDLS_SendSetupConfirm(string MAC)
         {
@@ -466,10 +422,8 @@ namespace Visualisator
            // _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
             TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
-                        }
-            catch(Exception)
-            {
             }
+            catch (Exception ex) { AddToLog("TDLS_SendSetupConfirm: " + ex.Message); }
         }
         //*********************************************************************
         public void AddDataStream(Data packet)
@@ -479,10 +433,7 @@ namespace Visualisator
                 StreamHandle dstream = new StreamHandle(packet);
                 _StreamsHash.Add(packet.streamID, dstream);
             }
-            catch (Exception ex)
-            {
-                AddToLog("File Stream: " + ex.Message);
-            }
+            catch (Exception ex){    AddToLog("File Stream: " + ex.Message); }
         }
         //*********************************************************************
         public void DeleteDataStream(Data packet)
@@ -499,10 +450,7 @@ namespace Visualisator
                     MessageBox.Show("File Stream: Tryed to remove stream that not exist at the stream hash");
                 }
             }
-            catch (Exception ex)
-            {
-                AddToLog("File Stream: " + ex.Message);
-            }
+            catch (Exception ex){  AddToLog("File Stream: " + ex.Message); }
 
         }
 
@@ -529,10 +477,7 @@ namespace Visualisator
 
 
                     }
-                    catch (Exception ex)
-                    {
-                        AddToLog("File Stream: " + ex.Message);
-                    }
+                    catch (Exception ex){    AddToLog("File Stream: " + ex.Message);}
                 }
             }
             else
@@ -550,10 +495,7 @@ namespace Visualisator
                     //dstream = _StreamsHash[packet.streamID] as StreamHandle;
                     //dstream.hendlePacket(packet);
                 }
-                catch (Exception ex)
-                {
-                    AddToLog("File Stream: " + ex.Message);
-                }
+                catch (Exception ex){ AddToLog("File Stream: " + ex.Message);}
             }
         }
 
@@ -583,7 +525,7 @@ namespace Visualisator
                     _channels[bec.PacketChannel - 1] = Math.Max(-100, Rssi);
                     _AccessPoint.Increase(bec.SSID);
                 }
-                catch (Exception) { }
+                catch (Exception ex) { AddToLog("Parse receibed Packet Beacon: " + ex.Message); }
             }
             else if (_Pt == typeof(Packets.Data))
             {
@@ -597,10 +539,7 @@ namespace Visualisator
                         {
                             HandleDataStream(dat);
                         }
-                        catch (Exception)
-                        {
-
-                        }
+                        catch (Exception ex) { AddToLog("Parse receibed Packet HandleDataStream: " + ex.Message); }
 
                         //DataReceivedContainer.Append(dat.getData() + "\r\n");
                     }else{
@@ -608,10 +547,7 @@ namespace Visualisator
                     }
                     
                 }
-                catch (Exception ex)
-                {
-                    AddToLog("Parse Received Packet - Data " + ex.Message);
-                }
+                catch (Exception ex) { AddToLog("Parse Received Packet - Data " + ex.Message);}
             }
             else if (_Pt == typeof(DataAck))
             {
@@ -659,7 +595,7 @@ namespace Visualisator
             {
                 _TDLS_work = false;
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) { AddToLog("DisableTDLS: " + ex.Message); }
         }
 
         public void EnableTDLS()
@@ -668,7 +604,7 @@ namespace Visualisator
             {
                 _TDLS_work = true;
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) { AddToLog("EnableTDLS: " + ex.Message); }
         }
 
         //*********************************************************************
@@ -682,7 +618,7 @@ namespace Visualisator
                     SpinWait.SpinUntil(() => { return (bool)!_scanning; });
                 }
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) { AddToLog("CheckScanConditionOnSend: " + ex.Message); }
         }
 
         //*********************************************************************
@@ -698,7 +634,7 @@ namespace Visualisator
                 AllReceivedPackets = 0;
                 this.DoubleRecieved = 0;
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) { AddToLog("ResetCounters: " + ex.Message); }
         }
 
         //*********************************************************************
@@ -713,7 +649,7 @@ namespace Visualisator
                         return (_tV);
                 }
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) { AddToLog("GetRFDeviceByMAC: " + ex.Message); }
             return (null);
         }
 
@@ -723,10 +659,10 @@ namespace Visualisator
             try
             {
                 Thread newThread = new Thread(() => ThreadAbleReadFile(fileName));
-                newThread.Name = "ThreadAbleReadFile";
+                newThread.Name = "ThreadAbleReadFile" + this.getMACAddress();
                 newThread.Start();
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) { AddToLog("rfile: " + ex.Message); }
         }
 
         //*********************************************************************
@@ -938,10 +874,7 @@ namespace Visualisator
 
                 MessageBox.Show(elapsedTime.TotalSeconds.ToString());
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("File Stream: " + ex.Message);
-            }
+            catch (Exception ex) { AddToLog("ThreadAbleReadFile: " + ex.Message); }
             finally
             {
                 fsSource.Close();
@@ -964,25 +897,31 @@ namespace Visualisator
                     }
                 }
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) { AddToLog("GetAPBySSID: " + ex.Message); }
             return (null);
         }
 
+        /// <summary>
+        /// Get BSS SSID
+        /// </summary>
+        /// <returns>SSID of BSS</returns>
         private string getBSS_SSID()
         {
             string ret = "";
-
             try
             {
                 AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
-
                 ret = _connecttoAP.SSID;
-            }catch(Exception)
-            {
             }
+            catch (Exception ex) { AddToLog("getBSS_SSID:" + ex.Message); }
 
             return ret;
         }
+
+        /// <summary>
+        /// Get Associatedd Devices IN BSS
+        /// </summary>
+        /// <returns>Array List Of Associated Devices</returns>
         public ArrayList getAssociatedDevicesInBSS()
         {
             try
@@ -1001,7 +940,7 @@ namespace Visualisator
                     }
                 }
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) { AddToLog("getAssociatedDevicesInBSS: " + ex.Message); }
 
             return null;
         }
@@ -1013,10 +952,10 @@ namespace Visualisator
             {
                 StopScan = false;
                 Thread newThread = new Thread(new ThreadStart(ThreadableScan));
-                newThread.Name = "ThreadableScan of" + this.getMACAddress();
+                newThread.Name = "Scan of: " + this.getMACAddress();
                 newThread.Start();
             }
-            catch (Exception){throw;}
+            catch (Exception ex){ AddToLog("Scan: " + ex.Message);}
         }
 
         //*********************************************************************
@@ -1048,7 +987,7 @@ namespace Visualisator
                 }
                 //Thread.Sleep(3);
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) { AddToLog("ScanOneChannel: " + ex.Message); }
         }
 
         //*********************************************************************
@@ -1085,7 +1024,7 @@ namespace Visualisator
                 }
 
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) { AddToLog("ThreadableScan: " + ex.Message); }
         }
 
         //*********************************************************************
@@ -1095,12 +1034,8 @@ namespace Visualisator
             {
                 return (_AccessPoint);
             }
-            catch (Exception)
-            {
-                
-                throw;
-            }
-            
+            catch (Exception ex) { AddToLog("ScanList: " + ex.Message); }
+            return null;
         }
     }
 }

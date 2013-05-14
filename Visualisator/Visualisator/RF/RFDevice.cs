@@ -13,7 +13,7 @@ namespace Visualisator
     class RFDevice: ISerializable,IRFDevice
     { 
         public  String RF_STATUS = "NONE";
-
+        protected String DOCpath = "";
         protected Hashtable     _RFpeers = new Hashtable(new ByteArrayComparer());
         protected Boolean       _Enabled = true;
         public StringBuilder    _LOG            =   new StringBuilder();
@@ -749,6 +749,21 @@ namespace Visualisator
 
             return retVal;
 
+        }
+
+        //*********************************************************************
+        protected void CreateFolder()
+        {
+            // Specify a name for your top-level folder. 
+            string folderName = @"C:\simulator";
+
+            // To create a string that specifies the path to a subfolder under your  
+            // top-level folder, add a name for the subfolder to folderName. 
+            String mac = this.getMACAddress();
+            mac = mac.Replace(":", "-");
+            string pathString = System.IO.Path.Combine(folderName, mac);
+            DOCpath = pathString;
+            System.IO.Directory.CreateDirectory(pathString);
         }
     }
 }
