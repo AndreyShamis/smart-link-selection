@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Collections;
 using System.Threading;
 using Visualisator.Properties;
+using System.Runtime.Serialization.Formatters.Binary;
 
 
 namespace Visualisator
@@ -323,6 +324,26 @@ namespace Visualisator
 
         private void cmdLogsClear_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void SelctFileToSend(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult dr = this.openFileToSend.ShowDialog();
+
+                if (dr == System.Windows.Forms.DialogResult.OK)
+                {
+                    toolTip1.SetToolTip(cmdSelectFileToSend, openFileToSend.FileName.ToString());
+                    MessageBox.Show(openFileToSend.FileName);
+                }
+            }
+            catch (Exception ex2)
+            {
+                //AddToErrorLog(ex.Message);
+                MessageBox.Show(ex2.Message);
+            }
 
         }
 

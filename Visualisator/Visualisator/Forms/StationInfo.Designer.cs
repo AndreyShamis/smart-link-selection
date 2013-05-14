@@ -40,6 +40,7 @@
             this.txtDestination = new System.Windows.Forms.TextBox();
             this.PresentRSSI = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.cmdSelectFileToSend = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -96,6 +97,7 @@
             this.cmdLogsUpdate = new System.Windows.Forms.Button();
             this.txtErrorsLogFromCode = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -197,6 +199,17 @@
             this.label13.Text = "Last TX Rate";
             this.toolTip1.SetToolTip(this.label13, "Last Transmitted Packet Rate");
             // 
+            // cmdSelectFileToSend
+            // 
+            this.cmdSelectFileToSend.Location = new System.Drawing.Point(497, 161);
+            this.cmdSelectFileToSend.Name = "cmdSelectFileToSend";
+            this.cmdSelectFileToSend.Size = new System.Drawing.Size(65, 21);
+            this.cmdSelectFileToSend.TabIndex = 60;
+            this.cmdSelectFileToSend.Text = "Select File";
+            this.toolTip1.SetToolTip(this.cmdSelectFileToSend, "Select File To Send");
+            this.cmdSelectFileToSend.UseVisualStyleBackColor = true;
+            this.cmdSelectFileToSend.Click += new System.EventHandler(this.SelctFileToSend);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -222,6 +235,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmdSelectFileToSend);
             this.groupBox1.Controls.Add(this.cmdShowLog);
             this.groupBox1.Controls.Add(this.lblRetransmittionRate);
             this.groupBox1.Controls.Add(this.label15);
@@ -913,5 +927,7 @@
         private System.Windows.Forms.Button cmdLogsUpdate;
         private System.Windows.Forms.TextBox txtErrorsLogFromCode;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Button cmdSelectFileToSend;
+        private System.Windows.Forms.OpenFileDialog openFileToSend;
     }
 }
