@@ -334,12 +334,6 @@ namespace Visualisator
             return _address.getMAC();
         }
 
-        //=====================================================================
-        public void setMAC(MAC _mac)
-        {
-            _address = _mac;
-        }
-
         #region Constructot
         //=====================================================================
         public RFDevice(int x, int y, int z)
