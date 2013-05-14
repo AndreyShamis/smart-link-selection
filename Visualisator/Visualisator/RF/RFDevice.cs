@@ -409,28 +409,21 @@ namespace Visualisator
         public void SendData(SimulatorPacket pack)
         {
             CheckScanConditionOnSend();
-            lock (RF_STATUS)
-            {
-
-                //_ev.WaitOne();
-                try
-                {
+            lock (RF_STATUS){
+                try{
                     RF_STATUS = "TX";
-                    while (!Medium.Registration(this.Freq, this.getOperateChannel(), this.x, this.y))
-                    {
+                    while (!Medium.Registration(this.Freq, this.getOperateChannel(), this.x, this.y)){
                         Thread.Sleep(new TimeSpan(randomWait.Next(20, 50)));
                     }
                     this.MACLastTrnsmitRate = pack.getTransmitRate();
                     Medium.SendData(pack);   
                 }
-                catch(Exception ex)
-                {
+                catch(Exception ex){
                     MessageBox.Show("SendData :" + ex.Message);
                 }
 
                 RF_STATUS = "NONE";
             }
-            //_ev.Set();
             if (pack.GetType() == typeof(Data)){
                 _DataSent++;
             }
@@ -438,12 +431,6 @@ namespace Visualisator
 
         //=====================================================================
         public virtual void CheckScanConditionOnSend(){}
-
-        //=====================================================================
-        public IPacket ReceiveData(IRFDevice ThisDevice)
-        {
-            throw new NotImplementedException();
-        }
 
         //=====================================================================
         public void MACsandACK(string Destination , Guid _DataGuid,int TXrate)
@@ -466,12 +453,6 @@ namespace Visualisator
         public void Disable()
         {
             _Enabled = false;
-        }
-
-        //=====================================================================
-        public void RegisterToMedium(int x, int y, int Channel, string Band, int Radius)
-        {
-            throw new NotImplementedException();
         }
 
         //=====================================================================
@@ -561,29 +542,14 @@ namespace Visualisator
                     Thread newThread = new Thread(() => ParseReceivedPacket(temp));
                     newThread.Name = "ParseReceivedPacket of " + this.getMACAddress();
                     newThread.Start();
-
-                    //   Thread.Sleep(1);
-
                 }
-                else if (pack != null)
-                {
-                    if (pack.GetType() != typeof(Packets.Beacon))
-                    {
+                else if (pack != null){
+                    if (pack.GetType() != typeof(Packets.Beacon)){
                         _DoubleRecieved++;
-                        //prev_guid = Guid.NewGuid();
                     }
-                    // else
-                    //  {
-                    //    Thread.Sleep(new TimeSpan(4000));
-                    // }
-                    //  Thread.Sleep(1);
                 }
-
             }
-
-            //}
         }
-
 
         //*********************************************************************
         public double GetNoiseOnSameChannel()
@@ -609,8 +575,6 @@ namespace Visualisator
             return val/points;
         }
 
-
-
         //*********************************************************************
         private bool ListenCondition()
         {
@@ -625,10 +589,6 @@ namespace Visualisator
             this.z = z;
             UpdateRFPeers();
         }
-
-
-
-
         
         //*********************************************************************
         /// <summary>
@@ -662,11 +622,8 @@ namespace Visualisator
                 if (_peer.BandWidth == Bandwidth._40Mhz)
                     retVale*=2;
             }  
-          
             return retVale;
         }
-
-
 
         /// <summary>
         /// 
