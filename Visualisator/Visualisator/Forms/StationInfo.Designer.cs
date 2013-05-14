@@ -41,6 +41,8 @@
             this.PresentRSSI = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.cmdSelectFileToSend = new System.Windows.Forms.Button();
+            this.btnSaveData = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -72,7 +74,6 @@
             this.lblWaitingForAck = new System.Windows.Forms.Label();
             this.lblDataAckRetransmited = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnSaveData = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.lblRetransmited = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -83,7 +84,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtDataReceeived = new System.Windows.Forms.Label();
             this.txtMAC = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.ConnectedToLabel = new System.Windows.Forms.Label();
             this.lblCoordinates = new System.Windows.Forms.Label();
             this.btnScan = new System.Windows.Forms.Button();
@@ -203,12 +203,35 @@
             // 
             this.cmdSelectFileToSend.Location = new System.Drawing.Point(497, 161);
             this.cmdSelectFileToSend.Name = "cmdSelectFileToSend";
-            this.cmdSelectFileToSend.Size = new System.Drawing.Size(65, 21);
+            this.cmdSelectFileToSend.Size = new System.Drawing.Size(64, 21);
             this.cmdSelectFileToSend.TabIndex = 60;
             this.cmdSelectFileToSend.Text = "Select File";
             this.toolTip1.SetToolTip(this.cmdSelectFileToSend, "Select File To Send");
             this.cmdSelectFileToSend.UseVisualStyleBackColor = true;
             this.cmdSelectFileToSend.Click += new System.EventHandler(this.SelctFileToSend);
+            // 
+            // btnSaveData
+            // 
+            this.btnSaveData.Enabled = false;
+            this.btnSaveData.Location = new System.Drawing.Point(429, 162);
+            this.btnSaveData.Name = "btnSaveData";
+            this.btnSaveData.Size = new System.Drawing.Size(62, 20);
+            this.btnSaveData.TabIndex = 21;
+            this.btnSaveData.Text = "Save Data";
+            this.toolTip1.SetToolTip(this.btnSaveData, "Save Received Data");
+            this.btnSaveData.UseVisualStyleBackColor = true;
+            this.btnSaveData.Click += new System.EventHandler(this.btnSaveData_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(504, 86);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(76, 22);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Send Data";
+            this.toolTip1.SetToolTip(this.button1, "Send Data to Providet MAC address and Selected file");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabControl1
             // 
@@ -307,7 +330,8 @@
             // lblRetransmittionRate
             // 
             this.lblRetransmittionRate.AutoSize = true;
-            this.lblRetransmittionRate.Location = new System.Drawing.Point(344, 165);
+            this.lblRetransmittionRate.ForeColor = System.Drawing.Color.Maroon;
+            this.lblRetransmittionRate.Location = new System.Drawing.Point(251, 15);
             this.lblRetransmittionRate.Name = "lblRetransmittionRate";
             this.lblRetransmittionRate.Size = new System.Drawing.Size(13, 13);
             this.lblRetransmittionRate.TabIndex = 58;
@@ -317,18 +341,19 @@
             // 
             this.label15.AccessibleDescription = "";
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(274, 165);
+            this.label15.ForeColor = System.Drawing.Color.Maroon;
+            this.label15.Location = new System.Drawing.Point(181, 15);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 13);
             this.label15.TabIndex = 57;
             this.label15.Tag = "";
             this.label15.Text = "Retr Rate";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // lblNoiseRssi
             // 
             this.lblNoiseRssi.AutoSize = true;
-            this.lblNoiseRssi.Location = new System.Drawing.Point(344, 178);
+            this.lblNoiseRssi.ForeColor = System.Drawing.Color.Maroon;
+            this.lblNoiseRssi.Location = new System.Drawing.Point(251, 28);
             this.lblNoiseRssi.Name = "lblNoiseRssi";
             this.lblNoiseRssi.Size = new System.Drawing.Size(13, 13);
             this.lblNoiseRssi.TabIndex = 56;
@@ -337,12 +362,12 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(274, 178);
+            this.label10.ForeColor = System.Drawing.Color.Maroon;
+            this.label10.Location = new System.Drawing.Point(181, 28);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(62, 13);
             this.label10.TabIndex = 55;
             this.label10.Text = "Noise RSSI";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // lblLastTransmitRate
             // 
@@ -357,11 +382,11 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(365, 199);
+            this.button3.Location = new System.Drawing.Point(498, 214);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(84, 22);
+            this.button3.Size = new System.Drawing.Size(63, 22);
             this.button3.TabIndex = 52;
-            this.button3.Text = "button3";
+            this.button3.Text = "Other";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -370,7 +395,7 @@
             this.btnGetDevicesInBSS.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnGetDevicesInBSS.Location = new System.Drawing.Point(504, 113);
             this.btnGetDevicesInBSS.Name = "btnGetDevicesInBSS";
-            this.btnGetDevicesInBSS.Size = new System.Drawing.Size(64, 18);
+            this.btnGetDevicesInBSS.Size = new System.Drawing.Size(76, 20);
             this.btnGetDevicesInBSS.TabIndex = 51;
             this.btnGetDevicesInBSS.Text = "BSS Devs";
             this.btnGetDevicesInBSS.UseVisualStyleBackColor = true;
@@ -384,6 +409,7 @@
             this.cmbAssociatedDevicesInBSS.Size = new System.Drawing.Size(113, 21);
             this.cmbAssociatedDevicesInBSS.TabIndex = 50;
             this.cmbAssociatedDevicesInBSS.SelectedIndexChanged += new System.EventHandler(this.cmbAssociatedDevicesInBSS_SelectedIndexChanged);
+            this.cmbAssociatedDevicesInBSS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAssociatedDevicesInBSS_MouseClick);
             // 
             // lblTDLSSetupStatus
             // 
@@ -579,17 +605,6 @@
             this.label6.TabIndex = 22;
             this.label6.Text = "Ack Retransmitted";
             // 
-            // btnSaveData
-            // 
-            this.btnSaveData.Enabled = false;
-            this.btnSaveData.Location = new System.Drawing.Point(479, 215);
-            this.btnSaveData.Name = "btnSaveData";
-            this.btnSaveData.Size = new System.Drawing.Size(101, 23);
-            this.btnSaveData.TabIndex = 21;
-            this.btnSaveData.Text = "Save Recv Data";
-            this.btnSaveData.UseVisualStyleBackColor = true;
-            this.btnSaveData.Click += new System.EventHandler(this.btnSaveData_Click);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -633,7 +648,7 @@
             // cmdReset
             // 
             this.cmdReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.cmdReset.Location = new System.Drawing.Point(209, 96);
+            this.cmdReset.Location = new System.Drawing.Point(270, 15);
             this.cmdReset.Name = "cmdReset";
             this.cmdReset.Size = new System.Drawing.Size(47, 20);
             this.cmdReset.TabIndex = 16;
@@ -691,16 +706,6 @@
             this.txtMAC.Size = new System.Drawing.Size(140, 23);
             this.txtMAC.TabIndex = 11;
             this.txtMAC.Text = "00:00:00:00:00:00";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(504, 86);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 22);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Send Data";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ConnectedToLabel
             // 
@@ -785,7 +790,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Error Log";
             this.tabPage3.UseVisualStyleBackColor = true;
-            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
             // cmdSaveLogs
             // 
@@ -805,7 +809,6 @@
             this.cmdLogsClear.TabIndex = 2;
             this.cmdLogsClear.Text = "Clear";
             this.cmdLogsClear.UseVisualStyleBackColor = true;
-            this.cmdLogsClear.Click += new System.EventHandler(this.cmdLogsClear_Click);
             // 
             // cmdLogsUpdate
             // 
@@ -840,7 +843,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 308);
+            this.ClientSize = new System.Drawing.Size(612, 308);
             this.Controls.Add(this.tabControl1);
             this.Name = "StationInfo";
             this.Text = "StationInfo";

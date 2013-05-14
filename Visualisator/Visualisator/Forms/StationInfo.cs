@@ -36,7 +36,7 @@ namespace Visualisator
             lblCoordinates.Text = "X:" + (int)_sta.x + " Y:" + (int)_sta.y; 
             PrintAPList();
             txtMAC.Text = _sta.getMACAddress();
-            
+            SelectSSIDIfHaveOneInList();
         }
 
         //=====================================================================
@@ -286,16 +286,6 @@ namespace Visualisator
            // MessageBox.Show(_sta.GetNoiseOnSameChannel().ToString());
         }
 
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cmdShowLog_Click(object sender, EventArgs e)
         {
             ShowLog LogForm = new ShowLog((RFDevice)_sta);
@@ -310,23 +300,23 @@ namespace Visualisator
             }
 
             lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
+
+            SelectSSIDIfHaveOneInList();
+        }
+
+        private void SelectSSIDIfHaveOneInList()
+        {
+            if(cmbAPList.Items.Count == 1)
+            {
+                cmbAPList.SelectedIndex = 0;
+            }
+            
         }
 
         private void cmdLogsUpdate_Click(object sender, EventArgs e)
         {
             txtErrorsLogFromCode.Text = _sta._LOG.ToString();
         }
-
-        private void tabPage3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmdLogsClear_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void SelctFileToSend(object sender, EventArgs e)
         {
             try
@@ -345,6 +335,11 @@ namespace Visualisator
                 MessageBox.Show(ex2.Message);
             }
 
+        }
+
+        private void cmbAssociatedDevicesInBSS_MouseClick(object sender, MouseEventArgs e)
+        {
+            GetDevicesInBSS();
         }
 
     }
