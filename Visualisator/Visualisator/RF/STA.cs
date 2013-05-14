@@ -166,12 +166,7 @@ namespace Visualisator
 
                     keepAl.SSID             = _connecttoAP.SSID;
                     keepAl.Destination      = _connecttoAP.getMACAddress();
-                    keepAl.PacketChannel    = this.getOperateChannel();
                     //keepAl.PacketBand = this.getOperateBand();
-                    keepAl.PacketBandWith   = this.BandWidth;
-                    keepAl.PacketStandart   = this.Stand80211;
-                    keepAl.PacketFrequency  = this.Freq;
-                
                     keepAl.Reciver          = _connecttoAP.getMACAddress();
                     SendData(keepAl);
                     Thread.Sleep(3000);
@@ -683,11 +678,7 @@ namespace Visualisator
                 Data dataPack = new Data(CreatePacket());
                 dataPack.SSID = _connecttoAP.SSID;
                 dataPack.Destination = _connecttoAP.getMACAddress();
-                dataPack.PacketChannel = this.getOperateChannel();
                 //dataPack.PacketBand = this.getOperateBand();
-                dataPack.PacketBandWith = this.BandWidth;
-                dataPack.PacketStandart = this.Stand80211;
-                dataPack.PacketFrequency = this.Freq;
                 dataPack.Reciver = DestinationMacAddress;
                 int transmitRate = 144;
 
@@ -717,30 +708,18 @@ namespace Visualisator
                     dataPack._data = buffer;
 
                     if (packetCounter == 0 && !exit_loop)
-                    {
                         dataPack.streamStatus = StreamingStatus.Started;
-                    }
                     else if (packetCounter > 0 && numOfReadBytes > 0)
-                    {
                         dataPack.streamStatus = StreamingStatus.active;
-                    }
+
                     packetCounter++;
 
                     if (TDLSisWork)
-                    {
                         dataPack.Destination = DestinationMacAddress;// TDLS TODO 
-                    }
                     else
-                    {
                         dataPack.Destination = _connecttoAP.getMACAddress();// TDLS TODO
-                    }
 
                     dataPack.Reciver = DestinationMacAddress;                        // TDLS TODO
-                    dataPack.PacketChannel = this.getOperateChannel();
-                    //dataPack.PacketBand = this.getOperateBand();
-                    dataPack.PacketBandWith = this.BandWidth;
-                    dataPack.PacketStandart = this.Stand80211;
-                    dataPack.PacketFrequency = this.Freq;
 
                     SQID++;
                     short tem = GetTXRate(dataPack.Destination);
@@ -755,25 +734,10 @@ namespace Visualisator
                     int retrCounter = Medium.WaitBeforeRetransmit;
                     int loops = 1;
 
-                    if (TDLSisWork)
-                    {
-                        if (DelayInTDLS > 0)
-                        {
-                            Thread.Sleep(DelayInTDLS);
-                        }
-                    }
-                    else
-                    {
-                        if (DelayInBss > 0)
-                        {
-                            Thread.Sleep(DelayInBss);
-                        }
-                    }
+                    if (TDLSisWork && DelayInTDLS > 0)      Thread.Sleep(DelayInTDLS);
+                    else if (!TDLSisWork && DelayInBss > 0) Thread.Sleep(DelayInBss);
 
-                    if (getScanStatus())
-                    {
-                        SpinWait.SpinUntil(getScanStatus);
-                    }
+                    if (getScanStatus())  SpinWait.SpinUntil(getScanStatus);
 
                     int maxRetrays = Medium.TrysToRetransmit;
                     bool ThePacketWasRetransmited = false;
@@ -789,26 +753,19 @@ namespace Visualisator
                             long timeNew = sw.ElapsedMilliseconds;
                             long timeOld = timeWindow.Milliseconds;
                             if (timeNew - timeOld < Medium.RetransmitWindow)
-                            {
                                 workPeer.RetransmitionCounter++;
-                            }
                             else
-                            {
                                 timeWindow = sw.Elapsed;
                                 //  workPeer.RetransmitionCounter++;
-                            }
+  
                             dataPack.IsRetransmit = true;       //  This is retrasmition
                             retrCounter = Medium.WaitBeforeRetransmit;
                             ThePacketWasRetransmited = true;
                             SendData(dataPack);
                             if (TDLSisWork)
-                            {
                                 Thread.Sleep(DelayInTDLS + 5);
-                            }
                             else
-                            {
                                 Thread.Sleep(DelayInBss + 5);
-                            }
                             _DataRetransmited++;
                             loops = loops + 1;
                             if (!_Enabled)
