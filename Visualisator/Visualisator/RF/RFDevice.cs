@@ -491,13 +491,15 @@ namespace Visualisator
                 return;
             if (((SimulatorPacket)sender).PacketFrequency != this.Freq)
                 return;
-            string _dest = ((SimulatorPacket)sender).Destination;
+            
 
             double dist = GetSTADist(((SimulatorPacket) sender).X, ((SimulatorPacket) sender).Y, this.x, this.y);
             if(dist > Medium.ReceiveDistance)
                 return;
 
-            if ((this.GetType() == typeof(STA) && _dest.Equals("FF:FF:FF:FF:FF:FF")) || _dest.Equals(this.getMACAddress()))
+            string desinationOfReceivedPacket = ((SimulatorPacket)sender).Destination;
+
+            if ((this.GetType() == typeof(STA) && desinationOfReceivedPacket.Equals("FF:FF:FF:FF:FF:FF")) || desinationOfReceivedPacket.Equals(this.getMACAddress()))
             {
                 double t = GetNoiseRSSI(((SimulatorPacket) sender).Source);
                 if (sender.GetType() == typeof(Data))
