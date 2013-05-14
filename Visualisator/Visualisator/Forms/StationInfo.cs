@@ -144,7 +144,9 @@ namespace Visualisator
             else
             {
                 txtDestination.BackColor = Color.IndianRed;
-            }   
+            }
+            
+
         }
 
         //=====================================================================

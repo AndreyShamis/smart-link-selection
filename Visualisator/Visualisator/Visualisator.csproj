@@ -61,6 +61,7 @@
     <Compile Include="Packets\Data.cs" />
     <Compile Include="Packets\DataAck.cs" />
     <Compile Include="Packets\KeepAlive.cs" />
+    <Compile Include="Packets\PacketInumiration.cs" />
     <Compile Include="Packets\TDLSChannelSwitchRequest.cs" />
     <Compile Include="Packets\TDLSChannelSwitchResponse.cs" />
     <Compile Include="Packets\TDLSDiscovery.cs" />
@@ -109,6 +110,7 @@
       <DependentUpon>StationInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="RF\RFDevice.cs" />
+    <Compile Include="Simulator\StreamHandle.cs" />
     <EmbeddedResource Include="Forms\APInfo.resx">
       <DependentUpon>APInfo.cs</DependentUpon>
     </EmbeddedResource>
