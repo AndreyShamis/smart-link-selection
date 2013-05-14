@@ -24,6 +24,7 @@ namespace Visualisator
             InitializeComponent();
             _sta = st;
             _objects = _obj;
+            this.Text = "Station Info :" + _sta.getMACAddress();
         }
 
         //=====================================================================
@@ -33,6 +34,7 @@ namespace Visualisator
             lblCoordinates.Text = "X:" + (int)_sta.x + " Y:" + (int)_sta.y; 
             PrintAPList();
             txtMAC.Text = _sta.getMACAddress();
+            
         }
 
         //=====================================================================
