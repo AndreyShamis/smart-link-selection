@@ -238,13 +238,9 @@ namespace Visualisator
         public bool RFWorking()
         {
             if (!RF_STATUS.Equals("NONE"))
-            {
                 return true;
-            }
-            else
-            {
-                return false;
-            }
+                
+            return false;
         }
 
         //=====================================================================
