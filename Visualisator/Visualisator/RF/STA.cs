@@ -370,15 +370,9 @@ namespace Visualisator
             try
             {
                 Packets.TDLSSetupRequest _tdlsSetupR = new TDLSSetupRequest(CreatePacket());
-
                 AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
-
                 _tdlsSetupR.SSID            = _connecttoAP.SSID;
                 _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
-                _tdlsSetupR.PacketChannel   = this.getOperateChannel();
-                _tdlsSetupR.PacketFrequency = this.Freq;
-                _tdlsSetupR.PacketBandWith = this.BandWidth;
-                _tdlsSetupR.PacketStandart = this.Stand80211;
                 _tdlsSetupR.Reciver         = MAC;
               //  _tdlsSetupR.setTransmitRate(11);
                 SendData(_tdlsSetupR);
@@ -395,10 +389,6 @@ namespace Visualisator
                 AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
                 _tdlsSetupR.SSID = _connecttoAP.SSID;
                 _tdlsSetupR.Destination = _connecttoAP.getMACAddress();
-                _tdlsSetupR.PacketChannel = this.getOperateChannel();
-                _tdlsSetupR.PacketFrequency = this.Freq;
-                _tdlsSetupR.PacketBandWith = this.BandWidth;
-                _tdlsSetupR.PacketStandart = this.Stand80211;
                 _tdlsSetupR.Reciver = MAC;
                 // _tdlsSetupR.setTransmitRate(11);
                 SendData(_tdlsSetupR);
@@ -414,10 +404,6 @@ namespace Visualisator
             AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
             _tdlsSetupR.SSID = _connecttoAP.SSID;
             _tdlsSetupR.Destination = _connecttoAP.getMACAddress();
-            _tdlsSetupR.PacketChannel = this.getOperateChannel();
-            _tdlsSetupR.PacketFrequency = this.Freq;
-            _tdlsSetupR.PacketBandWith = this.BandWidth;
-            _tdlsSetupR.PacketStandart = this.Stand80211;
             _tdlsSetupR.Reciver = MAC;
            // _tdlsSetupR.setTransmitRate(11);
             SendData(_tdlsSetupR);
