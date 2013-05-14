@@ -323,12 +323,6 @@ namespace Visualisator
         }
 
         //=====================================================================
-        public MAC getMAC()
-        {
-            return _address;
-        }
-
-        //=====================================================================
         public string getMACAddress()
         {
             return _address.getMAC();
@@ -359,10 +353,10 @@ namespace Visualisator
         {
             SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel(), this.Freq);
 
-            pack.SSID = this.SSID;
-            pack.Source = getMACAddress();
-            pack.X = this.x;
-            pack.Y = this.y;
+            pack.SSID               = this.SSID;
+            pack.Source             = getMACAddress();
+            pack.X                  = this.x;
+            pack.Y                  = this.y;
             pack.PacketFrequency    = this.Freq;
             pack.PacketStandart     = this.Stand80211;
             pack.PacketBandWith     = this.BandWidth;
@@ -464,7 +458,7 @@ namespace Visualisator
             return Medium.MediumHaveAIRWork(this, ListenBeacon);
         }
 
-        //*********************************************************************
+        //=====================================================================
         /// <summary>
         /// Function for Listen And Receive Packets
         /// </summary>
@@ -545,7 +539,7 @@ namespace Visualisator
             }
         }
 
-        //*********************************************************************
+        //=====================================================================
         public double GetNoiseOnSameChannel()
         {
             //short devisesCounter = 0;
@@ -569,13 +563,13 @@ namespace Visualisator
             return val/points;
         }
 
-        //*********************************************************************
+        //=====================================================================
         private bool ListenCondition()
         {
             return ( RF_Ready());
             //checkIfHaveDataReceive() &&
         }
-
+        //=====================================================================
         public void SetVertex(int x, int y, int z)
         {
             this.x = x;
@@ -618,7 +612,7 @@ namespace Visualisator
             }  
             return retVale;
         }
-
+        //=====================================================================
         /// <summary>
         /// 
         /// </summary>
@@ -648,7 +642,7 @@ namespace Visualisator
             return retVal;
 
         }
-
+        //=====================================================================
         /// <summary>
         /// 
         /// </summary>
@@ -678,7 +672,7 @@ namespace Visualisator
             return retVal;
 
         }
-
+        //=====================================================================
         /// <summary>
         /// 
         /// </summary>
@@ -708,7 +702,7 @@ namespace Visualisator
             return retVal;
 
         }
-
+        //=====================================================================
         /// <summary>
         /// 
         /// </summary>
