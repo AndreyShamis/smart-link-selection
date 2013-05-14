@@ -266,7 +266,7 @@
             // 
             // txtTDLSSendDelay
             // 
-            this.txtTDLSSendDelay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtTDLSSendDelay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtTDLSSendDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTDLSSendDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtTDLSSendDelay.ForeColor = System.Drawing.Color.Navy;
@@ -300,7 +300,7 @@
             // 
             // txtBSSSendDelay
             // 
-            this.txtBSSSendDelay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtBSSSendDelay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtBSSSendDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBSSSendDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtBSSSendDelay.ForeColor = System.Drawing.Color.Navy;
