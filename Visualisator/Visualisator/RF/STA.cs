@@ -113,6 +113,7 @@ namespace Visualisator
         //*********************************************************************
         public STA(ArrayList RfObjects)
         {
+            StopScan = false;
             DefaultColor = Color.RoyalBlue;
             ListenBeacon = true;
             this.VColor = DefaultColor;
@@ -129,7 +130,7 @@ namespace Visualisator
         //*********************************************************************
         public new void Enable()
         {
-            StopScan = false;
+            
             base.Enable();
             CreateFolder();
             this._scanning = false;
@@ -250,6 +251,7 @@ namespace Visualisator
         {
             if (SSID.Length > 0 && _AccessPoint.Contains(SSID))
             {
+                this.StopScan = true;
                 Connect _conn = new Connect(CreatePacket());
                 AP _connecttoAP = GetAPBySSID(SSID);
 
@@ -1044,7 +1046,7 @@ namespace Visualisator
                     this.Freq = prev_band;
                     _scanning = false;
                 }
-                Thread.Sleep(3);
+                //Thread.Sleep(3);
             }
             catch (Exception) { throw; }
         }
@@ -1070,7 +1072,7 @@ namespace Visualisator
                 for (short i = 1; i < 15; i++)
                 {
                     ScanOneChannel(i, 320, Frequency._2400GHz);
-                    if(!StopScan)
+                    if(StopScan)
                         return;
                 }
                 ArrayList Achannels = Medium.getBandAChannels();
@@ -1078,7 +1080,7 @@ namespace Visualisator
                 {
                     int temp_val = (int)i;
                     ScanOneChannel((short)temp_val, 320, Frequency._5200GHz);
-                    if (!StopScan)
+                    if (StopScan)
                         return;
                 }
 
