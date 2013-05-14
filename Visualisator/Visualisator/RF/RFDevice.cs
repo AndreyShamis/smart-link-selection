@@ -413,10 +413,13 @@ namespace Visualisator
         public void SendData(SimulatorPacket pack)
         {
             CheckScanConditionOnSend();
+            int Rate = pack.getTransmitRate();
+            int sleep = (int)(600 / Rate);
             lock (RF_STATUS){
                 try{
                     RF_STATUS = "TX";
-                    while (!Medium.Registration(this.Freq, this.getOperateChannel(), this.x, this.y)){
+                    while (!Medium.Registration(this.Freq, this.getOperateChannel(), this.x, this.y, sleep))
+                    {
                         Thread.Sleep(new TimeSpan(randomWait.Next(20, 50)));
                     }
                     this.MACLastTrnsmitRate = pack.getTransmitRate();

@@ -104,7 +104,7 @@ namespace Visualisator
         //=====================================================================
         //*********************************************************************
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static Boolean Registration(Frequency band, short channel, int x, int y)
+        public static Boolean Registration(Frequency band, short channel, int x, int y,int sleepTime)
         {
 
             if ( channel == 0)      //  In case if trys to send data in incorrect channel
@@ -176,7 +176,7 @@ namespace Visualisator
                 if (ret)
                 {
                     //Thread.Sleep(1);
-                    Thread.Sleep(new TimeSpan(_MediumSendDataRatio));
+                    Thread.Sleep(new TimeSpan(sleepTime * _MediumSendDataRatio * 100));
                     ArrayList _temp = (ArrayList)_T[Tk];
                     try
                     {
