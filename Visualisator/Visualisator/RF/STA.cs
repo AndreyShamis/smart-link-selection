@@ -448,6 +448,7 @@ namespace Visualisator
                     {
                         if (packet.streamStatus == StreamingStatus.Ended)
                         {
+                            Thread.Sleep(5);
                             DeleteDataStream(packet);
                         }
                         else
@@ -682,11 +683,11 @@ namespace Visualisator
                 MACOfAnotherPeer = DestinationMacAddress;
                 while (!exit_loop)
                 {
+                    dataPack = new Data(CreatePacket()); 
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
                     }
-                    dataPack = new Data(CreatePacket());    //  TODO this should be before last lines
                     dataPack.SSID       = _connecttoAP.SSID;
                     dataPack.FrameSize  = numOfReadBytes;
                     dataPack.streamID   = streamID;

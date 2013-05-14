@@ -29,7 +29,7 @@ namespace Visualisator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("File Stream: " + ex.Message);
+                //AddToLog("File Stream: " + ex.Message);
             }
         }
         ~StreamHandle()
@@ -40,7 +40,7 @@ namespace Visualisator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("File Stream: " + ex.Message);
+                //AddToLog("File Stream: " + ex.Message);
             }
         }
 
@@ -54,7 +54,7 @@ namespace Visualisator
                 }
                 else
                 {
-                    MessageBox.Show("File Stream: " + "Wrong Stream - ignoring packet");
+                    //AddToLog("File Stream: " + "Wrong Stream - ignoring packet");
                 }
             }
             catch (Exception ex)
