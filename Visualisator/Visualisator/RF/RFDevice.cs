@@ -370,7 +370,7 @@ namespace Visualisator
         //=====================================================================
         public SimulatorPacket CreatePacket()
         {
-            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel(), this.Freq);
+            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel());
 
             pack.SSID               = this.SSID;
             pack.Source             = getMACAddress();
@@ -384,7 +384,7 @@ namespace Visualisator
 
         public SimulatorPacket CreatePacket(bool inTDLS)
         {
-            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel(), this.Freq);
+            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel());
 
             pack.SSID               = this.SSID;
             pack.Source             = getMACAddress();

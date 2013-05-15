@@ -45,7 +45,7 @@ namespace Visualisator
         /// <returns>Packet prepared to work or in BSS or in TDLS</returns>
         public SimulatorPacket CreatePacket(string destination)
         {
-            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel(), this.Freq);
+            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel());
 
             pack.Destination = TDLSisWork ? destination : _connectedAPMacAddress;
 

@@ -36,13 +36,12 @@ namespace Visualisator.Packets
         public int X { get; set; }
         public int Y { get; set; }
         public short PacketChannel { get; set; }
-        public SimulatorPacket(short Channel, Frequency freq)
+        public SimulatorPacket(short Channel)
         {
-            _guid = Guid.NewGuid();
-            this.PacketFrequency = freq;
-            this.PacketChannel = Channel;;
+            _guid                   = Guid.NewGuid();
+            this.PacketChannel      = Channel;
             this._MAX_SupportedRate = "64";
-            _TransmitRate = 1;
+            _TransmitRate           = 1;
         }
 
         public void setTransmitRate(int r)
