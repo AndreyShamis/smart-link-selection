@@ -464,16 +464,21 @@ namespace Visualisator
 
             if (_Pt  == typeof(Packets.ConnectionACK))
             {
-                if (!_AssociatedWithAPList.Contains(pack.SSID))
-                    _AssociatedWithAPList.Add(pack.SSID);
+                lock (_AssociatedWithAPList)
+                {
+                    if (!_AssociatedWithAPList.Contains(pack.SSID))
+                        _AssociatedWithAPList.Add(pack.SSID);
+                }
             }
             else if (_Pt == typeof(Packets.Beacon))
             {
                 try
                 {
-                    if (!_AccessPoint.Contains(pack.SSID))
-                        _AccessPoint.Add(pack.SSID);
-
+                    lock (_AccessPoint)
+                    {
+                        if (!_AccessPoint.Contains(pack.SSID))
+                            _AccessPoint.Add(pack.SSID);
+                    }
                     _channels[pack.PacketChannel - 1] = Math.Max(-100, Rssi);
                     _AccessPoint.Increase(pack.SSID);
                 }
@@ -485,16 +490,14 @@ namespace Visualisator
                 {
                     Data dat = (Data)pack;
                     MACsandACK(dat.Source, dat.GuidD, dat.getTransmitRate());
-                    if (!dat.IsReceivedRetransmit){
+                    if (!dat.IsReceivedRetransmit)
+                    {
                         _DataReceived++;
                         try{    HandleDataStream(dat);  }
                         catch (Exception ex) { AddToLog("Parse receibed Packet HandleDataStream: " + ex.Message); }
-
-                        //DataReceivedContainer.Append(dat.getData() + "\r\n");
                     }else{
                         DataAckRetransmitted++;
                     }
-                    
                 }
                 catch (Exception ex) { AddToLog("Parse Received Packet - Data " + ex.Message);}
             }
