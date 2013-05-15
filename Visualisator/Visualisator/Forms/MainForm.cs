@@ -568,7 +568,7 @@ namespace Visualisator
 
         private void SetMedioRatio()
         {
-            Int32 mediumSendRatio = 8000;
+            Int32 mediumSendRatio = 10;
 
             try
             {
@@ -652,6 +652,73 @@ namespace Visualisator
         private void btnUpdateMediumListenDist_Click(object sender, EventArgs e)
         {
             Medium.ListenDistance = ConvertStringToInt(txtMediumListenDistance.Text);
+        }
+
+        private void cmdCreateOneAPTwoSta_Click(object sender, EventArgs e)
+        {
+            ClearObjects();
+
+
+                AP _ap = new AP();
+                _ap.setOperateChannel((short)rand.Next(1, 14));
+                _ap.SetVertex(300, 200, 0);
+                _objects.Add(_ap);
+
+                STA _sta = new STA(_objects);
+                _sta.setOperateChannel(0); // (rand.Next(1, 14));       //  TODO delete this line
+                _sta.SetVertex(320, 210, 0);
+                _objects.Add(_sta);
+                _sta.Scan();
+
+                STA _sta2 = new STA(_objects);
+                _sta2.setOperateChannel(0); // (rand.Next(1, 14));       //  TODO delete this line
+                _sta2.SetVertex(280, 170, 0);
+                _objects.Add(_sta2);
+                _sta2.Scan();
+
+            Medium.setMediumObj(_objects);
+            SetMedioRatio();
+            Medium.Enable();
+        }
+
+        private void cmdAdd1APforSTA_Click(object sender, EventArgs e)
+        {
+            ClearObjects();
+
+
+            AP _ap = new AP();
+            _ap.setOperateChannel((short)rand.Next(1, 14));
+            _ap.SetVertex(300, 200, 0);
+            _objects.Add(_ap);
+
+            STA _sta = new STA(_objects);
+            _sta.setOperateChannel(0);
+            _sta.SetVertex(320, 210, 0);
+            _objects.Add(_sta);
+            _sta.Scan();
+
+            STA _sta2 = new STA(_objects);
+            _sta2.setOperateChannel(0); 
+            _sta2.SetVertex(280, 170, 0);
+            _objects.Add(_sta2);
+            _sta2.Scan();
+
+            STA _sta3 = new STA(_objects);
+            _sta3.setOperateChannel(0); 
+            _sta3.SetVertex(280, 210, 0);
+            _objects.Add(_sta3);
+            _sta3.Scan();
+
+
+            STA _sta4 = new STA(_objects);
+            _sta4.setOperateChannel(0);
+            _sta4.SetVertex(320, 170, 0);
+            _objects.Add(_sta4);
+            _sta4.Scan();
+
+            Medium.setMediumObj(_objects);
+            SetMedioRatio();
+            Medium.Enable();
         }
     //private void mnuContext(object sender, EventArgs e)
         //{

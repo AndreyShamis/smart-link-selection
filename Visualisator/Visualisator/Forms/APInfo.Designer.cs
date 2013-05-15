@@ -63,6 +63,9 @@
             this.lblStandart = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.cmdShowLog = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -413,11 +416,44 @@
             this.cmdShowLog.UseVisualStyleBackColor = true;
             this.cmdShowLog.Click += new System.EventHandler(this.cmdShowLog_Click);
             // 
+            // label17
+            // 
+            this.label17.BackColor = System.Drawing.Color.White;
+            this.label17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label17.Location = new System.Drawing.Point(343, 171);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(15, 15);
+            this.label17.TabIndex = 67;
+            this.label17.Text = "N";
+            // 
+            // label16
+            // 
+            this.label16.BackColor = System.Drawing.Color.White;
+            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label16.Location = new System.Drawing.Point(325, 171);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(15, 15);
+            this.label16.TabIndex = 66;
+            this.label16.Text = "G";
+            // 
+            // label13
+            // 
+            this.label13.BackColor = System.Drawing.Color.White;
+            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label13.Location = new System.Drawing.Point(307, 171);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(15, 15);
+            this.label13.TabIndex = 65;
+            this.label13.Text = "A";
+            // 
             // APInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 319);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.cmdShowLog);
             this.Controls.Add(this.lblStandart);
             this.Controls.Add(this.label15);
@@ -494,5 +530,8 @@
         private System.Windows.Forms.Label lblStandart;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button cmdShowLog;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label13;
     }
 }
