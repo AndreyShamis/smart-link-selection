@@ -42,6 +42,7 @@ namespace Visualisator
 
         private bool StopScan { set; get; }
 
+        public string FilePachToSend { set; get; }
         private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;   
 
         //*********************************************************************
@@ -130,7 +131,7 @@ namespace Visualisator
         //*********************************************************************
         public new void Enable()
         {
-            
+            FilePachToSend = @"C:\simulator\_DATA_TO_SEND\input.txt";
             base.Enable();
             CreateFolder();
             this._scanning = false;
@@ -655,7 +656,7 @@ namespace Visualisator
             Guid streamID = new Guid();
             streamID = Guid.NewGuid();
             int packetCounter = 0;
-            FileStream fsSource = new FileStream(@"C:\simulator\_DATA_TO_SEND\input.txt",
+            FileStream fsSource = new FileStream(FilePachToSend,
                     FileMode.Open, FileAccess.Read);
             try
             {
