@@ -46,7 +46,10 @@ namespace Visualisator
         public string SSID { set; get; }
         public string BSSID { set; get; }
         public Color DefaultColor { set; get; }
-    
+
+        public bool TDLSisEnabled { set; get; }
+        public bool TDLSisWork { set; get; }
+
 
         #region Noise
         /// <summary>
@@ -368,7 +371,7 @@ namespace Visualisator
         //=====================================================================
         public SimulatorPacket CreatePacket()
         {
-            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel(), this.Freq);
+            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel());
 
             pack.SSID               = this.SSID;
             pack.Source             = getMACAddress();
@@ -380,6 +383,19 @@ namespace Visualisator
             return(pack);
         }
 
+        public SimulatorPacket CreatePacket(bool inTDLS)
+        {
+            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel());
+
+            pack.SSID               = this.SSID;
+            pack.Source             = getMACAddress();
+            pack.X                  = this.x;
+            pack.Y                  = this.y;
+            pack.PacketFrequency    = this.Freq;
+            pack.PacketStandart     = this.Stand80211;
+            pack.PacketBandWith     = this.BandWidth;
+            return (pack);
+        }
         //=====================================================================
         public void setOperateChannel(short NewChannel)
         {
@@ -424,7 +440,15 @@ namespace Visualisator
             _Enabled = true;
             BandWithSupport.Add(Bandwidth._20MHz);
         }
+        public bool BandWidthCheckCheckSupport(Bandwidth ban)
+        {
+            if(this.BandWithSupport.Contains(ban))
+            {
+                return true;
+            }
 
+            return false;
+        }
 
         //*********************************************************************
         public void SendData(SimulatorPacket pack)

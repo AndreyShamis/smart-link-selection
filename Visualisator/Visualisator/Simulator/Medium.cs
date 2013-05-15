@@ -92,6 +92,8 @@ namespace Visualisator
         public static int TrysToRetransmit { set; get; }
         public static int RetransmitWindow { set; get; }
 
+        public static int TDLS_TearDownAfterFails { set; get; }
+
         //*********************************************************************
         private static ArrayList BandAChannels = new ArrayList();
         private static Hashtable _packets = new Hashtable(new ByteArrayComparer());
