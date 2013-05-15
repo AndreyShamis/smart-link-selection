@@ -33,8 +33,7 @@ namespace Visualisator
         private StringBuilder   DataReceivedContainer   = new StringBuilder();
         private Int32           _StatisticRetransmitTime = 0;
 
-        private bool            _TDLS_enabled           = true;
-        private bool            _TDLS_work              = false;
+        private string _connectedAPMacAddress = "";
         private int _delayInBSS     = 1;
         private int _delayInTDLS    = 1;
         private const int max_channel = 13;
@@ -48,6 +47,24 @@ namespace Visualisator
         //*********************************************************************
         //*********************************************************************
         //*********************************************************************
+        //=====================================================================
+        public SimulatorPacket CreatePacket(string destination)
+        {
+            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel(), this.Freq);
+
+            pack.Destination = TDLSisWork ? destination : _connectedAPMacAddress;
+
+            pack.Reciver            = destination;
+            pack.SSID               = this.SSID;
+            pack.Source             = getMACAddress();
+            pack.X                  = this.x;
+            pack.Y                  = this.y;
+            pack.PacketFrequency    = this.Freq;
+            pack.PacketStandart     = this.Stand80211;
+            pack.PacketBandWith     = this.BandWidth;
+            
+            return (pack);
+        }
 
         #region SETERS
         public TDLSSetupStatus TDLSSetupInfo
@@ -90,15 +107,7 @@ namespace Visualisator
             set { _StatisticRetransmitTime = value; }
         }
 
-        public bool TDLSisEnabled
-        {
-            get { return _TDLS_enabled; }
-        }
 
-        public bool TDLSisWork
-        {
-            get { return _TDLS_work; }
-        }
 
         public int DelayInBss
         {
@@ -118,6 +127,8 @@ namespace Visualisator
         public STA(ArrayList RfObjects)
         {
             StopScan = false;
+            TDLSisEnabled   = true;
+            TDLSisWork      = false;
             DefaultColor = Color.RoyalBlue;
             ListenBeacon = true;
             this.VColor = DefaultColor;
@@ -217,9 +228,10 @@ namespace Visualisator
                     }
                 }
                 else{
-                    this.SSID = _connecttoAP.SSID;
-                    this.BSSID = _connecttoAP.getMACAddress();
-                    connectSuccess = true;
+                    this.SSID               = _connecttoAP.SSID;
+                    _connectedAPMacAddress  = _connecttoAP.getMACAddress();
+                    this.BSSID              = _connecttoAP.getMACAddress();
+                    connectSuccess          = true;
                 }
             }
             if (connectSuccess && _scanning)
@@ -515,7 +527,7 @@ namespace Visualisator
             }
             else
             {
-                if (_TDLS_enabled)   // TDLS Parsing
+                if (this.TDLSisEnabled)   // TDLS Parsing
                 {
                     if (_Pt == typeof(TDLSSetupRequest))
                     {
@@ -528,14 +540,14 @@ namespace Visualisator
                     else if (_Pt == typeof(TDLSSetupResponse))
                     {
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseReceived;
-                        _TDLS_work = true;
+                        this.TDLSisWork = true;
                         var tdlSreq = (TDLSSetupResponse)pack;
                         TDLS_SendSetupConfirm(tdlSreq.Source);
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
                     }
                     else if (_Pt == typeof(TDLSSetupConfirm))
                     {
-                        _TDLS_work = true;
+                        this.TDLSisWork = true;
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmReceived;
                     }
                 }
@@ -547,7 +559,7 @@ namespace Visualisator
         {
             try
             {
-                _TDLS_work = false;
+                this.TDLSisWork = false;
             }
             catch (Exception ex) { AddToLog("DisableTDLS: " + ex.Message); }
         }
@@ -556,7 +568,7 @@ namespace Visualisator
         {
             try
             {
-                _TDLS_work = true;
+                this.TDLSisWork = true;
             }
             catch (Exception ex) { AddToLog("EnableTDLS: " + ex.Message); }
         }
@@ -655,23 +667,18 @@ namespace Visualisator
                 MACOfAnotherPeer    = DestinationMacAddress;
                 while (!exit_loop)
                 {
-                    dataPack = new Data(CreatePacket()); 
+                    dataPack = new Data(CreatePacket(DestinationMacAddress)); 
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
                     }
-                    dataPack.PacketID = packetCounter;
-                    dataPack.SSID       = _connecttoAP.SSID;
+                    dataPack.PacketID   = packetCounter;
                     dataPack.FrameSize  = numOfReadBytes;
                     dataPack.streamID   = streamID;
                     dataPack._data      = buffer;
-
-                    if (TDLSisWork)     dataPack.Destination    = DestinationMacAddress;        // TDLS TODO 
-                    else                dataPack.Destination    = _connecttoAP.getMACAddress(); // TDLS TODO
-
                     TxRateOnSend = GetTXRate(dataPack.Destination);
                     dataPack.setTransmitRate(TxRateOnSend);
-                    dataPack.Reciver = DestinationMacAddress;                        // TDLS TODO
+                     
 
                     if (packetCounter == 0 && !exit_loop)               dataPack.streamStatus = StreamingStatus.Started;
                     else if (packetCounter > 0 && numOfReadBytes > 0)   dataPack.streamStatus = StreamingStatus.active;
@@ -752,7 +759,7 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        public AP GetAPBySSID(String _SSID)
+        public  AP GetAPBySSID(string _SSID)
         {
             try
             {

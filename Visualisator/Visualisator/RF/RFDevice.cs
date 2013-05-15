@@ -46,7 +46,10 @@ namespace Visualisator
         public string SSID { set; get; }
         public string BSSID { set; get; }
         public Color DefaultColor { set; get; }
-    
+
+        public bool TDLSisEnabled { set; get; }
+        public bool TDLSisWork { set; get; }
+
 
         #region Noise
         /// <summary>
@@ -379,6 +382,19 @@ namespace Visualisator
             return(pack);
         }
 
+        public SimulatorPacket CreatePacket(bool inTDLS)
+        {
+            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel(), this.Freq);
+
+            pack.SSID               = this.SSID;
+            pack.Source             = getMACAddress();
+            pack.X                  = this.x;
+            pack.Y                  = this.y;
+            pack.PacketFrequency    = this.Freq;
+            pack.PacketStandart     = this.Stand80211;
+            pack.PacketBandWith     = this.BandWidth;
+            return (pack);
+        }
         //=====================================================================
         public void setOperateChannel(short NewChannel)
         {
