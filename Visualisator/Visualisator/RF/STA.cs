@@ -216,22 +216,15 @@ namespace Visualisator
             }
             if (connectSuccess && _scanning)
             {
-                SpinWait.SpinUntil
-                (() =>
-                    {
-                        return (bool)!_scanning;
-                    }
-                );
+                SpinWait.SpinUntil(() =>{return (bool)!_scanning; } );
                 this.setOperateChannel(_connecttoAP.getOperateChannel());
                // this.setOperateBand(_connecttoAP.getOperateBand());
                 this.Freq = _connecttoAP.Freq;
-                
-
             }
             //  Fix Work Channel under scan
         }
 
-        //*********************************************************************
+        //=====================================================================
         public String getAssociatedAP_SSID()
         {
             String ret = "";
@@ -242,7 +235,7 @@ namespace Visualisator
             return ret;
         }
 
-        //*********************************************************************
+        //=====================================================================
         public Boolean ConnectToAP(String SSID)
         {
             if (SSID.Length > 0 && _AccessPoint.Contains(SSID))
@@ -263,9 +256,7 @@ namespace Visualisator
             return (false);
         }
 
-
-
-        //*********************************************************************
+        //=====================================================================
         public void SaveReceivedDataIntoFile()
         {
             string mydocpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -276,17 +267,16 @@ namespace Visualisator
             } 
         }
 
-        //*********************************************************************
+        //=====================================================================
         public Int32 getSizeOfReceivedData()
         {
             if (DataReceivedContainer != null)
                 return DataReceivedContainer.Length;
-            else
-            {
-                return 0;
-            }
+                
+            return 0;
         }
 
+        //=====================================================================
         public void LookIntoChannels()
         {
             UpdateRFPeers();
@@ -294,6 +284,7 @@ namespace Visualisator
             
         }
 
+        //=====================================================================
         public int getBestChannel()
         {
             const double neighborsWeight = 2;
@@ -334,6 +325,7 @@ namespace Visualisator
             return MaxIndex(resultArr) +1;
         }
 
+        //=====================================================================
         public static int MaxIndex<T>(IEnumerable<T> sequence)
         where T : IComparable<T>
         {
@@ -361,6 +353,8 @@ namespace Visualisator
         {
 
         }
+
+        //=====================================================================
         public void TDLS_SendSetupRequest(string MAC)
         {
             try
@@ -377,6 +371,8 @@ namespace Visualisator
             catch (Exception ex) { AddToLog("TDLS_SendSetupRequest: " + ex.Message); }
             
         }
+
+        //=====================================================================
         public void TDLS_SendSetupResponse(string MAC)
         {
             try
@@ -384,7 +380,7 @@ namespace Visualisator
                 Packets.TDLSSetupResponse _tdlsSetupR = new TDLSSetupResponse(CreatePacket());
                 AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
                 _tdlsSetupR.SSID = _connecttoAP.SSID;
-                _tdlsSetupR.Destination = _connecttoAP.getMACAddress();
+                _tdlsSetupR.Destination = MAC;// _connecttoAP.getMACAddress();
                 _tdlsSetupR.Reciver = MAC;
                 // _tdlsSetupR.setTransmitRate(11);
                 SendData(_tdlsSetupR);
@@ -392,6 +388,8 @@ namespace Visualisator
             }
             catch (Exception ex) { AddToLog("TDLS_SendSetupResponse: " + ex.Message); }
         }
+
+        //=====================================================================
         public void TDLS_SendSetupConfirm(string MAC)
         {
             try
@@ -407,45 +405,30 @@ namespace Visualisator
             }
             catch (Exception ex) { AddToLog("TDLS_SendSetupConfirm: " + ex.Message); }
         }
-        //*********************************************************************
-        public void AddDataStream(Data packet)
-        {
-            try
-            {
-                StreamHandle dstream = new StreamHandle(packet);
-                _StreamsHash.Add(packet.streamID, dstream);
-            }
-            catch (Exception ex){    AddToLog("File Stream: " + ex.Message); }
-        }
-        //*********************************************************************
+
+        //=====================================================================
         public void DeleteDataStream(Data packet)
         {
             try
             {
                 if (_StreamsHash.Contains(packet.streamID))
-                {
-
                     _StreamsHash.Remove(packet.streamID);
-                }
                 else
-                {
-                    MessageBox.Show("File Stream: Tryed to remove stream that not exist at the stream hash");
-                }
+                    AddToLog("File Stream: Tryed to remove stream that not exist at the stream hash");
             }
             catch (Exception ex){  AddToLog("File Stream: " + ex.Message); }
-
         }
 
-        //*********************************************************************
+        //=====================================================================
         public void HandleDataStream(Data packet)
         {
             StreamHandle dstream = null;
-
-            if (_StreamsHash.Contains(packet.streamID))
+                                
+            lock (_StreamsHash)
             {
-                lock (_StreamsHash)
+                try
                 {
-                    try
+                    if (_StreamsHash.Contains(packet.streamID))
                     {
                         if (packet.streamStatus == StreamingStatus.Ended)
                         {
@@ -455,34 +438,22 @@ namespace Visualisator
                         else
                         {
                             dstream = _StreamsHash[packet.streamID] as StreamHandle;
-                            dstream.hendlePacket(packet);
+                            if (dstream != null)
+                                dstream.hendlePacket(packet);
                         }
-
-
                     }
-                    catch (Exception ex){    AddToLog("File Stream: " + ex.Message);}
-                }
-            }
-            else
-            {
-                try
-                {
-                    //if (packet.streamStatus == StreamingStatus.Started)
-                    //AddDataStream(packet);
-                    lock (_StreamsHash)
+                    else
                     {
                         StreamHandle dstream222 = new StreamHandle(packet);
                         dstream222.hendlePacket(packet);
                         _StreamsHash.Add(packet.streamID, dstream222);
                     }
-                    //dstream = _StreamsHash[packet.streamID] as StreamHandle;
-                    //dstream.hendlePacket(packet);
                 }
-                catch (Exception ex){ AddToLog("File Stream: " + ex.Message);}
+                catch (Exception ex) { AddToLog("File Stream: " + ex.Message); }
             }
         }
 
-        //*********************************************************************
+        //=====================================================================
         public override void ParseReceivedPacket(IPacket pack)
         {
             SimulatorPacket locPack = (SimulatorPacket) pack;
@@ -492,9 +463,8 @@ namespace Visualisator
             if (_Pt  == typeof(Packets.ConnectionACK))
             {
                 Packets.ConnectionACK _ack = (Packets.ConnectionACK)pack;
-                if (!_AssociatedWithAPList.Contains(_ack.SSID)){
+                if (!_AssociatedWithAPList.Contains(_ack.SSID))
                     _AssociatedWithAPList.Add(_ack.SSID);
-                }
             }
             else if (_Pt == typeof(Packets.Beacon))
             {
@@ -502,9 +472,8 @@ namespace Visualisator
                 {
                     Packets.Beacon bec = (Packets.Beacon)pack;
                     if (!_AccessPoint.Contains(bec.SSID))
-                    {
                         _AccessPoint.Add(bec.SSID);
-                    }
+
                     _channels[bec.PacketChannel - 1] = Math.Max(-100, Rssi);
                     _AccessPoint.Increase(bec.SSID);
                 }
@@ -518,10 +487,7 @@ namespace Visualisator
                     MACsandACK(dat.Source, dat.GuidD, dat.getTransmitRate());
                     if (!dat.IsReceivedRetransmit){
                         _DataReceived++;
-                        try
-                        {
-                            HandleDataStream(dat);
-                        }
+                        try{    HandleDataStream(dat);  }
                         catch (Exception ex) { AddToLog("Parse receibed Packet HandleDataStream: " + ex.Message); }
 
                         //DataReceivedContainer.Append(dat.getData() + "\r\n");
@@ -540,14 +506,12 @@ namespace Visualisator
             }
             else
             {
-                // TDLS Parsing
-                if(_TDLS_enabled)
+                if (_TDLS_enabled)   // TDLS Parsing
                 {
                     if (_Pt == typeof(TDLSSetupRequest))
                     {
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestReceived;
                         var tdlSreq = (TDLSSetupRequest)pack;
-                        //MessageBox.Show("We received TDLS Setup Request");
                         TDLS_SendSetupResponse(tdlSreq.Source);
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
                         
@@ -557,21 +521,19 @@ namespace Visualisator
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseReceived;
                         _TDLS_work = true;
                         var tdlSreq = (TDLSSetupResponse)pack;
-                        //MessageBox.Show("We received TDLS Setup Response!!!");
                         TDLS_SendSetupConfirm(tdlSreq.Source);
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
                     }
                     else if (_Pt == typeof(TDLSSetupConfirm))
                     {
                         _TDLS_work = true;
-                        //MessageBox.Show("We received TDLS Setup Confirm!!!");
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmReceived;
                     }
                 }
-                //Console.WriteLine("[" + getMACAddress() + "]" + " listening.");
             }
         }
 
+        //=====================================================================
         public void DisableTDLS()
         {
             try
