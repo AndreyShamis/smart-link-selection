@@ -302,7 +302,7 @@ namespace Visualisator
             }
 
             lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
-
+            PrintAPList();
             SelectSSIDIfHaveOneInList();
         }
 
@@ -352,6 +352,11 @@ namespace Visualisator
         private void cmdLogsClear_Click(object sender, EventArgs e)
         {
             _sta.ClearLog();
+        }
+
+        private void cmbAPList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

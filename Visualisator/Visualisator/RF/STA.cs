@@ -654,9 +654,11 @@ namespace Visualisator
             int buf_size = 500, numOfReadBytes = 0;
             byte[] buffer = new byte[buf_size];
             bool exit_loop = false;
+            Data dataPack = null;
             Guid streamID = new Guid();
             streamID = Guid.NewGuid();
             int packetCounter = 0;
+            short TxRateOnSend;
             FileStream fsSource = new FileStream(FilePachToSend,
                     FileMode.Open, FileAccess.Read);
             try
@@ -669,16 +671,13 @@ namespace Visualisator
                 Stopwatch sw = Stopwatch.StartNew();
 
                 TimeSpan timeWindow = sw.Elapsed;// Do work
-                Data dataPack = new Data(CreatePacket());
-                dataPack.SSID = _connecttoAP.SSID;
-                dataPack.Destination = _connecttoAP.getMACAddress();
-                //dataPack.PacketBand = this.getOperateBand();
-                dataPack.Reciver = DestinationMacAddress;
-                int transmitRate = 144;
-                Int32 SQID = 0;
-                if (!_RFpeers.Contains(dataPack.Destination) || !_RFpeers.Contains(DestinationMacAddress))  this.UpdateRFPeers();
-                RFpeer workPeer = (RFpeer)_RFpeers[DestinationMacAddress];
-                MACOfAnotherPeer = DestinationMacAddress;
+                
+                
+                if (!_RFpeers.Contains(DestinationMacAddress))  
+                    this.UpdateRFPeers();
+
+                RFpeer workPeer     = (RFpeer)_RFpeers[DestinationMacAddress];
+                MACOfAnotherPeer    = DestinationMacAddress;
                 while (!exit_loop)
                 {
                     dataPack = new Data(CreatePacket()); 
@@ -686,27 +685,26 @@ namespace Visualisator
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
                     }
+                    dataPack.PacketID = packetCounter;
                     dataPack.SSID       = _connecttoAP.SSID;
                     dataPack.FrameSize  = numOfReadBytes;
                     dataPack.streamID   = streamID;
                     dataPack._data      = buffer;
-                    if (packetCounter == 0 && !exit_loop)    dataPack.streamStatus = StreamingStatus.Started;
-                    else if (packetCounter > 0 && numOfReadBytes > 0)    dataPack.streamStatus = StreamingStatus.active;
 
-                    packetCounter++;
+                    if (TDLSisWork) dataPack.Destination    = DestinationMacAddress;// TDLS TODO 
+                    else dataPack.Destination               = _connecttoAP.getMACAddress();// TDLS TODO
 
-                    if (TDLSisWork)    dataPack.Destination = DestinationMacAddress;// TDLS TODO 
-                    else    dataPack.Destination = _connecttoAP.getMACAddress();// TDLS TODO
-
+                    TxRateOnSend = GetTXRate(dataPack.Destination);
+                    dataPack.setTransmitRate(TxRateOnSend);
                     dataPack.Reciver = DestinationMacAddress;                        // TDLS TODO
 
-                    SQID++;
-                    short tem = GetTXRate(dataPack.Destination);
-                    dataPack.setTransmitRate(tem);
-                    dataPack.PacketID   = SQID;
+                    if (packetCounter == 0 && !exit_loop)    dataPack.streamStatus = StreamingStatus.Started;
+                    else if (packetCounter > 0 && numOfReadBytes > 0)    dataPack.streamStatus = StreamingStatus.active;
+                    
                     ackReceived         = false;
                     SendData(dataPack);
-                    WaitingForAck = true;
+                    WaitingForAck       = true;
+                    packetCounter++;
                     int retrCounter = Medium.WaitBeforeRetransmit;
                     int loops = 1;
 
@@ -719,19 +717,19 @@ namespace Visualisator
                     bool ThePacketWasRetransmited = false;
                     while (!ackReceived)
                     {
-                        retrCounter--;
+                        retrCounter --;
                         Thread.Sleep(1);
                         if (retrCounter < 0)
                         {
-                            workPeer = (RFpeer)_RFpeers[DestinationMacAddress];
-                            long timeNew = sw.ElapsedMilliseconds;
-                            long timeOld = timeWindow.Milliseconds;
+                            workPeer        = (RFpeer)_RFpeers[DestinationMacAddress];
+                            long timeNew    = sw.ElapsedMilliseconds;
+                            long timeOld    = timeWindow.Milliseconds;
                             if (timeNew - timeOld < Medium.RetransmitWindow)    workPeer.RetransmitionCounter++;
                             else                                                timeWindow = sw.Elapsed;
 
-                            dataPack.IsRetransmit = true;       //  This is retrasmition
-                            retrCounter = Medium.WaitBeforeRetransmit;
-                            ThePacketWasRetransmited = true;
+                            dataPack.IsRetransmit       = true;       //  This is retrasmition
+                            retrCounter                 = Medium.WaitBeforeRetransmit;
+                            ThePacketWasRetransmited    = true;
                             SendData(dataPack);
 
                             if (TDLSisWork)     Thread.Sleep(DelayInTDLS + 5);
@@ -772,7 +770,6 @@ namespace Visualisator
                 fsSource.Close();
             }
         }
-
 
         //*********************************************************************
         public AP GetAPBySSID(String _SSID)
