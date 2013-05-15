@@ -102,6 +102,7 @@
             this.txtErrorsLogFromCode = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
+            this.lblSpeed = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -286,6 +287,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblSpeed);
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.label14);
@@ -894,6 +896,15 @@
             this.tabPage4.Text = "Statistic";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // lblSpeed
+            // 
+            this.lblSpeed.AutoSize = true;
+            this.lblSpeed.Location = new System.Drawing.Point(277, 172);
+            this.lblSpeed.Name = "lblSpeed";
+            this.lblSpeed.Size = new System.Drawing.Size(38, 13);
+            this.lblSpeed.TabIndex = 65;
+            this.lblSpeed.Text = "Speed";
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -991,5 +1002,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblSpeed;
     }
 }

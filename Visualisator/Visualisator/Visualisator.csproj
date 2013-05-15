@@ -110,6 +110,7 @@
       <DependentUpon>StationInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="RF\RFDevice.cs" />
+    <Compile Include="Simulator\Statistic.cs" />
     <Compile Include="Simulator\StreamHandle.cs" />
     <EmbeddedResource Include="Forms\APInfo.resx">
       <DependentUpon>APInfo.cs</DependentUpon>

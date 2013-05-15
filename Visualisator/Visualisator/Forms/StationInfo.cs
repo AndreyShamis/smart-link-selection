@@ -181,7 +181,9 @@ namespace Visualisator
                 lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
 
                 lblLastTransmitRate.Text = _sta.MACLastTrnsmitRate.ToString();
-                
+
+                lblSpeed.Text = ConvertBytesToKilobytes((long)_sta.speed).ToString() + "Kbps/sec";
+
                 lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
                                          //     lblCounterToretransmit.Text.Substring(0, 2);
 
@@ -192,6 +194,21 @@ namespace Visualisator
             {
                 MessageBox.Show("STA INFO tmrFast_Tick" + ex.Message);
             }
+        }
+
+        public static float ConvertBytesToKilobytes(long bytes)
+        {
+            return (bytes / 1024f);
+        }
+
+        public static float ConvertBytesToMegabytes(long bytes)
+        {
+            return (bytes / 1024f) / 1024f;
+        }
+
+        public static float ConvertKilobytesToMegabytes(long kilobytes)
+        {
+            return kilobytes / 1024f;
         }
 
         //=====================================================================

@@ -613,6 +613,8 @@ namespace Visualisator
             catch (Exception ex) { AddToLog("rfile: " + ex.Message); }
         }
 
+
+        public double speed { set; get; }
         //*********************************************************************
         public void ThreadAbleReadFile(String DestinationMacAddress)
         {
@@ -624,6 +626,8 @@ namespace Visualisator
             streamID = Guid.NewGuid();
             int packetCounter = 0;
             short TxRateOnSend;
+
+            long TransferedByte = 0;
             FileStream fsSource = new FileStream(FilePachToSend,
                     FileMode.Open, FileAccess.Read);
             try
@@ -665,11 +669,13 @@ namespace Visualisator
 
                     if (packetCounter == 0 && !exit_loop)    dataPack.streamStatus = StreamingStatus.Started;
                     else if (packetCounter > 0 && numOfReadBytes > 0)    dataPack.streamStatus = StreamingStatus.active;
-                    
+                    TransferedByte += numOfReadBytes;
                     ackReceived         = false;
                     SendData(dataPack);
                     WaitingForAck       = true;
                     packetCounter++;
+                    if(sw.Elapsed.Seconds > 0)
+                        speed = TransferedByte / sw.Elapsed.Seconds;
                     int retrCounter = Medium.WaitBeforeRetransmit;
                     int loops = 1;
 
