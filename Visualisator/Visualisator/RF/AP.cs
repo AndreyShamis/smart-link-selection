@@ -26,7 +26,7 @@ namespace Visualisator
         private Hashtable _packet_queues = new Hashtable(new ByteArrayComparer());
         private string Sync = "sync";
 
-        private string[] APImagesArr = { @"C:\simulator\Images\ap1.jpg", @"C:\simulator\Images\ap4.jpg", @"C:\simulator\Images\ap5.png" };
+        private string[] APImagesArr = { ImagesPath + "ap1.jpg", ImagesPath + "ap4.jpg", ImagesPath + "ap5.png" };
         public string _APImagePath { set; get; } 
 
         

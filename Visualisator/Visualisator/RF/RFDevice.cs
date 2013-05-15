@@ -25,6 +25,7 @@ namespace Visualisator
         private MAC             _address        =   new MAC();
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
+        protected static string ImagesPath = Application.StartupPath.ToString() + @"\..\..\Images\";
 
         protected  static Random randomWait = new Random();
         protected static Random randomRssi = new Random();

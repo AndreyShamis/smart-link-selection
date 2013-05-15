@@ -61,7 +61,13 @@ namespace Visualisator
             return (pack);
         }
 
-        private string[] STAImagesArr = { @"C:\simulator\Images\lp1.jpg", @"C:\simulator\Images\lp2.png", @"C:\simulator\Images\lp3.png", @"C:\simulator\Images\sp1.png", @"C:\simulator\Images\sp2.gif", @"C:\simulator\Images\tv1.png", @"C:\simulator\Images\tv2.gif" };
+        private string[] STAImagesArr = { ImagesPath + "lp1.jpg",
+                                            ImagesPath + "lp2.png", 
+                                            ImagesPath + "lp3.png", 
+                                            ImagesPath + "sp1.png", 
+                                            ImagesPath + "sp2.gif", 
+                                            ImagesPath + "tv1.png",
+                                            ImagesPath + "tv2.gif" };
         public string _STAImagePath { set; get; }
         #region SETERS
         public TDLSSetupStatus TDLSSetupInfo
