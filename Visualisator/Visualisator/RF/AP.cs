@@ -25,6 +25,10 @@ namespace Visualisator
         private static Random       random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
         private Hashtable _packet_queues = new Hashtable(new ByteArrayComparer());
         private string Sync = "sync";
+
+        private string[] APImagesArr = { @"C:\simulator\Images\ap1.jpg", @"C:\simulator\Images\ap4.jpg", @"C:\simulator\Images\ap5.png" };
+        public string _APImagePath { set; get; } 
+
         
         //*********************************************************************
 
@@ -77,7 +81,8 @@ namespace Visualisator
             this.VColor = DefaultColor;
             this.SSID = RandomString(8);
             this.BSSID = this.getMACAddress();
-            _BeaconPeriod = rnadomBeacon.Next(AP_MIN_SEND_PERIOD, AP_MAX_SEND_PERIOD);    
+            _BeaconPeriod = rnadomBeacon.Next(AP_MIN_SEND_PERIOD, AP_MAX_SEND_PERIOD);
+            _APImagePath = APImagesArr[new Random().Next(0, APImagesArr.Length)];
             Enable();
         }
 

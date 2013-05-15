@@ -43,7 +43,10 @@ namespace Visualisator
         private bool StopScan { set; get; }
 
         public string FilePachToSend { set; get; }
-        private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;   
+        private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;
+
+        private string[] STAImagesArr = { @"C:\simulator\Images\lp1.jpg", @"C:\simulator\Images\lp2.png", @"C:\simulator\Images\lp3.png", @"C:\simulator\Images\sp1.png", @"C:\simulator\Images\sp2.gif", @"C:\simulator\Images\tv1.png", @"C:\simulator\Images\tv2.gif" };
+        public string _STAImagePath { set; get; }
 
         //*********************************************************************
         //*********************************************************************
@@ -122,6 +125,7 @@ namespace Visualisator
             ListenBeacon = true;
             this.VColor = DefaultColor;
             _PointerToAllRfDevices = RfObjects;
+            _STAImagePath = STAImagesArr[new Random().Next(0, STAImagesArr.Length)];
             Enable();
         }
         //*********************************************************************

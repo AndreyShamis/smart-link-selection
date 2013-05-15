@@ -253,9 +253,10 @@ namespace Visualisator
         protected short GetRSSI(int x, int y)
         {
             short ret = 0;
+            double dist;
             try{
-                double dist = GetSTADist( this.x,this.y, x, y);
-                if (dist >= 0){
+                dist = GetSTADist( this.x,this.y, x, y);
+                if (dist > 0.0 && dist < 100){
                     // formula for wolfram: plot [y= -13*log_2(x),{y,16,-95},{x,60,0}] 
                     // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-13*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
                     ret = (short)Convert.ToInt32(Math.Round(-13*Math.Log(dist, 2)));
