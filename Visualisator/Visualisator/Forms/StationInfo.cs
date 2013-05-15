@@ -317,6 +317,8 @@ namespace Visualisator
             {
                 cmdShowLog.Enabled = true;
             }
+            lblBandwith.Text = _sta.BandWidth.ToString();
+            lblStandart.Text = _sta.Stand80211.ToString();
 
             lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
             PrintAPList();
@@ -374,6 +376,16 @@ namespace Visualisator
         private void cmbAPList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            _sta.EnableBandwithSupportFor40MHz();
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            _sta.DisableBandwithSupportFor40MHz();
         }
 
     }

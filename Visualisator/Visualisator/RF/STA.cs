@@ -181,6 +181,7 @@ namespace Visualisator
             }
         }
 
+
         //*********************************************************************
         private void ThreadableConnectToAP(String SSID, Connect _conn, AP _connecttoAP)
         {
@@ -199,7 +200,11 @@ namespace Visualisator
             _conn.Reciver                       = _connecttoAP.getMACAddress();
             this.setOperateChannel(_connecttoAP.getOperateChannel());
             this.Freq = _connecttoAP.Freq;
-            this.BandWidth = _connecttoAP.BandWidth;
+            if (_connecttoAP.BandWidth == Bandwidth._40Mhz && BandWidthCheckCheckSupport(Bandwidth._40Mhz))
+                this.BandWidth = _connecttoAP.BandWidth;
+            else
+                this.BandWidth = Bandwidth._20MHz;
+
             this.Stand80211 = _connecttoAP.Stand80211;
             while (!connectSuccess )
             {
@@ -223,6 +228,7 @@ namespace Visualisator
                 this.setOperateChannel(_connecttoAP.getOperateChannel());
                // this.setOperateBand(_connecttoAP.getOperateBand());
                 this.Freq = _connecttoAP.Freq;
+                
             }
             //  Fix Work Channel under scan
         }
@@ -660,22 +666,25 @@ namespace Visualisator
                     dataPack.streamID   = streamID;
                     dataPack._data      = buffer;
 
-                    if (TDLSisWork) dataPack.Destination    = DestinationMacAddress;// TDLS TODO 
-                    else dataPack.Destination               = _connecttoAP.getMACAddress();// TDLS TODO
+                    if (TDLSisWork)     dataPack.Destination    = DestinationMacAddress;        // TDLS TODO 
+                    else                dataPack.Destination    = _connecttoAP.getMACAddress(); // TDLS TODO
 
                     TxRateOnSend = GetTXRate(dataPack.Destination);
                     dataPack.setTransmitRate(TxRateOnSend);
                     dataPack.Reciver = DestinationMacAddress;                        // TDLS TODO
 
-                    if (packetCounter == 0 && !exit_loop)    dataPack.streamStatus = StreamingStatus.Started;
-                    else if (packetCounter > 0 && numOfReadBytes > 0)    dataPack.streamStatus = StreamingStatus.active;
+                    if (packetCounter == 0 && !exit_loop)               dataPack.streamStatus = StreamingStatus.Started;
+                    else if (packetCounter > 0 && numOfReadBytes > 0)   dataPack.streamStatus = StreamingStatus.active;
+
                     TransferedByte += numOfReadBytes;
                     ackReceived         = false;
                     SendData(dataPack);
                     WaitingForAck       = true;
                     packetCounter++;
+                    
                     if(sw.Elapsed.Seconds > 0)
                         speed = TransferedByte / sw.Elapsed.Seconds;
+
                     int retrCounter = Medium.WaitBeforeRetransmit;
                     int loops = 1;
 

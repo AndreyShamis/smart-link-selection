@@ -423,7 +423,15 @@ namespace Visualisator
             _Enabled = true;
             BandWithSupport.Add(Bandwidth._20MHz);
         }
+        public bool BandWidthCheckCheckSupport(Bandwidth ban)
+        {
+            if(this.BandWithSupport.Contains(ban))
+            {
+                return true;
+            }
 
+            return false;
+        }
 
         //*********************************************************************
         public void SendData(SimulatorPacket pack)
