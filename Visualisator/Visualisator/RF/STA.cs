@@ -661,10 +661,7 @@ namespace Visualisator
                     FileMode.Open, FileAccess.Read);
             try
             {
-
-                string[] lines = System.IO.File.ReadAllLines(@"C:\simulator\_DATA_TO_SEND\input.txt");
                 AP _connecttoAP = GetAPBySSID(_AssociatedWithAPList[0].ToString());
-
                 if (_connecttoAP == null)    return;
 
                 this.Passive = false;
