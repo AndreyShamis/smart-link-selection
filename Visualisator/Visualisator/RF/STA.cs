@@ -40,6 +40,8 @@ namespace Visualisator
         private const int max_channel = 13;
         private int[] _channels = new int[max_channel];  // now it's a 20-element array
 
+        public string _fileNameToStream = "";
+
         private bool StopScan { set; get; }
 
         private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;   
@@ -656,8 +658,12 @@ namespace Visualisator
             Guid streamID = new Guid();
             streamID = Guid.NewGuid();
             int packetCounter = 0;
-            FileStream fsSource = new FileStream(@"C:\simulator\_DATA_TO_SEND\input.txt",
-                    FileMode.Open, FileAccess.Read);
+
+            string path = "";
+            if (_fileNameToStream == "") path = @"C:\simulator\_DATA_TO_SEND\input.txt";
+            else path = _fileNameToStream;
+            FileStream fsSource = new FileStream(path, FileMode.Open, FileAccess.Read);
+
             try
             {
 

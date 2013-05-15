@@ -328,7 +328,8 @@ namespace Visualisator
                 if (dr == System.Windows.Forms.DialogResult.OK)
                 {
                     toolTip1.SetToolTip(cmdSelectFileToSend, openFileToSend.FileName.ToString());
-                    MessageBox.Show(openFileToSend.FileName);
+                    //MessageBox.Show(openFileToSend.FileName);
+                    _sta._fileNameToStream = openFileToSend.FileName.ToString();
                 }
             }
             catch (Exception ex2)

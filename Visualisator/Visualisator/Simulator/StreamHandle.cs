@@ -21,8 +21,8 @@ namespace Visualisator
         public StreamHandle(Data packet)
         {
             _streamID = packet.streamID;
-            _fullFilePathAndName = saveFilePath + _streamID + @".txt";
-
+            //_fullFilePathAndName = saveFilePath + _streamID + @".txt";
+            _fullFilePathAndName = saveFilePath + _streamID;
             try
             {
                 fstream = new FileStream(_fullFilePathAndName, FileMode.Create, FileAccess.Write);

@@ -40,6 +40,7 @@ namespace Visualisator.Packets
             {
                 pi.SetValue(this, pi.GetValue(pack, null), null);
             }
+            _data = pack._data;
         }
     }
 }
