@@ -651,14 +651,10 @@ namespace Visualisator
             {
                 AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
                 if (_connecttoAP == null)    return;
-
                 this.Passive = false;
                 int SuccessContinuous = 0;
                 Stopwatch sw = Stopwatch.StartNew();
-
                 TimeSpan timeWindow = sw.Elapsed;// Do work
-                
-                
                 if (!_RFpeers.Contains(DestinationMacAddress))  
                     this.UpdateRFPeers();
 
@@ -727,7 +723,6 @@ namespace Visualisator
                             maxRetrays--;
                         }
                         if (maxRetrays == 0)  break;
-
                     }
 
                     if (!ThePacketWasRetransmited){
