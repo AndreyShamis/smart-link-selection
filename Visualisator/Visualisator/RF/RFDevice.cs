@@ -402,10 +402,26 @@ namespace Visualisator
         }
 
         //=====================================================================
+        public void EnableBandwithSupportFor40MHz()
+        {
+            BandWidth = Bandwidth._40Mhz;
+            if (!BandWithSupport.Contains(Bandwidth._40Mhz))
+                BandWithSupport.Add(Bandwidth._40Mhz);
+        }
+
+        //=====================================================================
+        public void DisableBandwithSupportFor40MHz()
+        {
+            BandWidth = Bandwidth._20MHz;
+            BandWithSupport.Remove(Bandwidth._40Mhz);
+        }
+
+        //=====================================================================
         public void Enable()
         {
             this.Passive = true;
             _Enabled = true;
+            BandWithSupport.Add(Bandwidth._20MHz);
         }
 
 

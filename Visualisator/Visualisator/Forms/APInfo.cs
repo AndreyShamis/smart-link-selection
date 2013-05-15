@@ -167,5 +167,15 @@ namespace Visualisator
             ShowLog LogForm = new ShowLog((RFDevice)_ap);
             LogForm.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            _ap.EnableBandwithSupportFor40MHz();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            _ap.DisableBandwithSupportFor40MHz();
+        }
     }
 }
