@@ -457,28 +457,25 @@ namespace Visualisator
         }
 
         //=====================================================================
-        public override void ParseReceivedPacket(IPacket pack)
+        public override void ParseReceivedPacket(SimulatorPacket pack)
         {
-            SimulatorPacket locPack = (SimulatorPacket) pack;
-            Rssi = GetRSSI(locPack.X, locPack.Y);             
+            Rssi = GetRSSI(pack.X, pack.Y);             
             Type _Pt = pack.GetType();
 
             if (_Pt  == typeof(Packets.ConnectionACK))
             {
-                Packets.ConnectionACK _ack = (Packets.ConnectionACK)pack;
-                if (!_AssociatedWithAPList.Contains(_ack.SSID))
-                    _AssociatedWithAPList.Add(_ack.SSID);
+                if (!_AssociatedWithAPList.Contains(pack.SSID))
+                    _AssociatedWithAPList.Add(pack.SSID);
             }
             else if (_Pt == typeof(Packets.Beacon))
             {
                 try
                 {
-                    Packets.Beacon bec = (Packets.Beacon)pack;
-                    if (!_AccessPoint.Contains(bec.SSID))
-                        _AccessPoint.Add(bec.SSID);
+                    if (!_AccessPoint.Contains(pack.SSID))
+                        _AccessPoint.Add(pack.SSID);
 
-                    _channels[bec.PacketChannel - 1] = Math.Max(-100, Rssi);
-                    _AccessPoint.Increase(bec.SSID);
+                    _channels[pack.PacketChannel - 1] = Math.Max(-100, Rssi);
+                    _AccessPoint.Increase(pack.SSID);
                 }
                 catch (Exception ex) { AddToLog("Parse receibed Packet Beacon: " + ex.Message); }
             }
@@ -503,7 +500,7 @@ namespace Visualisator
             }
             else if (_Pt == typeof(DataAck))
             {
-                var dat = (DataAck)pack;
+                //var dat = (DataAck)pack;
                 ackReceived = true;
                 _DataAckReceived++;
             }

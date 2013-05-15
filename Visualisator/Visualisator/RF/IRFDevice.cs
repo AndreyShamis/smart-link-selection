@@ -16,6 +16,6 @@ namespace Visualisator
         short getOperateChannel();
         void AddToLog(String newLogEntry);
         String DumpAll();
-        void ParseReceivedPacket(IPacket pack);
+        void ParseReceivedPacket(SimulatorPacket pack);
     }
 }

@@ -474,7 +474,7 @@ namespace Visualisator
             _LOG.Clear();
         }
         //=====================================================================
-        public virtual void ParseReceivedPacket(IPacket pack) { }
+        public virtual void ParseReceivedPacket(SimulatorPacket pack) { }
 
         //=====================================================================
         private bool checkIfHaveDataReceive()
@@ -518,7 +518,7 @@ namespace Visualisator
 
                 //SpinWait.SpinUntil(ListenCondition);//,1);
                 Guid prev_guid = new Guid();
-                Packets.IPacket pack = null;
+                SimulatorPacket pack = null;
                    // _ev.WaitOne();
 
                 lock (RF_STATUS)
@@ -543,7 +543,7 @@ namespace Visualisator
                     {
                         ((SimulatorPacket)pack).IsReceivedRetransmit = true;
                     }
-                    IPacket temp = pack;
+                    SimulatorPacket temp = (SimulatorPacket)pack;
                     prev_guid = ((SimulatorPacket)temp).GuidD;
                     // if (pack.GetType() != typeof(Packets.Beacon))
                     //     _MEDIUM.DeleteReceivedPacket(this, prev_guid);

@@ -530,10 +530,10 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        public static IPacket ReceiveData(RFDevice device)
+        public static SimulatorPacket ReceiveData(RFDevice device)
         {
             Key Pk = null;
-            IPacket retvalue = null;
+            SimulatorPacket retvalue = null;
 
             if (_packets == null){ 
                 return null;
