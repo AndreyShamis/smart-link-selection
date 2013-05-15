@@ -48,6 +48,8 @@ namespace Visualisator
         //*********************************************************************
         //*********************************************************************
         //*********************************************************************
+
+        #region SETERS
         public TDLSSetupStatus TDLSSetupInfo
         {
             get { return _TDLSSetupStatus; }
@@ -109,6 +111,7 @@ namespace Visualisator
             get { return _delayInTDLS; }
             set { _delayInTDLS = value; }
         }
+        #endregion
         private bool ackReceived = false;
 
         //*********************************************************************
