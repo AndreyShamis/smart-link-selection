@@ -11,13 +11,8 @@ namespace Visualisator.Packets
     {
                         // TODO check if this work corectlly
         public KeepAlive(SimulatorPacket pack)
+            : base(pack)
         {
-            Type t = typeof(SimulatorPacket);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
         }
     }
 }

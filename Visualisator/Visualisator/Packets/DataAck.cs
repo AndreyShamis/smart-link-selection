@@ -9,16 +9,10 @@ namespace Visualisator.Packets
     [Serializable()]
     class DataAck : SimulatorPacket, IPacket, ISerializable
     {
-                        // TODO check if this work corectlly
         private Guid _GUIDforDataPacket = new Guid();
         public DataAck(SimulatorPacket pack)
+            : base(pack)
         {
-            Type t = typeof(SimulatorPacket);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
         }
 
         public Guid GuiDforDataPacket

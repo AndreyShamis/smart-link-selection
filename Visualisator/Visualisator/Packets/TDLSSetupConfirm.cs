@@ -14,13 +14,8 @@ namespace Visualisator.Packets
         public ArrayList BandWithSupport = new ArrayList();
         public ArrayList StandartSupport = new ArrayList();
         public TDLSSetupConfirm(SimulatorPacket pack)
+            : base(pack)
         {
-            Type t = typeof(SimulatorPacket);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
         }
     }
 }

@@ -10,15 +10,10 @@ namespace Visualisator.Packets
     [Serializable()]
     class TDLSTearDown : SimulatorPacket, IPacket, ISerializable
     {
-  
+
         public TDLSTearDown(SimulatorPacket pack)
+            : base(pack)
         {
-            Type t = typeof(SimulatorPacket);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
         }
     }
 }

@@ -11,23 +11,8 @@ namespace Visualisator.Packets
     {
 
         public TDLSResponse(SimulatorPacket pack)
+            : base(pack)
         {
-            Type t = typeof(SimulatorPacket);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
-        }
-
-        public TDLSResponse(Packets.Data pack)
-        {
-            Type t = typeof(Data);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
         }
     }
 }

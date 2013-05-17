@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 
 namespace Visualisator.Packets
 {
@@ -11,6 +12,15 @@ namespace Visualisator.Packets
         public SimulatorPacket()
         {
             
+        }
+        public SimulatorPacket(SimulatorPacket pack)
+        {
+            Type t = typeof(SimulatorPacket);
+            PropertyInfo[] properties = t.GetProperties();
+            foreach (PropertyInfo pi in properties)
+            {
+                pi.SetValue(this, pi.GetValue(pack, null), null);
+            }
         }
         private string _Reciver ;
         private string _Destination;

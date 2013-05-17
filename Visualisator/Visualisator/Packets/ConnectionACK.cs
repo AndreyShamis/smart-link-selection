@@ -9,15 +9,9 @@ namespace Visualisator.Packets
     [Serializable()]
     class ConnectionACK : SimulatorPacket, IPacket, ISerializable
     {
-                // TODO check if this work corectlly
         public ConnectionACK(SimulatorPacket pack)
+            : base(pack)
         {
-            Type t = typeof(SimulatorPacket);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
         }
     }
 

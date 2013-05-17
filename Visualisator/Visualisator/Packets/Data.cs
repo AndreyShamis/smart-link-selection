@@ -23,13 +23,8 @@ namespace Visualisator.Packets
         public Guid streamID { set; get; }
 
         public Data(SimulatorPacket pack)
+            : base(pack)
         {
-            Type t = typeof(SimulatorPacket);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
         }
 
         public Data(Data pack)

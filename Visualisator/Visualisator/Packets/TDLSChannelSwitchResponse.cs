@@ -10,25 +10,10 @@ namespace Visualisator.Packets
     [Serializable()]
     class TDLSChannelSwitchResponse : SimulatorPacket, IPacket, ISerializable
     {
-  
-        public TDLSChannelSwitchResponse(SimulatorPacket pack)
-        {
-            Type t = typeof(SimulatorPacket);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
-        }
 
-        public TDLSChannelSwitchResponse(Packets.Data pack)
+        public TDLSChannelSwitchResponse(SimulatorPacket pack)
+            : base(pack)
         {
-            Type t = typeof(Data);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
         }
     }
 }

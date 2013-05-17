@@ -6,25 +6,10 @@ namespace Visualisator.Packets
     [Serializable()]
     class TDLSDiscovery : SimulatorPacket, IPacket, ISerializable
     {
-  
-        public TDLSDiscovery(SimulatorPacket pack)
-        {
-            Type t = typeof(SimulatorPacket);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
-        }
 
-        public TDLSDiscovery(Packets.Data pack)
+        public TDLSDiscovery(SimulatorPacket pack)
+            : base(pack)
         {
-            Type t = typeof(Data);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
         }
     }
 }
