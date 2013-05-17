@@ -162,6 +162,7 @@ namespace Visualisator
         {
             FilePachToSend = @"C:\simulator\_DATA_TO_SEND\input.txt";
             base.Enable();
+            TDLSAutoStart = true;
             CreateFolder();
             this._scanning = false;
             this._WaitingForAck = false;

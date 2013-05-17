@@ -38,6 +38,7 @@ namespace Visualisator
         public ArrayList BandWithSupport    = new ArrayList();
         public ArrayList StandartSupport    = new ArrayList();
 
+        
 
         public string MACOfAnotherPeer { set; get; } //mac of another device with him we working now
         public bool Passive { set; get; }
@@ -50,6 +51,7 @@ namespace Visualisator
 
         public bool TDLSisEnabled { set; get; }
         public bool TDLSisWork { set; get; }
+        public bool TDLSAutoStart { set; get; }
 
 
         #region Noise
@@ -219,6 +221,8 @@ namespace Visualisator
         }
 
         #endregion
+
+        
         //=====================================================================
         public string DumpAll()
         {

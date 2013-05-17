@@ -27,6 +27,7 @@ namespace Visualisator
             _sta = st;
             _objects = _obj;
             this.Text = Resources.StationInfo_StationInfo_Station_Info__ + _sta.getMACAddress();
+            SlowFlow();
         }
 
         //=====================================================================
@@ -313,6 +314,19 @@ namespace Visualisator
 
         private void tmrSlow_Tick(object sender, EventArgs e)
         {
+            SlowFlow();
+        }
+
+        private void SlowFlow()
+        {
+            if (_sta.TDLSAutoStart)
+            {
+                chkbAutoStartTdls.Checked = true;
+            }
+            else
+            {
+                chkbAutoStartTdls.Checked = false;
+            }
             if (_sta._LOG.Length > 0)
             {
                 cmdShowLog.Enabled = true;
@@ -365,7 +379,12 @@ namespace Visualisator
 
         private void chkbAutoStartTdls_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (chkbAutoStartTdls.Checked)
+                _sta.TDLSAutoStart = true;
+            else
+            {
+                _sta.TDLSAutoStart = false;
+            }
         }
 
         private void cmdLogsClear_Click(object sender, EventArgs e)
