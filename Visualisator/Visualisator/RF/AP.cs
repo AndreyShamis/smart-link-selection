@@ -27,8 +27,8 @@ namespace Visualisator
         private string Sync = "sync";
 
         private string[] APImagesArr = { ImagesPath + "ap1.jpg", ImagesPath + "ap4.jpg", ImagesPath + "ap5.png" };
-        public string _APImagePath { set; get; } 
-
+        public string _APImagePath { set; get; }
+        public const int MAX_QUEUE_SIZE = 10;
         
         //*********************************************************************
 
@@ -220,36 +220,46 @@ namespace Visualisator
             }
             else if (Pt == typeof(Data))
             {
-                Data _wp        = (Data)pack;
-                MACsandACK(_wp.Source, _wp.GuidD, _wp.getTransmitRate());
-
-                Data resendedData = new Data(_wp);
-                resendedData.Destination = _wp.Reciver;
-                resendedData.X = this.x;
-                resendedData.Y = this.y;
-                resendedData.setTransmitRate(_wp.getTransmitRate());
-                resendedData.Source = this.getMACAddress().ToString();
-
-                Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Reciver];
-
-                bool add = true;
+                Queue<Data> temporaryQ = (Queue<Data>)_packet_queues[pack.Reciver];
+                bool add = true,receive = true;
                 try
                 {
                     if (temporaryQ != null)
                     {
-                        foreach (Data value in temporaryQ)
+                        if (temporaryQ.Count < MAX_QUEUE_SIZE)
                         {
-                            if (value.GuidD.Equals(_wp.GuidD))
+                            foreach (Data value in temporaryQ)
                             {
-                                add = false;
-                                break;
+                                if (value.GuidD.Equals(pack.GuidD))
+                                {
+                                    add = false;
+                                    break;
+                                }
                             }
                         }
+                        else
+                        {
+                            add = false;
+                            receive = false;
+                        }
                     }
-                }catch(Exception ex )
+                }catch(Exception ex ){ AddToLog("Parse Received Packet - Data " + ex.Message);}
+
+                Data resendedData = null;
+
+                if (receive && add)
                 {
-                    AddToLog("Parse Received Packet - Data " + ex.Message);
+                    MACsandACK(pack.Source, pack.GuidD, pack.getTransmitRate());
+
+                    resendedData = new Data(pack);
+                    resendedData.Destination = pack.Reciver;
+                    resendedData.X = this.x;
+                    resendedData.Y = this.y;
+                    resendedData.GuidD = pack.GuidD;
+                    resendedData.setTransmitRate(pack.getTransmitRate());
+                    resendedData.Source = this.getMACAddress();
                 }
+
                 if (add){
                     lock (Sync){
                         temporaryQ.Enqueue(resendedData);

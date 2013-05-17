@@ -458,6 +458,7 @@ namespace Visualisator
         //*********************************************************************
         public void SendData(SimulatorPacket pack)
         {
+
             CheckScanConditionOnSend();
             int Rate = pack.getTransmitRate();
             int sleep = (int)(600 / Rate);
@@ -495,7 +496,7 @@ namespace Visualisator
             da.PacketBandWith = this.BandWidth;
             da.PacketStandart = this.Stand80211;
             da.PacketFrequency = this.Freq;
-            da.Source = this.getMACAddress().ToString();
+            da.Source = this.getMACAddress();//.ToString();
             da.GuiDforDataPacket = _DataGuid;
             da.setTransmitRate(TXrate);
             this.SendData(da);
@@ -565,7 +566,6 @@ namespace Visualisator
                 //SpinWait.SpinUntil(ListenCondition);//,1);
                 Guid prev_guid = new Guid();
                 SimulatorPacket pack = null;
-                   // _ev.WaitOne();
 
                 lock (RF_STATUS)
                 {
@@ -573,24 +573,23 @@ namespace Visualisator
                     pack = Medium.ReceiveData(this);
                     RF_STATUS = "NONE";
                 }
-                // _ev.Set();
-
                 if (pack == null)
                 {
                     //Thread.Sleep(new TimeSpan(4000));
                     // Thread.Sleep(1); 
                 }
-                else if (pack != null && (prev_guid != ((SimulatorPacket)pack).GuidD || ((SimulatorPacket)pack).IsRetransmit))
+                else if (pack != null && (prev_guid != pack.GuidD || pack.IsRetransmit))
                 {
                     //ParseReceivedPacket(pack);
                     //  Only if we have received packet before
                     //  but flag Rentransmit is UP
-                    if (prev_guid == ((SimulatorPacket)pack).GuidD)
-                    {
-                        ((SimulatorPacket)pack).IsReceivedRetransmit = true;
-                    }
-                    SimulatorPacket temp = (SimulatorPacket)pack;
-                    prev_guid = ((SimulatorPacket)temp).GuidD;
+                    if (prev_guid == pack.GuidD)
+                        pack.IsReceivedRetransmit = true;
+
+
+
+                    if (pack.GetType() != typeof(Beacon))
+                        prev_guid = ((SimulatorPacket)pack).GuidD;
                     // if (pack.GetType() != typeof(Packets.Beacon))
                     //     _MEDIUM.DeleteReceivedPacket(this, prev_guid);
                     //else
@@ -599,7 +598,7 @@ namespace Visualisator
                     // }
                     AllReceivedPackets += 1;
 
-                    Thread newThread = new Thread(() => ParseReceivedPacket(temp));
+                    Thread newThread = new Thread(() => ParseReceivedPacket(pack));
                     newThread.Name = "ParseReceivedPacket of " + this.getMACAddress();
                     newThread.Start();
                 }

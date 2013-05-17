@@ -32,7 +32,7 @@ namespace Visualisator.Packets
             }
         }
 
-        public Data(Packets.Data pack)
+        public Data(Data pack)
         {
             Type t = typeof(Data);
             PropertyInfo[] properties = t.GetProperties();

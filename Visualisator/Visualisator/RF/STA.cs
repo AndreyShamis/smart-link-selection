@@ -221,7 +221,7 @@ namespace Visualisator
                 {
                     KeepAlive keepAl        = new KeepAlive(CreatePacket());
                     AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
-                    Data dataPack           = new Data(CreatePacket());
+                    //Data dataPack           = new Data(CreatePacket());
 
                     keepAl.SSID             = _connecttoAP.SSID;
                     keepAl.Destination      = _connecttoAP.getMACAddress();
