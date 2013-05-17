@@ -10,7 +10,6 @@ namespace Visualisator.Packets
     [Serializable()]
     class TDLSTearDown : SimulatorPacket, IPacket, ISerializable
     {
-
         public TDLSTearDown(SimulatorPacket pack)
             : base(pack)
         {

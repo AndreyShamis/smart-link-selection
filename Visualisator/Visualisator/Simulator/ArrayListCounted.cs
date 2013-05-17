@@ -7,14 +7,14 @@ using System.Collections;
 namespace Visualisator
 {
     [Serializable()]
-    class ArrayListCounted : ArrayList
+    class ArrayListCounted : ArrayList,ISerializable
     {
 
         [Serializable()]
-        class CountedKey
+        class CountedKey:ISerializable
         {
-            private String _MAC;
-            public CountedKey(String MAC)
+            private string _MAC;
+            public CountedKey(string MAC)
             {
                 _MAC = MAC;
             }
@@ -27,18 +27,11 @@ namespace Visualisator
             if(this.Contains(_obj))
             {
                 CountedKey k = new CountedKey((String)_obj);
-
                 if (_counters.Contains(k))
-                {
                     _counters[k] = MAX_KEEP_ALIVE_COUNTER;
-
-                }
                 else
-                {
                     _counters.Add(k, MAX_KEEP_ALIVE_COUNTER);
-                }
             }
-            
         }
 
         public void Decrease(object _obj)
@@ -74,7 +67,7 @@ namespace Visualisator
             {
                 if (this.Count > 0)
                 {
-                    foreach (String st in this)
+                    foreach (string st in this)
                     {
                         this.Decrease(st);
                     }

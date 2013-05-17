@@ -227,19 +227,14 @@ namespace Visualisator
         public string DumpAll()
         {
             String ret = "";
-
-            ret = ObjectDumper.Dump(this);
-            ret += "_OperateChannel\r\n";
-            ret += ObjectDumper.Dump(_OperateChannel);
-            ret += "Frequency\r\n";
-            ret += ObjectDumper.Dump(this.Freq);
-            ret += "Bandwith\r\n";
-            ret += ObjectDumper.Dump(this.BandWidth);
-            ret += "80211 Standart\r\n";
-            ret += ObjectDumper.Dump(this.Stand80211);
-            ret += "_address\r\n";
-            ret += ObjectDumper.Dump(_address);
-
+            ret += "OperateChannel     :    " + this._OperateChannel;
+            ret += "\r\nFrequency       :   " + this.Freq.ToString();
+            ret += "\r\nBandwith        :   " + this.BandWidth.ToString();
+            ret += "\r\n80211 Standart  :   " + this.Stand80211.ToString();
+            ret += "\r\n_address        :   " + this.getMACAddress();
+            ret += "\r\nFrequencySupport:   " + ObjectDumper.Dump(this.FrequencySupport);
+            ret += "\r\nBandWithSupport :   " + ObjectDumper.Dump(this.BandWithSupport);
+            ret += "\r\nStandartSupport :   " + ObjectDumper.Dump(this.StandartSupport);
             return (ret);
         }
         //=====================================================================

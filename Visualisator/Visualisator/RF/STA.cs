@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Threading;
@@ -14,7 +13,7 @@ using System.Diagnostics;
 namespace Visualisator
 {
     [Serializable()]
-    class STA : RFDevice, IBoardObjects, ISerializable,IRFDevice
+    class STA : RFDevice, IBoardObjects,IRFDevice
     {
 
         protected ArrayListCounted  _AccessPoint = new ArrayListCounted();

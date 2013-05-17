@@ -10,7 +10,8 @@ using System.Windows.Forms;
 namespace Visualisator
 {
      [Serializable()]
-    class ByteArrayComparer: IEqualityComparer {
+    class ByteArrayComparer: IEqualityComparer ,ISerializable
+     {
           public int GetHashCode(object obj) {
               byte[] arr = ObjectToByteArray(obj);// as byte[];
             int hash = 0;

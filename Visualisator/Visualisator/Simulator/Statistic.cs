@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Visualisator.Simulator
 {
-    class Statistic
+    [Serializable]
+    class Statistic:ISerializable
     {
         public string   FileName        { set; get; }
         public string   SourceMAC       { set; get; }

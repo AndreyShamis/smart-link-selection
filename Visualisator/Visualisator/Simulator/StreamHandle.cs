@@ -9,7 +9,7 @@ using Visualisator.Packets;
 namespace Visualisator
 {
     [Serializable()]
-    class StreamHandle
+    class StreamHandle:ISerializable
     {
         private const string saveFilePath = @"C:\simulator\_DATA_TO_SEND\";
 

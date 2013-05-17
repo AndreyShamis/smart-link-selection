@@ -8,7 +8,7 @@ namespace Visualisator
     [Serializable()]
     class MAC:ISerializable
     {
-        private String _MAC;
+        private string _MAC;
         private static Random rand = new Random(123);
         public  MAC()
         {
@@ -23,13 +23,11 @@ namespace Visualisator
             _MAC = string.Format("{0:X2}:{1:X2}:{2:X2}:{3:X2}:{4:X2}:{5:X2}", _mac1, _mac2, _mac3, _mac4, _mac5, _mac6);
             
         }
-        public MAC(String SavedMAC)
+        public MAC(string SavedMAC)
         {
-
             _MAC = SavedMAC;
-
         }
-        public String getMAC()
+        public string getMAC()
         {
             try
             {

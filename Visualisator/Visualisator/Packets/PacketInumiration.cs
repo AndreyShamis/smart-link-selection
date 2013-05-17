@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Visualisator
 {
+    [Serializable()]
     internal enum StreamingStatus
     {
         Started,
