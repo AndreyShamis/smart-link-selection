@@ -39,15 +39,5 @@ namespace Visualisator.Packets
                 pi.SetValue(this, pi.GetValue(pack, null), null);
             }
         }
-
-        public TDLSSetupResponse(Packets.Data pack)
-        {
-            Type t = typeof(Data);
-            PropertyInfo[] properties = t.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                pi.SetValue(this, pi.GetValue(pack, null), null);
-            }
-        }
     }
 }

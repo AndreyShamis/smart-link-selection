@@ -42,7 +42,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.cmdSelectFileToSend = new System.Windows.Forms.Button();
             this.btnSaveData = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cmdSendData = new System.Windows.Forms.Button();
             this.lblTDLSisWork = new System.Windows.Forms.Label();
             this.lblTDLStatus = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
@@ -110,6 +110,8 @@
             this.txtErrorsLogFromCode = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
+            this.lblTdlsUnsuccessTrys = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -234,16 +236,16 @@
             this.btnSaveData.UseVisualStyleBackColor = true;
             this.btnSaveData.Click += new System.EventHandler(this.btnSaveData_Click);
             // 
-            // button1
+            // cmdSendData
             // 
-            this.button1.Location = new System.Drawing.Point(504, 86);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 22);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Send Data";
-            this.toolTip1.SetToolTip(this.button1, "Send Data to Providet MAC address and Selected file");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.cmdSendData.Location = new System.Drawing.Point(504, 86);
+            this.cmdSendData.Name = "cmdSendData";
+            this.cmdSendData.Size = new System.Drawing.Size(76, 22);
+            this.cmdSendData.TabIndex = 9;
+            this.cmdSendData.Text = "Send Data";
+            this.toolTip1.SetToolTip(this.cmdSendData, "Send Data to Providet MAC address and Selected file");
+            this.cmdSendData.UseVisualStyleBackColor = true;
+            this.cmdSendData.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblTDLSisWork
             // 
@@ -320,6 +322,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblTdlsUnsuccessTrys);
+            this.groupBox1.Controls.Add(this.label22);
             this.groupBox1.Controls.Add(this.label20);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button5);
@@ -375,7 +379,7 @@
             this.groupBox1.Controls.Add(this.txtDataReceeived);
             this.groupBox1.Controls.Add(this.txtMAC);
             this.groupBox1.Controls.Add(this.txtDestination);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.cmdSendData);
             this.groupBox1.Controls.Add(this.lblAssociatedAP);
             this.groupBox1.Controls.Add(this.ConnectedToLabel);
             this.groupBox1.Controls.Add(this.lblCoordinates);
@@ -1006,6 +1010,26 @@
             this.tabPage4.Text = "Statistic";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // lblTdlsUnsuccessTrys
+            // 
+            this.lblTdlsUnsuccessTrys.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblTdlsUnsuccessTrys.Location = new System.Drawing.Point(202, 234);
+            this.lblTdlsUnsuccessTrys.Name = "lblTdlsUnsuccessTrys";
+            this.lblTdlsUnsuccessTrys.Size = new System.Drawing.Size(62, 14);
+            this.lblTdlsUnsuccessTrys.TabIndex = 75;
+            this.lblTdlsUnsuccessTrys.Text = "0";
+            this.lblTdlsUnsuccessTrys.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label22.Location = new System.Drawing.Point(6, 235);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(188, 13);
+            this.label22.TabIndex = 74;
+            this.label22.Text = "Unsuccessdull trys to send over TDLS";
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1047,7 +1071,7 @@
         private System.Windows.Forms.Label lblCoordinates;
         private System.Windows.Forms.Label ConnectedToLabel;
         private System.Windows.Forms.Label lblAssociatedAP;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cmdSendData;
         private System.Windows.Forms.TextBox txtDestination;
         private System.Windows.Forms.TextBox txtMAC;
         private System.Windows.Forms.Label txtDataReceeived;
@@ -1111,5 +1135,7 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label lblTdlsUnsuccessTrys;
+        private System.Windows.Forms.Label label22;
     }
 }

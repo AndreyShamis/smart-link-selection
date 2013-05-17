@@ -46,7 +46,8 @@ namespace Visualisator
         TDLSSetupResponseSened,
         TDLSSetupResponseReceived,
         TDLSSetupConfirmSended,
-        TDLSSetupConfirmReceived
+        TDLSSetupConfirmReceived,
+        TDLSTearDown,
     };
 
 }

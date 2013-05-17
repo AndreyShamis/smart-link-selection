@@ -70,9 +70,11 @@ namespace Visualisator
             Medium.ReceiveDistance = 100;
             Medium.ListenDistance = 200;
             Medium.WaitBeforeRetransmit = 60;
-            Medium.TrysToRetransmit = 10;
+            Medium.TrysToRetransmit = 5;
             Medium.RetransmitWindow = 100;
             Medium.MediumStart();
+            Medium.TDLS_TearDownAfterFails = 10;
+
             SetMedioRatio();
             SetBSSDelay();
             SetTDLSDelay();

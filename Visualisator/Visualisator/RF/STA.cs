@@ -33,7 +33,9 @@ namespace Visualisator
         private int[]           _channels                   = new int[max_channel]; // now it's a 20-element array
         private bool            StopScan { set; get; }                              // Used fro stop scan if start connection
         public string           FilePachToSend { set; get; }
-        private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;   
+        private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;
+
+        public int              _TDLSCounterUnSuccessTx { set; get; }
 
         //*********************************************************************
         //=====================================================================
@@ -69,6 +71,28 @@ namespace Visualisator
                                             ImagesPath + "tv1.png",
                                             ImagesPath + "tv2.gif" };
         public string _STAImagePath { set; get; }
+
+        private  void SLS()
+        {
+            if (!TDLSAutoStart || !TDLSisEnabled)
+                return;
+        }
+
+        /// <summary>
+        /// This function should tear down TDLS setup in case if number of packets more then Medium.TDLS_TearDownAfterFails
+        /// </summary>
+        private void TearDownTdlsOnFailToSend(string MAC)
+        {
+            try
+            {
+                _TDLSCounterUnSuccessTx++;
+                if(_TDLSCounterUnSuccessTx >= Medium.TDLS_TearDownAfterFails)
+                {
+                    TDLS_SendTearDown(MAC);
+                }
+            }
+            catch (Exception ex) { AddToLog("TearDownTdlsOnFailToSend: " + ex.Message); }  
+        }
         #region SETERS
         public TDLSSetupStatus TDLSSetupInfo
         {
@@ -448,6 +472,23 @@ namespace Visualisator
         }
 
         //=====================================================================
+        public void TDLS_SendTearDown(string MAC)
+        {
+            try
+            {
+                TDLSisWork = false;
+                Packets.TDLSTearDown _tdlsTearDown = new TDLSTearDown(CreatePacket());
+                AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
+                _tdlsTearDown.SSID = _connecttoAP.SSID;
+                _tdlsTearDown.Destination = _connecttoAP.getMACAddress();
+                _tdlsTearDown.Reciver = MAC;
+                //  _tdlsSetupR.setTransmitRate(11);
+                SendData(_tdlsTearDown);
+                TDLSSetupInfo = TDLSSetupStatus.TDLSTearDown;
+            }
+            catch (Exception ex) { AddToLog("TDLS_SendTearDown: " + ex.Message); }  
+        }
+        //=====================================================================
         public void DeleteDataStream(Data packet)
         {
             try
@@ -570,6 +611,11 @@ namespace Visualisator
                         this.TDLSisWork = true;
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmReceived;
                     }
+                    else if (_Pt == typeof(TDLSTearDown))
+                    {
+                        this.TDLSisWork = false;
+                        TDLSSetupInfo = TDLSSetupStatus.TDLSTearDown;
+                    }
                 }
             }
         }
@@ -653,10 +699,11 @@ namespace Visualisator
             streamID = Guid.NewGuid();
             int packetCounter = 0;
             short TxRateOnSend;
-
+            _TDLSCounterUnSuccessTx = 0;
             long TransferedByte = 0;
             FileStream fsSource = new FileStream(FilePachToSend,
                     FileMode.Open, FileAccess.Read);
+
             try
             {
                 AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
@@ -732,7 +779,12 @@ namespace Visualisator
                             if (!_Enabled)  return;
                             maxRetrays--;
                         }
-                        if (maxRetrays == 0)  break;
+                        if (maxRetrays == 0)
+                        {
+                            if (TDLSisWork)
+                                TearDownTdlsOnFailToSend(DestinationMacAddress);
+                            break;
+                        }
                     }
 
                     if (!ThePacketWasRetransmited){
@@ -759,6 +811,7 @@ namespace Visualisator
             catch (Exception ex) { AddToLog("ThreadAbleReadFile: " + ex.Message); }
             finally {
                 fsSource.Close();
+                Passive = true;
             }
         }
 
@@ -955,6 +1008,7 @@ namespace Visualisator
                 _DataAckRetransmitted = 0;
                 AllReceivedPackets = 0;
                 this.DoubleRecieved = 0;
+                _TDLSCounterUnSuccessTx = 0;
             }
             catch (Exception ex) { AddToLog("ResetCounters: " + ex.Message); }
         }

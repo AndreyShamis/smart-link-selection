@@ -278,33 +278,39 @@ namespace Visualisator
                 }
                 DataAckReceived++;
             }
-            else if (Pt == typeof(TDLSSetupRequest) ){
-                TDLSSetupRequest _wp = (TDLSSetupRequest)pack;
-                TDLSSetupRequest resendedData = new TDLSSetupRequest(_wp);
-                resendedData.Destination = _wp.Reciver;
-                resendedData.X = this.x;
-                resendedData.Y = this.y;
-                SendData(resendedData);
-            }
-            else if ( Pt == typeof(TDLSSetupResponse) ){
-                TDLSSetupResponse _wp = (TDLSSetupResponse)pack;
-                TDLSSetupResponse resendedData = new TDLSSetupResponse(_wp);
-                resendedData.Destination = _wp.Reciver;
-                resendedData.X = this.x;
-                resendedData.Y = this.y;
-                SendData(resendedData);
-            }
-            else if ( Pt == typeof(TDLSSetupConfirm)) {
-                TDLSSetupConfirm _wp = (TDLSSetupConfirm)pack;
-                TDLSSetupConfirm resendedData = new TDLSSetupConfirm(_wp);
-                resendedData.Destination = _wp.Reciver;
-                resendedData.X = this.x;
-                resendedData.Y = this.y;
-                SendData(resendedData);
-            }
+            //else if (Pt == typeof(TDLSSetupRequest) ){
+            //    TDLSSetupRequest _wp = (TDLSSetupRequest)pack;
+            //    TDLSSetupRequest resendedData = new TDLSSetupRequest(_wp);
+            //    resendedData.Destination = _wp.Reciver;
+            //    resendedData.X = this.x;
+            //    resendedData.Y = this.y;
+            //    SendData(resendedData);
+            //}
+            //else if ( Pt == typeof(TDLSSetupResponse) ){
+            //    TDLSSetupResponse _wp = (TDLSSetupResponse)pack;
+            //    TDLSSetupResponse resendedData = new TDLSSetupResponse(_wp);
+            //    resendedData.Destination = _wp.Reciver;
+            //    resendedData.X = this.x;
+            //    resendedData.Y = this.y;
+            //    SendData(resendedData);
+            //}
+            //else if ( Pt == typeof(TDLSSetupConfirm)) {
+            //    TDLSSetupConfirm _wp = (TDLSSetupConfirm)pack;
+            //    TDLSSetupConfirm resendedData = new TDLSSetupConfirm(_wp);
+            //    resendedData.Destination = _wp.Reciver;
+            //    resendedData.X = this.x;
+            //    resendedData.Y = this.y;
+            //    SendData(resendedData);
+            //}
             else
             {
-                //Console.WriteLine("[" + getMACAddress() + "]" + " listening.");
+                //  Generic Packet retransmitter
+                //  This code will create new packet by him type
+                SimulatorPacket instance = (SimulatorPacket)Activator.CreateInstance(pack.GetType(),pack);
+                instance.X = this.x;
+                instance.Y = this.y;
+                instance.Destination = pack.Reciver;
+                SendData(instance);
             }
         }
 

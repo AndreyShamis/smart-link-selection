@@ -141,60 +141,18 @@ namespace Visualisator
                 _sta.rfile(txtDestination.Text);
                 txtDestination.BackColor = Color.White;
                 txtTDLSSetupRequestMAC.Text = txtDestination.Text;
+                cmdSendData.Enabled = false;
             }
             else
             {
                 txtDestination.BackColor = Color.IndianRed;
             }
-            
-
         }
 
         //=====================================================================
         private void cmdReset_Click(object sender, EventArgs e)
         {
             _sta.ResetCounters();
-        }
-
-        //=====================================================================
-        private void tmrFast_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                lblRSSI.Text = _sta.Rssi.ToString();
-
-                if (_sta.WaitingForAck)
-                {
-                    lblWaitingForAck.BackColor = Color.Chartreuse;
-                }
-                else
-                {
-                    lblWaitingForAck.BackColor = Color.Black;
-                }
-                txtDataReceeived.Text = _sta.getDataRecieved().ToString();
-                lblSent.Text = _sta.getDataSent().ToString();
-                lblAllReceivedPackets.Text = _sta.AllReceivedPackets.ToString();
-                lblAssociatedAP.Text = _sta.getAssociatedAP_SSID();
-                lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
-
-                lblTDLSSetupStatus.Text = _sta.TDLSSetupInfo.ToString() + " [" + _sta.TDLSSetupInfo.GetHashCode().ToString() + "]";
-                lblRetransmited.Text = _sta.DataRetransmited.ToString();
-                lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
-
-                lblLastTransmitRate.Text = _sta.MACLastTrnsmitRate.ToString();
-
-                lblSpeed.Text = ConvertBytesToKilobytes((long)_sta.speed).ToString() + "Kbps/sec";
-
-                lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
-                                         //     lblCounterToretransmit.Text.Substring(0, 2);
-
-                lblRetransmittionRate.Text = _sta.getRetransmitionRate().ToString();
-                lblNoiseRssi.Text = _sta.guiNoiseRssi.ToString();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("STA INFO tmrFast_Tick" + ex.Message);
-            }
         }
 
         public static float ConvertBytesToKilobytes(long bytes)
@@ -320,17 +278,18 @@ namespace Visualisator
         private void SlowFlow()
         {
             if (_sta.TDLSAutoStart)
-            {
                 chkbAutoStartTdls.Checked = true;
-            }
             else
-            {
                 chkbAutoStartTdls.Checked = false;
-            }
+
             if (_sta._LOG.Length > 0)
-            {
                 cmdShowLog.Enabled = true;
-            }
+
+            if (_sta.Passive)
+                cmdSendData.Enabled = true;
+            else
+                cmdSendData.Enabled = false;
+
             lblBandwith.Text = _sta.BandWidth.ToString();
             lblStandart.Text = _sta.Stand80211.ToString();
 
@@ -339,6 +298,54 @@ namespace Visualisator
             SelectSSIDIfHaveOneInList();
         }
 
+        //=====================================================================
+        private void tmrFast_Tick(object sender, EventArgs e)
+        {
+            FastFlow();
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Flow for fast timer
+        /// </summary>
+        private void FastFlow()
+        {
+            try
+            {
+                lblRSSI.Text = _sta.Rssi.ToString();
+
+                if (_sta.WaitingForAck)
+                    lblWaitingForAck.BackColor = Color.Chartreuse;
+                else
+                    lblWaitingForAck.BackColor = Color.Black;
+
+                txtDataReceeived.Text = _sta.getDataRecieved().ToString();
+                lblSent.Text = _sta.getDataSent().ToString();
+                lblAllReceivedPackets.Text = _sta.AllReceivedPackets.ToString();
+                lblAssociatedAP.Text = _sta.getAssociatedAP_SSID();
+                lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
+
+                lblTdlsUnsuccessTrys.Text = _sta._TDLSCounterUnSuccessTx.ToString();
+
+                lblTDLSSetupStatus.Text = _sta.TDLSSetupInfo.ToString() + " [" + _sta.TDLSSetupInfo.GetHashCode().ToString() + "]";
+                lblRetransmited.Text = _sta.DataRetransmited.ToString();
+                lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
+
+                lblLastTransmitRate.Text = _sta.MACLastTrnsmitRate.ToString();
+
+                lblSpeed.Text = ConvertBytesToKilobytes((long)_sta.speed).ToString() + "Kbps/sec";
+
+                lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
+                //     lblCounterToretransmit.Text.Substring(0, 2);
+
+                lblRetransmittionRate.Text = _sta.getRetransmitionRate().ToString();
+                lblNoiseRssi.Text = _sta.guiNoiseRssi.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("STA INFO tmrFast_Tick" + ex.Message);
+            }
+        }
         private void SelectSSIDIfHaveOneInList()
         {
             if (cmbAPList.SelectedIndex == -1 && cmbAPList.Items.Count == 1)

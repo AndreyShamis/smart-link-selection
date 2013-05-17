@@ -13,12 +13,6 @@ namespace Visualisator.Packets
         public ArrayList FrequencySupport = new ArrayList();
         public ArrayList BandWithSupport = new ArrayList();
         public ArrayList StandartSupport = new ArrayList();
-        public Beacon(Int32 Channel, String Band)
-        {
-
-
-        }
-
         // TODO check if this work corectlly
         public Beacon(SimulatorPacket pack)
         {
