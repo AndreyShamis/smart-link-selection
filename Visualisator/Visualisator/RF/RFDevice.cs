@@ -524,6 +524,7 @@ namespace Visualisator
             return Medium.MediumHaveAIRWork(this, ListenBeacon);
         }
 
+        private Guid prev_guid = new Guid();
         //=====================================================================
         /// <summary>
         /// Function for Listen And Receive Packets
@@ -559,7 +560,7 @@ namespace Visualisator
                 }
 
                 //SpinWait.SpinUntil(ListenCondition);//,1);
-                Guid prev_guid = new Guid();
+                prev_guid = new Guid();
                 SimulatorPacket pack = null;
 
                 lock (RF_STATUS)
@@ -573,7 +574,7 @@ namespace Visualisator
                     //Thread.Sleep(new TimeSpan(4000));
                     // Thread.Sleep(1); 
                 }
-                else if (pack != null && (prev_guid != pack.GuidD || pack.IsRetransmit))
+                else if (pack != null )//&& (prev_guid != pack.GuidD || pack.IsRetransmit))
                 {
                     //ParseReceivedPacket(pack);
                     //  Only if we have received packet before
