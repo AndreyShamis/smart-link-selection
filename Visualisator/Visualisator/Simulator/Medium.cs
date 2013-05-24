@@ -55,6 +55,8 @@ namespace Visualisator
                 this.y = y;
             }
         }
+
+
         private const string _BROADCAST = "FF:FF:FF:FF:FF:FF";
         private static bool DebugLogEnabled = true;
         public static ArrayList _objects = null;
@@ -458,9 +460,10 @@ namespace Visualisator
                         LocalPackets.Add(pack);
                         _packets.Add(_Pk, LocalPackets);
                     }
-                    Thread newThread = new Thread(() => ThreadableSendData(_Pk, pack));
-                    newThread.Name = "ThreadableSendData ";
-                    newThread.Start();
+                   // Thread newThread = new Thread(() => ThreadableSendData(_Pk, pack));
+                   // newThread.Name = "ThreadableSendData ";
+                    //newThread.Start();
+                    ThreadPool.QueueUserWorkItem(new WaitCallback((s) => ThreadableSendData(_Pk, pack)));
                 }
 
             }

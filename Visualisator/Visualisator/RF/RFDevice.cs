@@ -569,42 +569,24 @@ namespace Visualisator
                     pack = Medium.ReceiveData(this);
                     RF_STATUS = "NONE";
                 }
-                if (pack == null)
-                {
-                    //Thread.Sleep(new TimeSpan(4000));
-                    // Thread.Sleep(1); 
-                }
+                if (pack == null){ }
                 else //if (pack != null )//&& (prev_guid != pack.GuidD || pack.IsRetransmit))
                 {
-                    //ParseReceivedPacket(pack);
                     //  Only if we have received packet before
                     //  but flag Rentransmit is UP
                     if (prev_guid == pack.GuidD)
                         pack.IsReceivedRetransmit = true;
 
-
-
                     if (pack.GetType() != typeof(Beacon))
                         prev_guid = pack.GuidD;
-                    // if (pack.GetType() != typeof(Packets.Beacon))
-                    //     _MEDIUM.DeleteReceivedPacket(this, prev_guid);
-                    //else
-                    //{
-                    //Thread.Sleep(1); 
-                    // }
+
                     AllReceivedPackets += 1;
 
-                    Thread newThread = new Thread(() => ParseReceivedPacket(pack));
-                    newThread.Name = "ParseReceivedPacket of " + this.getMACAddress();
-                    newThread.Start();
+                    //Thread newThread = new Thread(() => ParseReceivedPacket(pack),1);
+                    //newThread.Name = "ParseReceivedPacket of " + this.getMACAddress();
+                    //newThread.Start();
+                    ThreadPool.QueueUserWorkItem(new WaitCallback((s) => ParseReceivedPacket(pack)));
                 }
-                //else if (pack != null)
-                //{
-                //    if (pack.GetType() != typeof(Packets.Beacon))
-                //    {
-                //        _DoubleRecieved++;
-                //    }
-                //}
             }
         }
 
