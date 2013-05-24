@@ -143,7 +143,7 @@ namespace Visualisator
                 else{
                     Thread.Sleep(1000); // sec * 
                 }
-                Thread.Sleep(100); // sec *
+                Thread.Sleep(500); // sec *
             }
         }
 

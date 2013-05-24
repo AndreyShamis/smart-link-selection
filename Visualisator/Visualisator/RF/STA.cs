@@ -707,7 +707,7 @@ namespace Visualisator
         /// <param name="DestinationMacAddress">Destination Mac Address</param>
         public void ThreadAbleReadFile(string DestinationMacAddress)
         {
-            int buf_size = 500, numOfReadBytes = 0;
+            int buf_size = Medium.PACKET_BUFFER_SIZE, numOfReadBytes = 0;
             byte[] buffer = new byte[buf_size];
             bool exit_loop = false;
             Data dataPack = null;

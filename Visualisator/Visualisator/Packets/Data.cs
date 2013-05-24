@@ -14,7 +14,7 @@ namespace Visualisator.Packets
 
         public int FrameSize { set; get; }
 
-        public byte[] _data = new byte[500];
+        public byte[] _data = new byte[Medium.PACKET_BUFFER_SIZE];
         //public void setData(String data){
         //    _data = data;
         //}
