@@ -574,7 +574,7 @@ namespace Visualisator
                     //Thread.Sleep(new TimeSpan(4000));
                     // Thread.Sleep(1); 
                 }
-                else if (pack != null )//&& (prev_guid != pack.GuidD || pack.IsRetransmit))
+                else //if (pack != null )//&& (prev_guid != pack.GuidD || pack.IsRetransmit))
                 {
                     //ParseReceivedPacket(pack);
                     //  Only if we have received packet before
@@ -585,7 +585,7 @@ namespace Visualisator
 
 
                     if (pack.GetType() != typeof(Beacon))
-                        prev_guid = ((SimulatorPacket)pack).GuidD;
+                        prev_guid = pack.GuidD;
                     // if (pack.GetType() != typeof(Packets.Beacon))
                     //     _MEDIUM.DeleteReceivedPacket(this, prev_guid);
                     //else
@@ -598,11 +598,13 @@ namespace Visualisator
                     newThread.Name = "ParseReceivedPacket of " + this.getMACAddress();
                     newThread.Start();
                 }
-                else if (pack != null){
-                    if (pack.GetType() != typeof(Packets.Beacon)){
-                        _DoubleRecieved++;
-                    }
-                }
+                //else if (pack != null)
+                //{
+                //    if (pack.GetType() != typeof(Packets.Beacon))
+                //    {
+                //        _DoubleRecieved++;
+                //    }
+                //}
             }
         }
 
