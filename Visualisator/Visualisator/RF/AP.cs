@@ -277,7 +277,9 @@ namespace Visualisator
                     {
                         lock (Sync)
                         {
-                            ((Queue<Packets.Data>) _packet_queues[_wp.Source]).Dequeue();
+                            Data temp = ((Queue<Packets.Data>) _packet_queues[_wp.Source]).First();
+                            if (temp.GuidD.Equals(_wp.GuiDforDataPacket))
+                                ((Queue<Packets.Data>) _packet_queues[_wp.Source]).Dequeue();
                             Monitor.PulseAll(Sync);
                         }
                     }

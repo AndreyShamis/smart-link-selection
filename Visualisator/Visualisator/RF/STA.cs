@@ -36,6 +36,9 @@ namespace Visualisator
 
         public int              _TDLSCounterUnSuccessTx { set; get; }
 
+        private const int MAX_QUEUE_REC_PACKETS = 10;
+        public Queue ReceivedGuids = new Queue(MAX_QUEUE_REC_PACKETS);
+
         //*********************************************************************
         //=====================================================================
 
@@ -566,14 +569,28 @@ namespace Visualisator
             {
                 try
                 {
+                    
                     Data dat = (Data)pack;
                     MACsandACK(dat.Source, dat.GuidD, dat.getTransmitRate());
-                    if (!dat.IsReceivedRetransmit)
+
+                    if (!ReceivedGuids.Contains(pack.GuidD))
                     {
-                        _DataReceived++;
-                        try{    HandleDataStream(dat);  }
-                        catch (Exception ex) { AddToLog("Parse receibed Packet HandleDataStream: " + ex.Message); }
-                    }else{
+                        if (ReceivedGuids.Count == MAX_QUEUE_REC_PACKETS)
+                            ReceivedGuids.Dequeue();
+                        ReceivedGuids.Enqueue(pack.GuidD);
+
+                       // if (!dat.IsReceivedRetransmit)
+                        //{
+                            _DataReceived++;
+                            try{  HandleDataStream(dat);}
+                            catch (Exception ex){AddToLog("Parse receibed Packet HandleDataStream: " + ex.Message);}
+                        //}
+                        //}else{
+                            
+                        //}
+                    }
+                    else
+                    {
                         DataAckRetransmitted++;
                     }
                 }
