@@ -15,7 +15,6 @@ namespace Visualisator
 {
     public partial class MainForm : Form
     {
-        BAD FILE
         private const string _KEY_GRAFFIC_UPD_INT   = "GrafficUpdateInterval";
         private const string _KEY_RECEIVE_DISTANCE  = "ReceiveDistance";
         private const string _KEY_MEDIUM_SEND_RATIO = "MediumSentRatio";
