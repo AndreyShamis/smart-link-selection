@@ -86,11 +86,9 @@ namespace Visualisator
         {
             try
             {
-            ArrayList _devs = Medium._objects;
                 double dist = 0;
-                foreach (var dev in _devs)
+                foreach (RFDevice devi in Medium._objects)
                 {
-                    RFDevice devi = (RFDevice) dev;
                     if(devi.getMACAddress().Equals(this.getMACAddress()))
                         continue;
 
@@ -98,27 +96,28 @@ namespace Visualisator
 
                     if (dist <= Medium.ListenDistance*2)
                     {
-                        RFpeer _peer = new RFpeer();
-                        _peer.Distance = dist;
-                        _peer.BSSID = devi.BSSID;
-                        _peer.MAC = devi.getMACAddress();
-                        _peer.Freq = devi.Freq;
-                        _peer.Stand80211 = devi.Stand80211;
-                        _peer.BandWidth = devi.BandWidth;
-                        _peer.Channel = devi.getOperateChannel();
-                        _peer.RSSI = GetRSSI(devi.x, devi.y);
-                        _peer.isPassive = devi.Passive;
+                        RFpeer _peer = new RFpeer()
+                        {
+                            Distance    = dist,
+                            BSSID       = devi.BSSID,
+                            MAC         = devi.getMACAddress(),
+                            Freq        = devi.Freq,
+                            Stand80211  = devi.Stand80211,
+                            BandWidth   = devi.BandWidth,
+                            Channel     = devi.getOperateChannel(),
+                            RSSI        = GetRSSI(devi.x, devi.y),
+                            isPassive   = devi.Passive,
+                        };
                         
-                        if (_RFpeers.Contains(_peer.MAC)){
+                        if (_RFpeers.Contains(_peer.MAC))
                             _RFpeers[_peer.MAC] = _peer;
-                        }else{
+                        else
                             _RFpeers.Add(_peer.MAC, _peer);
-                        }
                     }
 
                 }
             }
-            catch(Exception){}
+            catch (Exception ex) { AddToLog("Update RFpeers :" + ex.Message); }
         }
 
         //protected  AutoResetEvent _ev = new AutoResetEvent(true);
