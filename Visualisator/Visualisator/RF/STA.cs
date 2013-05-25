@@ -39,6 +39,7 @@ namespace Visualisator
         public ArrayList        _StatisticOfSendData = new ArrayList();
         private const int MAX_QUEUE_REC_PACKETS = 10;
         public Queue ReceivedGuids = new Queue(MAX_QUEUE_REC_PACKETS);
+        public Image STAImage { set; get; }
 
         //*********************************************************************
         //=====================================================================
@@ -65,15 +66,6 @@ namespace Visualisator
             
             return (pack);
         }
-
-        private string[] STAImagesArr = { ImagesPath + "lp1.jpg",
-                                            ImagesPath + "lp2.png", 
-                                            ImagesPath + "lp3.png", 
-                                            ImagesPath + "sp1.png", 
-                                            ImagesPath + "sp2.gif", 
-                                            ImagesPath + "tv1.png",
-                                            ImagesPath + "tv2.gif" };
-        public string _STAImagePath { set; get; }
 
         private  void SLS()
         {
@@ -167,7 +159,7 @@ namespace Visualisator
             ListenBeacon        = true;
             this.VColor         = DefaultColor;
             _PointerToAllRfDevices = RfObjects;
-            _STAImagePath = STAImagesArr[new Random().Next(0, STAImagesArr.Length)];
+            STAImage = (Image)Medium.imgLPImages[new Random().Next(0, Medium.imgLPImages.Count)];
             Enable();
         }
 

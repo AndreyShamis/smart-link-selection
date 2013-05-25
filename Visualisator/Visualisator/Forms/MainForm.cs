@@ -335,10 +335,9 @@ namespace Visualisator
                         else
                             RadiusForStaPen = new Pen(System.Drawing.Color.SpringGreen);
 
-                        //gr.DrawPie(new Pen(_tsta.VColor), (float) _tsta.x - 5, (float) _tsta.y - 5, 10, 10, 1, 360);
-                        Image mySTAImage = Image.FromFile(_tsta._STAImagePath);
                         Point ulCorner = new Point((int)_tsta.x - 10, (int)_tsta.y - 10);
-                        gr.DrawImage(mySTAImage, ulCorner);
+                        gr.DrawImage(_tsta.STAImage, ulCorner);
+
                         gr.DrawPie(RadiusForStaPen, (float) _tsta.x - HalfRadius, (float) _tsta.y - HalfRadius,
                                    DoubleRadius,
                                    DoubleRadius, 1, 360);
@@ -365,11 +364,9 @@ namespace Visualisator
                         gr.DrawPie(RadiusForApPen, (float) _tap.x - HalfRadius, (float) _tap.y - HalfRadius,
                                    DoubleRadius,
                                    DoubleRadius, 1, 360);
-                        //gr.DrawRectangle(new Pen(_tap.VColor), myRectangle);
-                        Image myAPImage = Image.FromFile(_tap._APImagePath);
-                        Point ulCorner = new Point((int)_tap.x - 10, (int)_tap.y - 10);
-                        gr.DrawImage(myAPImage, ulCorner);
 
+                        Point ulCorner = new Point((int)_tap.x - 10, (int)_tap.y - 10);
+                        gr.DrawImage(_tap.APImage, ulCorner);
 
                         string drawString = "AP:" + _tap.getOperateChannel() + " " + _tap.SSID + " " +
                                             _tap.getMACAddress();

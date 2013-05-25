@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Drawing;
 using System.Text;
 using System.Threading;
 using System.Collections;
@@ -56,6 +56,22 @@ namespace Visualisator
             }
         }
 
+        private static string ImagesPath = Application.StartupPath.ToString() + @"\..\..\Images\";
+
+        private static string[] LPImagesArr = { ImagesPath + "lp1.jpg",
+                                                ImagesPath + "lp2.png", 
+                                                ImagesPath + "lp3.png" };
+        private static string[] SPImagesArr = { ImagesPath + "sp1.png", 
+                                                ImagesPath + "sp2.gif" };
+        private static string[] TVImagesArr = { ImagesPath + "tv1.png",
+                                                ImagesPath + "tv2.gif" };
+        private static string[] APImagesArr = { ImagesPath + "ap1.jpg",
+                                                ImagesPath + "ap4.jpg" };
+
+        public static ArrayList imgLPImages = new ArrayList();
+        public static ArrayList imgAPImages = new ArrayList();
+        public static ArrayList imgSPImages = new ArrayList();
+        public static ArrayList imgTVImages = new ArrayList();
 
         private const string _BROADCAST = "FF:FF:FF:FF:FF:FF";
         private static bool DebugLogEnabled = true;
@@ -102,6 +118,34 @@ namespace Visualisator
         private static Hashtable _T = new Hashtable(new ByteArrayComparer());
         private static ArrayList _B = new ArrayList();
         private static StringBuilder _LOG = new StringBuilder();
+
+
+        //=====================================================================
+        static Medium()
+        {
+            LoadImagesToArrayLists();
+        }
+
+        //=====================================================================
+        private static ArrayList getArreyOfImagesObjects(string[] ImagesPaths)
+        {
+            ArrayList Images = new ArrayList();
+            foreach (var immmage in ImagesPaths){
+                Images.Add(Image.FromFile(immmage));
+            }
+            return Images;
+        }
+
+        //=====================================================================
+        private static void LoadImagesToArrayLists()
+        {
+            imgLPImages = getArreyOfImagesObjects(LPImagesArr);
+            imgSPImages = getArreyOfImagesObjects(SPImagesArr);
+            imgTVImages = getArreyOfImagesObjects(TVImagesArr);
+            imgAPImages = getArreyOfImagesObjects(APImagesArr);
+        }
+            
+
 
 
         //=====================================================================

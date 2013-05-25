@@ -26,8 +26,7 @@ namespace Visualisator
         private Hashtable _packet_queues = new Hashtable(new ByteArrayComparer());
         private string Sync = "sync";
 
-        private string[] APImagesArr = { ImagesPath + "ap1.jpg", ImagesPath + "ap4.jpg", ImagesPath + "ap5.png" };
-        public string _APImagePath { set; get; }
+        public Image APImage { set; get; }
         public const int MAX_QUEUE_SIZE = 10;
         
         //*********************************************************************
@@ -82,7 +81,7 @@ namespace Visualisator
             this.SSID = RandomString(8);
             this.BSSID = this.getMACAddress();
             _BeaconPeriod = rnadomBeacon.Next(AP_MIN_SEND_PERIOD, AP_MAX_SEND_PERIOD);
-            _APImagePath = APImagesArr[new Random().Next(0, APImagesArr.Length)];
+            APImage = (Image)Medium.imgAPImages[new Random().Next(0, Medium.imgAPImages.Count)];
             Enable();
         }
 
