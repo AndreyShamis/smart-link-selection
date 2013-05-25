@@ -111,9 +111,11 @@
             this.cmdLogsUpdate = new System.Windows.Forms.Button();
             this.txtErrorsLogFromCode = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
-            this.lstStatisticTable = new System.Windows.Forms.ListBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.cmdUpdateStatisticTable = new System.Windows.Forms.Button();
+            this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
+            this.label21 = new System.Windows.Forms.Label();
+            this.lblLastTransmitTime = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -325,6 +327,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblLastTransmitTime);
+            this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.lblTdlsUnsuccessTrys);
             this.groupBox1.Controls.Add(this.label22);
             this.groupBox1.Controls.Add(this.label20);
@@ -1025,8 +1029,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.listView1);
             this.tabPage4.Controls.Add(this.cmdUpdateStatisticTable);
-            this.tabPage4.Controls.Add(this.lstStatisticTable);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -1035,13 +1039,13 @@
             this.tabPage4.Text = "Statistic";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // lstStatisticTable
+            // listView1
             // 
-            this.lstStatisticTable.FormattingEnabled = true;
-            this.lstStatisticTable.Location = new System.Drawing.Point(3, 45);
-            this.lstStatisticTable.Name = "lstStatisticTable";
-            this.lstStatisticTable.Size = new System.Drawing.Size(590, 225);
-            this.lstStatisticTable.TabIndex = 0;
+            this.listView1.Location = new System.Drawing.Point(6, 42);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(587, 229);
+            this.listView1.TabIndex = 2;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // cmdUpdateStatisticTable
             // 
@@ -1052,6 +1056,24 @@
             this.cmdUpdateStatisticTable.Text = "Update";
             this.cmdUpdateStatisticTable.UseVisualStyleBackColor = true;
             this.cmdUpdateStatisticTable.Click += new System.EventHandler(this.cmdUpdateStatisticTable_Click);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(153, 196);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(96, 13);
+            this.label21.TabIndex = 76;
+            this.label21.Text = "Last Transmit Time";
+            // 
+            // lblLastTransmitTime
+            // 
+            this.lblLastTransmitTime.AutoSize = true;
+            this.lblLastTransmitTime.Location = new System.Drawing.Point(267, 196);
+            this.lblLastTransmitTime.Name = "lblLastTransmitTime";
+            this.lblLastTransmitTime.Size = new System.Drawing.Size(13, 13);
+            this.lblLastTransmitTime.TabIndex = 77;
+            this.lblLastTransmitTime.Text = "0";
             // 
             // StationInfo
             // 
@@ -1162,6 +1184,8 @@
         private System.Windows.Forms.Label lblTdlsUnsuccessTrys;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button cmdUpdateStatisticTable;
-        private System.Windows.Forms.ListBox lstStatisticTable;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Label lblLastTransmitTime;
+        private System.Windows.Forms.Label label21;
     }
 }

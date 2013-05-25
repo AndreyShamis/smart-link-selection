@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -26,7 +27,42 @@ namespace Visualisator.Simulator
         public float getPercentInTdls()
         {
             return (PacketsInTdls*100)/Packets;
+        }
 
+        public static float ConvertBytesToKilobytes(long bytes)
+        {
+            return (bytes / 1024f);
+        }
+
+        public static float ConvertBytesToMegabytes(long bytes)
+        {
+            return (bytes / 1024f) / 1024f;
+        }
+
+        public static float ConvertKilobytesToMegabytes(long kilobytes)
+        {
+            return kilobytes / 1024f;
+        }
+
+        public string getSpeedInHumanRead()
+        {
+            string ret;
+            double m_speed = this.Speed;
+
+            if(m_speed <1000)
+            {
+                ret = m_speed + " bs";
+            }
+            else if(m_speed < 1000000)
+            {
+                ret = ConvertBytesToKilobytes((long)m_speed).ToString(CultureInfo.InvariantCulture) + " Kbs";
+            }
+            else
+            {
+                ret = ConvertBytesToMegabytes((long)m_speed).ToString(CultureInfo.InvariantCulture) + " Mbs";
+            }
+
+            return ret;
         }
     }
 }

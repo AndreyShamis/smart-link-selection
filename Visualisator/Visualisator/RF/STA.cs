@@ -34,7 +34,7 @@ namespace Visualisator
         private bool            StopScan { set; get; }                              // Used fro stop scan if start connection
         public string           FilePachToSend { set; get; }
         private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;
-
+        public string           _lastTransmitTIme { set; get; }
         public int              _TDLSCounterUnSuccessTx { set; get; }
         public ArrayList        _StatisticOfSendData = new ArrayList();
         private const int MAX_QUEUE_REC_PACKETS = 10;
@@ -836,8 +836,7 @@ namespace Visualisator
                 this.Passive = true;
                 sw.Stop();
                 TimeSpan elapsedTime = sw.Elapsed;
-
-                MessageBox.Show(elapsedTime.TotalSeconds.ToString());
+                _lastTransmitTIme = elapsedTime.TotalSeconds.ToString();
                 stat.Time = elapsedTime.TotalSeconds;
             }
             catch (Exception ex) { AddToLog("ThreadAbleReadFile: " + ex.Message); }

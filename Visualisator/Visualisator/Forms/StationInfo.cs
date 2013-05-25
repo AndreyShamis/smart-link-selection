@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -29,6 +30,7 @@ namespace Visualisator
             _objects = _obj;
             this.Text = Resources.StationInfo_StationInfo_Station_Info__ + _sta.getMACAddress();
             SlowFlow();
+            BuildListView();
         }
 
         //=====================================================================
@@ -297,6 +299,7 @@ namespace Visualisator
             lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
             PrintAPList();
             SelectSSIDIfHaveOneInList();
+            ReloadStatistic();
         }
 
         //=====================================================================
@@ -338,7 +341,7 @@ namespace Visualisator
 
                 lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
                 //     lblCounterToretransmit.Text.Substring(0, 2);
-
+                lblLastTransmitTime.Text = _sta._lastTransmitTIme;
                 lblRetransmittionRate.Text = _sta.getRetransmitionRate().ToString();
                 lblNoiseRssi.Text = _sta.guiNoiseRssi.ToString();
             }
@@ -417,11 +420,91 @@ namespace Visualisator
 
         private void cmdUpdateStatisticTable_Click(object sender, EventArgs e)
         {
-            lstStatisticTable.Items.Clear();
+            ReloadStatistic();
+        }
+
+        private void BuildListView()
+        {
+            ColumnHeader header1, header2, header3, header4, header5, header6, header7, header8, header9, header10;
+            header1 = new ColumnHeader();
+            header2 = new ColumnHeader();
+            header3 = new ColumnHeader();
+            header4 = new ColumnHeader();
+            header5 = new ColumnHeader();
+            header6 = new ColumnHeader();
+            header7 = new ColumnHeader();
+            //header8 = new ColumnHeader();
+            //header9 = new ColumnHeader();
+            //header10 = new ColumnHeader();
+
+            header1.Text = "Dest";
+            header1.TextAlign = HorizontalAlignment.Left;
+            header1.Width = 120;
+            header2.TextAlign = HorizontalAlignment.Left;
+            header2.Text = "File Size";
+            header2.Width = 80;
+            header3.TextAlign = HorizontalAlignment.Left;
+            header3.Text = "Packets/Packets in TDLS";
+            header3.Width = 80;
+            header4.TextAlign = HorizontalAlignment.Left;
+            header4.Text = "TDLS %";
+            header4.Width = 40;
+            header5.TextAlign = HorizontalAlignment.Left;
+            header5.Text = "Time";
+            header5.Width = 80;
+            header6.TextAlign = HorizontalAlignment.Left;
+            header6.Text = "Speed";
+            header6.Width = 85;
+            header7.TextAlign = HorizontalAlignment.Left;
+            header7.Text = "Source";
+            header7.Width = 120;
+
+            //header8.TextAlign = HorizontalAlignment.Left;
+            //header8.Text = "-";
+            //header8.Width = 270;
+            //header9.TextAlign = HorizontalAlignment.Left;
+            //header9.Text = "-";
+            //header9.Width = 50;
+            //header10.TextAlign = HorizontalAlignment.Left;
+            //header10.Text = "-";
+            //header10.Width = 50;
+
+            // Add the headers to the ListView control.
+            listView1.Columns.Add(header1);
+            listView1.Columns.Add(header2);
+            listView1.Columns.Add(header3);
+            listView1.Columns.Add(header4);
+            listView1.Columns.Add(header5);
+            listView1.Columns.Add(header6);
+            listView1.Columns.Add(header7);
+            //listView1.Columns.Add(header8);
+            //listView1.Columns.Add(header9);
+            //listView1.Columns.Add(header10);
+            // Specify that each item appears on a separate line 
+
+            listView1.AllowColumnReorder = true;
+            listView1.CheckBoxes = true;
+            listView1.LabelEdit = true;
+            listView1.FullRowSelect = true;
+            listView1.GridLines = true;
+            listView1.Sorting = SortOrder.Ascending;
+            listView1.View = View.Details;
+        }
+        public void ReloadStatistic()
+        {
+            listView1.Items.Clear();
             foreach (Statistic stat in _sta._StatisticOfSendData)
             {
-                lstStatisticTable.Items.Add(stat.DesctinationMAC + " " + stat.FileName.Substring(stat.FileName.Length -10,10) + " " +
-                                            stat.getPercentInTdls() + " " + stat.FileSize);
+                ListViewItem item = new ListViewItem(stat.DesctinationMAC);
+
+                item.SubItems.Add(stat.FileSize.ToString(CultureInfo.InvariantCulture));
+                item.SubItems.Add(stat.Packets.ToString(CultureInfo.InvariantCulture)+"/"+stat.PacketsInTdls.ToString(CultureInfo.InvariantCulture));
+                item.SubItems.Add(stat.getPercentInTdls().ToString(CultureInfo.InvariantCulture));
+                item.SubItems.Add(stat.Time.ToString(CultureInfo.InvariantCulture));
+                item.SubItems.Add(stat.getSpeedInHumanRead());
+                item.SubItems.Add(stat.SourceMAC);
+                listView1.Items.Add(item);
+  
             }
         }
 
