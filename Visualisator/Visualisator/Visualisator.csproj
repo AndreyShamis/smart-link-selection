@@ -91,6 +91,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="RF\IRFDevice.cs" />
+    <Compile Include="Simulator\INIfile.cs" />
     <Compile Include="Simulator\ISerializable.cs" />
     <Compile Include="RF\MAC.cs" />
     <Compile Include="Simulator\Medium.cs" />

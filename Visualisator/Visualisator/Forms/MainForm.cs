@@ -15,10 +15,14 @@ namespace Visualisator
 {
     public partial class MainForm : Form
     {
+
+        private const string _KEY_GRAFFIC_UPD_INT   = "GrafficUpdateInterval";
+        private const string _KEY_RECEIVE_DISTANCE  = "ReceiveDistance";
+        private const string _KEY_MEDIUM_SEND_RATIO = "MediumSentRatio";
         private PictureBox piB;
         private Bitmap bm;
         private Graphics gr;
-
+        public INIfile settings = new INIfile(Application.StartupPath.ToString() + @"\..\..\Visualisator.ini");
         private static Int32 STA_SIZE = 2;
         private static Int32 APs_SIZE = 1;
         private static Int32 SelectedVertex = -1;
@@ -67,7 +71,27 @@ namespace Visualisator
             this.piB.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BoardDblClick);
             bm = new Bitmap(piB.Width, piB.Height);
             gr = Graphics.FromImage(bm);
-            Medium.ReceiveDistance = 100;
+
+            if (settings.getValue(_KEY_RECEIVE_DISTANCE).Length > 0)
+                Medium.ReceiveDistance = Convert.ToInt32(settings.getValue(_KEY_RECEIVE_DISTANCE));
+            else
+            {
+                Medium.ReceiveDistance = 100;
+                settings.setValue(_KEY_RECEIVE_DISTANCE, Medium.ReceiveDistance.ToString());
+            }
+
+            if (settings.getValue(_KEY_GRAFFIC_UPD_INT).Length > 0)
+            {
+                txtUpdateInterval.Text = settings.getValue(_KEY_GRAFFIC_UPD_INT);
+            }
+            GrafficUpdateInterval();
+            if (settings.getValue(_KEY_MEDIUM_SEND_RATIO).Length > 0)
+            {
+                txtMediumSendRatio.Text = settings.getValue(_KEY_MEDIUM_SEND_RATIO);
+            }
+            SetMedioRatio();
+
+            txtMediumReceiveDistance.Text = Medium.ReceiveDistance.ToString();
             Medium.ListenDistance = 200;
             Medium.WaitBeforeRetransmit = 60;
             Medium.TrysToRetransmit = 5;
@@ -519,12 +543,18 @@ namespace Visualisator
         //====================================================================================================
         private void btnSetUpdateInterval_Click(object sender, EventArgs e)
         {
-            Int32 updateInterval = 1000;
+            GrafficUpdateInterval();
+        }
+
+        private void GrafficUpdateInterval()
+        {
+            Int32 updateInterval = 500;
 
             try
             {
                 updateInterval = Convert.ToInt32(txtUpdateInterval.Text);
                 tmrGUISlow.Interval = updateInterval;
+                settings.setValue(_KEY_GRAFFIC_UPD_INT, txtUpdateInterval.Text);
             }
             catch (Exception)
             {
@@ -581,6 +611,7 @@ namespace Visualisator
             try
             {
                 mediumSendRatio = Convert.ToInt32(txtMediumSendRatio.Text);
+                settings.setValue(_KEY_MEDIUM_SEND_RATIO, txtMediumSendRatio.Text);
                 Medium.MediumSendDataRatio = mediumSendRatio;
                 // tmrGUISlow.Interval = updateInterval;
             }
@@ -642,8 +673,9 @@ namespace Visualisator
 
         private void btnUpdateMediumRecDist_Click(object sender, EventArgs e)
         {
+            settings.setValue(_KEY_RECEIVE_DISTANCE, txtMediumReceiveDistance.Text);
             Medium.ReceiveDistance = ConvertStringToInt(txtMediumReceiveDistance.Text);
-            _RADIUS = Medium.ReceiveDistance;
+            //_RADIUS = Medium.ReceiveDistance;
         }
 
         public int ConvertStringToInt(string str)

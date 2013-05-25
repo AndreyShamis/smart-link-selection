@@ -433,8 +433,8 @@ namespace Visualisator
             header5 = new ColumnHeader();
             header6 = new ColumnHeader();
             header7 = new ColumnHeader();
-            //header8 = new ColumnHeader();
-            //header9 = new ColumnHeader();
+            header8 = new ColumnHeader();
+            header9 = new ColumnHeader();
             //header10 = new ColumnHeader();
 
             header1.Text = "Dest";
@@ -459,12 +459,12 @@ namespace Visualisator
             header7.Text = "Source";
             header7.Width = 120;
 
-            //header8.TextAlign = HorizontalAlignment.Left;
-            //header8.Text = "-";
-            //header8.Width = 270;
-            //header9.TextAlign = HorizontalAlignment.Left;
-            //header9.Text = "-";
-            //header9.Width = 50;
+            header8.TextAlign = HorizontalAlignment.Left;
+            header8.Text = "BSS BandW";
+            header8.Width = 100;
+            header9.TextAlign = HorizontalAlignment.Left;
+            header9.Text = "BSS Stand";
+            header9.Width = 50;
             //header10.TextAlign = HorizontalAlignment.Left;
             //header10.Text = "-";
             //header10.Width = 50;
@@ -477,8 +477,8 @@ namespace Visualisator
             listView1.Columns.Add(header5);
             listView1.Columns.Add(header6);
             listView1.Columns.Add(header7);
-            //listView1.Columns.Add(header8);
-            //listView1.Columns.Add(header9);
+            listView1.Columns.Add(header8);
+            listView1.Columns.Add(header9);
             //listView1.Columns.Add(header10);
             // Specify that each item appears on a separate line 
 
@@ -503,6 +503,8 @@ namespace Visualisator
                 item.SubItems.Add(stat.Time.ToString(CultureInfo.InvariantCulture));
                 item.SubItems.Add(stat.getSpeedInHumanRead());
                 item.SubItems.Add(stat.SourceMAC);
+                item.SubItems.Add(stat.BSS_BandWith);
+                item.SubItems.Add(stat.BSS_Standart);
                 listView1.Items.Add(item);
   
             }
