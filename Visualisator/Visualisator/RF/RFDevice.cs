@@ -237,6 +237,10 @@ namespace Visualisator
             return (ret);
         }
         //=====================================================================
+        /// <summary>
+        /// Return Status Of RF status
+        /// </summary>
+        /// <returns>True if device not busy</returns>
         public bool RFWorking()
         {
             if (!RF_STATUS.Equals("NONE"))
@@ -263,10 +267,8 @@ namespace Visualisator
                     // http://www.wolframalpha.com/input/?i=plot+%5By%3D+-13*log_2%28x%29%2C%7By%2C16%2C-95%7D%2C%7Bx%2C60%2C0%7D%5D+
                     ret = (short)Convert.ToInt32(Math.Round(-13*Math.Log(dist, 2)));
                 }
-            }catch(Exception ex)
-            {
-                MessageBox.Show("GETRRSI " + ex.Message);
             }
+            catch (Exception ex) { AddToLog("GETRSSI:[" + this.GetType() + "] " + ex.Message); }
             return ret;
         }
 
@@ -283,8 +285,8 @@ namespace Visualisator
 
             if (NoiseRssi > 1)
             {
-                int given_chance = randomRssi.Next(10, 100);
-                int chance = randomRssi.Next(1, (int) NoiseRssi);
+                int given_chance    = randomRssi.Next(10, 100);
+                int chance          = randomRssi.Next(1, (int) NoiseRssi);
 
                 if (chance >= given_chance)
                     ret = false;
@@ -370,29 +372,31 @@ namespace Visualisator
         //=====================================================================
         public SimulatorPacket CreatePacket()
         {
-            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel());
-
-            pack.SSID               = this.SSID;
-            pack.Source             = getMACAddress();
-            pack.X                  = this.x;
-            pack.Y                  = this.y;
-            pack.PacketFrequency    = this.Freq;
-            pack.PacketStandart     = this.Stand80211;
-            pack.PacketBandWith     = this.BandWidth;
+            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel())
+            {
+                SSID               = this.SSID,
+                Source             = getMACAddress(),
+                X                  = this.x,
+                Y                  = this.y,
+                PacketFrequency    = this.Freq,
+                PacketStandart     = this.Stand80211,
+                PacketBandWith     = this.BandWidth,
+            };
             return(pack);
         }
 
         public SimulatorPacket CreatePacket(bool inTDLS)
         {
-            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel());
-
-            pack.SSID               = this.SSID;
-            pack.Source             = getMACAddress();
-            pack.X                  = this.x;
-            pack.Y                  = this.y;
-            pack.PacketFrequency    = this.Freq;
-            pack.PacketStandart     = this.Stand80211;
-            pack.PacketBandWith     = this.BandWidth;
+            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel())
+            {
+                SSID                = this.SSID,
+                Source              = getMACAddress(),
+                X                   = this.x,
+                Y                   = this.y,
+                PacketFrequency     = this.Freq,
+                PacketStandart      = this.Stand80211,
+                PacketBandWith      = this.BandWidth,
+            };
             return (pack);
         }
         //=====================================================================
@@ -470,6 +474,7 @@ namespace Visualisator
                     Medium.SendData(pack);   
                 }
                 catch(Exception ex){
+                    AddToLog("SendData:[" + this.GetType() + "] " + ex.Message);
                     MessageBox.Show("SendData :" + ex.Message);
                 }
 
