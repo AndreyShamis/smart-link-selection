@@ -50,6 +50,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblTdlsUnsuccessTrys = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.lblStandart = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -110,14 +112,15 @@
             this.txtErrorsLogFromCode = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
-            this.lblTdlsUnsuccessTrys = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
+            this.lstStatisticTable = new System.Windows.Forms.ListBox();
+            this.cmdUpdateStatisticTable = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -393,6 +396,26 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
+            // 
+            // lblTdlsUnsuccessTrys
+            // 
+            this.lblTdlsUnsuccessTrys.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblTdlsUnsuccessTrys.Location = new System.Drawing.Point(202, 234);
+            this.lblTdlsUnsuccessTrys.Name = "lblTdlsUnsuccessTrys";
+            this.lblTdlsUnsuccessTrys.Size = new System.Drawing.Size(62, 14);
+            this.lblTdlsUnsuccessTrys.TabIndex = 75;
+            this.lblTdlsUnsuccessTrys.Text = "0";
+            this.lblTdlsUnsuccessTrys.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label22.Location = new System.Drawing.Point(6, 235);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(188, 13);
+            this.label22.TabIndex = 74;
+            this.label22.Text = "Unsuccessdull trys to send over TDLS";
             // 
             // label20
             // 
@@ -1002,6 +1025,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.cmdUpdateStatisticTable);
+            this.tabPage4.Controls.Add(this.lstStatisticTable);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -1010,25 +1035,23 @@
             this.tabPage4.Text = "Statistic";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // lblTdlsUnsuccessTrys
+            // lstStatisticTable
             // 
-            this.lblTdlsUnsuccessTrys.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblTdlsUnsuccessTrys.Location = new System.Drawing.Point(202, 234);
-            this.lblTdlsUnsuccessTrys.Name = "lblTdlsUnsuccessTrys";
-            this.lblTdlsUnsuccessTrys.Size = new System.Drawing.Size(62, 14);
-            this.lblTdlsUnsuccessTrys.TabIndex = 75;
-            this.lblTdlsUnsuccessTrys.Text = "0";
-            this.lblTdlsUnsuccessTrys.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lstStatisticTable.FormattingEnabled = true;
+            this.lstStatisticTable.Location = new System.Drawing.Point(3, 45);
+            this.lstStatisticTable.Name = "lstStatisticTable";
+            this.lstStatisticTable.Size = new System.Drawing.Size(590, 225);
+            this.lstStatisticTable.TabIndex = 0;
             // 
-            // label22
+            // cmdUpdateStatisticTable
             // 
-            this.label22.AutoSize = true;
-            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label22.Location = new System.Drawing.Point(6, 235);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(188, 13);
-            this.label22.TabIndex = 74;
-            this.label22.Text = "Unsuccessdull trys to send over TDLS";
+            this.cmdUpdateStatisticTable.Location = new System.Drawing.Point(10, 13);
+            this.cmdUpdateStatisticTable.Name = "cmdUpdateStatisticTable";
+            this.cmdUpdateStatisticTable.Size = new System.Drawing.Size(87, 23);
+            this.cmdUpdateStatisticTable.TabIndex = 1;
+            this.cmdUpdateStatisticTable.Text = "Update";
+            this.cmdUpdateStatisticTable.UseVisualStyleBackColor = true;
+            this.cmdUpdateStatisticTable.Click += new System.EventHandler(this.cmdUpdateStatisticTable_Click);
             // 
             // StationInfo
             // 
@@ -1048,6 +1071,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1137,5 +1161,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label lblTdlsUnsuccessTrys;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button cmdUpdateStatisticTable;
+        private System.Windows.Forms.ListBox lstStatisticTable;
     }
 }

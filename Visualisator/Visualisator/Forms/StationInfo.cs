@@ -10,6 +10,7 @@ using System.Collections;
 using System.Threading;
 using Visualisator.Properties;
 using System.Runtime.Serialization.Formatters.Binary;
+using Visualisator.Simulator;
 
 
 namespace Visualisator
@@ -412,6 +413,16 @@ namespace Visualisator
         private void button4_Click_1(object sender, EventArgs e)
         {
             _sta.DisableBandwithSupportFor40MHz();
+        }
+
+        private void cmdUpdateStatisticTable_Click(object sender, EventArgs e)
+        {
+            lstStatisticTable.Items.Clear();
+            foreach (Statistic stat in _sta._StatisticOfSendData)
+            {
+                lstStatisticTable.Items.Add(stat.DesctinationMAC + " " + stat.FileName.Substring(stat.FileName.Length -10,10) + " " +
+                                            stat.getPercentInTdls() + " " + stat.FileSize);
+            }
         }
 
     }

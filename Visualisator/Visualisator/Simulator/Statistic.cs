@@ -14,12 +14,19 @@ namespace Visualisator.Simulator
         public long     FileSize        { set; get; }
         public double   Time            { set; get; }
         public bool     TdlsUse         { set; get; }
-        public short    PercentInTdls   { set; get; }
+        public long     PacketsInTdls   { set; get; }
         public double   Speed           { set; get; }
+        public long     Packets         { set; get; }
 
         public Statistic()
         {
                 
+        }
+
+        public float getPercentInTdls()
+        {
+            return (PacketsInTdls*100)/Packets;
+
         }
     }
 }

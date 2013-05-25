@@ -8,6 +8,7 @@ using Visualisator.Packets;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using Visualisator.Simulator;
 
 
 namespace Visualisator
@@ -35,7 +36,7 @@ namespace Visualisator
         private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;
 
         public int              _TDLSCounterUnSuccessTx { set; get; }
-
+        public ArrayList        _StatisticOfSendData = new ArrayList();
         private const int MAX_QUEUE_REC_PACKETS = 10;
         public Queue ReceivedGuids = new Queue(MAX_QUEUE_REC_PACKETS);
 
@@ -719,7 +720,13 @@ namespace Visualisator
             long TransferedByte = 0;
             FileStream fsSource = new FileStream(FilePachToSend,
                     FileMode.Open, FileAccess.Read);
-
+            Statistic stat = new Statistic();
+            _StatisticOfSendData.Add(stat);
+            stat.DesctinationMAC = DestinationMacAddress;
+            stat.FileName = FilePachToSend;
+            stat.FileSize = fsSource.Length;
+            stat.SourceMAC = this.getMACAddress();
+            
             try
             {
                 AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
@@ -746,8 +753,13 @@ namespace Visualisator
                     dataPack._data      = buffer;
                     TxRateOnSend = GetTXRate(dataPack.Destination);
                     dataPack.setTransmitRate(TxRateOnSend);
-                     
 
+                    stat.Packets += 1;
+                    if(TDLSisEnabled && TDLSisWork)
+                    {
+                        stat.TdlsUse = true;
+                        stat.PacketsInTdls += 1;
+                    }
                     if (packetCounter == 0 && !exit_loop)               dataPack.streamStatus = StreamingStatus.Started;
                     else if (packetCounter > 0 && numOfReadBytes > 0)   dataPack.streamStatus = StreamingStatus.active;
 
@@ -756,9 +768,12 @@ namespace Visualisator
                     SendData(dataPack);
                     WaitingForAck       = true;
                     packetCounter++;
-                    
-                    if(sw.Elapsed.Seconds > 0)
-                        speed = TransferedByte / sw.Elapsed.Seconds;
+
+                    //if (sw.Elapsed.Seconds > 0)
+                    //{
+                        speed = TransferedByte/(sw.Elapsed.Seconds+0.1);
+                        stat.Speed = speed;
+                    //}
 
                     int retrCounter = Medium.WaitBeforeRetransmit;
                     int loops = 1;
@@ -823,6 +838,7 @@ namespace Visualisator
                 TimeSpan elapsedTime = sw.Elapsed;
 
                 MessageBox.Show(elapsedTime.TotalSeconds.ToString());
+                stat.Time = elapsedTime.TotalSeconds;
             }
             catch (Exception ex) { AddToLog("ThreadAbleReadFile: " + ex.Message); }
             finally {
