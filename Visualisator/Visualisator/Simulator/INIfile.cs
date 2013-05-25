@@ -10,7 +10,8 @@ namespace Visualisator
     /// <summary>
     /// INI file tool
     /// </summary>
-    class INIfile
+    [Serializable()]
+    public class INIfile
     {
         private string          _iniFileName    = "";
         private Hashtable       data            = new Hashtable();
