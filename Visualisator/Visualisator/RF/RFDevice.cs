@@ -401,7 +401,10 @@ namespace Visualisator
         {
             _OperateChannel = NewChannel;
             if (NewChannel > 0 && NewChannel < 15)
+            {
                 this.Freq = Frequency._2400GHz;
+                this.Stand80211 = Standart80211._11n;
+            }
             else
                 this.Freq = Frequency._5200GHz;
         }

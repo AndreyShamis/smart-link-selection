@@ -726,6 +726,10 @@ namespace Visualisator
             stat.FileName = FilePachToSend;
             stat.FileSize = fsSource.Length;
             stat.SourceMAC = this.getMACAddress();
+            stat.CoordinateX = this.x;
+            stat.CoordinateY = this.y;
+            stat.BSS_BandWith = this.BandWidth.ToString();
+            stat.BSS_Standart = this.Stand80211.ToString();
             
             try
             {

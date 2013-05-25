@@ -18,6 +18,12 @@ namespace Visualisator.Simulator
         public long     PacketsInTdls   { set; get; }
         public double   Speed           { set; get; }
         public long     Packets         { set; get; }
+        public int      CoordinateX     { set; get; }
+        public int      CoordinateY     { set; get; }
+        public string   BSS_BandWith    { set; get; }
+        public string   BSS_Standart    { set; get; }
+        public string   TDLS_BandWith   { set; get; }
+        public string   TDLS_Standart   { set; get; }
 
         public Statistic()
         {
