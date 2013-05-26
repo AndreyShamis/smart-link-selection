@@ -27,7 +27,7 @@ namespace Visualisator
             {
                 fstream = new FileStream(_fullFilePathAndName, FileMode.Create, FileAccess.Write);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //AddToLog("File Stream: " + ex.Message);
             }
@@ -38,7 +38,7 @@ namespace Visualisator
             {
                 fstream.Close();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //AddToLog("File Stream: " + ex.Message);
             }
@@ -57,7 +57,7 @@ namespace Visualisator
                     //AddToLog("File Stream: " + "Wrong Stream - ignoring packet");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //MessageBox.Show("File Stream: " + ex.Message);
                 //fstream.Close();

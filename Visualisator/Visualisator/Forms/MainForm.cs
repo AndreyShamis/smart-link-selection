@@ -36,7 +36,7 @@ namespace Visualisator
         private static Random rand = new Random();
         private static Int32 _BOARDX = 680;
         private static Int32 _BOARDY = 360;
-        private SelectedObjectType _ob;
+        //private SelectedObjectType _ob;
         private static Color BoardColor = Color.Black;
 
 
@@ -220,7 +220,7 @@ namespace Visualisator
                         SelectedX = e.X;
                         SelectedY = e.Y;
                         SelectedZ = e.X + e.Y;
-                        _ob = SelectedObjectType.STA;
+                        //_ob = SelectedObjectType.STA;
                         _tsta.VColor = Color.Red;
                         return;
                     }
@@ -237,7 +237,7 @@ namespace Visualisator
                         SelectedY = e.Y;
                         SelectedZ = e.X + e.Y;
                         _tap.VColor = Color.Red;
-                        _ob = SelectedObjectType.AP;
+                        //_ob = SelectedObjectType.AP;
                         return;
                     }
                 }

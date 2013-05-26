@@ -425,7 +425,7 @@ namespace Visualisator
 
         private void BuildListView()
         {
-            ColumnHeader header1, header2, header3, header4, header5, header6, header7, header8, header9, header10;
+            ColumnHeader header1, header2, header3, header4, header5, header6, header7, header8, header9;//, header10;
             header1 = new ColumnHeader();
             header2 = new ColumnHeader();
             header3 = new ColumnHeader();
