@@ -50,4 +50,11 @@ namespace Visualisator
         TDLSTearDown,
     };
 
+    [Serializable()]
+    internal enum STAType
+    {
+        TV,
+        LP,
+        SP,
+    };
 }

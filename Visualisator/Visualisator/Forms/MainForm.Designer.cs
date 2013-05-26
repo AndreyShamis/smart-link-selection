@@ -45,7 +45,10 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sTAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lPtoolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.sTtoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.sPtoolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSetMediumSendRatio = new System.Windows.Forms.Button();
             this.txtMediumSendRatio = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -199,7 +202,7 @@
             // 
             this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aPToolStripMenuItem,
-            this.sTAToolStripMenuItem});
+            this.stationToolStripMenuItem});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.addToolStripMenuItem.Text = "Add";
@@ -208,16 +211,45 @@
             // 
             this.aPToolStripMenuItem.CheckOnClick = true;
             this.aPToolStripMenuItem.Name = "aPToolStripMenuItem";
-            this.aPToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.aPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aPToolStripMenuItem.Text = "Access Point";
             this.aPToolStripMenuItem.Click += new System.EventHandler(this.aPToolStripMenuItem_Click);
             // 
-            // sTAToolStripMenuItem
+            // stationToolStripMenuItem
             // 
-            this.sTAToolStripMenuItem.Name = "sTAToolStripMenuItem";
-            this.sTAToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.sTAToolStripMenuItem.Text = "Station";
-            this.sTAToolStripMenuItem.Click += new System.EventHandler(this.sTAToolStripMenuItem_Click);
+            this.stationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lPtoolStripMenuItem1,
+            this.sTtoolStripMenuItem2,
+            this.sPtoolStripMenuItem3});
+            this.stationToolStripMenuItem.Name = "stationToolStripMenuItem";
+            this.stationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stationToolStripMenuItem.Text = "Station";
+            // 
+            // lPtoolStripMenuItem1
+            // 
+            this.lPtoolStripMenuItem1.CheckOnClick = true;
+            this.lPtoolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.lPtoolStripMenuItem1.Name = "lPtoolStripMenuItem1";
+            this.lPtoolStripMenuItem1.ShowShortcutKeys = false;
+            this.lPtoolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.lPtoolStripMenuItem1.Text = "Laptop";
+            this.lPtoolStripMenuItem1.Click += new System.EventHandler(this.lPtoolStripMenuItem1_Click);
+            // 
+            // sTtoolStripMenuItem2
+            // 
+            this.sTtoolStripMenuItem2.CheckOnClick = true;
+            this.sTtoolStripMenuItem2.Name = "sTtoolStripMenuItem2";
+            this.sTtoolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.sTtoolStripMenuItem2.Text = "Smart TV";
+            this.sTtoolStripMenuItem2.Click += new System.EventHandler(this.sTtoolStripMenuItem2_Click);
+            // 
+            // sPtoolStripMenuItem3
+            // 
+            this.sPtoolStripMenuItem3.CheckOnClick = true;
+            this.sPtoolStripMenuItem3.Name = "sPtoolStripMenuItem3";
+            this.sPtoolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.sPtoolStripMenuItem3.Text = "Smart Phone";
+            this.sPtoolStripMenuItem3.Click += new System.EventHandler(this.sPtoolStripMenuItem3_Click);
             // 
             // btnSetMediumSendRatio
             // 
@@ -550,7 +582,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aPToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sTAToolStripMenuItem;
         private System.Windows.Forms.Button btnSetMediumSendRatio;
         private System.Windows.Forms.TextBox txtMediumSendRatio;
         private System.Windows.Forms.Label label2;
@@ -574,6 +605,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button cmdCreateOneAPTwoSta;
         private System.Windows.Forms.Button cmdAdd1APforSTA;
+        private System.Windows.Forms.ToolStripMenuItem stationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lPtoolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem sTtoolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem sPtoolStripMenuItem3;
     }
 }
 

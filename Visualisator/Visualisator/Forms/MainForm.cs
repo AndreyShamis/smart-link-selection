@@ -151,12 +151,32 @@ namespace Visualisator
         }
 
         //====================================================================================================
-        private void CreateSTA()
+        private void CreateSTA(STAType staType)
         {
 
             STA _sta = new STA(_objects);
             _sta.setOperateChannel(0); // (rand.Next(1, 14));       //  TODO delete this line
             _sta.SetVertex((int)MouseX, (int)MouseY, 0);
+
+            switch (staType)
+            {
+                case STAType.LP:
+                    _sta.STAImage = (Image)Medium.imgLPImages[new Random().Next(0, Medium.imgLPImages.Count)];
+                    break;
+
+                case STAType.SP:
+                    _sta.STAImage = (Image)Medium.imgSPImages[new Random().Next(0, Medium.imgLPImages.Count)];
+                    break;
+
+                case STAType.TV:
+                    _sta.STAImage = (Image)Medium.imgTVImages[new Random().Next(0, Medium.imgLPImages.Count)];
+                    break;
+
+                default:
+                    break;
+
+            }
+
             _objects.Add(_sta);
             _sta.Scan();
             Medium.setMediumObj(_objects);
@@ -594,9 +614,29 @@ namespace Visualisator
 
         private void sTAToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateSTA();
+            CreateSTA(STAType.LP);
             DrowOnBoard();
         }
+        //-----------------------------------------------------------------------------
+        private void sTtoolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+            CreateSTA(STAType.TV);
+            DrowOnBoard();
+        }
+
+        private void sPtoolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            CreateSTA(STAType.SP);
+            DrowOnBoard();
+        }
+
+        private void lPtoolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            CreateSTA(STAType.LP);
+            DrowOnBoard();
+        }
+        //-----------------------------------------------------------------------------
 
         private void btnSetMediumSendRatio_Click(object sender, EventArgs e)
         {
@@ -759,6 +799,8 @@ namespace Visualisator
             SetMedioRatio();
             Medium.Enable();
         }
+
+
     //private void mnuContext(object sender, EventArgs e)
         //{
         //    ContextMenu myContextMenu = new ContextMenu();
