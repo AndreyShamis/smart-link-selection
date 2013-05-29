@@ -250,7 +250,7 @@ namespace Visualisator
                 {
                     MACsandACK(pack.Source, pack.GuidD, pack.getTransmitRate());
 
-                    resendedData = new Data(pack);
+                    resendedData = new Data((Data)pack);
                     resendedData.Destination = pack.Reciver;
                     resendedData.X = this.x;
                     resendedData.Y = this.y;
