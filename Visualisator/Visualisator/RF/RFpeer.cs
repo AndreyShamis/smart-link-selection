@@ -66,8 +66,14 @@ namespace Visualisator
         public Bandwidth        TDLSBandWith    { set; get; }
         public Standart80211    TDLSStandart    { set; get; }
         public Frequency        TDLSFrequency   { set; get; }
+        public short            TDLSChannel     { set; get; }
+        public bool             TDLSwork        { set; get; }
         #endregion
 
+        public RFpeer()
+        {
+            TDLSwork = false;
+        }
 
     }
 }

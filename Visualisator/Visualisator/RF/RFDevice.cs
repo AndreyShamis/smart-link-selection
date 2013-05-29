@@ -466,7 +466,7 @@ namespace Visualisator
             lock (RF_STATUS){
                 try{
                     RF_STATUS = "TX";
-                    while (!Medium.Registration(this.Freq, this.getOperateChannel(), this.x, this.y, sleep))
+                    while (!Medium.Registration(pack.PacketFrequency, pack.PacketChannel, this.x, this.y, sleep))
                     {
                         Thread.Sleep(new TimeSpan(randomWait.Next(20, 50)));
                     }
@@ -489,17 +489,17 @@ namespace Visualisator
         public virtual void CheckScanConditionOnSend(){}
 
         //=====================================================================
-        public void MACsandACK(string Destination , Guid _DataGuid,int TXrate)
+        public void MACsandACK(string destination , Guid dataGuid,int TXrate)
         {
             DataAck da = new DataAck(CreatePacket());
-            da.Destination = Destination;
+            da.Destination = destination;
             da.PacketChannel = this.getOperateChannel();
             //da.PacketBand = this.getOperateBand();
             da.PacketBandWith = this.BandWidth;
             da.PacketStandart = this.Stand80211;
             da.PacketFrequency = this.Freq;
             da.Source = this.getMACAddress();//.ToString();
-            da.GuiDforDataPacket = _DataGuid;
+            da.GuiDforDataPacket = dataGuid;
             da.setTransmitRate(TXrate);
             this.SendData(da);
             
@@ -540,16 +540,31 @@ namespace Visualisator
         /// <param name="args">Not used - needed by event</param>
         public void Listen(object sender, EventArgs args)
         {
-
+            RFpeer tempPeer = null;
             //while (_Enabled)
             //{
             //SpinWait.SpinUntil(checkIfHaveDataReceive);
             //SpinWait.SpinUntil(RF_Ready);
-            if (((SimulatorPacket)sender).PacketChannel != this.getOperateChannel())
-                return;
-            if (((SimulatorPacket)sender).PacketFrequency != this.Freq)
-                return;
-            
+            bool another_check = true;
+            if(TDLSisWork)
+            {
+                if(_RFpeers.Contains(((SimulatorPacket)sender).Source))
+                {
+                    tempPeer = (RFpeer) _RFpeers[((SimulatorPacket) sender).Source];
+                    if(tempPeer.TDLSwork)
+                    {
+                        another_check = false;
+                    }
+                }
+
+            }
+            if (another_check)
+            {
+                if (((SimulatorPacket) sender).PacketChannel != this.getOperateChannel())
+                    return;
+                if (((SimulatorPacket) sender).PacketFrequency != this.Freq)
+                    return;
+            }
 
             double dist = GetSTADist(((SimulatorPacket) sender).X, ((SimulatorPacket) sender).Y, this.x, this.y);
             if(dist > Medium.ReceiveDistance)
@@ -573,7 +588,17 @@ namespace Visualisator
                 lock (RF_STATUS)
                 {
                     RF_STATUS = "RX";
-                    pack = Medium.ReceiveData(this);
+                    if (!another_check && tempPeer != null)
+                    {
+                        pack = Medium.ReceiveData(tempPeer.TDLSFrequency, this.getOperateChannel(), this.getMACAddress(), this.x, this.y,
+                                                      this.ListenBeacon);
+                    }
+                    else
+                    {
+                        pack = Medium.ReceiveData(this.Freq, this.getOperateChannel(), this.getMACAddress(), this.x, this.y,
+                                                this.ListenBeacon);  
+                    }
+                    
                     RF_STATUS = "NONE";
                 }
                 if (pack == null){ }

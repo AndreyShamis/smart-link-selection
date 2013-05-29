@@ -45,6 +45,8 @@ namespace Visualisator
         //*********************************************************************
         //=====================================================================
 
+
+        //=====================================================================
         /// <summary>
         /// Function for create packet. Used in Send Data.
         /// </summary>
@@ -61,13 +63,47 @@ namespace Visualisator
             pack.Source             = getMACAddress();
             pack.X                  = this.x;
             pack.Y                  = this.y;
-            pack.PacketFrequency    = this.Freq;
-            pack.PacketStandart     = this.Stand80211;
-            pack.PacketBandWith     = this.BandWidth;
+            pack.PacketFrequency    = TDLSisWork ? GetTDLSFrequncy(destination) : this.Freq;
+            pack.PacketStandart     = TDLSisWork ? GetTDLSStandart(destination) : this.Stand80211;
+            pack.PacketBandWith     = TDLSisWork ? GetTDLSBandWith(destination) : this.BandWidth;
             
             return (pack);
         }
 
+        //=====================================================================
+        /// <summary>
+        /// Calculate TDLS bandwith for some Peer by MAC
+        /// </summary>
+        /// <param name="mac">MAC address of Peers</param>
+        /// <returns>Bandwith</returns>
+        private Bandwidth GetTDLSBandWith(string mac)
+        {
+            return ((RFpeer) _RFpeers[mac]).TDLSBandWith;
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Calculate TDLS Frequency for some Peer by MAC
+        /// </summary>
+        /// <param name="mac">MAC address of Peers</param>
+        /// <returns>Frequency</returns>
+        private Frequency GetTDLSFrequncy(string mac)
+        {
+            return ((RFpeer)_RFpeers[mac]).TDLSFrequency;
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Calculate TDLS Standart80211 for some Peer by MAC
+        /// </summary>
+        /// <param name="mac">MAC address of Peers</param>
+        /// <returns>Standart80211</returns>
+        private Standart80211 GetTDLSStandart(string mac)
+        {
+            return ((RFpeer)_RFpeers[mac]).TDLSStandart;
+        }
+
+        //=====================================================================
         /// <summary>
         /// SLS Function
         /// </summary>
@@ -77,6 +113,7 @@ namespace Visualisator
                 return;
         }
 
+        //=====================================================================
         /// <summary>
         /// This function should tear down TDLS setup in case if number of packets more then Medium.TDLS_TearDownAfterFails
         /// </summary>
@@ -87,7 +124,7 @@ namespace Visualisator
                 TDLSCounterUnSuccessTx++;
                 if(TDLSCounterUnSuccessTx >= Medium.TDLS_TearDownAfterFails)
                 {
-                    TDLS_SendTearDown(MAC);
+                    TDLSSendTearDown(MAC);
                 }
             }
             catch (Exception ex) { AddToLog("TearDownTdlsOnFailToSend: " + ex.Message); }  
@@ -227,11 +264,11 @@ namespace Visualisator
         {
             while (_Enabled)
             {
-                if (!getAssociatedAP_SSID().Equals(""))
+                if (!GetAssociatedAPSsid().Equals(""))
                 {
                     KeepAlive keepAl        = new KeepAlive(CreatePacket());
                     AP connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
-                    if (connecttoAP == null) throw new ArgumentNullException("connecttoAP");
+                    //if (connecttoAP == null) throw new ArgumentNullException("connecttoAP");
                     //Data dataPack           = new Data(CreatePacket());
 
                     keepAl.SSID             = connecttoAP.SSID;
@@ -310,7 +347,7 @@ namespace Visualisator
         /// Return SSID of AP for each we are associated
         /// </summary>
         /// <returns>SSID</returns>
-        public string getAssociatedAP_SSID()
+        public string GetAssociatedAPSsid()
         {
             string ret = "";
 
@@ -361,7 +398,7 @@ namespace Visualisator
         /// Function for search for best channel on Frequency 2400
         /// </summary>
         /// <returns>Return channel number on 2400</returns>
-        public int getBestChannel()
+        public int GetBestChannel()
         {
             const double neighborsWeight = 2;
             const double neighborsofNeighborsWeight = 4;
@@ -432,7 +469,7 @@ namespace Visualisator
         /// Prepare and send TDLS setup request
         /// </summary>
         /// <param name="MAC">MAC address of Peer</param>
-        public void TDLS_SendSetupRequest(string MAC)
+        public void TDLSSendSetupRequest(string MAC)
         {
             try
             {
@@ -447,7 +484,7 @@ namespace Visualisator
                     BandWithSupport     = BandWithSupport,
                     StandartSupport     = StandartSupport,
                     FrequencySupport    = FrequencySupport,
-                    PrefferedChannel    = (short)getBestChannel(),
+                    PrefferedChannel    = (short)GetBestChannel(),
                 };
 
               //  _tdlsSetupR.setTransmitRate(11);
@@ -463,7 +500,7 @@ namespace Visualisator
         /// Responce to TDLS request
         /// </summary>
         /// <param name="req">TDLS Setup Request packet</param>
-        public void TDLS_SendSetupResponse(TDLSSetupRequest req)
+        public void TDLSSendSetupResponse(TDLSSetupRequest req)
         {
             try
             {
@@ -473,14 +510,15 @@ namespace Visualisator
                 _tdlsSetupR.Destination = req.Source;// _connecttoAP.getMACAddress();
                 _tdlsSetupR.Reciver = req.Source;
 
-                ((RFpeer)_RFpeers[req.Source]).TDLSBandWith = getBestIntersectionBandwith(req.BandWithSupport);
+                ((RFpeer)_RFpeers[req.Source]).TDLSBandWith = GetBestIntersectionBandwith(req.BandWithSupport);
                 if (((RFpeer)_RFpeers[req.Source]).TDLSBandWith == Bandwidth._40Mhz)
                     _tdlsSetupR.Width40Support = true;
                 else
                     _tdlsSetupR.Width40Support = false;
 
+                ((RFpeer)_RFpeers[req.Source]).TDLSwork = true;
 
-                ((RFpeer)_RFpeers[req.Source]).TDLSFrequency = getBestIntersectionFreqency(req.FrequencySupport);
+                ((RFpeer)_RFpeers[req.Source]).TDLSFrequency = GetBestIntersectionFreqency(req.FrequencySupport);
                 if (((RFpeer)_RFpeers[req.Source]).TDLSFrequency == Frequency._5200GHz)
                     _tdlsSetupR.freq5000Support = true;
 
@@ -496,7 +534,7 @@ namespace Visualisator
         /// Confirm TDLS setup
         /// </summary>
         /// <param name="MAC">MAC address of Peer</param>
-        public void TDLS_SendSetupConfirm(string MAC)
+        public void TDLSSendSetupConfirm(string MAC)
         {
             try
             {
@@ -517,7 +555,7 @@ namespace Visualisator
         /// Tear down TDLS setup
         /// </summary>
         /// <param name="MAC">MAC address of Peer</param>
-        public void TDLS_SendTearDown(string MAC)
+        public void TDLSSendTearDown(string MAC)
         {
             try
             {
@@ -533,6 +571,7 @@ namespace Visualisator
             }
             catch (Exception ex) { AddToLog("TDLS_SendTearDown: " + ex.Message); }  
         }
+
         //=====================================================================
         public void DeleteDataStream(Data packet)
         {
@@ -662,7 +701,7 @@ namespace Visualisator
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestReceived;
                         var tdlSreq = (TDLSSetupRequest)pack;
                         //getBestIntersectionBandwith(tdlSreq.BandWithSupport);
-                        TDLS_SendSetupResponse(tdlSreq);
+                        TDLSSendSetupResponse(tdlSreq);
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
                         
                     }
@@ -674,10 +713,17 @@ namespace Visualisator
 
                         if (tdlSreq.freq5000Support)
                             ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSFrequency = Frequency._5200GHz;
+                        else
+                            ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSFrequency = Frequency._2400GHz;
+
                         if (tdlSreq.Width40Support)
                             ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSBandWith = Bandwidth._40Mhz ;
+                        else
+                            ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSBandWith = Bandwidth._20MHz;
 
-                        TDLS_SendSetupConfirm(tdlSreq.Source);
+                        ((RFpeer) _RFpeers[tdlSreq.Source]).TDLSwork = true;
+
+                        TDLSSendSetupConfirm(tdlSreq.Source);
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
                     }
                     else if (_Pt == typeof(TDLSSetupConfirm))
@@ -700,7 +746,7 @@ namespace Visualisator
         /// </summary>
         /// <param name="otherBandWith">Array list of supported Bandwith for other device</param>
         /// <returns>Return Best Intersection Bandwith</returns>
-        public Bandwidth getBestIntersectionBandwith(ArrayList otherBandWith)
+        public Bandwidth GetBestIntersectionBandwith(ArrayList otherBandWith)
         {
             Bandwidth ret = Bandwidth._20MHz;
 
@@ -716,7 +762,7 @@ namespace Visualisator
         /// </summary>
         /// <param name="otherFrequency">Array list of supported frequncy for other device</param>
         /// <returns>Return Best Intersection Frequency</returns>
-        public Frequency getBestIntersectionFreqency(ArrayList otherFrequency)
+        public Frequency GetBestIntersectionFreqency(ArrayList otherFrequency)
         {
             Frequency ret = Frequency._2400GHz;
 
@@ -810,8 +856,8 @@ namespace Visualisator
         /// <summary>
         /// Function for send file
         /// </summary>
-        /// <param name="DestinationMacAddress">Destination Mac Address</param>
-        public void ThreadAbleReadFile(string DestinationMacAddress)
+        /// <param name="destinationMacAddress">Destination Mac Address</param>
+        public void ThreadAbleReadFile(string destinationMacAddress)
         {
             int buf_size = Medium.PACKET_BUFFER_SIZE, numOfReadBytes = 0;
             byte[] buffer = new byte[buf_size];
@@ -827,7 +873,7 @@ namespace Visualisator
                     FileMode.Open, FileAccess.Read);
             Statistic stat = new Statistic();
             StatisticOfSendData.Add(stat);
-            stat.DesctinationMAC = DestinationMacAddress;
+            stat.DesctinationMAC = destinationMacAddress;
             stat.FileName = FilePachToSend;
             stat.FileSize = fsSource.Length;
             stat.SourceMAC = this.getMACAddress();
@@ -844,14 +890,14 @@ namespace Visualisator
                 int SuccessContinuous = 0;
                 Stopwatch sw = Stopwatch.StartNew();
                 TimeSpan timeWindow = sw.Elapsed;// Do work
-                if (!_RFpeers.Contains(DestinationMacAddress))  
+                if (!_RFpeers.Contains(destinationMacAddress))  
                     this.UpdateRFPeers();
 
-                RFpeer workPeer     = (RFpeer)_RFpeers[DestinationMacAddress];
-                MACOfAnotherPeer    = DestinationMacAddress;
+                RFpeer workPeer     = (RFpeer)_RFpeers[destinationMacAddress];
+                MACOfAnotherPeer    = destinationMacAddress;
                 while (!exit_loop)
                 {
-                    dataPack = new Data(CreatePacket(DestinationMacAddress)); 
+                    dataPack = new Data(CreatePacket(destinationMacAddress)); 
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
@@ -900,7 +946,7 @@ namespace Visualisator
                         Thread.Sleep(1);
                         if (retrCounter < 0)
                         {
-                            workPeer        = (RFpeer)_RFpeers[DestinationMacAddress];
+                            workPeer        = (RFpeer)_RFpeers[destinationMacAddress];
                             long timeNew    = sw.ElapsedMilliseconds;
                             long timeOld    = timeWindow.Milliseconds;
                             if (timeNew - timeOld < Medium.RetransmitWindow)    workPeer.RetransmitionCounter++;
@@ -922,7 +968,7 @@ namespace Visualisator
                         if (maxRetrays == 0)
                         {
                             if (TDLSisWork)
-                                TearDownTdlsOnFailToSend(DestinationMacAddress);
+                                TearDownTdlsOnFailToSend(destinationMacAddress);
                             break;
                         }
                     }
@@ -956,7 +1002,7 @@ namespace Visualisator
         }
 
         //=====================================================================
-        private AP GetApbySsid(string _SSID)
+        private AP GetApbySsid(string ssid)
         {
             try
             {
@@ -965,7 +1011,7 @@ namespace Visualisator
                     if (obj.GetType() == typeof(AP))
                     {
                         AP _tV = (AP)obj;
-                        if (_tV.SSID.Equals(_SSID))
+                        if (_tV.SSID.Equals(ssid))
                             return (_tV);
                     }
                 }
@@ -997,7 +1043,7 @@ namespace Visualisator
         /// Get Associatedd Devices IN BSS
         /// </summary>
         /// <returns>Array List Of Associated Devices</returns>
-        public ArrayList getAssociatedDevicesInBSS()
+        public ArrayList GetAssociatedDevicesInBSS()
         {
             try
             {
@@ -1041,32 +1087,32 @@ namespace Visualisator
         /// Function which perform scan on one channel
         /// </summary>
         /// <param name="chann">Channel to Scan</param>
-        /// <param name="TimeForListen">Time to listen on given channel</param>
+        /// <param name="timeForListen">Time to listen on given channel</param>
         /// <param name="freq">Frequency</param>
-        private void ScanOneChannel(short chann, int TimeForListen, Frequency freq)
+        private void ScanOneChannel(short chann, int timeForListen, Frequency freq)
         {
             try
             {
-                short perv_channel = this.getOperateChannel();
-                Frequency prev_band = this.Freq;
+                short pervChannel   = this.getOperateChannel();
+                Frequency prevBand  = this.Freq;
 
                 this.Freq = freq;
                 _scanning = true;
                 setOperateChannel(chann);
-                Thread.Sleep(TimeForListen);
+                Thread.Sleep(timeForListen);
                 if (this.getOperateChannel() != chann)
                 {
                     //  Scan on this channel was desturbed
                     //  Try again
                     _scanning = false;
-                    ScanOneChannel(chann, TimeForListen, freq);
+                    ScanOneChannel(chann, timeForListen, freq);
                 }
                 else
                 {
                     //  Scan on this channel success
                     //  Return back work parameters
-                    setOperateChannel(perv_channel);
-                    this.Freq = prev_band;
+                    setOperateChannel(pervChannel);
+                    this.Freq = prevBand;
                     _scanning = false;
                 }
                 //Thread.Sleep(3);
@@ -1085,8 +1131,8 @@ namespace Visualisator
                 //_AccessPoint.Clear();
                 AccessPoint.DecreaseAll();
                 //_AccessPointTimeCounter.Clear();
-                short perv_channel = this.getOperateChannel();
-                Frequency prev_band = this.Freq;
+                short pervChannel   = this.getOperateChannel();
+                Frequency prevBand  = this.Freq;
                 for (short i = 1; i < 15; i++)
                 {
                     ScanOneChannel(i, 320, Frequency._2400GHz);

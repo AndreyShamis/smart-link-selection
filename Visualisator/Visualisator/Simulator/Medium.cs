@@ -579,7 +579,7 @@ namespace Visualisator
         }
 
         //*********************************************************************
-        public static SimulatorPacket ReceiveData(RFDevice device)
+        public static SimulatorPacket ReceiveData(Frequency freq,short chan, string mac,int x,int y,bool listenBeacon)
         {
             Key Pk = null;
             SimulatorPacket retvalue = null;
@@ -591,15 +591,15 @@ namespace Visualisator
             {
                 _ev.WaitOne();
                 //  Private packets
-                Pk = new Key(device.Freq, device.getOperateChannel(), device.getMACAddress());
+                Pk = new Key(freq, chan, mac);
                 if (_packets.ContainsKey(Pk)){
                     ArrayList LocalPackets = (ArrayList)_packets[Pk];
                     foreach (object pack in LocalPackets)
                     {
                         if (pack != null){
                             SimulatorPacket _LocalPack = (SimulatorPacket)pack;
-                            if (_LocalPack.Source != device.getMACAddress() &&
-                                getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < ReceiveDistance)
+                            if (_LocalPack.Source != mac &&
+                                getDistance(x, y, _LocalPack.X, _LocalPack.Y) < ReceiveDistance)
                             {
                                 retvalue = _LocalPack;
                                 LocalPackets.Remove(pack);
@@ -610,15 +610,15 @@ namespace Visualisator
                 }
 
                 // Broadcast packets
-                if (device.getListenBeacon() && retvalue == null){
-                    Pk = new Key(device.Freq, device.getOperateChannel(), _BROADCAST);
+                if (listenBeacon && retvalue == null){
+                    Pk = new Key(freq, chan, _BROADCAST);
                     if (_packets.ContainsKey(Pk)){
                         ArrayList LocalPackets = (ArrayList)_packets[Pk];
                         foreach (object pack in LocalPackets){
                             if (pack != null){
                                 SimulatorPacket _LocalPack = (SimulatorPacket)pack;
-                                if (_LocalPack.Source != device.getMACAddress() &&
-                                    getDistance(device.x, device.y, _LocalPack.X, _LocalPack.Y) < ReceiveDistance){
+                                if (_LocalPack.Source != mac &&
+                                    getDistance(x, y, _LocalPack.X, _LocalPack.Y) < ReceiveDistance){
                                     retvalue = _LocalPack;
                                     break;
                                 }

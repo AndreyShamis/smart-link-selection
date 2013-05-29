@@ -203,7 +203,7 @@ namespace Visualisator
             if (txtTDLSSetupRequestMAC.Text.Length > 10)
             {
                 txtTDLSSetupRequest = txtTDLSSetupRequestMAC.Text;
-                _sta.TDLS_SendSetupRequest(txtTDLSSetupRequest);
+                _sta.TDLSSendSetupRequest(txtTDLSSetupRequest);
             }
         }
 
@@ -226,7 +226,7 @@ namespace Visualisator
 
         private void GetDevicesInBSS()
         {
-            ArrayList _des = _sta.getAssociatedDevicesInBSS();
+            ArrayList _des = _sta.GetAssociatedDevicesInBSS();
             string _selfMac = _sta.getMACAddress();
             cmbAssociatedDevicesInBSS.Items.Clear();
             if (_des != null)
@@ -316,7 +316,7 @@ namespace Visualisator
                 txtDataReceeived.Text = _sta.getDataRecieved().ToString();
                 lblSent.Text = _sta.getDataSent().ToString();
                 lblAllReceivedPackets.Text = _sta.AllReceivedPackets.ToString();
-                lblAssociatedAP.Text = _sta.getAssociatedAP_SSID();
+                lblAssociatedAP.Text = _sta.GetAssociatedAPSsid();
                 lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
 
                 lblTdlsUnsuccessTrys.Text = _sta.TDLSCounterUnSuccessTx.ToString();
