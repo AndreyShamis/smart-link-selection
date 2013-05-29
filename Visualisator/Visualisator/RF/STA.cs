@@ -18,15 +18,15 @@ namespace Visualisator
     [Serializable()]
     class STA : RFDevice, IBoardObjects,IRFDevice
     {
-        protected ArrayListCounted  _AccessPoint                = new ArrayListCounted();
-        protected Hashtable         _StreamsHash                = new Hashtable(new ByteArrayComparer());
+        protected ArrayListCounted  AccessPoint                 = new ArrayListCounted();
+        protected Hashtable         StreamsHash                 = new Hashtable(new ByteArrayComparer());
         private Boolean             _scanning                   = false;
-        private int                 _DataRetransmited           = 0;
-        private int                 _DataAckRetransmitted       = 0;
+        private int                 _dataRetransmited           = 0;
+        private int                 _dataAckRetransmitted       = 0;
         private int                 _RSSI                       = 0;
-        private bool                _WaitingForAck              = false;
+        private bool                _waitingForAck              = false;
         //private StringBuilder       DataReceivedContainer       = new StringBuilder();
-        private Int32               _StatisticRetransmitTime    = 0;
+        private Int32               _statisticRetransmitTime    = 0;
         private string              _connectedAPMacAddress      = "";
         private int                 _delayInBSS                 = 1;
         private int                 _delayInTDLS                = 1;
@@ -34,14 +34,14 @@ namespace Visualisator
         private int[]               _channels                   = new int[max_channel]; // now it's a 20-element array
         private bool                StopScan                    { set; get; } // Used for stop scan if start connection
         public string               FilePachToSend              { set; get; }
-        private TDLSSetupStatus     _TDLSSetupStatus            = TDLSSetupStatus.TDLSSetupDisabled;
-        public string               _lastTransmitTIme           { set; get; }
-        public int                  _TDLSCounterUnSuccessTx     { set; get; }
-        public ArrayList            _StatisticOfSendData        = new ArrayList();
+        private TDLSSetupStatus     _tdlsSetupStatus            = TDLSSetupStatus.TDLSSetupDisabled;
+        public string               LastTransmitTIme            { set; get; }
+        public int                  TDLSCounterUnSuccessTx      { set; get; }
+        public ArrayList            StatisticOfSendData         = new ArrayList();
         private const int           MAX_QUEUE_REC_PACKETS       = 10;
         public Queue                ReceivedGuids               = new Queue(MAX_QUEUE_REC_PACKETS);
         public Image                STAImage                    { set; get; }
-
+        private bool                _ackReceived                = false;
         //*********************************************************************
         //=====================================================================
 
@@ -84,8 +84,8 @@ namespace Visualisator
         {
             try
             {
-                _TDLSCounterUnSuccessTx++;
-                if(_TDLSCounterUnSuccessTx >= Medium.TDLS_TearDownAfterFails)
+                TDLSCounterUnSuccessTx++;
+                if(TDLSCounterUnSuccessTx >= Medium.TDLS_TearDownAfterFails)
                 {
                     TDLS_SendTearDown(MAC);
                 }
@@ -95,8 +95,8 @@ namespace Visualisator
         #region SETERS
         public TDLSSetupStatus TDLSSetupInfo
         {
-            get { return _TDLSSetupStatus; }
-            set { _TDLSSetupStatus = value; }
+            get { return _tdlsSetupStatus; }
+            set { _tdlsSetupStatus = value; }
         }
 
         public bool getScanStatus()
@@ -105,20 +105,20 @@ namespace Visualisator
         }
         public int DataRetransmited
         {
-            get { return _DataRetransmited; }
-            set { _DataRetransmited = value; }
+            get { return _dataRetransmited; }
+            set { _dataRetransmited = value; }
         }
 
         public int DataAckRetransmitted
         {
-            get { return _DataAckRetransmitted; }
-            set { _DataAckRetransmitted = value; }
+            get { return _dataAckRetransmitted; }
+            set { _dataAckRetransmitted = value; }
         }
 
         public bool WaitingForAck
         {
-            get { return _WaitingForAck; }
-            set { _WaitingForAck = value; }
+            get { return _waitingForAck; }
+            set { _waitingForAck = value; }
         }
 
         public int Rssi
@@ -129,8 +129,8 @@ namespace Visualisator
 
         public int StatisticRetransmitTime
         {
-            get { return _StatisticRetransmitTime; }
-            set { _StatisticRetransmitTime = value; }
+            get { return _statisticRetransmitTime; }
+            set { _statisticRetransmitTime = value; }
         }
 
 
@@ -147,22 +147,23 @@ namespace Visualisator
             set { _delayInTDLS = value; }
         }
         #endregion
-        private bool ackReceived = false;
+        
 
         //=====================================================================
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="RfObjects">Reference to RF objects</param>
-        public STA(ArrayList RfObjects)
+        /// <param name="rfObjects">Reference to RF objects</param>
+        public STA(ArrayList rfObjects)
         {
-            StopScan            = false;
-            TDLSisEnabled       = true;
-            TDLSisWork          = false;
-            DefaultColor        = Color.RoyalBlue;
-            ListenBeacon        = true;
-            this.VColor         = DefaultColor;
-            _PointerToAllRfDevices = RfObjects;
+            if (rfObjects == null) throw new ArgumentNullException("rfObjects");
+            StopScan                = false;
+            TDLSisEnabled           = true;
+            TDLSisWork              = false;
+            DefaultColor            = Color.RoyalBlue;
+            ListenBeacon            = true;
+            this.VColor             = DefaultColor;
+            _PointerToAllRfDevices  = rfObjects;
 
             BandWithSupport.Add(Bandwidth._20MHz);
             BandWithSupport.Add(Bandwidth._40Mhz);
@@ -197,7 +198,7 @@ namespace Visualisator
             TDLSAutoStart = true;
             CreateFolder();
             this._scanning = false;
-            this._WaitingForAck = false;
+            this._waitingForAck = false;
             for (int i = 0; i < _channels.Length; i++)
             {
                 _channels[i] = -100;
@@ -207,10 +208,12 @@ namespace Visualisator
             //newThread.Start();
             Medium.WeHavePacketsToSend += new EventHandler(Listen);
 
-            Thread newThreadKeepAl = new Thread(new ThreadStart(SendKeepAlive));
-            newThreadKeepAl.Name = "Send keep Alive of " + this.getMACAddress();
-            newThreadKeepAl.Priority = ThreadPriority.Lowest;
-            newThreadKeepAl.Start();
+            ThreadPool.QueueUserWorkItem(new WaitCallback((s) => SendKeepAlive()));
+            
+            //Thread newThreadKeepAl = new Thread(new ThreadStart(SendKeepAlive));
+            //newThreadKeepAl.Name = "Send keep Alive of " + this.getMACAddress();
+            //newThreadKeepAl.Priority = ThreadPriority.Lowest;
+            //newThreadKeepAl.Start();
             /*
             Thread newThreadSTACleaner = new Thread(new ThreadStart(STACleaner));
             newThreadSTACleaner.Start();
@@ -228,13 +231,14 @@ namespace Visualisator
                 if (!getAssociatedAP_SSID().Equals(""))
                 {
                     KeepAlive keepAl        = new KeepAlive(CreatePacket());
-                    AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
+                    AP connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
+                    if (connecttoAP == null) throw new ArgumentNullException("connecttoAP");
                     //Data dataPack           = new Data(CreatePacket());
 
-                    keepAl.SSID             = _connecttoAP.SSID;
-                    keepAl.Destination      = _connecttoAP.getMACAddress();
+                    keepAl.SSID             = connecttoAP.SSID;
+                    keepAl.Destination      = connecttoAP.getMACAddress();
                     //keepAl.PacketBand = this.getOperateBand();
-                    keepAl.Reciver          = _connecttoAP.getMACAddress();
+                    keepAl.Reciver          = connecttoAP.getMACAddress();
                     SendData(keepAl);
                     Thread.Sleep(3000);
                 }
@@ -256,14 +260,14 @@ namespace Visualisator
 
             bool connectSuccess = false;
             _AssociatedWithAPList.Clear();
-            Int32 tRYStOcONNECT                 = 0;
+            int tryOnConnect                    = 0;
             
             _conn.SSID                          = _connecttoAP.SSID;
             _conn.Destination                   = _connecttoAP.getMACAddress();
             _conn.PacketChannel                 = _connecttoAP.getOperateChannel();
-            _conn.PacketBandWith = _connecttoAP.BandWidth;
-            _conn.PacketFrequency = _connecttoAP.Freq;
-            _conn.PacketStandart = _connecttoAP.Stand80211;
+            _conn.PacketBandWith                = _connecttoAP.BandWidth;
+            _conn.PacketFrequency               = _connecttoAP.Freq;
+            _conn.PacketStandart                = _connecttoAP.Stand80211;
 
             _conn.Reciver                       = _connecttoAP.getMACAddress();
             this.setOperateChannel(_connecttoAP.getOperateChannel());
@@ -278,9 +282,9 @@ namespace Visualisator
             {
                 if (!_AssociatedWithAPList.Contains(SSID))
                 {
-                    if (tRYStOcONNECT < 10){
+                    if (tryOnConnect < 10){
                         SendData(_conn);
-                        tRYStOcONNECT++;
+                        tryOnConnect++;
                         Thread.Sleep(1000);
                     }
                 }
@@ -325,15 +329,16 @@ namespace Visualisator
         /// <returns>True if success to connect</returns>
         public Boolean ConnectToAP(String SSID)
         {
-            if (SSID.Length > 0 && _AccessPoint.Contains(SSID))
+            if (SSID.Length > 0 && AccessPoint.Contains(SSID))
             {
                 this.StopScan   = true;
-                Connect _conn   = new Connect(CreatePacket());
-                AP _connecttoAP = GetApbySsid(SSID);
+                Connect conn    = new Connect(CreatePacket());
+                AP connecttoAP  = GetApbySsid(SSID);
 
-                if (_connecttoAP != null){
-                    Thread newThread = new Thread(() => ThreadableConnectToAP(SSID, _conn, _connecttoAP));
-                    newThread.Start();
+                if (connecttoAP != null){
+                    //Thread newThread = new Thread(() => ThreadableConnectToAP(SSID, _conn, _connecttoAP));
+                    //newThread.Start();
+                    ThreadPool.QueueUserWorkItem(new WaitCallback((s) => ThreadableConnectToAP(SSID, conn, connecttoAP)));
                     return (true);
                 }else{
                     if(DebugLogEnabled)
@@ -350,7 +355,6 @@ namespace Visualisator
         {
             UpdateRFPeers();
             //MessageBox.Show(_channels.Count().ToString());
-            
         }
 
         //=====================================================================
@@ -433,17 +437,22 @@ namespace Visualisator
         {
             try
             {
-                TDLSSetupRequest _tdlsSetupR = new TDLSSetupRequest(CreatePacket());
-                AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
-                _tdlsSetupR.SSID            = _connecttoAP.SSID;
-                _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
-                _tdlsSetupR.Reciver         = MAC;
-                _tdlsSetupR.BandWithSupport = BandWithSupport;
-                _tdlsSetupR.StandartSupport = StandartSupport;
-                _tdlsSetupR.FrequencySupport = FrequencySupport;
-                _tdlsSetupR.PrefferedChannel = (short)getBestChannel();
+                
+                AP connecttoAP                 = GetApbySsid(_AssociatedWithAPList[0].ToString());
+                if (connecttoAP == null) throw new ArgumentNullException("connecttoAP");
+                TDLSSetupRequest tdlsSetupR    = new TDLSSetupRequest(CreatePacket())
+                {
+                    SSID                = connecttoAP.SSID,
+                    Destination         = connecttoAP.getMACAddress(),
+                    Reciver             = MAC,
+                    BandWithSupport     = BandWithSupport,
+                    StandartSupport     = StandartSupport,
+                    FrequencySupport    = FrequencySupport,
+                    PrefferedChannel    = (short)getBestChannel(),
+                };
+
               //  _tdlsSetupR.setTransmitRate(11);
-                SendData(_tdlsSetupR);
+                SendData(tdlsSetupR);
                 TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestSended;
             }
             catch (Exception ex) { AddToLog("TDLS_SendSetupRequest: " + ex.Message); }
@@ -530,8 +539,8 @@ namespace Visualisator
         {
             try
             {
-                if (_StreamsHash.Contains(packet.streamID))
-                    _StreamsHash.Remove(packet.streamID);
+                if (StreamsHash.Contains(packet.streamID))
+                    StreamsHash.Remove(packet.streamID);
                 else
                     AddToLog("File Stream: Tryed to remove stream that not exist at the stream hash");
             }
@@ -547,11 +556,11 @@ namespace Visualisator
         {
             StreamHandle dstream = null;
                                 
-            lock (_StreamsHash)
+            lock (StreamsHash)
             {
                 try
                 {
-                    if (_StreamsHash.Contains(packet.streamID))
+                    if (StreamsHash.Contains(packet.streamID))
                     {
                         if (packet.streamStatus == StreamingStatus.Ended)
                         {
@@ -560,7 +569,7 @@ namespace Visualisator
                         }
                         else
                         {
-                            dstream = _StreamsHash[packet.streamID] as StreamHandle;
+                            dstream = StreamsHash[packet.streamID] as StreamHandle;
                             if (dstream != null)
                                 dstream.hendlePacket(packet);
                         }
@@ -569,7 +578,7 @@ namespace Visualisator
                     {
                         StreamHandle dstream222 = new StreamHandle(packet);
                         dstream222.hendlePacket(packet);
-                        _StreamsHash.Add(packet.streamID, dstream222);
+                        StreamsHash.Add(packet.streamID, dstream222);
                     }
                 }
                 catch (Exception ex) { AddToLog("File Stream: " + ex.Message); }
@@ -598,13 +607,13 @@ namespace Visualisator
             {
                 try
                 {
-                    lock (_AccessPoint)
+                    lock (AccessPoint)
                     {
-                        if (!_AccessPoint.Contains(pack.SSID))
-                            _AccessPoint.Add(pack.SSID);
+                        if (!AccessPoint.Contains(pack.SSID))
+                            AccessPoint.Add(pack.SSID);
                     }
                     _channels[pack.PacketChannel - 1] = Math.Max(-100, Rssi);
-                    _AccessPoint.Increase(pack.SSID);
+                    AccessPoint.Increase(pack.SSID);
                 }
                 catch (Exception ex) { AddToLog("Parse receibed Packet Beacon: " + ex.Message); }
             }
@@ -642,7 +651,7 @@ namespace Visualisator
             else if (_Pt == typeof(DataAck))
             {
                 //var dat = (DataAck)pack;
-                ackReceived = true;
+                _ackReceived = true;
                 _DataAckReceived++;
             }
             else
@@ -769,7 +778,7 @@ namespace Visualisator
         {
             try
             {
-                foreach (var obj in _AccessPoint)
+                foreach (var obj in AccessPoint)
                 {
                     RFDevice _tV = (RFDevice)obj;
                     if (_tV.getMACAddress().Equals(_mac))
@@ -813,12 +822,12 @@ namespace Visualisator
             streamID = Guid.NewGuid();
             int packetCounter = 0;
             short TxRateOnSend;
-            _TDLSCounterUnSuccessTx = 0;
+            TDLSCounterUnSuccessTx = 0;
             long TransferedByte = 0;
             FileStream fsSource = new FileStream(FilePachToSend,
                     FileMode.Open, FileAccess.Read);
             Statistic stat = new Statistic();
-            _StatisticOfSendData.Add(stat);
+            StatisticOfSendData.Add(stat);
             stat.DesctinationMAC = DestinationMacAddress;
             stat.FileName = FilePachToSend;
             stat.FileSize = fsSource.Length;
@@ -827,7 +836,7 @@ namespace Visualisator
             stat.CoordinateY = this.y;
             stat.BSS_BandWith = this.BandWidth.ToString();
             stat.BSS_Standart = this.Stand80211.ToString();
-            
+            //ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(DestinationMacAddress)));
             try
             {
                 AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
@@ -865,7 +874,7 @@ namespace Visualisator
                     else if (packetCounter > 0 && numOfReadBytes > 0)   dataPack.streamStatus = StreamingStatus.active;
 
                     TransferedByte += numOfReadBytes;
-                    ackReceived         = false;
+                    _ackReceived         = false;
                     SendData(dataPack);
                     WaitingForAck       = true;
                     packetCounter++;
@@ -886,7 +895,7 @@ namespace Visualisator
 
                     int maxRetrays = Medium.TrysToRetransmit;
                     bool ThePacketWasRetransmited = false;
-                    while (!ackReceived)
+                    while (!_ackReceived)
                     {
                         retrCounter --;
                         Thread.Sleep(1);
@@ -906,7 +915,7 @@ namespace Visualisator
                             if (TDLSisWork)     Thread.Sleep(DelayInTDLS + 5);
                             else                Thread.Sleep(DelayInBss + 5);
 
-                            _DataRetransmited++;
+                            _dataRetransmited++;
                             loops = loops + 1;
                             if (!_Enabled)  return;
                             maxRetrays--;
@@ -926,18 +935,18 @@ namespace Visualisator
                         workPeer.RetransmitionCounter++;
                         SuccessContinuous = 0;
                     }
-                    if (!ThePacketWasRetransmited && ackReceived && SuccessContinuous > 10){
+                    if (!ThePacketWasRetransmited && _ackReceived && SuccessContinuous > 10){
                         workPeer.TransmitCounter = 0;
                         workPeer.RetransmitionCounter = 0;
                     }
 
                     WaitingForAck = false;
-                    _StatisticRetransmitTime = loops * 60 - retrCounter;
+                    _statisticRetransmitTime = loops * 60 - retrCounter;
                 }
                 this.Passive = true;
                 sw.Stop();
                 TimeSpan elapsedTime = sw.Elapsed;
-                _lastTransmitTIme = elapsedTime.TotalSeconds.ToString();
+                LastTransmitTIme = elapsedTime.TotalSeconds.ToString();
                 stat.Time = elapsedTime.TotalSeconds;
             }
             catch (Exception ex) { AddToLog("ThreadAbleReadFile: " + ex.Message); }
@@ -1075,7 +1084,7 @@ namespace Visualisator
             try
             {
                 //_AccessPoint.Clear();
-                _AccessPoint.DecreaseAll();
+                AccessPoint.DecreaseAll();
                 //_AccessPointTimeCounter.Clear();
                 short perv_channel = this.getOperateChannel();
                 Frequency prev_band = this.Freq;
@@ -1107,7 +1116,7 @@ namespace Visualisator
         {
             try
             {
-                return (_AccessPoint);
+                return (AccessPoint);
             }
             catch (Exception ex) { AddToLog("ScanList: " + ex.Message); }
             return null;
@@ -1124,13 +1133,30 @@ namespace Visualisator
                 _DataSent = 0;
                 _DataReceived = 0;
                 _DataAckReceived = 0;
-                _DataRetransmited = 0;
-                _DataAckRetransmitted = 0;
+                _dataRetransmited = 0;
+                _dataAckRetransmitted = 0;
                 AllReceivedPackets = 0;
                 this.DoubleRecieved = 0;
-                _TDLSCounterUnSuccessTx = 0;
+                TDLSCounterUnSuccessTx = 0;
             }
             catch (Exception ex) { AddToLog("ResetCounters: " + ex.Message); }
+        }
+
+        public void TestTdls(string mac)
+        {
+            while (_Enabled)
+            {
+
+                if(TDLSisWork)
+                {
+                    NullData pack = (NullData) CreatePacket(mac);
+                    SendData(pack);
+                }
+                else
+                {
+                    Thread.Sleep(2000);
+                }
+            }
         }
     }
 }
