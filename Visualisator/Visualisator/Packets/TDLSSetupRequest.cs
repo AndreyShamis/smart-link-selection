@@ -9,11 +9,9 @@ namespace Visualisator.Packets
     {
         private bool _bandASupport      = false;
         private bool _width40Support    = false;
-        private Int32 _prefferedChannel = 0;
-        public ArrayList FrequencySupport = new ArrayList();
-        public ArrayList BandWithSupport = new ArrayList();
-        public ArrayList StandartSupport = new ArrayList();
-        public int PrefferedChannel
+        private short _prefferedChannel = 0;
+
+        public short PrefferedChannel
         {
             get { return _prefferedChannel; }
             set { _prefferedChannel = value; }

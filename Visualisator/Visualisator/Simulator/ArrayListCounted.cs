@@ -24,14 +24,19 @@ namespace Visualisator
 
         public void Increase(object _obj)
         {
-            if(this.Contains(_obj))
+            try
             {
-                CountedKey k = new CountedKey((String)_obj);
-                if (_counters.Contains(k))
-                    _counters[k] = MAX_KEEP_ALIVE_COUNTER;
-                else
-                    _counters.Add(k, MAX_KEEP_ALIVE_COUNTER);
+
+                if (this.Contains(_obj))
+                {
+                    CountedKey k = new CountedKey((String)_obj);
+                    if (_counters.Contains(k))
+                        _counters[k] = MAX_KEEP_ALIVE_COUNTER;
+                    else
+                        _counters.Add(k, MAX_KEEP_ALIVE_COUNTER);
+                }
             }
+            catch (Exception) { }
         }
 
         public void Decrease(object _obj)

@@ -159,6 +159,15 @@ namespace Visualisator
             ListenBeacon        = true;
             this.VColor         = DefaultColor;
             _PointerToAllRfDevices = RfObjects;
+
+            BandWithSupport.Add(Bandwidth._20MHz);
+            BandWithSupport.Add(Bandwidth._40Mhz);
+
+            StandartSupport.Add(Standart80211._11n);
+            StandartSupport.Add(Standart80211._11a);
+
+            FrequencySupport.Add(Frequency._2400GHz);
+            FrequencySupport.Add(Frequency._5200GHz);
             STAImage = (Image)Medium.imgLPImages[new Random().Next(0, Medium.imgLPImages.Count)];
             Enable();
         }
@@ -419,11 +428,15 @@ namespace Visualisator
         {
             try
             {
-                Packets.TDLSSetupRequest _tdlsSetupR = new TDLSSetupRequest(CreatePacket());
+                TDLSSetupRequest _tdlsSetupR = new TDLSSetupRequest(CreatePacket());
                 AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
                 _tdlsSetupR.SSID            = _connecttoAP.SSID;
                 _tdlsSetupR.Destination     = _connecttoAP.getMACAddress();
                 _tdlsSetupR.Reciver         = MAC;
+                _tdlsSetupR.BandWithSupport = BandWithSupport;
+                _tdlsSetupR.StandartSupport = StandartSupport;
+                _tdlsSetupR.FrequencySupport = FrequencySupport;
+                _tdlsSetupR.PrefferedChannel = (short)getBestChannel();
               //  _tdlsSetupR.setTransmitRate(11);
                 SendData(_tdlsSetupR);
                 TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestSended;
@@ -433,15 +446,27 @@ namespace Visualisator
         }
 
         //=====================================================================
-        public void TDLS_SendSetupResponse(string MAC)
+        public void TDLS_SendSetupResponse(TDLSSetupRequest req)
         {
             try
             {
                 Packets.TDLSSetupResponse _tdlsSetupR = new TDLSSetupResponse(CreatePacket());
                 AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
                 _tdlsSetupR.SSID = _connecttoAP.SSID;
-                _tdlsSetupR.Destination = MAC;// _connecttoAP.getMACAddress();
-                _tdlsSetupR.Reciver = MAC;
+                _tdlsSetupR.Destination = req.Source;// _connecttoAP.getMACAddress();
+                _tdlsSetupR.Reciver = req.Source;
+
+                ((RFpeer)_RFpeers[req.Source]).TDLSBandWith = getBestIntersectionBandwith(req.BandWithSupport);
+                if (((RFpeer)_RFpeers[req.Source]).TDLSBandWith == Bandwidth._40Mhz)
+                    _tdlsSetupR.Width40Support = true;
+                else
+                    _tdlsSetupR.Width40Support = false;
+
+
+                ((RFpeer)_RFpeers[req.Source]).TDLSFrequency = getBestIntersectionFreqency(req.FrequencySupport);
+                if (((RFpeer)_RFpeers[req.Source]).TDLSFrequency == Frequency._5200GHz)
+                    _tdlsSetupR.freq5000Support = true;
+
                 // _tdlsSetupR.setTransmitRate(11);
                 SendData(_tdlsSetupR);
                 TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
@@ -603,7 +628,8 @@ namespace Visualisator
                     {
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestReceived;
                         var tdlSreq = (TDLSSetupRequest)pack;
-                        TDLS_SendSetupResponse(tdlSreq.Source);
+                        //getBestIntersectionBandwith(tdlSreq.BandWithSupport);
+                        TDLS_SendSetupResponse(tdlSreq);
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
                         
                     }
@@ -612,6 +638,12 @@ namespace Visualisator
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseReceived;
                         this.TDLSisWork = true;
                         var tdlSreq = (TDLSSetupResponse)pack;
+
+                        if (tdlSreq.freq5000Support)
+                            ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSFrequency = Frequency._5200GHz;
+                        if (tdlSreq.Width40Support)
+                            ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSBandWith = Bandwidth._40Mhz ;
+
                         TDLS_SendSetupConfirm(tdlSreq.Source);
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
                     }
@@ -629,6 +661,28 @@ namespace Visualisator
             }
         }
 
+
+        public Bandwidth getBestIntersectionBandwith(ArrayList otherBandWith)
+        {
+            Bandwidth ret = Bandwidth._20MHz;
+
+            if (this.BandWithSupport.Contains(Bandwidth._40Mhz) && otherBandWith.Contains(Bandwidth._40Mhz))
+                ret = Bandwidth._40Mhz;
+
+            return ret;
+
+        }
+
+        public Frequency getBestIntersectionFreqency(ArrayList otherFrequency)
+        {
+            Frequency ret = Frequency._2400GHz;
+
+            if (this.FrequencySupport.Contains(Frequency._5200GHz) && otherFrequency.Contains(Frequency._5200GHz))
+                ret = Frequency._5200GHz;
+
+            return ret;
+
+        }
         //=====================================================================
         public void DisableTDLS()
         {

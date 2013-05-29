@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using System.Collections;
 
 namespace Visualisator.Packets
 {
@@ -28,6 +29,9 @@ namespace Visualisator.Packets
 
         private int _TransmitRate = 64;
         private int _PacketID = 0;
+        public ArrayList FrequencySupport { set; get; }
+        public ArrayList BandWithSupport { set; get; }
+        public ArrayList StandartSupport { set; get; }
 
         private bool _isRetransmit              =       false;
         private bool _isReceivedRetransmit      =       false;

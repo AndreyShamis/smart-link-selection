@@ -7,12 +7,9 @@ namespace Visualisator.Packets
     [Serializable()]
     class TDLSSetupResponse : SimulatorPacket, IPacket, ISerializable
     {
-        private bool _bandASupport      = false;
+        public bool freq5000Support = false;
         private bool _width40Support    = false;
         private Int32 _prefferedChannel = 0;
-        public ArrayList FrequencySupport = new ArrayList();
-        public ArrayList BandWithSupport = new ArrayList();
-        public ArrayList StandartSupport = new ArrayList();
         public int PrefferedChannel
         {
             get { return _prefferedChannel; }
@@ -24,11 +21,7 @@ namespace Visualisator.Packets
             set { _width40Support = value; }
         }
 
-        public bool BandASupport
-        {
-            get { return _bandASupport; }
-            set { _bandASupport = value; }
-        }
+
 
         public TDLSSetupResponse(SimulatorPacket pack)
             : base(pack)

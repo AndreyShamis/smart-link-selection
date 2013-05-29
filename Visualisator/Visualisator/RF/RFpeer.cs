@@ -61,6 +61,11 @@ namespace Visualisator
         /// Show if device active or passive now
         /// </summary>
         public bool isPassive { set; get; }
+
+
+        public Bandwidth        TDLSBandWith    { set; get; }
+        public Standart80211    TDLSStandart    { set; get; }
+        public Frequency        TDLSFrequency   { set; get; }
         #endregion
 
 
