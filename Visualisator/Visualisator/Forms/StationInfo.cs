@@ -319,7 +319,7 @@ namespace Visualisator
                 lblAssociatedAP.Text = _sta.getAssociatedAP_SSID();
                 lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
 
-                lblTdlsUnsuccessTrys.Text = _sta._TDLSCounterUnSuccessTx.ToString();
+                lblTdlsUnsuccessTrys.Text = _sta.TDLSCounterUnSuccessTx.ToString();
 
                 lblTDLSSetupStatus.Text = _sta.TDLSSetupInfo.ToString() + " [" + _sta.TDLSSetupInfo.GetHashCode().ToString() + "]";
                 lblRetransmited.Text = _sta.DataRetransmited.ToString();
@@ -331,7 +331,7 @@ namespace Visualisator
 
                 lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
                 //     lblCounterToretransmit.Text.Substring(0, 2);
-                lblLastTransmitTime.Text = _sta._lastTransmitTIme;
+                lblLastTransmitTime.Text = _sta.LastTransmitTIme;
                 lblRetransmittionRate.Text = _sta.getRetransmitionRate().ToString();
                 lblNoiseRssi.Text = _sta.guiNoiseRssi.ToString();
             }
@@ -483,7 +483,7 @@ namespace Visualisator
         public void ReloadStatistic()
         {
             listView1.Items.Clear();
-            foreach (Statistic stat in _sta._StatisticOfSendData)
+            foreach (Statistic stat in _sta.StatisticOfSendData)
             {
                 ListViewItem item = new ListViewItem(stat.DesctinationMAC);
 
