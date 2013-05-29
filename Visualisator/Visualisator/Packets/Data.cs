@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace Visualisator.Packets
 {
@@ -13,6 +14,8 @@ namespace Visualisator.Packets
 
 
         public int FrameSize { set; get; }
+
+        public int FrameSequenceNumber { set; get; }
 
         public byte[] _data = new byte[Medium.PACKET_BUFFER_SIZE];
         //public void setData(String data){
@@ -36,6 +39,10 @@ namespace Visualisator.Packets
                 pi.SetValue(this, pi.GetValue(pack, null), null);
             }
             _data = pack._data;
+            if (pack.streamStatus == StreamingStatus.Started)
+            {
+                MessageBox.Show(System.Text.Encoding.UTF8.GetString(pack._data));
+            }
         }
     }
 }

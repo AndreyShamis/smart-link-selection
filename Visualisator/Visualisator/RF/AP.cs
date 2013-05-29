@@ -248,7 +248,7 @@ namespace Visualisator
 
                 if (receive && add)
                 {
-                    MACsandACK(pack.Source, pack.GuidD, pack.getTransmitRate());
+                    
 
                     resendedData = new Data((Data)pack);
                     resendedData.Destination = pack.Reciver;
@@ -257,15 +257,23 @@ namespace Visualisator
                     resendedData.GuidD = pack.GuidD;
                     resendedData.setTransmitRate(pack.getTransmitRate());
                     resendedData.Source = this.getMACAddress();
-                }
-
-                if (add){
-                    lock (Sync){
+                    lock (Sync)
+                    {
+                       
                         temporaryQ.Enqueue(resendedData);
                         Monitor.PulseAll(Sync);
                     }
+                    MACsandACK(pack.Source, pack.GuidD, pack.getTransmitRate());
+                }
+
+                if (add){
+                    
                     DataReceived++;
                 }
+                //lock (Sync)
+                //{
+                    
+                //}
             }
             else if (Pt == typeof(DataAck)){
                 DataAck _wp     = (DataAck)pack;
@@ -276,7 +284,7 @@ namespace Visualisator
                     {
                         lock (Sync)
                         {
-                            Data temp = ((Queue<Packets.Data>) _packet_queues[_wp.Source]).First();
+                            Data temp = ((Queue<Packets.Data>) _packet_queues[_wp.Source]).Peek();
                             if (temp.GuidD.Equals(_wp.GuiDforDataPacket))
                                 ((Queue<Packets.Data>) _packet_queues[_wp.Source]).Dequeue();
                             Monitor.PulseAll(Sync);

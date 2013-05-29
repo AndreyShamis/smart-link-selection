@@ -564,6 +564,8 @@ namespace Visualisator
                         if (packet.streamStatus == StreamingStatus.Ended)
                         {
                             Thread.Sleep(5);
+                            dstream = StreamsHash[packet.streamID] as StreamHandle;
+                            dstream.Terminate();
                             DeleteDataStream(packet);
                         }
                         else
@@ -862,6 +864,7 @@ namespace Visualisator
                     dataPack._data      = buffer;
                     TxRateOnSend = GetTXRate(dataPack.Destination);
                     dataPack.setTransmitRate(TxRateOnSend);
+                    dataPack.FrameSequenceNumber = packetCounter;
 
                     stat.Packets += 1;
                     if(TDLSisEnabled && TDLSisWork)
@@ -869,8 +872,12 @@ namespace Visualisator
                         stat.TdlsUse = true;
                         stat.PacketsInTdls += 1;
                     }
-                    if (packetCounter == 0 && !exit_loop)               dataPack.streamStatus = StreamingStatus.Started;
-                    else if (packetCounter > 0 && numOfReadBytes > 0)   dataPack.streamStatus = StreamingStatus.active;
+                    if (packetCounter == 0 && !exit_loop)
+                    {
+                        dataPack.streamStatus = StreamingStatus.Started;
+                        MessageBox.Show(System.Text.Encoding.UTF8.GetString(dataPack._data));
+                    }
+                    else if (packetCounter > 0 && numOfReadBytes > 0) dataPack.streamStatus = StreamingStatus.active;
 
                     TransferedByte += numOfReadBytes;
                     _ackReceived         = false;
