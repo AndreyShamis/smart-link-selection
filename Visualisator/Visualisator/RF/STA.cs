@@ -10,36 +10,37 @@ using System.IO;
 using System.Diagnostics;
 using Visualisator.Simulator;
 
-
 namespace Visualisator
 {
+    /// <summary>
+    /// STA Station device, base is RFDevice
+    /// </summary>
     [Serializable()]
     class STA : RFDevice, IBoardObjects,IRFDevice
     {
-
-        protected ArrayListCounted  _AccessPoint = new ArrayListCounted();
-        protected Hashtable         _StreamsHash = new Hashtable(new ByteArrayComparer());
-        private Boolean         _scanning                   = false;
-        private int             _DataRetransmited           = 0;
-        private int             _DataAckRetransmitted       = 0;
-        private int             _RSSI                       = 0;
-        private bool            _WaitingForAck              = false;
-        private StringBuilder   DataReceivedContainer       = new StringBuilder();
-        private Int32           _StatisticRetransmitTime    = 0;
-        private string          _connectedAPMacAddress      = "";
-        private int             _delayInBSS                 = 1;
-        private int             _delayInTDLS                = 1;
-        private const int       max_channel                 = 13;
-        private int[]           _channels                   = new int[max_channel]; // now it's a 20-element array
-        private bool            StopScan { set; get; }                              // Used fro stop scan if start connection
-        public string           FilePachToSend { set; get; }
-        private TDLSSetupStatus _TDLSSetupStatus = TDLSSetupStatus.TDLSSetupDisabled;
-        public string           _lastTransmitTIme { set; get; }
-        public int              _TDLSCounterUnSuccessTx { set; get; }
-        public ArrayList        _StatisticOfSendData = new ArrayList();
-        private const int MAX_QUEUE_REC_PACKETS = 10;
-        public Queue ReceivedGuids = new Queue(MAX_QUEUE_REC_PACKETS);
-        public Image STAImage { set; get; }
+        protected ArrayListCounted  _AccessPoint                = new ArrayListCounted();
+        protected Hashtable         _StreamsHash                = new Hashtable(new ByteArrayComparer());
+        private Boolean             _scanning                   = false;
+        private int                 _DataRetransmited           = 0;
+        private int                 _DataAckRetransmitted       = 0;
+        private int                 _RSSI                       = 0;
+        private bool                _WaitingForAck              = false;
+        //private StringBuilder       DataReceivedContainer       = new StringBuilder();
+        private Int32               _StatisticRetransmitTime    = 0;
+        private string              _connectedAPMacAddress      = "";
+        private int                 _delayInBSS                 = 1;
+        private int                 _delayInTDLS                = 1;
+        private const int           max_channel                 = 13;
+        private int[]               _channels                   = new int[max_channel]; // now it's a 20-element array
+        private bool                StopScan                    { set; get; } // Used for stop scan if start connection
+        public string               FilePachToSend              { set; get; }
+        private TDLSSetupStatus     _TDLSSetupStatus            = TDLSSetupStatus.TDLSSetupDisabled;
+        public string               _lastTransmitTIme           { set; get; }
+        public int                  _TDLSCounterUnSuccessTx     { set; get; }
+        public ArrayList            _StatisticOfSendData        = new ArrayList();
+        private const int           MAX_QUEUE_REC_PACKETS       = 10;
+        public Queue                ReceivedGuids               = new Queue(MAX_QUEUE_REC_PACKETS);
+        public Image                STAImage                    { set; get; }
 
         //*********************************************************************
         //=====================================================================
@@ -67,6 +68,9 @@ namespace Visualisator
             return (pack);
         }
 
+        /// <summary>
+        /// SLS Function
+        /// </summary>
         private  void SLS()
         {
             if (!TDLSAutoStart || !TDLSisEnabled)
@@ -240,14 +244,13 @@ namespace Visualisator
             }
         }
 
-
         //=====================================================================
         /// <summary>
         /// Function for connect to AP
         /// </summary>
-        /// <param name="SSID"></param>
-        /// <param name="_conn"></param>
-        /// <param name="_connecttoAP"></param>
+        /// <param name="SSID">SSID of BSS</param>
+        /// <param name="_conn">Connect Packet</param>
+        /// <param name="_connecttoAP">AP for association</param>
         private void ThreadableConnectToAP(String SSID, Connect _conn, AP _connecttoAP)
         {
 
@@ -300,9 +303,13 @@ namespace Visualisator
         }
 
         //=====================================================================
-        public String getAssociatedAP_SSID()
+        /// <summary>
+        /// Return SSID of AP for each we are associated
+        /// </summary>
+        /// <returns>SSID</returns>
+        public string getAssociatedAP_SSID()
         {
-            String ret = "";
+            string ret = "";
 
             foreach (var ap in _AssociatedWithAPList)
                 ret += ap.ToString() + "";
@@ -336,14 +343,7 @@ namespace Visualisator
             return (false);
         }
 
-        //=====================================================================
-        public Int32 getSizeOfReceivedData()
-        {
-            if (DataReceivedContainer != null)
-                return DataReceivedContainer.Length;
-                
-            return 0;
-        }
+
 
         //=====================================================================
         public void LookIntoChannels()
@@ -354,6 +354,10 @@ namespace Visualisator
         }
 
         //=====================================================================
+        /// <summary>
+        /// Function for search for best channel on Frequency 2400
+        /// </summary>
+        /// <returns>Return channel number on 2400</returns>
         public int getBestChannel()
         {
             const double neighborsWeight = 2;
@@ -395,6 +399,12 @@ namespace Visualisator
         }
 
         //=====================================================================
+        /// <summary>
+        /// Function for find index of max value in array
+        /// </summary>
+        /// <typeparam name="T">Object Type</typeparam>
+        /// <param name="sequence">Object</param>
+        /// <returns>Index of max value</returns>
         public static int MaxIndex<T>(IEnumerable<T> sequence)
         where T : IComparable<T>
         {
@@ -414,16 +424,11 @@ namespace Visualisator
             return maxIndex;
         }
 
-        public void TDLS_SendDiscoveryRequest()
-        {
-            
-        }
-        public void TDLS_SendDiscoveryResponse(string MAC)
-        {
-
-        }
-
         //=====================================================================
+        /// <summary>
+        /// Prepare and send TDLS setup request
+        /// </summary>
+        /// <param name="MAC">MAC address of Peer</param>
         public void TDLS_SendSetupRequest(string MAC)
         {
             try
@@ -446,6 +451,10 @@ namespace Visualisator
         }
 
         //=====================================================================
+        /// <summary>
+        /// Responce to TDLS request
+        /// </summary>
+        /// <param name="req">TDLS Setup Request packet</param>
         public void TDLS_SendSetupResponse(TDLSSetupRequest req)
         {
             try
@@ -475,6 +484,10 @@ namespace Visualisator
         }
 
         //=====================================================================
+        /// <summary>
+        /// Confirm TDLS setup
+        /// </summary>
+        /// <param name="MAC">MAC address of Peer</param>
         public void TDLS_SendSetupConfirm(string MAC)
         {
             try
@@ -492,6 +505,10 @@ namespace Visualisator
         }
 
         //=====================================================================
+        /// <summary>
+        /// Tear down TDLS setup
+        /// </summary>
+        /// <param name="MAC">MAC address of Peer</param>
         public void TDLS_SendTearDown(string MAC)
         {
             try
@@ -522,6 +539,10 @@ namespace Visualisator
         }
 
         //=====================================================================
+        /// <summary>
+        /// Handle data stream
+        /// </summary>
+        /// <param name="packet">Received packet</param>
         public void HandleDataStream(Data packet)
         {
             StreamHandle dstream = null;
@@ -556,6 +577,10 @@ namespace Visualisator
         }
 
         //=====================================================================
+        /// <summary>
+        /// Function for parse received packet
+        /// </summary>
+        /// <param name="pack">Simulator packet</param>
         public override void ParseReceivedPacket(SimulatorPacket pack)
         {
             Rssi = GetRSSI(pack.X, pack.Y);             
@@ -661,7 +686,12 @@ namespace Visualisator
             }
         }
 
-
+        //=====================================================================
+        /// <summary>
+        /// Return Best Intersection Bandwith for use in TDLS
+        /// </summary>
+        /// <param name="otherBandWith">Array list of supported Bandwith for other device</param>
+        /// <returns>Return Best Intersection Bandwith</returns>
         public Bandwidth getBestIntersectionBandwith(ArrayList otherBandWith)
         {
             Bandwidth ret = Bandwidth._20MHz;
@@ -670,9 +700,14 @@ namespace Visualisator
                 ret = Bandwidth._40Mhz;
 
             return ret;
-
         }
 
+        //=====================================================================
+        /// <summary>
+        /// Return Best Intersection Frequency for use in TDLS
+        /// </summary>
+        /// <param name="otherFrequency">Array list of supported frequncy for other device</param>
+        /// <returns>Return Best Intersection Frequency</returns>
         public Frequency getBestIntersectionFreqency(ArrayList otherFrequency)
         {
             Frequency ret = Frequency._2400GHz;
@@ -681,9 +716,12 @@ namespace Visualisator
                 ret = Frequency._5200GHz;
 
             return ret;
-
         }
+
         //=====================================================================
+        /// <summary>
+        /// Use for disable TDLS
+        /// </summary>
         public void DisableTDLS()
         {
             try
@@ -694,6 +732,9 @@ namespace Visualisator
         }
 
         //=====================================================================
+        /// <summary>
+        /// Use for enable TDLS
+        /// </summary>
         public void EnableTDLS()
         {
             try
@@ -704,21 +745,27 @@ namespace Visualisator
         }
 
         //=====================================================================
+        /// <summary>
+        /// Test scan condition before send.Used for check if we not perform scan right now. 
+        /// The function wait until scan is completed
+        /// </summary>
         public override void CheckScanConditionOnSend()
         {
             try
             {
-                // Now scanning process running
-                if (_scanning)
-                {
+                if (_scanning)  // Now scanning process running
                     SpinWait.SpinUntil(() => { return (bool)!_scanning; });
-                }
             }
             catch (Exception ex) { AddToLog("CheckScanConditionOnSend: " + ex.Message); }
         }
 
         //=====================================================================
-        public RFDevice GetRFDeviceByMAC(String _mac)
+        /// <summary>
+        /// Return RF device by MAC address
+        /// </summary>
+        /// <param name="_mac">MAC address of other device</param>
+        /// <returns>RFDevice</returns>
+        public RFDevice GetRFDeviceByMAC(string _mac)
         {
             try
             {
@@ -734,7 +781,11 @@ namespace Visualisator
         }
 
         //=====================================================================
-        public void rfile(String fileName)
+        /// <summary>
+        /// Start send file
+        /// </summary>
+        /// <param name="fileName">Actually Mac Address of Peer</param>
+        public void rfile(string fileName)
         {
             try
             {
@@ -1063,21 +1114,9 @@ namespace Visualisator
         }
 
         //=====================================================================
-        // TODO - Delete this function
         /// <summary>
-        /// Send received Data into File. Not used.
+        /// Reset counters
         /// </summary>
-        public void SaveReceivedDataIntoFile()
-        {
-            string mydocpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            StringBuilder sb = new StringBuilder();
-            using (StreamWriter outfile = new StreamWriter(DOCpath + @"\received.txt"))
-            {
-                outfile.Write(DataReceivedContainer.ToString());
-            }
-        }
-
-        //=====================================================================
         public void ResetCounters()
         {
             try

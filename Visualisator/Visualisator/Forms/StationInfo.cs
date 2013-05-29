@@ -92,11 +92,6 @@ namespace Visualisator
                 btnScan.Enabled = false;
             }
 
-            if (_sta.getSizeOfReceivedData() > 1)
-            {
-                btnSaveData.Enabled = true;
-            }
-
             //txtDumpAll.Text = _sta.DumpAll();
             if(_sta.TDLSisEnabled)
             {
@@ -176,7 +171,7 @@ namespace Visualisator
         //=====================================================================
         private void btnSaveData_Click(object sender, EventArgs e)
         {
-            _sta.SaveReceivedDataIntoFile();
+          //  _sta.SaveReceivedDataIntoFile();
         }
 
         //=====================================================================
@@ -199,11 +194,6 @@ namespace Visualisator
             }
         }
 
-        //=====================================================================
-        private void btnTDLSDiscoveryRequest_Click(object sender, EventArgs e)
-        {
-            _sta.TDLS_SendDiscoveryRequest();
-        }
 
         //=====================================================================
         private void button2_Click(object sender, EventArgs e)
