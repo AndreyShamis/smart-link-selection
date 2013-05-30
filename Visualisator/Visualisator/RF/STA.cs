@@ -816,7 +816,7 @@ namespace Visualisator
         public void ThreadAbleReadFile(string DestinationMacAddress)
         {
             int buf_size = Medium.PACKET_BUFFER_SIZE, numOfReadBytes = 0;
-            byte[] buffer = new byte[buf_size];
+            byte[] buffer;
             bool exit_loop = false;
             Data dataPack = null;
             Guid streamID = new Guid();
@@ -853,6 +853,7 @@ namespace Visualisator
                 MACOfAnotherPeer    = DestinationMacAddress;
                 while (!exit_loop)
                 {
+                    buffer = new byte[buf_size];
                     dataPack = new Data(CreatePacket(DestinationMacAddress)); 
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
@@ -875,7 +876,7 @@ namespace Visualisator
                     if (packetCounter == 0 && !exit_loop)
                     {
                         dataPack.streamStatus = StreamingStatus.Started;
-                        MessageBox.Show(System.Text.Encoding.UTF8.GetString(dataPack._data));
+                       // MessageBox.Show(System.Text.Encoding.UTF8.GetString(dataPack._data));
                     }
                     else if (packetCounter > 0 && numOfReadBytes > 0) dataPack.streamStatus = StreamingStatus.active;
 

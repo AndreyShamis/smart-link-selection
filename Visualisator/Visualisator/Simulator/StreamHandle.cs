@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Visualisator.Packets;
 using System.Threading;
 using System.Collections;
+using System.Security.Permissions;
 
 namespace Visualisator
 {
@@ -22,6 +23,7 @@ namespace Visualisator
         //private Queue<Packets.Data> _DataQueue = new Queue<Packets.Data>(1000);
         private SortedList _sortedDataPac = new SortedList();
         private bool _Enabled = false;
+        private bool _endStream = false;
         private Thread newThread;
 
         public StreamHandle(Data packet)
@@ -48,17 +50,25 @@ namespace Visualisator
                 //AddToLog("File Stream: " + ex.Message);
             }
         }
-
+        //[SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
         public void Terminate()
         {
-            Thread.Sleep(1000);
-            newThread.Abort();
+            _Enabled = false;
+            while (!_endStream)
+            {
+                Thread.Sleep(10);
+            }
+            
+            //newThread.Abort();
+            //fstream.Close();
+            //fstream = null;
         }
+
         ~StreamHandle()
         {
             try
-            {   
-                fstream.Close();
+            { 
+                if (fstream != null)    fstream.Close();
             }
             catch (Exception)
             {
@@ -88,7 +98,7 @@ namespace Visualisator
         }
         private void WriteFromQueueToFile()
         {
-            while (_Enabled)
+            while (_Enabled || _sortedDataPac.Count > 0)
             {
                 if (_sortedDataPac.Count > 0)
                 {
@@ -97,10 +107,10 @@ namespace Visualisator
                         Data tempDataPac = (Data)_sortedDataPac.GetByIndex(0);
                         _sortedDataPac.RemoveAt(0);
                         fstream.Write(tempDataPac._data, 0, tempDataPac.FrameSize);
-                        if (tempDataPac.streamStatus == StreamingStatus.Started)
-                        {
-                            MessageBox.Show(System.Text.Encoding.UTF8.GetString(tempDataPac._data));
-                        }
+                        //if (tempDataPac.streamStatus == StreamingStatus.Started)
+                        //{
+                        //    MessageBox.Show(System.Text.Encoding.UTF8.GetString(tempDataPac._data));
+                        //}
                     }
                     catch (Exception)
                     {
@@ -109,7 +119,11 @@ namespace Visualisator
                     }
                 }
                 Thread.Sleep(10);
-            }   
+            }
+            fstream.Close();
+            Thread.Sleep(10);
+            fstream = null;
+            _endStream = true;
         }
     }
 }

@@ -39,10 +39,10 @@ namespace Visualisator.Packets
                 pi.SetValue(this, pi.GetValue(pack, null), null);
             }
             _data = pack._data;
-            if (pack.streamStatus == StreamingStatus.Started)
-            {
-                MessageBox.Show(System.Text.Encoding.UTF8.GetString(pack._data));
-            }
+            //if (pack.streamStatus == StreamingStatus.Started)
+            //{
+            //    MessageBox.Show(System.Text.Encoding.UTF8.GetString(pack._data));
+            //}
         }
     }
 }
