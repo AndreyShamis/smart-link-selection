@@ -226,7 +226,7 @@ namespace Visualisator
 
         private void GetDevicesInBSS()
         {
-            ArrayList _des = _sta.getAssociatedDevicesInBSS();
+            ArrayList _des = _sta.GetAssociatedDevicesInBSS();
             string _selfMac = _sta.getMACAddress();
             cmbAssociatedDevicesInBSS.Items.Clear();
             if (_des != null)

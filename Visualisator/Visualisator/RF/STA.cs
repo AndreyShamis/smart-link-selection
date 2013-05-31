@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Drawing;
 using System.Threading;
 using System.Collections;
 using Visualisator.Packets;
-using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using Visualisator.Simulator;
+using System.Windows.Forms;
 
 namespace Visualisator
 {
@@ -34,18 +33,49 @@ namespace Visualisator
         private const int           max_channel                 = 13;
         private int[]               _channels                   = new int[max_channel]; // now it's a 20-element array
         private bool                StopScan                    { set; get; } // Used for stop scan if start connection
-        public string               FilePachToSend              { set; get; }
         private TDLSSetupStatus     _tdlsSetupStatus            = TDLSSetupStatus.TDLSSetupDisabled;
+        private bool                _ackReceived                = false;
+
+        /// <summary>
+        /// Indicate if NullDataAck was received in TdlsTest
+        /// </summary>
+        private bool                NullDataAckValue            { set; get; }
+        /// <summary>
+        /// Contain pach to file which will be sended
+        /// </summary>
+        public string               FilePachToSend              { set; get; }
+
+        /// <summary>
+        /// Contain last Transmit rate
+        /// </summary>
         public string               LastTransmitTIme            { set; get; }
+
+        /// <summary>
+        /// TDLS. Contain Unsuccesfull TX counter in TDLS
+        /// </summary>
         public int                  TDLSCounterUnSuccessTx      { set; get; }
+
+        /// <summary>
+        /// Collect Statistic of Send Data
+        /// </summary>
         public ArrayList            StatisticOfSendData         = new ArrayList();
         private const int           MAX_QUEUE_REC_PACKETS       = 10;
+
+        /// <summary>
+        /// Contains Guids of received packets
+        /// </summary>
         public Queue                ReceivedGuids               = new Queue(MAX_QUEUE_REC_PACKETS);
         public Image                STAImage                    { set; get; }
-        private bool                _ackReceived                = false;
-        //*********************************************************************
-        //=====================================================================
 
+        /// <summary>
+        /// Smart Link Selection Message
+        /// </summary>
+        public string               SLSMessage                  { set; get; }
+
+
+
+
+        //=====================================================================
         /// <summary>
         /// Function for create packet. Used in Send Data.
         /// </summary>
@@ -73,6 +103,7 @@ namespace Visualisator
             return (pack);
         }
 
+        //=====================================================================
         /// <summary>
         /// SLS Function
         /// </summary>
@@ -82,6 +113,7 @@ namespace Visualisator
                 return;
         }
 
+        //=====================================================================
         /// <summary>
         /// This function should tear down TDLS setup in case if number of packets more then Medium.TDLS_TearDownAfterFails
         /// </summary>
@@ -199,6 +231,8 @@ namespace Visualisator
         /// </summary>
         public new void Enable()
         {
+           
+            SLSMessage = "TDLS disabled";
             FilePachToSend = @"C:\simulator\_DATA_TO_SEND\input.txt";
             base.Enable();
             TDLSAutoStart = true;
@@ -354,8 +388,6 @@ namespace Visualisator
             return (false);
         }
 
-
-
         //=====================================================================
         public void LookIntoChannels()
         {
@@ -480,21 +512,21 @@ namespace Visualisator
                 _tdlsSetupR.Destination = req.Source;// _connecttoAP.getMACAddress();
                 _tdlsSetupR.Reciver = req.Source;
 
-                ((RFpeer)_RFpeers[req.Source]).TDLSBandWith = getBestIntersectionBandwith(req.BandWithSupport);
+                ((RFpeer)_RFpeers[req.Source]).TDLSBandWith = GetBestIntersectionBandwith(req.BandWithSupport);
                 if (((RFpeer)_RFpeers[req.Source]).TDLSBandWith == Bandwidth._40Mhz)
                     _tdlsSetupR.Width40Support = true;
                 else
                     _tdlsSetupR.Width40Support = false;
 
 
-                ((RFpeer)_RFpeers[req.Source]).TDLSFrequency = getBestIntersectionFreqency(req.FrequencySupport);
+                ((RFpeer)_RFpeers[req.Source]).TDLSFrequency = GetBestIntersectionFreqency(req.FrequencySupport);
                 if (((RFpeer)_RFpeers[req.Source]).TDLSFrequency == Frequency._5200GHz)
                     _tdlsSetupR.freq5000Support = true;
 
                 // _tdlsSetupR.setTransmitRate(11);
                 SendData(_tdlsSetupR);
                 TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
-                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(req.Source)));
+                
             }
             catch (Exception ex) { AddToLog("TDLS_SendSetupResponse: " + ex.Message); }
         }
@@ -508,14 +540,15 @@ namespace Visualisator
         {
             try
             {
-            Packets.TDLSSetupConfirm _tdlsSetupR = new TDLSSetupConfirm(CreatePacket());
-            AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
-            _tdlsSetupR.SSID = _connecttoAP.SSID;
-            _tdlsSetupR.Destination = _connecttoAP.getMACAddress();
-            _tdlsSetupR.Reciver = MAC;
-           // _tdlsSetupR.setTransmitRate(11);
-            SendData(_tdlsSetupR);
-            TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
+                TDLSSetupConfirm _tdlsSetupR = new TDLSSetupConfirm(CreatePacket());
+                AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
+                _tdlsSetupR.SSID = _connecttoAP.SSID;
+                _tdlsSetupR.Destination = _connecttoAP.getMACAddress();
+                _tdlsSetupR.Reciver = MAC;
+               // _tdlsSetupR.setTransmitRate(11);
+                SendData(_tdlsSetupR);
+                TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
+                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(MAC)));
             }
             catch (Exception ex) { AddToLog("TDLS_SendSetupConfirm: " + ex.Message); }
         }
@@ -530,7 +563,7 @@ namespace Visualisator
             try
             {
                 TDLSisWork = false;
-                Packets.TDLSTearDown _tdlsTearDown = new TDLSTearDown(CreatePacket());
+                TDLSTearDown _tdlsTearDown = new TDLSTearDown(CreatePacket());
                 AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
                 _tdlsTearDown.SSID = _connecttoAP.SSID;
                 _tdlsTearDown.Destination = _connecttoAP.getMACAddress();
@@ -541,7 +574,12 @@ namespace Visualisator
             }
             catch (Exception ex) { AddToLog("TDLS_SendTearDown: " + ex.Message); }  
         }
+
         //=====================================================================
+        /// <summary>
+        /// Delete Datapackets stream
+        /// </summary>
+        /// <param name="packet">Packet </param>
         public void DeleteDataStream(Data packet)
         {
             try
@@ -741,7 +779,7 @@ namespace Visualisator
         /// </summary>
         /// <param name="otherBandWith">Array list of supported Bandwith for other device</param>
         /// <returns>Return Best Intersection Bandwith</returns>
-        public Bandwidth getBestIntersectionBandwith(ArrayList otherBandWith)
+        public Bandwidth GetBestIntersectionBandwith(ArrayList otherBandWith)
         {
             Bandwidth ret = Bandwidth._20MHz;
 
@@ -757,7 +795,7 @@ namespace Visualisator
         /// </summary>
         /// <param name="otherFrequency">Array list of supported frequncy for other device</param>
         /// <returns>Return Best Intersection Frequency</returns>
-        public Frequency getBestIntersectionFreqency(ArrayList otherFrequency)
+        public Frequency GetBestIntersectionFreqency(ArrayList otherFrequency)
         {
             Frequency ret = Frequency._2400GHz;
 
@@ -769,39 +807,12 @@ namespace Visualisator
 
         //=====================================================================
         /// <summary>
-        /// Use for disable TDLS
-        /// </summary>
-        public void DisableTDLS()
-        {
-            try
-            {
-                this.TDLSisWork = false;
-            }
-            catch (Exception ex) { AddToLog("DisableTDLS: " + ex.Message); }
-        }
-
-        //=====================================================================
-        /// <summary>
-        /// Use for enable TDLS
-        /// </summary>
-        public void EnableTDLS()
-        {
-            try
-            {
-                this.TDLSisWork = true;
-            }
-            catch (Exception ex) { AddToLog("EnableTDLS: " + ex.Message); }
-        }
-
-        //=====================================================================
-        /// <summary>
         /// Test scan condition before send.Used for check if we not perform scan right now. 
         /// The function wait until scan is completed
         /// </summary>
         public override void CheckScanConditionOnSend()
         {
-            try
-            {
+            try{
                 if (_scanning)  // Now scanning process running
                     SpinWait.SpinUntil(() => { return (bool)!_scanning; });
             }
@@ -1008,6 +1019,11 @@ namespace Visualisator
             }
         }
 
+        //=====================================================================
+        /// <summary>
+        /// TDLS starter. This function trying to start work in TDLS mode bt sending TDLS setup request to destination
+        /// </summary>
+        /// <param name="destinationMacAddress">Destination MAC address of Peer</param>
         private void TdlsStarter(string destinationMacAddress)
         {
             while (_Enabled && this.TDLSisEnabled)
@@ -1015,19 +1031,19 @@ namespace Visualisator
                 if (this.TDLSAutoStart && this.TDLSisEnabled)
                 {
                     if(!TDLSisWork)
-                    {
                         TDLS_SendSetupRequest(destinationMacAddress);
-                        
-                    }
                 }
-
                 Thread.Sleep(5000);
             }
-
         }
 
         //=====================================================================
-        private AP GetApbySsid(string _SSID)
+        /// <summary>
+        /// Return pointer to AP by SSID
+        /// </summary>
+        /// <param name="ssid">SSID of of AP</param>
+        /// <returns>AP object</returns>
+        private AP GetApbySsid(string ssid)
         {
             try
             {
@@ -1036,7 +1052,7 @@ namespace Visualisator
                     if (obj.GetType() == typeof(AP))
                     {
                         AP _tV = (AP)obj;
-                        if (_tV.SSID.Equals(_SSID))
+                        if (_tV.SSID.Equals(ssid))
                             return (_tV);
                     }
                 }
@@ -1068,7 +1084,7 @@ namespace Visualisator
         /// Get Associatedd Devices IN BSS
         /// </summary>
         /// <returns>Array List Of Associated Devices</returns>
-        public ArrayList getAssociatedDevicesInBSS()
+        public ArrayList GetAssociatedDevicesInBSS()
         {
             try
             {
@@ -1167,8 +1183,8 @@ namespace Visualisator
                 ArrayList Achannels = Medium.getBandAChannels();
                 foreach (var i in Achannels)
                 {
-                    int temp_val = (int)i;
-                    ScanOneChannel((short)temp_val, 320, Frequency._5200GHz);
+                    int tempVal = (int)i;
+                    ScanOneChannel((short)tempVal, 320, Frequency._5200GHz);
                     if (StopScan)
                         return;
                 }
@@ -1245,91 +1261,116 @@ namespace Visualisator
             }
             catch (Exception ex) { AddToLog("NullDataAck Routine: " + ex.Message); }
         }
-
-        private bool NullDataAckValue { set; get; }
-
-
-        public string SLSMessage { set; get; }
    
         //=====================================================================
         /// <summary>
         /// Test BSS vs TDLS
         /// </summary>
         /// <param name="mac">MAC address of Peer</param>
-        public void TestTdls(string mac)
+        private void TestTdls(string mac)
         {
-            const int PACKETS_FOR_TEST = 20;
-            Stopwatch sw;
-            const int MAX_TRYS = 10;
-            int counter = 0;
-            while (_Enabled)
+            try
             {
-                if (TDLSisWork)
-                {
-                    // BSS
-                    sw = Stopwatch.StartNew();
-                    for (int i = 0; i < PACKETS_FOR_TEST; i++)
-                    {
-                        NullData pack = new NullData(CreatePacket(mac,true));
-                        NullDataAckValue = false;
-                        SendData(pack);
-                        counter = 0;
-                        while (!NullDataAckValue)
-                        {
-                            Thread.Sleep(1);
-                            counter++;
-                            if (counter >= MAX_TRYS)
-                                NullDataAckValue = true;
-                        }
-
-                        //Thread.Sleep(1);
-                    }
-                    sw.Stop();
-                    TimeSpan elapsedTime1 = sw.Elapsed;
-                    
-                    //TDLS
-                    sw = Stopwatch.StartNew();
-                    for (int i = 0; i < PACKETS_FOR_TEST; i++)
-                    {
-                        NullDataAckValue = false;
-                        NullData pack = new NullData(CreatePacket(mac));
-                        SendData(pack);
-                        counter = 0;
-                        while (!NullDataAckValue)
-                        {
-                            Thread.Sleep(1);
-                            counter++;
-                            if (counter >= MAX_TRYS)
-                                NullDataAckValue = true;
-                        }
-
-                        //Thread.Sleep(1);
-                    }
-
-                    sw.Stop();
-                    
-                    TimeSpan elapsedTime2 = sw.Elapsed;
 
 
-                    string mess = "";
+                const int PACKETS_FOR_TEST = 20;
+                Stopwatch sw;
+                const int MAX_TRYS = 10;
+                int counter = 0;
 
-                    if (elapsedTime1 < elapsedTime2)
-                        mess = "BSS better";
-                    else
-                        mess = "TDLS better";
-                    mess = mess + "-" + elapsedTime1.Milliseconds.ToString(CultureInfo.InvariantCulture) + " " + elapsedTime2.Milliseconds.ToString(CultureInfo.InvariantCulture);
-
-                    SLSMessage = mess;
-                }
-                else
-                {
-                    SLSMessage = "BSS Only";
-                    break;
-                }
-         
                 Thread.Sleep(1000);
-            }
+                while (_Enabled)
+                {
+                    if (TDLSisWork)
+                    {
+                        // BSS
+                        sw = Stopwatch.StartNew();
+                        for (int i = 0; i < PACKETS_FOR_TEST; i++)
+                        {
+                            NullData pack = new NullData(CreatePacket(mac, true));
+                            NullDataAckValue = false;
+                            SendData(pack);
+                            counter = 0;
+                            while (!NullDataAckValue)
+                            {
+                                Thread.Sleep(1);
+                                counter++;
+                                if (counter >= MAX_TRYS)
+                                    NullDataAckValue = true;
+                            }
 
+                            //Thread.Sleep(1);
+                        }
+                        sw.Stop();
+                        TimeSpan elapsedTime1 = sw.Elapsed;
+
+                        //TDLS
+                        sw = Stopwatch.StartNew();
+                        for (int i = 0; i < PACKETS_FOR_TEST; i++)
+                        {
+                            NullDataAckValue = false;
+                            NullData pack = new NullData(CreatePacket(mac));
+                            SendData(pack);
+                            counter = 0;
+                            while (!NullDataAckValue)
+                            {
+                                Thread.Sleep(1);
+                                counter++;
+                                if (counter >= MAX_TRYS)
+                                    NullDataAckValue = true;
+                            }
+
+                            //Thread.Sleep(1);
+                        }
+
+                        sw.Stop();
+
+                        TimeSpan elapsedTime2 = sw.Elapsed;
+
+
+                        if (elapsedTime1 < elapsedTime2)
+                            SLSMessage = "BSS better";
+                        else
+                            SLSMessage = "TDLS better";
+                        SLSMessage = SLSMessage + "-" + elapsedTime1.Milliseconds.ToString(CultureInfo.InvariantCulture) + " " +
+                               elapsedTime2.Milliseconds.ToString(CultureInfo.InvariantCulture);
+
+             
+                    }
+                    else
+                    {
+                        SLSMessage = "BSS Only";
+                        break;
+                    }
+
+                    Thread.Sleep(1000);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Use for disable TDLS
+        /// </summary>
+        public void DisableTDLS()
+        {
+            try {                   this.TDLSisWork = false; }
+            catch (Exception ex) {  AddToLog("DisableTDLS: " + ex.Message); }
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Use for enable TDLS
+        /// </summary>
+        public void EnableTDLS()
+        {
+            try {                   this.TDLSisWork = true; }
+            catch (Exception ex) {  AddToLog("EnableTDLS: " + ex.Message); }
         }
     }
 }
