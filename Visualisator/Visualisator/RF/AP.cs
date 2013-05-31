@@ -321,6 +321,12 @@ namespace Visualisator
                 instance.X = this.x;
                 instance.Y = this.y;
                 instance.Destination = pack.Reciver;
+                //if (pack.GetType() == typeof(NullData))
+                //    MessageBox.Show(pack.ToString());
+
+                //if (pack.GetType() == typeof(NullDataAck))
+                //    MessageBox.Show(pack.ToString());
+
                 SendData(instance);
             }
         }

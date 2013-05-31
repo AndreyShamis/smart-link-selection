@@ -6,7 +6,7 @@ using System.Text;
 namespace Visualisator.Packets
 {
     [Serializable()]
-    class NullDataAck : SimulatorPacket
+    class NullDataAck : SimulatorPacket, IPacket, ISerializable
     {
         public NullDataAck(SimulatorPacket pack)
             : base(pack)

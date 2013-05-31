@@ -117,6 +117,7 @@
             this.cmdUpdateStatisticTable = new System.Windows.Forms.Button();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblSLSMessage = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -337,6 +338,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblSLSMessage);
             this.groupBox1.Controls.Add(this.lblLastTransmitTime);
             this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.lblTdlsUnsuccessTrys);
@@ -1105,6 +1107,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Logs";
             // 
+            // lblSLSMessage
+            // 
+            this.lblSLSMessage.Location = new System.Drawing.Point(287, 239);
+            this.lblSLSMessage.Name = "lblSLSMessage";
+            this.lblSLSMessage.Size = new System.Drawing.Size(305, 24);
+            this.lblSLSMessage.TabIndex = 78;
+            this.lblSLSMessage.Text = "SLS Message";
+            this.toolTip1.SetToolTip(this.lblSLSMessage, "SLS Message");
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1219,5 +1230,6 @@
         private System.Windows.Forms.Label lblLastTransmitTime;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label lblSLSMessage;
     }
 }

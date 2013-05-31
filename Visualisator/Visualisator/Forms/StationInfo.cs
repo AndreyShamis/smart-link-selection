@@ -320,7 +320,7 @@ namespace Visualisator
                 lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
 
                 lblTdlsUnsuccessTrys.Text = _sta.TDLSCounterUnSuccessTx.ToString();
-
+                lblSLSMessage.Text = _sta.SLSMessage;
                 lblTDLSSetupStatus.Text = _sta.TDLSSetupInfo.ToString() + " [" + _sta.TDLSSetupInfo.GetHashCode().ToString() + "]";
                 lblRetransmited.Text = _sta.DataRetransmited.ToString();
                 lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();

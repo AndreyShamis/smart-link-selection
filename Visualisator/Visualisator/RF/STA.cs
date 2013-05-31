@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Drawing;
 using System.Threading;
@@ -50,11 +51,15 @@ namespace Visualisator
         /// </summary>
         /// <param name="destination">Destination MAC address</param>
         /// <returns>Packet prepared to work or in BSS or in TDLS</returns>
-        public SimulatorPacket CreatePacket(string destination)
+        public SimulatorPacket CreatePacket(string destination, bool forciblyBSS=false)
         {
             SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel());
 
-            pack.Destination = TDLSisWork ? destination : _connectedAPMacAddress;
+            if (forciblyBSS)
+                pack.Destination = _connectedAPMacAddress;
+            else
+                pack.Destination = TDLSisWork ? destination : _connectedAPMacAddress;
+            
 
             pack.Reciver            = destination;
             pack.SSID               = this.SSID;
@@ -704,28 +709,27 @@ namespace Visualisator
         public override void ParseReceivedPacket(SimulatorPacket pack)
         {
             Rssi = GetRSSI(pack.X, pack.Y);             
-            Type _Pt = pack.GetType();
+            Type pt = pack.GetType();
 
-            if (_Pt  == typeof(Packets.ConnectionACK))
+            if (pt  == typeof(Packets.ConnectionACK))
                 ThreadPool.QueueUserWorkItem(new WaitCallback((s) => ConnectionAckRoutine(pack.SSID)));
-            else if (_Pt == typeof(Packets.Beacon))
+            else if (pt == typeof(Packets.Beacon))
                 ThreadPool.QueueUserWorkItem(new WaitCallback((s) => BeaconRoutine(pack.SSID,Rssi,pack.PacketChannel)));
-            else if (_Pt == typeof(Packets.Data))
+            else if (pt == typeof(Packets.Data))
                 ThreadPool.QueueUserWorkItem(new WaitCallback((s) => DataRoutine((Data)pack)));
-            else if (_Pt == typeof(DataAck))
+            else if (pt == typeof(DataAck))
             {
                 _ackReceived = true;
                 _DataAckReceived++;
             }
-            else if (_Pt == typeof(NullData))
-            {
-                NullDataAck NullAck = new NullDataAck(pack);
-                NullAck.Destination = pack.Source;
-            }
+            else if (pt == typeof(NullData))
+                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => NullDataRoutine((NullData)pack)));
+            else if (pt == typeof(NullDataAck))
+                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => NullDataAckRoutine((NullDataAck)pack)));
             else
             {
                 if (this.TDLSisEnabled)   // TDLS Parsing
-                    ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TDLSRoutine(pack,_Pt)));
+                    ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TDLSRoutine(pack,pt)));
             }
         }
 
@@ -870,7 +874,7 @@ namespace Visualisator
             stat.CoordinateY = this.y;
             stat.BSS_BandWith = this.BandWidth.ToString();
             stat.BSS_Standart = this.Stand80211.ToString();
-            //ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(DestinationMacAddress)));
+            ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(DestinationMacAddress)));
             try
             {
                 AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
@@ -1177,25 +1181,124 @@ namespace Visualisator
             catch (Exception ex) { AddToLog("ResetCounters: " + ex.Message); }
         }
 
+        //=====================================================================
+        /// <summary>
+        /// Parse NullData Packet which was received
+        /// </summary>
+        /// <param name="pack">NullData packet</param>
+        private void NullDataRoutine(NullData pack)
+        {
+            try
+            {
+                NullDataAck nullAck = new NullDataAck(CreatePacket());
+                nullAck.Destination = pack.Source;
+                
+
+                SendData(nullAck);
+            }
+            catch (Exception ex) { AddToLog("NullData Routine: " + ex.Message); }
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Parse NullDataAck Packet which was received
+        /// </summary>
+        /// <param name="pack">NullDataAck packet</param>
+        private void NullDataAckRoutine(NullDataAck pack)
+        {
+            try
+            {
+                NullDataAckValue = true;
+                //NullDataAck nullAck = new NullDataAck(pack);
+                //nullAck.Destination = pack.Source;
+            }
+            catch (Exception ex) { AddToLog("NullDataAck Routine: " + ex.Message); }
+        }
+
+        private bool NullDataAckValue { set; get; }
+
+
+        public string SLSMessage { set; get; }
+   
+        //=====================================================================
+        /// <summary>
+        /// Test BSS vs TDLS
+        /// </summary>
+        /// <param name="mac">MAC address of Peer</param>
         public void TestTdls(string mac)
         {
-            int PACKETS_FOR_TEST = 20;
-                            
-            if(TDLSisWork)
+            const int PACKETS_FOR_TEST = 20;
+            Stopwatch sw;
+            const int MAX_TRYS = 10;
+            int counter = 0;
+            while (_Enabled)
             {
-                for (int i = 0; i < PACKETS_FOR_TEST; i++)
-                {                   
-                    NullData pack = (NullData) CreatePacket(mac);
-                    SendData(pack); 
-                }
-
-                for (int i = 0; i < PACKETS_FOR_TEST; i++)
+                if (TDLSisWork)
                 {
-                    NullData pack = (NullData) CreatePacket(mac);
-                    SendData(pack);         
+                    // BSS
+                    sw = Stopwatch.StartNew();
+                    for (int i = 0; i < PACKETS_FOR_TEST; i++)
+                    {
+                        NullData pack = new NullData(CreatePacket(mac,true));
+                        NullDataAckValue = false;
+                        SendData(pack);
+                        counter = 0;
+                        while (!NullDataAckValue)
+                        {
+                            Thread.Sleep(1);
+                            counter++;
+                            if (counter >= MAX_TRYS)
+                                NullDataAckValue = true;
+                        }
+
+                        //Thread.Sleep(1);
+                    }
+                    sw.Stop();
+                    TimeSpan elapsedTime1 = sw.Elapsed;
+                    
+                    //TDLS
+                    sw = Stopwatch.StartNew();
+                    for (int i = 0; i < PACKETS_FOR_TEST; i++)
+                    {
+                        NullDataAckValue = false;
+                        NullData pack = new NullData(CreatePacket(mac));
+                        SendData(pack);
+                        counter = 0;
+                        while (!NullDataAckValue)
+                        {
+                            Thread.Sleep(1);
+                            counter++;
+                            if (counter >= MAX_TRYS)
+                                NullDataAckValue = true;
+                        }
+
+                        //Thread.Sleep(1);
+                    }
+
+                    sw.Stop();
+                    
+                    TimeSpan elapsedTime2 = sw.Elapsed;
+
+
+                    string mess = "";
+
+                    if (elapsedTime1 < elapsedTime2)
+                        mess = "BSS better";
+                    else
+                        mess = "TDLS better";
+                    mess = mess + "-" + elapsedTime1.Milliseconds.ToString(CultureInfo.InvariantCulture) + " " + elapsedTime2.Milliseconds.ToString(CultureInfo.InvariantCulture);
+
+                    SLSMessage = mess;
                 }
-            
+                else
+                {
+                    SLSMessage = "BSS Only";
+                    break;
+                }
+         
+                Thread.Sleep(1000);
             }
+
         }
     }
 }
