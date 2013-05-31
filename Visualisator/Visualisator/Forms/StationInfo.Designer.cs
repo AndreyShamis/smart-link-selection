@@ -1051,6 +1051,7 @@
             // 
             this.txtErrorsLogFromCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.txtErrorsLogFromCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtErrorsLogFromCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtErrorsLogFromCode.Location = new System.Drawing.Point(3, 25);
             this.txtErrorsLogFromCode.Multiline = true;
             this.txtErrorsLogFromCode.Name = "txtErrorsLogFromCode";
