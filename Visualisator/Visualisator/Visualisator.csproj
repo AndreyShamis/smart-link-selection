@@ -67,6 +67,7 @@
     <Compile Include="Packets\DataAck.cs" />
     <Compile Include="Packets\KeepAlive.cs" />
     <Compile Include="Packets\NullData.cs" />
+    <Compile Include="Packets\NullDataAck.cs" />
     <Compile Include="Packets\PacketInumiration.cs" />
     <Compile Include="Packets\TDLSChannelSwitchRequest.cs" />
     <Compile Include="Packets\TDLSChannelSwitchResponse.cs" />

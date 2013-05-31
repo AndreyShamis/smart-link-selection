@@ -587,6 +587,117 @@ namespace Visualisator
 
         //=====================================================================
         /// <summary>
+        /// Parse Beacon Packet which was received
+        /// </summary>
+        /// <param name="receivedSSID">SSID Of Received Packet</param>
+        /// <param name="receivedRssi">RSSI of received packet</param>
+        /// <param name="receivedChannel">Channel of received packet</param>
+        private void BeaconRoutine(string receivedSSID,int receivedRssi,short receivedChannel)
+        {
+            try
+            {
+                lock (AccessPoint)
+                {
+                    if (!AccessPoint.Contains(receivedSSID))
+                        AccessPoint.Add(receivedSSID);
+                }
+                _channels[receivedChannel - 1] = Math.Max(-100, receivedRssi);
+                AccessPoint.Increase(receivedSSID);
+            }
+            catch (Exception ex) { AddToLog("BeaconRoutine: " + ex.Message); }
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Parse ConnectionAck Packet which was received
+        /// </summary>
+        /// <param name="receivedSSID">SSID Of Packet</param>
+        private void ConnectionAckRoutine(string receivedSSID)
+        {
+            try
+            {
+                lock (_AssociatedWithAPList)
+                {
+                    if (!_AssociatedWithAPList.Contains(receivedSSID))
+                        _AssociatedWithAPList.Add(receivedSSID);
+                }
+            }
+            catch (Exception ex){ AddToLog("ConnectionAckRoutine: " + ex.Message);}
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Parse TDLS Packets
+        /// </summary>
+        /// <param name="pack">Received Packet</param>
+        /// <param name="pt">Packet type</param>
+        private void TDLSRoutine(SimulatorPacket pack, Type pt)
+        {
+            if (pt == typeof(TDLSSetupRequest))
+            {
+                TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestReceived;
+                var tdlSreq = (TDLSSetupRequest)pack;
+                //getBestIntersectionBandwith(tdlSreq.BandWithSupport);
+                TDLS_SendSetupResponse(tdlSreq);
+                TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
+
+            }
+            else if (pt == typeof(TDLSSetupResponse))
+            {
+                TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseReceived;
+                this.TDLSisWork = true;
+                var tdlSreq = (TDLSSetupResponse)pack;
+
+                if (tdlSreq.freq5000Support)
+                    ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSFrequency = Frequency._5200GHz;
+                if (tdlSreq.Width40Support)
+                    ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSBandWith = Bandwidth._40Mhz;
+
+                TDLS_SendSetupConfirm(tdlSreq.Source);
+                TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
+            }
+            else if (pt == typeof(TDLSSetupConfirm))
+            {
+                this.TDLSisWork = true;
+                TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmReceived;
+            }
+            else if (pt == typeof(TDLSTearDown))
+            {
+                this.TDLSisWork = false;
+                TDLSSetupInfo = TDLSSetupStatus.TDLSTearDown;
+            }
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Parse Data Packet which was received
+        /// </summary>
+        /// <param name="pack">Data Packet</param>
+        private void DataRoutine(Data pack)
+        {
+            try
+            {
+                MACsandACK(pack.Source, pack.GuidD, pack.getTransmitRate());
+
+                if (!ReceivedGuids.Contains(pack.GuidD))
+                {
+                    if (ReceivedGuids.Count == MAX_QUEUE_REC_PACKETS)
+                        ReceivedGuids.Dequeue();
+                    ReceivedGuids.Enqueue(pack.GuidD);
+                    _DataReceived++;
+                    try { HandleDataStream(pack); }
+                    catch (Exception ex){AddToLog("Parse receibed Packet HandleDataStream: " + ex.Message);}
+                }
+                else
+                {
+                    DataAckRetransmitted++;
+                }
+            }
+            catch (Exception ex) { AddToLog("DataRoutine: " + ex.Message); }
+        }
+
+        //=====================================================================
+        /// <summary>
         /// Function for parse received packet
         /// </summary>
         /// <param name="pack">Simulator packet</param>
@@ -596,102 +707,25 @@ namespace Visualisator
             Type _Pt = pack.GetType();
 
             if (_Pt  == typeof(Packets.ConnectionACK))
-            {
-                lock (_AssociatedWithAPList)
-                {
-                    if (!_AssociatedWithAPList.Contains(pack.SSID))
-                        _AssociatedWithAPList.Add(pack.SSID);
-                }
-            }
+                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => ConnectionAckRoutine(pack.SSID)));
             else if (_Pt == typeof(Packets.Beacon))
-            {
-                try
-                {
-                    lock (AccessPoint)
-                    {
-                        if (!AccessPoint.Contains(pack.SSID))
-                            AccessPoint.Add(pack.SSID);
-                    }
-                    _channels[pack.PacketChannel - 1] = Math.Max(-100, Rssi);
-                    AccessPoint.Increase(pack.SSID);
-                }
-                catch (Exception ex) { AddToLog("Parse receibed Packet Beacon: " + ex.Message); }
-            }
+                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => BeaconRoutine(pack.SSID,Rssi,pack.PacketChannel)));
             else if (_Pt == typeof(Packets.Data))
-            {
-                try
-                {
-                    
-                    Data dat = (Data)pack;
-                    MACsandACK(dat.Source, dat.GuidD, dat.getTransmitRate());
-
-                    if (!ReceivedGuids.Contains(pack.GuidD))
-                    {
-                        if (ReceivedGuids.Count == MAX_QUEUE_REC_PACKETS)
-                            ReceivedGuids.Dequeue();
-                        ReceivedGuids.Enqueue(pack.GuidD);
-
-                       // if (!dat.IsReceivedRetransmit)
-                        //{
-                            _DataReceived++;
-                            try{  HandleDataStream(dat);}
-                            catch (Exception ex){AddToLog("Parse receibed Packet HandleDataStream: " + ex.Message);}
-                        //}
-                        //}else{
-                            
-                        //}
-                    }
-                    else
-                    {
-                        DataAckRetransmitted++;
-                    }
-                }
-                catch (Exception ex) { AddToLog("Parse Received Packet - Data " + ex.Message);}
-            }
+                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => DataRoutine((Data)pack)));
             else if (_Pt == typeof(DataAck))
             {
-                //var dat = (DataAck)pack;
                 _ackReceived = true;
                 _DataAckReceived++;
+            }
+            else if (_Pt == typeof(NullData))
+            {
+                NullDataAck NullAck = new NullDataAck(pack);
+                NullAck.Destination = pack.Source;
             }
             else
             {
                 if (this.TDLSisEnabled)   // TDLS Parsing
-                {
-                    if (_Pt == typeof(TDLSSetupRequest))
-                    {
-                        TDLSSetupInfo = TDLSSetupStatus.TDLSSetupRequestReceived;
-                        var tdlSreq = (TDLSSetupRequest)pack;
-                        //getBestIntersectionBandwith(tdlSreq.BandWithSupport);
-                        TDLS_SendSetupResponse(tdlSreq);
-                        TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
-                        
-                    }
-                    else if (_Pt == typeof(TDLSSetupResponse))
-                    {
-                        TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseReceived;
-                        this.TDLSisWork = true;
-                        var tdlSreq = (TDLSSetupResponse)pack;
-
-                        if (tdlSreq.freq5000Support)
-                            ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSFrequency = Frequency._5200GHz;
-                        if (tdlSreq.Width40Support)
-                            ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSBandWith = Bandwidth._40Mhz ;
-
-                        TDLS_SendSetupConfirm(tdlSreq.Source);
-                        TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
-                    }
-                    else if (_Pt == typeof(TDLSSetupConfirm))
-                    {
-                        this.TDLSisWork = true;
-                        TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmReceived;
-                    }
-                    else if (_Pt == typeof(TDLSTearDown))
-                    {
-                        this.TDLSisWork = false;
-                        TDLSSetupInfo = TDLSSetupStatus.TDLSTearDown;
-                    }
-                }
+                    ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TDLSRoutine(pack,_Pt)));
             }
         }
 
@@ -1145,18 +1179,22 @@ namespace Visualisator
 
         public void TestTdls(string mac)
         {
-            while (_Enabled)
+            int PACKETS_FOR_TEST = 20;
+                            
+            if(TDLSisWork)
             {
+                for (int i = 0; i < PACKETS_FOR_TEST; i++)
+                {                   
+                    NullData pack = (NullData) CreatePacket(mac);
+                    SendData(pack); 
+                }
 
-                if(TDLSisWork)
+                for (int i = 0; i < PACKETS_FOR_TEST; i++)
                 {
                     NullData pack = (NullData) CreatePacket(mac);
-                    SendData(pack);
+                    SendData(pack);         
                 }
-                else
-                {
-                    Thread.Sleep(2000);
-                }
+            
             }
         }
     }
