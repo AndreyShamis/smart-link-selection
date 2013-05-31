@@ -50,6 +50,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblLastTransmitTime = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.lblTdlsUnsuccessTrys = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -114,8 +116,7 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.cmdUpdateStatisticTable = new System.Windows.Forms.Button();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
-            this.label21 = new System.Windows.Forms.Label();
-            this.lblLastTransmitTime = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -123,22 +124,26 @@
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnDumpAll);
             this.groupBox2.Controls.Add(this.txtDumpAll);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(589, 279);
+            this.groupBox2.Size = new System.Drawing.Size(598, 266);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Send Data";
             // 
             // btnDumpAll
             // 
-            this.btnDumpAll.Location = new System.Drawing.Point(63, 0);
+            this.btnDumpAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDumpAll.Location = new System.Drawing.Point(122, 0);
             this.btnDumpAll.Name = "btnDumpAll";
             this.btnDumpAll.Size = new System.Drawing.Size(103, 20);
             this.btnDumpAll.TabIndex = 1;
@@ -148,11 +153,14 @@
             // 
             // txtDumpAll
             // 
-            this.txtDumpAll.Location = new System.Drawing.Point(11, 19);
+            this.txtDumpAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtDumpAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDumpAll.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtDumpAll.Location = new System.Drawing.Point(3, 22);
             this.txtDumpAll.Multiline = true;
             this.txtDumpAll.Name = "txtDumpAll";
             this.txtDumpAll.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDumpAll.Size = new System.Drawing.Size(575, 253);
+            this.txtDumpAll.Size = new System.Drawing.Size(592, 241);
             this.txtDumpAll.TabIndex = 0;
             // 
             // tmrGUI
@@ -190,7 +198,7 @@
             // 
             this.txtDestination.Location = new System.Drawing.Point(389, 86);
             this.txtDestination.Name = "txtDestination";
-            this.txtDestination.Size = new System.Drawing.Size(113, 20);
+            this.txtDestination.Size = new System.Drawing.Size(102, 20);
             this.txtDestination.TabIndex = 10;
             this.txtDestination.Text = "00:00:00:00:00:00";
             this.toolTip1.SetToolTip(this.txtDestination, "Enter MAC address of peer that you want to send data to him");
@@ -239,6 +247,7 @@
             this.btnSaveData.Text = "Save Data";
             this.toolTip1.SetToolTip(this.btnSaveData, "Save Received Data");
             this.btnSaveData.UseVisualStyleBackColor = true;
+            this.btnSaveData.Visible = false;
             this.btnSaveData.Click += new System.EventHandler(this.btnSaveData_Click);
             // 
             // cmdSendData
@@ -305,13 +314,14 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(3, 3);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(608, 303);
+            this.tabControl1.Size = new System.Drawing.Size(612, 298);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -320,7 +330,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(600, 277);
+            this.tabPage1.Size = new System.Drawing.Size(604, 272);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Station Info";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -394,12 +404,31 @@
             this.groupBox1.Controls.Add(this.btnConnectToBSS);
             this.groupBox1.Controls.Add(this.cmbAPList);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(583, 263);
+            this.groupBox1.Size = new System.Drawing.Size(598, 266);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
+            // 
+            // lblLastTransmitTime
+            // 
+            this.lblLastTransmitTime.AutoSize = true;
+            this.lblLastTransmitTime.Location = new System.Drawing.Point(267, 196);
+            this.lblLastTransmitTime.Name = "lblLastTransmitTime";
+            this.lblLastTransmitTime.Size = new System.Drawing.Size(13, 13);
+            this.lblLastTransmitTime.TabIndex = 77;
+            this.lblLastTransmitTime.Text = "0";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(153, 196);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(96, 13);
+            this.label21.TabIndex = 76;
+            this.label21.Text = "Last Transmit Time";
             // 
             // lblTdlsUnsuccessTrys
             // 
@@ -622,7 +651,7 @@
             this.cmbAssociatedDevicesInBSS.FormattingEnabled = true;
             this.cmbAssociatedDevicesInBSS.Location = new System.Drawing.Point(389, 112);
             this.cmbAssociatedDevicesInBSS.Name = "cmbAssociatedDevicesInBSS";
-            this.cmbAssociatedDevicesInBSS.Size = new System.Drawing.Size(113, 21);
+            this.cmbAssociatedDevicesInBSS.Size = new System.Drawing.Size(101, 21);
             this.cmbAssociatedDevicesInBSS.TabIndex = 50;
             this.cmbAssociatedDevicesInBSS.SelectedIndexChanged += new System.EventHandler(this.cmbAssociatedDevicesInBSS_SelectedIndexChanged);
             this.cmbAssociatedDevicesInBSS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAssociatedDevicesInBSS_MouseClick);
@@ -699,7 +728,7 @@
             this.txtTDLSSetupRequestMAC.Name = "txtTDLSSetupRequestMAC";
             this.txtTDLSSetupRequestMAC.Size = new System.Drawing.Size(102, 20);
             this.txtTDLSSetupRequestMAC.TabIndex = 42;
-            this.txtTDLSSetupRequestMAC.Text = "00:00:00:00:00:00";
+            this.txtTDLSSetupRequestMAC.Text = "00:00:00:00:00";
             this.txtTDLSSetupRequestMAC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button2
@@ -899,7 +928,7 @@
             this.txtMAC.Location = new System.Drawing.Point(6, 12);
             this.txtMAC.Name = "txtMAC";
             this.txtMAC.ReadOnly = true;
-            this.txtMAC.Size = new System.Drawing.Size(140, 23);
+            this.txtMAC.Size = new System.Drawing.Size(129, 23);
             this.txtMAC.TabIndex = 11;
             this.txtMAC.Text = "00:00:00:00:00:00";
             // 
@@ -969,21 +998,18 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(600, 277);
+            this.tabPage2.Size = new System.Drawing.Size(604, 272);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Log";
+            this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.cmdSaveLogs);
-            this.tabPage3.Controls.Add(this.cmdLogsClear);
-            this.tabPage3.Controls.Add(this.cmdLogsUpdate);
-            this.tabPage3.Controls.Add(this.txtErrorsLogFromCode);
+            this.tabPage3.Controls.Add(this.groupBox3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(600, 277);
+            this.tabPage3.Size = new System.Drawing.Size(604, 272);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Error Log";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -991,18 +1017,20 @@
             // cmdSaveLogs
             // 
             this.cmdSaveLogs.Enabled = false;
-            this.cmdSaveLogs.Location = new System.Drawing.Point(331, 3);
+            this.cmdSaveLogs.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdSaveLogs.Location = new System.Drawing.Point(192, 1);
             this.cmdSaveLogs.Name = "cmdSaveLogs";
-            this.cmdSaveLogs.Size = new System.Drawing.Size(50, 20);
+            this.cmdSaveLogs.Size = new System.Drawing.Size(62, 18);
             this.cmdSaveLogs.TabIndex = 3;
             this.cmdSaveLogs.Text = "Save";
             this.cmdSaveLogs.UseVisualStyleBackColor = true;
             // 
             // cmdLogsClear
             // 
-            this.cmdLogsClear.Location = new System.Drawing.Point(265, 3);
+            this.cmdLogsClear.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdLogsClear.Location = new System.Drawing.Point(126, 1);
             this.cmdLogsClear.Name = "cmdLogsClear";
-            this.cmdLogsClear.Size = new System.Drawing.Size(50, 20);
+            this.cmdLogsClear.Size = new System.Drawing.Size(62, 18);
             this.cmdLogsClear.TabIndex = 2;
             this.cmdLogsClear.Text = "Clear";
             this.cmdLogsClear.UseVisualStyleBackColor = true;
@@ -1010,9 +1038,10 @@
             // 
             // cmdLogsUpdate
             // 
-            this.cmdLogsUpdate.Location = new System.Drawing.Point(197, 3);
+            this.cmdLogsUpdate.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdLogsUpdate.Location = new System.Drawing.Point(58, 1);
             this.cmdLogsUpdate.Name = "cmdLogsUpdate";
-            this.cmdLogsUpdate.Size = new System.Drawing.Size(50, 20);
+            this.cmdLogsUpdate.Size = new System.Drawing.Size(62, 18);
             this.cmdLogsUpdate.TabIndex = 1;
             this.cmdLogsUpdate.Text = "Update";
             this.cmdLogsUpdate.UseVisualStyleBackColor = true;
@@ -1020,11 +1049,13 @@
             // 
             // txtErrorsLogFromCode
             // 
-            this.txtErrorsLogFromCode.Location = new System.Drawing.Point(6, 28);
+            this.txtErrorsLogFromCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.txtErrorsLogFromCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtErrorsLogFromCode.Location = new System.Drawing.Point(3, 25);
             this.txtErrorsLogFromCode.Multiline = true;
             this.txtErrorsLogFromCode.Name = "txtErrorsLogFromCode";
             this.txtErrorsLogFromCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtErrorsLogFromCode.Size = new System.Drawing.Size(594, 243);
+            this.txtErrorsLogFromCode.Size = new System.Drawing.Size(592, 238);
             this.txtErrorsLogFromCode.TabIndex = 0;
             // 
             // tabPage4
@@ -1034,22 +1065,23 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(600, 277);
+            this.tabPage4.Size = new System.Drawing.Size(604, 272);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Statistic";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(6, 42);
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(587, 229);
+            this.listView1.Size = new System.Drawing.Size(598, 266);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // cmdUpdateStatisticTable
             // 
-            this.cmdUpdateStatisticTable.Location = new System.Drawing.Point(10, 13);
+            this.cmdUpdateStatisticTable.Location = new System.Drawing.Point(8, 6);
             this.cmdUpdateStatisticTable.Name = "cmdUpdateStatisticTable";
             this.cmdUpdateStatisticTable.Size = new System.Drawing.Size(87, 23);
             this.cmdUpdateStatisticTable.TabIndex = 1;
@@ -1057,29 +1089,26 @@
             this.cmdUpdateStatisticTable.UseVisualStyleBackColor = true;
             this.cmdUpdateStatisticTable.Click += new System.EventHandler(this.cmdUpdateStatisticTable_Click);
             // 
-            // label21
+            // groupBox3
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(153, 196);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(96, 13);
-            this.label21.TabIndex = 76;
-            this.label21.Text = "Last Transmit Time";
-            // 
-            // lblLastTransmitTime
-            // 
-            this.lblLastTransmitTime.AutoSize = true;
-            this.lblLastTransmitTime.Location = new System.Drawing.Point(267, 196);
-            this.lblLastTransmitTime.Name = "lblLastTransmitTime";
-            this.lblLastTransmitTime.Size = new System.Drawing.Size(13, 13);
-            this.lblLastTransmitTime.TabIndex = 77;
-            this.lblLastTransmitTime.Text = "0";
+            this.groupBox3.Controls.Add(this.txtErrorsLogFromCode);
+            this.groupBox3.Controls.Add(this.cmdSaveLogs);
+            this.groupBox3.Controls.Add(this.cmdLogsUpdate);
+            this.groupBox3.Controls.Add(this.cmdLogsClear);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(598, 266);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Logs";
             // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 308);
+            this.ClientSize = new System.Drawing.Size(612, 298);
             this.Controls.Add(this.tabControl1);
             this.Name = "StationInfo";
             this.Text = "StationInfo";
@@ -1092,8 +1121,9 @@
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1187,5 +1217,6 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label lblLastTransmitTime;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
