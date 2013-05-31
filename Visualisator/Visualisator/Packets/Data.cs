@@ -37,5 +37,14 @@ namespace Visualisator.Packets
             }
             _data = pack._data;
         }
+
+        public string ToString()
+        {
+            string ret = "";
+
+            ret += "Band" + this.PacketBandWith;
+
+            return ret;
+        }
     }
 }

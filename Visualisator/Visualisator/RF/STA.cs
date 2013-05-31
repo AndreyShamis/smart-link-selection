@@ -125,6 +125,7 @@ namespace Visualisator
                 if(TDLSCounterUnSuccessTx >= Medium.TDLS_TearDownAfterFails)
                 {
                     TDLSSendTearDown(MAC);
+                    TDLSCounterUnSuccessTx = 0;
                 }
             }
             catch (Exception ex) { AddToLog("TearDownTdlsOnFailToSend: " + ex.Message); }  
@@ -712,17 +713,31 @@ namespace Visualisator
                         this.TDLSisWork = true;
                         var tdlSreq = (TDLSSetupResponse)pack;
 
+                        ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSwork = true;
+
                         if (tdlSreq.freq5000Support)
+                        {
                             ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSFrequency = Frequency._5200GHz;
+                            ((RFpeer)_RFpeers[tdlSreq.Source]).Freq = Frequency._5200GHz;
+                        }
                         else
-                            ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSFrequency = Frequency._2400GHz;
+                        {
+                            ((RFpeer) _RFpeers[tdlSreq.Source]).TDLSFrequency = Frequency._2400GHz;
+                            ((RFpeer)_RFpeers[tdlSreq.Source]).Freq = Frequency._2400GHz;
+                        }
 
                         if (tdlSreq.Width40Support)
-                            ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSBandWith = Bandwidth._40Mhz ;
+                        {
+                            ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSBandWith = Bandwidth._40Mhz;
+                            ((RFpeer)_RFpeers[tdlSreq.Source]).BandWidth = Bandwidth._40Mhz;
+                        }
                         else
-                            ((RFpeer)_RFpeers[tdlSreq.Source]).TDLSBandWith = Bandwidth._20MHz;
+                        {
+                            ((RFpeer) _RFpeers[tdlSreq.Source]).TDLSBandWith = Bandwidth._20MHz;
+                            ((RFpeer)_RFpeers[tdlSreq.Source]).BandWidth = Bandwidth._20MHz;
+                        }
 
-                        ((RFpeer) _RFpeers[tdlSreq.Source]).TDLSwork = true;
+                        
 
                         TDLSSendSetupConfirm(tdlSreq.Source);
                         TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;

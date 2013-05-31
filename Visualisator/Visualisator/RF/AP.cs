@@ -98,10 +98,10 @@ namespace Visualisator
             
             RF_STATUS = "NONE";
             
-            Thread newThread = new Thread(new ThreadStart(SendBeacon));
-            newThread.Name ="Send Beacon Thread of" + this.getMACAddress();
-            newThread.Priority = ThreadPriority.Lowest;
-            newThread.Start();
+            Thread SendBeaconThread = new Thread(new ThreadStart(SendBeacon));
+            SendBeaconThread.Name = "Send Beacon Thread of" + this.getMACAddress();
+            SendBeaconThread.Priority = ThreadPriority.Lowest;
+            
 
             //Thread newThreadListen = new Thread(new ThreadStart(Listen));
             //newThreadListen.Start();
@@ -116,6 +116,8 @@ namespace Visualisator
 
             Thread queue = new Thread(new ThreadStart(queueT));
             queue.Start();
+
+            SendBeaconThread.Start();
         }
         
         //*********************************************************************

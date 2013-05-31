@@ -101,14 +101,32 @@ namespace Visualisator
                             Distance    = dist,
                             BSSID       = devi.BSSID,
                             MAC         = devi.getMACAddress(),
-                            Freq        = devi.Freq,
-                            Stand80211  = devi.Stand80211,
-                            BandWidth   = devi.BandWidth,
                             Channel     = devi.getOperateChannel(),
                             RSSI        = GetRSSI(devi.x, devi.y),
                             isPassive   = devi.Passive,
                         };
-                        
+
+                        if (_RFpeers.Contains(_peer.MAC))
+                        {
+                            if (!((RFpeer) _RFpeers[_peer.MAC]).TDLSwork)
+                            {
+                                _peer.Freq = devi.Freq;
+                                _peer.Stand80211 = devi.Stand80211;
+                                _peer.BandWidth = devi.BandWidth;
+                            }
+                            if (((RFpeer)_RFpeers[_peer.MAC]).TDLSwork)
+                            {
+                                _peer.Freq = ((RFpeer)_RFpeers[_peer.MAC]).TDLSFrequency;
+                                _peer.Stand80211 = ((RFpeer)_RFpeers[_peer.MAC]).TDLSStandart;
+                                _peer.BandWidth = ((RFpeer)_RFpeers[_peer.MAC]).TDLSBandWith;
+                            }
+                        }
+                        else
+                        {
+                            _peer.Freq = devi.Freq;
+                            _peer.Stand80211 = devi.Stand80211;
+                            _peer.BandWidth = devi.BandWidth;
+                        }
                         if (_RFpeers.Contains(_peer.MAC))
                             _RFpeers[_peer.MAC] = _peer;
                         else
