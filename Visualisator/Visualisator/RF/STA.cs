@@ -93,6 +93,7 @@ namespace Visualisator
                 if(TDLSCounterUnSuccessTx >= Medium.TDLS_TearDownAfterFails)
                 {
                     TDLS_SendTearDown(MAC);
+                    TDLSCounterUnSuccessTx = 0;
                 }
             }
             catch (Exception ex) { AddToLog("TearDownTdlsOnFailToSend: " + ex.Message); }  
@@ -493,6 +494,7 @@ namespace Visualisator
                 // _tdlsSetupR.setTransmitRate(11);
                 SendData(_tdlsSetupR);
                 TDLSSetupInfo = TDLSSetupStatus.TDLSSetupResponseSened;
+                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(req.Source)));
             }
             catch (Exception ex) { AddToLog("TDLS_SendSetupResponse: " + ex.Message); }
         }
@@ -874,7 +876,17 @@ namespace Visualisator
             stat.CoordinateY = this.y;
             stat.BSS_BandWith = this.BandWidth.ToString();
             stat.BSS_Standart = this.Stand80211.ToString();
-            ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(DestinationMacAddress)));
+            
+
+            //ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TdlsStarter(DestinationMacAddress)));
+            Thread tdlsStarterThread = new Thread(() => TdlsStarter(DestinationMacAddress));
+
+            tdlsStarterThread.Name = "TDLS StarterThread:" + this.getMACAddress();
+            tdlsStarterThread.Start();
+
+
+            
+
             try
             {
                 AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
@@ -992,7 +1004,26 @@ namespace Visualisator
             finally {
                 fsSource.Close();
                 Passive = true;
+                tdlsStarterThread.Join();
             }
+        }
+
+        private void TdlsStarter(string destinationMacAddress)
+        {
+            while (_Enabled && this.TDLSisEnabled)
+            {
+                if (this.TDLSAutoStart && this.TDLSisEnabled)
+                {
+                    if(!TDLSisWork)
+                    {
+                        TDLS_SendSetupRequest(destinationMacAddress);
+                        
+                    }
+                }
+
+                Thread.Sleep(5000);
+            }
+
         }
 
         //=====================================================================
