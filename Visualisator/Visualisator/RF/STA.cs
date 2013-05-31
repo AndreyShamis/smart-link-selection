@@ -899,7 +899,7 @@ namespace Visualisator
                 while (!exit_loop)
                 {
                     buffer = new byte[buf_size];
-                    dataPack = new Data(CreatePacket(DestinationMacAddress)); 
+                    dataPack = new Data(CreatePacket(destinationMacAddress)); 
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
