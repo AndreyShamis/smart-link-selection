@@ -165,11 +165,11 @@ namespace Visualisator
                     break;
 
                 case STAType.SP:
-                    _sta.STAImage = (Image)Medium.imgSPImages[new Random().Next(0, Medium.imgLPImages.Count)];
+                    _sta.STAImage = (Image)Medium.imgSPImages[new Random().Next(0, Medium.imgSPImages.Count)];
                     break;
 
                 case STAType.TV:
-                    _sta.STAImage = (Image)Medium.imgTVImages[new Random().Next(0, Medium.imgLPImages.Count)];
+                    _sta.STAImage = (Image)Medium.imgTVImages[new Random().Next(0, Medium.imgTVImages.Count)];
                     break;
 
                 default:

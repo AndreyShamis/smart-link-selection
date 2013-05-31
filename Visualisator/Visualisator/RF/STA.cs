@@ -246,6 +246,7 @@ namespace Visualisator
             Medium.WeHavePacketsToSend += new EventHandler(Listen);
 
             ThreadPool.QueueUserWorkItem(new WaitCallback((s) => SendKeepAlive()));
+            
             //Thread newThreadKeepAl = new Thread(new ThreadStart(SendKeepAlive));
             //newThreadKeepAl.Name = "Send keep Alive of " + this.getMACAddress();
             //newThreadKeepAl.Priority = ThreadPriority.Lowest;
@@ -860,7 +861,7 @@ namespace Visualisator
         public void ThreadAbleReadFile(string destinationMacAddress)
         {
             int buf_size = Medium.PACKET_BUFFER_SIZE, numOfReadBytes = 0;
-            byte[] buffer = new byte[buf_size];
+            byte[] buffer;
             bool exit_loop = false;
             Data dataPack = null;
             Guid streamID = new Guid();
@@ -881,7 +882,7 @@ namespace Visualisator
             stat.CoordinateY = this.y;
             stat.BSS_BandWith = this.BandWidth.ToString();
             stat.BSS_Standart = this.Stand80211.ToString();
-            
+            //ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(DestinationMacAddress)));
             try
             {
                 AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
@@ -897,7 +898,8 @@ namespace Visualisator
                 MACOfAnotherPeer    = destinationMacAddress;
                 while (!exit_loop)
                 {
-                    dataPack = new Data(CreatePacket(destinationMacAddress)); 
+                    buffer = new byte[buf_size];
+                    dataPack = new Data(CreatePacket(DestinationMacAddress)); 
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
@@ -1185,6 +1187,23 @@ namespace Visualisator
                 TDLSCounterUnSuccessTx = 0;
             }
             catch (Exception ex) { AddToLog("ResetCounters: " + ex.Message); }
+        }
+
+        public void TestTdls(string mac)
+        {
+            while (_Enabled)
+            {
+
+                if(TDLSisWork)
+                {
+                    NullData pack = (NullData) CreatePacket(mac);
+                    SendData(pack);
+                }
+                else
+                {
+                    Thread.Sleep(2000);
+                }
+            }
         }
     }
 }
