@@ -367,7 +367,7 @@ namespace Visualisator
         /// </summary>
         /// <param name="SSID">SSID of AP</param>
         /// <returns>True if success to connect</returns>
-        public Boolean ConnectToAP(String SSID)
+        public Boolean ConnectToAP(string SSID)
         {
             if (SSID.Length > 0 && AccessPoint.Contains(SSID))
             {
