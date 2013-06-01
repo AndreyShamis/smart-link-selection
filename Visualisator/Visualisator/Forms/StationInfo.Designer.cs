@@ -540,6 +540,7 @@
             this.lblStandartNSupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartNSupport.TabIndex = 64;
             this.lblStandartNSupport.Text = "N";
+            this.lblStandartNSupport.DoubleClick += new System.EventHandler(this.lblStandartNSupport_DoubleClick);
             // 
             // lblStandartGSupport
             // 
@@ -550,6 +551,7 @@
             this.lblStandartGSupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartGSupport.TabIndex = 63;
             this.lblStandartGSupport.Text = "G";
+            this.lblStandartGSupport.DoubleClick += new System.EventHandler(this.lblStandartGSupport_DoubleClick);
             // 
             // lblStandartASupport
             // 
@@ -560,6 +562,7 @@
             this.lblStandartASupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartASupport.TabIndex = 62;
             this.lblStandartASupport.Text = "A";
+            this.lblStandartASupport.DoubleClick += new System.EventHandler(this.lblStandartASupport_DoubleClick);
             // 
             // chkbAutoStartTdls
             // 

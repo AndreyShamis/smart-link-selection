@@ -515,6 +515,43 @@ namespace Visualisator
         public virtual void CheckScanConditionOnSend(){}
 
         //=====================================================================
+        /// <summary>
+        /// Add new standart to support list
+        /// </summary>
+        /// <param name="newStandart">Standart80211 will be added</param>
+        public void AddStandartSupport(Standart80211 newStandart)
+        {
+            if(!this.StandartSupport.Contains(newStandart))
+            {
+                StandartSupport.Add(newStandart);
+            }
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Remove standart from support list
+        /// </summary>
+        /// <param name="removeStandart">Standart80211 will be removed</param>
+        public void RemoveStandartSupport(Standart80211 removeStandart)
+        {
+            if (this.StandartSupport.Contains(removeStandart))
+            {
+                StandartSupport.Remove(removeStandart);
+            }
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Check if given standart supported by RF device
+        /// </summary>
+        /// <param name="standart">Standart80211</param>
+        /// <returns>True if supported</returns>
+        public bool StandartSupported(Standart80211 standart)
+        {
+            return this.StandartSupport.Contains(standart);
+        }
+
+        //=====================================================================
         public void MACsandACK(string Destination , Guid _DataGuid,int TXrate)
         {
             DataAck da = new DataAck(CreatePacket());

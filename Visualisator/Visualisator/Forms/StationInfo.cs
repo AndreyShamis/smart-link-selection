@@ -531,5 +531,30 @@ namespace Visualisator
             }
         }
 
+        private void SwitchStandartSupport(Standart80211 stand)
+        {
+            if (_sta.StandartSupported(stand))
+                _sta.RemoveStandartSupport(stand);
+            else
+                _sta.AddStandartSupport(stand);
+
+            UpdateStandartSupport();
+        }
+
+        private void lblStandartASupport_DoubleClick(object sender, EventArgs e)
+        {
+            SwitchStandartSupport(Standart80211._11a);
+        }
+
+        private void lblStandartGSupport_DoubleClick(object sender, EventArgs e)
+        {
+            SwitchStandartSupport(Standart80211._11g);
+        }
+
+        private void lblStandartNSupport_DoubleClick(object sender, EventArgs e)
+        {
+            SwitchStandartSupport(Standart80211._11n);
+        }
+
     }
 }
