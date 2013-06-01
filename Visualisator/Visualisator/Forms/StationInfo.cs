@@ -268,6 +268,35 @@ namespace Visualisator
             SlowFlow();
         }
 
+        private void UpdateStandartSupport()
+        {
+            if (_sta.StandartSupport.Contains(Standart80211._11a))
+                EnableSupportForLable(lblStandartASupport);
+            else
+                DisableSupportForLable(lblStandartASupport);
+
+            if (_sta.StandartSupport.Contains(Standart80211._11n))
+                EnableSupportForLable(lblStandartNSupport);
+            else
+                DisableSupportForLable(lblStandartNSupport);
+
+            if (_sta.StandartSupport.Contains(Standart80211._11g))
+                EnableSupportForLable(lblStandartGSupport);
+            else
+                DisableSupportForLable(lblStandartGSupport);
+
+        }
+
+        private void EnableSupportForLable(Label lbl)
+        {
+            lbl.BackColor = Color.Chartreuse;
+        }
+
+        private void DisableSupportForLable(Label lbl)
+        {
+            lbl.BackColor = Color.White;
+        }
+
         private void SlowFlow()
         {
             if (_sta.TDLSAutoStart)
@@ -290,6 +319,8 @@ namespace Visualisator
             PrintAPList();
             SelectSSIDIfHaveOneInList();
             ReloadStatistic();
+
+            UpdateStandartSupport();
         }
 
         //=====================================================================

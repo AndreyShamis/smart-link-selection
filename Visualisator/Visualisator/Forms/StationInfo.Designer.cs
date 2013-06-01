@@ -61,9 +61,9 @@
             this.lblBandwith = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.lblSpeed = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.lblStandartNSupport = new System.Windows.Forms.Label();
+            this.lblStandartGSupport = new System.Windows.Forms.Label();
+            this.lblStandartASupport = new System.Windows.Forms.Label();
             this.chkbAutoStartTdls = new System.Windows.Forms.CheckBox();
             this.cmdShowLog = new System.Windows.Forms.Button();
             this.lblRetransmittionRate = new System.Windows.Forms.Label();
@@ -360,9 +360,9 @@
             this.groupBox1.Controls.Add(this.lblBandwith);
             this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.lblSpeed);
-            this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.lblStandartNSupport);
+            this.groupBox1.Controls.Add(this.lblStandartGSupport);
+            this.groupBox1.Controls.Add(this.lblStandartASupport);
             this.groupBox1.Controls.Add(this.chkbAutoStartTdls);
             this.groupBox1.Controls.Add(this.cmdSelectFileToSend);
             this.groupBox1.Controls.Add(this.cmdShowLog);
@@ -531,35 +531,35 @@
             this.lblSpeed.TabIndex = 65;
             this.lblSpeed.Text = "Speed";
             // 
-            // label17
+            // lblStandartNSupport
             // 
-            this.label17.BackColor = System.Drawing.Color.White;
-            this.label17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label17.Location = new System.Drawing.Point(361, 218);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(15, 15);
-            this.label17.TabIndex = 64;
-            this.label17.Text = "N";
+            this.lblStandartNSupport.BackColor = System.Drawing.Color.White;
+            this.lblStandartNSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStandartNSupport.Location = new System.Drawing.Point(361, 218);
+            this.lblStandartNSupport.Name = "lblStandartNSupport";
+            this.lblStandartNSupport.Size = new System.Drawing.Size(15, 15);
+            this.lblStandartNSupport.TabIndex = 64;
+            this.lblStandartNSupport.Text = "N";
             // 
-            // label16
+            // lblStandartGSupport
             // 
-            this.label16.BackColor = System.Drawing.Color.White;
-            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label16.Location = new System.Drawing.Point(343, 218);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(15, 15);
-            this.label16.TabIndex = 63;
-            this.label16.Text = "G";
+            this.lblStandartGSupport.BackColor = System.Drawing.Color.White;
+            this.lblStandartGSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStandartGSupport.Location = new System.Drawing.Point(343, 218);
+            this.lblStandartGSupport.Name = "lblStandartGSupport";
+            this.lblStandartGSupport.Size = new System.Drawing.Size(15, 15);
+            this.lblStandartGSupport.TabIndex = 63;
+            this.lblStandartGSupport.Text = "G";
             // 
-            // label14
+            // lblStandartASupport
             // 
-            this.label14.BackColor = System.Drawing.Color.White;
-            this.label14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label14.Location = new System.Drawing.Point(325, 218);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(15, 15);
-            this.label14.TabIndex = 62;
-            this.label14.Text = "A";
+            this.lblStandartASupport.BackColor = System.Drawing.Color.White;
+            this.lblStandartASupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStandartASupport.Location = new System.Drawing.Point(325, 218);
+            this.lblStandartASupport.Name = "lblStandartASupport";
+            this.lblStandartASupport.Size = new System.Drawing.Size(15, 15);
+            this.lblStandartASupport.TabIndex = 62;
+            this.lblStandartASupport.Text = "A";
             // 
             // chkbAutoStartTdls
             // 
@@ -1212,9 +1212,9 @@
         private System.Windows.Forms.Button cmdSelectFileToSend;
         private System.Windows.Forms.OpenFileDialog openFileToSend;
         private System.Windows.Forms.CheckBox chkbAutoStartTdls;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblStandartNSupport;
+        private System.Windows.Forms.Label lblStandartGSupport;
+        private System.Windows.Forms.Label lblStandartASupport;
         private System.Windows.Forms.Label lblSpeed;
         private System.Windows.Forms.Label lblStandart;
         private System.Windows.Forms.Label label18;
