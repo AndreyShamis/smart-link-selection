@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using System.Collections;
 using Visualisator.Packets;
@@ -279,7 +280,7 @@ namespace Visualisator
         {
             while (_Enabled)
             {
-                if (!getAssociatedAP_SSID().Equals(""))
+                if (!GetAssociatedAPSSID().Equals(""))
                 {
                     KeepAlive keepAl        = new KeepAlive(CreatePacket());
                     AP connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
@@ -362,14 +363,9 @@ namespace Visualisator
         /// Return SSID of AP for each we are associated
         /// </summary>
         /// <returns>SSID</returns>
-        public string getAssociatedAP_SSID()
+        public string GetAssociatedAPSSID()
         {
-            string ret = "";
-
-            foreach (var ap in _AssociatedWithAPList)
-                ret += ap.ToString() + "";
-
-            return ret;
+            return _AssociatedWithAPList.Cast<object>().Aggregate("", (current, ap) => current + (ap.ToString() + ""));
         }
 
         //=====================================================================
@@ -938,8 +934,9 @@ namespace Visualisator
 
                     //if (sw.Elapsed.Seconds > 0)
                     //{
-                        speed = TransferedByte/(sw.Elapsed.Seconds+0.1);
-                        stat.Speed = speed;
+                        speed = TransferedByte/(sw.Elapsed.Seconds+0.0001);
+
+                        stat.Speed = Math.Round(speed,1);
                     //}
 
                     int retrCounter = Medium.WaitBeforeRetransmit;

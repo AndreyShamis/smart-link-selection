@@ -35,14 +35,14 @@ namespace Visualisator.Simulator
             return (PacketsInTdls*100)/Packets;
         }
 
-        public static float ConvertBytesToKilobytes(long bytes)
+        public static double ConvertBytesToKilobytes(long bytes)
         {
-            return (bytes / 1024f);
+            return Math.Round(bytes / 1024f,1);
         }
 
-        public static float ConvertBytesToMegabytes(long bytes)
+        public static double ConvertBytesToMegabytes(long bytes)
         {
-            return (bytes / 1024f) / 1024f;
+            return Math.Round ((bytes / 1024f) / 1024f,1);
         }
 
         public static float ConvertKilobytesToMegabytes(long kilobytes)

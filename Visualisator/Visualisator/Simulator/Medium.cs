@@ -87,8 +87,8 @@ namespace Visualisator
         private static Int32 _ConnectAckCounter = 0;
 
         private static AutoResetEvent _ev = new AutoResetEvent(true);
-        public static int PACKET_BUFFER_SIZE = 5000;
-        private static Int32 _MediumSendDataRatio = 10;
+        public static int               PACKET_BUFFER_SIZE = 50000;
+        private static Int32            _MediumSendDataRatio = 10;
 
         public static Int32 MediumSendDataRatio
         {

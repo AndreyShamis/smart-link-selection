@@ -153,9 +153,9 @@ namespace Visualisator
             _sta.ResetCounters();
         }
 
-        public static float ConvertBytesToKilobytes(long bytes)
+        public static double ConvertBytesToKilobytes(long bytes)
         {
-            return (bytes / 1024f);
+            return Math.Round((bytes / 1024f),1);
         }
 
         public static float ConvertBytesToMegabytes(long bytes)
@@ -347,7 +347,7 @@ namespace Visualisator
                 txtDataReceeived.Text = _sta.getDataRecieved().ToString();
                 lblSent.Text = _sta.getDataSent().ToString();
                 lblAllReceivedPackets.Text = _sta.AllReceivedPackets.ToString();
-                lblAssociatedAP.Text = _sta.getAssociatedAP_SSID();
+                lblAssociatedAP.Text = _sta.GetAssociatedAPSSID();
                 lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
 
                 lblTdlsUnsuccessTrys.Text = _sta.TDLSCounterUnSuccessTx.ToString();
@@ -358,7 +358,7 @@ namespace Visualisator
 
                 lblLastTransmitRate.Text = _sta.MACLastTrnsmitRate.ToString();
 
-                lblSpeed.Text = ConvertBytesToKilobytes((long)_sta.speed).ToString() + "Kbps/sec";
+                lblSpeed.Text = ConvertBytesToKilobytes((long)_sta.speed).ToString() + "Kbps";
 
                 lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
                 //     lblCounterToretransmit.Text.Substring(0, 2);
