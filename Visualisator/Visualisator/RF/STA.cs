@@ -130,6 +130,7 @@ namespace Visualisator
             }
             catch (Exception ex) { AddToLog("TearDownTdlsOnFailToSend: " + ex.Message); }  
         }
+
         #region SETERS
         public TDLSSetupStatus TDLSSetupInfo
         {
@@ -142,12 +143,18 @@ namespace Visualisator
             return _scanning;
         }
 
+        /// <summary>
+        /// Indicate for ack receiving status
+        /// </summary>
         public bool WaitingForAck
         {
             get { return _waitingForAck; }
             set { _waitingForAck = value; }
         }
 
+        /// <summary>
+        /// Provide RSSI value
+        /// </summary>
         public int Rssi
         {
             get { return _RSSI; }
@@ -160,14 +167,18 @@ namespace Visualisator
             set { _statisticRetransmitTime = value; }
         }
 
-
-
+        /// <summary>
+        /// Provide delay in BSS between send packet and receive ack
+        /// </summary>
         public int DelayInBss
         {
             get { return _delayInBSS; }
             set { _delayInBSS = value; }
         }
 
+        /// <summary>
+        /// Provide delay in TDLS between send packet and receive ack
+        /// </summary>
         public int DelayInTDLS
         {
             get { return _delayInTDLS; }
@@ -1070,7 +1081,7 @@ namespace Visualisator
                         AP _tV = (AP)obj;
                         if (_tV.SSID.Equals(_SSID))
                         {
-                            return _tV.getAssociatedDevicesinAP();
+                            return _tV.GetAssociatedDevicesinAP();
                         }
                     }
                 }

@@ -62,7 +62,7 @@ namespace Visualisator
             lblBand.Text        = _ap.Freq.ToString() + " " + _ap.Stand80211.ToString();
             lblSSID.Text        = _ap.SSID;
 
-            ArrayListCounted devicesList = _ap.getAssociatedDevices();
+            ArrayListCounted devicesList = _ap.GetAssociatedDevices();
             listStations.Items.Clear();
             foreach (object __o in devicesList){
                 string s = (string)__o;
@@ -84,7 +84,7 @@ namespace Visualisator
         {
             lblDataReceived.Text        = _ap.getDataRecieved().ToString();
             lblDataAckReceived.Text     = _ap.getDataAckRecieved().ToString();
-            lblConnectedSTA.Text        = _ap.CenntedDevicesCount().ToString();
+            lblConnectedSTA.Text        = _ap.ConnectedDevicesCount().ToString();
             lblKeepAliveReceived.Text   = _ap.KeepAliveReceived.ToString();
             lblAllReceivedPackets.Text  = _ap.AllReceivedPackets.ToString();
             lblStandart.Text            = _ap.Stand80211.ToString();
@@ -118,7 +118,7 @@ namespace Visualisator
         /// <param name="e"></param>
         private void listStations_MouseClick(object sender, MouseEventArgs e)
         {
-            lblQueue.Text = _ap.getQueueSize(listStations.Text).ToString();
+            lblQueue.Text = _ap.GetQueueSize(listStations.Text).ToString();
         }
 
         /// <summary>

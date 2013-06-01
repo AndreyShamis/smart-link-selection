@@ -466,7 +466,8 @@ namespace Visualisator
         //=====================================================================
         public void Enable()
         {
-            DataRetransmited = 0;
+            DataRetransmited        = 0;
+            DataAckRetransmitted    = 0;
             this.Passive = true;
             _Enabled = true;
             BandWithSupport.Add(Bandwidth._20MHz);
