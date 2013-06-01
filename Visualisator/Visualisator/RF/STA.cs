@@ -21,8 +21,8 @@ namespace Visualisator
         protected ArrayListCounted  AccessPoint                 = new ArrayListCounted();
         protected Hashtable         StreamsHash                 = new Hashtable(new ByteArrayComparer());
         private Boolean             _scanning                   = false;
+
         
-        private int                 _dataAckRetransmitted       = 0;
         private int                 _RSSI                       = 0;
         private bool                _waitingForAck              = false;
         //private StringBuilder       DataReceivedContainer       = new StringBuilder();
@@ -140,12 +140,6 @@ namespace Visualisator
         public bool getScanStatus()
         {
             return _scanning;
-        }
-
-        public int DataAckRetransmitted
-        {
-            get { return _dataAckRetransmitted; }
-            set { _dataAckRetransmitted = value; }
         }
 
         public bool WaitingForAck
@@ -1199,7 +1193,7 @@ namespace Visualisator
                 _DataReceived = 0;
                 _DataAckReceived = 0;
                 DataRetransmited = 0;
-                _dataAckRetransmitted = 0;
+                DataAckRetransmitted = 0;
                 AllReceivedPackets = 0;
                 this.DoubleRecieved = 0;
                 TDLSCounterUnSuccessTx = 0;

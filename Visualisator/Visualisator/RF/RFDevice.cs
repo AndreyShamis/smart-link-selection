@@ -26,7 +26,16 @@ namespace Visualisator
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
         protected static string ImagesPath = Application.StartupPath.ToString() + @"\..\..\Images\";
-        public int                  DataRetransmited { set; get; }
+
+        /// <summary>
+        /// Provide information about retransmited DATA packets
+        /// </summary>
+        public int                  DataRetransmited                { set; get; }
+
+        /// <summary>
+        /// Provide information about retransmited ACK for data packets
+        /// </summary>
+        public int                  DataAckRetransmitted            { set; get; }
         protected  static Random randomWait = new Random();
         protected static Random randomRssi = new Random();
 
@@ -37,7 +46,7 @@ namespace Visualisator
         public ArrayList FrequencySupport   = new ArrayList();
         public ArrayList BandWithSupport    = new ArrayList();
         public ArrayList StandartSupport    = new ArrayList();
-
+        
         
 
         public string MACOfAnotherPeer { set; get; } //mac of another device with him we working now
