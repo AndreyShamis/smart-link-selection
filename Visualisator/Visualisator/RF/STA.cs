@@ -35,7 +35,8 @@ namespace Visualisator
         private bool                StopScan                    { set; get; } // Used for stop scan if start connection
         private TDLSSetupStatus     _tdlsSetupStatus            = TDLSSetupStatus.TDLSSetupDisabled;
         private bool                _ackReceived                = false;
-
+        private bool                ForceTxInBss                = false;
+        public bool                 AutoStartSLS                { set; get; }
         /// <summary>
         /// Indicate if NullDataAck was received in TdlsTest
         /// </summary>
@@ -78,28 +79,39 @@ namespace Visualisator
         //=====================================================================
         /// <summary>
         /// Function for create packet. Used in Send Data.
+        /// In case if AutoStart of SLS is enabled - check if SLS set flag ForceTxInBss
+        /// and then set forciblyBSS to true to send packet in BSS
         /// </summary>
         /// <param name="destination">Destination MAC address</param>
+        /// <param name="forciblyBSS">Force to send packet in BSS even if TDLS is work</param>
         /// <returns>Packet prepared to work or in BSS or in TDLS</returns>
         public SimulatorPacket CreatePacket(string destination, bool forciblyBSS=false)
         {
-            SimulatorPacket pack = new SimulatorPacket(this.getOperateChannel());
+            
 
+            // In case if AutoStart of SLS is enabled - check if SLS set flag ForceTxInBss
+            // and then set forciblyBSS to true to send packet in BSS
+            if (AutoStartSLS && ForceTxInBss)
+                forciblyBSS = true;
+
+            var pack = new SimulatorPacket(this.getOperateChannel())
+                {
+                    Reciver         = destination,
+                    SSID            = this.SSID,
+                    Source          = getMACAddress(),
+                    X               = this.x,
+                    Y               = this.y,
+                    PacketFrequency = this.Freq,
+                    PacketStandart  = this.Stand80211,
+                    PacketBandWith  = this.BandWidth
+                };
+
+            // Decide to force send packet in BSS even if TDLS is work
             if (forciblyBSS)
                 pack.Destination = _connectedAPMacAddress;
             else
                 pack.Destination = TDLSisWork ? destination : _connectedAPMacAddress;
-            
 
-            pack.Reciver            = destination;
-            pack.SSID               = this.SSID;
-            pack.Source             = getMACAddress();
-            pack.X                  = this.x;
-            pack.Y                  = this.y;
-            pack.PacketFrequency    = this.Freq;
-            pack.PacketStandart     = this.Stand80211;
-            pack.PacketBandWith     = this.BandWidth;
-            
             return (pack);
         }
 
@@ -194,6 +206,7 @@ namespace Visualisator
         /// <param name="rfObjects">Reference to RF objects</param>
         public STA(ArrayList rfObjects)
         {
+            AutoStartSLS = false;
             if (rfObjects == null) throw new ArgumentNullException("rfObjects");
             StopScan                = false;
             TDLSisEnabled           = true;
@@ -244,8 +257,6 @@ namespace Visualisator
                 _channels[i] = -100;
             }
 
-            //Thread newThread = new Thread(new ThreadStart(Listen));
-            //newThread.Start();
             Medium.WeHavePacketsToSend += new EventHandler(Listen);
 
             ThreadPool.QueueUserWorkItem(new WaitCallback((s) => SendKeepAlive()));
@@ -1309,9 +1320,16 @@ namespace Visualisator
                         sw.Stop();
                         TimeSpan elapsedTime2 = sw.Elapsed;
                         if (elapsedTime1 < elapsedTime2)
+                        {
                             SLSMessage = "BSS better";
+                            ForceTxInBss = true;
+                        }
                         else
+                        {
                             SLSMessage = "TDLS better";
+                            ForceTxInBss = false;
+                        }
+
                         SLSMessage = SLSMessage + "-" + elapsedTime1.Milliseconds.ToString(CultureInfo.InvariantCulture) + " " +
                                elapsedTime2.Milliseconds.ToString(CultureInfo.InvariantCulture);
              

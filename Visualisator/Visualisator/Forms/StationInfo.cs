@@ -556,5 +556,10 @@ namespace Visualisator
             SwitchStandartSupport(Standart80211._11n);
         }
 
+        private void chkbSLSAutoStart_CheckedChanged(object sender, EventArgs e)
+        {
+            _sta.AutoStartSLS = chkbSLSAutoStart.Checked ;
+        }
+
     }
 }

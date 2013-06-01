@@ -118,6 +118,7 @@
             this.cmdLogsClear = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
+            this.chkbSLSAutoStart = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -347,6 +348,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkbSLSAutoStart);
             this.groupBox1.Controls.Add(this.lblSLSMessage);
             this.groupBox1.Controls.Add(this.lblLastTransmitTime);
             this.groupBox1.Controls.Add(this.label21);
@@ -426,7 +428,7 @@
             // lblLastTransmitTime
             // 
             this.lblLastTransmitTime.AutoSize = true;
-            this.lblLastTransmitTime.Location = new System.Drawing.Point(267, 196);
+            this.lblLastTransmitTime.Location = new System.Drawing.Point(243, 201);
             this.lblLastTransmitTime.Name = "lblLastTransmitTime";
             this.lblLastTransmitTime.Size = new System.Drawing.Size(13, 13);
             this.lblLastTransmitTime.TabIndex = 77;
@@ -435,7 +437,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(153, 196);
+            this.label21.Location = new System.Drawing.Point(127, 201);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(96, 13);
             this.label21.TabIndex = 76;
@@ -572,6 +574,7 @@
             this.chkbAutoStartTdls.Size = new System.Drawing.Size(104, 17);
             this.chkbAutoStartTdls.TabIndex = 61;
             this.chkbAutoStartTdls.Text = "Auto Start TDLS";
+            this.toolTip1.SetToolTip(this.chkbAutoStartTdls, "Automatic start of TDLS ");
             this.chkbAutoStartTdls.UseVisualStyleBackColor = true;
             this.chkbAutoStartTdls.CheckedChanged += new System.EventHandler(this.chkbAutoStartTdls_CheckedChanged);
             // 
@@ -1119,6 +1122,18 @@
             this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // chkbSLSAutoStart
+            // 
+            this.chkbSLSAutoStart.AutoSize = true;
+            this.chkbSLSAutoStart.Location = new System.Drawing.Point(152, 181);
+            this.chkbSLSAutoStart.Name = "chkbSLSAutoStart";
+            this.chkbSLSAutoStart.Size = new System.Drawing.Size(71, 17);
+            this.chkbSLSAutoStart.TabIndex = 79;
+            this.chkbSLSAutoStart.Text = "Auto SLS";
+            this.toolTip1.SetToolTip(this.chkbSLSAutoStart, "Automatic switch between links by SLS");
+            this.chkbSLSAutoStart.UseVisualStyleBackColor = true;
+            this.chkbSLSAutoStart.CheckedChanged += new System.EventHandler(this.chkbSLSAutoStart_CheckedChanged);
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1234,5 +1249,6 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label lblSLSMessage;
+        private System.Windows.Forms.CheckBox chkbSLSAutoStart;
     }
 }
