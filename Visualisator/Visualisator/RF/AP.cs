@@ -368,7 +368,7 @@ namespace Visualisator
         /// <param name="source">MAC address od STA device</param>
         private void DisonnectRoutine(string source)
         {
-            if (!_AssociatedDevices.Contains(source))
+            if (_AssociatedDevices.Contains(source))
                 _AssociatedDevices.Remove(source);
 
             try
