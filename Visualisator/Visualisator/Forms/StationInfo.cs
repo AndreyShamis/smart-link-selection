@@ -372,16 +372,16 @@ namespace Visualisator
                 lblRetransmittionRate.Text = _sta.getRetransmitionRate().ToString();
                 lblNoiseRssi.Text = _sta.guiNoiseRssi.ToString();
 
-                if(string.IsNullOrEmpty(_sta.SSID))
-                {
-                    cmdSendData.Enabled = false;
-                    button2.Enabled = false;
-                }
-                else
-                {
-                    cmdSendData.Enabled = true;
-                    button2.Enabled = true;
-                }
+                //if(string.IsNullOrEmpty(_sta.SSID))
+                //{
+                //    cmdSendData.Enabled = false;
+                //    button2.Enabled = false;
+                //}
+                //else
+                //{
+                //    cmdSendData.Enabled = true;
+                //    button2.Enabled = true;
+                //}
             }
             catch (Exception ex)
             {
@@ -577,6 +577,11 @@ namespace Visualisator
         private void chkbSLSAutoStart_CheckedChanged(object sender, EventArgs e)
         {
             _sta.AutoStartSLS = chkbSLSAutoStart.Checked ;
+        }
+
+        private void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            _sta.DisconnectFromAp();
         }
 
     }

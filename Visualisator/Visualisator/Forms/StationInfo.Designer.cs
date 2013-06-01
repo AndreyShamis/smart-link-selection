@@ -119,6 +119,7 @@
             this.cmdLogsClear = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
+            this.btnDisconnect = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -372,6 +373,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnDisconnect);
             this.groupBox1.Controls.Add(this.chkbSLSAutoStart);
             this.groupBox1.Controls.Add(this.lblSLSMessage);
             this.groupBox1.Controls.Add(this.lblLastTransmitTime);
@@ -1134,6 +1136,16 @@
             this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btnDisconnect
+            // 
+            this.btnDisconnect.Location = new System.Drawing.Point(510, 138);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(70, 21);
+            this.btnDisconnect.TabIndex = 80;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1250,5 +1262,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label lblSLSMessage;
         private System.Windows.Forms.CheckBox chkbSLSAutoStart;
+        private System.Windows.Forms.Button btnDisconnect;
     }
 }

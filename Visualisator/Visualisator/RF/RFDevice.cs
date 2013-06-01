@@ -492,9 +492,13 @@ namespace Visualisator
             lock (RF_STATUS){
                 try{
                     RF_STATUS = "TX";
-                    while (!Medium.Registration(this.Freq, this.getOperateChannel(), this.x, this.y, sleep))
+                    short OperateChannel = this.getOperateChannel();
+                    int try_counter = 0;
+                    while (!Medium.Registration(this.Freq, OperateChannel, this.x, this.y, sleep))
                     {
                         Thread.Sleep(new TimeSpan(randomWait.Next(20, 50)));
+                        if (try_counter++ > 200)
+                            return;
                     }
                     this.MACLastTrnsmitRate = pack.getTransmitRate();
                     Medium.SendData(pack);   

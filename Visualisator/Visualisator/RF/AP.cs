@@ -345,7 +345,7 @@ namespace Visualisator
 
             if (pt == typeof(Connect))
                 ConnectRoutine(pack.Source);
-            if (pt == typeof(Disconnect))
+            else if (pt == typeof(Disconnect))
                 DisonnectRoutine(pack.Source);
             else if (pt == typeof(KeepAlive))
             {

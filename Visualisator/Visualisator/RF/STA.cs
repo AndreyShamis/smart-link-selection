@@ -1374,5 +1374,26 @@ namespace Visualisator
             try {                   this.TDLSisWork = true; }
             catch (Exception ex) {  AddToLog("EnableTDLS: " + ex.Message); }
         }
+
+        //=====================================================================
+        /// <summary>
+        /// Disconnect from AP
+        /// </summary>
+        public void DisconnectFromAp()
+        {
+            
+            var disconn = new Disconnect(CreatePacket()) {Destination = _connectedAPMacAddress};
+            SendData(disconn);
+            Thread.Sleep(100);
+            SendData(disconn);
+            Thread.Sleep(100);
+            SendData(disconn);
+            this.SSID = "";
+            _connectedAPMacAddress = "";
+            this.BSSID = "";
+            _AssociatedWithAPList.Clear();
+            this.setOperateChannel(0);
+            
+        }
     }
 }
