@@ -36,7 +36,7 @@ namespace Visualisator
         private bool                StopScan                    { set; get; } // Used for stop scan if start connection
         private TDLSSetupStatus     _tdlsSetupStatus            = TDLSSetupStatus.TDLSSetupDisabled;
         private bool                _ackReceived                = false;
-        private bool                ForceTxInBss                = false;
+        public bool                 ForceTxInBss                = false;
         public bool                 AutoStartSLS                { set; get; }
         /// <summary>
         /// Indicate if NullDataAck was received in TdlsTest

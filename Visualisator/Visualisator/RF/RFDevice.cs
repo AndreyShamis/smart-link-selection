@@ -167,7 +167,7 @@ namespace Visualisator
             }
             catch(Exception ex)
             {
-                MessageBox.Show("getRetransmitionRate" + ex.Message);
+                //MessageBox.Show("getRetransmitionRate" + ex.Message);
             }
 
             return -1;

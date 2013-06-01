@@ -372,16 +372,36 @@ namespace Visualisator
                 lblRetransmittionRate.Text = _sta.getRetransmitionRate().ToString();
                 lblNoiseRssi.Text = _sta.guiNoiseRssi.ToString();
 
-                //if(string.IsNullOrEmpty(_sta.SSID))
-                //{
-                //    cmdSendData.Enabled = false;
-                //    button2.Enabled = false;
-                //}
-                //else
-                //{
-                //    cmdSendData.Enabled = true;
-                //    button2.Enabled = true;
-                //}
+                if (string.IsNullOrEmpty(_sta.SSID))
+                {
+                    cmdSendData.Enabled = false;
+                    btnDisconnect.Enabled = false;
+                    button2.Enabled = false;
+                }
+                else
+                {
+                    cmdSendData.Enabled = true;
+                    btnDisconnect.Enabled = true;
+                    btnConnectToBSS.Enabled = false;
+                    button2.Enabled = true;
+                }
+
+                if(string.IsNullOrEmpty(_sta.SSID))
+                {
+                    lblNowTDLS.BackColor = Color.Black;
+                    lblNowBSS.BackColor = Color.Black;   
+                }
+                else if (_sta.TDLSisWork && !_sta.ForceTxInBss)
+                {
+                    lblNowTDLS.BackColor = Color.YellowGreen;
+                    lblNowBSS.BackColor = Color.Black;         
+                }
+                else 
+                {
+                    lblNowTDLS.BackColor = Color.Black;
+                    lblNowBSS.BackColor = Color.YellowGreen;             
+                }
+
             }
             catch (Exception ex)
             {
@@ -582,6 +602,8 @@ namespace Visualisator
         private void btnDisconnect_Click(object sender, EventArgs e)
         {
             _sta.DisconnectFromAp();
+            btnConnectToBSS.Enabled = true;
+            btnDisconnect.Enabled = false;
         }
 
     }

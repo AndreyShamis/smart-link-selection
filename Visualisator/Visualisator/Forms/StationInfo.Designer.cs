@@ -50,9 +50,17 @@
             this.lblSLSMessage = new System.Windows.Forms.Label();
             this.chkbAutoStartTdls = new System.Windows.Forms.CheckBox();
             this.chkbSLSAutoStart = new System.Windows.Forms.CheckBox();
+            this.cmdReset = new System.Windows.Forms.Button();
+            this.btnScan = new System.Windows.Forms.Button();
+            this.btnConnectToBSS = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblNowTDLS = new System.Windows.Forms.Label();
+            this.lblNowBSS = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnDisconnect = new System.Windows.Forms.Button();
             this.lblLastTransmitTime = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.lblTdlsUnsuccessTrys = new System.Windows.Forms.Label();
@@ -96,7 +104,6 @@
             this.lblRetransmited = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblAckReceived = new System.Windows.Forms.Label();
-            this.cmdReset = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.lblSent = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -104,10 +111,7 @@
             this.txtMAC = new System.Windows.Forms.TextBox();
             this.ConnectedToLabel = new System.Windows.Forms.Label();
             this.lblCoordinates = new System.Windows.Forms.Label();
-            this.btnScan = new System.Windows.Forms.Button();
-            this.btnConnectToBSS = new System.Windows.Forms.Button();
             this.cmbAPList = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
             this.cmdUpdateStatisticTable = new System.Windows.Forms.Button();
@@ -119,7 +123,6 @@
             this.cmdLogsClear = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
-            this.btnDisconnect = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -189,7 +192,7 @@
             this.lblAssociatedAP.AutoSize = true;
             this.lblAssociatedAP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lblAssociatedAP.ForeColor = System.Drawing.Color.Green;
-            this.lblAssociatedAP.Location = new System.Drawing.Point(446, 54);
+            this.lblAssociatedAP.Location = new System.Drawing.Point(434, 0);
             this.lblAssociatedAP.Name = "lblAssociatedAP";
             this.lblAssociatedAP.Size = new System.Drawing.Size(116, 16);
             this.lblAssociatedAP.TabIndex = 8;
@@ -199,7 +202,7 @@
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(389, 86);
+            this.txtDestination.Location = new System.Drawing.Point(309, 69);
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(113, 20);
             this.txtDestination.TabIndex = 10;
@@ -231,7 +234,7 @@
             // 
             // cmdSelectFileToSend
             // 
-            this.cmdSelectFileToSend.Location = new System.Drawing.Point(497, 161);
+            this.cmdSelectFileToSend.Location = new System.Drawing.Point(506, 70);
             this.cmdSelectFileToSend.Name = "cmdSelectFileToSend";
             this.cmdSelectFileToSend.Size = new System.Drawing.Size(64, 21);
             this.cmdSelectFileToSend.TabIndex = 60;
@@ -243,7 +246,7 @@
             // btnSaveData
             // 
             this.btnSaveData.Enabled = false;
-            this.btnSaveData.Location = new System.Drawing.Point(429, 162);
+            this.btnSaveData.Location = new System.Drawing.Point(506, 125);
             this.btnSaveData.Name = "btnSaveData";
             this.btnSaveData.Size = new System.Drawing.Size(62, 20);
             this.btnSaveData.TabIndex = 21;
@@ -255,7 +258,7 @@
             // 
             // cmdSendData
             // 
-            this.cmdSendData.Location = new System.Drawing.Point(504, 86);
+            this.cmdSendData.Location = new System.Drawing.Point(424, 69);
             this.cmdSendData.Name = "cmdSendData";
             this.cmdSendData.Size = new System.Drawing.Size(76, 22);
             this.cmdSendData.TabIndex = 9;
@@ -292,7 +295,7 @@
             // 
             this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.button4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(405, 216);
+            this.button4.Location = new System.Drawing.Point(506, 232);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(18, 18);
             this.button4.TabIndex = 72;
@@ -305,7 +308,7 @@
             // 
             this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.button5.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(388, 216);
+            this.button5.Location = new System.Drawing.Point(489, 232);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(18, 18);
             this.button5.TabIndex = 71;
@@ -316,9 +319,9 @@
             // 
             // lblSLSMessage
             // 
-            this.lblSLSMessage.Location = new System.Drawing.Point(287, 239);
+            this.lblSLSMessage.Location = new System.Drawing.Point(0, 252);
             this.lblSLSMessage.Name = "lblSLSMessage";
-            this.lblSLSMessage.Size = new System.Drawing.Size(305, 24);
+            this.lblSLSMessage.Size = new System.Drawing.Size(305, 14);
             this.lblSLSMessage.TabIndex = 78;
             this.lblSLSMessage.Text = "SLS Message";
             this.toolTip1.SetToolTip(this.lblSLSMessage, "SLS Message");
@@ -326,6 +329,7 @@
             // chkbAutoStartTdls
             // 
             this.chkbAutoStartTdls.AutoSize = true;
+            this.chkbAutoStartTdls.ForeColor = System.Drawing.Color.Green;
             this.chkbAutoStartTdls.Location = new System.Drawing.Point(152, 164);
             this.chkbAutoStartTdls.Name = "chkbAutoStartTdls";
             this.chkbAutoStartTdls.Size = new System.Drawing.Size(104, 17);
@@ -338,6 +342,7 @@
             // chkbSLSAutoStart
             // 
             this.chkbSLSAutoStart.AutoSize = true;
+            this.chkbSLSAutoStart.ForeColor = System.Drawing.Color.Green;
             this.chkbSLSAutoStart.Location = new System.Drawing.Point(152, 181);
             this.chkbSLSAutoStart.Name = "chkbSLSAutoStart";
             this.chkbSLSAutoStart.Size = new System.Drawing.Size(71, 17);
@@ -346,6 +351,53 @@
             this.toolTip1.SetToolTip(this.chkbSLSAutoStart, "Automatic switch between links by SLS");
             this.chkbSLSAutoStart.UseVisualStyleBackColor = true;
             this.chkbSLSAutoStart.CheckedChanged += new System.EventHandler(this.chkbSLSAutoStart_CheckedChanged);
+            // 
+            // cmdReset
+            // 
+            this.cmdReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.cmdReset.Location = new System.Drawing.Point(233, 22);
+            this.cmdReset.Name = "cmdReset";
+            this.cmdReset.Size = new System.Drawing.Size(44, 21);
+            this.cmdReset.TabIndex = 16;
+            this.cmdReset.Text = "Reset";
+            this.toolTip1.SetToolTip(this.cmdReset, "Reset counters");
+            this.cmdReset.UseVisualStyleBackColor = true;
+            this.cmdReset.Click += new System.EventHandler(this.cmdReset_Click);
+            // 
+            // btnScan
+            // 
+            this.btnScan.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnScan.ForeColor = System.Drawing.Color.Teal;
+            this.btnScan.Location = new System.Drawing.Point(456, 19);
+            this.btnScan.Name = "btnScan";
+            this.btnScan.Size = new System.Drawing.Size(58, 19);
+            this.btnScan.TabIndex = 5;
+            this.btnScan.Text = "Scan";
+            this.toolTip1.SetToolTip(this.btnScan, "Perform Scan on Medium");
+            this.btnScan.UseVisualStyleBackColor = true;
+            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
+            // 
+            // btnConnectToBSS
+            // 
+            this.btnConnectToBSS.Location = new System.Drawing.Point(456, 40);
+            this.btnConnectToBSS.Name = "btnConnectToBSS";
+            this.btnConnectToBSS.Size = new System.Drawing.Size(58, 21);
+            this.btnConnectToBSS.TabIndex = 3;
+            this.btnConnectToBSS.Text = "Connect";
+            this.toolTip1.SetToolTip(this.btnConnectToBSS, "Press here after you have sekected SSID for connect");
+            this.btnConnectToBSS.UseVisualStyleBackColor = true;
+            this.btnConnectToBSS.Click += new System.EventHandler(this.btnConnectToBSS_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(322, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Choose BSS";
+            this.toolTip1.SetToolTip(this.label1, "Choose BSS[AP] to connect");
             // 
             // tabControl1
             // 
@@ -373,6 +425,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblNowTDLS);
+            this.groupBox1.Controls.Add(this.lblNowBSS);
+            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.btnDisconnect);
             this.groupBox1.Controls.Add(this.chkbSLSAutoStart);
             this.groupBox1.Controls.Add(this.lblSLSMessage);
@@ -451,6 +506,47 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
             // 
+            // lblNowTDLS
+            // 
+            this.lblNowTDLS.AutoSize = true;
+            this.lblNowTDLS.BackColor = System.Drawing.Color.Black;
+            this.lblNowTDLS.ForeColor = System.Drawing.Color.Coral;
+            this.lblNowTDLS.Location = new System.Drawing.Point(210, 2);
+            this.lblNowTDLS.Name = "lblNowTDLS";
+            this.lblNowTDLS.Size = new System.Drawing.Size(35, 13);
+            this.lblNowTDLS.TabIndex = 83;
+            this.lblNowTDLS.Text = "TDLS";
+            // 
+            // lblNowBSS
+            // 
+            this.lblNowBSS.AutoSize = true;
+            this.lblNowBSS.BackColor = System.Drawing.Color.Black;
+            this.lblNowBSS.ForeColor = System.Drawing.Color.Coral;
+            this.lblNowBSS.Location = new System.Drawing.Point(181, 2);
+            this.lblNowBSS.Name = "lblNowBSS";
+            this.lblNowBSS.Size = new System.Drawing.Size(28, 13);
+            this.lblNowBSS.TabIndex = 82;
+            this.lblNowBSS.Text = "BSS";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(358, 250);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(38, 13);
+            this.label14.TabIndex = 81;
+            this.label14.Text = "Speed";
+            // 
+            // btnDisconnect
+            // 
+            this.btnDisconnect.Location = new System.Drawing.Point(520, 40);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(73, 21);
+            this.btnDisconnect.TabIndex = 80;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
+            // 
             // lblLastTransmitTime
             // 
             this.lblLastTransmitTime.AutoSize = true;
@@ -495,7 +591,7 @@
             this.label20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label20.ForeColor = System.Drawing.Color.Teal;
-            this.label20.Location = new System.Drawing.Point(424, 216);
+            this.label20.Location = new System.Drawing.Point(525, 232);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(50, 18);
             this.label20.TabIndex = 73;
@@ -508,7 +604,7 @@
             this.lblStandart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblStandart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblStandart.ForeColor = System.Drawing.Color.Teal;
-            this.lblStandart.Location = new System.Drawing.Point(424, 198);
+            this.lblStandart.Location = new System.Drawing.Point(525, 214);
             this.lblStandart.Name = "lblStandart";
             this.lblStandart.Size = new System.Drawing.Size(50, 15);
             this.lblStandart.TabIndex = 69;
@@ -520,7 +616,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label18.Location = new System.Drawing.Point(407, 185);
+            this.label18.Location = new System.Drawing.Point(508, 201);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(83, 13);
             this.label18.TabIndex = 68;
@@ -532,7 +628,7 @@
             this.lblBandwith.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblBandwith.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblBandwith.ForeColor = System.Drawing.Color.Teal;
-            this.lblBandwith.Location = new System.Drawing.Point(349, 198);
+            this.lblBandwith.Location = new System.Drawing.Point(450, 214);
             this.lblBandwith.Name = "lblBandwith";
             this.lblBandwith.Size = new System.Drawing.Size(50, 15);
             this.lblBandwith.TabIndex = 67;
@@ -544,7 +640,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label19.Location = new System.Drawing.Point(333, 185);
+            this.label19.Location = new System.Drawing.Point(434, 201);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(87, 13);
             this.label19.TabIndex = 66;
@@ -553,17 +649,18 @@
             // lblSpeed
             // 
             this.lblSpeed.AutoSize = true;
-            this.lblSpeed.Location = new System.Drawing.Point(226, 112);
+            this.lblSpeed.Location = new System.Drawing.Point(402, 251);
             this.lblSpeed.Name = "lblSpeed";
             this.lblSpeed.Size = new System.Drawing.Size(38, 13);
             this.lblSpeed.TabIndex = 65;
             this.lblSpeed.Text = "Speed";
+            this.lblSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblStandartNSupport
             // 
             this.lblStandartNSupport.BackColor = System.Drawing.Color.White;
             this.lblStandartNSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStandartNSupport.Location = new System.Drawing.Point(361, 218);
+            this.lblStandartNSupport.Location = new System.Drawing.Point(462, 234);
             this.lblStandartNSupport.Name = "lblStandartNSupport";
             this.lblStandartNSupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartNSupport.TabIndex = 64;
@@ -574,7 +671,7 @@
             // 
             this.lblStandartGSupport.BackColor = System.Drawing.Color.White;
             this.lblStandartGSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStandartGSupport.Location = new System.Drawing.Point(343, 218);
+            this.lblStandartGSupport.Location = new System.Drawing.Point(444, 234);
             this.lblStandartGSupport.Name = "lblStandartGSupport";
             this.lblStandartGSupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartGSupport.TabIndex = 63;
@@ -585,7 +682,7 @@
             // 
             this.lblStandartASupport.BackColor = System.Drawing.Color.White;
             this.lblStandartASupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStandartASupport.Location = new System.Drawing.Point(325, 218);
+            this.lblStandartASupport.Location = new System.Drawing.Point(426, 234);
             this.lblStandartASupport.Name = "lblStandartASupport";
             this.lblStandartASupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartASupport.TabIndex = 62;
@@ -595,9 +692,11 @@
             // cmdShowLog
             // 
             this.cmdShowLog.Enabled = false;
-            this.cmdShowLog.Location = new System.Drawing.Point(497, 186);
+            this.cmdShowLog.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdShowLog.ForeColor = System.Drawing.Color.Teal;
+            this.cmdShowLog.Location = new System.Drawing.Point(520, 19);
             this.cmdShowLog.Name = "cmdShowLog";
-            this.cmdShowLog.Size = new System.Drawing.Size(64, 22);
+            this.cmdShowLog.Size = new System.Drawing.Size(73, 19);
             this.cmdShowLog.TabIndex = 59;
             this.cmdShowLog.Text = "Show Log";
             this.cmdShowLog.UseVisualStyleBackColor = true;
@@ -607,7 +706,7 @@
             // 
             this.lblRetransmittionRate.AutoSize = true;
             this.lblRetransmittionRate.ForeColor = System.Drawing.Color.Maroon;
-            this.lblRetransmittionRate.Location = new System.Drawing.Point(251, 15);
+            this.lblRetransmittionRate.Location = new System.Drawing.Point(206, 22);
             this.lblRetransmittionRate.Name = "lblRetransmittionRate";
             this.lblRetransmittionRate.Size = new System.Drawing.Size(13, 13);
             this.lblRetransmittionRate.TabIndex = 58;
@@ -618,7 +717,7 @@
             this.label15.AccessibleDescription = "";
             this.label15.AutoSize = true;
             this.label15.ForeColor = System.Drawing.Color.Maroon;
-            this.label15.Location = new System.Drawing.Point(181, 15);
+            this.label15.Location = new System.Drawing.Point(136, 22);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 13);
             this.label15.TabIndex = 57;
@@ -629,7 +728,7 @@
             // 
             this.lblNoiseRssi.AutoSize = true;
             this.lblNoiseRssi.ForeColor = System.Drawing.Color.Maroon;
-            this.lblNoiseRssi.Location = new System.Drawing.Point(251, 28);
+            this.lblNoiseRssi.Location = new System.Drawing.Point(206, 35);
             this.lblNoiseRssi.Name = "lblNoiseRssi";
             this.lblNoiseRssi.Size = new System.Drawing.Size(13, 13);
             this.lblNoiseRssi.TabIndex = 56;
@@ -639,7 +738,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.ForeColor = System.Drawing.Color.Maroon;
-            this.label10.Location = new System.Drawing.Point(181, 28);
+            this.label10.Location = new System.Drawing.Point(136, 35);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(62, 13);
             this.label10.TabIndex = 55;
@@ -658,7 +757,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(498, 214);
+            this.button3.Location = new System.Drawing.Point(506, 97);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(63, 22);
             this.button3.TabIndex = 52;
@@ -669,7 +768,7 @@
             // btnGetDevicesInBSS
             // 
             this.btnGetDevicesInBSS.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnGetDevicesInBSS.Location = new System.Drawing.Point(504, 113);
+            this.btnGetDevicesInBSS.Location = new System.Drawing.Point(424, 96);
             this.btnGetDevicesInBSS.Name = "btnGetDevicesInBSS";
             this.btnGetDevicesInBSS.Size = new System.Drawing.Size(76, 20);
             this.btnGetDevicesInBSS.TabIndex = 51;
@@ -680,7 +779,7 @@
             // cmbAssociatedDevicesInBSS
             // 
             this.cmbAssociatedDevicesInBSS.FormattingEnabled = true;
-            this.cmbAssociatedDevicesInBSS.Location = new System.Drawing.Point(389, 112);
+            this.cmbAssociatedDevicesInBSS.Location = new System.Drawing.Point(309, 95);
             this.cmbAssociatedDevicesInBSS.Name = "cmbAssociatedDevicesInBSS";
             this.cmbAssociatedDevicesInBSS.Size = new System.Drawing.Size(113, 21);
             this.cmbAssociatedDevicesInBSS.TabIndex = 50;
@@ -710,7 +809,7 @@
             // lblAllReceivedPackets
             // 
             this.lblAllReceivedPackets.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblAllReceivedPackets.Location = new System.Drawing.Point(202, 79);
+            this.lblAllReceivedPackets.Location = new System.Drawing.Point(202, 86);
             this.lblAllReceivedPackets.Name = "lblAllReceivedPackets";
             this.lblAllReceivedPackets.Size = new System.Drawing.Size(62, 14);
             this.lblAllReceivedPackets.TabIndex = 47;
@@ -721,7 +820,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label11.Location = new System.Drawing.Point(117, 80);
+            this.label11.Location = new System.Drawing.Point(117, 87);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(79, 13);
             this.label11.TabIndex = 46;
@@ -835,16 +934,17 @@
             this.lblWaitingForAck.AutoSize = true;
             this.lblWaitingForAck.BackColor = System.Drawing.Color.Black;
             this.lblWaitingForAck.ForeColor = System.Drawing.Color.Coral;
-            this.lblWaitingForAck.Location = new System.Drawing.Point(491, 70);
+            this.lblWaitingForAck.Location = new System.Drawing.Point(251, 2);
             this.lblWaitingForAck.Name = "lblWaitingForAck";
-            this.lblWaitingForAck.Size = new System.Drawing.Size(83, 13);
+            this.lblWaitingForAck.Size = new System.Drawing.Size(26, 13);
             this.lblWaitingForAck.TabIndex = 24;
-            this.lblWaitingForAck.Text = "Waiting For Ack";
+            this.lblWaitingForAck.Text = "Ack";
+            this.toolTip1.SetToolTip(this.lblWaitingForAck, "Waiting For Ack");
             // 
             // lblDataAckRetransmited
             // 
             this.lblDataAckRetransmited.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblDataAckRetransmited.Location = new System.Drawing.Point(209, 66);
+            this.lblDataAckRetransmited.Location = new System.Drawing.Point(209, 73);
             this.lblDataAckRetransmited.Name = "lblDataAckRetransmited";
             this.lblDataAckRetransmited.Size = new System.Drawing.Size(55, 13);
             this.lblDataAckRetransmited.TabIndex = 23;
@@ -855,7 +955,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label6.Location = new System.Drawing.Point(117, 67);
+            this.label6.Location = new System.Drawing.Point(117, 74);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(94, 13);
             this.label6.TabIndex = 22;
@@ -865,7 +965,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Teal;
-            this.label5.Location = new System.Drawing.Point(117, 54);
+            this.label5.Location = new System.Drawing.Point(117, 61);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 20;
@@ -874,7 +974,7 @@
             // lblRetransmited
             // 
             this.lblRetransmited.ForeColor = System.Drawing.Color.Teal;
-            this.lblRetransmited.Location = new System.Drawing.Point(206, 54);
+            this.lblRetransmited.Location = new System.Drawing.Point(206, 61);
             this.lblRetransmited.Name = "lblRetransmited";
             this.lblRetransmited.Size = new System.Drawing.Size(58, 13);
             this.lblRetransmited.TabIndex = 19;
@@ -885,7 +985,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Navy;
-            this.label4.Location = new System.Drawing.Point(117, 41);
+            this.label4.Location = new System.Drawing.Point(117, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 13);
             this.label4.TabIndex = 18;
@@ -894,23 +994,12 @@
             // lblAckReceived
             // 
             this.lblAckReceived.ForeColor = System.Drawing.Color.Navy;
-            this.lblAckReceived.Location = new System.Drawing.Point(209, 41);
+            this.lblAckReceived.Location = new System.Drawing.Point(209, 48);
             this.lblAckReceived.Name = "lblAckReceived";
             this.lblAckReceived.Size = new System.Drawing.Size(55, 16);
             this.lblAckReceived.TabIndex = 17;
             this.lblAckReceived.Text = "0";
             this.lblAckReceived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cmdReset
-            // 
-            this.cmdReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.cmdReset.Location = new System.Drawing.Point(270, 15);
-            this.cmdReset.Name = "cmdReset";
-            this.cmdReset.Size = new System.Drawing.Size(47, 20);
-            this.cmdReset.TabIndex = 16;
-            this.cmdReset.Text = "Reset";
-            this.cmdReset.UseVisualStyleBackColor = true;
-            this.cmdReset.Click += new System.EventHandler(this.cmdReset_Click);
             // 
             // label3
             // 
@@ -967,7 +1056,7 @@
             // 
             this.ConnectedToLabel.AutoSize = true;
             this.ConnectedToLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.ConnectedToLabel.Location = new System.Drawing.Point(333, 54);
+            this.ConnectedToLabel.Location = new System.Drawing.Point(321, 0);
             this.ConnectedToLabel.Name = "ConnectedToLabel";
             this.ConnectedToLabel.Size = new System.Drawing.Size(107, 16);
             this.ConnectedToLabel.TabIndex = 7;
@@ -983,45 +1072,15 @@
             this.lblCoordinates.TabIndex = 4;
             this.lblCoordinates.Text = "X:___ Y:___";
             // 
-            // btnScan
-            // 
-            this.btnScan.Location = new System.Drawing.Point(510, 12);
-            this.btnScan.Name = "btnScan";
-            this.btnScan.Size = new System.Drawing.Size(58, 19);
-            this.btnScan.TabIndex = 5;
-            this.btnScan.Text = "Scan";
-            this.btnScan.UseVisualStyleBackColor = true;
-            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
-            // 
-            // btnConnectToBSS
-            // 
-            this.btnConnectToBSS.Location = new System.Drawing.Point(510, 30);
-            this.btnConnectToBSS.Name = "btnConnectToBSS";
-            this.btnConnectToBSS.Size = new System.Drawing.Size(58, 21);
-            this.btnConnectToBSS.TabIndex = 3;
-            this.btnConnectToBSS.Text = "Connect";
-            this.btnConnectToBSS.UseVisualStyleBackColor = true;
-            this.btnConnectToBSS.Click += new System.EventHandler(this.btnConnectToBSS_Click);
-            // 
             // cmbAPList
             // 
             this.cmbAPList.FormattingEnabled = true;
-            this.cmbAPList.Location = new System.Drawing.Point(364, 30);
+            this.cmbAPList.Location = new System.Drawing.Point(312, 40);
             this.cmbAPList.Name = "cmbAPList";
             this.cmbAPList.Size = new System.Drawing.Size(138, 21);
             this.cmbAPList.TabIndex = 2;
             this.cmbAPList.SelectedIndexChanged += new System.EventHandler(this.cmbAPList_SelectedIndexChanged);
             this.cmbAPList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAPList_MouseClick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(361, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(141, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Choose BSS[AP] to connect";
             // 
             // tabPage4
             // 
@@ -1135,16 +1194,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // btnDisconnect
-            // 
-            this.btnDisconnect.Location = new System.Drawing.Point(510, 138);
-            this.btnDisconnect.Name = "btnDisconnect";
-            this.btnDisconnect.Size = new System.Drawing.Size(70, 21);
-            this.btnDisconnect.TabIndex = 80;
-            this.btnDisconnect.Text = "Disconnect";
-            this.btnDisconnect.UseVisualStyleBackColor = true;
-            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // StationInfo
             // 
@@ -1263,5 +1312,8 @@
         private System.Windows.Forms.Label lblSLSMessage;
         private System.Windows.Forms.CheckBox chkbSLSAutoStart;
         private System.Windows.Forms.Button btnDisconnect;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblNowTDLS;
+        private System.Windows.Forms.Label lblNowBSS;
     }
 }
