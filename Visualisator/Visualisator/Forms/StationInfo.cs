@@ -134,7 +134,8 @@ namespace Visualisator
         //=====================================================================
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtDestination.Text.Length > 16)
+            string mac = txtDestination.Text;
+            if (mac.Length == 17 && !mac.Equals("00:00:00:00:00:00") && !mac.Equals("FF:FF:FF:FF:FF:FF"))
             {
                 _sta.rfile(txtDestination.Text);
                 txtDestination.BackColor = Color.White;
@@ -198,12 +199,17 @@ namespace Visualisator
         //=====================================================================
         private void button2_Click(object sender, EventArgs e)
         {
-            String txtTDLSSetupRequest = "";
-
-            if (txtTDLSSetupRequestMAC.Text.Length > 10)
+            string txtTDLSSetupRequest = "";
+            string mac = txtTDLSSetupRequestMAC.Text;
+            if (mac.Length == 17 && !mac.Equals("00:00:00:00:00:00") && !mac.Equals("FF:FF:FF:FF:FF:FF"))
             {
                 txtTDLSSetupRequest = txtTDLSSetupRequestMAC.Text;
                 _sta.TDLS_SendSetupRequest(txtTDLSSetupRequest);
+                txtTDLSSetupRequestMAC.BackColor = Color.YellowGreen;
+            }
+            else
+            {
+                txtTDLSSetupRequestMAC.BackColor = Color.IndianRed;
             }
         }
 
@@ -365,6 +371,17 @@ namespace Visualisator
                 lblLastTransmitTime.Text = _sta.LastTransmitTIme;
                 lblRetransmittionRate.Text = _sta.getRetransmitionRate().ToString();
                 lblNoiseRssi.Text = _sta.guiNoiseRssi.ToString();
+
+                if(string.IsNullOrEmpty(_sta.SSID))
+                {
+                    cmdSendData.Enabled = false;
+                    button2.Enabled = false;
+                }
+                else
+                {
+                    cmdSendData.Enabled = true;
+                    button2.Enabled = true;
+                }
             }
             catch (Exception ex)
             {

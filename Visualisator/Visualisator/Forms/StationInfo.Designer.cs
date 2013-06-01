@@ -202,7 +202,7 @@
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(113, 20);
             this.txtDestination.TabIndex = 10;
-            this.txtDestination.Text = "00:00:00:00:00";
+            this.txtDestination.Text = "00:00:00:00:00:00";
             this.toolTip1.SetToolTip(this.txtDestination, "Enter MAC address of peer that you want to send data to him");
             // 
             // PresentRSSI
@@ -757,7 +757,7 @@
             this.txtTDLSSetupRequestMAC.Name = "txtTDLSSetupRequestMAC";
             this.txtTDLSSetupRequestMAC.Size = new System.Drawing.Size(102, 20);
             this.txtTDLSSetupRequestMAC.TabIndex = 42;
-            this.txtTDLSSetupRequestMAC.Text = "00:00:00:00:00";
+            this.txtTDLSSetupRequestMAC.Text = "00:00:00:00:00:00";
             this.txtTDLSSetupRequestMAC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button2
