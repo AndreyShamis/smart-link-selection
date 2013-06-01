@@ -26,7 +26,7 @@ namespace Visualisator
         private Int32 _DoubleRecieved = 0;
         private Int32 _AllReceivedPackets = 0;
         protected static string ImagesPath = Application.StartupPath.ToString() + @"\..\..\Images\";
-
+        public int                  DataRetransmited { set; get; }
         protected  static Random randomWait = new Random();
         protected static Random randomRssi = new Random();
 
@@ -457,6 +457,7 @@ namespace Visualisator
         //=====================================================================
         public void Enable()
         {
+            DataRetransmited = 0;
             this.Passive = true;
             _Enabled = true;
             BandWithSupport.Add(Bandwidth._20MHz);

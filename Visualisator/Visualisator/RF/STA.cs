@@ -21,7 +21,7 @@ namespace Visualisator
         protected ArrayListCounted  AccessPoint                 = new ArrayListCounted();
         protected Hashtable         StreamsHash                 = new Hashtable(new ByteArrayComparer());
         private Boolean             _scanning                   = false;
-        private int                 _dataRetransmited           = 0;
+        
         private int                 _dataAckRetransmitted       = 0;
         private int                 _RSSI                       = 0;
         private bool                _waitingForAck              = false;
@@ -140,11 +140,6 @@ namespace Visualisator
         public bool getScanStatus()
         {
             return _scanning;
-        }
-        public int DataRetransmited
-        {
-            get { return _dataRetransmited; }
-            set { _dataRetransmited = value; }
         }
 
         public int DataAckRetransmitted
@@ -961,7 +956,7 @@ namespace Visualisator
                             if (TDLSisWork)     Thread.Sleep(DelayInTDLS + 5);
                             else                Thread.Sleep(DelayInBss + 5);
 
-                            _dataRetransmited++;
+                            DataRetransmited++;
                             loops = loops + 1;
                             if (!_Enabled)  return;
                             maxRetrays--;
@@ -1203,7 +1198,7 @@ namespace Visualisator
                 _DataSent = 0;
                 _DataReceived = 0;
                 _DataAckReceived = 0;
-                _dataRetransmited = 0;
+                DataRetransmited = 0;
                 _dataAckRetransmitted = 0;
                 AllReceivedPackets = 0;
                 this.DoubleRecieved = 0;
