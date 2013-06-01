@@ -134,7 +134,7 @@ namespace Visualisator
         //=====================================================================
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtDestination.Text.Length > 10)
+            if (txtDestination.Text.Length > 16)
             {
                 _sta.rfile(txtDestination.Text);
                 txtDestination.BackColor = Color.White;

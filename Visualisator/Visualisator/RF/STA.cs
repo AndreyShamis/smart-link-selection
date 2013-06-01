@@ -918,7 +918,7 @@ namespace Visualisator
                     dataPack.setTransmitRate(TxRateOnSend);
 
                     stat.Packets += 1;
-                    if(TDLSisEnabled && TDLSisWork)
+                    if(TDLSisEnabled && TDLSisWork && !ForceTxInBss)
                     {
                         stat.TdlsUse = true;
                         stat.PacketsInTdls += 1;
@@ -938,7 +938,7 @@ namespace Visualisator
 
                         stat.Speed = Math.Round(speed,1);
                     //}
-
+                    stat.Time = sw.Elapsed.TotalSeconds;
                     int retrCounter = Medium.WaitBeforeRetransmit;
                     int loops = 1;
 
