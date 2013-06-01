@@ -24,6 +24,10 @@ namespace Visualisator
         private const int                       AP_MIN_SEND_PERIOD          = 100;
         private static Random                   rnadomBeacon                = new Random();
         private ArrayListCounted                _AssociatedDevices          = new ArrayListCounted();
+
+        /// <summary>
+        /// Counter for KeepAlive Received
+        /// </summary>
         public long                             KeepAliveReceived           { set; get; }
         private static Random                   random                      = new Random((int)DateTime.Now.Ticks);//thanks to McAden
         private Hashtable                       _packet_queues              = new Hashtable(new ByteArrayComparer());
@@ -40,6 +44,29 @@ namespace Visualisator
         public const int                        MAX_QUEUE_SIZE              = 10;
 
 
+        //=====================================================================
+        /// <summary>
+        /// Constructor of AP.Also call to Enable Routines.
+        /// </summary>
+        public AP()
+        {
+            DefaultColor        = Color.YellowGreen;
+            this.VColor         = DefaultColor;
+            this.SSID           = RandomString(8);
+            this.BSSID          = this.getMACAddress();
+            _BeaconPeriod       = rnadomBeacon.Next(AP_MIN_SEND_PERIOD, AP_MAX_SEND_PERIOD);
+            APImage             = (Image)Medium.imgAPImages[new Random().Next(0, Medium.imgAPImages.Count)];
+            Enable();
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Destructor of AP
+        /// </summary>
+        ~AP()
+        {
+            _Enabled = false;
+        }
 
         //=====================================================================
         /// <summary>
@@ -48,7 +75,7 @@ namespace Visualisator
         /// <returns>ArrayList of associated device</returns>
         public ArrayList GetAssociatedDevicesinAP()
         {
-            ArrayList ret = new ArrayList();
+            var ret     = new ArrayList();
             foreach (string associatedDevice in _AssociatedDevices)
             {
                 ret.Add(associatedDevice);
@@ -74,7 +101,7 @@ namespace Visualisator
         /// <returns>string</returns>
         private string RandomString(int size)
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             char ch;
             for (int i = 0; i < size; i++)
             {
@@ -96,30 +123,6 @@ namespace Visualisator
 
         //=====================================================================
         /// <summary>
-        /// Constructor of AP
-        /// </summary>
-        public AP()
-        {
-            DefaultColor = Color.YellowGreen;
-            this.VColor = DefaultColor;
-            this.SSID = RandomString(8);
-            this.BSSID = this.getMACAddress();
-            _BeaconPeriod = rnadomBeacon.Next(AP_MIN_SEND_PERIOD, AP_MAX_SEND_PERIOD);
-            APImage = (Image)Medium.imgAPImages[new Random().Next(0, Medium.imgAPImages.Count)];
-            Enable();
-        }
-
-        //=====================================================================
-        /// <summary>
-        /// Destructor of AP
-        /// </summary>
-        ~AP()
-        {
-            _Enabled = false;
-        }
-
-        //=====================================================================
-        /// <summary>
         /// Enable AP routibe function
         /// </summary>
         public new void Enable()
@@ -128,25 +131,31 @@ namespace Visualisator
             base.Enable();
             
             RF_STATUS = "NONE";
-            
-            Thread newThread = new Thread(new ThreadStart(SendBeacon));
-            newThread.Name ="Send Beacon Thread of" + this.getMACAddress();
-            newThread.Priority = ThreadPriority.Lowest;
-            newThread.Start();
 
-            //Thread newThreadListen = new Thread(new ThreadStart(Listen));
-            //newThreadListen.Start();
-            Medium.WeHavePacketsToSend += new EventHandler(Listen);
-            Thread newThreadKeepAliveDecrease = new Thread(new ThreadStart(UpdateKeepAlive));
-            newThreadKeepAliveDecrease.Name = "UpdateKeepAlive of" + this.getMACAddress();
+            Thread beaconThread = new Thread(SendBeacon)
+                    {
+                        Name         = "Send Beacon Thread of" + this.getMACAddress(),
+                        Priority     = ThreadPriority.Lowest
+                    };
+
+            Thread newThreadKeepAliveDecrease = new Thread(UpdateKeepAlive)
+                    {
+                        Name = "UpdateKeepAlive of" + this.getMACAddress()
+                    };
+
+            Thread newQueueElemntsSendDecision = new Thread(QueueElemntsSendDecision)
+                    {
+                        Name = "newQueueElemntsSendDecision of" + this.getMACAddress()
+                    };
+
+            beaconThread.Start();
             newThreadKeepAliveDecrease.Start();
-
-            Thread newQueueElemntsSendDecision = new Thread(new ThreadStart(QueueElemntsSendDecision));
-            newQueueElemntsSendDecision.Name = "newQueueElemntsSendDecision of" + this.getMACAddress();
             newQueueElemntsSendDecision.Start();
 
-            Thread queue = new Thread(new ThreadStart(QueueT));
+            Thread queue = new Thread(QueueT);
             queue.Start();
+
+            Medium.WeHavePacketsToSend += new EventHandler(Listen);
         }
 
         //=====================================================================
@@ -168,14 +177,11 @@ namespace Visualisator
         {
             while (_Enabled)
             {
-                if (_packet_queues != null)
+                if (_packet_queues != null && _packet_queues.Count > 0)
                 {
-                    if (_packet_queues.Count > 0)
+                    lock (Sync)
                     {
-                        lock (Sync)
-                        {
-                            Monitor.PulseAll(Sync);
-                        }
+                        Monitor.PulseAll(Sync);
                     }
                 }
                 else
@@ -240,11 +246,90 @@ namespace Visualisator
         /// <param name="staMAC">MAC address of STA device</param>
         private void UpdateSTAKeepAliveInfoOnReceive(string staMAC)
         {
-            if (_AssociatedDevices.Contains(staMAC)){
+            if (_AssociatedDevices.Contains(staMAC))
+            {
                 KeepAliveReceived++;
                 _AssociatedDevices.Increase(staMAC);
-            }else{
+            }
+            else
+            {
                 MessageBox.Show(staMAC + " not associated UpdateSTAKeepAliveInfo",this.getMACAddress());
+            }
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Connect routine.Send connection ack and add this mac to Array list
+        /// </summary>
+        /// <param name="sourceMAC">Sorce MAC address of STA device</param>
+        private void ConnectRoutine(string sourceMAC)
+        {
+            if (!_AssociatedDevices.Contains(sourceMAC))
+                _AssociatedDevices.Add(sourceMAC);
+
+            SendConnectionACK(sourceMAC);
+
+            try
+            {
+                _packet_queues.Add(sourceMAC, new Queue<Data>(1000)); //TODO : Check 1000?
+            }
+            catch (Exception ex) { AddToLog("CennectRoutine: " + ex.Message); }
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Data routine
+        /// </summary>
+        /// <param name="pack">Received packet</param>
+        private void DataRoutine(Data pack)
+        {
+            var temporaryQ = (Queue<Data>)_packet_queues[pack.Reciver];
+            bool add = true, receive = true;
+            try
+            {
+                if (temporaryQ != null)
+                {
+                    if (temporaryQ.Count < MAX_QUEUE_SIZE)
+                    {
+                        if (temporaryQ.Any(value => value.GuidD.Equals(pack.GuidD)))
+                        {
+                            add = false;
+                        }
+                    }
+                    else
+                    {
+                        add = false;
+                        receive = false;
+                    }
+                }
+            }
+            catch (Exception ex) { AddToLog("DataRoutine " + ex.Message); }
+
+            Data resendedData = null;
+
+            if (receive && add)
+            {
+                MACsandACK(pack.Source, pack.GuidD, pack.getTransmitRate());
+
+                resendedData = new Data((Data)pack)
+                {
+                    Destination     = pack.Reciver,
+                    X               = this.x,
+                    Y               = this.y,
+                    GuidD           = pack.GuidD,
+                    Source          = this.getMACAddress()
+                };
+                resendedData.setTransmitRate(pack.getTransmitRate());
+            }
+
+            if (add)
+            {
+                lock (Sync)
+                {
+                    if (temporaryQ != null) temporaryQ.Enqueue(resendedData);
+                    Monitor.PulseAll(Sync);
+                }
+                DataReceived++;
             }
         }
 
@@ -256,112 +341,63 @@ namespace Visualisator
         /// <param name="pack">SimulatorPacket</param>
         public override void ParseReceivedPacket(SimulatorPacket pack)
         {
-            Type Pt = pack.GetType();
-            if (Pt == typeof(Connect))
+            Type pt = pack.GetType();
+
+            if (pt == typeof(Connect))
+                ConnectRoutine(pack.Source);
+            else if (pt == typeof(KeepAlive))
             {
-                Connect _conn = (Connect)pack;
-                if (!_AssociatedDevices.Contains(_conn.Source))
-                    _AssociatedDevices.Add(_conn.Source);
-                SendConnectionACK(_conn.Source);
-                try{
-                    _packet_queues.Add(_conn.Source, new Queue<Packets.Data>(1000)); //TODO : Check 1000?
-                }
-                catch (Exception ex)
-                {
-                    AddToLog("Parse Received Packet - Connection " + ex.Message);
-                }
-            }
-            else if (Pt == typeof(KeepAlive))
-            {
-                KeepAlive _wp   = (KeepAlive)pack;
-                Thread newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(_wp.Source));
+                var newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(pack.Source));
                 newThread.Start();
             }
-            else if (Pt == typeof(Data))
+            else if (pt == typeof(Data))
+                DataRoutine((Data) pack);
+            else if (pt == typeof(DataAck))
+                DataAckRoutine((DataAck)pack);
+            else
+                OtherPacketsRoutine(pack);
+
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// DataAck routine
+        /// </summary>
+        /// <param name="dataAckPacket">DataAck packet</param>
+        private void DataAckRoutine(DataAck dataAckPacket)
+        {
+            //Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Source];
+            try
             {
-                Queue<Data> temporaryQ = (Queue<Data>)_packet_queues[pack.Reciver];
-                bool add = true,receive = true;
-                try
+                if (((Queue<Data>)_packet_queues[dataAckPacket.Source]).Count > 0)
                 {
-                    if (temporaryQ != null)
-                    {
-                        if (temporaryQ.Count < MAX_QUEUE_SIZE)
-                        {
-                            foreach (Data value in temporaryQ)
-                            {
-                                if (value.GuidD.Equals(pack.GuidD))
-                                {
-                                    add = false;
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            add = false;
-                            receive = false;
-                        }
-                    }
-                }catch(Exception ex ){ AddToLog("Parse Received Packet - Data " + ex.Message);}
-
-                Data resendedData = null;
-
-                if (receive && add)
-                {
-                    MACsandACK(pack.Source, pack.GuidD, pack.getTransmitRate());
-
-                    resendedData = new Data((Data) pack)
-                            {
-                                Destination  = pack.Reciver,
-                                X            = this.x,
-                                Y            = this.y,
-                                GuidD        = pack.GuidD,
-                                Source       = this.getMACAddress()
-                            };
-                    resendedData.setTransmitRate(pack.getTransmitRate());
-                }
-
-                if (add){
                     lock (Sync)
                     {
-                        if (temporaryQ != null) temporaryQ.Enqueue(resendedData);
+                        var temp = ((Queue<Data>)_packet_queues[dataAckPacket.Source]).First();
+                        if (temp.GuidD.Equals(dataAckPacket.GuiDforDataPacket))
+                            ((Queue<Data>)_packet_queues[dataAckPacket.Source]).Dequeue();
                         Monitor.PulseAll(Sync);
                     }
-                    DataReceived++;
                 }
             }
-            else if (Pt == typeof(DataAck)){
-                var wp     = (DataAck)pack;
-                //Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[_wp.Source];
-                try
-                {
-                    if ( ((Queue<Packets.Data>) _packet_queues[wp.Source]).Count > 0)
-                    {
-                        lock (Sync)
-                        {
-                            Data temp = ((Queue<Data>) _packet_queues[wp.Source]).First();
-                            if (temp.GuidD.Equals(wp.GuiDforDataPacket))
-                                ((Queue<Data>) _packet_queues[wp.Source]).Dequeue();
-                            Monitor.PulseAll(Sync);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    AddToLog("Parse Received Packet - Data Ack " + ex.Message);
-                }
-                DataAckReceived++;
-            }
-            else
-            {
-                //  Generic Packet retransmitter
-                //  This code will create new packet by him type
-                SimulatorPacket instance = (SimulatorPacket)Activator.CreateInstance(pack.GetType(),pack);
-                instance.X = this.x;
-                instance.Y = this.y;
-                instance.Destination = pack.Reciver;
-                SendData(instance);
-            }
+            catch (Exception ex) { AddToLog("DataAckRoutine: " + ex.Message); }
+            DataAckReceived++;
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// This function work with all others packets which don't have special Routines
+        /// </summary>
+        /// <param name="pack">Simulator Packet </param>
+        private void OtherPacketsRoutine(SimulatorPacket pack)
+        {
+            //  Generic Packet retransmitter
+            //  This code will create new packet by him type
+            var instance = (SimulatorPacket)Activator.CreateInstance(pack.GetType(), pack);
+            instance.X              = this.x;
+            instance.Y              = this.y;
+            instance.Destination    = pack.Reciver;
+            SendData(instance);
         }
 
         //=====================================================================
@@ -379,7 +415,7 @@ namespace Visualisator
                         {
                             foreach (string sta in _AssociatedDevices)
                             {
-                                Queue<Packets.Data> temporaryQ = (Queue<Packets.Data>)_packet_queues[sta];
+                                var temporaryQ = (Queue<Data>)_packet_queues[sta];
                                 if (temporaryQ != null && temporaryQ.Count > 0)
                                 {
                                     SendData(temporaryQ.Peek());
