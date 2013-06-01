@@ -465,8 +465,9 @@ namespace Visualisator
             header2.Text = "File Size";
             header2.Width = 80;
             header3.TextAlign = HorizontalAlignment.Left;
-            header3.Text = "Packets/Packets in TDLS";
-            header3.Width = 80;
+            header3.Text = "All/Sent/TDLS";
+           
+            header3.Width = 100;
             header4.TextAlign = HorizontalAlignment.Left;
             header4.Text = "TDLS %";
             header4.Width = 40;
@@ -519,7 +520,7 @@ namespace Visualisator
                 ListViewItem item = new ListViewItem(stat.DesctinationMAC);
 
                 item.SubItems.Add(stat.FileSize.ToString(CultureInfo.InvariantCulture));
-                item.SubItems.Add(stat.Packets.ToString(CultureInfo.InvariantCulture)+"/"+stat.PacketsInTdls.ToString(CultureInfo.InvariantCulture));
+                item.SubItems.Add((stat.FileSize/Medium.PACKET_BUFFER_SIZE +1).ToString() + "/" + stat.Packets.ToString(CultureInfo.InvariantCulture)+"/"+stat.PacketsInTdls.ToString(CultureInfo.InvariantCulture));
                 item.SubItems.Add(stat.getPercentInTdls().ToString(CultureInfo.InvariantCulture));
                 item.SubItems.Add(stat.Time.ToString(CultureInfo.InvariantCulture));
                 item.SubItems.Add(stat.getSpeedInHumanRead());

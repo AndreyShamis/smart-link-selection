@@ -977,9 +977,17 @@ namespace Visualisator
                         if (maxRetrays == 0)
                         {
                             if (TDLSisWork)
+                            {
                                 TearDownTdlsOnFailToSend(DestinationMacAddress);
+                            }
+                            else
+                            {
+                                TDLSCounterUnSuccessTx = 0;
+                            }
+
                             break;
                         }
+
                     }
 
                     if (!ThePacketWasRetransmited){

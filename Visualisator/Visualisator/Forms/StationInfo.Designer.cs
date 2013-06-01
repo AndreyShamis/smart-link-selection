@@ -48,6 +48,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.lblSLSMessage = new System.Windows.Forms.Label();
+            this.chkbAutoStartTdls = new System.Windows.Forms.CheckBox();
+            this.chkbSLSAutoStart = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -64,7 +66,6 @@
             this.lblStandartNSupport = new System.Windows.Forms.Label();
             this.lblStandartGSupport = new System.Windows.Forms.Label();
             this.lblStandartASupport = new System.Windows.Forms.Label();
-            this.chkbAutoStartTdls = new System.Windows.Forms.CheckBox();
             this.cmdShowLog = new System.Windows.Forms.Button();
             this.lblRetransmittionRate = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -118,7 +119,6 @@
             this.cmdLogsClear = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
-            this.chkbSLSAutoStart = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -285,7 +285,7 @@
             this.lblTDLStatus.Size = new System.Drawing.Size(24, 13);
             this.lblTDLStatus.TabIndex = 34;
             this.lblTDLStatus.Text = "Off";
-            this.toolTip1.SetToolTip(this.lblTDLStatus, "TDLS Status");
+            this.toolTip1.SetToolTip(this.lblTDLStatus, "TDLS is supported");
             // 
             // button4
             // 
@@ -321,6 +321,30 @@
             this.lblSLSMessage.TabIndex = 78;
             this.lblSLSMessage.Text = "SLS Message";
             this.toolTip1.SetToolTip(this.lblSLSMessage, "SLS Message");
+            // 
+            // chkbAutoStartTdls
+            // 
+            this.chkbAutoStartTdls.AutoSize = true;
+            this.chkbAutoStartTdls.Location = new System.Drawing.Point(152, 164);
+            this.chkbAutoStartTdls.Name = "chkbAutoStartTdls";
+            this.chkbAutoStartTdls.Size = new System.Drawing.Size(104, 17);
+            this.chkbAutoStartTdls.TabIndex = 61;
+            this.chkbAutoStartTdls.Text = "Auto Start TDLS";
+            this.toolTip1.SetToolTip(this.chkbAutoStartTdls, "Automatic start of TDLS ");
+            this.chkbAutoStartTdls.UseVisualStyleBackColor = true;
+            this.chkbAutoStartTdls.CheckedChanged += new System.EventHandler(this.chkbAutoStartTdls_CheckedChanged);
+            // 
+            // chkbSLSAutoStart
+            // 
+            this.chkbSLSAutoStart.AutoSize = true;
+            this.chkbSLSAutoStart.Location = new System.Drawing.Point(152, 181);
+            this.chkbSLSAutoStart.Name = "chkbSLSAutoStart";
+            this.chkbSLSAutoStart.Size = new System.Drawing.Size(71, 17);
+            this.chkbSLSAutoStart.TabIndex = 79;
+            this.chkbSLSAutoStart.Text = "Auto SLS";
+            this.toolTip1.SetToolTip(this.chkbSLSAutoStart, "Automatic switch between links by SLS");
+            this.chkbSLSAutoStart.UseVisualStyleBackColor = true;
+            this.chkbSLSAutoStart.CheckedChanged += new System.EventHandler(this.chkbSLSAutoStart_CheckedChanged);
             // 
             // tabControl1
             // 
@@ -565,18 +589,6 @@
             this.lblStandartASupport.TabIndex = 62;
             this.lblStandartASupport.Text = "A";
             this.lblStandartASupport.DoubleClick += new System.EventHandler(this.lblStandartASupport_DoubleClick);
-            // 
-            // chkbAutoStartTdls
-            // 
-            this.chkbAutoStartTdls.AutoSize = true;
-            this.chkbAutoStartTdls.Location = new System.Drawing.Point(152, 164);
-            this.chkbAutoStartTdls.Name = "chkbAutoStartTdls";
-            this.chkbAutoStartTdls.Size = new System.Drawing.Size(104, 17);
-            this.chkbAutoStartTdls.TabIndex = 61;
-            this.chkbAutoStartTdls.Text = "Auto Start TDLS";
-            this.toolTip1.SetToolTip(this.chkbAutoStartTdls, "Automatic start of TDLS ");
-            this.chkbAutoStartTdls.UseVisualStyleBackColor = true;
-            this.chkbAutoStartTdls.CheckedChanged += new System.EventHandler(this.chkbAutoStartTdls_CheckedChanged);
             // 
             // cmdShowLog
             // 
@@ -1121,18 +1133,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // chkbSLSAutoStart
-            // 
-            this.chkbSLSAutoStart.AutoSize = true;
-            this.chkbSLSAutoStart.Location = new System.Drawing.Point(152, 181);
-            this.chkbSLSAutoStart.Name = "chkbSLSAutoStart";
-            this.chkbSLSAutoStart.Size = new System.Drawing.Size(71, 17);
-            this.chkbSLSAutoStart.TabIndex = 79;
-            this.chkbSLSAutoStart.Text = "Auto SLS";
-            this.toolTip1.SetToolTip(this.chkbSLSAutoStart, "Automatic switch between links by SLS");
-            this.chkbSLSAutoStart.UseVisualStyleBackColor = true;
-            this.chkbSLSAutoStart.CheckedChanged += new System.EventHandler(this.chkbSLSAutoStart_CheckedChanged);
             // 
             // StationInfo
             // 

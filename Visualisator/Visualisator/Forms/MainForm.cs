@@ -91,12 +91,12 @@ namespace Visualisator
             SetMedioRatio();
 
             txtMediumReceiveDistance.Text = Medium.ReceiveDistance.ToString();
-            Medium.ListenDistance = 200;
-            Medium.WaitBeforeRetransmit = 60;
-            Medium.TrysToRetransmit = 5;
-            Medium.RetransmitWindow = 100;
+            Medium.ListenDistance           = 200;
+            Medium.WaitBeforeRetransmit     = 60;
+            Medium.TrysToRetransmit         = 5;
+            Medium.RetransmitWindow         = 100;
             Medium.MediumStart();
-            Medium.TDLS_TearDownAfterFails = 10;
+            Medium.TDLS_TearDownAfterFails  = 3;
 
             SetMedioRatio();
             SetBSSDelay();
