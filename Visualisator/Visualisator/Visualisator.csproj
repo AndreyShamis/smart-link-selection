@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Packets\Data.cs" />
     <Compile Include="Packets\DataAck.cs" />
+    <Compile Include="Packets\Disconnect.cs" />
     <Compile Include="Packets\KeepAlive.cs" />
     <Compile Include="Packets\NullData.cs" />
     <Compile Include="Packets\NullDataAck.cs" />

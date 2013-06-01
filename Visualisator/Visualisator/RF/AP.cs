@@ -345,6 +345,8 @@ namespace Visualisator
 
             if (pt == typeof(Connect))
                 ConnectRoutine(pack.Source);
+            if (pt == typeof(Disconnect))
+                DisonnectRoutine(pack.Source);
             else if (pt == typeof(KeepAlive))
             {
                 var newThread = new Thread(() => UpdateSTAKeepAliveInfoOnReceive(pack.Source));
@@ -357,6 +359,23 @@ namespace Visualisator
             else
                 OtherPacketsRoutine(pack);
 
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Disconnect routine
+        /// </summary>
+        /// <param name="source">MAC address od STA device</param>
+        private void DisonnectRoutine(string source)
+        {
+            if (!_AssociatedDevices.Contains(source))
+                _AssociatedDevices.Remove(source);
+
+            try
+            {
+                _packet_queues.Remove(source);
+            }
+            catch (Exception ex) { AddToLog("DisonnectRoutine: " + ex.Message); }     
         }
 
         //=====================================================================
