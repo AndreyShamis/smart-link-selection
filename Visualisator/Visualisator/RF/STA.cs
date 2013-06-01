@@ -775,22 +775,6 @@ namespace Visualisator
 
         //=====================================================================
         /// <summary>
-        /// Return Best Intersection Bandwith for use in TDLS
-        /// </summary>
-        /// <param name="otherBandWith">Array list of supported Bandwith for other device</param>
-        /// <returns>Return Best Intersection Bandwith</returns>
-        public Bandwidth GetBestIntersectionBandwith(ArrayList otherBandWith)
-        {
-            Bandwidth ret = Bandwidth._20MHz;
-
-            if (this.BandWithSupport.Contains(Bandwidth._40Mhz) && otherBandWith.Contains(Bandwidth._40Mhz))
-                ret = Bandwidth._40Mhz;
-
-            return ret;
-        }
-
-        //=====================================================================
-        /// <summary>
         /// Return Best Intersection Frequency for use in TDLS
         /// </summary>
         /// <param name="otherFrequency">Array list of supported frequncy for other device</param>
@@ -1275,7 +1259,7 @@ namespace Visualisator
 
                 const int PACKETS_FOR_TEST = 20;
                 Stopwatch sw;
-                const int MAX_TRYS = 10;
+                const int MAX_TRYS = 30;
                 int counter = 0;
 
                 Thread.Sleep(1000);
@@ -1319,22 +1303,17 @@ namespace Visualisator
                                 if (counter >= MAX_TRYS)
                                     NullDataAckValue = true;
                             }
-
                             //Thread.Sleep(1);
                         }
 
                         sw.Stop();
-
                         TimeSpan elapsedTime2 = sw.Elapsed;
-
-
                         if (elapsedTime1 < elapsedTime2)
                             SLSMessage = "BSS better";
                         else
                             SLSMessage = "TDLS better";
                         SLSMessage = SLSMessage + "-" + elapsedTime1.Milliseconds.ToString(CultureInfo.InvariantCulture) + " " +
                                elapsedTime2.Milliseconds.ToString(CultureInfo.InvariantCulture);
-
              
                     }
                     else

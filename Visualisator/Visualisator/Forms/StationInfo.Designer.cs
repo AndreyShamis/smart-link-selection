@@ -47,6 +47,7 @@
             this.lblTDLStatus = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.lblSLSMessage = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -106,26 +107,25 @@
             this.btnConnectToBSS = new System.Windows.Forms.Button();
             this.cmbAPList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.cmdSaveLogs = new System.Windows.Forms.Button();
-            this.cmdLogsClear = new System.Windows.Forms.Button();
-            this.cmdLogsUpdate = new System.Windows.Forms.Button();
-            this.txtErrorsLogFromCode = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
             this.cmdUpdateStatisticTable = new System.Windows.Forms.Button();
-            this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lblSLSMessage = new System.Windows.Forms.Label();
+            this.txtErrorsLogFromCode = new System.Windows.Forms.TextBox();
+            this.cmdSaveLogs = new System.Windows.Forms.Button();
+            this.cmdLogsUpdate = new System.Windows.Forms.Button();
+            this.cmdLogsClear = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -199,9 +199,9 @@
             // 
             this.txtDestination.Location = new System.Drawing.Point(389, 86);
             this.txtDestination.Name = "txtDestination";
-            this.txtDestination.Size = new System.Drawing.Size(102, 20);
+            this.txtDestination.Size = new System.Drawing.Size(113, 20);
             this.txtDestination.TabIndex = 10;
-            this.txtDestination.Text = "00:00:00:00:00:00";
+            this.txtDestination.Text = "00:00:00:00:00";
             this.toolTip1.SetToolTip(this.txtDestination, "Enter MAC address of peer that you want to send data to him");
             // 
             // PresentRSSI
@@ -311,6 +311,15 @@
             this.toolTip1.SetToolTip(this.button5, "Enable");
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // lblSLSMessage
+            // 
+            this.lblSLSMessage.Location = new System.Drawing.Point(287, 239);
+            this.lblSLSMessage.Name = "lblSLSMessage";
+            this.lblSLSMessage.Size = new System.Drawing.Size(305, 24);
+            this.lblSLSMessage.TabIndex = 78;
+            this.lblSLSMessage.Text = "SLS Message";
+            this.toolTip1.SetToolTip(this.lblSLSMessage, "SLS Message");
             // 
             // tabControl1
             // 
@@ -653,7 +662,7 @@
             this.cmbAssociatedDevicesInBSS.FormattingEnabled = true;
             this.cmbAssociatedDevicesInBSS.Location = new System.Drawing.Point(389, 112);
             this.cmbAssociatedDevicesInBSS.Name = "cmbAssociatedDevicesInBSS";
-            this.cmbAssociatedDevicesInBSS.Size = new System.Drawing.Size(101, 21);
+            this.cmbAssociatedDevicesInBSS.Size = new System.Drawing.Size(113, 21);
             this.cmbAssociatedDevicesInBSS.TabIndex = 50;
             this.cmbAssociatedDevicesInBSS.SelectedIndexChanged += new System.EventHandler(this.cmbAssociatedDevicesInBSS_SelectedIndexChanged);
             this.cmbAssociatedDevicesInBSS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAssociatedDevicesInBSS_MouseClick);
@@ -994,73 +1003,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Choose BSS[AP] to connect";
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(604, 272);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Object Dump";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.groupBox3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(604, 272);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Error Log";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // cmdSaveLogs
-            // 
-            this.cmdSaveLogs.Enabled = false;
-            this.cmdSaveLogs.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdSaveLogs.Location = new System.Drawing.Point(192, 1);
-            this.cmdSaveLogs.Name = "cmdSaveLogs";
-            this.cmdSaveLogs.Size = new System.Drawing.Size(62, 18);
-            this.cmdSaveLogs.TabIndex = 3;
-            this.cmdSaveLogs.Text = "Save";
-            this.cmdSaveLogs.UseVisualStyleBackColor = true;
-            // 
-            // cmdLogsClear
-            // 
-            this.cmdLogsClear.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdLogsClear.Location = new System.Drawing.Point(126, 1);
-            this.cmdLogsClear.Name = "cmdLogsClear";
-            this.cmdLogsClear.Size = new System.Drawing.Size(62, 18);
-            this.cmdLogsClear.TabIndex = 2;
-            this.cmdLogsClear.Text = "Clear";
-            this.cmdLogsClear.UseVisualStyleBackColor = true;
-            this.cmdLogsClear.Click += new System.EventHandler(this.cmdLogsClear_Click);
-            // 
-            // cmdLogsUpdate
-            // 
-            this.cmdLogsUpdate.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdLogsUpdate.Location = new System.Drawing.Point(58, 1);
-            this.cmdLogsUpdate.Name = "cmdLogsUpdate";
-            this.cmdLogsUpdate.Size = new System.Drawing.Size(62, 18);
-            this.cmdLogsUpdate.TabIndex = 1;
-            this.cmdLogsUpdate.Text = "Update";
-            this.cmdLogsUpdate.UseVisualStyleBackColor = true;
-            this.cmdLogsUpdate.Click += new System.EventHandler(this.cmdLogsUpdate_Click);
-            // 
-            // txtErrorsLogFromCode
-            // 
-            this.txtErrorsLogFromCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.txtErrorsLogFromCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtErrorsLogFromCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtErrorsLogFromCode.Location = new System.Drawing.Point(3, 25);
-            this.txtErrorsLogFromCode.Multiline = true;
-            this.txtErrorsLogFromCode.Name = "txtErrorsLogFromCode";
-            this.txtErrorsLogFromCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtErrorsLogFromCode.Size = new System.Drawing.Size(592, 238);
-            this.txtErrorsLogFromCode.TabIndex = 0;
-            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.listView1);
@@ -1092,6 +1034,17 @@
             this.cmdUpdateStatisticTable.UseVisualStyleBackColor = true;
             this.cmdUpdateStatisticTable.Click += new System.EventHandler(this.cmdUpdateStatisticTable_Click);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(604, 272);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Error Log";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.txtErrorsLogFromCode);
@@ -1107,14 +1060,61 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Logs";
             // 
-            // lblSLSMessage
+            // txtErrorsLogFromCode
             // 
-            this.lblSLSMessage.Location = new System.Drawing.Point(287, 239);
-            this.lblSLSMessage.Name = "lblSLSMessage";
-            this.lblSLSMessage.Size = new System.Drawing.Size(305, 24);
-            this.lblSLSMessage.TabIndex = 78;
-            this.lblSLSMessage.Text = "SLS Message";
-            this.toolTip1.SetToolTip(this.lblSLSMessage, "SLS Message");
+            this.txtErrorsLogFromCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.txtErrorsLogFromCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtErrorsLogFromCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtErrorsLogFromCode.Location = new System.Drawing.Point(3, 25);
+            this.txtErrorsLogFromCode.Multiline = true;
+            this.txtErrorsLogFromCode.Name = "txtErrorsLogFromCode";
+            this.txtErrorsLogFromCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtErrorsLogFromCode.Size = new System.Drawing.Size(592, 238);
+            this.txtErrorsLogFromCode.TabIndex = 0;
+            // 
+            // cmdSaveLogs
+            // 
+            this.cmdSaveLogs.Enabled = false;
+            this.cmdSaveLogs.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdSaveLogs.Location = new System.Drawing.Point(192, 1);
+            this.cmdSaveLogs.Name = "cmdSaveLogs";
+            this.cmdSaveLogs.Size = new System.Drawing.Size(62, 18);
+            this.cmdSaveLogs.TabIndex = 3;
+            this.cmdSaveLogs.Text = "Save";
+            this.cmdSaveLogs.UseVisualStyleBackColor = true;
+            // 
+            // cmdLogsUpdate
+            // 
+            this.cmdLogsUpdate.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdLogsUpdate.Location = new System.Drawing.Point(58, 1);
+            this.cmdLogsUpdate.Name = "cmdLogsUpdate";
+            this.cmdLogsUpdate.Size = new System.Drawing.Size(62, 18);
+            this.cmdLogsUpdate.TabIndex = 1;
+            this.cmdLogsUpdate.Text = "Update";
+            this.cmdLogsUpdate.UseVisualStyleBackColor = true;
+            this.cmdLogsUpdate.Click += new System.EventHandler(this.cmdLogsUpdate_Click);
+            // 
+            // cmdLogsClear
+            // 
+            this.cmdLogsClear.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdLogsClear.Location = new System.Drawing.Point(126, 1);
+            this.cmdLogsClear.Name = "cmdLogsClear";
+            this.cmdLogsClear.Size = new System.Drawing.Size(62, 18);
+            this.cmdLogsClear.TabIndex = 2;
+            this.cmdLogsClear.Text = "Clear";
+            this.cmdLogsClear.UseVisualStyleBackColor = true;
+            this.cmdLogsClear.Click += new System.EventHandler(this.cmdLogsClear_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(604, 272);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Object Dump";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // StationInfo
             // 
@@ -1131,11 +1131,11 @@
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

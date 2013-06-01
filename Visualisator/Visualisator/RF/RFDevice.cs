@@ -103,7 +103,7 @@ namespace Visualisator
                             MAC         = devi.getMACAddress(),
                             Freq        = devi.Freq,
                             Stand80211  = devi.Stand80211,
-                            BandWidth   = devi.BandWidth,
+                            BandWidth   = GetBestIntersectionBandwith(devi.BandWithSupport),// devi.BandWidth,
                             Channel     = devi.getOperateChannel(),
                             RSSI        = GetRSSI(devi.x, devi.y),
                             isPassive   = devi.Passive,
@@ -221,7 +221,22 @@ namespace Visualisator
 
         #endregion
 
-        
+        //=====================================================================
+        /// <summary>
+        /// Return Best Intersection Bandwith for use in TDLS
+        /// </summary>
+        /// <param name="otherBandWith">Array list of supported Bandwith for other device</param>
+        /// <returns>Return Best Intersection Bandwith</returns>
+        public Bandwidth GetBestIntersectionBandwith(ArrayList otherBandWith)
+        {
+            Bandwidth ret = Bandwidth._20MHz;
+
+            if (this.BandWithSupport.Contains(Bandwidth._40Mhz) && otherBandWith.Contains(Bandwidth._40Mhz))
+                ret = Bandwidth._40Mhz;
+
+            return ret;
+        }
+
         //=====================================================================
         public string DumpAll()
         {
