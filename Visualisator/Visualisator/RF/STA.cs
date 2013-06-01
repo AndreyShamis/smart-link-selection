@@ -74,7 +74,10 @@ namespace Visualisator
         /// </summary>
         public string               SLSMessage                  { set; get; }
 
-
+        /// <summary>
+        /// Indicate to mac address of Peer on which we last success ti setup TDLS
+        /// </summary>
+        public string               LastMacAddressOfTdlsDevice  { set; get; }
 
 
         //=====================================================================
@@ -247,6 +250,7 @@ namespace Visualisator
         {
            
             SLSMessage = "TDLS disabled";
+            LastMacAddressOfTdlsDevice = "";
             FilePachToSend = @"C:\simulator\_DATA_TO_SEND\input.txt";
             base.Enable();
             TDLSAutoStart = true;
@@ -280,7 +284,7 @@ namespace Visualisator
         {
             while (_Enabled)
             {
-                if (!GetAssociatedAPSSID().Equals(""))
+                if (!GetAssociatedAPSSID().Equals("") && !string.IsNullOrEmpty(_connectedAPMacAddress))
                 {
                     KeepAlive keepAl        = new KeepAlive(CreatePacket());
                     AP connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
@@ -556,6 +560,7 @@ namespace Visualisator
                 SendData(_tdlsSetupR);
                 TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
                 ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(MAC)));
+                LastMacAddressOfTdlsDevice = MAC;
             }
             catch (Exception ex) { AddToLog("TDLS_SendSetupConfirm: " + ex.Message); }
         }
@@ -904,6 +909,8 @@ namespace Visualisator
                 MACOfAnotherPeer    = DestinationMacAddress;
                 while (!exit_loop)
                 {
+                    if (string.IsNullOrEmpty(_connectedAPMacAddress))
+                        return;
                     buffer = new byte[buf_size];
                     dataPack = new Data(CreatePacket(DestinationMacAddress)); 
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
@@ -1381,7 +1388,16 @@ namespace Visualisator
         /// </summary>
         public void DisconnectFromAp()
         {
-            
+
+            if (!string.IsNullOrEmpty(LastMacAddressOfTdlsDevice))
+            {
+
+                while (!TDLSSetupInfo.Equals(TDLSSetupStatus.TDLSTearDown) && !TDLSSetupInfo.Equals(TDLSSetupStatus.TDLSSetupDisabled))
+                {
+                    TDLS_SendTearDown(LastMacAddressOfTdlsDevice);
+                    Thread.Sleep(200);
+                }
+            }
             var disconn = new Disconnect(CreatePacket()) {Destination = _connectedAPMacAddress};
             SendData(disconn);
             Thread.Sleep(100);
@@ -1393,7 +1409,7 @@ namespace Visualisator
             this.BSSID = "";
             _AssociatedWithAPList.Clear();
             this.setOperateChannel(0);
-            
+            TDLSSetupInfo = TDLSSetupStatus.TDLSSetupDisabled;
         }
     }
 }
