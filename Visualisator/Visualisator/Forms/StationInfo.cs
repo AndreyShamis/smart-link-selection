@@ -135,7 +135,7 @@ namespace Visualisator
         private void button1_Click(object sender, EventArgs e)
         {
             string mac = txtDestination.Text;
-            if (mac.Length == 17 && !mac.Equals("00:00:00:00:00:00") && !mac.Equals("FF:FF:FF:FF:FF:FF"))
+            if (mac.Length == 17 && !mac.Equals("00:00:00:00:00:00") && !mac.Equals("FF:FF:FF:FF:FF:FF") && _sta.CheckMacExistance(mac))
             {
                 _sta.rfile(txtDestination.Text);
                 txtDestination.BackColor = Color.White;
@@ -201,7 +201,7 @@ namespace Visualisator
         {
             string txtTDLSSetupRequest = "";
             string mac = txtTDLSSetupRequestMAC.Text;
-            if (mac.Length == 17 && !mac.Equals("00:00:00:00:00:00") && !mac.Equals("FF:FF:FF:FF:FF:FF"))
+            if (mac.Length == 17 && !mac.Equals("00:00:00:00:00:00") && !mac.Equals("FF:FF:FF:FF:FF:FF") && _sta.CheckMacExistance(mac))
             {
                 txtTDLSSetupRequest = txtTDLSSetupRequestMAC.Text;
                 _sta.TDLS_SendSetupRequest(txtTDLSSetupRequest);

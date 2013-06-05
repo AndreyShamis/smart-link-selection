@@ -91,6 +91,10 @@ namespace Visualisator
 
 
         //[MethodImpl(MethodImplOptions.Synchronized)]
+        //=====================================================================
+        /// <summary>
+        /// Update RF decie peers in this peer
+        /// </summary>
         public void UpdateRFPeers()
         {
             try
@@ -134,21 +138,40 @@ namespace Visualisator
         protected  bool DebugLogEnabled = false;
         protected bool ListenBeacon = false;
 
+        //=====================================================================
         public bool getListenBeacon()
         {
             return ListenBeacon;
         }
 
+        //=====================================================================
         protected Int32 DoubleRecieved
         {
             get { return _DoubleRecieved; }
             set { _DoubleRecieved = value; }
         }
+
+        //=====================================================================
         public Int32 getDoubleRecieved()
         {
             return DoubleRecieved;
         }
 
+        //=====================================================================
+        /// <summary>
+        /// Chacking if RF device with given MAC address axist
+        /// </summary>
+        /// <param name="mac">MAC address of rf device</param>
+        /// <returns>True if exist</returns>
+        public bool CheckMacExistance(string mac)
+        {
+            if (_RFpeers.Contains(mac))
+                return true;
+
+            return false;
+        }
+
+        //=====================================================================
         public double getRetransmitionRate()
         {
             if (MACOfAnotherPeer == null)
