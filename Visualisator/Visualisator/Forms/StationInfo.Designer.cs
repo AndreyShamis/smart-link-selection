@@ -350,9 +350,9 @@
             // cmdReset
             // 
             this.cmdReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.cmdReset.Location = new System.Drawing.Point(254, 5);
+            this.cmdReset.Location = new System.Drawing.Point(254, 51);
             this.cmdReset.Name = "cmdReset";
-            this.cmdReset.Size = new System.Drawing.Size(44, 21);
+            this.cmdReset.Size = new System.Drawing.Size(44, 19);
             this.cmdReset.TabIndex = 16;
             this.cmdReset.Text = "Reset";
             this.toolTip1.SetToolTip(this.cmdReset, "Reset counters");
@@ -455,6 +455,7 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(3, 16);
             this.splitContainer1.Name = "splitContainer1";
@@ -769,7 +770,7 @@
             // 
             this.lblTDLSSetupStatus.AutoSize = true;
             this.lblTDLSSetupStatus.ForeColor = System.Drawing.Color.Teal;
-            this.lblTDLSSetupStatus.Location = new System.Drawing.Point(110, 140);
+            this.lblTDLSSetupStatus.Location = new System.Drawing.Point(152, 142);
             this.lblTDLSSetupStatus.Name = "lblTDLSSetupStatus";
             this.lblTDLSSetupStatus.Size = new System.Drawing.Size(120, 13);
             this.lblTDLSSetupStatus.TabIndex = 49;
@@ -866,6 +867,7 @@
             // 
             // splitContainer2
             // 
+            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
