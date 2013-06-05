@@ -162,8 +162,10 @@ namespace Visualisator
 
                 if (counter == 0)
                     return 0;
-
-                return 100 * Recounter / counter; 
+                double ret = 100 * Recounter / counter; 
+                if(ret > 100)
+                    ret = 100;
+                return ret;
             }
             catch(Exception ex)
             {
