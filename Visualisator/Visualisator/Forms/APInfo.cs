@@ -133,7 +133,7 @@ namespace Visualisator
 
             if (_ap.ConnectedDevicesCount() > 0)
             {
-                MessageBox.Show("You cannot set channel while you associated devices!");
+                MessageBox.Show("You cannot set channel while you have associated devices!");
             }
             else
             {
@@ -154,19 +154,43 @@ namespace Visualisator
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            _ap.Freq = Frequency._2400GHz;
+            if (_ap.ConnectedDevicesCount() > 0)
+            {
+                MessageBox.Show("You cannot set frequency while you have associated devices!");
+            }
+            else
+            {
+                try
+                {
+                    _ap.Freq = Frequency._2400GHz;
+                }
+                catch (Exception) { }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            _ap.Freq = Frequency._5200GHz;
-            cmbWorkChannel.Items.Clear();
-            ArrayList Achannels = Medium.getBandAChannels();
-            foreach (var i in Achannels){
-                int temp_val = (int)i;
-                cmbWorkChannel.Items.Add(temp_val);
+            if (_ap.ConnectedDevicesCount() > 0)
+            {
+                MessageBox.Show("You cannot set frequency while you have associated devices!");
             }
-            cmbWorkChannel.SelectedIndex = 1;
+            else
+            {
+                try
+                {
+                    _ap.Freq = Frequency._5200GHz;
+                    cmbWorkChannel.Items.Clear();
+                    ArrayList Achannels = Medium.getBandAChannels();
+                    foreach (var i in Achannels)
+                    {
+                        int temp_val = (int)i;
+                        cmbWorkChannel.Items.Add(temp_val);
+                    }
+                    cmbWorkChannel.SelectedIndex = 1;
+                }
+                catch (Exception) { }
+            }
+
         }
 
         /// <summary>
