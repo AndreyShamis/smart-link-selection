@@ -42,6 +42,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtUpdateInterval = new System.Windows.Forms.TextBox();
             this.btnSetUpdateInterval = new System.Windows.Forms.Button();
+            this.cmdCreateOneAPTwoSta = new System.Windows.Forms.Button();
+            this.cmdAdd1APforSTA = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,9 +72,13 @@
             this.btnUpdateMediumRecDist = new System.Windows.Forms.Button();
             this.txtMediumReceiveDistance = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.cmdCreateOneAPTwoSta = new System.Windows.Forms.Button();
-            this.cmdAdd1APforSTA = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtSLSPeriod = new System.Windows.Forms.TextBox();
+            this.btnSetSLSPeriod = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtSLSPacketsNumber = new System.Windows.Forms.TextBox();
+            this.btmSetNumberPacketsinSls = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -87,7 +93,7 @@
             this.txtConsole.Multiline = true;
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtConsole.Size = new System.Drawing.Size(253, 97);
+            this.txtConsole.Size = new System.Drawing.Size(253, 63);
             this.txtConsole.TabIndex = 1;
             // 
             // label1
@@ -200,6 +206,30 @@
             this.toolTip1.SetToolTip(this.btnSetUpdateInterval, "Set graffic interface update interval in miliseconds");
             this.btnSetUpdateInterval.UseVisualStyleBackColor = true;
             this.btnSetUpdateInterval.Click += new System.EventHandler(this.btnSetUpdateInterval_Click);
+            // 
+            // cmdCreateOneAPTwoSta
+            // 
+            this.cmdCreateOneAPTwoSta.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdCreateOneAPTwoSta.Location = new System.Drawing.Point(4, 39);
+            this.cmdCreateOneAPTwoSta.Name = "cmdCreateOneAPTwoSta";
+            this.cmdCreateOneAPTwoSta.Size = new System.Drawing.Size(36, 19);
+            this.cmdCreateOneAPTwoSta.TabIndex = 34;
+            this.cmdCreateOneAPTwoSta.Text = "1/2";
+            this.toolTip1.SetToolTip(this.cmdCreateOneAPTwoSta, "Create static Simulation 1 AP and 2 STA");
+            this.cmdCreateOneAPTwoSta.UseVisualStyleBackColor = true;
+            this.cmdCreateOneAPTwoSta.Click += new System.EventHandler(this.cmdCreateOneAPTwoSta_Click);
+            // 
+            // cmdAdd1APforSTA
+            // 
+            this.cmdAdd1APforSTA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdAdd1APforSTA.Location = new System.Drawing.Point(46, 39);
+            this.cmdAdd1APforSTA.Name = "cmdAdd1APforSTA";
+            this.cmdAdd1APforSTA.Size = new System.Drawing.Size(36, 19);
+            this.cmdAdd1APforSTA.TabIndex = 35;
+            this.cmdAdd1APforSTA.Text = "1/4";
+            this.toolTip1.SetToolTip(this.cmdAdd1APforSTA, "Create static Simulation 1 AP and 4 STA");
+            this.cmdAdd1APforSTA.UseVisualStyleBackColor = true;
+            this.cmdAdd1APforSTA.Click += new System.EventHandler(this.cmdAdd1APforSTA_Click);
             // 
             // contextMenuStrip1
             // 
@@ -501,32 +531,14 @@
             this.label8.TabIndex = 28;
             this.label8.Text = "Medium Receive Distance";
             // 
-            // cmdCreateOneAPTwoSta
-            // 
-            this.cmdCreateOneAPTwoSta.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdCreateOneAPTwoSta.Location = new System.Drawing.Point(4, 39);
-            this.cmdCreateOneAPTwoSta.Name = "cmdCreateOneAPTwoSta";
-            this.cmdCreateOneAPTwoSta.Size = new System.Drawing.Size(36, 19);
-            this.cmdCreateOneAPTwoSta.TabIndex = 34;
-            this.cmdCreateOneAPTwoSta.Text = "1/2";
-            this.toolTip1.SetToolTip(this.cmdCreateOneAPTwoSta, "Create static Simulation 1 AP and 2 STA");
-            this.cmdCreateOneAPTwoSta.UseVisualStyleBackColor = true;
-            this.cmdCreateOneAPTwoSta.Click += new System.EventHandler(this.cmdCreateOneAPTwoSta_Click);
-            // 
-            // cmdAdd1APforSTA
-            // 
-            this.cmdAdd1APforSTA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdAdd1APforSTA.Location = new System.Drawing.Point(46, 39);
-            this.cmdAdd1APforSTA.Name = "cmdAdd1APforSTA";
-            this.cmdAdd1APforSTA.Size = new System.Drawing.Size(36, 19);
-            this.cmdAdd1APforSTA.TabIndex = 35;
-            this.cmdAdd1APforSTA.Text = "1/4";
-            this.toolTip1.SetToolTip(this.cmdAdd1APforSTA, "Create static Simulation 1 AP and 4 STA");
-            this.cmdAdd1APforSTA.UseVisualStyleBackColor = true;
-            this.cmdAdd1APforSTA.Click += new System.EventHandler(this.cmdAdd1APforSTA_Click);
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.txtSLSPacketsNumber);
+            this.groupBox1.Controls.Add(this.btmSetNumberPacketsinSls);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.txtSLSPeriod);
+            this.groupBox1.Controls.Add(this.btnSetSLSPeriod);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnUpdateMediumListenDist);
             this.groupBox1.Controls.Add(this.button3);
@@ -566,6 +578,82 @@
             this.groupBox1.TabIndex = 36;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Medium Controll";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.ForeColor = System.Drawing.Color.Navy;
+            this.label9.Location = new System.Drawing.Point(10, 147);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(57, 13);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "SLS Period";
+            this.toolTip1.SetToolTip(this.label9, "Delay Between Test SLS on Medium");
+            // 
+            // txtSLSPeriod
+            // 
+            this.txtSLSPeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSLSPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSLSPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtSLSPeriod.ForeColor = System.Drawing.Color.Navy;
+            this.txtSLSPeriod.Location = new System.Drawing.Point(152, 147);
+            this.txtSLSPeriod.Name = "txtSLSPeriod";
+            this.txtSLSPeriod.Size = new System.Drawing.Size(57, 18);
+            this.txtSLSPeriod.TabIndex = 37;
+            this.txtSLSPeriod.Text = "1000";
+            this.txtSLSPeriod.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtSLSPeriod, "Delay Between Test SLS on Medium");
+            // 
+            // btnSetSLSPeriod
+            // 
+            this.btnSetSLSPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSetSLSPeriod.Location = new System.Drawing.Point(215, 147);
+            this.btnSetSLSPeriod.Name = "btnSetSLSPeriod";
+            this.btnSetSLSPeriod.Size = new System.Drawing.Size(39, 18);
+            this.btnSetSLSPeriod.TabIndex = 38;
+            this.btnSetSLSPeriod.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnSetSLSPeriod, "Delay Between Test SLS on Medium");
+            this.btnSetSLSPeriod.UseVisualStyleBackColor = true;
+            this.btnSetSLSPeriod.Click += new System.EventHandler(this.btnSetSLSPeriod_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.ForeColor = System.Drawing.Color.Navy;
+            this.label10.Location = new System.Drawing.Point(10, 169);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(104, 13);
+            this.label10.TabIndex = 39;
+            this.label10.Text = "SLS Packets Number";
+            this.toolTip1.SetToolTip(this.label10, "Number of Packets that will be sendet on each iteration on simple link");
+            // 
+            // txtSLSPacketsNumber
+            // 
+            this.txtSLSPacketsNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSLSPacketsNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSLSPacketsNumber.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtSLSPacketsNumber.ForeColor = System.Drawing.Color.Navy;
+            this.txtSLSPacketsNumber.Location = new System.Drawing.Point(152, 169);
+            this.txtSLSPacketsNumber.Name = "txtSLSPacketsNumber";
+            this.txtSLSPacketsNumber.Size = new System.Drawing.Size(57, 18);
+            this.txtSLSPacketsNumber.TabIndex = 40;
+            this.txtSLSPacketsNumber.Text = "10";
+            this.txtSLSPacketsNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtSLSPacketsNumber, "Number of Packets that will be sendet on each iteration on simple link");
+            // 
+            // btmSetNumberPacketsinSls
+            // 
+            this.btmSetNumberPacketsinSls.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btmSetNumberPacketsinSls.Location = new System.Drawing.Point(215, 169);
+            this.btmSetNumberPacketsinSls.Name = "btmSetNumberPacketsinSls";
+            this.btmSetNumberPacketsinSls.Size = new System.Drawing.Size(39, 18);
+            this.btmSetNumberPacketsinSls.TabIndex = 41;
+            this.btmSetNumberPacketsinSls.Text = "Set";
+            this.toolTip1.SetToolTip(this.btmSetNumberPacketsinSls, "Number of Packets that will be sendet on each iteration on simple link");
+            this.btmSetNumberPacketsinSls.UseVisualStyleBackColor = true;
+            this.btmSetNumberPacketsinSls.Click += new System.EventHandler(this.btmSetNumberPacketsinSls_Click);
             // 
             // MainForm
             // 
@@ -634,6 +722,12 @@
         private System.Windows.Forms.ToolStripMenuItem sTtoolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem sPtoolStripMenuItem3;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtSLSPacketsNumber;
+        private System.Windows.Forms.Button btmSetNumberPacketsinSls;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtSLSPeriod;
+        private System.Windows.Forms.Button btnSetSLSPeriod;
     }
 }
 

@@ -1278,9 +1278,6 @@ namespace Visualisator
         {
             try
             {
-
-
-                const int PACKETS_FOR_TEST = 20;
                 Stopwatch sw;
                 const int MAX_TRYS = 30;
                 int counter = 0;
@@ -1292,7 +1289,7 @@ namespace Visualisator
                     {
                         // BSS
                         sw = Stopwatch.StartNew();
-                        for (int i = 0; i < PACKETS_FOR_TEST; i++)
+                        for (int i = 0; i < Medium.SLSPacketsNumber; i++)
                         {
                             NullData pack = new NullData(CreatePacket(mac, true));
                             NullDataAckValue = false;
@@ -1313,7 +1310,7 @@ namespace Visualisator
 
                         //TDLS
                         sw = Stopwatch.StartNew();
-                        for (int i = 0; i < PACKETS_FOR_TEST; i++)
+                        for (int i = 0; i < Medium.SLSPacketsNumber; i++)
                         {
                             NullDataAckValue = false;
                             NullData pack = new NullData(CreatePacket(mac));
@@ -1352,7 +1349,7 @@ namespace Visualisator
                         break;
                     }
 
-                    Thread.Sleep(1000);
+                    Thread.Sleep(Medium.SLSPeriod);
                 }
             }
             catch(Exception ex)

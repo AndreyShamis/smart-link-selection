@@ -90,6 +90,11 @@ namespace Visualisator
         public static int               PACKET_BUFFER_SIZE = 500000;
         private static Int32            _MediumSendDataRatio = 10;
 
+
+        public static int               SLSPeriod { set; get; }
+        public static int               SLSPacketsNumber { set; get; }
+
+
         public static Int32 MediumSendDataRatio
         {
             get { return _MediumSendDataRatio; }
@@ -124,6 +129,8 @@ namespace Visualisator
         static Medium()
         {
             LoadImagesToArrayLists();
+            SLSPacketsNumber    = 20;
+            SLSPeriod           = 1000;
         }
 
         //=====================================================================

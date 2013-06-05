@@ -18,6 +18,9 @@ namespace Visualisator
         private const string _KEY_GRAFFIC_UPD_INT   = "GrafficUpdateInterval";
         private const string _KEY_RECEIVE_DISTANCE  = "ReceiveDistance";
         private const string _KEY_MEDIUM_SEND_RATIO = "MediumSentRatio";
+
+        private const string _KEY_MEDIUM_SLS_PERIOD = "MediumSlsPeriod";
+        private const string _KEY_MEDIUM_SLS_COUNTER = "MediumSlsPacketsCounter";
         private PictureBox piB;
         private Bitmap bm;
         private Graphics gr;
@@ -79,6 +82,24 @@ namespace Visualisator
                 settings.setValue(_KEY_RECEIVE_DISTANCE, Medium.ReceiveDistance.ToString());
             }
 
+
+            if (settings.getValue(_KEY_MEDIUM_SLS_PERIOD).Length > 0)
+                Medium.SLSPeriod = Convert.ToInt32(settings.getValue(_KEY_MEDIUM_SLS_PERIOD));
+            else
+            {
+                Medium.SLSPeriod = 1000;
+                settings.setValue(_KEY_MEDIUM_SLS_PERIOD, Medium.SLSPeriod.ToString());
+            }
+
+
+            if (settings.getValue(_KEY_MEDIUM_SLS_COUNTER).Length > 0)
+                Medium.SLSPacketsNumber = Convert.ToInt32(settings.getValue(_KEY_MEDIUM_SLS_COUNTER));
+            else
+            {
+                Medium.SLSPacketsNumber = 20;
+                settings.setValue(_KEY_MEDIUM_SLS_COUNTER, Medium.SLSPacketsNumber.ToString());
+            }
+
             if (settings.getValue(_KEY_GRAFFIC_UPD_INT).Length > 0)
             {
                 txtUpdateInterval.Text = settings.getValue(_KEY_GRAFFIC_UPD_INT);
@@ -97,6 +118,10 @@ namespace Visualisator
             Medium.RetransmitWindow         = 100;
             Medium.MediumStart();
             Medium.TDLS_TearDownAfterFails  = 3;
+
+            txtSLSPeriod.Text = Medium.SLSPeriod.ToString();
+
+            txtSLSPacketsNumber.Text = Medium.SLSPacketsNumber.ToString();
 
             SetMedioRatio();
             SetBSSDelay();
@@ -684,6 +709,24 @@ namespace Visualisator
             }
         }
 
+        private int ParseIntFromTxt(TextBox txt)
+        {
+                        
+            int ret = 0;
+
+
+            try
+            {
+                ret = Convert.ToInt32(txt.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cannot parse value to int.Please check input");
+            }
+
+            return ret;
+        }
+
         public void SetTDLSDelay()
         {
             int delay_in_tdls = 0;
@@ -798,6 +841,20 @@ namespace Visualisator
             Medium.setMediumObj(_objects);
             SetMedioRatio();
             Medium.Enable();
+        }
+
+        private void btnSetSLSPeriod_Click(object sender, EventArgs e)
+        {
+            int val = ParseIntFromTxt(txtSLSPeriod);
+            Medium.SLSPeriod = val;
+            settings.setValue(_KEY_MEDIUM_SLS_PERIOD, Medium.SLSPeriod.ToString());
+        }
+
+        private void btmSetNumberPacketsinSls_Click(object sender, EventArgs e)
+        {
+            int val = ParseIntFromTxt(txtSLSPacketsNumber);
+            Medium.SLSPacketsNumber = val;
+            settings.setValue(_KEY_MEDIUM_SLS_COUNTER, Medium.SLSPacketsNumber.ToString());
         }
 
 
