@@ -79,6 +79,10 @@ namespace Visualisator
         /// </summary>
         public string               LastMacAddressOfTdlsDevice  { set; get; }
 
+        /// <summary>
+        /// idicate type of SLS algorithem
+        /// </summary>
+        public SLSAlgType SLSAlgorithm { get; set; }
 
         //=====================================================================
         /// <summary>
@@ -852,8 +856,56 @@ namespace Visualisator
             catch (Exception ex) { AddToLog("rfile: " + ex.Message); }
         }
 
-
         public double speed { set; get; }
+        //=====================================================================
+
+
+
+        public long slsWinGlobalDataPacketCounter = 0;
+        public long slsWinBSSDataPacketCounter = 0;
+        public long slsWinTDLSDataPacketCounter = 0;
+        public short SLSWindowSize = 10; //procent %
+        public SelectedLink selectedLink { set; get; }
+        public SelectedLink SampleSelectedLink { set; get; }
+        const short minPacketCount = 10;
+
+        //=====================================================================
+        /// <summary>
+        /// Function perform Window Based SLS algorithm
+        /// </summary>
+        public SelectedLink WindowBasedSLSAlgorithm()
+        {
+            if (slsWinGlobalDataPacketCounter >= minPacketCount)
+            {
+                if (SampleSelectedLink == SelectedLink.BSS) 
+                {
+                    double temp = slsWinBSSDataPacketCounter / slsWinTDLSDataPacketCounter * 100;
+
+                    
+                    // if sampeled link counter (BSS) greater than window
+                    if (temp >= SLSWindowSize)
+                    {
+                        selectedLink = SelectedLink.BSS;
+                    }
+                    // if sampeled link counter (BSS) smaller than window
+                    
+
+
+
+                //calcThroughputAvarage(
+
+                }
+                
+                return SelectedLink.TDLS;
+            }
+            else
+            {
+                SampleSelectedLink = SelectedLink.TDLS;
+                selectedLink = SelectedLink.TDLS;
+                return SelectedLink.TDLS;
+            }            
+        }
+
         //=====================================================================
         /// <summary>
         /// Function for send file
@@ -912,7 +964,15 @@ namespace Visualisator
                     if (string.IsNullOrEmpty(_connectedAPMacAddress))
                         return;
                     buffer = new byte[buf_size];
-                    dataPack = new Data(CreatePacket(DestinationMacAddress)); 
+                    if (SLSAlgorithm == SLSAlgType.WindowBased)
+                    {
+                        if (WindowBasedSLSAlgorithm() == SelectedLink.TDLS)
+                            dataPack = new Data(CreatePacket(DestinationMacAddress,true)); 
+                        else
+                            dataPack = new Data(CreatePacket(DestinationMacAddress, false)); 
+                    }
+                    else
+                        dataPack = new Data(CreatePacket(DestinationMacAddress));
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
@@ -1408,5 +1468,7 @@ namespace Visualisator
             this.setOperateChannel(0);
             TDLSSetupInfo = TDLSSetupStatus.TDLSSetupDisabled;
         }
+
+        
     }
 }
