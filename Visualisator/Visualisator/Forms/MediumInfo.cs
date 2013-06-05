@@ -53,5 +53,25 @@ namespace Visualisator
             }
             catch (Exception ex) { MessageBox.Show("getMediumInfo :" + ex.Message); }
         }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
+
+        private void MediumInfo_Load(object sender, EventArgs e)
+        {
+            splitContainer1.Height = this.Height - 80;
+        }
+
+        private void MediumInfo_ResizeEnd(object sender, EventArgs e)
+        {
+            splitContainer1.Height = this.Height - 80;
+        }
+
+        private void MediumInfo_Resize(object sender, EventArgs e)
+        {
+            splitContainer1.Height = this.Height - 80;
+        }
     }
 }
