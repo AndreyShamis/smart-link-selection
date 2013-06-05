@@ -225,11 +225,6 @@ namespace Visualisator
             _sta.EnableTDLS();
         }
 
-        private void btnGetDevicesInBSS_Click(object sender, EventArgs e)
-        {
-            GetDevicesInBSS();
-        }
-
         private void GetDevicesInBSS()
         {
             ArrayList _des = _sta.GetAssociatedDevicesInBSS();
@@ -252,15 +247,6 @@ namespace Visualisator
                 txtDestination.Text = cmbAssociatedDevicesInBSS.Text;
                 txtTDLSSetupRequestMAC.Text = cmbAssociatedDevicesInBSS.Text;
             }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            _sta.LookIntoChannels();
-
-           // MessageBox.Show(_sta.getBestChannel().ToString());
-
-           // MessageBox.Show(_sta.GetNoiseOnSameChannel().ToString());
         }
 
         private void cmdShowLog_Click(object sender, EventArgs e)
@@ -350,8 +336,8 @@ namespace Visualisator
                 else
                     lblWaitingForAck.BackColor = Color.Black;
 
-                txtDataReceeived.Text = _sta.getDataRecieved().ToString();
-                lblSent.Text = _sta.getDataSent().ToString();
+
+                lblTxRx.Text = _sta.getDataSent().ToString() + "/" + _sta.getDataRecieved().ToString();
                 lblAllReceivedPackets.Text = _sta.AllReceivedPackets.ToString();
                 lblAssociatedAP.Text = _sta.GetAssociatedAPSSID();
                 lblAckReceived.Text = _sta.getDataAckRecieved().ToString();

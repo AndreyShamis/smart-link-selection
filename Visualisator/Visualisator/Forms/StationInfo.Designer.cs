@@ -54,63 +54,62 @@
             this.btnConnectToBSS = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblWaitingForAck = new System.Windows.Forms.Label();
+            this.cmbAssociatedDevicesInBSS = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtMAC = new System.Windows.Forms.TextBox();
             this.lblNowTDLS = new System.Windows.Forms.Label();
             this.lblNowBSS = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.btnDisconnect = new System.Windows.Forms.Button();
-            this.lblLastTransmitTime = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
+            this.lblTxRx = new System.Windows.Forms.Label();
             this.lblTdlsUnsuccessTrys = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.lblStandart = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.lblBandwith = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.lblSpeed = new System.Windows.Forms.Label();
-            this.lblStandartNSupport = new System.Windows.Forms.Label();
-            this.lblStandartGSupport = new System.Windows.Forms.Label();
-            this.lblStandartASupport = new System.Windows.Forms.Label();
-            this.cmdShowLog = new System.Windows.Forms.Button();
+            this.lblLastTransmitTime = new System.Windows.Forms.Label();
+            this.lblAckReceived = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblRetransmited = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblDataAckRetransmited = new System.Windows.Forms.Label();
             this.lblRetransmittionRate = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.lblRSSI = new System.Windows.Forms.Label();
             this.lblNoiseRssi = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.lblDoubleReceived = new System.Windows.Forms.Label();
             this.lblLastTransmitRate = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.btnGetDevicesInBSS = new System.Windows.Forms.Button();
-            this.cmbAssociatedDevicesInBSS = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblCounterToretransmit = new System.Windows.Forms.Label();
             this.lblTDLSSetupStatus = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.lblAllReceivedPackets = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.btnChangeTDLSStatusOn = new System.Windows.Forms.Button();
-            this.btnChangeTDLSStatus = new System.Windows.Forms.Button();
-            this.txtTDLSSetupRequestMAC = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lblCounterToretransmit = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lblDoubleReceived = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblRSSI = new System.Windows.Forms.Label();
-            this.lblDataAckRetransmited = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblRetransmited = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblAckReceived = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblSent = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtDataReceeived = new System.Windows.Forms.Label();
-            this.txtMAC = new System.Windows.Forms.TextBox();
-            this.ConnectedToLabel = new System.Windows.Forms.Label();
-            this.lblCoordinates = new System.Windows.Forms.Label();
+            this.btnChangeTDLSStatusOn = new System.Windows.Forms.Button();
+            this.txtTDLSSetupRequestMAC = new System.Windows.Forms.TextBox();
+            this.btnChangeTDLSStatus = new System.Windows.Forms.Button();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.label16 = new System.Windows.Forms.Label();
             this.cmbAPList = new System.Windows.Forms.ComboBox();
+            this.btnDisconnect = new System.Windows.Forms.Button();
+            this.ConnectedToLabel = new System.Windows.Forms.Label();
+            this.cmdShowLog = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.lblStandartASupport = new System.Windows.Forms.Label();
+            this.lblStandartGSupport = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblStandartNSupport = new System.Windows.Forms.Label();
+            this.lblSpeed = new System.Windows.Forms.Label();
+            this.lblBandwith = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.lblStandart = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lblCoordinates = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
             this.cmdUpdateStatisticTable = new System.Windows.Forms.Button();
@@ -122,16 +121,10 @@
             this.cmdLogsClear = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -140,6 +133,10 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -212,10 +209,12 @@
             // txtDestination
             // 
             this.txtDestination.Location = new System.Drawing.Point(20, 82);
+            this.txtDestination.MaxLength = 17;
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(113, 20);
             this.txtDestination.TabIndex = 10;
             this.txtDestination.Text = "00:00:00:00:00:00";
+            this.txtDestination.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtDestination, "Enter MAC address of peer that you want to send data to him");
             // 
             // PresentRSSI
@@ -223,7 +222,7 @@
             this.PresentRSSI.AutoSize = true;
             this.PresentRSSI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.PresentRSSI.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.PresentRSSI.Location = new System.Drawing.Point(11, 66);
+            this.PresentRSSI.Location = new System.Drawing.Point(149, 28);
             this.PresentRSSI.Name = "PresentRSSI";
             this.PresentRSSI.Size = new System.Drawing.Size(36, 13);
             this.PresentRSSI.TabIndex = 25;
@@ -234,18 +233,18 @@
             // 
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label13.Location = new System.Drawing.Point(12, 79);
+            this.label13.Location = new System.Drawing.Point(151, 57);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(70, 13);
+            this.label13.Size = new System.Drawing.Size(47, 13);
             this.label13.TabIndex = 53;
-            this.label13.Text = "Last TX Rate";
+            this.label13.Text = "TX Rate";
             this.toolTip1.SetToolTip(this.label13, "Last Transmitted Packet Rate");
             // 
             // cmdSelectFileToSend
             // 
             this.cmdSelectFileToSend.Location = new System.Drawing.Point(217, 83);
             this.cmdSelectFileToSend.Name = "cmdSelectFileToSend";
-            this.cmdSelectFileToSend.Size = new System.Drawing.Size(64, 21);
+            this.cmdSelectFileToSend.Size = new System.Drawing.Size(70, 21);
             this.cmdSelectFileToSend.TabIndex = 60;
             this.cmdSelectFileToSend.Text = "Select File";
             this.toolTip1.SetToolTip(this.cmdSelectFileToSend, "Select File To Send");
@@ -268,7 +267,7 @@
             this.lblTDLSisWork.AutoSize = true;
             this.lblTDLSisWork.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblTDLSisWork.ForeColor = System.Drawing.Color.Olive;
-            this.lblTDLSisWork.Location = new System.Drawing.Point(176, 166);
+            this.lblTDLSisWork.Location = new System.Drawing.Point(176, 155);
             this.lblTDLSisWork.Name = "lblTDLSisWork";
             this.lblTDLSisWork.Size = new System.Drawing.Size(24, 13);
             this.lblTDLSisWork.TabIndex = 40;
@@ -280,7 +279,7 @@
             this.lblTDLStatus.AutoSize = true;
             this.lblTDLStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblTDLStatus.ForeColor = System.Drawing.Color.DarkSeaGreen;
-            this.lblTDLStatus.Location = new System.Drawing.Point(149, 166);
+            this.lblTDLStatus.Location = new System.Drawing.Point(149, 155);
             this.lblTDLStatus.Name = "lblTDLStatus";
             this.lblTDLStatus.Size = new System.Drawing.Size(24, 13);
             this.lblTDLStatus.TabIndex = 34;
@@ -315,7 +314,7 @@
             // 
             // lblSLSMessage
             // 
-            this.lblSLSMessage.Location = new System.Drawing.Point(14, 240);
+            this.lblSLSMessage.Location = new System.Drawing.Point(14, 229);
             this.lblSLSMessage.Name = "lblSLSMessage";
             this.lblSLSMessage.Size = new System.Drawing.Size(269, 13);
             this.lblSLSMessage.TabIndex = 78;
@@ -326,7 +325,7 @@
             // 
             this.chkbAutoStartTdls.AutoSize = true;
             this.chkbAutoStartTdls.ForeColor = System.Drawing.Color.Green;
-            this.chkbAutoStartTdls.Location = new System.Drawing.Point(206, 165);
+            this.chkbAutoStartTdls.Location = new System.Drawing.Point(206, 154);
             this.chkbAutoStartTdls.Name = "chkbAutoStartTdls";
             this.chkbAutoStartTdls.Size = new System.Drawing.Size(104, 17);
             this.chkbAutoStartTdls.TabIndex = 61;
@@ -339,7 +338,7 @@
             // 
             this.chkbSLSAutoStart.AutoSize = true;
             this.chkbSLSAutoStart.ForeColor = System.Drawing.Color.Green;
-            this.chkbSLSAutoStart.Location = new System.Drawing.Point(206, 182);
+            this.chkbSLSAutoStart.Location = new System.Drawing.Point(206, 171);
             this.chkbSLSAutoStart.Name = "chkbSLSAutoStart";
             this.chkbSLSAutoStart.Size = new System.Drawing.Size(71, 17);
             this.chkbSLSAutoStart.TabIndex = 79;
@@ -407,6 +406,17 @@
             this.lblWaitingForAck.Text = "Ack";
             this.toolTip1.SetToolTip(this.lblWaitingForAck, "Waiting For Ack");
             // 
+            // cmbAssociatedDevicesInBSS
+            // 
+            this.cmbAssociatedDevicesInBSS.FormattingEnabled = true;
+            this.cmbAssociatedDevicesInBSS.Location = new System.Drawing.Point(20, 108);
+            this.cmbAssociatedDevicesInBSS.Name = "cmbAssociatedDevicesInBSS";
+            this.cmbAssociatedDevicesInBSS.Size = new System.Drawing.Size(113, 21);
+            this.cmbAssociatedDevicesInBSS.TabIndex = 50;
+            this.toolTip1.SetToolTip(this.cmbAssociatedDevicesInBSS, "Select Device for send data");
+            this.cmbAssociatedDevicesInBSS.SelectedIndexChanged += new System.EventHandler(this.cmbAssociatedDevicesInBSS_SelectedIndexChanged);
+            this.cmbAssociatedDevicesInBSS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAssociatedDevicesInBSS_MouseClick);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -417,7 +427,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(665, 312);
+            this.tabControl1.Size = new System.Drawing.Size(665, 297);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -426,7 +436,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(657, 286);
+            this.tabPage1.Size = new System.Drawing.Size(657, 271);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Station Info";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -438,691 +448,10 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(651, 280);
+            this.groupBox1.Size = new System.Drawing.Size(651, 265);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cennect Info";
-            // 
-            // lblNowTDLS
-            // 
-            this.lblNowTDLS.AutoSize = true;
-            this.lblNowTDLS.BackColor = System.Drawing.Color.Black;
-            this.lblNowTDLS.ForeColor = System.Drawing.Color.Coral;
-            this.lblNowTDLS.Location = new System.Drawing.Point(178, 8);
-            this.lblNowTDLS.Name = "lblNowTDLS";
-            this.lblNowTDLS.Size = new System.Drawing.Size(35, 13);
-            this.lblNowTDLS.TabIndex = 83;
-            this.lblNowTDLS.Text = "TDLS";
-            // 
-            // lblNowBSS
-            // 
-            this.lblNowBSS.AutoSize = true;
-            this.lblNowBSS.BackColor = System.Drawing.Color.Black;
-            this.lblNowBSS.ForeColor = System.Drawing.Color.Coral;
-            this.lblNowBSS.Location = new System.Drawing.Point(149, 8);
-            this.lblNowBSS.Name = "lblNowBSS";
-            this.lblNowBSS.Size = new System.Drawing.Size(28, 13);
-            this.lblNowBSS.TabIndex = 82;
-            this.lblNowBSS.Text = "BSS";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(92, 40);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(38, 13);
-            this.label14.TabIndex = 81;
-            this.label14.Text = "Speed";
-            // 
-            // btnDisconnect
-            // 
-            this.btnDisconnect.Location = new System.Drawing.Point(214, 53);
-            this.btnDisconnect.Name = "btnDisconnect";
-            this.btnDisconnect.Size = new System.Drawing.Size(73, 21);
-            this.btnDisconnect.TabIndex = 80;
-            this.btnDisconnect.Text = "Disconnect";
-            this.btnDisconnect.UseVisualStyleBackColor = true;
-            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
-            // 
-            // lblLastTransmitTime
-            // 
-            this.lblLastTransmitTime.AutoSize = true;
-            this.lblLastTransmitTime.Location = new System.Drawing.Point(259, 124);
-            this.lblLastTransmitTime.Name = "lblLastTransmitTime";
-            this.lblLastTransmitTime.Size = new System.Drawing.Size(13, 13);
-            this.lblLastTransmitTime.TabIndex = 77;
-            this.lblLastTransmitTime.Text = "0";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(117, 124);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(96, 13);
-            this.label21.TabIndex = 76;
-            this.label21.Text = "Last Transmit Time";
-            // 
-            // lblTdlsUnsuccessTrys
-            // 
-            this.lblTdlsUnsuccessTrys.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblTdlsUnsuccessTrys.Location = new System.Drawing.Point(210, 226);
-            this.lblTdlsUnsuccessTrys.Name = "lblTdlsUnsuccessTrys";
-            this.lblTdlsUnsuccessTrys.Size = new System.Drawing.Size(62, 14);
-            this.lblTdlsUnsuccessTrys.TabIndex = 75;
-            this.lblTdlsUnsuccessTrys.Text = "0";
-            this.lblTdlsUnsuccessTrys.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label22.Location = new System.Drawing.Point(12, 226);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(188, 13);
-            this.label22.TabIndex = 74;
-            this.label22.Text = "Unsuccessdull trys to send over TDLS";
-            // 
-            // label20
-            // 
-            this.label20.BackColor = System.Drawing.Color.White;
-            this.label20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label20.ForeColor = System.Drawing.Color.Teal;
-            this.label20.Location = new System.Drawing.Point(203, 18);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(50, 18);
-            this.label20.TabIndex = 73;
-            this.label20.Text = "40MHz";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblStandart
-            // 
-            this.lblStandart.BackColor = System.Drawing.Color.White;
-            this.lblStandart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStandart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblStandart.ForeColor = System.Drawing.Color.Teal;
-            this.lblStandart.Location = new System.Drawing.Point(95, 19);
-            this.lblStandart.Name = "lblStandart";
-            this.lblStandart.Size = new System.Drawing.Size(50, 15);
-            this.lblStandart.TabIndex = 69;
-            this.lblStandart.Text = "STAN80211";
-            this.lblStandart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label18.Location = new System.Drawing.Point(78, 6);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(83, 13);
-            this.label18.TabIndex = 68;
-            this.label18.Text = "STA Standart";
-            // 
-            // lblBandwith
-            // 
-            this.lblBandwith.BackColor = System.Drawing.Color.White;
-            this.lblBandwith.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblBandwith.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblBandwith.ForeColor = System.Drawing.Color.Teal;
-            this.lblBandwith.Location = new System.Drawing.Point(20, 19);
-            this.lblBandwith.Name = "lblBandwith";
-            this.lblBandwith.Size = new System.Drawing.Size(50, 15);
-            this.lblBandwith.TabIndex = 67;
-            this.lblBandwith.Text = "BANDWITH";
-            this.lblBandwith.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label19.Location = new System.Drawing.Point(4, 6);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(87, 13);
-            this.label19.TabIndex = 66;
-            this.label19.Text = "STA Bandwith";
-            // 
-            // lblSpeed
-            // 
-            this.lblSpeed.AutoSize = true;
-            this.lblSpeed.Location = new System.Drawing.Point(151, 40);
-            this.lblSpeed.Name = "lblSpeed";
-            this.lblSpeed.Size = new System.Drawing.Size(38, 13);
-            this.lblSpeed.TabIndex = 65;
-            this.lblSpeed.Text = "Speed";
-            this.lblSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblStandartNSupport
-            // 
-            this.lblStandartNSupport.BackColor = System.Drawing.Color.White;
-            this.lblStandartNSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStandartNSupport.Location = new System.Drawing.Point(19, 36);
-            this.lblStandartNSupport.Name = "lblStandartNSupport";
-            this.lblStandartNSupport.Size = new System.Drawing.Size(15, 15);
-            this.lblStandartNSupport.TabIndex = 64;
-            this.lblStandartNSupport.Text = "N";
-            this.lblStandartNSupport.Click += new System.EventHandler(this.lblStandartNSupport_Click);
-            this.lblStandartNSupport.DoubleClick += new System.EventHandler(this.lblStandartNSupport_DoubleClick);
-            // 
-            // lblStandartGSupport
-            // 
-            this.lblStandartGSupport.BackColor = System.Drawing.Color.White;
-            this.lblStandartGSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStandartGSupport.Location = new System.Drawing.Point(56, 36);
-            this.lblStandartGSupport.Name = "lblStandartGSupport";
-            this.lblStandartGSupport.Size = new System.Drawing.Size(15, 15);
-            this.lblStandartGSupport.TabIndex = 63;
-            this.lblStandartGSupport.Text = "G";
-            this.lblStandartGSupport.Click += new System.EventHandler(this.lblStandartGSupport_Click);
-            this.lblStandartGSupport.DoubleClick += new System.EventHandler(this.lblStandartGSupport_DoubleClick);
-            // 
-            // lblStandartASupport
-            // 
-            this.lblStandartASupport.BackColor = System.Drawing.Color.White;
-            this.lblStandartASupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStandartASupport.Location = new System.Drawing.Point(38, 36);
-            this.lblStandartASupport.Name = "lblStandartASupport";
-            this.lblStandartASupport.Size = new System.Drawing.Size(15, 15);
-            this.lblStandartASupport.TabIndex = 62;
-            this.lblStandartASupport.Text = "A";
-            this.lblStandartASupport.Click += new System.EventHandler(this.lblStandartASupport_Click);
-            this.lblStandartASupport.DoubleClick += new System.EventHandler(this.lblStandartASupport_DoubleClick);
-            // 
-            // cmdShowLog
-            // 
-            this.cmdShowLog.Enabled = false;
-            this.cmdShowLog.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdShowLog.ForeColor = System.Drawing.Color.Teal;
-            this.cmdShowLog.Location = new System.Drawing.Point(214, 32);
-            this.cmdShowLog.Name = "cmdShowLog";
-            this.cmdShowLog.Size = new System.Drawing.Size(73, 19);
-            this.cmdShowLog.TabIndex = 59;
-            this.cmdShowLog.Text = "Show Log";
-            this.cmdShowLog.UseVisualStyleBackColor = true;
-            this.cmdShowLog.Click += new System.EventHandler(this.cmdShowLog_Click);
-            // 
-            // lblRetransmittionRate
-            // 
-            this.lblRetransmittionRate.AutoSize = true;
-            this.lblRetransmittionRate.ForeColor = System.Drawing.Color.Maroon;
-            this.lblRetransmittionRate.Location = new System.Drawing.Point(84, 124);
-            this.lblRetransmittionRate.Name = "lblRetransmittionRate";
-            this.lblRetransmittionRate.Size = new System.Drawing.Size(13, 13);
-            this.lblRetransmittionRate.TabIndex = 58;
-            this.lblRetransmittionRate.Text = "0";
-            // 
-            // label15
-            // 
-            this.label15.AccessibleDescription = "";
-            this.label15.AutoSize = true;
-            this.label15.ForeColor = System.Drawing.Color.Maroon;
-            this.label15.Location = new System.Drawing.Point(14, 124);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(53, 13);
-            this.label15.TabIndex = 57;
-            this.label15.Tag = "";
-            this.label15.Text = "Retr Rate";
-            // 
-            // lblNoiseRssi
-            // 
-            this.lblNoiseRssi.AutoSize = true;
-            this.lblNoiseRssi.ForeColor = System.Drawing.Color.Maroon;
-            this.lblNoiseRssi.Location = new System.Drawing.Point(84, 137);
-            this.lblNoiseRssi.Name = "lblNoiseRssi";
-            this.lblNoiseRssi.Size = new System.Drawing.Size(13, 13);
-            this.lblNoiseRssi.TabIndex = 56;
-            this.lblNoiseRssi.Text = "0";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.Maroon;
-            this.label10.Location = new System.Drawing.Point(14, 137);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(62, 13);
-            this.label10.TabIndex = 55;
-            this.label10.Text = "Noise RSSI";
-            // 
-            // lblLastTransmitRate
-            // 
-            this.lblLastTransmitRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblLastTransmitRate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblLastTransmitRate.Location = new System.Drawing.Point(82, 79);
-            this.lblLastTransmitRate.Name = "lblLastTransmitRate";
-            this.lblLastTransmitRate.Size = new System.Drawing.Size(36, 16);
-            this.lblLastTransmitRate.TabIndex = 54;
-            this.lblLastTransmitRate.Text = "0";
-            this.lblLastTransmitRate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(217, 110);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(63, 19);
-            this.button3.TabIndex = 52;
-            this.button3.Text = "Other";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // btnGetDevicesInBSS
-            // 
-            this.btnGetDevicesInBSS.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnGetDevicesInBSS.Location = new System.Drawing.Point(135, 109);
-            this.btnGetDevicesInBSS.Name = "btnGetDevicesInBSS";
-            this.btnGetDevicesInBSS.Size = new System.Drawing.Size(76, 20);
-            this.btnGetDevicesInBSS.TabIndex = 51;
-            this.btnGetDevicesInBSS.Text = "BSS Devs";
-            this.btnGetDevicesInBSS.UseVisualStyleBackColor = true;
-            this.btnGetDevicesInBSS.Click += new System.EventHandler(this.btnGetDevicesInBSS_Click);
-            // 
-            // cmbAssociatedDevicesInBSS
-            // 
-            this.cmbAssociatedDevicesInBSS.FormattingEnabled = true;
-            this.cmbAssociatedDevicesInBSS.Location = new System.Drawing.Point(20, 108);
-            this.cmbAssociatedDevicesInBSS.Name = "cmbAssociatedDevicesInBSS";
-            this.cmbAssociatedDevicesInBSS.Size = new System.Drawing.Size(113, 21);
-            this.cmbAssociatedDevicesInBSS.TabIndex = 50;
-            this.cmbAssociatedDevicesInBSS.SelectedIndexChanged += new System.EventHandler(this.cmbAssociatedDevicesInBSS_SelectedIndexChanged);
-            this.cmbAssociatedDevicesInBSS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAssociatedDevicesInBSS_MouseClick);
-            // 
-            // lblTDLSSetupStatus
-            // 
-            this.lblTDLSSetupStatus.AutoSize = true;
-            this.lblTDLSSetupStatus.ForeColor = System.Drawing.Color.Teal;
-            this.lblTDLSSetupStatus.Location = new System.Drawing.Point(110, 151);
-            this.lblTDLSSetupStatus.Name = "lblTDLSSetupStatus";
-            this.lblTDLSSetupStatus.Size = new System.Drawing.Size(120, 13);
-            this.lblTDLSSetupStatus.TabIndex = 49;
-            this.lblTDLSSetupStatus.Text = "TDLS SETUP STATUS";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.Teal;
-            this.label12.Location = new System.Drawing.Point(11, 151);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(99, 13);
-            this.label12.TabIndex = 48;
-            this.label12.Text = "TDLS Setup Status";
-            // 
-            // lblAllReceivedPackets
-            // 
-            this.lblAllReceivedPackets.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblAllReceivedPackets.Location = new System.Drawing.Point(210, 82);
-            this.lblAllReceivedPackets.Name = "lblAllReceivedPackets";
-            this.lblAllReceivedPackets.Size = new System.Drawing.Size(62, 14);
-            this.lblAllReceivedPackets.TabIndex = 47;
-            this.lblAllReceivedPackets.Text = "0";
-            this.lblAllReceivedPackets.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label11.Location = new System.Drawing.Point(125, 83);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(79, 13);
-            this.label11.TabIndex = 46;
-            this.label11.Text = "Rec Pack Sum";
-            // 
-            // btnChangeTDLSStatusOn
-            // 
-            this.btnChangeTDLSStatusOn.Enabled = false;
-            this.btnChangeTDLSStatusOn.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnChangeTDLSStatusOn.Location = new System.Drawing.Point(167, 200);
-            this.btnChangeTDLSStatusOn.Name = "btnChangeTDLSStatusOn";
-            this.btnChangeTDLSStatusOn.Size = new System.Drawing.Size(52, 21);
-            this.btnChangeTDLSStatusOn.TabIndex = 45;
-            this.btnChangeTDLSStatusOn.Text = "SLS On";
-            this.btnChangeTDLSStatusOn.UseVisualStyleBackColor = true;
-            this.btnChangeTDLSStatusOn.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // btnChangeTDLSStatus
-            // 
-            this.btnChangeTDLSStatus.Enabled = false;
-            this.btnChangeTDLSStatus.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnChangeTDLSStatus.Location = new System.Drawing.Point(128, 200);
-            this.btnChangeTDLSStatus.Name = "btnChangeTDLSStatus";
-            this.btnChangeTDLSStatus.Size = new System.Drawing.Size(35, 21);
-            this.btnChangeTDLSStatus.TabIndex = 44;
-            this.btnChangeTDLSStatus.Text = "SLS";
-            this.btnChangeTDLSStatus.UseVisualStyleBackColor = true;
-            this.btnChangeTDLSStatus.Click += new System.EventHandler(this.btnChangeTDLSStatus_Click);
-            // 
-            // txtTDLSSetupRequestMAC
-            // 
-            this.txtTDLSSetupRequestMAC.BackColor = System.Drawing.Color.YellowGreen;
-            this.txtTDLSSetupRequestMAC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTDLSSetupRequestMAC.Location = new System.Drawing.Point(15, 200);
-            this.txtTDLSSetupRequestMAC.Name = "txtTDLSSetupRequestMAC";
-            this.txtTDLSSetupRequestMAC.Size = new System.Drawing.Size(102, 20);
-            this.txtTDLSSetupRequestMAC.TabIndex = 42;
-            this.txtTDLSSetupRequestMAC.Text = "00:00:00:00:00:00";
-            this.txtTDLSSetupRequestMAC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(15, 179);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(133, 19);
-            this.button2.TabIndex = 41;
-            this.button2.Text = "TDLS Setup Request";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.label8.Location = new System.Drawing.Point(11, 164);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(129, 13);
-            this.label8.TabIndex = 33;
-            this.label8.Text = "TDLS(Enabled/Work)";
-            // 
-            // lblCounterToretransmit
-            // 
-            this.lblCounterToretransmit.AutoSize = true;
-            this.lblCounterToretransmit.Location = new System.Drawing.Point(130, 108);
-            this.lblCounterToretransmit.Name = "lblCounterToretransmit";
-            this.lblCounterToretransmit.Size = new System.Drawing.Size(13, 13);
-            this.lblCounterToretransmit.TabIndex = 32;
-            this.lblCounterToretransmit.Text = "0";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(14, 108);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(109, 13);
-            this.label9.TabIndex = 31;
-            this.label9.Text = "Counter to Retransmit";
-            // 
-            // lblDoubleReceived
-            // 
-            this.lblDoubleReceived.AutoSize = true;
-            this.lblDoubleReceived.Location = new System.Drawing.Point(130, 95);
-            this.lblDoubleReceived.Name = "lblDoubleReceived";
-            this.lblDoubleReceived.Size = new System.Drawing.Size(13, 13);
-            this.lblDoubleReceived.TabIndex = 30;
-            this.lblDoubleReceived.Text = "0";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(14, 95);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(90, 13);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Double Recieved";
-            // 
-            // lblRSSI
-            // 
-            this.lblRSSI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblRSSI.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblRSSI.Location = new System.Drawing.Point(73, 66);
-            this.lblRSSI.Name = "lblRSSI";
-            this.lblRSSI.Size = new System.Drawing.Size(45, 13);
-            this.lblRSSI.TabIndex = 26;
-            this.lblRSSI.Text = "0";
-            this.lblRSSI.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblDataAckRetransmited
-            // 
-            this.lblDataAckRetransmited.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblDataAckRetransmited.Location = new System.Drawing.Point(217, 69);
-            this.lblDataAckRetransmited.Name = "lblDataAckRetransmited";
-            this.lblDataAckRetransmited.Size = new System.Drawing.Size(55, 13);
-            this.lblDataAckRetransmited.TabIndex = 23;
-            this.lblDataAckRetransmited.Text = "0";
-            this.lblDataAckRetransmited.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label6.Location = new System.Drawing.Point(125, 70);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 13);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "Ack Retransmitted";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.Teal;
-            this.label5.Location = new System.Drawing.Point(125, 57);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 13);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "Retransmitted";
-            // 
-            // lblRetransmited
-            // 
-            this.lblRetransmited.ForeColor = System.Drawing.Color.Teal;
-            this.lblRetransmited.Location = new System.Drawing.Point(214, 57);
-            this.lblRetransmited.Name = "lblRetransmited";
-            this.lblRetransmited.Size = new System.Drawing.Size(58, 13);
-            this.lblRetransmited.TabIndex = 19;
-            this.lblRetransmited.Text = "0";
-            this.lblRetransmited.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Navy;
-            this.label4.Location = new System.Drawing.Point(125, 44);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 13);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Ack Received";
-            // 
-            // lblAckReceived
-            // 
-            this.lblAckReceived.ForeColor = System.Drawing.Color.Navy;
-            this.lblAckReceived.Location = new System.Drawing.Point(217, 44);
-            this.lblAckReceived.Name = "lblAckReceived";
-            this.lblAckReceived.Size = new System.Drawing.Size(55, 16);
-            this.lblAckReceived.TabIndex = 17;
-            this.lblAckReceived.Text = "0";
-            this.lblAckReceived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.label3.Location = new System.Drawing.Point(11, 40);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Sent";
-            // 
-            // lblSent
-            // 
-            this.lblSent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.lblSent.Location = new System.Drawing.Point(70, 41);
-            this.lblSent.Name = "lblSent";
-            this.lblSent.Size = new System.Drawing.Size(49, 13);
-            this.lblSent.TabIndex = 14;
-            this.lblSent.Text = "0";
-            this.lblSent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Purple;
-            this.label2.Location = new System.Drawing.Point(11, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Received";
-            // 
-            // txtDataReceeived
-            // 
-            this.txtDataReceeived.ForeColor = System.Drawing.Color.Purple;
-            this.txtDataReceeived.Location = new System.Drawing.Point(67, 54);
-            this.txtDataReceeived.Name = "txtDataReceeived";
-            this.txtDataReceeived.Size = new System.Drawing.Size(52, 12);
-            this.txtDataReceeived.TabIndex = 12;
-            this.txtDataReceeived.Text = "0";
-            this.txtDataReceeived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtMAC
-            // 
-            this.txtMAC.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtMAC.ForeColor = System.Drawing.Color.DarkGreen;
-            this.txtMAC.Location = new System.Drawing.Point(14, 8);
-            this.txtMAC.Name = "txtMAC";
-            this.txtMAC.ReadOnly = true;
-            this.txtMAC.Size = new System.Drawing.Size(129, 23);
-            this.txtMAC.TabIndex = 11;
-            this.txtMAC.Text = "00:00:00:00:00:00";
-            // 
-            // ConnectedToLabel
-            // 
-            this.ConnectedToLabel.AutoSize = true;
-            this.ConnectedToLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.ConnectedToLabel.Location = new System.Drawing.Point(3, 8);
-            this.ConnectedToLabel.Name = "ConnectedToLabel";
-            this.ConnectedToLabel.Size = new System.Drawing.Size(107, 16);
-            this.ConnectedToLabel.TabIndex = 7;
-            this.ConnectedToLabel.Text = "Associated to ";
-            // 
-            // lblCoordinates
-            // 
-            this.lblCoordinates.AutoSize = true;
-            this.lblCoordinates.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblCoordinates.Location = new System.Drawing.Point(102, -4);
-            this.lblCoordinates.Name = "lblCoordinates";
-            this.lblCoordinates.Size = new System.Drawing.Size(79, 16);
-            this.lblCoordinates.TabIndex = 4;
-            this.lblCoordinates.Text = "X:___ Y:___";
-            // 
-            // cmbAPList
-            // 
-            this.cmbAPList.FormattingEnabled = true;
-            this.cmbAPList.Location = new System.Drawing.Point(6, 53);
-            this.cmbAPList.Name = "cmbAPList";
-            this.cmbAPList.Size = new System.Drawing.Size(138, 21);
-            this.cmbAPList.TabIndex = 2;
-            this.cmbAPList.SelectedIndexChanged += new System.EventHandler(this.cmbAPList_SelectedIndexChanged);
-            this.cmbAPList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAPList_MouseClick);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.listView1);
-            this.tabPage4.Controls.Add(this.cmdUpdateStatisticTable);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(631, 311);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Statistic";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // listView1
-            // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(3, 3);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(625, 305);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // cmdUpdateStatisticTable
-            // 
-            this.cmdUpdateStatisticTable.Location = new System.Drawing.Point(8, 6);
-            this.cmdUpdateStatisticTable.Name = "cmdUpdateStatisticTable";
-            this.cmdUpdateStatisticTable.Size = new System.Drawing.Size(87, 23);
-            this.cmdUpdateStatisticTable.TabIndex = 1;
-            this.cmdUpdateStatisticTable.Text = "Update";
-            this.cmdUpdateStatisticTable.UseVisualStyleBackColor = true;
-            this.cmdUpdateStatisticTable.Click += new System.EventHandler(this.cmdUpdateStatisticTable_Click);
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.groupBox3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(631, 311);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Error Log";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.txtErrorsLogFromCode);
-            this.groupBox3.Controls.Add(this.cmdSaveLogs);
-            this.groupBox3.Controls.Add(this.cmdLogsUpdate);
-            this.groupBox3.Controls.Add(this.cmdLogsClear);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox3.Location = new System.Drawing.Point(3, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(625, 305);
-            this.groupBox3.TabIndex = 4;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Logs";
-            // 
-            // txtErrorsLogFromCode
-            // 
-            this.txtErrorsLogFromCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.txtErrorsLogFromCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtErrorsLogFromCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtErrorsLogFromCode.Location = new System.Drawing.Point(3, 25);
-            this.txtErrorsLogFromCode.Multiline = true;
-            this.txtErrorsLogFromCode.Name = "txtErrorsLogFromCode";
-            this.txtErrorsLogFromCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtErrorsLogFromCode.Size = new System.Drawing.Size(619, 277);
-            this.txtErrorsLogFromCode.TabIndex = 0;
-            // 
-            // cmdSaveLogs
-            // 
-            this.cmdSaveLogs.Enabled = false;
-            this.cmdSaveLogs.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdSaveLogs.Location = new System.Drawing.Point(192, 1);
-            this.cmdSaveLogs.Name = "cmdSaveLogs";
-            this.cmdSaveLogs.Size = new System.Drawing.Size(62, 18);
-            this.cmdSaveLogs.TabIndex = 3;
-            this.cmdSaveLogs.Text = "Save";
-            this.cmdSaveLogs.UseVisualStyleBackColor = true;
-            // 
-            // cmdLogsUpdate
-            // 
-            this.cmdLogsUpdate.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdLogsUpdate.Location = new System.Drawing.Point(58, 1);
-            this.cmdLogsUpdate.Name = "cmdLogsUpdate";
-            this.cmdLogsUpdate.Size = new System.Drawing.Size(62, 18);
-            this.cmdLogsUpdate.TabIndex = 1;
-            this.cmdLogsUpdate.Text = "Update";
-            this.cmdLogsUpdate.UseVisualStyleBackColor = true;
-            this.cmdLogsUpdate.Click += new System.EventHandler(this.cmdLogsUpdate_Click);
-            // 
-            // cmdLogsClear
-            // 
-            this.cmdLogsClear.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdLogsClear.Location = new System.Drawing.Point(126, 1);
-            this.cmdLogsClear.Name = "cmdLogsClear";
-            this.cmdLogsClear.Size = new System.Drawing.Size(62, 18);
-            this.cmdLogsClear.TabIndex = 2;
-            this.cmdLogsClear.Text = "Clear";
-            this.cmdLogsClear.UseVisualStyleBackColor = true;
-            this.cmdLogsClear.Click += new System.EventHandler(this.cmdLogsClear_Click);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(631, 311);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Object Dump";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
@@ -1134,11 +463,9 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.txtMAC);
             this.splitContainer1.Panel1.Controls.Add(this.lblNowTDLS);
-            this.splitContainer1.Panel1.Controls.Add(this.txtDataReceeived);
             this.splitContainer1.Panel1.Controls.Add(this.lblNowBSS);
             this.splitContainer1.Panel1.Controls.Add(this.lblWaitingForAck);
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.lblSent);
+            this.splitContainer1.Panel1.Controls.Add(this.lblTxRx);
             this.splitContainer1.Panel1.Controls.Add(this.lblSLSMessage);
             this.splitContainer1.Panel1.Controls.Add(this.chkbSLSAutoStart);
             this.splitContainer1.Panel1.Controls.Add(this.lblTdlsUnsuccessTrys);
@@ -1181,9 +508,361 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(645, 261);
+            this.splitContainer1.Size = new System.Drawing.Size(645, 246);
             this.splitContainer1.SplitterDistance = 315;
             this.splitContainer1.TabIndex = 84;
+            // 
+            // txtMAC
+            // 
+            this.txtMAC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtMAC.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtMAC.ForeColor = System.Drawing.Color.DarkGreen;
+            this.txtMAC.Location = new System.Drawing.Point(14, 8);
+            this.txtMAC.Name = "txtMAC";
+            this.txtMAC.ReadOnly = true;
+            this.txtMAC.Size = new System.Drawing.Size(129, 23);
+            this.txtMAC.TabIndex = 11;
+            this.txtMAC.Text = "00:00:00:00:00:00";
+            // 
+            // lblNowTDLS
+            // 
+            this.lblNowTDLS.AutoSize = true;
+            this.lblNowTDLS.BackColor = System.Drawing.Color.Black;
+            this.lblNowTDLS.ForeColor = System.Drawing.Color.Coral;
+            this.lblNowTDLS.Location = new System.Drawing.Point(178, 8);
+            this.lblNowTDLS.Name = "lblNowTDLS";
+            this.lblNowTDLS.Size = new System.Drawing.Size(35, 13);
+            this.lblNowTDLS.TabIndex = 83;
+            this.lblNowTDLS.Text = "TDLS";
+            // 
+            // lblNowBSS
+            // 
+            this.lblNowBSS.AutoSize = true;
+            this.lblNowBSS.BackColor = System.Drawing.Color.Black;
+            this.lblNowBSS.ForeColor = System.Drawing.Color.Coral;
+            this.lblNowBSS.Location = new System.Drawing.Point(149, 8);
+            this.lblNowBSS.Name = "lblNowBSS";
+            this.lblNowBSS.Size = new System.Drawing.Size(28, 13);
+            this.lblNowBSS.TabIndex = 82;
+            this.lblNowBSS.Text = "BSS";
+            // 
+            // lblTxRx
+            // 
+            this.lblTxRx.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblTxRx.Location = new System.Drawing.Point(48, 48);
+            this.lblTxRx.Name = "lblTxRx";
+            this.lblTxRx.Size = new System.Drawing.Size(99, 12);
+            this.lblTxRx.TabIndex = 14;
+            this.lblTxRx.Text = "0";
+            this.lblTxRx.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblTdlsUnsuccessTrys
+            // 
+            this.lblTdlsUnsuccessTrys.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblTdlsUnsuccessTrys.Location = new System.Drawing.Point(210, 215);
+            this.lblTdlsUnsuccessTrys.Name = "lblTdlsUnsuccessTrys";
+            this.lblTdlsUnsuccessTrys.Size = new System.Drawing.Size(62, 14);
+            this.lblTdlsUnsuccessTrys.TabIndex = 75;
+            this.lblTdlsUnsuccessTrys.Text = "0";
+            this.lblTdlsUnsuccessTrys.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label3.Location = new System.Drawing.Point(15, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Tx/Rx";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label22.Location = new System.Drawing.Point(12, 215);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(188, 13);
+            this.label22.TabIndex = 74;
+            this.label22.Text = "Unsuccessdull trys to send over TDLS";
+            // 
+            // lblLastTransmitTime
+            // 
+            this.lblLastTransmitTime.AutoSize = true;
+            this.lblLastTransmitTime.Location = new System.Drawing.Point(285, 123);
+            this.lblLastTransmitTime.Name = "lblLastTransmitTime";
+            this.lblLastTransmitTime.Size = new System.Drawing.Size(13, 13);
+            this.lblLastTransmitTime.TabIndex = 77;
+            this.lblLastTransmitTime.Text = "0";
+            // 
+            // lblAckReceived
+            // 
+            this.lblAckReceived.ForeColor = System.Drawing.Color.Navy;
+            this.lblAckReceived.Location = new System.Drawing.Point(57, 58);
+            this.lblAckReceived.Name = "lblAckReceived";
+            this.lblAckReceived.Size = new System.Drawing.Size(90, 15);
+            this.lblAckReceived.TabIndex = 17;
+            this.lblAckReceived.Text = "0";
+            this.lblAckReceived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(149, 122);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(96, 13);
+            this.label21.TabIndex = 76;
+            this.label21.Text = "Last Transmit Time";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Navy;
+            this.label4.Location = new System.Drawing.Point(16, 59);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "AckRx";
+            this.toolTip1.SetToolTip(this.label4, "Ack Received");
+            // 
+            // lblRetransmited
+            // 
+            this.lblRetransmited.ForeColor = System.Drawing.Color.Teal;
+            this.lblRetransmited.Location = new System.Drawing.Point(89, 73);
+            this.lblRetransmited.Name = "lblRetransmited";
+            this.lblRetransmited.Size = new System.Drawing.Size(58, 13);
+            this.lblRetransmited.TabIndex = 19;
+            this.lblRetransmited.Text = "0";
+            this.lblRetransmited.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Teal;
+            this.label5.Location = new System.Drawing.Point(15, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Retransmitted";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label6.Location = new System.Drawing.Point(149, 97);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Ack Retransmitted";
+            // 
+            // lblDataAckRetransmited
+            // 
+            this.lblDataAckRetransmited.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblDataAckRetransmited.Location = new System.Drawing.Point(243, 97);
+            this.lblDataAckRetransmited.Name = "lblDataAckRetransmited";
+            this.lblDataAckRetransmited.Size = new System.Drawing.Size(55, 13);
+            this.lblDataAckRetransmited.TabIndex = 23;
+            this.lblDataAckRetransmited.Text = "0";
+            this.lblDataAckRetransmited.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblRetransmittionRate
+            // 
+            this.lblRetransmittionRate.ForeColor = System.Drawing.Color.Maroon;
+            this.lblRetransmittionRate.Location = new System.Drawing.Point(244, 76);
+            this.lblRetransmittionRate.Name = "lblRetransmittionRate";
+            this.lblRetransmittionRate.Size = new System.Drawing.Size(54, 11);
+            this.lblRetransmittionRate.TabIndex = 58;
+            this.lblRetransmittionRate.Text = "0";
+            this.lblRetransmittionRate.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // label15
+            // 
+            this.label15.AccessibleDescription = "";
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.Maroon;
+            this.label15.Location = new System.Drawing.Point(149, 73);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(53, 13);
+            this.label15.TabIndex = 57;
+            this.label15.Tag = "";
+            this.label15.Text = "Retr Rate";
+            // 
+            // lblRSSI
+            // 
+            this.lblRSSI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRSSI.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblRSSI.Location = new System.Drawing.Point(200, 29);
+            this.lblRSSI.Name = "lblRSSI";
+            this.lblRSSI.Size = new System.Drawing.Size(45, 13);
+            this.lblRSSI.TabIndex = 26;
+            this.lblRSSI.Text = "0";
+            this.lblRSSI.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblNoiseRssi
+            // 
+            this.lblNoiseRssi.AutoSize = true;
+            this.lblNoiseRssi.ForeColor = System.Drawing.Color.Maroon;
+            this.lblNoiseRssi.Location = new System.Drawing.Point(232, 42);
+            this.lblNoiseRssi.Name = "lblNoiseRssi";
+            this.lblNoiseRssi.Size = new System.Drawing.Size(13, 13);
+            this.lblNoiseRssi.TabIndex = 56;
+            this.lblNoiseRssi.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(18, 97);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(90, 13);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Double Recieved";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Maroon;
+            this.label10.Location = new System.Drawing.Point(151, 42);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(62, 13);
+            this.label10.TabIndex = 55;
+            this.label10.Text = "Noise RSSI";
+            // 
+            // lblDoubleReceived
+            // 
+            this.lblDoubleReceived.AutoSize = true;
+            this.lblDoubleReceived.Location = new System.Drawing.Point(134, 97);
+            this.lblDoubleReceived.Name = "lblDoubleReceived";
+            this.lblDoubleReceived.Size = new System.Drawing.Size(13, 13);
+            this.lblDoubleReceived.TabIndex = 30;
+            this.lblDoubleReceived.Text = "0";
+            // 
+            // lblLastTransmitRate
+            // 
+            this.lblLastTransmitRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblLastTransmitRate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblLastTransmitRate.Location = new System.Drawing.Point(203, 57);
+            this.lblLastTransmitRate.Name = "lblLastTransmitRate";
+            this.lblLastTransmitRate.Size = new System.Drawing.Size(42, 13);
+            this.lblLastTransmitRate.TabIndex = 54;
+            this.lblLastTransmitRate.Text = "0";
+            this.lblLastTransmitRate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(18, 110);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(109, 13);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Counter to Retransmit";
+            // 
+            // lblCounterToretransmit
+            // 
+            this.lblCounterToretransmit.AutoSize = true;
+            this.lblCounterToretransmit.Location = new System.Drawing.Point(134, 110);
+            this.lblCounterToretransmit.Name = "lblCounterToretransmit";
+            this.lblCounterToretransmit.Size = new System.Drawing.Size(13, 13);
+            this.lblCounterToretransmit.TabIndex = 32;
+            this.lblCounterToretransmit.Text = "0";
+            // 
+            // lblTDLSSetupStatus
+            // 
+            this.lblTDLSSetupStatus.AutoSize = true;
+            this.lblTDLSSetupStatus.ForeColor = System.Drawing.Color.Teal;
+            this.lblTDLSSetupStatus.Location = new System.Drawing.Point(110, 140);
+            this.lblTDLSSetupStatus.Name = "lblTDLSSetupStatus";
+            this.lblTDLSSetupStatus.Size = new System.Drawing.Size(120, 13);
+            this.lblTDLSSetupStatus.TabIndex = 49;
+            this.lblTDLSSetupStatus.Text = "TDLS SETUP STATUS";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.label8.Location = new System.Drawing.Point(11, 153);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(129, 13);
+            this.label8.TabIndex = 33;
+            this.label8.Text = "TDLS(Enabled/Work)";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.Teal;
+            this.label12.Location = new System.Drawing.Point(11, 140);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(99, 13);
+            this.label12.TabIndex = 48;
+            this.label12.Text = "TDLS Setup Status";
+            // 
+            // lblAllReceivedPackets
+            // 
+            this.lblAllReceivedPackets.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblAllReceivedPackets.Location = new System.Drawing.Point(236, 110);
+            this.lblAllReceivedPackets.Name = "lblAllReceivedPackets";
+            this.lblAllReceivedPackets.Size = new System.Drawing.Size(62, 14);
+            this.lblAllReceivedPackets.TabIndex = 47;
+            this.lblAllReceivedPackets.Text = "0";
+            this.lblAllReceivedPackets.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.lblAllReceivedPackets, "Summary of all received packets");
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label11.Location = new System.Drawing.Point(149, 110);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(79, 13);
+            this.label11.TabIndex = 46;
+            this.label11.Text = "Rec Pack Sum";
+            this.toolTip1.SetToolTip(this.label11, "Summary of all received packets");
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(15, 168);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(133, 19);
+            this.button2.TabIndex = 41;
+            this.button2.Text = "TDLS Setup Request";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnChangeTDLSStatusOn
+            // 
+            this.btnChangeTDLSStatusOn.Enabled = false;
+            this.btnChangeTDLSStatusOn.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnChangeTDLSStatusOn.Location = new System.Drawing.Point(167, 189);
+            this.btnChangeTDLSStatusOn.Name = "btnChangeTDLSStatusOn";
+            this.btnChangeTDLSStatusOn.Size = new System.Drawing.Size(52, 21);
+            this.btnChangeTDLSStatusOn.TabIndex = 45;
+            this.btnChangeTDLSStatusOn.Text = "SLS On";
+            this.btnChangeTDLSStatusOn.UseVisualStyleBackColor = true;
+            this.btnChangeTDLSStatusOn.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // txtTDLSSetupRequestMAC
+            // 
+            this.txtTDLSSetupRequestMAC.BackColor = System.Drawing.Color.LemonChiffon;
+            this.txtTDLSSetupRequestMAC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTDLSSetupRequestMAC.Location = new System.Drawing.Point(15, 189);
+            this.txtTDLSSetupRequestMAC.MaxLength = 17;
+            this.txtTDLSSetupRequestMAC.Name = "txtTDLSSetupRequestMAC";
+            this.txtTDLSSetupRequestMAC.Size = new System.Drawing.Size(102, 20);
+            this.txtTDLSSetupRequestMAC.TabIndex = 42;
+            this.txtTDLSSetupRequestMAC.Text = "00:00:00:00:00:00";
+            this.txtTDLSSetupRequestMAC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnChangeTDLSStatus
+            // 
+            this.btnChangeTDLSStatus.Enabled = false;
+            this.btnChangeTDLSStatus.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnChangeTDLSStatus.Location = new System.Drawing.Point(128, 189);
+            this.btnChangeTDLSStatus.Name = "btnChangeTDLSStatus";
+            this.btnChangeTDLSStatus.Size = new System.Drawing.Size(35, 21);
+            this.btnChangeTDLSStatus.TabIndex = 44;
+            this.btnChangeTDLSStatus.Text = "SLS";
+            this.btnChangeTDLSStatus.UseVisualStyleBackColor = true;
+            this.btnChangeTDLSStatus.Click += new System.EventHandler(this.btnChangeTDLSStatus_Click);
             // 
             // splitContainer2
             // 
@@ -1194,6 +873,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.label16);
             this.splitContainer2.Panel1.Controls.Add(this.label1);
             this.splitContainer2.Panel1.Controls.Add(this.cmbAPList);
             this.splitContainer2.Panel1.Controls.Add(this.btnConnectToBSS);
@@ -1204,8 +884,6 @@
             this.splitContainer2.Panel1.Controls.Add(this.cmdSendData);
             this.splitContainer2.Panel1.Controls.Add(this.txtDestination);
             this.splitContainer2.Panel1.Controls.Add(this.cmbAssociatedDevicesInBSS);
-            this.splitContainer2.Panel1.Controls.Add(this.btnGetDevicesInBSS);
-            this.splitContainer2.Panel1.Controls.Add(this.button3);
             this.splitContainer2.Panel1.Controls.Add(this.cmdShowLog);
             this.splitContainer2.Panel1.Controls.Add(this.cmdSelectFileToSend);
             this.splitContainer2.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel1_Paint);
@@ -1224,16 +902,307 @@
             this.splitContainer2.Panel2.Controls.Add(this.button5);
             this.splitContainer2.Panel2.Controls.Add(this.button4);
             this.splitContainer2.Panel2.Controls.Add(this.label20);
-            this.splitContainer2.Size = new System.Drawing.Size(326, 261);
-            this.splitContainer2.SplitterDistance = 156;
+            this.splitContainer2.Size = new System.Drawing.Size(326, 246);
+            this.splitContainer2.SplitterDistance = 147;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(140, 113);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(160, 13);
+            this.label16.TabIndex = 81;
+            this.label16.Text = "<== Select Device for send data";
+            // 
+            // cmbAPList
+            // 
+            this.cmbAPList.FormattingEnabled = true;
+            this.cmbAPList.Location = new System.Drawing.Point(6, 53);
+            this.cmbAPList.Name = "cmbAPList";
+            this.cmbAPList.Size = new System.Drawing.Size(138, 21);
+            this.cmbAPList.TabIndex = 2;
+            this.cmbAPList.SelectedIndexChanged += new System.EventHandler(this.cmbAPList_SelectedIndexChanged);
+            this.cmbAPList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAPList_MouseClick);
+            // 
+            // btnDisconnect
+            // 
+            this.btnDisconnect.Location = new System.Drawing.Point(214, 53);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(73, 21);
+            this.btnDisconnect.TabIndex = 80;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
+            // 
+            // ConnectedToLabel
+            // 
+            this.ConnectedToLabel.AutoSize = true;
+            this.ConnectedToLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.ConnectedToLabel.Location = new System.Drawing.Point(3, 8);
+            this.ConnectedToLabel.Name = "ConnectedToLabel";
+            this.ConnectedToLabel.Size = new System.Drawing.Size(107, 16);
+            this.ConnectedToLabel.TabIndex = 7;
+            this.ConnectedToLabel.Text = "Associated to ";
+            // 
+            // cmdShowLog
+            // 
+            this.cmdShowLog.Enabled = false;
+            this.cmdShowLog.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdShowLog.ForeColor = System.Drawing.Color.Teal;
+            this.cmdShowLog.Location = new System.Drawing.Point(214, 32);
+            this.cmdShowLog.Name = "cmdShowLog";
+            this.cmdShowLog.Size = new System.Drawing.Size(73, 19);
+            this.cmdShowLog.TabIndex = 59;
+            this.cmdShowLog.Text = "Show Log";
+            this.cmdShowLog.UseVisualStyleBackColor = true;
+            this.cmdShowLog.Click += new System.EventHandler(this.cmdShowLog_Click);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label19.Location = new System.Drawing.Point(4, 6);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(87, 13);
+            this.label19.TabIndex = 66;
+            this.label19.Text = "STA Bandwith";
+            // 
+            // lblStandartASupport
+            // 
+            this.lblStandartASupport.BackColor = System.Drawing.Color.White;
+            this.lblStandartASupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStandartASupport.Location = new System.Drawing.Point(38, 36);
+            this.lblStandartASupport.Name = "lblStandartASupport";
+            this.lblStandartASupport.Size = new System.Drawing.Size(15, 15);
+            this.lblStandartASupport.TabIndex = 62;
+            this.lblStandartASupport.Text = "A";
+            this.lblStandartASupport.Click += new System.EventHandler(this.lblStandartASupport_Click);
+            this.lblStandartASupport.DoubleClick += new System.EventHandler(this.lblStandartASupport_DoubleClick);
+            // 
+            // lblStandartGSupport
+            // 
+            this.lblStandartGSupport.BackColor = System.Drawing.Color.White;
+            this.lblStandartGSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStandartGSupport.Location = new System.Drawing.Point(56, 36);
+            this.lblStandartGSupport.Name = "lblStandartGSupport";
+            this.lblStandartGSupport.Size = new System.Drawing.Size(15, 15);
+            this.lblStandartGSupport.TabIndex = 63;
+            this.lblStandartGSupport.Text = "G";
+            this.lblStandartGSupport.Click += new System.EventHandler(this.lblStandartGSupport_Click);
+            this.lblStandartGSupport.DoubleClick += new System.EventHandler(this.lblStandartGSupport_DoubleClick);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(92, 40);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(38, 13);
+            this.label14.TabIndex = 81;
+            this.label14.Text = "Speed";
+            // 
+            // lblStandartNSupport
+            // 
+            this.lblStandartNSupport.BackColor = System.Drawing.Color.White;
+            this.lblStandartNSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStandartNSupport.Location = new System.Drawing.Point(19, 36);
+            this.lblStandartNSupport.Name = "lblStandartNSupport";
+            this.lblStandartNSupport.Size = new System.Drawing.Size(15, 15);
+            this.lblStandartNSupport.TabIndex = 64;
+            this.lblStandartNSupport.Text = "N";
+            this.lblStandartNSupport.Click += new System.EventHandler(this.lblStandartNSupport_Click);
+            this.lblStandartNSupport.DoubleClick += new System.EventHandler(this.lblStandartNSupport_DoubleClick);
+            // 
+            // lblSpeed
+            // 
+            this.lblSpeed.AutoSize = true;
+            this.lblSpeed.Location = new System.Drawing.Point(151, 40);
+            this.lblSpeed.Name = "lblSpeed";
+            this.lblSpeed.Size = new System.Drawing.Size(38, 13);
+            this.lblSpeed.TabIndex = 65;
+            this.lblSpeed.Text = "Speed";
+            this.lblSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblBandwith
+            // 
+            this.lblBandwith.BackColor = System.Drawing.Color.White;
+            this.lblBandwith.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblBandwith.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblBandwith.ForeColor = System.Drawing.Color.Teal;
+            this.lblBandwith.Location = new System.Drawing.Point(20, 19);
+            this.lblBandwith.Name = "lblBandwith";
+            this.lblBandwith.Size = new System.Drawing.Size(50, 15);
+            this.lblBandwith.TabIndex = 67;
+            this.lblBandwith.Text = "BANDWITH";
+            this.lblBandwith.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label18.Location = new System.Drawing.Point(78, 6);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(83, 13);
+            this.label18.TabIndex = 68;
+            this.label18.Text = "STA Standart";
+            // 
+            // lblStandart
+            // 
+            this.lblStandart.BackColor = System.Drawing.Color.White;
+            this.lblStandart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStandart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblStandart.ForeColor = System.Drawing.Color.Teal;
+            this.lblStandart.Location = new System.Drawing.Point(95, 19);
+            this.lblStandart.Name = "lblStandart";
+            this.lblStandart.Size = new System.Drawing.Size(50, 15);
+            this.lblStandart.TabIndex = 69;
+            this.lblStandart.Text = "STAN80211";
+            this.lblStandart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label20
+            // 
+            this.label20.BackColor = System.Drawing.Color.White;
+            this.label20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label20.ForeColor = System.Drawing.Color.Teal;
+            this.label20.Location = new System.Drawing.Point(203, 18);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(50, 18);
+            this.label20.TabIndex = 73;
+            this.label20.Text = "40MHz";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblCoordinates
+            // 
+            this.lblCoordinates.AutoSize = true;
+            this.lblCoordinates.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblCoordinates.Location = new System.Drawing.Point(102, -4);
+            this.lblCoordinates.Name = "lblCoordinates";
+            this.lblCoordinates.Size = new System.Drawing.Size(79, 16);
+            this.lblCoordinates.TabIndex = 4;
+            this.lblCoordinates.Text = "X:___ Y:___";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.listView1);
+            this.tabPage4.Controls.Add(this.cmdUpdateStatisticTable);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(657, 286);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Statistic";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(3, 3);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(625, 305);
+            this.listView1.TabIndex = 2;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // cmdUpdateStatisticTable
+            // 
+            this.cmdUpdateStatisticTable.Location = new System.Drawing.Point(8, 6);
+            this.cmdUpdateStatisticTable.Name = "cmdUpdateStatisticTable";
+            this.cmdUpdateStatisticTable.Size = new System.Drawing.Size(87, 23);
+            this.cmdUpdateStatisticTable.TabIndex = 1;
+            this.cmdUpdateStatisticTable.Text = "Update";
+            this.cmdUpdateStatisticTable.UseVisualStyleBackColor = true;
+            this.cmdUpdateStatisticTable.Click += new System.EventHandler(this.cmdUpdateStatisticTable_Click);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(657, 286);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Error Log";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtErrorsLogFromCode);
+            this.groupBox3.Controls.Add(this.cmdSaveLogs);
+            this.groupBox3.Controls.Add(this.cmdLogsUpdate);
+            this.groupBox3.Controls.Add(this.cmdLogsClear);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(651, 280);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Logs";
+            // 
+            // txtErrorsLogFromCode
+            // 
+            this.txtErrorsLogFromCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.txtErrorsLogFromCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtErrorsLogFromCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtErrorsLogFromCode.Location = new System.Drawing.Point(3, 25);
+            this.txtErrorsLogFromCode.Multiline = true;
+            this.txtErrorsLogFromCode.Name = "txtErrorsLogFromCode";
+            this.txtErrorsLogFromCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtErrorsLogFromCode.Size = new System.Drawing.Size(645, 252);
+            this.txtErrorsLogFromCode.TabIndex = 0;
+            // 
+            // cmdSaveLogs
+            // 
+            this.cmdSaveLogs.Enabled = false;
+            this.cmdSaveLogs.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdSaveLogs.Location = new System.Drawing.Point(192, 1);
+            this.cmdSaveLogs.Name = "cmdSaveLogs";
+            this.cmdSaveLogs.Size = new System.Drawing.Size(62, 18);
+            this.cmdSaveLogs.TabIndex = 3;
+            this.cmdSaveLogs.Text = "Save";
+            this.cmdSaveLogs.UseVisualStyleBackColor = true;
+            // 
+            // cmdLogsUpdate
+            // 
+            this.cmdLogsUpdate.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdLogsUpdate.Location = new System.Drawing.Point(58, 1);
+            this.cmdLogsUpdate.Name = "cmdLogsUpdate";
+            this.cmdLogsUpdate.Size = new System.Drawing.Size(62, 18);
+            this.cmdLogsUpdate.TabIndex = 1;
+            this.cmdLogsUpdate.Text = "Update";
+            this.cmdLogsUpdate.UseVisualStyleBackColor = true;
+            this.cmdLogsUpdate.Click += new System.EventHandler(this.cmdLogsUpdate_Click);
+            // 
+            // cmdLogsClear
+            // 
+            this.cmdLogsClear.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmdLogsClear.Location = new System.Drawing.Point(126, 1);
+            this.cmdLogsClear.Name = "cmdLogsClear";
+            this.cmdLogsClear.Size = new System.Drawing.Size(62, 18);
+            this.cmdLogsClear.TabIndex = 2;
+            this.cmdLogsClear.Text = "Clear";
+            this.cmdLogsClear.UseVisualStyleBackColor = true;
+            this.cmdLogsClear.Click += new System.EventHandler(this.cmdLogsClear_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(657, 286);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Object Dump";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 312);
+            this.ClientSize = new System.Drawing.Size(665, 297);
             this.Controls.Add(this.tabControl1);
             this.Name = "StationInfo";
             this.Text = "StationInfo";
@@ -1244,11 +1213,6 @@
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -1260,6 +1224,11 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1286,10 +1255,7 @@
         private System.Windows.Forms.Button cmdSendData;
         private System.Windows.Forms.TextBox txtDestination;
         private System.Windows.Forms.TextBox txtMAC;
-        private System.Windows.Forms.Label txtDataReceeived;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblSent;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblTxRx;
         private System.Windows.Forms.Button cmdReset;
         private System.Windows.Forms.Label lblAckReceived;
         private System.Windows.Forms.Label label4;
@@ -1316,8 +1282,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblTDLSSetupStatus;
         private System.Windows.Forms.ComboBox cmbAssociatedDevicesInBSS;
-        private System.Windows.Forms.Button btnGetDevicesInBSS;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lblLastTransmitRate;
         private System.Windows.Forms.Label label10;
@@ -1361,5 +1325,7 @@
         private System.Windows.Forms.Label lblNowBSS;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label3;
     }
 }
