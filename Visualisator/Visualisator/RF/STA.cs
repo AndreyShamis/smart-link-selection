@@ -658,7 +658,11 @@ namespace Visualisator
                     if (!AccessPoint.Contains(receivedSSID))
                         AccessPoint.Add(receivedSSID);
                 }
-                _channels[receivedChannel - 1] = Math.Max(-100, receivedRssi);
+
+                //  TODO Here is only 2.4 support
+                if (receivedChannel < max_channel)
+                    _channels[receivedChannel - 1] = Math.Max(-100, receivedRssi);
+
                 AccessPoint.Increase(receivedSSID);
             }
             catch (Exception ex) { AddToLog("BeaconRoutine: " + ex.Message); }
@@ -871,8 +875,7 @@ namespace Visualisator
             short TxRateOnSend;
             TDLSCounterUnSuccessTx = 0;
             long TransferedByte = 0;
-            FileStream fsSource = new FileStream(FilePachToSend,
-                    FileMode.Open, FileAccess.Read);
+            FileStream fsSource = new FileStream(FilePachToSend, FileMode.Open, FileAccess.Read);
             Statistic stat = new Statistic();
             StatisticOfSendData.Add(stat);
             stat.DesctinationMAC = DestinationMacAddress;
@@ -890,9 +893,6 @@ namespace Visualisator
 
             tdlsStarterThread.Name = "TDLS StarterThread:" + this.getMACAddress();
             tdlsStarterThread.Start();
-
-
-            
 
             try
             {

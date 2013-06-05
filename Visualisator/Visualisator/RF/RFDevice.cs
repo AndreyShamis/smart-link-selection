@@ -423,6 +423,7 @@ namespace Visualisator
             };
             return (pack);
         }
+
         //=====================================================================
         public void setOperateChannel(short NewChannel)
         {
