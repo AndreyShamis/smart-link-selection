@@ -426,6 +426,7 @@ namespace Visualisator
         //=====================================================================
         public void setOperateChannel(short NewChannel)
         {
+            
             _OperateChannel = NewChannel;
             if (NewChannel > 0 && NewChannel < 15)
             {

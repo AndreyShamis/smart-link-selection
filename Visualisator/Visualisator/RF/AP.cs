@@ -52,10 +52,8 @@ namespace Visualisator
         {
 
             BandWithSupport.Add(Bandwidth._20MHz);
-            BandWithSupport.Add(Bandwidth._40Mhz);
 
             StandartSupport.Add(Standart80211._11n);
-            StandartSupport.Add(Standart80211._11a);
 
             FrequencySupport.Add(Frequency._2400GHz);
             FrequencySupport.Add(Frequency._5200GHz);

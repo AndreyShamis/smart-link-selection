@@ -130,10 +130,20 @@ namespace Visualisator
         /// <param name="e"></param>
         private void cmdSetChannel_Click(object sender, EventArgs e)
         {
-            try{
-                _ap.setOperateChannel((short)Convert.ToInt32(cmbWorkChannel.SelectedItem.ToString()));  
+
+            if (_ap.ConnectedDevicesCount() > 0)
+            {
+                MessageBox.Show("You cannot set channel while you associated devices!");
             }
-            catch(Exception){}
+            else
+            {
+                try
+                {
+                    _ap.setOperateChannel((short)Convert.ToInt32(cmbWorkChannel.SelectedItem.ToString()));
+                }
+                catch (Exception) { }             
+            }
+
             
         }
 

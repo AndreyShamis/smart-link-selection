@@ -89,19 +89,20 @@
             this.txtConsole.Enabled = false;
             this.txtConsole.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtConsole.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.txtConsole.Location = new System.Drawing.Point(4, 81);
+            this.txtConsole.Location = new System.Drawing.Point(4, 69);
             this.txtConsole.Multiline = true;
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtConsole.Size = new System.Drawing.Size(253, 63);
+            this.txtConsole.Size = new System.Drawing.Size(253, 75);
             this.txtConsole.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 65);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(5, 57);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.Size = new System.Drawing.Size(39, 12);
             this.label1.TabIndex = 4;
             this.label1.Text = "Console";
             // 
@@ -574,7 +575,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox1.Location = new System.Drawing.Point(696, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(262, 375);
+            this.groupBox1.Size = new System.Drawing.Size(262, 378);
             this.groupBox1.TabIndex = 36;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Medium Controll";
@@ -659,7 +660,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 375);
+            this.ClientSize = new System.Drawing.Size(958, 378);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.btnStopMedium);
             this.Controls.Add(this.groupBox1);

@@ -260,7 +260,7 @@
             this.listStations.FormattingEnabled = true;
             this.listStations.Location = new System.Drawing.Point(373, 0);
             this.listStations.Name = "listStations";
-            this.listStations.Size = new System.Drawing.Size(207, 225);
+            this.listStations.Size = new System.Drawing.Size(207, 199);
             this.listStations.TabIndex = 16;
             this.listStations.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listStations_MouseClick);
             this.listStations.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listStations_MouseDoubleClick);
@@ -306,7 +306,7 @@
             // cmbWorkChannel
             // 
             this.cmbWorkChannel.FormattingEnabled = true;
-            this.cmbWorkChannel.Location = new System.Drawing.Point(373, 290);
+            this.cmbWorkChannel.Location = new System.Drawing.Point(131, 173);
             this.cmbWorkChannel.Name = "cmbWorkChannel";
             this.cmbWorkChannel.Size = new System.Drawing.Size(84, 21);
             this.cmbWorkChannel.TabIndex = 21;
@@ -314,7 +314,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(370, 274);
+            this.label6.Location = new System.Drawing.Point(128, 157);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 13);
             this.label6.TabIndex = 22;
@@ -322,7 +322,7 @@
             // 
             // cmdSetChannel
             // 
-            this.cmdSetChannel.Location = new System.Drawing.Point(463, 292);
+            this.cmdSetChannel.Location = new System.Drawing.Point(221, 175);
             this.cmdSetChannel.Name = "cmdSetChannel";
             this.cmdSetChannel.Size = new System.Drawing.Size(46, 19);
             this.cmdSetChannel.TabIndex = 23;
@@ -333,7 +333,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(373, 253);
+            this.button1.Location = new System.Drawing.Point(6, 172);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(52, 18);
             this.button1.TabIndex = 26;
@@ -344,7 +344,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(370, 237);
+            this.label12.Location = new System.Drawing.Point(3, 156);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(73, 13);
             this.label12.TabIndex = 25;
@@ -353,7 +353,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(431, 253);
+            this.button2.Location = new System.Drawing.Point(64, 172);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(52, 18);
             this.button2.TabIndex = 27;
@@ -424,7 +424,7 @@
             // 
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.button3.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(272, 207);
+            this.button3.Location = new System.Drawing.Point(280, 105);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(18, 18);
             this.button3.TabIndex = 68;
@@ -437,7 +437,7 @@
             // 
             this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.button4.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(289, 207);
+            this.button4.Location = new System.Drawing.Point(297, 105);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(18, 18);
             this.button4.TabIndex = 69;
@@ -452,7 +452,7 @@
             this.label18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label18.ForeColor = System.Drawing.Color.Teal;
-            this.label18.Location = new System.Drawing.Point(308, 207);
+            this.label18.Location = new System.Drawing.Point(316, 105);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(50, 18);
             this.label18.TabIndex = 70;
@@ -463,7 +463,7 @@
             // 
             this.lblStandartNSupport.BackColor = System.Drawing.Color.White;
             this.lblStandartNSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStandartNSupport.Location = new System.Drawing.Point(307, 228);
+            this.lblStandartNSupport.Location = new System.Drawing.Point(315, 126);
             this.lblStandartNSupport.Name = "lblStandartNSupport";
             this.lblStandartNSupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartNSupport.TabIndex = 73;
@@ -474,7 +474,7 @@
             // 
             this.lblStandartGSupport.BackColor = System.Drawing.Color.White;
             this.lblStandartGSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStandartGSupport.Location = new System.Drawing.Point(344, 228);
+            this.lblStandartGSupport.Location = new System.Drawing.Point(352, 126);
             this.lblStandartGSupport.Name = "lblStandartGSupport";
             this.lblStandartGSupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartGSupport.TabIndex = 72;
@@ -485,7 +485,7 @@
             // 
             this.lblStandartASupport.BackColor = System.Drawing.Color.White;
             this.lblStandartASupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStandartASupport.Location = new System.Drawing.Point(326, 228);
+            this.lblStandartASupport.Location = new System.Drawing.Point(334, 126);
             this.lblStandartASupport.Name = "lblStandartASupport";
             this.lblStandartASupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartASupport.TabIndex = 71;
@@ -496,7 +496,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 319);
+            this.ClientSize = new System.Drawing.Size(581, 200);
             this.Controls.Add(this.lblStandartNSupport);
             this.Controls.Add(this.lblStandartGSupport);
             this.Controls.Add(this.lblStandartASupport);
@@ -535,6 +535,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "APInfo";
             this.Text = "APInfo";
             this.Load += new System.EventHandler(this.APInfo_Load);
