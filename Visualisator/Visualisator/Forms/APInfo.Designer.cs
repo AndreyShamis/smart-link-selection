@@ -63,13 +63,13 @@
             this.lblStandart = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.cmdShowLog = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label18 = new System.Windows.Forms.Label();
+            this.lblStandartNSupport = new System.Windows.Forms.Label();
+            this.lblStandartGSupport = new System.Windows.Forms.Label();
+            this.lblStandartASupport = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -420,36 +420,6 @@
             this.cmdShowLog.UseVisualStyleBackColor = true;
             this.cmdShowLog.Click += new System.EventHandler(this.cmdShowLog_Click);
             // 
-            // label17
-            // 
-            this.label17.BackColor = System.Drawing.Color.White;
-            this.label17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label17.Location = new System.Drawing.Point(343, 171);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(15, 15);
-            this.label17.TabIndex = 67;
-            this.label17.Text = "N";
-            // 
-            // label16
-            // 
-            this.label16.BackColor = System.Drawing.Color.White;
-            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label16.Location = new System.Drawing.Point(325, 171);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(15, 15);
-            this.label16.TabIndex = 66;
-            this.label16.Text = "G";
-            // 
-            // label13
-            // 
-            this.label13.BackColor = System.Drawing.Color.White;
-            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label13.Location = new System.Drawing.Point(307, 171);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(15, 15);
-            this.label13.TabIndex = 65;
-            this.label13.Text = "A";
-            // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -489,17 +459,50 @@
             this.label18.Text = "40MHz";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // lblStandartNSupport
+            // 
+            this.lblStandartNSupport.BackColor = System.Drawing.Color.White;
+            this.lblStandartNSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStandartNSupport.Location = new System.Drawing.Point(307, 228);
+            this.lblStandartNSupport.Name = "lblStandartNSupport";
+            this.lblStandartNSupport.Size = new System.Drawing.Size(15, 15);
+            this.lblStandartNSupport.TabIndex = 73;
+            this.lblStandartNSupport.Text = "N";
+            this.lblStandartNSupport.DoubleClick += new System.EventHandler(this.lblStandartNSupport_DoubleClick);
+            // 
+            // lblStandartGSupport
+            // 
+            this.lblStandartGSupport.BackColor = System.Drawing.Color.White;
+            this.lblStandartGSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStandartGSupport.Location = new System.Drawing.Point(344, 228);
+            this.lblStandartGSupport.Name = "lblStandartGSupport";
+            this.lblStandartGSupport.Size = new System.Drawing.Size(15, 15);
+            this.lblStandartGSupport.TabIndex = 72;
+            this.lblStandartGSupport.Text = "G";
+            this.lblStandartGSupport.DoubleClick += new System.EventHandler(this.lblStandartGSupport_DoubleClick);
+            // 
+            // lblStandartASupport
+            // 
+            this.lblStandartASupport.BackColor = System.Drawing.Color.White;
+            this.lblStandartASupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStandartASupport.Location = new System.Drawing.Point(326, 228);
+            this.lblStandartASupport.Name = "lblStandartASupport";
+            this.lblStandartASupport.Size = new System.Drawing.Size(15, 15);
+            this.lblStandartASupport.TabIndex = 71;
+            this.lblStandartASupport.Text = "A";
+            this.lblStandartASupport.DoubleClick += new System.EventHandler(this.lblStandartASupport_DoubleClick);
+            // 
             // APInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 319);
+            this.Controls.Add(this.lblStandartNSupport);
+            this.Controls.Add(this.lblStandartGSupport);
+            this.Controls.Add(this.lblStandartASupport);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.label17);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label13);
             this.Controls.Add(this.cmdShowLog);
             this.Controls.Add(this.lblStandart);
             this.Controls.Add(this.label15);
@@ -576,12 +579,12 @@
         private System.Windows.Forms.Label lblStandart;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button cmdShowLog;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label lblStandartNSupport;
+        private System.Windows.Forms.Label lblStandartGSupport;
+        private System.Windows.Forms.Label lblStandartASupport;
     }
 }

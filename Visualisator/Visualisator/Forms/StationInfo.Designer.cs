@@ -660,11 +660,12 @@
             // 
             this.lblStandartNSupport.BackColor = System.Drawing.Color.White;
             this.lblStandartNSupport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStandartNSupport.Location = new System.Drawing.Point(462, 234);
+            this.lblStandartNSupport.Location = new System.Drawing.Point(407, 234);
             this.lblStandartNSupport.Name = "lblStandartNSupport";
             this.lblStandartNSupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartNSupport.TabIndex = 64;
             this.lblStandartNSupport.Text = "N";
+            this.lblStandartNSupport.Click += new System.EventHandler(this.lblStandartNSupport_Click);
             this.lblStandartNSupport.DoubleClick += new System.EventHandler(this.lblStandartNSupport_DoubleClick);
             // 
             // lblStandartGSupport
@@ -676,6 +677,7 @@
             this.lblStandartGSupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartGSupport.TabIndex = 63;
             this.lblStandartGSupport.Text = "G";
+            this.lblStandartGSupport.Click += new System.EventHandler(this.lblStandartGSupport_Click);
             this.lblStandartGSupport.DoubleClick += new System.EventHandler(this.lblStandartGSupport_DoubleClick);
             // 
             // lblStandartASupport
@@ -687,6 +689,7 @@
             this.lblStandartASupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartASupport.TabIndex = 62;
             this.lblStandartASupport.Text = "A";
+            this.lblStandartASupport.Click += new System.EventHandler(this.lblStandartASupport_Click);
             this.lblStandartASupport.DoubleClick += new System.EventHandler(this.lblStandartASupport_DoubleClick);
             // 
             // cmdShowLog

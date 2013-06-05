@@ -48,6 +48,7 @@ namespace Visualisator
                 cmbWorkChannel.Items.Add(i);
 
             cmbWorkChannel.SelectedText = _ap.getOperateChannel().ToString();
+            UpdateStandartSupport();
         }
 
         /// <summary>
@@ -73,6 +74,7 @@ namespace Visualisator
             if(_ap._LOG.Length > 0){
                 cmdShowLog.Enabled = true;
             }
+            UpdateStandartSupport();
         }
 
         /// <summary>
@@ -176,6 +178,57 @@ namespace Visualisator
         private void button4_Click(object sender, EventArgs e)
         {
             _ap.DisableBandwithSupportFor40MHz();
+        }
+
+        private void SwitchStandartSupport(Standart80211 stand)
+        {
+            if (_ap.StandartSupported(stand))
+                _ap.RemoveStandartSupport(stand);
+            else
+                _ap.AddStandartSupport(stand);
+
+            UpdateStandartSupport();
+        }
+        private void EnableSupportForLable(Label lbl)
+        {
+            lbl.BackColor = Color.Chartreuse;
+        }
+
+        private void DisableSupportForLable(Label lbl)
+        {
+            lbl.BackColor = Color.White;
+        }
+        private void UpdateStandartSupport()
+        {
+            if (_ap.StandartSupport.Contains(Standart80211._11a))
+                EnableSupportForLable(lblStandartASupport);
+            else
+                DisableSupportForLable(lblStandartASupport);
+
+            if (_ap.StandartSupport.Contains(Standart80211._11n))
+                EnableSupportForLable(lblStandartNSupport);
+            else
+                DisableSupportForLable(lblStandartNSupport);
+
+            if (_ap.StandartSupport.Contains(Standart80211._11g))
+                EnableSupportForLable(lblStandartGSupport);
+            else
+                DisableSupportForLable(lblStandartGSupport);
+
+        }
+        private void lblStandartASupport_DoubleClick(object sender, EventArgs e)
+        {
+            SwitchStandartSupport(Standart80211._11a);
+        }
+
+        private void lblStandartGSupport_DoubleClick(object sender, EventArgs e)
+        {
+            SwitchStandartSupport(Standart80211._11g);
+        }
+
+        private void lblStandartNSupport_DoubleClick(object sender, EventArgs e)
+        {
+            SwitchStandartSupport(Standart80211._11n);
         }
     }
 }

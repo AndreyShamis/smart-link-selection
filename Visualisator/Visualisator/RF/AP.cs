@@ -50,6 +50,17 @@ namespace Visualisator
         /// </summary>
         public AP()
         {
+
+            BandWithSupport.Add(Bandwidth._20MHz);
+            BandWithSupport.Add(Bandwidth._40Mhz);
+
+            StandartSupport.Add(Standart80211._11n);
+            StandartSupport.Add(Standart80211._11a);
+
+            FrequencySupport.Add(Frequency._2400GHz);
+            FrequencySupport.Add(Frequency._5200GHz);
+            
+            
             DefaultColor        = Color.YellowGreen;
             this.VColor         = DefaultColor;
             this.SSID           = RandomString(8);
@@ -57,6 +68,7 @@ namespace Visualisator
             _BeaconPeriod       = rnadomBeacon.Next(AP_MIN_SEND_PERIOD, AP_MAX_SEND_PERIOD);
             APImage             = (Image)Medium.imgAPImages[new Random().Next(0, Medium.imgAPImages.Count)];
             Enable();
+
         }
 
         //=====================================================================

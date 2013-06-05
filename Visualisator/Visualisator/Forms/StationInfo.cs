@@ -606,5 +606,20 @@ namespace Visualisator
             btnDisconnect.Enabled = false;
         }
 
+        private void lblStandartNSupport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblStandartGSupport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblStandartASupport_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
