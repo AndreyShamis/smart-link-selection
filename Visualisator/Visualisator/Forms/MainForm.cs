@@ -22,6 +22,8 @@ namespace Visualisator
         private const string _KEY_MEDIUM_SLS_PERIOD = "MediumSlsPeriod";
         private const string _KEY_MEDIUM_SLS_COUNTER = "MediumSlsPacketsCounter";
         private const string _KEY_MEDIUM_TDLS_STARTER_DELAY = "MediumTdlsStarterDelay";
+        private const string _KEY_MEDIUM_RUN_PERIOD = "MediumRunPeriod";
+        private const string _KEY_SLS_ALGORITHM_USE = "SlsAlgorithmType";
         private PictureBox piB;
         private Bitmap bm;
         private Graphics gr;
@@ -44,7 +46,7 @@ namespace Visualisator
         private static Color BoardColor = Color.Black;
 
 
-
+        private bool LefatPannelStatus = true;
 
         private enum SelectedObjectType
         {
@@ -62,6 +64,8 @@ namespace Visualisator
         private void Form1_Load(object sender, EventArgs e)
         {
             piB = new PictureBox();
+            cmbAlgorithm.Items.Add(SLSAlgType.NullDataBased.ToString());
+            cmbAlgorithm.Items.Add(SLSAlgType.WindowBased.ToString());
             piB.Parent = this;
             piB.Location = new Point(10, 10);
             piB.Size = new Size(_BOARDX, _BOARDY);
@@ -104,8 +108,7 @@ namespace Visualisator
 
             if (settings.getValue(_KEY_MEDIUM_TDLS_STARTER_DELAY).Length > 0)
             {
-                Medium.TdlsStarterDelay = Convert.ToInt32(settings.getValue(_KEY_MEDIUM_TDLS_STARTER_DELAY));
-                
+                Medium.TdlsStarterDelay = Convert.ToInt32(settings.getValue(_KEY_MEDIUM_TDLS_STARTER_DELAY));  
             }
             else
             {
@@ -113,6 +116,29 @@ namespace Visualisator
                 settings.setValue(_KEY_MEDIUM_TDLS_STARTER_DELAY, Medium.TdlsStarterDelay.ToString());
             }
 
+
+
+            if (settings.getValue(_KEY_MEDIUM_RUN_PERIOD).Length > 0)
+            {
+                Medium.RunPeriod = Convert.ToInt32(settings.getValue(_KEY_MEDIUM_RUN_PERIOD));          
+            }
+            else
+            {
+                Medium.RunPeriod = 3000;
+                settings.setValue(_KEY_MEDIUM_RUN_PERIOD, Medium.RunPeriod.ToString());
+            }
+
+            if (settings.getValue(_KEY_SLS_ALGORITHM_USE).Length > 0)
+            {
+                Medium.SlsAlgorithm = (SLSAlgType)Enum.Parse(typeof(SLSAlgType), settings.getValue(_KEY_SLS_ALGORITHM_USE));
+            }
+            else
+            {
+                Medium.SlsAlgorithm = SLSAlgType.NullDataBased;
+                settings.setValue(_KEY_SLS_ALGORITHM_USE, Medium.SlsAlgorithm.ToString());
+            }
+
+            
             if (settings.getValue(_KEY_GRAFFIC_UPD_INT).Length > 0)
             {
                 txtUpdateInterval.Text = settings.getValue(_KEY_GRAFFIC_UPD_INT);
@@ -133,9 +159,10 @@ namespace Visualisator
             Medium.TDLS_TearDownAfterFails  = 3;
 
             txtSLSPeriod.Text = Medium.SLSPeriod.ToString();
-
+            cmbAlgorithm.SelectedText = Medium.SlsAlgorithm.ToString();
             txtSLSPacketsNumber.Text = Medium.SLSPacketsNumber.ToString();
             txtTdlsStarterDelay.Text = Medium.TdlsStarterDelay.ToString();
+            txtMediumRunPeriod.Text = Medium.RunPeriod.ToString();
             SetMedioRatio();
             SetBSSDelay();
             SetTDLSDelay();
@@ -568,7 +595,7 @@ namespace Visualisator
         //====================================================================================================
         private void button4_Click(object sender, EventArgs e)
         {
-            
+            LeftPannelSmall();
             //Medium.Disable();
             
             CreateRandomSimulation();
@@ -792,9 +819,9 @@ namespace Visualisator
         private void cmdCreateOneAPTwoSta_Click(object sender, EventArgs e)
         {
             ClearObjects();
-
-
-                AP _ap = new AP();
+            LeftPannelSmall();
+            
+            AP _ap = new AP();
                 _ap.setOperateChannel((short)rand.Next(1, 14));
                 _ap.SetVertex(300, 200, 0);
                 _objects.Add(_ap);
@@ -819,7 +846,7 @@ namespace Visualisator
         private void cmdAdd1APforSTA_Click(object sender, EventArgs e)
         {
             ClearObjects();
-
+            LeftPannelSmall();
 
             AP _ap = new AP();
             _ap.setOperateChannel((short)rand.Next(1, 14));
@@ -877,6 +904,59 @@ namespace Visualisator
             settings.setValue(_KEY_MEDIUM_TDLS_STARTER_DELAY, Medium.TdlsStarterDelay.ToString());
         }
 
+        private void btnShowAllOptions_Click(object sender, EventArgs e)
+        {
+            if (LefatPannelStatus)
+                LeftPannelSmall();
+            else
+                LeftPannelBig();
+
+            
+        }
+
+        private void LeftPannelSmall()
+        {
+            groupBox1.Width = 262;
+            LefatPannelStatus = false;
+        }
+
+        private void LeftPannelBig()
+        {
+            groupBox1.Width = this.Width-20;
+            LefatPannelStatus = true;
+        }
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSetMediumRunPerion_Click(object sender, EventArgs e)
+        {
+            int val = ParseIntFromTxt(txtMediumRunPeriod);
+            Medium.RunPeriod = val;
+            settings.setValue(_KEY_MEDIUM_RUN_PERIOD, Medium.RunPeriod.ToString());
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbAlgorithm_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbAlgorithm_SelectedValueChanged(object sender, EventArgs e)
+        {
+            Medium.SlsAlgorithm = (SLSAlgType)Enum.Parse(typeof(SLSAlgType),cmbAlgorithm.Text);
+            settings.setValue(_KEY_SLS_ALGORITHM_USE, Medium.SlsAlgorithm.ToString());
+        }
+
+        private void cmbAlgorithm_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
 
     //private void mnuContext(object sender, EventArgs e)
         //{

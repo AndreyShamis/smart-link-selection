@@ -58,6 +58,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lblAllReceivedPackets = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -99,6 +100,7 @@
             this.btnDisconnect = new System.Windows.Forms.Button();
             this.ConnectedToLabel = new System.Windows.Forms.Label();
             this.cmdShowLog = new System.Windows.Forms.Button();
+            this.slsWindowSize = new System.Windows.Forms.ProgressBar();
             this.label19 = new System.Windows.Forms.Label();
             this.lblStandartASupport = new System.Windows.Forms.Label();
             this.lblStandartGSupport = new System.Windows.Forms.Label();
@@ -121,6 +123,7 @@
             this.cmdLogsClear = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
+            this.slslAmountOfPackets = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -295,7 +298,7 @@
             this.button4.Size = new System.Drawing.Size(18, 18);
             this.button4.TabIndex = 72;
             this.button4.Text = "D";
-            this.toolTip1.SetToolTip(this.button4, "Disable");
+            this.toolTip1.SetToolTip(this.button4, "Disable 40MHz Support");
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
@@ -308,7 +311,7 @@
             this.button5.Size = new System.Drawing.Size(18, 18);
             this.button5.TabIndex = 71;
             this.button5.Text = "E";
-            this.toolTip1.SetToolTip(this.button5, "Enable");
+            this.toolTip1.SetToolTip(this.button5, "Enable 40MHz Support");
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -449,6 +452,16 @@
             this.label11.TabIndex = 46;
             this.label11.Text = "Rec Pack Sum";
             this.toolTip1.SetToolTip(this.label11, "Summary of all received packets");
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(4, 60);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.TabIndex = 82;
+            this.label2.Text = "SLS Window Size";
+            this.toolTip1.SetToolTip(this.label2, "SLS Window Size in Second Algorithm.Changed Dinamicly");
             // 
             // tabControl1
             // 
@@ -892,6 +905,9 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.slslAmountOfPackets);
+            this.splitContainer2.Panel2.Controls.Add(this.slsWindowSize);
+            this.splitContainer2.Panel2.Controls.Add(this.label2);
             this.splitContainer2.Panel2.Controls.Add(this.label19);
             this.splitContainer2.Panel2.Controls.Add(this.lblStandartASupport);
             this.splitContainer2.Panel2.Controls.Add(this.lblStandartGSupport);
@@ -960,6 +976,13 @@
             this.cmdShowLog.Text = "Show Log";
             this.cmdShowLog.UseVisualStyleBackColor = true;
             this.cmdShowLog.Click += new System.EventHandler(this.cmdShowLog_Click);
+            // 
+            // slsWindowSize
+            // 
+            this.slsWindowSize.Location = new System.Drawing.Point(119, 64);
+            this.slsWindowSize.Name = "slsWindowSize";
+            this.slsWindowSize.Size = new System.Drawing.Size(94, 10);
+            this.slsWindowSize.TabIndex = 83;
             // 
             // label19
             // 
@@ -1139,7 +1162,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox3.Location = new System.Drawing.Point(3, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(651, 280);
+            this.groupBox3.Size = new System.Drawing.Size(651, 265);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Logs";
@@ -1153,7 +1176,7 @@
             this.txtErrorsLogFromCode.Multiline = true;
             this.txtErrorsLogFromCode.Name = "txtErrorsLogFromCode";
             this.txtErrorsLogFromCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtErrorsLogFromCode.Size = new System.Drawing.Size(645, 252);
+            this.txtErrorsLogFromCode.Size = new System.Drawing.Size(645, 237);
             this.txtErrorsLogFromCode.TabIndex = 0;
             // 
             // cmdSaveLogs
@@ -1199,6 +1222,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // slslAmountOfPackets
+            // 
+            this.slslAmountOfPackets.AutoSize = true;
+            this.slslAmountOfPackets.Location = new System.Drawing.Point(219, 60);
+            this.slslAmountOfPackets.Name = "slslAmountOfPackets";
+            this.slslAmountOfPackets.Size = new System.Drawing.Size(25, 13);
+            this.slslAmountOfPackets.TabIndex = 84;
+            this.slslAmountOfPackets.Text = "100";
+            this.toolTip1.SetToolTip(this.slslAmountOfPackets, "SLS Window Size in Second Algorithm.Changed Dinamicly");
             // 
             // StationInfo
             // 
@@ -1329,5 +1362,8 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ProgressBar slsWindowSize;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label slslAmountOfPackets;
     }
 }
