@@ -1063,11 +1063,10 @@ namespace Visualisator
                     {
                         if (AutoStartSLS)
                         {
-
-                                if (selectedLink == SelectedLink.TDLS)
-                                    ForceTxInBss = false;
-                                else
-                                    ForceTxInBss = true;
+                            if (selectedLink == SelectedLink.TDLS)
+                                ForceTxInBss = false;
+                            else
+                                ForceTxInBss = true;
                         }
                     }
                     dataPack = new Data(CreatePacket(DestinationMacAddress));
