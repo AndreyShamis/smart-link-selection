@@ -79,6 +79,10 @@ namespace Visualisator
         /// </summary>
         public string               LastMacAddressOfTdlsDevice  { set; get; }
 
+        /// <summary>
+        /// idicate type of SLS algorithem
+        /// </summary>
+        public SLSAlgType SLSAlgorithm { get; set; }
         private bool ForceStopTdlsStarter;
         private bool TestTdlsEnable;
 
@@ -561,7 +565,7 @@ namespace Visualisator
                // _tdlsSetupR.setTransmitRate(11);
                 SendData(_tdlsSetupR);
                 TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
-                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(MAC)));
+                //ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(MAC)));
                 LastMacAddressOfTdlsDevice = MAC;
             }
             catch (Exception ex) { AddToLog("TDLS_SendSetupConfirm: " + ex.Message); }
@@ -858,8 +862,127 @@ namespace Visualisator
             catch (Exception ex) { AddToLog("rfile: " + ex.Message); }
         }
 
-
         public double speed { set; get; }
+        //=====================================================================
+
+
+
+        public long slsWinGlobalDataPacketCounter = 0;
+        public long slsWinBSSDataPacketCounter = 0;
+        public long slsWinTDLSDataPacketCounter = 0;
+        public short SLSWindowSize = 10; //procent %
+        public SelectedLink selectedLink { set; get; }
+        public SelectedLink slsWinSampleSelectedLink { set; get; }
+        const short slsWinAmountOfPacket = 100;
+        public bool slsWinsampleInProgress = true;
+        public TimeSpan sampleSpeedAverage;
+        public TimeSpan RegulareSpeedAverage;
+        public Stopwatch stoper = new Stopwatch();
+        public int winSizeToNumOfPacket;
+
+        //=====================================================================
+        /// <summary>
+        /// Function perform Window Based SLS algorithm
+        /// </summary>
+        public void WindowBasedSLSAlgorithm(bool start, bool stop)
+        {
+            if (stop)
+            {
+                try { stoper.Stop(); }
+                catch { }
+                slsWinGlobalDataPacketCounter = 0;
+                slsWinTDLSDataPacketCounter = 0;
+                slsWinBSSDataPacketCounter = 0;
+                sampleSpeedAverage = new TimeSpan();
+                RegulareSpeedAverage = new TimeSpan();
+            }
+            if (start)
+            {
+                try { stoper.Stop(); }
+                catch { }
+                sampleSpeedAverage = new TimeSpan();
+                RegulareSpeedAverage = new TimeSpan();
+                slsWinGlobalDataPacketCounter = 0;
+                slsWinTDLSDataPacketCounter = 0;
+                slsWinBSSDataPacketCounter = 0;
+                winSizeToNumOfPacket = (slsWinAmountOfPacket - ((slsWinAmountOfPacket / 100) * SLSWindowSize)); // the oposite of window
+                stoper.Start();
+            }
+            else
+            {
+                slsWinGlobalDataPacketCounter++;
+
+                if (slsWinSampleSelectedLink == SelectedLink.BSS)
+                {
+                    if (slsWinTDLSDataPacketCounter < winSizeToNumOfPacket)
+                    {
+                        slsWinTDLSDataPacketCounter++;
+                        selectedLink = SelectedLink.TDLS;
+                        try { stoper.Stop(); }
+                        catch { }
+                        RegulareSpeedAverage += stoper.Elapsed;
+                        if (slsWinTDLSDataPacketCounter >= winSizeToNumOfPacket) {selectedLink = SelectedLink.BSS;}
+                    }
+                    else
+                    {
+                        slsWinBSSDataPacketCounter++;
+                        selectedLink = SelectedLink.BSS;
+                        try { stoper.Stop(); }
+                        catch { }
+                        sampleSpeedAverage += stoper.Elapsed;
+                    }
+                }
+                else
+                {
+                    if (slsWinBSSDataPacketCounter < winSizeToNumOfPacket)
+                    {
+                        slsWinBSSDataPacketCounter++;
+                        selectedLink = SelectedLink.BSS;
+                        try { stoper.Stop(); }
+                        catch { }
+                        RegulareSpeedAverage += stoper.Elapsed;
+                        if (slsWinBSSDataPacketCounter >= winSizeToNumOfPacket) {selectedLink = SelectedLink.TDLS;}
+                    }
+                    else
+                    {
+                        slsWinTDLSDataPacketCounter++;
+                        selectedLink = SelectedLink.TDLS;
+                        try { stoper.Stop(); }
+                        catch { }
+                        sampleSpeedAverage += stoper.Elapsed;
+                    }
+                }
+                if (slsWinGlobalDataPacketCounter < slsWinAmountOfPacket) { stoper.Start(); }
+                else
+                {
+                    //stoper.Stop();
+                    if (slsWinSampleSelectedLink == SelectedLink.BSS) // if sample selected link is BSS
+                    {
+                        if (sampleSpeedAverage > RegulareSpeedAverage ) 
+                        { 
+                            slsWinSampleSelectedLink = SelectedLink.TDLS;
+                            selectedLink = SelectedLink.BSS;
+                        }
+                    }
+                    else // if sample selected link is TDLS
+                    {
+                        if (sampleSpeedAverage > RegulareSpeedAverage) 
+                        {
+                            slsWinSampleSelectedLink = SelectedLink.BSS;
+                            selectedLink = SelectedLink.TDLS;
+                        }
+                    }
+                    stoper.Start();
+                    slsWinGlobalDataPacketCounter   = 0;
+                    slsWinTDLSDataPacketCounter     = 0;
+                    slsWinBSSDataPacketCounter      = 0;
+                    sampleSpeedAverage = new TimeSpan();
+                    RegulareSpeedAverage = new TimeSpan();
+                    winSizeToNumOfPacket = (slsWinAmountOfPacket - ((slsWinAmountOfPacket / 100) * SLSWindowSize)); // the oposite of window
+                }
+            }
+        }
+
         //=====================================================================
         /// <summary>
         /// Function for send file
@@ -888,6 +1011,7 @@ namespace Visualisator
             stat.CoordinateY = this.y;
             stat.BSS_BandWith = this.BandWidth.ToString();
             stat.BSS_Standart = this.Stand80211.ToString();
+            SLSAlgorithm = SLSAlgType.WindowBased;
             
 
             //ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TdlsStarter(DestinationMacAddress)));
@@ -895,6 +1019,9 @@ namespace Visualisator
 
             tdlsStarterThread.Name = "TDLS StarterThread:" + this.getMACAddress();
             tdlsStarterThread.Start();
+
+            if (SLSAlgorithm == SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(true, false); }
+
             TestTdlsEnable = true;
             try
             {
@@ -914,7 +1041,15 @@ namespace Visualisator
                     if (string.IsNullOrEmpty(_connectedAPMacAddress))
                         return;
                     buffer = new byte[buf_size];
-                    dataPack = new Data(CreatePacket(DestinationMacAddress)); 
+                    if (SLSAlgorithm == SLSAlgType.WindowBased)
+                    {
+                        if (selectedLink == SelectedLink.TDLS)
+                            dataPack = new Data(CreatePacket(DestinationMacAddress,false)); 
+                        else
+                            dataPack = new Data(CreatePacket(DestinationMacAddress,true)); 
+                    }
+                    else
+                        dataPack = new Data(CreatePacket(DestinationMacAddress));
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
@@ -960,6 +1095,7 @@ namespace Visualisator
                     bool ThePacketWasRetransmited = false;
                     while (!_ackReceived)
                     {
+
                         retrCounter --;
                         Thread.Sleep(1);
                         if (retrCounter < 0)
@@ -998,6 +1134,7 @@ namespace Visualisator
                         }
 
                     }
+                    if (SLSAlgorithm == SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(false, false); }
 
                     if (!ThePacketWasRetransmited){
                         SuccessContinuous++;
@@ -1014,6 +1151,9 @@ namespace Visualisator
                     WaitingForAck = false;
                     _statisticRetransmitTime = loops * 60 - retrCounter;
                 }
+
+                if (SLSAlgorithm == SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(false, true); }
+
                 this.Passive = true;
                 sw.Stop();
                 TimeSpan elapsedTime = sw.Elapsed;
@@ -1426,5 +1566,7 @@ namespace Visualisator
             this.setOperateChannel(0);
             TDLSSetupInfo = TDLSSetupStatus.TDLSSetupDisabled;
         }
+
+        
     }
 }

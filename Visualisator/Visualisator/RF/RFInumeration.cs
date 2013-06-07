@@ -57,4 +57,17 @@ namespace Visualisator
         LP,
         SP,
     };
+    [Serializable()]
+    internal enum SLSAlgType
+    {
+        WindowBased,
+        NullDataBased,
+    };
+    [Serializable()]
+    internal enum SelectedLink
+    {
+        TDLS,
+        BSS,
+    };
+
 }
