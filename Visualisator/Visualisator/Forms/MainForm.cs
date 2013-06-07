@@ -25,6 +25,7 @@ namespace Visualisator
         private const string _KEY_MEDIUM_RUN_PERIOD = "MediumRunPeriod";
         private const string _KEY_SLS_ALGORITHM_USE = "SlsAlgorithmType";
         private const string _KEY_SLS_AMOUNT_OF_WINDOW_SIZE = "SlsAmountOfWindowSize";
+        private const string _KEY_MEDIUM_BUFFER_SIZE = "DataBufferSize";
         private PictureBox piB;
         private Bitmap bm;
         private Graphics gr;
@@ -129,6 +130,17 @@ namespace Visualisator
                 settings.setValue(_KEY_MEDIUM_RUN_PERIOD, Medium.RunPeriod.ToString());
             }
 
+            if (settings.getValue(_KEY_MEDIUM_BUFFER_SIZE).Length > 0)
+            {
+                Medium.PACKET_BUFFER_SIZE = Convert.ToInt32(settings.getValue(_KEY_MEDIUM_BUFFER_SIZE));          
+            }
+            else
+            {
+                Medium.PACKET_BUFFER_SIZE = 100000;
+                settings.setValue(_KEY_MEDIUM_BUFFER_SIZE, Medium.PACKET_BUFFER_SIZE.ToString());
+            }
+            
+
             if (settings.getValue(_KEY_SLS_ALGORITHM_USE).Length > 0)
             {
                 Medium.SlsAlgorithm = (SLSAlgType)Enum.Parse(typeof(SLSAlgType), settings.getValue(_KEY_SLS_ALGORITHM_USE));
@@ -175,6 +187,7 @@ namespace Visualisator
             txtTdlsStarterDelay.Text = Medium.TdlsStarterDelay.ToString();
             txtMediumRunPeriod.Text = Medium.RunPeriod.ToString();
             txtAmountWindowSize.Text = Medium.SlsAmountOfWondowSize.ToString();
+            txtDataBufferSize.Text = Medium.PACKET_BUFFER_SIZE.ToString();
             SetMedioRatio();
             SetBSSDelay();
             SetTDLSDelay();
@@ -980,6 +993,13 @@ namespace Visualisator
             int val = ParseIntFromTxt(txtAmountWindowSize);
             Medium.SlsAmountOfWondowSize = val;
             settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.SlsAmountOfWondowSize.ToString());
+        }
+
+        private void btnSetDataBufferSize_Click(object sender, EventArgs e)
+        {
+            int val = ParseIntFromTxt(txtDataBufferSize);
+            Medium.PACKET_BUFFER_SIZE = val;
+            settings.setValue(_KEY_MEDIUM_BUFFER_SIZE, Medium.PACKET_BUFFER_SIZE.ToString());
         }
 
     //private void mnuContext(object sender, EventArgs e)

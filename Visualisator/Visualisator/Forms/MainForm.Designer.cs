@@ -92,6 +92,9 @@
             this.cmbAlgorithm = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.btnShowAllOptions = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtDataBufferSize = new System.Windows.Forms.TextBox();
+            this.btnSetDataBufferSize = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -364,8 +367,8 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.ForeColor = System.Drawing.Color.Navy;
-            this.label13.Location = new System.Drawing.Point(260, 319);
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(269, 227);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(98, 13);
             this.label13.TabIndex = 47;
@@ -374,11 +377,11 @@
             // 
             // txtMediumRunPeriod
             // 
-            this.txtMediumRunPeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtMediumRunPeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.txtMediumRunPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMediumRunPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtMediumRunPeriod.ForeColor = System.Drawing.Color.Navy;
-            this.txtMediumRunPeriod.Location = new System.Drawing.Point(395, 319);
+            this.txtMediumRunPeriod.Location = new System.Drawing.Point(395, 225);
             this.txtMediumRunPeriod.Name = "txtMediumRunPeriod";
             this.txtMediumRunPeriod.Size = new System.Drawing.Size(57, 18);
             this.txtMediumRunPeriod.TabIndex = 48;
@@ -389,7 +392,7 @@
             // btnSetMediumRunPerion
             // 
             this.btnSetMediumRunPerion.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetMediumRunPerion.Location = new System.Drawing.Point(458, 319);
+            this.btnSetMediumRunPerion.Location = new System.Drawing.Point(458, 225);
             this.btnSetMediumRunPerion.Name = "btnSetMediumRunPerion";
             this.btnSetMediumRunPerion.Size = new System.Drawing.Size(39, 18);
             this.btnSetMediumRunPerion.TabIndex = 49;
@@ -747,6 +750,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.txtDataBufferSize);
+            this.groupBox1.Controls.Add(this.btnSetDataBufferSize);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.txtAmountWindowSize);
             this.groupBox1.Controls.Add(this.btmSetAmountWindowSize);
@@ -851,6 +857,43 @@
             this.btnShowAllOptions.UseVisualStyleBackColor = false;
             this.btnShowAllOptions.Click += new System.EventHandler(this.btnShowAllOptions_Click);
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label16.Location = new System.Drawing.Point(269, 207);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(125, 13);
+            this.label16.TabIndex = 55;
+            this.label16.Text = "Data BUF size[bytes]";
+            this.toolTip1.SetToolTip(this.label16, "Buffer size in Packet data");
+            // 
+            // txtDataBufferSize
+            // 
+            this.txtDataBufferSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtDataBufferSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtDataBufferSize.ForeColor = System.Drawing.Color.Navy;
+            this.txtDataBufferSize.Location = new System.Drawing.Point(395, 205);
+            this.txtDataBufferSize.Name = "txtDataBufferSize";
+            this.txtDataBufferSize.Size = new System.Drawing.Size(57, 18);
+            this.txtDataBufferSize.TabIndex = 56;
+            this.txtDataBufferSize.Text = "500000";
+            this.txtDataBufferSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtDataBufferSize, "Buffer size in Packet data");
+            // 
+            // btnSetDataBufferSize
+            // 
+            this.btnSetDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSetDataBufferSize.Location = new System.Drawing.Point(458, 205);
+            this.btnSetDataBufferSize.Name = "btnSetDataBufferSize";
+            this.btnSetDataBufferSize.Size = new System.Drawing.Size(39, 18);
+            this.btnSetDataBufferSize.TabIndex = 57;
+            this.btnSetDataBufferSize.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnSetDataBufferSize, "Buffer size in Packet data");
+            this.btnSetDataBufferSize.UseVisualStyleBackColor = true;
+            this.btnSetDataBufferSize.Click += new System.EventHandler(this.btnSetDataBufferSize_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -937,6 +980,9 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtAmountWindowSize;
         private System.Windows.Forms.Button btmSetAmountWindowSize;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtDataBufferSize;
+        private System.Windows.Forms.Button btnSetDataBufferSize;
     }
 }
 
