@@ -79,10 +79,6 @@ namespace Visualisator
         /// </summary>
         public string               LastMacAddressOfTdlsDevice  { set; get; }
 
-        /// <summary>
-        /// idicate type of SLS algorithem
-        /// </summary>
-        public SLSAlgType SLSAlgorithm { get; set; }
         private bool ForceStopTdlsStarter;
         private bool TestTdlsEnable;
 
@@ -565,7 +561,7 @@ namespace Visualisator
                // _tdlsSetupR.setTransmitRate(11);
                 SendData(_tdlsSetupR);
                 TDLSSetupInfo = TDLSSetupStatus.TDLSSetupConfirmSended;
-                //ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(MAC)));
+                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TestTdls(MAC)));
                 LastMacAddressOfTdlsDevice = MAC;
             }
             catch (Exception ex) { AddToLog("TDLS_SendSetupConfirm: " + ex.Message); }
@@ -1032,7 +1028,6 @@ namespace Visualisator
             stat.BSS_BandWith = this.BandWidth.ToString();
             stat.BSS_Standart = this.Stand80211.ToString();
             stat.PacketsSum = (long)(stat.FileSize / Medium.PACKET_BUFFER_SIZE + (stat.FileSize % Medium.PACKET_BUFFER_SIZE > 0 ? 1 : 0));
-            SLSAlgorithm = SLSAlgType.WindowBased;
 
             CurrentStatistic = stat;
             //ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TdlsStarter(DestinationMacAddress)));
@@ -1041,7 +1036,7 @@ namespace Visualisator
             tdlsStarterThread.Name = "TDLS StarterThread:" + this.getMACAddress();
             tdlsStarterThread.Start();
 
-            if (SLSAlgorithm == SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(true, false); }
+            if ( Medium.SlsAlgorithm== SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(true, false); }
 
             TestTdlsEnable = true;
             try
@@ -1063,18 +1058,19 @@ namespace Visualisator
                     if (string.IsNullOrEmpty(_connectedAPMacAddress))
                         return;
                     buffer = new byte[buf_size];
-                    if (AutoStartSLS)
+
+                    if (Medium.SlsAlgorithm == SLSAlgType.WindowBased)
                     {
-                        if (SLSAlgorithm == SLSAlgType.WindowBased)
+                        if (AutoStartSLS)
                         {
-                            if (selectedLink == SelectedLink.TDLS)
-                                ForceTxInBss = false;
-                            else
-                                ForceTxInBss = true;
+
+                                if (selectedLink == SelectedLink.TDLS)
+                                    ForceTxInBss = false;
+                                else
+                                    ForceTxInBss = true;
                         }
                     }
-                    
-                        dataPack = new Data(CreatePacket(DestinationMacAddress));
+                    dataPack = new Data(CreatePacket(DestinationMacAddress));
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
@@ -1159,7 +1155,7 @@ namespace Visualisator
                         }
 
                     }
-                    if (SLSAlgorithm == SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(false, false); }
+                    if (Medium.SlsAlgorithm == SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(false, false); }
 
                     if (!ThePacketWasRetransmited){
                         SuccessContinuous++;
@@ -1177,7 +1173,7 @@ namespace Visualisator
                     _statisticRetransmitTime = loops * 60 - retrCounter;
                 }
 
-                if (SLSAlgorithm == SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(false, true); }
+                if (Medium.SlsAlgorithm == SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(false, true); }
 
                 this.Passive = true;
                 sw.Stop();
@@ -1464,7 +1460,7 @@ namespace Visualisator
                     if (TDLSisWork)
                     {
 
-                        while (!TestTdlsEnable)
+                        while (!TestTdlsEnable || Medium.SlsAlgorithm != SLSAlgType.NullDataBased)
                         {
                             Thread.Sleep(200);
                         }
