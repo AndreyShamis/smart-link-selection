@@ -50,6 +50,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtSLSPacketsNumber = new System.Windows.Forms.TextBox();
             this.btmSetNumberPacketsinSls = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtTdlsStarterDelay = new System.Windows.Forms.TextBox();
+            this.btnTdlsStarterSetDelay = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,9 +82,8 @@
             this.txtMediumReceiveDistance = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtTdlsStarterDelay = new System.Windows.Forms.TextBox();
-            this.btnTdlsStarterSetDelay = new System.Windows.Forms.Button();
+            this.btnShowAllOptions = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -92,18 +94,18 @@
             this.txtConsole.Enabled = false;
             this.txtConsole.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtConsole.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.txtConsole.Location = new System.Drawing.Point(4, 69);
+            this.txtConsole.Location = new System.Drawing.Point(13, 69);
             this.txtConsole.Multiline = true;
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtConsole.Size = new System.Drawing.Size(253, 75);
+            this.txtConsole.Size = new System.Drawing.Size(244, 75);
             this.txtConsole.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(5, 57);
+            this.label1.Location = new System.Drawing.Point(12, 59);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 12);
             this.label1.TabIndex = 4;
@@ -111,7 +113,7 @@
             // 
             // btnStopMedium
             // 
-            this.btnStopMedium.Location = new System.Drawing.Point(70, 14);
+            this.btnStopMedium.Location = new System.Drawing.Point(87, 94);
             this.btnStopMedium.Name = "btnStopMedium";
             this.btnStopMedium.Size = new System.Drawing.Size(62, 19);
             this.btnStopMedium.TabIndex = 5;
@@ -148,7 +150,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(4, 14);
+            this.button4.Location = new System.Drawing.Point(23, 14);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(78, 19);
             this.button4.TabIndex = 8;
@@ -159,7 +161,7 @@
             // 
             // btnShowMediumInfo
             // 
-            this.btnShowMediumInfo.Location = new System.Drawing.Point(88, 14);
+            this.btnShowMediumInfo.Location = new System.Drawing.Point(107, 14);
             this.btnShowMediumInfo.Name = "btnShowMediumInfo";
             this.btnShowMediumInfo.Size = new System.Drawing.Size(67, 44);
             this.btnShowMediumInfo.TabIndex = 9;
@@ -178,7 +180,8 @@
             // 
             this.lblUpdateIntervalDescr.AutoSize = true;
             this.lblUpdateIntervalDescr.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUpdateIntervalDescr.Location = new System.Drawing.Point(10, 193);
+            this.lblUpdateIntervalDescr.ForeColor = System.Drawing.Color.Green;
+            this.lblUpdateIntervalDescr.Location = new System.Drawing.Point(17, 219);
             this.lblUpdateIntervalDescr.Name = "lblUpdateIntervalDescr";
             this.lblUpdateIntervalDescr.Size = new System.Drawing.Size(104, 13);
             this.lblUpdateIntervalDescr.TabIndex = 10;
@@ -191,7 +194,7 @@
             this.txtUpdateInterval.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtUpdateInterval.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtUpdateInterval.ForeColor = System.Drawing.Color.Navy;
-            this.txtUpdateInterval.Location = new System.Drawing.Point(152, 193);
+            this.txtUpdateInterval.Location = new System.Drawing.Point(152, 220);
             this.txtUpdateInterval.Name = "txtUpdateInterval";
             this.txtUpdateInterval.Size = new System.Drawing.Size(57, 18);
             this.txtUpdateInterval.TabIndex = 11;
@@ -202,7 +205,7 @@
             // btnSetUpdateInterval
             // 
             this.btnSetUpdateInterval.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetUpdateInterval.Location = new System.Drawing.Point(215, 193);
+            this.btnSetUpdateInterval.Location = new System.Drawing.Point(215, 220);
             this.btnSetUpdateInterval.Name = "btnSetUpdateInterval";
             this.btnSetUpdateInterval.Size = new System.Drawing.Size(39, 18);
             this.btnSetUpdateInterval.TabIndex = 12;
@@ -214,7 +217,7 @@
             // cmdCreateOneAPTwoSta
             // 
             this.cmdCreateOneAPTwoSta.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdCreateOneAPTwoSta.Location = new System.Drawing.Point(4, 39);
+            this.cmdCreateOneAPTwoSta.Location = new System.Drawing.Point(23, 39);
             this.cmdCreateOneAPTwoSta.Name = "cmdCreateOneAPTwoSta";
             this.cmdCreateOneAPTwoSta.Size = new System.Drawing.Size(36, 19);
             this.cmdCreateOneAPTwoSta.TabIndex = 34;
@@ -226,7 +229,7 @@
             // cmdAdd1APforSTA
             // 
             this.cmdAdd1APforSTA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmdAdd1APforSTA.Location = new System.Drawing.Point(46, 39);
+            this.cmdAdd1APforSTA.Location = new System.Drawing.Point(65, 39);
             this.cmdAdd1APforSTA.Name = "cmdAdd1APforSTA";
             this.cmdAdd1APforSTA.Size = new System.Drawing.Size(36, 19);
             this.cmdAdd1APforSTA.TabIndex = 35;
@@ -240,7 +243,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label9.ForeColor = System.Drawing.Color.Navy;
-            this.label9.Location = new System.Drawing.Point(10, 147);
+            this.label9.Location = new System.Drawing.Point(17, 146);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(57, 13);
             this.label9.TabIndex = 36;
@@ -278,7 +281,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label10.ForeColor = System.Drawing.Color.Navy;
-            this.label10.Location = new System.Drawing.Point(10, 169);
+            this.label10.Location = new System.Drawing.Point(17, 168);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(104, 13);
             this.label10.TabIndex = 39;
@@ -310,6 +313,44 @@
             this.toolTip1.SetToolTip(this.btmSetNumberPacketsinSls, "Number of Packets that will be sendet on each iteration on simple link");
             this.btmSetNumberPacketsinSls.UseVisualStyleBackColor = true;
             this.btmSetNumberPacketsinSls.Click += new System.EventHandler(this.btmSetNumberPacketsinSls_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.ForeColor = System.Drawing.Color.Navy;
+            this.label11.Location = new System.Drawing.Point(17, 191);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(129, 13);
+            this.label11.TabIndex = 42;
+            this.label11.Text = "Try Start TDLS every(ms)";
+            this.toolTip1.SetToolTip(this.label11, "Try Start TDLS every(ms)");
+            // 
+            // txtTdlsStarterDelay
+            // 
+            this.txtTdlsStarterDelay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtTdlsStarterDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTdlsStarterDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtTdlsStarterDelay.ForeColor = System.Drawing.Color.Navy;
+            this.txtTdlsStarterDelay.Location = new System.Drawing.Point(152, 191);
+            this.txtTdlsStarterDelay.Name = "txtTdlsStarterDelay";
+            this.txtTdlsStarterDelay.Size = new System.Drawing.Size(57, 18);
+            this.txtTdlsStarterDelay.TabIndex = 43;
+            this.txtTdlsStarterDelay.Text = "5000";
+            this.txtTdlsStarterDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtTdlsStarterDelay, "Try Start TDLS every(ms)");
+            // 
+            // btnTdlsStarterSetDelay
+            // 
+            this.btnTdlsStarterSetDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnTdlsStarterSetDelay.Location = new System.Drawing.Point(215, 191);
+            this.btnTdlsStarterSetDelay.Name = "btnTdlsStarterSetDelay";
+            this.btnTdlsStarterSetDelay.Size = new System.Drawing.Size(39, 18);
+            this.btnTdlsStarterSetDelay.TabIndex = 44;
+            this.btnTdlsStarterSetDelay.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnTdlsStarterSetDelay, "Try Start TDLS every(ms)");
+            this.btnTdlsStarterSetDelay.UseVisualStyleBackColor = true;
+            this.btnTdlsStarterSetDelay.Click += new System.EventHandler(this.btnTdlsStarterSetDelay_Click);
             // 
             // contextMenuStrip1
             // 
@@ -374,7 +415,7 @@
             // btnSetMediumSendRatio
             // 
             this.btnSetMediumSendRatio.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetMediumSendRatio.Location = new System.Drawing.Point(215, 211);
+            this.btnSetMediumSendRatio.Location = new System.Drawing.Point(215, 238);
             this.btnSetMediumSendRatio.Name = "btnSetMediumSendRatio";
             this.btnSetMediumSendRatio.Size = new System.Drawing.Size(39, 18);
             this.btnSetMediumSendRatio.TabIndex = 15;
@@ -388,7 +429,7 @@
             this.txtMediumSendRatio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMediumSendRatio.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtMediumSendRatio.ForeColor = System.Drawing.Color.Navy;
-            this.txtMediumSendRatio.Location = new System.Drawing.Point(152, 211);
+            this.txtMediumSendRatio.Location = new System.Drawing.Point(152, 238);
             this.txtMediumSendRatio.Name = "txtMediumSendRatio";
             this.txtMediumSendRatio.Size = new System.Drawing.Size(57, 18);
             this.txtMediumSendRatio.TabIndex = 14;
@@ -399,7 +440,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(10, 211);
+            this.label2.Location = new System.Drawing.Point(17, 237);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 13;
@@ -408,7 +449,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(214, 269);
+            this.button1.Location = new System.Drawing.Point(214, 274);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(40, 18);
             this.button1.TabIndex = 21;
@@ -422,7 +463,7 @@
             this.txtTDLSSendDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTDLSSendDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtTDLSSendDelay.ForeColor = System.Drawing.Color.Navy;
-            this.txtTDLSSendDelay.Location = new System.Drawing.Point(152, 269);
+            this.txtTDLSSendDelay.Location = new System.Drawing.Point(152, 274);
             this.txtTDLSSendDelay.Name = "txtTDLSSendDelay";
             this.txtTDLSSendDelay.Size = new System.Drawing.Size(57, 18);
             this.txtTDLSSendDelay.TabIndex = 20;
@@ -433,7 +474,8 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(21, 269);
+            this.label3.ForeColor = System.Drawing.Color.Olive;
+            this.label3.Location = new System.Drawing.Point(21, 274);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 19;
@@ -442,7 +484,7 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(215, 227);
+            this.button5.Location = new System.Drawing.Point(215, 254);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(39, 20);
             this.button5.TabIndex = 18;
@@ -456,7 +498,7 @@
             this.txtBSSSendDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBSSSendDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtBSSSendDelay.ForeColor = System.Drawing.Color.Navy;
-            this.txtBSSSendDelay.Location = new System.Drawing.Point(152, 229);
+            this.txtBSSSendDelay.Location = new System.Drawing.Point(152, 256);
             this.txtBSSSendDelay.Name = "txtBSSSendDelay";
             this.txtBSSSendDelay.Size = new System.Drawing.Size(57, 18);
             this.txtBSSSendDelay.TabIndex = 17;
@@ -467,7 +509,8 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(21, 232);
+            this.label4.ForeColor = System.Drawing.Color.Olive;
+            this.label4.Location = new System.Drawing.Point(21, 259);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 13);
             this.label4.TabIndex = 16;
@@ -477,7 +520,8 @@
             // 
             this.button6.Enabled = false;
             this.button6.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button6.Location = new System.Drawing.Point(214, 288);
+            this.button6.ForeColor = System.Drawing.Color.Gray;
+            this.button6.Location = new System.Drawing.Point(454, 274);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(40, 18);
             this.button6.TabIndex = 27;
@@ -490,8 +534,8 @@
             this.txtTDLSSendDelayWait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTDLSSendDelayWait.Enabled = false;
             this.txtTDLSSendDelayWait.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtTDLSSendDelayWait.ForeColor = System.Drawing.Color.Navy;
-            this.txtTDLSSendDelayWait.Location = new System.Drawing.Point(152, 290);
+            this.txtTDLSSendDelayWait.ForeColor = System.Drawing.Color.Gray;
+            this.txtTDLSSendDelayWait.Location = new System.Drawing.Point(391, 274);
             this.txtTDLSSendDelayWait.Name = "txtTDLSSendDelayWait";
             this.txtTDLSSendDelayWait.Size = new System.Drawing.Size(57, 18);
             this.txtTDLSSendDelayWait.TabIndex = 26;
@@ -502,7 +546,8 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(21, 290);
+            this.label5.ForeColor = System.Drawing.Color.Gray;
+            this.label5.Location = new System.Drawing.Point(260, 274);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(113, 13);
             this.label5.TabIndex = 25;
@@ -512,9 +557,10 @@
             // 
             this.button7.Enabled = false;
             this.button7.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button7.Location = new System.Drawing.Point(215, 249);
+            this.button7.ForeColor = System.Drawing.Color.Gray;
+            this.button7.Location = new System.Drawing.Point(454, 257);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(39, 18);
+            this.button7.Size = new System.Drawing.Size(40, 18);
             this.button7.TabIndex = 24;
             this.button7.Text = "Set";
             this.button7.UseVisualStyleBackColor = true;
@@ -525,8 +571,8 @@
             this.txtBSSSendDelayWait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBSSSendDelayWait.Enabled = false;
             this.txtBSSSendDelayWait.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBSSSendDelayWait.ForeColor = System.Drawing.Color.Navy;
-            this.txtBSSSendDelayWait.Location = new System.Drawing.Point(152, 249);
+            this.txtBSSSendDelayWait.ForeColor = System.Drawing.Color.Gray;
+            this.txtBSSSendDelayWait.Location = new System.Drawing.Point(391, 259);
             this.txtBSSSendDelayWait.Name = "txtBSSSendDelayWait";
             this.txtBSSSendDelayWait.Size = new System.Drawing.Size(57, 18);
             this.txtBSSSendDelayWait.TabIndex = 23;
@@ -537,7 +583,8 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(21, 249);
+            this.label6.ForeColor = System.Drawing.Color.Gray;
+            this.label6.Location = new System.Drawing.Point(260, 259);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 13);
             this.label6.TabIndex = 22;
@@ -546,7 +593,7 @@
             // btnUpdateMediumListenDist
             // 
             this.btnUpdateMediumListenDist.Font = new System.Drawing.Font("Tahoma", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnUpdateMediumListenDist.Location = new System.Drawing.Point(214, 355);
+            this.btnUpdateMediumListenDist.Location = new System.Drawing.Point(218, 337);
             this.btnUpdateMediumListenDist.Name = "btnUpdateMediumListenDist";
             this.btnUpdateMediumListenDist.Size = new System.Drawing.Size(30, 19);
             this.btnUpdateMediumListenDist.TabIndex = 33;
@@ -560,7 +607,7 @@
             this.txtMediumListenDistance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMediumListenDistance.Font = new System.Drawing.Font("Tahoma", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtMediumListenDistance.ForeColor = System.Drawing.Color.Navy;
-            this.txtMediumListenDistance.Location = new System.Drawing.Point(151, 357);
+            this.txtMediumListenDistance.Location = new System.Drawing.Point(155, 339);
             this.txtMediumListenDistance.Name = "txtMediumListenDistance";
             this.txtMediumListenDistance.Size = new System.Drawing.Size(57, 17);
             this.txtMediumListenDistance.TabIndex = 32;
@@ -571,7 +618,8 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(17, 357);
+            this.label7.ForeColor = System.Drawing.Color.Teal;
+            this.label7.Location = new System.Drawing.Point(21, 339);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(118, 13);
             this.label7.TabIndex = 31;
@@ -580,7 +628,7 @@
             // btnUpdateMediumRecDist
             // 
             this.btnUpdateMediumRecDist.Font = new System.Drawing.Font("Tahoma", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnUpdateMediumRecDist.Location = new System.Drawing.Point(214, 337);
+            this.btnUpdateMediumRecDist.Location = new System.Drawing.Point(218, 319);
             this.btnUpdateMediumRecDist.Name = "btnUpdateMediumRecDist";
             this.btnUpdateMediumRecDist.Size = new System.Drawing.Size(30, 19);
             this.btnUpdateMediumRecDist.TabIndex = 30;
@@ -594,7 +642,7 @@
             this.txtMediumReceiveDistance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMediumReceiveDistance.Font = new System.Drawing.Font("Tahoma", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtMediumReceiveDistance.ForeColor = System.Drawing.Color.Navy;
-            this.txtMediumReceiveDistance.Location = new System.Drawing.Point(151, 339);
+            this.txtMediumReceiveDistance.Location = new System.Drawing.Point(155, 321);
             this.txtMediumReceiveDistance.Name = "txtMediumReceiveDistance";
             this.txtMediumReceiveDistance.Size = new System.Drawing.Size(57, 17);
             this.txtMediumReceiveDistance.TabIndex = 29;
@@ -605,7 +653,8 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(17, 341);
+            this.label8.ForeColor = System.Drawing.Color.Teal;
+            this.label8.Location = new System.Drawing.Point(21, 323);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(128, 13);
             this.label8.TabIndex = 28;
@@ -613,6 +662,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.btnShowAllOptions);
+            this.groupBox1.Controls.Add(this.btnStopMedium);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.txtTdlsStarterDelay);
             this.groupBox1.Controls.Add(this.btnTdlsStarterSetDelay);
@@ -655,50 +707,34 @@
             this.groupBox1.Controls.Add(this.txtBSSSendDelay);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox1.Location = new System.Drawing.Point(696, 0);
+            this.groupBox1.Location = new System.Drawing.Point(1, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(262, 378);
+            this.groupBox1.Size = new System.Drawing.Size(957, 378);
             this.groupBox1.TabIndex = 36;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Medium Controll";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // label11
+            // btnShowAllOptions
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.ForeColor = System.Drawing.Color.Navy;
-            this.label11.Location = new System.Drawing.Point(10, 312);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(129, 13);
-            this.label11.TabIndex = 42;
-            this.label11.Text = "Try Start TDLS every(ms)";
-            this.toolTip1.SetToolTip(this.label11, "Try Start TDLS every(ms)");
+            this.btnShowAllOptions.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnShowAllOptions.Font = new System.Drawing.Font("Miriam", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnShowAllOptions.Location = new System.Drawing.Point(2, 13);
+            this.btnShowAllOptions.Name = "btnShowAllOptions";
+            this.btnShowAllOptions.Size = new System.Drawing.Size(11, 364);
+            this.btnShowAllOptions.TabIndex = 45;
+            this.btnShowAllOptions.Text = "<";
+            this.btnShowAllOptions.UseVisualStyleBackColor = false;
+            this.btnShowAllOptions.Click += new System.EventHandler(this.btnShowAllOptions_Click);
             // 
-            // txtTdlsStarterDelay
+            // label12
             // 
-            this.txtTdlsStarterDelay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.txtTdlsStarterDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTdlsStarterDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtTdlsStarterDelay.ForeColor = System.Drawing.Color.Navy;
-            this.txtTdlsStarterDelay.Location = new System.Drawing.Point(152, 312);
-            this.txtTdlsStarterDelay.Name = "txtTdlsStarterDelay";
-            this.txtTdlsStarterDelay.Size = new System.Drawing.Size(57, 18);
-            this.txtTdlsStarterDelay.TabIndex = 43;
-            this.txtTdlsStarterDelay.Text = "5000";
-            this.txtTdlsStarterDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.txtTdlsStarterDelay, "Try Start TDLS every(ms)");
-            // 
-            // btnTdlsStarterSetDelay
-            // 
-            this.btnTdlsStarterSetDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnTdlsStarterSetDelay.Location = new System.Drawing.Point(215, 312);
-            this.btnTdlsStarterSetDelay.Name = "btnTdlsStarterSetDelay";
-            this.btnTdlsStarterSetDelay.Size = new System.Drawing.Size(39, 18);
-            this.btnTdlsStarterSetDelay.TabIndex = 44;
-            this.btnTdlsStarterSetDelay.Text = "Set";
-            this.toolTip1.SetToolTip(this.btnTdlsStarterSetDelay, "Try Start TDLS every(ms)");
-            this.btnTdlsStarterSetDelay.UseVisualStyleBackColor = true;
-            this.btnTdlsStarterSetDelay.Click += new System.EventHandler(this.btnTdlsStarterSetDelay_Click);
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(19, 300);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(235, 13);
+            this.label12.TabIndex = 46;
+            this.label12.Text = "______________________________________";
             // 
             // MainForm
             // 
@@ -706,7 +742,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 378);
             this.ContextMenuStrip = this.contextMenuStrip1;
-            this.Controls.Add(this.btnStopMedium);
             this.Controls.Add(this.groupBox1);
             this.Name = "MainForm";
             this.Text = "SLS - Smart Link Selection - Visualisator";
@@ -776,6 +811,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtTdlsStarterDelay;
         private System.Windows.Forms.Button btnTdlsStarterSetDelay;
+        private System.Windows.Forms.Button btnShowAllOptions;
+        private System.Windows.Forms.Label label12;
     }
 }
 

@@ -44,7 +44,7 @@ namespace Visualisator
         private static Color BoardColor = Color.Black;
 
 
-
+        private bool LefatPannelStatus = true;
 
         private enum SelectedObjectType
         {
@@ -62,6 +62,7 @@ namespace Visualisator
         private void Form1_Load(object sender, EventArgs e)
         {
             piB = new PictureBox();
+            
             piB.Parent = this;
             piB.Location = new Point(10, 10);
             piB.Size = new Size(_BOARDX, _BOARDY);
@@ -568,7 +569,7 @@ namespace Visualisator
         //====================================================================================================
         private void button4_Click(object sender, EventArgs e)
         {
-            
+            LeftPannelSmall();
             //Medium.Disable();
             
             CreateRandomSimulation();
@@ -792,9 +793,9 @@ namespace Visualisator
         private void cmdCreateOneAPTwoSta_Click(object sender, EventArgs e)
         {
             ClearObjects();
-
-
-                AP _ap = new AP();
+            LeftPannelSmall();
+            
+            AP _ap = new AP();
                 _ap.setOperateChannel((short)rand.Next(1, 14));
                 _ap.SetVertex(300, 200, 0);
                 _objects.Add(_ap);
@@ -819,7 +820,7 @@ namespace Visualisator
         private void cmdAdd1APforSTA_Click(object sender, EventArgs e)
         {
             ClearObjects();
-
+            LeftPannelSmall();
 
             AP _ap = new AP();
             _ap.setOperateChannel((short)rand.Next(1, 14));
@@ -877,6 +878,31 @@ namespace Visualisator
             settings.setValue(_KEY_MEDIUM_TDLS_STARTER_DELAY, Medium.TdlsStarterDelay.ToString());
         }
 
+        private void btnShowAllOptions_Click(object sender, EventArgs e)
+        {
+            if (LefatPannelStatus)
+                LeftPannelSmall();
+            else
+                LeftPannelBig();
+
+            
+        }
+
+        private void LeftPannelSmall()
+        {
+            groupBox1.Width = 262;
+            LefatPannelStatus = false;
+        }
+
+        private void LeftPannelBig()
+        {
+            groupBox1.Width = this.Width-20;
+            LefatPannelStatus = true;
+        }
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
 
     //private void mnuContext(object sender, EventArgs e)
         //{
