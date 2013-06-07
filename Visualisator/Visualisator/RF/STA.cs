@@ -20,13 +20,13 @@ namespace Visualisator
     class STA : RFDevice, IBoardObjects,IRFDevice
     {
         protected ArrayListCounted  AccessPoint                 = new ArrayListCounted();
+        [field: NonSerialized()]
         protected Hashtable         StreamsHash                 = new Hashtable(new ByteArrayComparer());
         private Boolean             _scanning                   = false;
 
         
         private int                 _RSSI                       = 0;
         private bool                _waitingForAck              = false;
-        //private StringBuilder       DataReceivedContainer       = new StringBuilder();
         private Int32               _statisticRetransmitTime    = 0;
         private string              _connectedAPMacAddress      = "";
         private int                 _delayInBSS                 = 1;
