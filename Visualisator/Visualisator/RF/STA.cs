@@ -873,7 +873,7 @@ namespace Visualisator
         public double SLSWindowSize = 10; //procent %
         public SelectedLink selectedLink { set; get; }
         public SelectedLink slsWinSampleSelectedLink { set; get; }
-        const double slsWinAmountOfPacket = 30;
+        public double slsWinAmountOfPacket = 30;
         public bool slsWinsampleInProgress = true;
         public TimeSpan sampleSpeedAverage;
         public TimeSpan RegulareSpeedAverage;

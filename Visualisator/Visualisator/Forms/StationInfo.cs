@@ -388,7 +388,7 @@ namespace Visualisator
                     lblNowBSS.BackColor = Color.YellowGreen;             
                 }
 
-                slsWindowSize.Value = _sta.SLSWindowSize;
+                slsWindowSize.Value = (int)_sta.SLSWindowSize;
                 slslAmountOfPackets.Text = _sta.SLSWindowSize.ToString() + " / " + _sta.slsWinAmountOfPacket.ToString();
 
             }
