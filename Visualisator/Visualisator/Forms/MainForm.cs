@@ -991,8 +991,13 @@ namespace Visualisator
         private void btmSetAmountWindowSize_Click(object sender, EventArgs e)
         {
             int val = ParseIntFromTxt(txtAmountWindowSize);
-            Medium.SlsAmountOfWondowSize = val;
-            settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.SlsAmountOfWondowSize.ToString());
+            if (val < 10)
+                MessageBox.Show("Minimal value can be 10");
+            else
+            {
+                Medium.SlsAmountOfWondowSize = val;
+                settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.SlsAmountOfWondowSize.ToString());
+            }
         }
 
         private void btnSetDataBufferSize_Click(object sender, EventArgs e)
