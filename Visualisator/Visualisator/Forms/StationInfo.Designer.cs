@@ -59,6 +59,7 @@
             this.lblAllReceivedPackets = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.slslAmountOfPackets = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -123,7 +124,7 @@
             this.cmdLogsClear = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
-            this.slslAmountOfPackets = new System.Windows.Forms.Label();
+            this.sendDataProgress = new System.Windows.Forms.ProgressBar();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -201,7 +202,7 @@
             this.lblAssociatedAP.AutoSize = true;
             this.lblAssociatedAP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lblAssociatedAP.ForeColor = System.Drawing.Color.Green;
-            this.lblAssociatedAP.Location = new System.Drawing.Point(116, 8);
+            this.lblAssociatedAP.Location = new System.Drawing.Point(151, 0);
             this.lblAssociatedAP.Name = "lblAssociatedAP";
             this.lblAssociatedAP.Size = new System.Drawing.Size(116, 16);
             this.lblAssociatedAP.TabIndex = 8;
@@ -211,7 +212,7 @@
             // 
             // txtDestination
             // 
-            this.txtDestination.Location = new System.Drawing.Point(20, 82);
+            this.txtDestination.Location = new System.Drawing.Point(34, 77);
             this.txtDestination.MaxLength = 17;
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(113, 20);
@@ -245,7 +246,7 @@
             // 
             // cmdSelectFileToSend
             // 
-            this.cmdSelectFileToSend.Location = new System.Drawing.Point(217, 83);
+            this.cmdSelectFileToSend.Location = new System.Drawing.Point(231, 78);
             this.cmdSelectFileToSend.Name = "cmdSelectFileToSend";
             this.cmdSelectFileToSend.Size = new System.Drawing.Size(70, 21);
             this.cmdSelectFileToSend.TabIndex = 60;
@@ -256,7 +257,7 @@
             // 
             // cmdSendData
             // 
-            this.cmdSendData.Location = new System.Drawing.Point(135, 82);
+            this.cmdSendData.Location = new System.Drawing.Point(149, 77);
             this.cmdSendData.Name = "cmdSendData";
             this.cmdSendData.Size = new System.Drawing.Size(76, 22);
             this.cmdSendData.TabIndex = 9;
@@ -366,7 +367,7 @@
             // 
             this.btnScan.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnScan.ForeColor = System.Drawing.Color.Teal;
-            this.btnScan.Location = new System.Drawing.Point(150, 32);
+            this.btnScan.Location = new System.Drawing.Point(155, 18);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(58, 19);
             this.btnScan.TabIndex = 5;
@@ -377,7 +378,7 @@
             // 
             // btnConnectToBSS
             // 
-            this.btnConnectToBSS.Location = new System.Drawing.Point(150, 53);
+            this.btnConnectToBSS.Location = new System.Drawing.Point(155, 39);
             this.btnConnectToBSS.Name = "btnConnectToBSS";
             this.btnConnectToBSS.Size = new System.Drawing.Size(58, 21);
             this.btnConnectToBSS.TabIndex = 3;
@@ -390,7 +391,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(16, 35);
+            this.label1.Location = new System.Drawing.Point(2, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 1;
@@ -412,7 +413,7 @@
             // cmbAssociatedDevicesInBSS
             // 
             this.cmbAssociatedDevicesInBSS.FormattingEnabled = true;
-            this.cmbAssociatedDevicesInBSS.Location = new System.Drawing.Point(20, 108);
+            this.cmbAssociatedDevicesInBSS.Location = new System.Drawing.Point(34, 103);
             this.cmbAssociatedDevicesInBSS.Name = "cmbAssociatedDevicesInBSS";
             this.cmbAssociatedDevicesInBSS.Size = new System.Drawing.Size(113, 21);
             this.cmbAssociatedDevicesInBSS.TabIndex = 50;
@@ -462,6 +463,16 @@
             this.label2.TabIndex = 82;
             this.label2.Text = "SLS Window Size";
             this.toolTip1.SetToolTip(this.label2, "SLS Window Size in Second Algorithm.Changed Dinamicly");
+            // 
+            // slslAmountOfPackets
+            // 
+            this.slslAmountOfPackets.AutoSize = true;
+            this.slslAmountOfPackets.Location = new System.Drawing.Point(219, 60);
+            this.slslAmountOfPackets.Name = "slslAmountOfPackets";
+            this.slslAmountOfPackets.Size = new System.Drawing.Size(25, 13);
+            this.slslAmountOfPackets.TabIndex = 84;
+            this.slslAmountOfPackets.Text = "100";
+            this.toolTip1.SetToolTip(this.slslAmountOfPackets, "SLS Window Size in Second Algorithm.Changed Dinamicly");
             // 
             // tabControl1
             // 
@@ -888,6 +899,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.sendDataProgress);
             this.splitContainer2.Panel1.Controls.Add(this.label16);
             this.splitContainer2.Panel1.Controls.Add(this.label1);
             this.splitContainer2.Panel1.Controls.Add(this.cmbAPList);
@@ -928,7 +940,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(140, 113);
+            this.label16.Location = new System.Drawing.Point(154, 108);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(160, 13);
             this.label16.TabIndex = 81;
@@ -937,7 +949,7 @@
             // cmbAPList
             // 
             this.cmbAPList.FormattingEnabled = true;
-            this.cmbAPList.Location = new System.Drawing.Point(6, 53);
+            this.cmbAPList.Location = new System.Drawing.Point(12, 26);
             this.cmbAPList.Name = "cmbAPList";
             this.cmbAPList.Size = new System.Drawing.Size(138, 21);
             this.cmbAPList.TabIndex = 2;
@@ -946,7 +958,7 @@
             // 
             // btnDisconnect
             // 
-            this.btnDisconnect.Location = new System.Drawing.Point(214, 53);
+            this.btnDisconnect.Location = new System.Drawing.Point(219, 39);
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(73, 21);
             this.btnDisconnect.TabIndex = 80;
@@ -958,7 +970,7 @@
             // 
             this.ConnectedToLabel.AutoSize = true;
             this.ConnectedToLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.ConnectedToLabel.Location = new System.Drawing.Point(3, 8);
+            this.ConnectedToLabel.Location = new System.Drawing.Point(17, 0);
             this.ConnectedToLabel.Name = "ConnectedToLabel";
             this.ConnectedToLabel.Size = new System.Drawing.Size(107, 16);
             this.ConnectedToLabel.TabIndex = 7;
@@ -969,7 +981,7 @@
             this.cmdShowLog.Enabled = false;
             this.cmdShowLog.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmdShowLog.ForeColor = System.Drawing.Color.Teal;
-            this.cmdShowLog.Location = new System.Drawing.Point(214, 32);
+            this.cmdShowLog.Location = new System.Drawing.Point(219, 18);
             this.cmdShowLog.Name = "cmdShowLog";
             this.cmdShowLog.Size = new System.Drawing.Size(73, 19);
             this.cmdShowLog.TabIndex = 59;
@@ -1223,15 +1235,12 @@
             this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // slslAmountOfPackets
+            // sendDataProgress
             // 
-            this.slslAmountOfPackets.AutoSize = true;
-            this.slslAmountOfPackets.Location = new System.Drawing.Point(219, 60);
-            this.slslAmountOfPackets.Name = "slslAmountOfPackets";
-            this.slslAmountOfPackets.Size = new System.Drawing.Size(25, 13);
-            this.slslAmountOfPackets.TabIndex = 84;
-            this.slslAmountOfPackets.Text = "100";
-            this.toolTip1.SetToolTip(this.slslAmountOfPackets, "SLS Window Size in Second Algorithm.Changed Dinamicly");
+            this.sendDataProgress.Location = new System.Drawing.Point(12, 61);
+            this.sendDataProgress.Name = "sendDataProgress";
+            this.sendDataProgress.Size = new System.Drawing.Size(302, 12);
+            this.sendDataProgress.TabIndex = 82;
             // 
             // StationInfo
             // 
@@ -1365,5 +1374,6 @@
         private System.Windows.Forms.ProgressBar slsWindowSize;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label slslAmountOfPackets;
+        private System.Windows.Forms.ProgressBar sendDataProgress;
     }
 }
