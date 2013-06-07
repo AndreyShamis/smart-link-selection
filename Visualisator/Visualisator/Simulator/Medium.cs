@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Visualisator
 {
-    [field: NonSerialized()]
+    [Serializable()]
     static class Medium 
     {
         [Serializable()]
@@ -118,7 +118,7 @@ namespace Visualisator
 
         public static int TDLS_TearDownAfterFails { set; get; }
         public static int TdlsStarterDelay { set; get; }
-        public static int SlsAmountOfWondowSize { set; get; }
+        public static double SlsAmountOfWondowSize { set; get; }
         //*********************************************************************
         private static ArrayList BandAChannels = new ArrayList();
         private static Hashtable _packets = new Hashtable(new ByteArrayComparer());
