@@ -44,6 +44,12 @@
             this.btnSetUpdateInterval = new System.Windows.Forms.Button();
             this.cmdCreateOneAPTwoSta = new System.Windows.Forms.Button();
             this.cmdAdd1APforSTA = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtSLSPeriod = new System.Windows.Forms.TextBox();
+            this.btnSetSLSPeriod = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtSLSPacketsNumber = new System.Windows.Forms.TextBox();
+            this.btmSetNumberPacketsinSls = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,12 +79,9 @@
             this.txtMediumReceiveDistance = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtSLSPeriod = new System.Windows.Forms.TextBox();
-            this.btnSetSLSPeriod = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtSLSPacketsNumber = new System.Windows.Forms.TextBox();
-            this.btmSetNumberPacketsinSls = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtTdlsStarterDelay = new System.Windows.Forms.TextBox();
+            this.btnTdlsStarterSetDelay = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -231,6 +234,82 @@
             this.toolTip1.SetToolTip(this.cmdAdd1APforSTA, "Create static Simulation 1 AP and 4 STA");
             this.cmdAdd1APforSTA.UseVisualStyleBackColor = true;
             this.cmdAdd1APforSTA.Click += new System.EventHandler(this.cmdAdd1APforSTA_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.ForeColor = System.Drawing.Color.Navy;
+            this.label9.Location = new System.Drawing.Point(10, 147);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(57, 13);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "SLS Period";
+            this.toolTip1.SetToolTip(this.label9, "Delay Between Test SLS on Medium");
+            // 
+            // txtSLSPeriod
+            // 
+            this.txtSLSPeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSLSPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSLSPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtSLSPeriod.ForeColor = System.Drawing.Color.Navy;
+            this.txtSLSPeriod.Location = new System.Drawing.Point(152, 147);
+            this.txtSLSPeriod.Name = "txtSLSPeriod";
+            this.txtSLSPeriod.Size = new System.Drawing.Size(57, 18);
+            this.txtSLSPeriod.TabIndex = 37;
+            this.txtSLSPeriod.Text = "1000";
+            this.txtSLSPeriod.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtSLSPeriod, "Delay Between Test SLS on Medium");
+            // 
+            // btnSetSLSPeriod
+            // 
+            this.btnSetSLSPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSetSLSPeriod.Location = new System.Drawing.Point(215, 147);
+            this.btnSetSLSPeriod.Name = "btnSetSLSPeriod";
+            this.btnSetSLSPeriod.Size = new System.Drawing.Size(39, 18);
+            this.btnSetSLSPeriod.TabIndex = 38;
+            this.btnSetSLSPeriod.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnSetSLSPeriod, "Delay Between Test SLS on Medium");
+            this.btnSetSLSPeriod.UseVisualStyleBackColor = true;
+            this.btnSetSLSPeriod.Click += new System.EventHandler(this.btnSetSLSPeriod_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.ForeColor = System.Drawing.Color.Navy;
+            this.label10.Location = new System.Drawing.Point(10, 169);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(104, 13);
+            this.label10.TabIndex = 39;
+            this.label10.Text = "SLS Packets Number";
+            this.toolTip1.SetToolTip(this.label10, "Number of Packets that will be sendet on each iteration on simple link");
+            // 
+            // txtSLSPacketsNumber
+            // 
+            this.txtSLSPacketsNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSLSPacketsNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSLSPacketsNumber.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtSLSPacketsNumber.ForeColor = System.Drawing.Color.Navy;
+            this.txtSLSPacketsNumber.Location = new System.Drawing.Point(152, 169);
+            this.txtSLSPacketsNumber.Name = "txtSLSPacketsNumber";
+            this.txtSLSPacketsNumber.Size = new System.Drawing.Size(57, 18);
+            this.txtSLSPacketsNumber.TabIndex = 40;
+            this.txtSLSPacketsNumber.Text = "10";
+            this.txtSLSPacketsNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtSLSPacketsNumber, "Number of Packets that will be sendet on each iteration on simple link");
+            // 
+            // btmSetNumberPacketsinSls
+            // 
+            this.btmSetNumberPacketsinSls.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btmSetNumberPacketsinSls.Location = new System.Drawing.Point(215, 169);
+            this.btmSetNumberPacketsinSls.Name = "btmSetNumberPacketsinSls";
+            this.btmSetNumberPacketsinSls.Size = new System.Drawing.Size(39, 18);
+            this.btmSetNumberPacketsinSls.TabIndex = 41;
+            this.btmSetNumberPacketsinSls.Text = "Set";
+            this.toolTip1.SetToolTip(this.btmSetNumberPacketsinSls, "Number of Packets that will be sendet on each iteration on simple link");
+            this.btmSetNumberPacketsinSls.UseVisualStyleBackColor = true;
+            this.btmSetNumberPacketsinSls.Click += new System.EventHandler(this.btmSetNumberPacketsinSls_Click);
             // 
             // contextMenuStrip1
             // 
@@ -534,6 +613,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.txtTdlsStarterDelay);
+            this.groupBox1.Controls.Add(this.btnTdlsStarterSetDelay);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtSLSPacketsNumber);
             this.groupBox1.Controls.Add(this.btmSetNumberPacketsinSls);
@@ -580,81 +662,43 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Medium Controll";
             // 
-            // label9
+            // label11
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.ForeColor = System.Drawing.Color.Navy;
-            this.label9.Location = new System.Drawing.Point(10, 147);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(57, 13);
-            this.label9.TabIndex = 36;
-            this.label9.Text = "SLS Period";
-            this.toolTip1.SetToolTip(this.label9, "Delay Between Test SLS on Medium");
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.ForeColor = System.Drawing.Color.Navy;
+            this.label11.Location = new System.Drawing.Point(10, 312);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(129, 13);
+            this.label11.TabIndex = 42;
+            this.label11.Text = "Try Start TDLS every(ms)";
+            this.toolTip1.SetToolTip(this.label11, "Try Start TDLS every(ms)");
             // 
-            // txtSLSPeriod
+            // txtTdlsStarterDelay
             // 
-            this.txtSLSPeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.txtSLSPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSLSPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtSLSPeriod.ForeColor = System.Drawing.Color.Navy;
-            this.txtSLSPeriod.Location = new System.Drawing.Point(152, 147);
-            this.txtSLSPeriod.Name = "txtSLSPeriod";
-            this.txtSLSPeriod.Size = new System.Drawing.Size(57, 18);
-            this.txtSLSPeriod.TabIndex = 37;
-            this.txtSLSPeriod.Text = "1000";
-            this.txtSLSPeriod.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.txtSLSPeriod, "Delay Between Test SLS on Medium");
+            this.txtTdlsStarterDelay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtTdlsStarterDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTdlsStarterDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtTdlsStarterDelay.ForeColor = System.Drawing.Color.Navy;
+            this.txtTdlsStarterDelay.Location = new System.Drawing.Point(152, 312);
+            this.txtTdlsStarterDelay.Name = "txtTdlsStarterDelay";
+            this.txtTdlsStarterDelay.Size = new System.Drawing.Size(57, 18);
+            this.txtTdlsStarterDelay.TabIndex = 43;
+            this.txtTdlsStarterDelay.Text = "5000";
+            this.txtTdlsStarterDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtTdlsStarterDelay, "Try Start TDLS every(ms)");
             // 
-            // btnSetSLSPeriod
+            // btnTdlsStarterSetDelay
             // 
-            this.btnSetSLSPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetSLSPeriod.Location = new System.Drawing.Point(215, 147);
-            this.btnSetSLSPeriod.Name = "btnSetSLSPeriod";
-            this.btnSetSLSPeriod.Size = new System.Drawing.Size(39, 18);
-            this.btnSetSLSPeriod.TabIndex = 38;
-            this.btnSetSLSPeriod.Text = "Set";
-            this.toolTip1.SetToolTip(this.btnSetSLSPeriod, "Delay Between Test SLS on Medium");
-            this.btnSetSLSPeriod.UseVisualStyleBackColor = true;
-            this.btnSetSLSPeriod.Click += new System.EventHandler(this.btnSetSLSPeriod_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.ForeColor = System.Drawing.Color.Navy;
-            this.label10.Location = new System.Drawing.Point(10, 169);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(104, 13);
-            this.label10.TabIndex = 39;
-            this.label10.Text = "SLS Packets Number";
-            this.toolTip1.SetToolTip(this.label10, "Number of Packets that will be sendet on each iteration on simple link");
-            // 
-            // txtSLSPacketsNumber
-            // 
-            this.txtSLSPacketsNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.txtSLSPacketsNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSLSPacketsNumber.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtSLSPacketsNumber.ForeColor = System.Drawing.Color.Navy;
-            this.txtSLSPacketsNumber.Location = new System.Drawing.Point(152, 169);
-            this.txtSLSPacketsNumber.Name = "txtSLSPacketsNumber";
-            this.txtSLSPacketsNumber.Size = new System.Drawing.Size(57, 18);
-            this.txtSLSPacketsNumber.TabIndex = 40;
-            this.txtSLSPacketsNumber.Text = "10";
-            this.txtSLSPacketsNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.txtSLSPacketsNumber, "Number of Packets that will be sendet on each iteration on simple link");
-            // 
-            // btmSetNumberPacketsinSls
-            // 
-            this.btmSetNumberPacketsinSls.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btmSetNumberPacketsinSls.Location = new System.Drawing.Point(215, 169);
-            this.btmSetNumberPacketsinSls.Name = "btmSetNumberPacketsinSls";
-            this.btmSetNumberPacketsinSls.Size = new System.Drawing.Size(39, 18);
-            this.btmSetNumberPacketsinSls.TabIndex = 41;
-            this.btmSetNumberPacketsinSls.Text = "Set";
-            this.toolTip1.SetToolTip(this.btmSetNumberPacketsinSls, "Number of Packets that will be sendet on each iteration on simple link");
-            this.btmSetNumberPacketsinSls.UseVisualStyleBackColor = true;
-            this.btmSetNumberPacketsinSls.Click += new System.EventHandler(this.btmSetNumberPacketsinSls_Click);
+            this.btnTdlsStarterSetDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnTdlsStarterSetDelay.Location = new System.Drawing.Point(215, 312);
+            this.btnTdlsStarterSetDelay.Name = "btnTdlsStarterSetDelay";
+            this.btnTdlsStarterSetDelay.Size = new System.Drawing.Size(39, 18);
+            this.btnTdlsStarterSetDelay.TabIndex = 44;
+            this.btnTdlsStarterSetDelay.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnTdlsStarterSetDelay, "Try Start TDLS every(ms)");
+            this.btnTdlsStarterSetDelay.UseVisualStyleBackColor = true;
+            this.btnTdlsStarterSetDelay.Click += new System.EventHandler(this.btnTdlsStarterSetDelay_Click);
             // 
             // MainForm
             // 
@@ -729,6 +773,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtSLSPeriod;
         private System.Windows.Forms.Button btnSetSLSPeriod;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtTdlsStarterDelay;
+        private System.Windows.Forms.Button btnTdlsStarterSetDelay;
     }
 }
 

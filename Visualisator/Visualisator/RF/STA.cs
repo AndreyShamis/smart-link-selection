@@ -80,6 +80,7 @@ namespace Visualisator
         public string               LastMacAddressOfTdlsDevice  { set; get; }
 
         private bool ForceStopTdlsStarter;
+        private bool TestTdlsEnable;
 
         //=====================================================================
         /// <summary>
@@ -894,7 +895,7 @@ namespace Visualisator
 
             tdlsStarterThread.Name = "TDLS StarterThread:" + this.getMACAddress();
             tdlsStarterThread.Start();
-
+            TestTdlsEnable = true;
             try
             {
                 AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
@@ -1025,7 +1026,8 @@ namespace Visualisator
                 Passive = true;
                 StopTdlsStarter();
                 tdlsStarterThread.Join();
-                
+                TestTdlsEnable = false;
+
             }
         }
 
@@ -1044,7 +1046,7 @@ namespace Visualisator
                     if(!TDLSisWork)
                         TDLS_SendSetupRequest(destinationMacAddress);
                 }
-                Thread.Sleep(5000);
+                Thread.Sleep(Medium.TdlsStarterDelay);
             }
         }
 
@@ -1296,6 +1298,12 @@ namespace Visualisator
                 {
                     if (TDLSisWork)
                     {
+
+                        while (!TestTdlsEnable)
+                        {
+                            Thread.Sleep(200);
+                        }
+
                         // BSS
                         sw = Stopwatch.StartNew();
                         for (int i = 0; i < Medium.SLSPacketsNumber; i++)
@@ -1359,6 +1367,7 @@ namespace Visualisator
                     }
 
                     Thread.Sleep(Medium.SLSPeriod);
+
                 }
             }
             catch(Exception ex)

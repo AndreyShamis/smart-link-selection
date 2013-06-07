@@ -21,6 +21,7 @@ namespace Visualisator
 
         private const string _KEY_MEDIUM_SLS_PERIOD = "MediumSlsPeriod";
         private const string _KEY_MEDIUM_SLS_COUNTER = "MediumSlsPacketsCounter";
+        private const string _KEY_MEDIUM_TDLS_STARTER_DELAY = "MediumTdlsStarterDelay";
         private PictureBox piB;
         private Bitmap bm;
         private Graphics gr;
@@ -100,6 +101,18 @@ namespace Visualisator
                 settings.setValue(_KEY_MEDIUM_SLS_COUNTER, Medium.SLSPacketsNumber.ToString());
             }
 
+
+            if (settings.getValue(_KEY_MEDIUM_TDLS_STARTER_DELAY).Length > 0)
+            {
+                Medium.TdlsStarterDelay = Convert.ToInt32(settings.getValue(_KEY_MEDIUM_TDLS_STARTER_DELAY));
+                
+            }
+            else
+            {
+                Medium.TdlsStarterDelay = 5000;
+                settings.setValue(_KEY_MEDIUM_TDLS_STARTER_DELAY, Medium.TdlsStarterDelay.ToString());
+            }
+
             if (settings.getValue(_KEY_GRAFFIC_UPD_INT).Length > 0)
             {
                 txtUpdateInterval.Text = settings.getValue(_KEY_GRAFFIC_UPD_INT);
@@ -122,7 +135,7 @@ namespace Visualisator
             txtSLSPeriod.Text = Medium.SLSPeriod.ToString();
 
             txtSLSPacketsNumber.Text = Medium.SLSPacketsNumber.ToString();
-
+            txtTdlsStarterDelay.Text = Medium.TdlsStarterDelay.ToString();
             SetMedioRatio();
             SetBSSDelay();
             SetTDLSDelay();
@@ -855,6 +868,13 @@ namespace Visualisator
             int val = ParseIntFromTxt(txtSLSPacketsNumber);
             Medium.SLSPacketsNumber = val;
             settings.setValue(_KEY_MEDIUM_SLS_COUNTER, Medium.SLSPacketsNumber.ToString());
+        }
+
+        private void btnTdlsStarterSetDelay_Click(object sender, EventArgs e)
+        {
+            int val = ParseIntFromTxt(txtTdlsStarterDelay);
+            Medium.TdlsStarterDelay = val;
+            settings.setValue(_KEY_MEDIUM_TDLS_STARTER_DELAY, Medium.TdlsStarterDelay.ToString());
         }
 
 

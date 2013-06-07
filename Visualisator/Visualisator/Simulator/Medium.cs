@@ -116,6 +116,7 @@ namespace Visualisator
         public static int RetransmitWindow { set; get; }
 
         public static int TDLS_TearDownAfterFails { set; get; }
+        public static int TdlsStarterDelay { set; get; }
 
         //*********************************************************************
         private static ArrayList BandAChannels = new ArrayList();
