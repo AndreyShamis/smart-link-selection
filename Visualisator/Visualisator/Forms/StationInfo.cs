@@ -413,8 +413,8 @@ namespace Visualisator
                     lblNowBSS.BackColor = Color.YellowGreen;             
                 }
 
-                slsWindowSize.Value = (int) (_sta.SLSWindowSize*100/Medium.SlsAmountOfWondowSize);
-                slslAmountOfPackets.Text = _sta.SLSWindowSize.ToString() + " / " +Medium.SlsAmountOfWondowSize.ToString();
+                slsWindowSize.Value = (int)(_sta.SLSWindowSize * Medium.SlsAmountOfWondowSize / 100);
+                slslAmountOfPackets.Text = (int)(_sta.SLSWindowSize * Medium.SlsAmountOfWondowSize / 100) + "% / " + Medium.SlsAmountOfWondowSize.ToString();
                 UpdateSendDataProgress();
             }
             catch (Exception ex)

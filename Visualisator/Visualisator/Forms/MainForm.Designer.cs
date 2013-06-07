@@ -423,7 +423,7 @@
             this.txtAmountWindowSize.Name = "txtAmountWindowSize";
             this.txtAmountWindowSize.Size = new System.Drawing.Size(57, 18);
             this.txtAmountWindowSize.TabIndex = 53;
-            this.txtAmountWindowSize.Text = "10";
+            this.txtAmountWindowSize.Text = "30";
             this.txtAmountWindowSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.txtAmountWindowSize, "SLS Amount of WIndow Size");
             // 
