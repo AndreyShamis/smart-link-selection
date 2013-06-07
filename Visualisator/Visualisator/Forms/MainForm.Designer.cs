@@ -743,6 +743,7 @@
             this.ClientSize = new System.Drawing.Size(958, 378);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "SLS - Smart Link Selection - Visualisator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
