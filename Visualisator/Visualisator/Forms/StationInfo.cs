@@ -260,6 +260,10 @@ namespace Visualisator
         private void tmrSlow_Tick(object sender, EventArgs e)
         {
             SlowFlow();
+            if(!_sta.isEnabled())
+            {
+                this.Close();
+            }
         }
 
         private void UpdateStandartSupport()

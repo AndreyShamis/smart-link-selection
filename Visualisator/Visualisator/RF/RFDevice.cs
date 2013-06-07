@@ -171,6 +171,10 @@ namespace Visualisator
             return false;
         }
 
+        public bool isEnabled()
+        {
+            return _Enabled;
+        }
         //=====================================================================
         public double getRetransmitionRate()
         {
