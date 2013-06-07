@@ -55,6 +55,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblWaitingForAck = new System.Windows.Forms.Label();
             this.cmbAssociatedDevicesInBSS = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblAllReceivedPackets = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -69,7 +72,6 @@
             this.lblLastTransmitTime = new System.Windows.Forms.Label();
             this.lblAckReceived = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.lblRetransmited = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -87,8 +89,6 @@
             this.lblTDLSSetupStatus = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.lblAllReceivedPackets = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.btnChangeTDLSStatusOn = new System.Windows.Forms.Button();
             this.txtTDLSSetupRequestMAC = new System.Windows.Forms.TextBox();
@@ -184,7 +184,7 @@
             // tmrFast
             // 
             this.tmrFast.Enabled = true;
-            this.tmrFast.Interval = 50;
+            this.tmrFast.Interval = 1;
             this.tmrFast.Tick += new System.EventHandler(this.tmrFast_Tick);
             // 
             // tmrSlow
@@ -417,6 +417,39 @@
             this.cmbAssociatedDevicesInBSS.SelectedIndexChanged += new System.EventHandler(this.cmbAssociatedDevicesInBSS_SelectedIndexChanged);
             this.cmbAssociatedDevicesInBSS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAssociatedDevicesInBSS_MouseClick);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Navy;
+            this.label4.Location = new System.Drawing.Point(16, 59);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "AckRx";
+            this.toolTip1.SetToolTip(this.label4, "Ack Received");
+            // 
+            // lblAllReceivedPackets
+            // 
+            this.lblAllReceivedPackets.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.lblAllReceivedPackets.Location = new System.Drawing.Point(236, 110);
+            this.lblAllReceivedPackets.Name = "lblAllReceivedPackets";
+            this.lblAllReceivedPackets.Size = new System.Drawing.Size(62, 14);
+            this.lblAllReceivedPackets.TabIndex = 47;
+            this.lblAllReceivedPackets.Text = "0";
+            this.lblAllReceivedPackets.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.lblAllReceivedPackets, "Summary of all received packets");
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label11.Location = new System.Drawing.Point(149, 110);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(79, 13);
+            this.label11.TabIndex = 46;
+            this.label11.Text = "Rec Pack Sum";
+            this.toolTip1.SetToolTip(this.label11, "Summary of all received packets");
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -615,17 +648,6 @@
             this.label21.TabIndex = 76;
             this.label21.Text = "Last Transmit Time";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Navy;
-            this.label4.Location = new System.Drawing.Point(16, 59);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 13);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "AckRx";
-            this.toolTip1.SetToolTip(this.label4, "Ack Received");
-            // 
             // lblRetransmited
             // 
             this.lblRetransmited.ForeColor = System.Drawing.Color.Teal;
@@ -796,28 +818,6 @@
             this.label12.Size = new System.Drawing.Size(99, 13);
             this.label12.TabIndex = 48;
             this.label12.Text = "TDLS Setup Status";
-            // 
-            // lblAllReceivedPackets
-            // 
-            this.lblAllReceivedPackets.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblAllReceivedPackets.Location = new System.Drawing.Point(236, 110);
-            this.lblAllReceivedPackets.Name = "lblAllReceivedPackets";
-            this.lblAllReceivedPackets.Size = new System.Drawing.Size(62, 14);
-            this.lblAllReceivedPackets.TabIndex = 47;
-            this.lblAllReceivedPackets.Text = "0";
-            this.lblAllReceivedPackets.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.lblAllReceivedPackets, "Summary of all received packets");
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label11.Location = new System.Drawing.Point(149, 110);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(79, 13);
-            this.label11.TabIndex = 46;
-            this.label11.Text = "Rec Pack Sum";
-            this.toolTip1.SetToolTip(this.label11, "Summary of all received packets");
             // 
             // button2
             // 
@@ -1124,7 +1124,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(657, 286);
+            this.tabPage3.Size = new System.Drawing.Size(657, 271);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Error Log";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1195,7 +1195,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(657, 286);
+            this.tabPage2.Size = new System.Drawing.Size(657, 271);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;

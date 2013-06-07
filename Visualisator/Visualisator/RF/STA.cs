@@ -867,13 +867,13 @@ namespace Visualisator
 
 
 
-        public long slsWinGlobalDataPacketCounter = 0;
-        public long slsWinBSSDataPacketCounter = 0;
-        public long slsWinTDLSDataPacketCounter = 0;
-        public short SLSWindowSize = 10; //procent %
+        public int slsWinGlobalDataPacketCounter = 0;
+        public int slsWinBSSDataPacketCounter = 0;
+        public int slsWinTDLSDataPacketCounter = 0;
+        public double SLSWindowSize = 10; //procent %
         public SelectedLink selectedLink { set; get; }
         public SelectedLink slsWinSampleSelectedLink { set; get; }
-        const short slsWinAmountOfPacket = 100;
+        const double slsWinAmountOfPacket = 30;
         public bool slsWinsampleInProgress = true;
         public TimeSpan sampleSpeedAverage;
         public TimeSpan RegulareSpeedAverage;
@@ -895,9 +895,12 @@ namespace Visualisator
                 slsWinBSSDataPacketCounter = 0;
                 sampleSpeedAverage = new TimeSpan();
                 RegulareSpeedAverage = new TimeSpan();
+                return;
             }
             if (start)
             {
+                slsWinSampleSelectedLink = SelectedLink.BSS;
+                selectedLink = SelectedLink.TDLS;
                 try { stoper.Stop(); }
                 catch { }
                 sampleSpeedAverage = new TimeSpan();
@@ -905,7 +908,7 @@ namespace Visualisator
                 slsWinGlobalDataPacketCounter = 0;
                 slsWinTDLSDataPacketCounter = 0;
                 slsWinBSSDataPacketCounter = 0;
-                winSizeToNumOfPacket = (slsWinAmountOfPacket - ((slsWinAmountOfPacket / 100) * SLSWindowSize)); // the oposite of window
+                winSizeToNumOfPacket = (int)(slsWinAmountOfPacket - ((slsWinAmountOfPacket / 100) * SLSWindowSize)); // the oposite of window
                 stoper.Start();
             }
             else
@@ -955,23 +958,37 @@ namespace Visualisator
                 if (slsWinGlobalDataPacketCounter < slsWinAmountOfPacket) { stoper.Start(); }
                 else
                 {
+
                     //stoper.Stop();
                     if (slsWinSampleSelectedLink == SelectedLink.BSS) // if sample selected link is BSS
                     {
+                        //TimeSpan temp = new TimeSpan();
+                        //TimeSpan temp2 = new TimeSpan();
+                        double temp = sampleSpeedAverage.TotalMilliseconds;
+                        double temp2 = RegulareSpeedAverage.TotalMilliseconds / SLSWindowSize;
 
-
-                        if (sampleSpeedAverage.Ticks > RegulareSpeedAverage.Ticks / SLSWindowSize) 
-                        { 
+                        if (sampleSpeedAverage.TotalMilliseconds < RegulareSpeedAverage.TotalMilliseconds / SLSWindowSize)
+                        {
                             slsWinSampleSelectedLink = SelectedLink.TDLS;
                             selectedLink = SelectedLink.BSS;
+                        }
+                        else
+                        {
+                            slsWinSampleSelectedLink = SelectedLink.BSS;
+                            selectedLink = SelectedLink.TDLS;
                         }
                     }
                     else // if sample selected link is TDLS
                     {
-                        if (sampleSpeedAverage.Ticks > RegulareSpeedAverage.Ticks / SLSWindowSize) 
+                        if (sampleSpeedAverage.Ticks > RegulareSpeedAverage.Ticks / SLSWindowSize)
                         {
                             slsWinSampleSelectedLink = SelectedLink.BSS;
                             selectedLink = SelectedLink.TDLS;
+                        }
+                        else
+                        {
+                            slsWinSampleSelectedLink = SelectedLink.TDLS;
+                            selectedLink = SelectedLink.BSS;
                         }
                     }
                     stoper.Start();
@@ -980,7 +997,7 @@ namespace Visualisator
                     slsWinBSSDataPacketCounter      = 0;
                     sampleSpeedAverage = new TimeSpan();
                     RegulareSpeedAverage = new TimeSpan();
-                    winSizeToNumOfPacket = (slsWinAmountOfPacket - ((slsWinAmountOfPacket / 100) * SLSWindowSize)); // the oposite of window
+                    winSizeToNumOfPacket = (int)(slsWinAmountOfPacket - ((slsWinAmountOfPacket / 100) * SLSWindowSize)); // the oposite of window
                 }
             }
         }
