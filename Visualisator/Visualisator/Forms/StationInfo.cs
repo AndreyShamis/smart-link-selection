@@ -323,12 +323,16 @@ namespace Visualisator
         {
             try
             {
+                int temp = 100;
                 if (_sta.CurrentStatistic != null)
-                    sendDataProgress.Value = (int)(_sta.CurrentStatistic.Packets * 100 / _sta.CurrentStatistic.PacketsSum);
+                    temp = (int)(_sta.CurrentStatistic.Packets * 100 / _sta.CurrentStatistic.PacketsSum);
+                if (temp > 100)
+                    temp = 100;
+                sendDataProgress.Value = temp;
             }
             catch (Exception ex)
             {
-                
+                MessageBox.Show(ex.Message);
             }
             
         }
