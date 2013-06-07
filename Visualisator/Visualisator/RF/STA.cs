@@ -79,8 +79,22 @@ namespace Visualisator
         /// </summary>
         public string               LastMacAddressOfTdlsDevice  { set; get; }
 
-        private bool ForceStopTdlsStarter;
-        private bool TestTdlsEnable;
+        private bool                ForceStopTdlsStarter;
+        private bool                TestTdlsEnable;
+        public int                  slsWinGlobalDataPacketCounter = 0;
+        public int                  slsWinBSSDataPacketCounter  = 0;
+        public int                  slsWinTDLSDataPacketCounter = 0;
+        public double               SLSWindowSize               { set; get; } //procent %
+        public SelectedLink         selectedLink                { set; get; }
+        public SelectedLink         slsWinSampleSelectedLink    { set; get; }
+        public bool                 slsWinsampleInProgress      = true;
+        public TimeSpan             sampleSpeedAverage;
+        public TimeSpan             RegulareSpeedAverage;
+        [field: NonSerialized()]
+        public Stopwatch            stoper                      = new Stopwatch();
+        public int                  winSizeToNumOfPacket;
+        public Statistic            CurrentStatistic            { set; get; }
+        public double               speed                       { set; get; }
 
         //=====================================================================
         /// <summary>
@@ -221,7 +235,7 @@ namespace Visualisator
             ListenBeacon            = true;
             this.VColor             = DefaultColor;
             _PointerToAllRfDevices  = rfObjects;
-
+            SLSWindowSize = 10;
             BandWithSupport.Add(Bandwidth._20MHz);
             BandWithSupport.Add(Bandwidth._40Mhz);
 
@@ -858,24 +872,6 @@ namespace Visualisator
             catch (Exception ex) { AddToLog("rfile: " + ex.Message); }
         }
 
-        public double speed { set; get; }
-        //=====================================================================
-
-
-
-        public int slsWinGlobalDataPacketCounter = 0;
-        public int slsWinBSSDataPacketCounter = 0;
-        public int slsWinTDLSDataPacketCounter = 0;
-        public double SLSWindowSize = 10; //procent %
-        public SelectedLink selectedLink { set; get; }
-        public SelectedLink slsWinSampleSelectedLink { set; get; }
-        public bool slsWinsampleInProgress = true;
-        public TimeSpan sampleSpeedAverage;
-        public TimeSpan RegulareSpeedAverage;
-        [field:NonSerialized()]
-        public Stopwatch stoper = new Stopwatch();
-        public int winSizeToNumOfPacket;
-
         //=====================================================================
         /// <summary>
         /// Function perform Window Based SLS algorithm
@@ -951,41 +947,26 @@ namespace Visualisator
                         sampleSpeedAverage += stoper.Elapsed;
                     }
                 }
-                if (slsWinGlobalDataPacketCounter < Medium.SlsAmountOfWondowSize) { stoper.Start(); }
+
+                if (slsWinGlobalDataPacketCounter < Medium.SlsAmountOfWondowSize)
+                {
+                    stoper.Start();
+                }
                 else
                 {
-
-                    //stoper.Stop();
                     if (slsWinSampleSelectedLink == SelectedLink.BSS) // if sample selected link is BSS
                     {
-                        //TimeSpan temp = new TimeSpan();
-                        //TimeSpan temp2 = new TimeSpan();
-                        double temp = sampleSpeedAverage.TotalMilliseconds;
-                        double temp2 = RegulareSpeedAverage.TotalMilliseconds / SLSWindowSize;
-
                         if (sampleSpeedAverage.TotalMilliseconds < RegulareSpeedAverage.TotalMilliseconds / SLSWindowSize)
-                        {
-                            slsWinSampleSelectedLink = SelectedLink.TDLS;
-                            selectedLink = SelectedLink.BSS;
-                        }
+                            SLSWindow_SwitchToBss();
                         else
-                        {
-                            slsWinSampleSelectedLink = SelectedLink.BSS;
-                            selectedLink = SelectedLink.TDLS;
-                        }
+                            SLSWindow_SwitchToTdls();
                     }
                     else // if sample selected link is TDLS
                     {
-                        if (sampleSpeedAverage.Ticks > RegulareSpeedAverage.Ticks / SLSWindowSize)
-                        {
-                            slsWinSampleSelectedLink = SelectedLink.BSS;
-                            selectedLink = SelectedLink.TDLS;
-                        }
+                        if (sampleSpeedAverage.Ticks > RegulareSpeedAverage.Ticks / SLSWindowSize)    
+                            SLSWindow_SwitchToTdls();
                         else
-                        {
-                            slsWinSampleSelectedLink = SelectedLink.TDLS;
-                            selectedLink = SelectedLink.BSS;
-                        }
+                            SLSWindow_SwitchToBss();
                     }
                     stoper.Start();
                     slsWinGlobalDataPacketCounter   = 0;
@@ -998,7 +979,26 @@ namespace Visualisator
             }
         }
 
-        public Statistic CurrentStatistic { set; get; }
+        //=====================================================================
+        /// <summary>
+        /// Used in Second Algorithm for switch to TDLS Link
+        /// </summary>
+        private void SLSWindow_SwitchToTdls()
+        {
+            slsWinSampleSelectedLink = SelectedLink.BSS;
+            selectedLink = SelectedLink.TDLS;     
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Used in Second Algorithm for switch to BSS Link
+        /// </summary>
+        private void SLSWindow_SwitchToBss()
+        {
+            slsWinSampleSelectedLink = SelectedLink.TDLS;
+            selectedLink = SelectedLink.BSS;
+        }
+
         //=====================================================================
         /// <summary>
         /// Function for send file
