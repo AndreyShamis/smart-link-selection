@@ -235,7 +235,7 @@ namespace Visualisator
             ListenBeacon            = true;
             this.VColor             = DefaultColor;
             _PointerToAllRfDevices  = rfObjects;
-            SLSWindowSize = 10;
+            SLSWindowSize = 1;
             BandWithSupport.Add(Bandwidth._20MHz);
             BandWithSupport.Add(Bandwidth._40Mhz);
 
