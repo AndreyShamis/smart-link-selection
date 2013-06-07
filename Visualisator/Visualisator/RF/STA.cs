@@ -958,7 +958,9 @@ namespace Visualisator
                     //stoper.Stop();
                     if (slsWinSampleSelectedLink == SelectedLink.BSS) // if sample selected link is BSS
                     {
-                        if (sampleSpeedAverage > RegulareSpeedAverage ) 
+
+
+                        if (sampleSpeedAverage.Ticks > RegulareSpeedAverage.Ticks / SLSWindowSize) 
                         { 
                             slsWinSampleSelectedLink = SelectedLink.TDLS;
                             selectedLink = SelectedLink.BSS;
@@ -966,7 +968,7 @@ namespace Visualisator
                     }
                     else // if sample selected link is TDLS
                     {
-                        if (sampleSpeedAverage > RegulareSpeedAverage) 
+                        if (sampleSpeedAverage.Ticks > RegulareSpeedAverage.Ticks / SLSWindowSize) 
                         {
                             slsWinSampleSelectedLink = SelectedLink.BSS;
                             selectedLink = SelectedLink.TDLS;
