@@ -876,6 +876,7 @@ namespace Visualisator
         public bool slsWinsampleInProgress = true;
         public TimeSpan sampleSpeedAverage;
         public TimeSpan RegulareSpeedAverage;
+        [field:NonSerialized()]
         public Stopwatch stoper = new Stopwatch();
         public int winSizeToNumOfPacket;
 
@@ -1049,6 +1050,7 @@ namespace Visualisator
                 if (_connecttoAP == null)    return;
                 this.Passive = false;
                 int SuccessContinuous = 0;
+                
                 Stopwatch sw = Stopwatch.StartNew();
                 TimeSpan timeWindow = sw.Elapsed;// Do work
                 if (!_RFpeers.Contains(DestinationMacAddress))  

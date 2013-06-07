@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Visualisator
 {
-    [Serializable()]
+    [field: NonSerialized()]
     static class Medium 
     {
         [Serializable()]
