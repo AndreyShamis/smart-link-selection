@@ -101,8 +101,9 @@ namespace Visualisator
             set { _MediumSendDataRatio = value; }
         }
 
+        public static SLSAlgType SlsAlgorithm { set; get; }
         public static event EventHandler WeHavePacketsToSend = new EventHandler(evh);
-
+        public static int RunPeriod { set; get; }
         public static void evh(object sender, EventArgs args)
         {
             
@@ -132,6 +133,7 @@ namespace Visualisator
             LoadImagesToArrayLists();
             SLSPacketsNumber    = 20;
             SLSPeriod           = 1000;
+            RunPeriod           = 300;
         }
 
         //=====================================================================
@@ -376,7 +378,7 @@ namespace Visualisator
             {
                 try
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(RunPeriod);
 
                     int PacketsCount = _packets.Count;
                     if (PacketsCount > 0)
