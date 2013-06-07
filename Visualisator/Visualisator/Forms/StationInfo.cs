@@ -41,6 +41,8 @@ namespace Visualisator
             PrintAPList();
             txtMAC.Text = _sta.getMACAddress();
             SelectSSIDIfHaveOneInList();
+            chkbSLSAutoStart.Checked = _sta.AutoStartSLS;
+
         }
 
         //=====================================================================
@@ -600,6 +602,7 @@ namespace Visualisator
 
         private void chkbSLSAutoStart_CheckedChanged(object sender, EventArgs e)
         {
+            _sta.ForceTxInBss = false;
             _sta.AutoStartSLS = chkbSLSAutoStart.Checked ;
         }
 

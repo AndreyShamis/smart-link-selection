@@ -579,6 +579,10 @@ namespace Visualisator
                     {
                         IRFDevice _dev = (IRFDevice) _objects[i];
                         _dev.Enable();
+                        if (_dev.GetType() == typeof(STA))
+                        {
+                            ((STA)_dev).stoper = new System.Diagnostics.Stopwatch();
+                        }
                     }
                 }
             }

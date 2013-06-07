@@ -1063,12 +1063,15 @@ namespace Visualisator
                     if (string.IsNullOrEmpty(_connectedAPMacAddress))
                         return;
                     buffer = new byte[buf_size];
-                    if (SLSAlgorithm == SLSAlgType.WindowBased)
+                    if (AutoStartSLS)
                     {
-                        if (selectedLink == SelectedLink.TDLS)
-                            ForceTxInBss = false;
-                        else
-                            ForceTxInBss = true;
+                        if (SLSAlgorithm == SLSAlgType.WindowBased)
+                        {
+                            if (selectedLink == SelectedLink.TDLS)
+                                ForceTxInBss = false;
+                            else
+                                ForceTxInBss = true;
+                        }
                     }
                     
                         dataPack = new Data(CreatePacket(DestinationMacAddress));
