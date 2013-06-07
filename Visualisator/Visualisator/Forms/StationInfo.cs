@@ -42,7 +42,7 @@ namespace Visualisator
             txtMAC.Text = _sta.getMACAddress();
             SelectSSIDIfHaveOneInList();
             chkbSLSAutoStart.Checked = _sta.AutoStartSLS;
-
+            chkbAutoStartTdls.Checked = _sta.TDLSAutoStart;
         }
 
         //=====================================================================
