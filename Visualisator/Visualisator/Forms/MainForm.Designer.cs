@@ -53,6 +53,12 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtTdlsStarterDelay = new System.Windows.Forms.TextBox();
             this.btnTdlsStarterSetDelay = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtMediumRunPeriod = new System.Windows.Forms.TextBox();
+            this.btnSetMediumRunPerion = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtAmountWindowSize = new System.Windows.Forms.TextBox();
+            this.btmSetAmountWindowSize = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,13 +88,10 @@
             this.txtMediumReceiveDistance = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnShowAllOptions = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtMediumRunPeriod = new System.Windows.Forms.TextBox();
-            this.btnSetMediumRunPerion = new System.Windows.Forms.Button();
-            this.cmbAlgorithm = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.cmbAlgorithm = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.btnShowAllOptions = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -356,6 +359,82 @@
             this.toolTip1.SetToolTip(this.btnTdlsStarterSetDelay, "Try Start TDLS every(ms)");
             this.btnTdlsStarterSetDelay.UseVisualStyleBackColor = true;
             this.btnTdlsStarterSetDelay.Click += new System.EventHandler(this.btnTdlsStarterSetDelay_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.ForeColor = System.Drawing.Color.Navy;
+            this.label13.Location = new System.Drawing.Point(260, 319);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(98, 13);
+            this.label13.TabIndex = 47;
+            this.label13.Text = "Medium Run Period";
+            this.toolTip1.SetToolTip(this.label13, "This function perform some routines for Medium");
+            // 
+            // txtMediumRunPeriod
+            // 
+            this.txtMediumRunPeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtMediumRunPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMediumRunPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtMediumRunPeriod.ForeColor = System.Drawing.Color.Navy;
+            this.txtMediumRunPeriod.Location = new System.Drawing.Point(395, 319);
+            this.txtMediumRunPeriod.Name = "txtMediumRunPeriod";
+            this.txtMediumRunPeriod.Size = new System.Drawing.Size(57, 18);
+            this.txtMediumRunPeriod.TabIndex = 48;
+            this.txtMediumRunPeriod.Text = "3000";
+            this.txtMediumRunPeriod.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtMediumRunPeriod, "This function perform some routines for Medium");
+            // 
+            // btnSetMediumRunPerion
+            // 
+            this.btnSetMediumRunPerion.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSetMediumRunPerion.Location = new System.Drawing.Point(458, 319);
+            this.btnSetMediumRunPerion.Name = "btnSetMediumRunPerion";
+            this.btnSetMediumRunPerion.Size = new System.Drawing.Size(39, 18);
+            this.btnSetMediumRunPerion.TabIndex = 49;
+            this.btnSetMediumRunPerion.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnSetMediumRunPerion, "This function perform some routines for Medium");
+            this.btnSetMediumRunPerion.UseVisualStyleBackColor = true;
+            this.btnSetMediumRunPerion.Click += new System.EventHandler(this.btnSetMediumRunPerion_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.ForeColor = System.Drawing.Color.Navy;
+            this.label15.Location = new System.Drawing.Point(269, 186);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(113, 13);
+            this.label15.TabIndex = 52;
+            this.label15.Text = "SLS Amount of win Sie";
+            this.toolTip1.SetToolTip(this.label15, "SLS Amount of WIndow Size");
+            // 
+            // txtAmountWindowSize
+            // 
+            this.txtAmountWindowSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtAmountWindowSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAmountWindowSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtAmountWindowSize.ForeColor = System.Drawing.Color.Navy;
+            this.txtAmountWindowSize.Location = new System.Drawing.Point(395, 184);
+            this.txtAmountWindowSize.Name = "txtAmountWindowSize";
+            this.txtAmountWindowSize.Size = new System.Drawing.Size(57, 18);
+            this.txtAmountWindowSize.TabIndex = 53;
+            this.txtAmountWindowSize.Text = "10";
+            this.txtAmountWindowSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtAmountWindowSize, "SLS Amount of WIndow Size");
+            // 
+            // btmSetAmountWindowSize
+            // 
+            this.btmSetAmountWindowSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btmSetAmountWindowSize.Location = new System.Drawing.Point(458, 184);
+            this.btmSetAmountWindowSize.Name = "btmSetAmountWindowSize";
+            this.btmSetAmountWindowSize.Size = new System.Drawing.Size(39, 18);
+            this.btmSetAmountWindowSize.TabIndex = 54;
+            this.btmSetAmountWindowSize.Text = "Set";
+            this.toolTip1.SetToolTip(this.btmSetAmountWindowSize, "SLS Amount of WIndow Size");
+            this.btmSetAmountWindowSize.UseVisualStyleBackColor = true;
+            this.btmSetAmountWindowSize.Click += new System.EventHandler(this.btmSetAmountWindowSize_Click);
             // 
             // contextMenuStrip1
             // 
@@ -668,6 +747,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.txtAmountWindowSize);
+            this.groupBox1.Controls.Add(this.btmSetAmountWindowSize);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.cmbAlgorithm);
             this.groupBox1.Controls.Add(this.label13);
@@ -726,64 +808,15 @@
             this.groupBox1.Text = "Medium Controll";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // btnShowAllOptions
+            // label14
             // 
-            this.btnShowAllOptions.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnShowAllOptions.Font = new System.Drawing.Font("Miriam", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.btnShowAllOptions.Location = new System.Drawing.Point(2, 13);
-            this.btnShowAllOptions.Name = "btnShowAllOptions";
-            this.btnShowAllOptions.Size = new System.Drawing.Size(11, 364);
-            this.btnShowAllOptions.TabIndex = 45;
-            this.btnShowAllOptions.Text = "<";
-            this.btnShowAllOptions.UseVisualStyleBackColor = false;
-            this.btnShowAllOptions.Click += new System.EventHandler(this.btnShowAllOptions_Click);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(19, 300);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(235, 13);
-            this.label12.TabIndex = 46;
-            this.label12.Text = "______________________________________";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.ForeColor = System.Drawing.Color.Navy;
-            this.label13.Location = new System.Drawing.Point(260, 319);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(98, 13);
-            this.label13.TabIndex = 47;
-            this.label13.Text = "Medium Run Period";
-            this.toolTip1.SetToolTip(this.label13, "This function perform some routines for Medium");
-            // 
-            // txtMediumRunPeriod
-            // 
-            this.txtMediumRunPeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.txtMediumRunPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMediumRunPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtMediumRunPeriod.ForeColor = System.Drawing.Color.Navy;
-            this.txtMediumRunPeriod.Location = new System.Drawing.Point(395, 319);
-            this.txtMediumRunPeriod.Name = "txtMediumRunPeriod";
-            this.txtMediumRunPeriod.Size = new System.Drawing.Size(57, 18);
-            this.txtMediumRunPeriod.TabIndex = 48;
-            this.txtMediumRunPeriod.Text = "3000";
-            this.txtMediumRunPeriod.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.txtMediumRunPeriod, "This function perform some routines for Medium");
-            // 
-            // btnSetMediumRunPerion
-            // 
-            this.btnSetMediumRunPerion.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetMediumRunPerion.Location = new System.Drawing.Point(458, 319);
-            this.btnSetMediumRunPerion.Name = "btnSetMediumRunPerion";
-            this.btnSetMediumRunPerion.Size = new System.Drawing.Size(39, 18);
-            this.btnSetMediumRunPerion.TabIndex = 49;
-            this.btnSetMediumRunPerion.Text = "Set";
-            this.toolTip1.SetToolTip(this.btnSetMediumRunPerion, "This function perform some routines for Medium");
-            this.btnSetMediumRunPerion.UseVisualStyleBackColor = true;
-            this.btnSetMediumRunPerion.Click += new System.EventHandler(this.btnSetMediumRunPerion_Click);
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.Coral;
+            this.label14.Location = new System.Drawing.Point(260, 149);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(140, 13);
+            this.label14.TabIndex = 51;
+            this.label14.Text = "Select SLS Algorithm to Use";
             // 
             // cmbAlgorithm
             // 
@@ -797,15 +830,26 @@
             this.cmbAlgorithm.SelectedValueChanged += new System.EventHandler(this.cmbAlgorithm_SelectedValueChanged);
             this.cmbAlgorithm.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAlgorithm_MouseClick);
             // 
-            // label14
+            // label12
             // 
-            this.label14.AutoSize = true;
-            this.label14.ForeColor = System.Drawing.Color.Coral;
-            this.label14.Location = new System.Drawing.Point(260, 149);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(140, 13);
-            this.label14.TabIndex = 51;
-            this.label14.Text = "Select SLS Algorithm to Use";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(19, 300);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(235, 13);
+            this.label12.TabIndex = 46;
+            this.label12.Text = "______________________________________";
+            // 
+            // btnShowAllOptions
+            // 
+            this.btnShowAllOptions.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnShowAllOptions.Font = new System.Drawing.Font("Miriam", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnShowAllOptions.Location = new System.Drawing.Point(2, 13);
+            this.btnShowAllOptions.Name = "btnShowAllOptions";
+            this.btnShowAllOptions.Size = new System.Drawing.Size(11, 364);
+            this.btnShowAllOptions.TabIndex = 45;
+            this.btnShowAllOptions.Text = "<";
+            this.btnShowAllOptions.UseVisualStyleBackColor = false;
+            this.btnShowAllOptions.Click += new System.EventHandler(this.btnShowAllOptions_Click);
             // 
             // MainForm
             // 
@@ -890,6 +934,9 @@
         private System.Windows.Forms.Button btnSetMediumRunPerion;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cmbAlgorithm;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtAmountWindowSize;
+        private System.Windows.Forms.Button btmSetAmountWindowSize;
     }
 }
 

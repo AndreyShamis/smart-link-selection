@@ -24,6 +24,7 @@ namespace Visualisator
         private const string _KEY_MEDIUM_TDLS_STARTER_DELAY = "MediumTdlsStarterDelay";
         private const string _KEY_MEDIUM_RUN_PERIOD = "MediumRunPeriod";
         private const string _KEY_SLS_ALGORITHM_USE = "SlsAlgorithmType";
+        private const string _KEY_SLS_AMOUNT_OF_WINDOW_SIZE = "SlsAmountOfWindowSize";
         private PictureBox piB;
         private Bitmap bm;
         private Graphics gr;
@@ -138,6 +139,16 @@ namespace Visualisator
                 settings.setValue(_KEY_SLS_ALGORITHM_USE, Medium.SlsAlgorithm.ToString());
             }
 
+            if (settings.getValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE).Length > 0)
+            {
+                Medium.SlsAmountOfWondowSize = Convert.ToInt32(settings.getValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE));  
+            }
+            else
+            {
+                Medium.SlsAmountOfWondowSize = 30;
+                settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.SlsAmountOfWondowSize.ToString());
+            }
+            
             
             if (settings.getValue(_KEY_GRAFFIC_UPD_INT).Length > 0)
             {
@@ -163,6 +174,7 @@ namespace Visualisator
             txtSLSPacketsNumber.Text = Medium.SLSPacketsNumber.ToString();
             txtTdlsStarterDelay.Text = Medium.TdlsStarterDelay.ToString();
             txtMediumRunPeriod.Text = Medium.RunPeriod.ToString();
+            txtAmountWindowSize.Text = Medium.SlsAmountOfWondowSize.ToString();
             SetMedioRatio();
             SetBSSDelay();
             SetTDLSDelay();
@@ -956,6 +968,13 @@ namespace Visualisator
         private void cmbAlgorithm_MouseClick(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void btmSetAmountWindowSize_Click(object sender, EventArgs e)
+        {
+            int val = ParseIntFromTxt(txtAmountWindowSize);
+            Medium.SlsAmountOfWondowSize = val;
+            settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.SlsAmountOfWondowSize.ToString());
         }
 
     //private void mnuContext(object sender, EventArgs e)

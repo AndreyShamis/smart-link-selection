@@ -873,7 +873,6 @@ namespace Visualisator
         public double SLSWindowSize = 10; //procent %
         public SelectedLink selectedLink { set; get; }
         public SelectedLink slsWinSampleSelectedLink { set; get; }
-        public double slsWinAmountOfPacket = 30;
         public bool slsWinsampleInProgress = true;
         public TimeSpan sampleSpeedAverage;
         public TimeSpan RegulareSpeedAverage;
@@ -908,7 +907,7 @@ namespace Visualisator
                 slsWinGlobalDataPacketCounter = 0;
                 slsWinTDLSDataPacketCounter = 0;
                 slsWinBSSDataPacketCounter = 0;
-                winSizeToNumOfPacket = (int)(slsWinAmountOfPacket - ((slsWinAmountOfPacket / 100) * SLSWindowSize)); // the oposite of window
+                winSizeToNumOfPacket = (int)(Medium.SlsAmountOfWondowSize - ((Medium.SlsAmountOfWondowSize / 100) * SLSWindowSize)); // the oposite of window
                 stoper.Start();
             }
             else
@@ -955,7 +954,7 @@ namespace Visualisator
                         sampleSpeedAverage += stoper.Elapsed;
                     }
                 }
-                if (slsWinGlobalDataPacketCounter < slsWinAmountOfPacket) { stoper.Start(); }
+                if (slsWinGlobalDataPacketCounter < Medium.SlsAmountOfWondowSize) { stoper.Start(); }
                 else
                 {
 
@@ -997,7 +996,7 @@ namespace Visualisator
                     slsWinBSSDataPacketCounter      = 0;
                     sampleSpeedAverage = new TimeSpan();
                     RegulareSpeedAverage = new TimeSpan();
-                    winSizeToNumOfPacket = (int)(slsWinAmountOfPacket - ((slsWinAmountOfPacket / 100) * SLSWindowSize)); // the oposite of window
+                    winSizeToNumOfPacket = (int)(Medium.SlsAmountOfWondowSize - ((Medium.SlsAmountOfWondowSize / 100) * SLSWindowSize)); // the oposite of window
                 }
             }
         }
