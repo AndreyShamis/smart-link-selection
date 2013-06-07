@@ -654,7 +654,7 @@ namespace Visualisator
 
         internal static string DumpPackets()
         {
-            String ret = "";
+            string ret = "";
 
             try
             {

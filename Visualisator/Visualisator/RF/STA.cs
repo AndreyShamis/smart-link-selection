@@ -79,6 +79,7 @@ namespace Visualisator
         /// </summary>
         public string               LastMacAddressOfTdlsDevice  { set; get; }
 
+        private bool ForceStopTdlsStarter;
 
         //=====================================================================
         /// <summary>
@@ -1022,7 +1023,9 @@ namespace Visualisator
             finally {
                 fsSource.Close();
                 Passive = true;
+                StopTdlsStarter();
                 tdlsStarterThread.Join();
+                
             }
         }
 
@@ -1033,7 +1036,8 @@ namespace Visualisator
         /// <param name="destinationMacAddress">Destination MAC address of Peer</param>
         private void TdlsStarter(string destinationMacAddress)
         {
-            while (_Enabled && this.TDLSisEnabled)
+            ForceStopTdlsStarter = false;
+            while (!ForceStopTdlsStarter &&_Enabled && this.TDLSisEnabled)
             {
                 if (this.TDLSAutoStart && this.TDLSisEnabled)
                 {
@@ -1042,6 +1046,11 @@ namespace Visualisator
                 }
                 Thread.Sleep(5000);
             }
+        }
+
+        private void StopTdlsStarter()
+        {
+            ForceStopTdlsStarter = true;
         }
 
         //=====================================================================

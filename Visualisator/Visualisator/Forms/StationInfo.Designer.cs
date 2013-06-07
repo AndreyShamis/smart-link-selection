@@ -314,7 +314,7 @@
             // 
             // lblSLSMessage
             // 
-            this.lblSLSMessage.Location = new System.Drawing.Point(14, 229);
+            this.lblSLSMessage.Location = new System.Drawing.Point(11, 225);
             this.lblSLSMessage.Name = "lblSLSMessage";
             this.lblSLSMessage.Size = new System.Drawing.Size(269, 13);
             this.lblSLSMessage.TabIndex = 78;
@@ -560,7 +560,7 @@
             // lblTdlsUnsuccessTrys
             // 
             this.lblTdlsUnsuccessTrys.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.lblTdlsUnsuccessTrys.Location = new System.Drawing.Point(210, 215);
+            this.lblTdlsUnsuccessTrys.Location = new System.Drawing.Point(210, 211);
             this.lblTdlsUnsuccessTrys.Name = "lblTdlsUnsuccessTrys";
             this.lblTdlsUnsuccessTrys.Size = new System.Drawing.Size(62, 14);
             this.lblTdlsUnsuccessTrys.TabIndex = 75;
@@ -581,7 +581,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label22.Location = new System.Drawing.Point(12, 215);
+            this.label22.Location = new System.Drawing.Point(16, 212);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(188, 13);
             this.label22.TabIndex = 74;
@@ -589,12 +589,12 @@
             // 
             // lblLastTransmitTime
             // 
-            this.lblLastTransmitTime.AutoSize = true;
-            this.lblLastTransmitTime.Location = new System.Drawing.Point(285, 123);
+            this.lblLastTransmitTime.Location = new System.Drawing.Point(251, 123);
             this.lblLastTransmitTime.Name = "lblLastTransmitTime";
-            this.lblLastTransmitTime.Size = new System.Drawing.Size(13, 13);
+            this.lblLastTransmitTime.Size = new System.Drawing.Size(47, 19);
             this.lblLastTransmitTime.TabIndex = 77;
             this.lblLastTransmitTime.Text = "0";
+            this.lblLastTransmitTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblAckReceived
             // 
@@ -1094,7 +1094,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(657, 286);
+            this.tabPage4.Size = new System.Drawing.Size(657, 271);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Statistic";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1104,7 +1104,7 @@
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(625, 305);
+            this.listView1.Size = new System.Drawing.Size(651, 265);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
