@@ -584,6 +584,7 @@ namespace Visualisator
                             ((STA)_dev).stoper = new System.Diagnostics.Stopwatch();
                         }
                     }
+                    LeftPannelSmall();
                 }
             }
             catch (Exception ex2)
