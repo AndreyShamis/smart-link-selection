@@ -75,6 +75,11 @@ namespace Visualisator
                 cmdShowLog.Enabled = true;
             }
             UpdateStandartSupport();
+
+            if (!_ap.isEnabled())
+            {
+                this.Close();
+            }
         }
 
         /// <summary>
