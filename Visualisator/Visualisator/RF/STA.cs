@@ -1002,6 +1002,7 @@ namespace Visualisator
             }
         }
 
+        public Statistic CurrentStatistic { set; get; }
         //=====================================================================
         /// <summary>
         /// Function for send file
@@ -1030,9 +1031,10 @@ namespace Visualisator
             stat.CoordinateY = this.y;
             stat.BSS_BandWith = this.BandWidth.ToString();
             stat.BSS_Standart = this.Stand80211.ToString();
+            stat.PacketsSum = (long)(stat.FileSize / Medium.PACKET_BUFFER_SIZE + (stat.FileSize % Medium.PACKET_BUFFER_SIZE > 0 ? 1 : 0));
             SLSAlgorithm = SLSAlgType.WindowBased;
-            
 
+            CurrentStatistic = stat;
             //ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TdlsStarter(DestinationMacAddress)));
             Thread tdlsStarterThread = new Thread(() => TdlsStarter(DestinationMacAddress));
 

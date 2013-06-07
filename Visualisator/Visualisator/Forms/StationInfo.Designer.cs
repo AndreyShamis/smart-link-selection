@@ -96,6 +96,7 @@
             this.txtTDLSSetupRequestMAC = new System.Windows.Forms.TextBox();
             this.btnChangeTDLSStatus = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.sendDataProgress = new System.Windows.Forms.ProgressBar();
             this.label16 = new System.Windows.Forms.Label();
             this.cmbAPList = new System.Windows.Forms.ComboBox();
             this.btnDisconnect = new System.Windows.Forms.Button();
@@ -124,7 +125,6 @@
             this.cmdLogsClear = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
-            this.sendDataProgress = new System.Windows.Forms.ProgressBar();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -937,6 +937,13 @@
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
+            // sendDataProgress
+            // 
+            this.sendDataProgress.Location = new System.Drawing.Point(12, 61);
+            this.sendDataProgress.Name = "sendDataProgress";
+            this.sendDataProgress.Size = new System.Drawing.Size(302, 12);
+            this.sendDataProgress.TabIndex = 82;
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -1234,13 +1241,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // sendDataProgress
-            // 
-            this.sendDataProgress.Location = new System.Drawing.Point(12, 61);
-            this.sendDataProgress.Name = "sendDataProgress";
-            this.sendDataProgress.Size = new System.Drawing.Size(302, 12);
-            this.sendDataProgress.TabIndex = 82;
             // 
             // StationInfo
             // 

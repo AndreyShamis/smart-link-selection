@@ -313,8 +313,23 @@ namespace Visualisator
             ReloadStatistic();
 
             UpdateStandartSupport();
+            
         }
 
+
+        private void UpdateSendDataProgress()
+        {
+            try
+            {
+                if (_sta.CurrentStatistic != null)
+                    sendDataProgress.Value = (int)(_sta.CurrentStatistic.Packets * 100 / _sta.CurrentStatistic.PacketsSum);
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            
+        }
         //=====================================================================
         private void tmrFast_Tick(object sender, EventArgs e)
         {
@@ -390,7 +405,7 @@ namespace Visualisator
 
                 slsWindowSize.Value = (int) (_sta.SLSWindowSize*100/_sta.slsWinAmountOfPacket);
                 slslAmountOfPackets.Text = _sta.SLSWindowSize.ToString() + " / " + _sta.slsWinAmountOfPacket.ToString();
-
+                UpdateSendDataProgress();
             }
             catch (Exception ex)
             {

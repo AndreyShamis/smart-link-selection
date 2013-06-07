@@ -24,7 +24,7 @@ namespace Visualisator.Simulator
         public string   BSS_Standart    { set; get; }
         public string   TDLS_BandWith   { set; get; }
         public string   TDLS_Standart   { set; get; }
-
+        public long     PacketsSum      { set; get; }
         public Statistic()
         {
                 
