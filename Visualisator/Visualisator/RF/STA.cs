@@ -1044,11 +1044,11 @@ namespace Visualisator
                     if (SLSAlgorithm == SLSAlgType.WindowBased)
                     {
                         if (selectedLink == SelectedLink.TDLS)
-                            dataPack = new Data(CreatePacket(DestinationMacAddress,false)); 
+                            ForceTxInBss = false;
                         else
-                            dataPack = new Data(CreatePacket(DestinationMacAddress,true)); 
+                            ForceTxInBss = true;
                     }
-                    else
+                    
                         dataPack = new Data(CreatePacket(DestinationMacAddress));
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
