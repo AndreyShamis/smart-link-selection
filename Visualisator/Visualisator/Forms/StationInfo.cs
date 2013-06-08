@@ -31,6 +31,7 @@ namespace Visualisator
             this.Text   = Resources.StationInfo_StationInfo_Station_Info__ + _sta.getMACAddress();
             SlowFlow();
             BuildListView();
+            
         }
 
         //=====================================================================
@@ -340,7 +341,7 @@ namespace Visualisator
         {
             try
             {
-                lblRSSI.Text                = _sta.Rssi.ToString(CultureInfo.InvariantCulture);
+                lblRSSI.Text                = _sta.GetRssi();
                 lblWaitingForAck.BackColor  = _sta.WaitingForAck ? Color.Chartreuse : Color.Black;
                 lblTxRx.Text                = _sta.getDataSent().ToString(CultureInfo.InvariantCulture) + "/" + _sta.getDataRecieved().ToString(CultureInfo.InvariantCulture);
                 lblAllReceivedPackets.Text  = _sta.AllReceivedPackets.ToString(CultureInfo.InvariantCulture);
@@ -357,7 +358,7 @@ namespace Visualisator
                 lblLastTransmitTime.Text    = _sta.LastTransmitTIme;
                 lblRetransmittionRate.Text  = _sta.getRetransmitionRate().ToString(CultureInfo.InvariantCulture);
                 lblNoiseRssi.Text           = _sta.guiNoiseRssi.ToString(CultureInfo.InvariantCulture);
-
+                lblBadPackets.Text          = _sta.BadPackets.ToString(CultureInfo.InvariantCulture);
                 if (string.IsNullOrEmpty(_sta.SSID))
                 {
                     cmdSendData.Enabled = false;

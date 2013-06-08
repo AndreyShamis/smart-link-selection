@@ -12,7 +12,8 @@ namespace Visualisator
     [Serializable()]
     class RFDevice: ISerializable,IRFDevice
     { 
-        public  String RF_STATUS = "NONE";
+        public  RFStatus RF_STATUS = RFStatus.None;
+        private string RfSync = "";
         protected String DOCpath = "";
         protected Hashtable     _RFpeers = new Hashtable(new ByteArrayComparer());
         protected Boolean       _Enabled = true;
@@ -62,6 +63,12 @@ namespace Visualisator
         public bool TDLSisWork { set; get; }
         public bool TDLSAutoStart { set; get; }
 
+        private long _badPackets;
+        public long BadPackets
+        {
+            set { _badPackets = value; }
+            get { return _badPackets; }
+        }
 
         #region Noise
         /// <summary>
@@ -296,7 +303,7 @@ namespace Visualisator
         /// <returns>True if device not busy</returns>
         public bool RFWorking()
         {
-            if (!RF_STATUS.Equals("NONE"))
+            if (!RF_STATUS.Equals(RFStatus.None))
                 return true;
                 
             return false;
@@ -476,7 +483,7 @@ namespace Visualisator
         //=====================================================================
         protected bool RF_Ready()
         {
-            return RF_STATUS.Equals("NONE");
+            return RF_STATUS.Equals(RFStatus.None);
         }
 
         //=====================================================================
@@ -520,9 +527,10 @@ namespace Visualisator
             CheckScanConditionOnSend();
             int Rate = pack.getTransmitRate();
             int sleep = (int)(600 / Rate);
-            lock (RF_STATUS){
+            lock (RfSync)
+            {
                 try{
-                    RF_STATUS = "TX";
+                    RF_STATUS = RFStatus.Tx;
                     short OperateChannel = this.getOperateChannel();
                     int try_counter = 0;
                     while (!Medium.Registration(this.Freq, OperateChannel, this.x, this.y, sleep))
@@ -539,7 +547,7 @@ namespace Visualisator
                     MessageBox.Show("SendData :" + ex.Message);
                 }
 
-                RF_STATUS = "NONE";
+                RF_STATUS = RFStatus.None;
             }
             if (pack.GetType() == typeof(Data)){
                 _DataSent++;
@@ -661,18 +669,22 @@ namespace Visualisator
                 if (sender.GetType() == typeof(Data))
                 {
                     if (!MissPacket(t, ((SimulatorPacket)sender).getTransmitRate() ))
+                    {
+                        _badPackets++;
                         return;
+                    }
+                        
                 }
 
                 //SpinWait.SpinUntil(ListenCondition);//,1);
                 prev_guid = new Guid();
                 SimulatorPacket pack = null;
 
-                lock (RF_STATUS)
+                lock (RfSync)
                 {
-                    RF_STATUS = "RX";
+                    RF_STATUS = RFStatus.Rx;
                     pack = Medium.ReceiveData(this);
-                    RF_STATUS = "NONE";
+                    RF_STATUS = RFStatus.None;
                 }
                 if (pack == null){ }
                 else //if (pack != null )//&& (prev_guid != pack.GuidD || pack.IsRetransmit))
@@ -763,8 +775,8 @@ namespace Visualisator
                     else if (_peer.BandWidth == Bandwidth._40Mhz)
                         retVale = getRateOn2_4RSSI40M(_peer.RSSI);
                 }
-                if (_peer.BandWidth == Bandwidth._40Mhz)
-                    retVale*=2;
+                //if (_peer.BandWidth == Bandwidth._40Mhz)
+                //    retVale*=2;
             }  
             return retVale;
         }
@@ -892,14 +904,12 @@ namespace Visualisator
         //*********************************************************************
         protected void CreateFolder()
         {
-            // Specify a name for your top-level folder. 
-            string folderName = @"C:\simulator";
 
             // To create a string that specifies the path to a subfolder under your  
             // top-level folder, add a name for the subfolder to folderName. 
             String mac = this.getMACAddress();
             mac = mac.Replace(":", "-");
-            string pathString = System.IO.Path.Combine(folderName, mac);
+            string pathString = System.IO.Path.Combine(Medium.VisualisatorWorkDir, mac);
             DOCpath = pathString;
             System.IO.Directory.CreateDirectory(pathString);
         }

@@ -185,14 +185,19 @@ namespace Visualisator
             get { return _waitingForAck; }
             set { _waitingForAck = value; }
         }
-
+        
         /// <summary>
         /// Provide RSSI value
         /// </summary>
         public int Rssi
         {
             get { return _RSSI; }
-            set { _RSSI = value; }
+            set{  _RSSI = value;}
+        }
+
+        public string GetRssi()
+        {
+            return Rssi.ToString(CultureInfo.InvariantCulture);
         }
 
         public int StatisticRetransmitTime
@@ -786,24 +791,24 @@ namespace Visualisator
             Type pt = pack.GetType();
 
             if (pt  == typeof(Packets.ConnectionACK))
-                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => ConnectionAckRoutine(pack.SSID)));
+                ConnectionAckRoutine(pack.SSID);
             else if (pt == typeof(Packets.Beacon))
-                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => BeaconRoutine(pack.SSID,Rssi,pack.PacketChannel)));
+                BeaconRoutine(pack.SSID,Rssi,pack.PacketChannel);
             else if (pt == typeof(Packets.Data))
-                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => DataRoutine((Data)pack)));
+                DataRoutine((Data)pack);
             else if (pt == typeof(DataAck))
             {
                 _ackReceived = true;
                 _DataAckReceived++;
             }
             else if (pt == typeof(NullData))
-                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => NullDataRoutine((NullData)pack)));
+                NullDataRoutine((NullData)pack);
             else if (pt == typeof(NullDataAck))
-                ThreadPool.QueueUserWorkItem(new WaitCallback((s) => NullDataAckRoutine((NullDataAck)pack)));
+                NullDataAckRoutine((NullDataAck)pack);
             else
             {
                 if (this.TDLSisEnabled)   // TDLS Parsing
-                    ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TDLSRoutine(pack,pt)));
+                    TDLSRoutine(pack,pt);
             }
         }
 

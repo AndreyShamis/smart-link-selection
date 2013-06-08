@@ -41,7 +41,7 @@ namespace Visualisator
         /// <summary>
         /// Max size for queue which conation Data packets
         /// </summary>
-        public const int                        MAX_QUEUE_SIZE              = 10;
+        public const int                        MAX_QUEUE_SIZE              = 1000;
 
 
         //=====================================================================
@@ -140,7 +140,7 @@ namespace Visualisator
             KeepAliveReceived = 0;
             base.Enable();
             
-            RF_STATUS = "NONE";
+            RF_STATUS = RFStatus.None;
 
             Thread beaconThread = new Thread(SendBeacon)
                     {
