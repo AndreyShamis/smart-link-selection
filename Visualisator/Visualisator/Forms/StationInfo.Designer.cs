@@ -913,7 +913,6 @@
             this.splitContainer2.Panel1.Controls.Add(this.cmbAssociatedDevicesInBSS);
             this.splitContainer2.Panel1.Controls.Add(this.cmdShowLog);
             this.splitContainer2.Panel1.Controls.Add(this.cmdSelectFileToSend);
-            this.splitContainer2.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel1_Paint);
             // 
             // splitContainer2.Panel2
             // 
@@ -935,7 +934,6 @@
             this.splitContainer2.Size = new System.Drawing.Size(326, 246);
             this.splitContainer2.SplitterDistance = 147;
             this.splitContainer2.TabIndex = 0;
-            this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
             // sendDataProgress
             // 
@@ -1023,7 +1021,6 @@
             this.lblStandartASupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartASupport.TabIndex = 62;
             this.lblStandartASupport.Text = "A";
-            this.lblStandartASupport.Click += new System.EventHandler(this.lblStandartASupport_Click);
             this.lblStandartASupport.DoubleClick += new System.EventHandler(this.lblStandartASupport_DoubleClick);
             // 
             // lblStandartGSupport
@@ -1035,7 +1032,6 @@
             this.lblStandartGSupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartGSupport.TabIndex = 63;
             this.lblStandartGSupport.Text = "G";
-            this.lblStandartGSupport.Click += new System.EventHandler(this.lblStandartGSupport_Click);
             this.lblStandartGSupport.DoubleClick += new System.EventHandler(this.lblStandartGSupport_DoubleClick);
             // 
             // label14
@@ -1056,7 +1052,6 @@
             this.lblStandartNSupport.Size = new System.Drawing.Size(15, 15);
             this.lblStandartNSupport.TabIndex = 64;
             this.lblStandartNSupport.Text = "N";
-            this.lblStandartNSupport.Click += new System.EventHandler(this.lblStandartNSupport_Click);
             this.lblStandartNSupport.DoubleClick += new System.EventHandler(this.lblStandartNSupport_DoubleClick);
             // 
             // lblSpeed
