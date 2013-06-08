@@ -95,6 +95,8 @@ namespace Visualisator
         public int                  winSizeToNumOfPacket;
         public Statistic            CurrentStatistic            { set; get; }
         public double               speed                       { set; get; }
+        const short                 MinSLSWindowSize            = 2;
+        const short                 MaxSLSWindowSize            = 6;
 
         //=====================================================================
         /// <summary>
@@ -881,7 +883,7 @@ namespace Visualisator
         /// <summary>
         /// Function perform Window Based SLS algorithm
         /// </summary>
-        public void WindowBasedSLSAlgorithm(bool start, bool stop)
+        private void WindowBasedSLSAlgorithm(bool start, bool stop)
         {
             if (stop)
             {
@@ -961,16 +963,29 @@ namespace Visualisator
                     if (slsWinSampleSelectedLink == SelectedLink.BSS) // if sampled selected link is BSS
                     {
                         if (sampleSpeedAverage.TotalMilliseconds < ((RegulareSpeedAverage.TotalMilliseconds / 100) * SLSWindowSize))
+                        {
                             SLSWindow_SwitchToBss();    // make BSS link to main link and TDLS link to sampeled link
+                            IncreaseSLSWindow();
+                        }
                         else
+                        {
                             SLSWindow_SwitchToTdls();   // make TDLS link to main link and BSS link to sampeled link
+                            DecreaseSLSWindow();
+                        }
                     }
                     else // if sample selected link is TDLS
                     {
                         if (sampleSpeedAverage.TotalMilliseconds < ((RegulareSpeedAverage.TotalMilliseconds / 100) * SLSWindowSize))
+                        {
                             SLSWindow_SwitchToTdls();   // make TDLS link to main link and BSS link to sampeled link
+                            IncreaseSLSWindow();
+                        }
                         else
+                        {
                             SLSWindow_SwitchToBss();    // make BSS link to main link and TDLS link to sampeled link
+                            DecreaseSLSWindow();
+                        }
+
                     }
                     stoper.Start();
                     slsWinGlobalDataPacketCounter   = 0;
@@ -985,7 +1000,27 @@ namespace Visualisator
 
         //=====================================================================
         /// <summary>
-        /// Used in Second Algorithm for switch to TDLS Link
+        /// Used in window based SLS Algorithm for decreasing the window size 
+        /// </summary>
+        private void DecreaseSLSWindow()
+        {
+            if (SLSWindowSize > MinSLSWindowSize)
+                SLSWindowSize--;
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Used in window based SLS Algorithm for inreasing the window size 
+        /// </summary>
+        private void IncreaseSLSWindow()
+        {
+            if (SLSWindowSize < MaxSLSWindowSize)
+                SLSWindowSize++;
+        }
+
+        //=====================================================================
+        /// <summary>
+        /// Used in window based SLS Algorithm for switch to TDLS Link
         /// </summary>
         private void SLSWindow_SwitchToTdls()
         {
@@ -995,7 +1030,7 @@ namespace Visualisator
 
         //=====================================================================
         /// <summary>
-        /// Used in Second Algorithm for switch to BSS Link
+        /// Used in window based SLS Algorithm for switch to BSS Link
         /// </summary>
         private void SLSWindow_SwitchToBss()
         {
