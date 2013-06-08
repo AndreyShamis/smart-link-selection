@@ -96,7 +96,7 @@ namespace Visualisator
 
         public static short slsWin_MinSLSWindowSize { set; get; }
         public static short slsWin_MaxSLSWindowSize { set; get; }
-
+        public static short slsWin_StartFromSLSWindowSize { set; get; }
 
         public static Int32 MediumSendDataRatio
         {
@@ -138,6 +138,9 @@ namespace Visualisator
             SLSPacketsNumber    = 20;
             SLSPeriod           = 1000;
             RunPeriod           = 300;
+            slsWin_StartFromSLSWindowSize = 4;
+            slsWin_MinSLSWindowSize = 2;
+            slsWin_MaxSLSWindowSize = 6;
         }
 
         //=====================================================================

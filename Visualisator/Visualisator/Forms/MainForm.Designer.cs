@@ -417,9 +417,9 @@
             this.label15.ForeColor = System.Drawing.Color.Navy;
             this.label15.Location = new System.Drawing.Point(269, 186);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(113, 13);
+            this.label15.Size = new System.Drawing.Size(118, 13);
             this.label15.TabIndex = 52;
-            this.label15.Text = "SLS Amount of win Sie";
+            this.label15.Text = "SLS Amount of win Size";
             this.toolTip1.SetToolTip(this.label15, "SLS Amount of WIndow Size");
             // 
             // txtAmountWindowSize

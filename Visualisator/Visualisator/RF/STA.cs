@@ -243,7 +243,7 @@ namespace Visualisator
             ListenBeacon            = true;
             this.VColor             = DefaultColor;
             _PointerToAllRfDevices  = rfObjects;
-            SLSWindowSize = 4;
+            SLSWindowSize = Medium.slsWin_StartFromSLSWindowSize;
             Medium.slsWin_MinSLSWindowSize = 2;
             Medium.slsWin_MaxSLSWindowSize = 6;
             BandWithSupport.Add(Bandwidth._20MHz);

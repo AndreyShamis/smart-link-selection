@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -169,10 +170,10 @@ namespace Visualisator
 
 
             if (settings.getValue(_KEY_SLS_ALG_AMOUNT_START).Length > 0){
-                Medium.slsWinNumOfPackPerSampleCycle = Convert.ToInt32(settings.getValue(_KEY_SLS_ALG_AMOUNT_START));
+                Medium.slsWin_StartFromSLSWindowSize = (short)Convert.ToInt32(settings.getValue(_KEY_SLS_ALG_AMOUNT_START));
             }else{
-                Medium.slsWinNumOfPackPerSampleCycle = 4;
-                settings.setValue(_KEY_SLS_ALG_AMOUNT_START, Medium.slsWinNumOfPackPerSampleCycle.ToString());
+                Medium.slsWin_StartFromSLSWindowSize = 4;
+                settings.setValue(_KEY_SLS_ALG_AMOUNT_START, Medium.slsWin_StartFromSLSWindowSize.ToString());
             }
 
             if (settings.getValue(_KEY_SLS_ALG_AMOUNT_MAX).Length > 0){
@@ -200,7 +201,7 @@ namespace Visualisator
             }
             SetMedioRatio();
 
-            txtMediumReceiveDistance.Text = Medium.ReceiveDistance.ToString();
+            
             Medium.ListenDistance           = 200;
             Medium.WaitBeforeRetransmit     = 60;
             Medium.TrysToRetransmit         = 5;
@@ -208,18 +209,19 @@ namespace Visualisator
             Medium.MediumStart();
             Medium.TDLS_TearDownAfterFails  = 13;
 
-            txtSLSPeriod.Text = Medium.SLSPeriod.ToString();
-            cmbAlgorithm.SelectedText = Medium.SlsAlgorithm.ToString();
-            txtSLSPacketsNumber.Text = Medium.SLSPacketsNumber.ToString();
-            txtTdlsStarterDelay.Text = Medium.TdlsStarterDelay.ToString();
-            txtMediumRunPeriod.Text = Medium.RunPeriod.ToString();
-            txtAmountWindowSize.Text = Medium.slsWinNumOfPackPerSampleCycle.ToString();
-            txtDataBufferSize.Text = Medium.PACKET_BUFFER_SIZE.ToString();
+            txtMediumReceiveDistance.Text = Medium.ReceiveDistance.ToString(CultureInfo.InvariantCulture);
+            txtSLSPeriod.Text           = Medium.SLSPeriod.ToString(CultureInfo.InvariantCulture);
+            cmbAlgorithm.SelectedText   = Medium.SlsAlgorithm.ToString();
+            txtSLSPacketsNumber.Text    = Medium.SLSPacketsNumber.ToString(CultureInfo.InvariantCulture);
+            txtTdlsStarterDelay.Text    = Medium.TdlsStarterDelay.ToString(CultureInfo.InvariantCulture);
+            txtMediumRunPeriod.Text     = Medium.RunPeriod.ToString(CultureInfo.InvariantCulture);
+            txtAmountWindowSize.Text    = Medium.slsWinNumOfPackPerSampleCycle.ToString(CultureInfo.InvariantCulture);
+            txtDataBufferSize.Text      = Medium.PACKET_BUFFER_SIZE.ToString(CultureInfo.InvariantCulture);
 
 
-            txtSlsAmountStart.Text = "";
-            txtSlsAmountMax.Text =  Medium.slsWin_MaxSLSWindowSize.ToString();
-            txtSlsAmountMin.Text = Medium.slsWin_MinSLSWindowSize.ToString();
+            txtSlsAmountStart.Text      = Medium.slsWin_StartFromSLSWindowSize.ToString(CultureInfo.InvariantCulture);
+            txtSlsAmountMax.Text        =  Medium.slsWin_MaxSLSWindowSize.ToString(CultureInfo.InvariantCulture);
+            txtSlsAmountMin.Text        = Medium.slsWin_MinSLSWindowSize.ToString(CultureInfo.InvariantCulture);
 
             SetMedioRatio();
             SetBSSDelay();
@@ -1023,15 +1025,36 @@ namespace Visualisator
 
         }
 
+
+        private bool CheckSlsAlgorithmCorrectnessForNewAmountSize(int AmountSize)
+        {
+            bool ret = true;
+
+            int temp = AmountSize * Medium.slsWin_MinSLSWindowSize / 100;
+
+            if (temp < 1)
+                ret = false;
+            return ret;
+        }
+        private bool CheckSlsAlgorithmCorrectnessForNewMinAmountSize(int MinSize)
+        {
+            bool ret = true;
+
+            int temp = (int)Medium.slsWinNumOfPackPerSampleCycle * MinSize / 100;
+
+            if (temp < 1)
+                ret = false;
+            return ret;
+        }
         private void btmSetAmountWindowSize_Click(object sender, EventArgs e)
         {
             int val = ParseIntFromTxt(txtAmountWindowSize);
-            if (val < 10)
-                MessageBox.Show("Minimal value can be 10");
+            if (!CheckSlsAlgorithmCorrectnessForNewAmountSize(val))
+                MessageBox.Show("You cannot set this value. You can increase your minimal value.");
             else
             {
                 Medium.slsWinNumOfPackPerSampleCycle = val;
-                settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.slsWinNumOfPackPerSampleCycle.ToString());
+                settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.slsWinNumOfPackPerSampleCycle.ToString(CultureInfo.InvariantCulture));
             }
         }
 
@@ -1039,30 +1062,34 @@ namespace Visualisator
         {
             int val = ParseIntFromTxt(txtDataBufferSize);
             Medium.PACKET_BUFFER_SIZE = val;
-            settings.setValue(_KEY_MEDIUM_BUFFER_SIZE, Medium.PACKET_BUFFER_SIZE.ToString());
+            settings.setValue(_KEY_MEDIUM_BUFFER_SIZE, Medium.PACKET_BUFFER_SIZE.ToString(CultureInfo.InvariantCulture));
         }
 
         private void btnSlsAmountStartSet_Click(object sender, EventArgs e)
         {
             int val = ParseIntFromTxt(txtSlsAmountStart);
-            if (val < 10)
-                MessageBox.Show("Minimal value can be 10");
+            if (val <= Medium.slsWin_MinSLSWindowSize || val >= Medium.slsWin_MaxSLSWindowSize)
+                MessageBox.Show("Start should be > " + Medium.slsWin_MinSLSWindowSize + " and < " + Medium.slsWin_MaxSLSWindowSize);
             else
             {
-                Medium.slsWinNumOfPackPerSampleCycle = val;
-                settings.setValue(_KEY_SLS_ALG_AMOUNT_START, Medium.slsWinNumOfPackPerSampleCycle.ToString());
+                Medium.slsWin_StartFromSLSWindowSize = (short)val;
+                settings.setValue(_KEY_SLS_ALG_AMOUNT_START, Medium.slsWin_StartFromSLSWindowSize.ToString(CultureInfo.InvariantCulture));
             }
         }
 
         private void btnSlsAmountMinSet_Click(object sender, EventArgs e)
         {
             int val = ParseIntFromTxt(txtSlsAmountMin);
-            if (val >= Medium.slsWin_MaxSLSWindowSize)
-                MessageBox.Show("Min should be smaller than " + Medium.slsWin_MaxSLSWindowSize.ToString());
+            if(!CheckSlsAlgorithmCorrectnessForNewMinAmountSize(val))
+                MessageBox.Show("You cannot set this value. You can increase your SLS Amount of win Size.");
+            else if (val >= Medium.slsWin_MaxSLSWindowSize)
+                MessageBox.Show("Min should be < " + Medium.slsWin_MaxSLSWindowSize.ToString(CultureInfo.InvariantCulture) + " [Max]");
+            else if (val >= Medium.slsWin_StartFromSLSWindowSize)
+                MessageBox.Show("Max should be < " + Medium.slsWin_StartFromSLSWindowSize.ToString(CultureInfo.InvariantCulture) + " [Start]");
             else
             {
                 Medium.slsWin_MinSLSWindowSize = (short)val;
-                settings.setValue(_KEY_SLS_ALG_AMOUNT_MIN, Medium.slsWin_MinSLSWindowSize.ToString());
+                settings.setValue(_KEY_SLS_ALG_AMOUNT_MIN, Medium.slsWin_MinSLSWindowSize.ToString(CultureInfo.InvariantCulture));
             }
         }
 
@@ -1070,11 +1097,13 @@ namespace Visualisator
         {
             int val = ParseIntFromTxt(txtSlsAmountMax);
             if (val <= Medium.slsWin_MinSLSWindowSize)
-                MessageBox.Show("Max should be bigger than " + Medium.slsWin_MinSLSWindowSize.ToString());
+                MessageBox.Show("Max should be > " + Medium.slsWin_MinSLSWindowSize.ToString(CultureInfo.InvariantCulture) + " [Min]");
+            else if (val <= Medium.slsWin_StartFromSLSWindowSize)
+                MessageBox.Show("Max should be > " + Medium.slsWin_StartFromSLSWindowSize.ToString(CultureInfo.InvariantCulture) + " [Start]");
             else
             {
                 Medium.slsWin_MaxSLSWindowSize = (short)val;
-                settings.setValue(_KEY_SLS_ALG_AMOUNT_MAX, Medium.slsWin_MaxSLSWindowSize.ToString());
+                settings.setValue(_KEY_SLS_ALG_AMOUNT_MAX, Medium.slsWin_MaxSLSWindowSize.ToString(CultureInfo.InvariantCulture));
             }
         }
 
