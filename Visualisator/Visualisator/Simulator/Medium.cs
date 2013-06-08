@@ -94,6 +94,9 @@ namespace Visualisator
         public static int               SLSPeriod { set; get; }
         public static int               SLSPacketsNumber { set; get; }
 
+        public static short slsWin_MinSLSWindowSize { set; get; }
+        public static short slsWin_MaxSLSWindowSize { set; get; }
+
 
         public static Int32 MediumSendDataRatio
         {

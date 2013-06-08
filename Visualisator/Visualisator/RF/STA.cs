@@ -95,8 +95,8 @@ namespace Visualisator
         public int                  slsWin_AmountOfPacketsForMainLink;
         public Statistic            CurrentStatistic            { set; get; }
         public double               speed                       { set; get; }
-        const short                 MinSLSWindowSize            = 2;
-        const short                 MaxSLSWindowSize            = 6;
+        //const short                 MinSLSWindowSize            = 2;
+        //const short                 MaxSLSWindowSize            = 6;
 
         public bool                 StopSendData { set; get; }
         //=====================================================================
@@ -244,6 +244,8 @@ namespace Visualisator
             this.VColor             = DefaultColor;
             _PointerToAllRfDevices  = rfObjects;
             SLSWindowSize = 4;
+            Medium.slsWin_MinSLSWindowSize = 2;
+            Medium.slsWin_MaxSLSWindowSize = 6;
             BandWithSupport.Add(Bandwidth._20MHz);
             BandWithSupport.Add(Bandwidth._40Mhz);
 
@@ -888,118 +890,160 @@ namespace Visualisator
         {
             if (stop)
             {
-                try { stoper.Stop(); }
-                catch { }
-                slsWin_GlobalDataPacketCounter = 0;
-                slsWin_TDLSDataPacketCounter = 0;
-                slsWin_BSSDataPacketCounter = 0;
-                slsWin_SampleLinkSpeedAverage = new TimeSpan();
-                slsWin_MainLinkSpeedAverage = new TimeSpan();
-                return;
+                try {
+                    stoper.Reset();
+                    slsWin_GlobalDataPacketCounter = 0;
+                    slsWin_TDLSDataPacketCounter = 0;
+                    slsWin_BSSDataPacketCounter = 0;
+                    slsWin_SampleLinkSpeedAverage = new TimeSpan();
+                    slsWin_MainLinkSpeedAverage = new TimeSpan();
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("SLS Stop:" + ex.Message);
+                }
+
             }
             if (start)
             {
-                slsWin_SampleSelectedLink = SelectedLink.BSS; // always start to sample BSS link 
-                selectedLink = SelectedLink.TDLS; // always start with TDLS link lik as a main link 
-                try { stoper.Stop(); }
-                catch { }
-                slsWin_SampleLinkSpeedAverage = new TimeSpan();
-                slsWin_MainLinkSpeedAverage = new TimeSpan();
-                slsWin_GlobalDataPacketCounter = 0;
-                slsWin_TDLSDataPacketCounter = 0;
-                slsWin_BSSDataPacketCounter = 0;
-                stoper.Start();
+
+                try 
+                {
+                    slsWin_SampleSelectedLink = SelectedLink.BSS; // always start to sample BSS link 
+                    selectedLink = SelectedLink.TDLS; // always start with TDLS link lik as a main link 
+                    slsWin_SampleLinkSpeedAverage = new TimeSpan();
+                    slsWin_MainLinkSpeedAverage = new TimeSpan();
+                    slsWin_GlobalDataPacketCounter = 0;
+                    slsWin_TDLSDataPacketCounter = 0;
+                    slsWin_BSSDataPacketCounter = 0;
+                    stoper.Restart();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("SLS Start :" + ex.Message);
+                }
+
             }
             else
             {
-                slsWin_GlobalDataPacketCounter++;
+                try
+                {
+                    slsWin_GlobalDataPacketCounter++;
 
-                if (slsWin_SampleSelectedLink == SelectedLink.BSS) // if the sampeled link is BSS
-                {
-                    if (slsWin_TDLSDataPacketCounter < slsWin_AmountOfPacketsForMainLink)
+                    if (slsWin_SampleSelectedLink == SelectedLink.BSS) // if the sampeled link is BSS
                     {
-                        slsWin_TDLSDataPacketCounter++;
-                        selectedLink = SelectedLink.TDLS;
-                        try { stoper.Stop(); }
-                        catch { }
-                        slsWin_MainLinkSpeedAverage += stoper.Elapsed;
-                        if (slsWin_TDLSDataPacketCounter >= slsWin_AmountOfPacketsForMainLink) {selectedLink = SelectedLink.BSS;}
-                    }
-                    else
-                    {
-                        slsWin_BSSDataPacketCounter++;
-                        selectedLink = SelectedLink.BSS;
-                        try { stoper.Stop(); }
-                        catch { }
-                        slsWin_SampleLinkSpeedAverage += stoper.Elapsed;
-                    }
-                }
-                else  // if the sampeled link is TDLS
-                {
-                    if (slsWin_BSSDataPacketCounter < slsWin_AmountOfPacketsForMainLink)
-                    {
-                        slsWin_BSSDataPacketCounter++;
-                        selectedLink = SelectedLink.BSS;
-                        try { stoper.Stop(); }
-                        catch { }
-                        slsWin_MainLinkSpeedAverage += stoper.Elapsed;
-                        if (slsWin_BSSDataPacketCounter >= slsWin_AmountOfPacketsForMainLink) {selectedLink = SelectedLink.TDLS;}
-                    }
-                    else
-                    {
-                        slsWin_TDLSDataPacketCounter++;
-                        selectedLink = SelectedLink.TDLS;
-                        try { stoper.Stop(); }
-                        catch { }
-                        slsWin_SampleLinkSpeedAverage += stoper.Elapsed;
-                    }
-                }
-
-                if (slsWin_GlobalDataPacketCounter < Medium.slsWinNumOfPackPerSampleCycle)
-                {
-                    stoper.Start();
-                }
-                else
-                {
-                    if (slsWin_SampleSelectedLink == SelectedLink.BSS) // if sampled selected link is BSS Link
-                    {
-                        if ((slsWin_SampleLinkSpeedAverage.TotalMilliseconds / slsWin_BSSDataPacketCounter) < 
-                            (slsWin_MainLinkSpeedAverage.TotalMilliseconds / slsWin_TDLSDataPacketCounter))
+                        if (slsWin_TDLSDataPacketCounter < slsWin_AmountOfPacketsForMainLink)
                         {
-                            slsWin_SwitchToBss();    // make BSS link to main link and TDLS link to sampeled link
-                            slsWin_IncreaseSLSWindow();
+                            slsWin_TDLSDataPacketCounter++;
+                            selectedLink = SelectedLink.TDLS;
+                            //try { 
+                            stoper.Stop();// }
+                            //catch { }
+                            slsWin_MainLinkSpeedAverage += stoper.Elapsed;
+                            if (slsWin_TDLSDataPacketCounter >= slsWin_AmountOfPacketsForMainLink) { selectedLink = SelectedLink.BSS; }
                         }
                         else
                         {
-                            slsWin_SwitchToTdls();   // make TDLS link to main link and BSS link to sampeled link
-                            slsWin_DecreaseSLSWindow();
+                            slsWin_BSSDataPacketCounter++;
+                            selectedLink = SelectedLink.BSS;
+                            //try { 
+                                stoper.Stop(); //}
+                           // catch 
+                            //{
+                           // }
+                            slsWin_SampleLinkSpeedAverage += stoper.Elapsed;
                         }
                     }
-                    else // if sample selected link is TDLS Link
+                    else  // if the sampeled link is TDLS
                     {
-                        if ((slsWin_SampleLinkSpeedAverage.TotalMilliseconds / slsWin_TDLSDataPacketCounter) <
-                            (slsWin_MainLinkSpeedAverage.TotalMilliseconds / slsWin_BSSDataPacketCounter))
+                        if (slsWin_BSSDataPacketCounter < slsWin_AmountOfPacketsForMainLink)
                         {
-                            slsWin_SwitchToTdls();   // make TDLS link to main link and BSS link to sampeled link
-                            slsWin_IncreaseSLSWindow();
+                            slsWin_BSSDataPacketCounter++;
+                            selectedLink = SelectedLink.BSS;
+                            //try { 
+                            stoper.Stop(); //}
+                            //catch { }
+                            slsWin_MainLinkSpeedAverage += stoper.Elapsed;
+                            if (slsWin_BSSDataPacketCounter >= slsWin_AmountOfPacketsForMainLink) { selectedLink = SelectedLink.TDLS; }
                         }
                         else
                         {
-                            slsWin_SwitchToBss();    // make BSS link to main link and TDLS link to sampeled link
-                            slsWin_DecreaseSLSWindow();
+                            slsWin_TDLSDataPacketCounter++;
+                            selectedLink = SelectedLink.TDLS;
+                            //try { 
+                            stoper.Stop(); //}
+                           // catch { }
+                            slsWin_SampleLinkSpeedAverage += stoper.Elapsed;
                         }
-
                     }
-                    stoper.Start();
-                    slsWin_GlobalDataPacketCounter   = 0;
-                    slsWin_TDLSDataPacketCounter     = 0;
-                    slsWin_BSSDataPacketCounter      = 0;
-                    slsWin_SampleLinkSpeedAverage = new TimeSpan();
-                    slsWin_MainLinkSpeedAverage = new TimeSpan();
+
+                    if (slsWin_GlobalDataPacketCounter < Medium.slsWinNumOfPackPerSampleCycle)
+                    {
+                        stoper.Restart();
+                    }
+                    else
+                    {
+                        if (slsWin_SampleSelectedLink == SelectedLink.BSS) // if sampled selected link is BSS Link
+                        {
+                            double sampleLinkSpeed = slsWin_SampleLinkSpeedAverage.TotalMilliseconds / slsWin_BSSDataPacketCounter;
+                            double mainLinkSpeed = slsWin_MainLinkSpeedAverage.TotalMilliseconds / slsWin_TDLSDataPacketCounter;
+
+                            if ((slsWin_SampleLinkSpeedAverage.TotalMilliseconds / slsWin_BSSDataPacketCounter) <
+                                (slsWin_MainLinkSpeedAverage.TotalMilliseconds / slsWin_TDLSDataPacketCounter))
+                            {
+                                slsWin_SwitchMainLinkToBss();    // make BSS link to main link and TDLS link to sampeled link
+                                slsWin_IncreaseSLSWindow();
+                            }
+                            else
+                            {
+                                slsWin_SwitchMainLinkToTdls();   // make TDLS link to main link and BSS link to sampeled link
+                                slsWin_DecreaseSLSWindow();
+                            }
+                        }
+                        else // if sample selected link is TDLS Link
+                        {
+                            double sampleLinkSpeed = slsWin_SampleLinkSpeedAverage.TotalMilliseconds / slsWin_BSSDataPacketCounter;
+                            double mainLinkSpeed = slsWin_MainLinkSpeedAverage.TotalMilliseconds / slsWin_TDLSDataPacketCounter;
+
+                            if ((slsWin_SampleLinkSpeedAverage.TotalMilliseconds / slsWin_TDLSDataPacketCounter) <
+                                (slsWin_MainLinkSpeedAverage.TotalMilliseconds / slsWin_BSSDataPacketCounter))
+                            {
+                                slsWin_SwitchMainLinkToTdls();   // make TDLS link to main link and BSS link to sampeled link
+                                slsWin_IncreaseSLSWindow();
+                            }
+                            else
+                            {
+                                slsWin_SwitchMainLinkToBss();    // make BSS link to main link and TDLS link to sampeled link
+                                slsWin_DecreaseSLSWindow();
+                            }
+
+                        }
+                        stoper.Restart(); 
+                        slsWin_GlobalDataPacketCounter = 0;
+                        slsWin_TDLSDataPacketCounter = 0;
+                        slsWin_BSSDataPacketCounter = 0;
+                        slsWin_SampleLinkSpeedAverage = new TimeSpan();
+                        slsWin_MainLinkSpeedAverage = new TimeSpan();
+                       
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("SLS :" + ex.Message);
                 }
             }
-            slsWin_AmountOfPacketsForMainLink = (int)(Medium.slsWinNumOfPackPerSampleCycle - ((Medium.slsWinNumOfPackPerSampleCycle / 100) * SLSWindowSize)); // the oposite of window
 
+            try
+            {
+                slsWin_AmountOfPacketsForMainLink = (int)(Medium.slsWinNumOfPackPerSampleCycle - ((Medium.slsWinNumOfPackPerSampleCycle / 100) * SLSWindowSize)); // the oposite of window
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("SLS FIN: " + ex.Message);
+            }
         }
 
         //=====================================================================
@@ -1008,8 +1052,15 @@ namespace Visualisator
         /// </summary>
         private void slsWin_DecreaseSLSWindow()
         {
-            if (SLSWindowSize > MinSLSWindowSize)
-                SLSWindowSize--;
+            try
+            {
+                if (SLSWindowSize > Medium.slsWin_MinSLSWindowSize)
+                    SLSWindowSize--;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
         }
 
         //=====================================================================
@@ -1018,15 +1069,23 @@ namespace Visualisator
         /// </summary>
         private void slsWin_IncreaseSLSWindow()
         {
-            if (SLSWindowSize < MaxSLSWindowSize)
-                SLSWindowSize++;
+            try
+            {
+                if (SLSWindowSize < Medium.slsWin_MaxSLSWindowSize)
+                    SLSWindowSize++;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         //=====================================================================
         /// <summary>
         /// Used in window based SLS Algorithm for switch to TDLS Link
         /// </summary>
-        private void slsWin_SwitchToTdls()
+        private void slsWin_SwitchMainLinkToTdls()
         {
             slsWin_SampleSelectedLink = SelectedLink.BSS;
             selectedLink = SelectedLink.TDLS;     
@@ -1036,7 +1095,7 @@ namespace Visualisator
         /// <summary>
         /// Used in window based SLS Algorithm for switch to BSS Link
         /// </summary>
-        private void slsWin_SwitchToBss()
+        private void slsWin_SwitchMainLinkToBss()
         {
             slsWin_SampleSelectedLink = SelectedLink.TDLS;
             selectedLink = SelectedLink.BSS;
