@@ -98,6 +98,7 @@ namespace Visualisator
         const short                 MinSLSWindowSize            = 2;
         const short                 MaxSLSWindowSize            = 6;
 
+        public bool                 StopSendData { set; get; }
         //=====================================================================
         /// <summary>
         /// Function for create packet. Used in Send Data.
@@ -1048,6 +1049,7 @@ namespace Visualisator
         /// <param name="DestinationMacAddress">Destination Mac Address</param>
         public void ThreadAbleReadFile(string DestinationMacAddress)
         {
+            StopSendData = false;
             int buf_size = Medium.PACKET_BUFFER_SIZE, numOfReadBytes = 0;
             byte[] buffer;
             bool exit_loop = false;
@@ -1106,7 +1108,8 @@ namespace Visualisator
                                        streamID = streamID,
                                        PacketID = packetCounter,
                                    };
-                    if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
+                    if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0 || StopSendData)
+                    {
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
                     }

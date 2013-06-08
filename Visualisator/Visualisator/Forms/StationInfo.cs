@@ -122,18 +122,26 @@ namespace Visualisator
         //=====================================================================
         private void button1_Click(object sender, EventArgs e)
         {
-            string mac = txtDestination.Text;
-            if (mac.Length == 17 && !mac.Equals("00:00:00:00:00:00") && !mac.Equals("FF:FF:FF:FF:FF:FF") && _sta.CheckMacExistance(mac))
+            if (cmdSendData.Text == "Stop")
             {
-                _sta.ReadAndSendFile(txtDestination.Text);
-                txtDestination.BackColor = Color.White;
-                txtTDLSSetupRequestMAC.Text = txtDestination.Text;
-                cmdSendData.Enabled = false;
+                _sta.StopSendData = true;
             }
             else
             {
-                txtDestination.BackColor = Color.IndianRed;
+                string mac = txtDestination.Text;
+                if (mac.Length == 17 && !mac.Equals("00:00:00:00:00:00") && !mac.Equals("FF:FF:FF:FF:FF:FF") && _sta.CheckMacExistance(mac))
+                {
+                    _sta.ReadAndSendFile(txtDestination.Text);
+                    txtDestination.BackColor = Color.White;
+                    txtTDLSSetupRequestMAC.Text = txtDestination.Text;
+                    cmdSendData.Text = "Stop";
+                }
+                else
+                {
+                    txtDestination.BackColor = Color.IndianRed;
+                }
             }
+
         }
 
         //=====================================================================
@@ -290,8 +298,8 @@ namespace Visualisator
 
             if (_sta._LOG.Length > 0)
                 cmdShowLog.Enabled = true;
-
-            cmdSendData.Enabled = _sta.Passive;
+            if (_sta.Passive)
+                cmdSendData.Text = "Send Data";
 
             lblBandwith.Text = _sta.BandWidth.ToString();
             lblStandart.Text = _sta.Stand80211.ToString();

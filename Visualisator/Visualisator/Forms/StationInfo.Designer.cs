@@ -60,6 +60,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.slslAmountOfPackets = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnSendTearDown = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -93,7 +95,6 @@
             this.lblTDLSSetupStatus = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnChangeTDLSStatusOn = new System.Windows.Forms.Button();
             this.txtTDLSSetupRequestMAC = new System.Windows.Forms.TextBox();
             this.btnChangeTDLSStatus = new System.Windows.Forms.Button();
@@ -127,7 +128,6 @@
             this.cmdLogsClear = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
-            this.btnSendTearDown = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -476,6 +476,28 @@
             this.slslAmountOfPackets.TabIndex = 84;
             this.slslAmountOfPackets.Text = "100";
             this.toolTip1.SetToolTip(this.slslAmountOfPackets, "SLS Window Size in Second Algorithm.Changed Dinamicly");
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(15, 168);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(102, 19);
+            this.button2.TabIndex = 41;
+            this.button2.Text = "TDLS Setup Req";
+            this.toolTip1.SetToolTip(this.button2, "Send TDLS Setup Request");
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnSendTearDown
+            // 
+            this.btnSendTearDown.Location = new System.Drawing.Point(123, 168);
+            this.btnSendTearDown.Name = "btnSendTearDown";
+            this.btnSendTearDown.Size = new System.Drawing.Size(62, 19);
+            this.btnSendTearDown.TabIndex = 86;
+            this.btnSendTearDown.Text = "TDLS TD";
+            this.toolTip1.SetToolTip(this.btnSendTearDown, "Send TDLS Teardown");
+            this.btnSendTearDown.UseVisualStyleBackColor = true;
+            this.btnSendTearDown.Click += new System.EventHandler(this.btnSendTearDown_Click);
             // 
             // tabControl1
             // 
@@ -867,17 +889,6 @@
             this.label12.TabIndex = 48;
             this.label12.Text = "TDLS Setup Status";
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(15, 168);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(102, 19);
-            this.button2.TabIndex = 41;
-            this.button2.Text = "TDLS Setup Req";
-            this.toolTip1.SetToolTip(this.button2, "Send TDLS Setup Request");
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // btnChangeTDLSStatusOn
             // 
             this.btnChangeTDLSStatusOn.Enabled = false;
@@ -1261,17 +1272,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // btnSendTearDown
-            // 
-            this.btnSendTearDown.Location = new System.Drawing.Point(123, 168);
-            this.btnSendTearDown.Name = "btnSendTearDown";
-            this.btnSendTearDown.Size = new System.Drawing.Size(62, 19);
-            this.btnSendTearDown.TabIndex = 86;
-            this.btnSendTearDown.Text = "TDLS TD";
-            this.toolTip1.SetToolTip(this.btnSendTearDown, "Send TDLS Teardown");
-            this.btnSendTearDown.UseVisualStyleBackColor = true;
-            this.btnSendTearDown.Click += new System.EventHandler(this.btnSendTearDown_Click);
             // 
             // StationInfo
             // 
