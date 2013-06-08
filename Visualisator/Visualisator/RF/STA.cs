@@ -1190,10 +1190,10 @@ namespace Visualisator
 
                     WaitingForAck = false;
                     if (sw.Elapsed.Seconds >0)
-                        speed = (int)TransferedByte / (sw.Elapsed.Seconds );
+                        speed = (int)TransferedByte / (sw.Elapsed.TotalSeconds );
                     else
                     {
-                        speed = (int)1000 * TransferedByte / (sw.Elapsed.Milliseconds);
+                        speed = (int)1000 * TransferedByte / (sw.Elapsed.TotalMilliseconds);
                     }
                     stat.Speed = speed;
                     stat.Time = sw.Elapsed.TotalSeconds;
