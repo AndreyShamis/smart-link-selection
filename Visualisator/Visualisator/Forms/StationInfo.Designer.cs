@@ -125,6 +125,8 @@
             this.cmdLogsClear = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
+            this.label17 = new System.Windows.Forms.Label();
+            this.lblBadPackets = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -519,6 +521,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label17);
+            this.splitContainer1.Panel1.Controls.Add(this.lblBadPackets);
             this.splitContainer1.Panel1.Controls.Add(this.txtMAC);
             this.splitContainer1.Panel1.Controls.Add(this.lblNowTDLS);
             this.splitContainer1.Panel1.Controls.Add(this.lblNowBSS);
@@ -1237,6 +1241,24 @@
             this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(18, 122);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(68, 13);
+            this.label17.TabIndex = 84;
+            this.label17.Text = "Bad Packets";
+            // 
+            // lblBadPackets
+            // 
+            this.lblBadPackets.AutoSize = true;
+            this.lblBadPackets.Location = new System.Drawing.Point(134, 122);
+            this.lblBadPackets.Name = "lblBadPackets";
+            this.lblBadPackets.Size = new System.Drawing.Size(13, 13);
+            this.lblBadPackets.TabIndex = 85;
+            this.lblBadPackets.Text = "0";
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1370,5 +1392,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label slslAmountOfPackets;
         private System.Windows.Forms.ProgressBar sendDataProgress;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lblBadPackets;
     }
 }

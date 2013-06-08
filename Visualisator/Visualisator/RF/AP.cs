@@ -41,7 +41,7 @@ namespace Visualisator
         /// <summary>
         /// Max size for queue which conation Data packets
         /// </summary>
-        public const int                        MAX_QUEUE_SIZE              = 10;
+        public const int                        MAX_QUEUE_SIZE              = 1000;
 
 
         //=====================================================================

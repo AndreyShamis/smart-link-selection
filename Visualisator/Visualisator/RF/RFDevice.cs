@@ -62,6 +62,12 @@ namespace Visualisator
         public bool TDLSisWork { set; get; }
         public bool TDLSAutoStart { set; get; }
 
+        private long _badPackets;
+        public long BadPackets
+        {
+            set { _badPackets = value; }
+            get { return _badPackets; }
+        }
 
         #region Noise
         /// <summary>
@@ -661,7 +667,11 @@ namespace Visualisator
                 if (sender.GetType() == typeof(Data))
                 {
                     if (!MissPacket(t, ((SimulatorPacket)sender).getTransmitRate() ))
+                    {
+                        _badPackets++;
                         return;
+                    }
+                        
                 }
 
                 //SpinWait.SpinUntil(ListenCondition);//,1);

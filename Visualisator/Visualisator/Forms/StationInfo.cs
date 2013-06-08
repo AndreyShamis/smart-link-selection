@@ -358,7 +358,7 @@ namespace Visualisator
                 lblLastTransmitTime.Text    = _sta.LastTransmitTIme;
                 lblRetransmittionRate.Text  = _sta.getRetransmitionRate().ToString(CultureInfo.InvariantCulture);
                 lblNoiseRssi.Text           = _sta.guiNoiseRssi.ToString(CultureInfo.InvariantCulture);
-
+                lblBadPackets.Text          = _sta.BadPackets.ToString(CultureInfo.InvariantCulture);
                 if (string.IsNullOrEmpty(_sta.SSID))
                 {
                     cmdSendData.Enabled = false;
