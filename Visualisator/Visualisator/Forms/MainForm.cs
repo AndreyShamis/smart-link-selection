@@ -153,12 +153,12 @@ namespace Visualisator
 
             if (settings.getValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE).Length > 0)
             {
-                Medium.SlsAmountOfWondowSize = Convert.ToInt32(settings.getValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE));  
+                Medium.slsWinNumOfPackPerSampleCycle = Convert.ToInt32(settings.getValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE));  
             }
             else
             {
-                Medium.SlsAmountOfWondowSize = 30;
-                settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.SlsAmountOfWondowSize.ToString());
+                Medium.slsWinNumOfPackPerSampleCycle = 30;
+                settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.slsWinNumOfPackPerSampleCycle.ToString());
             }
             
             
@@ -186,7 +186,7 @@ namespace Visualisator
             txtSLSPacketsNumber.Text = Medium.SLSPacketsNumber.ToString();
             txtTdlsStarterDelay.Text = Medium.TdlsStarterDelay.ToString();
             txtMediumRunPeriod.Text = Medium.RunPeriod.ToString();
-            txtAmountWindowSize.Text = Medium.SlsAmountOfWondowSize.ToString();
+            txtAmountWindowSize.Text = Medium.slsWinNumOfPackPerSampleCycle.ToString();
             txtDataBufferSize.Text = Medium.PACKET_BUFFER_SIZE.ToString();
             SetMedioRatio();
             SetBSSDelay();
@@ -997,8 +997,8 @@ namespace Visualisator
                 MessageBox.Show("Minimal value can be 10");
             else
             {
-                Medium.SlsAmountOfWondowSize = val;
-                settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.SlsAmountOfWondowSize.ToString());
+                Medium.slsWinNumOfPackPerSampleCycle = val;
+                settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.slsWinNumOfPackPerSampleCycle.ToString());
             }
         }
 

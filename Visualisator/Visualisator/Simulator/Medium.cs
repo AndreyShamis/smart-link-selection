@@ -118,7 +118,7 @@ namespace Visualisator
 
         public static int TDLS_TearDownAfterFails { set; get; }
         public static int TdlsStarterDelay { set; get; }
-        public static double SlsAmountOfWondowSize { set; get; }
+        public static double slsWinNumOfPackPerSampleCycle { set; get; }
         //*********************************************************************
         private static ArrayList BandAChannels = new ArrayList();
         private static Hashtable _packets = new Hashtable(new ByteArrayComparer());
