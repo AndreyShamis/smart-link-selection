@@ -95,8 +95,8 @@ namespace Visualisator
         public int                  slsWin_AmountOfPacketsForMainLink;
         public Statistic            CurrentStatistic            { set; get; }
         public double               speed                       { set; get; }
-        const short                 MinSLSWindowSize            = 2;
-        const short                 MaxSLSWindowSize            = 6;
+        const short                 MinSLSWindowSize            = 10;
+        const short                 MaxSLSWindowSize            = 30;
 
         public bool                 StopSendData { set; get; }
         //=====================================================================
@@ -243,7 +243,7 @@ namespace Visualisator
             ListenBeacon            = true;
             this.VColor             = DefaultColor;
             _PointerToAllRfDevices  = rfObjects;
-            SLSWindowSize = 4;
+            SLSWindowSize = 20;
             BandWithSupport.Add(Bandwidth._20MHz);
             BandWithSupport.Add(Bandwidth._40Mhz);
 
@@ -1172,7 +1172,7 @@ namespace Visualisator
                         }
                         if (maxRetrays == 0)
                         {
-                            if (TDLSisWork)
+                            if (TDLSisWork && !ForceTxInBss)
                                 TearDownTdlsOnFailToSend(DestinationMacAddress);
                             else
                                 TDLSCounterUnSuccessTx = 0;

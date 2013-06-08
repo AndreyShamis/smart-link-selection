@@ -179,7 +179,7 @@ namespace Visualisator
             Medium.TrysToRetransmit         = 5;
             Medium.RetransmitWindow         = 100;
             Medium.MediumStart();
-            Medium.TDLS_TearDownAfterFails  = 3;
+            Medium.TDLS_TearDownAfterFails  = 13;
 
             txtSLSPeriod.Text = Medium.SLSPeriod.ToString();
             cmbAlgorithm.SelectedText = Medium.SlsAlgorithm.ToString();
