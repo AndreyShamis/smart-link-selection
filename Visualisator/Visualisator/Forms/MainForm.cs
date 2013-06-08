@@ -26,6 +26,10 @@ namespace Visualisator
         private const string _KEY_SLS_ALGORITHM_USE = "SlsAlgorithmType";
         private const string _KEY_SLS_AMOUNT_OF_WINDOW_SIZE = "SlsAmountOfWindowSize";
         private const string _KEY_MEDIUM_BUFFER_SIZE = "DataBufferSize";
+
+        private const string _KEY_SLS_ALG_AMOUNT_START = "SlsAlgAmountStart";
+        private const string _KEY_SLS_ALG_AMOUNT_MAX = "SlsAlgAmountMax";
+        private const string _KEY_SLS_ALG_AMOUNT_MIN = "SlsAlgAmountMin";
         private PictureBox piB;
         private Bitmap bm;
         private Graphics gr;
@@ -160,8 +164,31 @@ namespace Visualisator
                 Medium.slsWinNumOfPackPerSampleCycle = 30;
                 settings.setValue(_KEY_SLS_AMOUNT_OF_WINDOW_SIZE, Medium.slsWinNumOfPackPerSampleCycle.ToString());
             }
-            
-            
+
+
+
+
+            if (settings.getValue(_KEY_SLS_ALG_AMOUNT_START).Length > 0){
+                Medium.slsWinNumOfPackPerSampleCycle = Convert.ToInt32(settings.getValue(_KEY_SLS_ALG_AMOUNT_START));
+            }else{
+                Medium.slsWinNumOfPackPerSampleCycle = 4;
+                settings.setValue(_KEY_SLS_ALG_AMOUNT_START, Medium.slsWinNumOfPackPerSampleCycle.ToString());
+            }
+
+            if (settings.getValue(_KEY_SLS_ALG_AMOUNT_MAX).Length > 0){
+                Medium.slsWinNumOfPackPerSampleCycle = Convert.ToInt32(settings.getValue(_KEY_SLS_ALG_AMOUNT_MAX));
+            }else{
+                Medium.slsWinNumOfPackPerSampleCycle = 6;
+                settings.setValue(_KEY_SLS_ALG_AMOUNT_MAX, Medium.slsWinNumOfPackPerSampleCycle.ToString());
+            }
+
+            if (settings.getValue(_KEY_SLS_ALG_AMOUNT_MIN).Length > 0){
+                Medium.slsWinNumOfPackPerSampleCycle = Convert.ToInt32(settings.getValue(_KEY_SLS_ALG_AMOUNT_MIN));
+            }else{
+                Medium.slsWinNumOfPackPerSampleCycle = 2;
+                settings.setValue(_KEY_SLS_ALG_AMOUNT_MIN, Medium.slsWinNumOfPackPerSampleCycle.ToString());
+            }
+
             if (settings.getValue(_KEY_GRAFFIC_UPD_INT).Length > 0)
             {
                 txtUpdateInterval.Text = settings.getValue(_KEY_GRAFFIC_UPD_INT);
@@ -188,6 +215,12 @@ namespace Visualisator
             txtMediumRunPeriod.Text = Medium.RunPeriod.ToString();
             txtAmountWindowSize.Text = Medium.slsWinNumOfPackPerSampleCycle.ToString();
             txtDataBufferSize.Text = Medium.PACKET_BUFFER_SIZE.ToString();
+
+
+            txtSlsAmountStart.Text = "";
+            txtSlsAmountMax.Text = "";
+            txtSlsAmountMin.Text = "";
+
             SetMedioRatio();
             SetBSSDelay();
             SetTDLSDelay();
@@ -1007,6 +1040,42 @@ namespace Visualisator
             int val = ParseIntFromTxt(txtDataBufferSize);
             Medium.PACKET_BUFFER_SIZE = val;
             settings.setValue(_KEY_MEDIUM_BUFFER_SIZE, Medium.PACKET_BUFFER_SIZE.ToString());
+        }
+
+        private void btnSlsAmountStartSet_Click(object sender, EventArgs e)
+        {
+            int val = ParseIntFromTxt(txtSlsAmountStart);
+            if (val < 10)
+                MessageBox.Show("Minimal value can be 10");
+            else
+            {
+                Medium.slsWinNumOfPackPerSampleCycle = val;
+                settings.setValue(_KEY_SLS_ALG_AMOUNT_START, Medium.slsWinNumOfPackPerSampleCycle.ToString());
+            }
+        }
+
+        private void btnSlsAmountMinSet_Click(object sender, EventArgs e)
+        {
+            int val = ParseIntFromTxt(txtSlsAmountMin);
+            if (val < 10)
+                MessageBox.Show("Minimal value can be 10");
+            else
+            {
+                Medium.slsWinNumOfPackPerSampleCycle = val;
+                settings.setValue(_KEY_SLS_ALG_AMOUNT_MIN, Medium.slsWinNumOfPackPerSampleCycle.ToString());
+            }
+        }
+
+        private void btnSlsAmountMaxSet_Click(object sender, EventArgs e)
+        {
+            int val = ParseIntFromTxt(txtSlsAmountMax);
+            if (val < 10)
+                MessageBox.Show("Minimal value can be 10");
+            else
+            {
+                Medium.slsWinNumOfPackPerSampleCycle = val;
+                settings.setValue(_KEY_SLS_ALG_AMOUNT_MAX, Medium.slsWinNumOfPackPerSampleCycle.ToString());
+            }
         }
 
     //private void mnuContext(object sender, EventArgs e)

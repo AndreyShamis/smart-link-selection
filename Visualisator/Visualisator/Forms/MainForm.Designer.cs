@@ -95,6 +95,15 @@
             this.label16 = new System.Windows.Forms.Label();
             this.txtDataBufferSize = new System.Windows.Forms.TextBox();
             this.btnSetDataBufferSize = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtSlsAmountMin = new System.Windows.Forms.TextBox();
+            this.btnSlsAmountMinSet = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtSlsAmountMax = new System.Windows.Forms.TextBox();
+            this.btnSlsAmountMaxSet = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtSlsAmountStart = new System.Windows.Forms.TextBox();
+            this.btnSlsAmountStartSet = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -368,7 +377,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(269, 227);
+            this.label13.Location = new System.Drawing.Point(269, 301);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(98, 13);
             this.label13.TabIndex = 47;
@@ -381,7 +390,7 @@
             this.txtMediumRunPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMediumRunPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtMediumRunPeriod.ForeColor = System.Drawing.Color.Navy;
-            this.txtMediumRunPeriod.Location = new System.Drawing.Point(395, 225);
+            this.txtMediumRunPeriod.Location = new System.Drawing.Point(395, 299);
             this.txtMediumRunPeriod.Name = "txtMediumRunPeriod";
             this.txtMediumRunPeriod.Size = new System.Drawing.Size(57, 18);
             this.txtMediumRunPeriod.TabIndex = 48;
@@ -392,7 +401,7 @@
             // btnSetMediumRunPerion
             // 
             this.btnSetMediumRunPerion.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetMediumRunPerion.Location = new System.Drawing.Point(458, 225);
+            this.btnSetMediumRunPerion.Location = new System.Drawing.Point(458, 299);
             this.btnSetMediumRunPerion.Name = "btnSetMediumRunPerion";
             this.btnSetMediumRunPerion.Size = new System.Drawing.Size(39, 18);
             this.btnSetMediumRunPerion.TabIndex = 49;
@@ -608,7 +617,7 @@
             this.button6.Enabled = false;
             this.button6.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button6.ForeColor = System.Drawing.Color.Gray;
-            this.button6.Location = new System.Drawing.Point(454, 274);
+            this.button6.Location = new System.Drawing.Point(454, 348);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(40, 18);
             this.button6.TabIndex = 27;
@@ -622,7 +631,7 @@
             this.txtTDLSSendDelayWait.Enabled = false;
             this.txtTDLSSendDelayWait.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtTDLSSendDelayWait.ForeColor = System.Drawing.Color.Gray;
-            this.txtTDLSSendDelayWait.Location = new System.Drawing.Point(391, 274);
+            this.txtTDLSSendDelayWait.Location = new System.Drawing.Point(391, 348);
             this.txtTDLSSendDelayWait.Name = "txtTDLSSendDelayWait";
             this.txtTDLSSendDelayWait.Size = new System.Drawing.Size(57, 18);
             this.txtTDLSSendDelayWait.TabIndex = 26;
@@ -634,7 +643,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.ForeColor = System.Drawing.Color.Gray;
-            this.label5.Location = new System.Drawing.Point(260, 274);
+            this.label5.Location = new System.Drawing.Point(260, 348);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(113, 13);
             this.label5.TabIndex = 25;
@@ -645,7 +654,7 @@
             this.button7.Enabled = false;
             this.button7.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button7.ForeColor = System.Drawing.Color.Gray;
-            this.button7.Location = new System.Drawing.Point(454, 257);
+            this.button7.Location = new System.Drawing.Point(454, 331);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(40, 18);
             this.button7.TabIndex = 24;
@@ -660,7 +669,7 @@
             this.txtBSSSendDelayWait.Enabled = false;
             this.txtBSSSendDelayWait.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtBSSSendDelayWait.ForeColor = System.Drawing.Color.Gray;
-            this.txtBSSSendDelayWait.Location = new System.Drawing.Point(391, 259);
+            this.txtBSSSendDelayWait.Location = new System.Drawing.Point(391, 333);
             this.txtBSSSendDelayWait.Name = "txtBSSSendDelayWait";
             this.txtBSSSendDelayWait.Size = new System.Drawing.Size(57, 18);
             this.txtBSSSendDelayWait.TabIndex = 23;
@@ -672,7 +681,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Gray;
-            this.label6.Location = new System.Drawing.Point(260, 259);
+            this.label6.Location = new System.Drawing.Point(260, 333);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 13);
             this.label6.TabIndex = 22;
@@ -750,6 +759,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label19);
+            this.groupBox1.Controls.Add(this.txtSlsAmountStart);
+            this.groupBox1.Controls.Add(this.btnSlsAmountStartSet);
+            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.txtSlsAmountMax);
+            this.groupBox1.Controls.Add(this.btnSlsAmountMaxSet);
+            this.groupBox1.Controls.Add(this.label17);
+            this.groupBox1.Controls.Add(this.txtSlsAmountMin);
+            this.groupBox1.Controls.Add(this.btnSlsAmountMinSet);
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.txtDataBufferSize);
             this.groupBox1.Controls.Add(this.btnSetDataBufferSize);
@@ -861,7 +879,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(269, 207);
+            this.label16.Location = new System.Drawing.Point(269, 281);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(125, 13);
             this.label16.TabIndex = 55;
@@ -874,7 +892,7 @@
             this.txtDataBufferSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtDataBufferSize.ForeColor = System.Drawing.Color.Navy;
-            this.txtDataBufferSize.Location = new System.Drawing.Point(395, 205);
+            this.txtDataBufferSize.Location = new System.Drawing.Point(395, 279);
             this.txtDataBufferSize.Name = "txtDataBufferSize";
             this.txtDataBufferSize.Size = new System.Drawing.Size(57, 18);
             this.txtDataBufferSize.TabIndex = 56;
@@ -885,7 +903,7 @@
             // btnSetDataBufferSize
             // 
             this.btnSetDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetDataBufferSize.Location = new System.Drawing.Point(458, 205);
+            this.btnSetDataBufferSize.Location = new System.Drawing.Point(458, 279);
             this.btnSetDataBufferSize.Name = "btnSetDataBufferSize";
             this.btnSetDataBufferSize.Size = new System.Drawing.Size(39, 18);
             this.btnSetDataBufferSize.TabIndex = 57;
@@ -893,6 +911,120 @@
             this.toolTip1.SetToolTip(this.btnSetDataBufferSize, "Buffer size in Packet data");
             this.btnSetDataBufferSize.UseVisualStyleBackColor = true;
             this.btnSetDataBufferSize.Click += new System.EventHandler(this.btnSetDataBufferSize_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.ForeColor = System.Drawing.Color.Navy;
+            this.label17.Location = new System.Drawing.Point(269, 231);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(97, 13);
+            this.label17.TabIndex = 58;
+            this.label17.Text = "SLS Amount Min %";
+            this.toolTip1.SetToolTip(this.label17, "SLS Amount of WIndow Size");
+            // 
+            // txtSlsAmountMin
+            // 
+            this.txtSlsAmountMin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSlsAmountMin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSlsAmountMin.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtSlsAmountMin.ForeColor = System.Drawing.Color.Navy;
+            this.txtSlsAmountMin.Location = new System.Drawing.Point(395, 229);
+            this.txtSlsAmountMin.Name = "txtSlsAmountMin";
+            this.txtSlsAmountMin.Size = new System.Drawing.Size(57, 18);
+            this.txtSlsAmountMin.TabIndex = 59;
+            this.txtSlsAmountMin.Text = "2";
+            this.txtSlsAmountMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtSlsAmountMin, "SLS Amount of WIndow Size");
+            // 
+            // btnSlsAmountMinSet
+            // 
+            this.btnSlsAmountMinSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSlsAmountMinSet.Location = new System.Drawing.Point(458, 229);
+            this.btnSlsAmountMinSet.Name = "btnSlsAmountMinSet";
+            this.btnSlsAmountMinSet.Size = new System.Drawing.Size(39, 18);
+            this.btnSlsAmountMinSet.TabIndex = 60;
+            this.btnSlsAmountMinSet.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnSlsAmountMinSet, "SLS Amount of WIndow Size");
+            this.btnSlsAmountMinSet.UseVisualStyleBackColor = true;
+            this.btnSlsAmountMinSet.Click += new System.EventHandler(this.btnSlsAmountMinSet_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label18.ForeColor = System.Drawing.Color.Navy;
+            this.label18.Location = new System.Drawing.Point(269, 251);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(101, 13);
+            this.label18.TabIndex = 61;
+            this.label18.Text = "SLS Amount Max %";
+            this.toolTip1.SetToolTip(this.label18, "SLS Amount of WIndow Size");
+            // 
+            // txtSlsAmountMax
+            // 
+            this.txtSlsAmountMax.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSlsAmountMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSlsAmountMax.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtSlsAmountMax.ForeColor = System.Drawing.Color.Navy;
+            this.txtSlsAmountMax.Location = new System.Drawing.Point(395, 249);
+            this.txtSlsAmountMax.Name = "txtSlsAmountMax";
+            this.txtSlsAmountMax.Size = new System.Drawing.Size(57, 18);
+            this.txtSlsAmountMax.TabIndex = 62;
+            this.txtSlsAmountMax.Text = "6";
+            this.txtSlsAmountMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtSlsAmountMax, "SLS Amount of WIndow Size");
+            // 
+            // btnSlsAmountMaxSet
+            // 
+            this.btnSlsAmountMaxSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSlsAmountMaxSet.Location = new System.Drawing.Point(458, 249);
+            this.btnSlsAmountMaxSet.Name = "btnSlsAmountMaxSet";
+            this.btnSlsAmountMaxSet.Size = new System.Drawing.Size(39, 18);
+            this.btnSlsAmountMaxSet.TabIndex = 63;
+            this.btnSlsAmountMaxSet.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnSlsAmountMaxSet, "SLS Amount of WIndow Size");
+            this.btnSlsAmountMaxSet.UseVisualStyleBackColor = true;
+            this.btnSlsAmountMaxSet.Click += new System.EventHandler(this.btnSlsAmountMaxSet_Click);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label19.ForeColor = System.Drawing.Color.Navy;
+            this.label19.Location = new System.Drawing.Point(269, 209);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(105, 13);
+            this.label19.TabIndex = 64;
+            this.label19.Text = "SLS Amount Start %";
+            this.toolTip1.SetToolTip(this.label19, "SLS Amount of WIndow Size");
+            // 
+            // txtSlsAmountStart
+            // 
+            this.txtSlsAmountStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSlsAmountStart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSlsAmountStart.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtSlsAmountStart.ForeColor = System.Drawing.Color.Navy;
+            this.txtSlsAmountStart.Location = new System.Drawing.Point(395, 207);
+            this.txtSlsAmountStart.Name = "txtSlsAmountStart";
+            this.txtSlsAmountStart.Size = new System.Drawing.Size(57, 18);
+            this.txtSlsAmountStart.TabIndex = 65;
+            this.txtSlsAmountStart.Text = "4";
+            this.txtSlsAmountStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtSlsAmountStart, "SLS Amount of WIndow Size");
+            // 
+            // btnSlsAmountStartSet
+            // 
+            this.btnSlsAmountStartSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSlsAmountStartSet.Location = new System.Drawing.Point(458, 207);
+            this.btnSlsAmountStartSet.Name = "btnSlsAmountStartSet";
+            this.btnSlsAmountStartSet.Size = new System.Drawing.Size(39, 18);
+            this.btnSlsAmountStartSet.TabIndex = 66;
+            this.btnSlsAmountStartSet.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnSlsAmountStartSet, "SLS Amount of WIndow Size");
+            this.btnSlsAmountStartSet.UseVisualStyleBackColor = true;
+            this.btnSlsAmountStartSet.Click += new System.EventHandler(this.btnSlsAmountStartSet_Click);
             // 
             // MainForm
             // 
@@ -983,6 +1115,15 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtDataBufferSize;
         private System.Windows.Forms.Button btnSetDataBufferSize;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtSlsAmountStart;
+        private System.Windows.Forms.Button btnSlsAmountStartSet;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtSlsAmountMax;
+        private System.Windows.Forms.Button btnSlsAmountMaxSet;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtSlsAmountMin;
+        private System.Windows.Forms.Button btnSlsAmountMinSet;
     }
 }
 
