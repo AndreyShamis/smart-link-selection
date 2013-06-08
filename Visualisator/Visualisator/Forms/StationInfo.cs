@@ -18,17 +18,17 @@ namespace Visualisator
 {
     partial class StationInfo : Form
     {
-        private STA _sta = null;
-        public ArrayList _objects = null;
+        private readonly STA _sta = null;
+        private readonly ArrayList _rfObjects = null;
         //=====================================================================
         //=====================================================================
         //=====================================================================
-        public StationInfo(STA st,ArrayList _obj)
+        public StationInfo(STA st,ArrayList obj)
         {
             InitializeComponent();
-            _sta = st;
-            _objects = _obj;
-            this.Text = Resources.StationInfo_StationInfo_Station_Info__ + _sta.getMACAddress();
+            _sta        = st;
+            _rfObjects  = obj;
+            this.Text   = Resources.StationInfo_StationInfo_Station_Info__ + _sta.getMACAddress();
             SlowFlow();
             BuildListView();
         }
@@ -36,10 +36,9 @@ namespace Visualisator
         //=====================================================================
         private void StationInfo_Load(object sender, EventArgs e)
         {
-           // lblMac.Text = _sta.getMACAddress();
-            lblCoordinates.Text = "X:" + (int)_sta.x + " Y:" + (int)_sta.y; 
+            lblCoordinates.Text     = "X:" + _sta.x + " Y:" + _sta.y; 
             PrintAPList();
-            txtMAC.Text = _sta.getMACAddress();
+            txtMAC.Text             = _sta.getMACAddress();
             SelectSSIDIfHaveOneInList();
             chkbSLSAutoStart.Checked = _sta.AutoStartSLS;
             chkbAutoStartTdls.Checked = _sta.TDLSAutoStart;
@@ -48,7 +47,7 @@ namespace Visualisator
         //=====================================================================
         private void btnScan_Click(object sender, EventArgs e)
         {
-            Thread newThread = new Thread(new ThreadStart(Scan));
+            var newThread = new Thread(Scan);
             newThread.Start();
             btnScan.Enabled = false;
             PrintAPList();
@@ -65,12 +64,12 @@ namespace Visualisator
         private void PrintAPList()
         {
             cmbAPList.Items.Clear();
-            ArrayList _ap = _sta.ScanList();
-            if (_ap != null)
+            var ap = _sta.ScanList();
+            if (ap != null)
             {
-                foreach (String SSID in _ap)
+                foreach (string ssid in ap)
                 {
-                    cmbAPList.Items.Add(SSID);
+                    cmbAPList.Items.Add(ssid);
                 }
             }
         }
@@ -85,24 +84,10 @@ namespace Visualisator
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblCoordinates.Text = "X:" + (int)_sta.x + " Y:" + (int)_sta.y; 
-            if (!_sta.getScanStatus())
-            {
-                btnScan.Enabled = true;
-            }
-            else
-            {
-                btnScan.Enabled = false;
-            }
+            btnScan.Enabled = !_sta.getScanStatus();
 
             //txtDumpAll.Text = _sta.DumpAll();
-            if(_sta.TDLSisEnabled)
-            {
-                lblTDLStatus.Text = "On";
-            }
-            else
-            {
-                lblTDLStatus.Text = "Off";
-            }
+            lblTDLStatus.Text = _sta.TDLSisEnabled ? "On" : "Off";
 
             if (_sta.TDLSisWork)
             {
@@ -180,16 +165,14 @@ namespace Visualisator
         //=====================================================================
         private void lblAssociatedAP_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            for (int i = 0; i < _objects.Count; i++)
+            foreach (object t in _rfObjects)
             {
-                if (_objects[i].GetType() == typeof(AP))
+                if (t.GetType() == typeof(AP))
                 {
-
-                    AP _tap = (AP)_objects[i];
-                    if (lblAssociatedAP.Text.ToString().Equals(_tap.SSID.ToString()))
+                    var tap = (AP)t;
+                    if (lblAssociatedAP.Text.Equals(tap.SSID))
                     {
-                        //txtConsole.Text = "AP selected for move :" + i.ToString() + "\r\n" + txtConsole.Text;
-                        APInfo apInf = new APInfo(_tap, _objects);
+                        var apInf = new APInfo(tap, _rfObjects);
                         apInf.Show();
                         return;
                     }
@@ -197,11 +180,10 @@ namespace Visualisator
             }
         }
 
-
         //=====================================================================
         private void button2_Click(object sender, EventArgs e)
         {
-            string txtTDLSSetupRequest = "";
+            string txtTDLSSetupRequest;
             string mac = txtTDLSSetupRequestMAC.Text;
             if (mac.Length == 17 && !mac.Equals("00:00:00:00:00:00") && !mac.Equals("FF:FF:FF:FF:FF:FF") && _sta.CheckMacExistance(mac))
             {
@@ -227,6 +209,7 @@ namespace Visualisator
             _sta.EnableTDLS();
         }
 
+        //=====================================================================
         private void GetDevicesInBSS()
         {
             ArrayList _des = _sta.GetAssociatedDevicesInBSS();
@@ -242,6 +225,7 @@ namespace Visualisator
             }  
         }
 
+        //=====================================================================
         private void cmbAssociatedDevicesInBSS_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbAssociatedDevicesInBSS.Text.Length > 5)
@@ -251,19 +235,23 @@ namespace Visualisator
             }
         }
 
+        //=====================================================================
         private void cmdShowLog_Click(object sender, EventArgs e)
         {
-            ShowLog LogForm = new ShowLog((RFDevice)_sta);
-            LogForm.Show();
+            var logForm = new ShowLog(_sta);
+            logForm.Show();
         }
 
+        //=====================================================================
         private void tmrSlow_Tick(object sender, EventArgs e)
         {
-            SlowFlow();
+            
             if(!_sta.isEnabled())
             {
                 this.Close();
             }
+            SlowFlow();
+            
         }
 
         private void UpdateStandartSupport()
@@ -297,32 +285,29 @@ namespace Visualisator
 
         private void SlowFlow()
         {
-            if (_sta.TDLSAutoStart)
-                chkbAutoStartTdls.Checked = true;
-            else
-                chkbAutoStartTdls.Checked = false;
+            chkbAutoStartTdls.Checked = _sta.TDLSAutoStart;
 
             if (_sta._LOG.Length > 0)
                 cmdShowLog.Enabled = true;
 
-            if (_sta.Passive)
-                cmdSendData.Enabled = true;
-            else
-                cmdSendData.Enabled = false;
+            cmdSendData.Enabled = _sta.Passive;
 
             lblBandwith.Text = _sta.BandWidth.ToString();
             lblStandart.Text = _sta.Stand80211.ToString();
 
-            lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString();
+            lblDoubleReceived.Text = _sta.getDoubleRecieved().ToString(CultureInfo.InvariantCulture);
             PrintAPList();
             SelectSSIDIfHaveOneInList();
             ReloadStatistic();
-
+            lblCoordinates.Text = "X:" + _sta.x + " Y:" + _sta.y; 
             UpdateStandartSupport();
             
         }
 
-
+        //=====================================================================
+        /// <summary>
+        /// Updating sebd Data progress bar
+        /// </summary>
         private void UpdateSendDataProgress()
         {
             try
@@ -340,6 +325,7 @@ namespace Visualisator
             }
             
         }
+
         //=====================================================================
         private void tmrFast_Tick(object sender, EventArgs e)
         {
@@ -354,34 +340,29 @@ namespace Visualisator
         {
             try
             {
-                lblRSSI.Text = _sta.Rssi.ToString();
+                lblRSSI.Text = _sta.Rssi.ToString(CultureInfo.InvariantCulture);
 
                 if (_sta.WaitingForAck)
                     lblWaitingForAck.BackColor = Color.Chartreuse;
                 else
                     lblWaitingForAck.BackColor = Color.Black;
 
-
-                lblTxRx.Text = _sta.getDataSent().ToString() + "/" + _sta.getDataRecieved().ToString();
-                lblAllReceivedPackets.Text = _sta.AllReceivedPackets.ToString();
-                lblAssociatedAP.Text = _sta.GetAssociatedAPSSID();
-                lblAckReceived.Text = _sta.getDataAckRecieved().ToString();
-
-                lblTdlsUnsuccessTrys.Text = _sta.TDLSCounterUnSuccessTx.ToString();
-                lblSLSMessage.Text = _sta.SLSMessage;
-                lblTDLSSetupStatus.Text = _sta.TDLSSetupInfo.ToString() + " [" + _sta.TDLSSetupInfo.GetHashCode().ToString() + "]";
-                lblRetransmited.Text = _sta.DataRetransmited.ToString();
-                lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString();
-
-                lblLastTransmitRate.Text = _sta.MACLastTrnsmitRate.ToString();
-
-                lblSpeed.Text = ConvertBytesToKilobytes((long)_sta.speed).ToString() + "Kbps";
-
-                lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString();// +" | " +
+                lblTxRx.Text                = _sta.getDataSent().ToString(CultureInfo.InvariantCulture) + "/" + _sta.getDataRecieved().ToString(CultureInfo.InvariantCulture);
+                lblAllReceivedPackets.Text  = _sta.AllReceivedPackets.ToString(CultureInfo.InvariantCulture);
+                lblAssociatedAP.Text        = _sta.GetAssociatedAPSSID();
+                lblAckReceived.Text         = _sta.getDataAckRecieved().ToString(CultureInfo.InvariantCulture);
+                lblTdlsUnsuccessTrys.Text   = _sta.TDLSCounterUnSuccessTx.ToString(CultureInfo.InvariantCulture);
+                lblSLSMessage.Text          = _sta.SLSMessage;
+                lblTDLSSetupStatus.Text     = _sta.TDLSSetupInfo.ToString() + " [" + _sta.TDLSSetupInfo.GetHashCode().ToString(CultureInfo.InvariantCulture) + "]";
+                lblRetransmited.Text        = _sta.DataRetransmited.ToString(CultureInfo.InvariantCulture);
+                lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString(CultureInfo.InvariantCulture);
+                lblLastTransmitRate.Text    = _sta.MACLastTrnsmitRate.ToString(CultureInfo.InvariantCulture);
+                lblSpeed.Text               = ConvertBytesToKilobytes((long)_sta.speed).ToString(CultureInfo.InvariantCulture) + "Kbps";
+                lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString(CultureInfo.InvariantCulture);// +" | " +
                 //     lblCounterToretransmit.Text.Substring(0, 2);
-                lblLastTransmitTime.Text = _sta.LastTransmitTIme;
-                lblRetransmittionRate.Text = _sta.getRetransmitionRate().ToString();
-                lblNoiseRssi.Text = _sta.guiNoiseRssi.ToString();
+                lblLastTransmitTime.Text    = _sta.LastTransmitTIme;
+                lblRetransmittionRate.Text  = _sta.getRetransmitionRate().ToString(CultureInfo.InvariantCulture);
+                lblNoiseRssi.Text           = _sta.guiNoiseRssi.ToString(CultureInfo.InvariantCulture);
 
                 if (string.IsNullOrEmpty(_sta.SSID))
                 {
@@ -413,15 +394,21 @@ namespace Visualisator
                     lblNowBSS.BackColor = Color.YellowGreen;             
                 }
 
-                slsWindowSize.Value = (int)(_sta.SLSWindowSize * Medium.SlsAmountOfWondowSize / 100);
-                slslAmountOfPackets.Text = (int)(_sta.SLSWindowSize * Medium.SlsAmountOfWondowSize / 100) + "% / " + Medium.SlsAmountOfWondowSize.ToString();
+                slsWindowSize.Value = (int)_sta.SLSWindowSize;
+                toolTip1.SetToolTip(slsWindowSize, caption: _sta.SLSWindowSize.ToString(CultureInfo.InvariantCulture) + " %");
+                slslAmountOfPackets.Text = (int)(_sta.SLSWindowSize * Medium.SlsAmountOfWondowSize / 100) + " of " + Medium.SlsAmountOfWondowSize.ToString(CultureInfo.InvariantCulture);
                 UpdateSendDataProgress();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("STA INFO tmrFast_Tick" + ex.Message);
+                MessageBox.Show("STA INFO FastFlow:" + ex.Message);
             }
         }
+
+        //=====================================================================
+        /// <summary>
+        /// Check if have SSID in List and Select One
+        /// </summary>
         private void SelectSSIDIfHaveOneInList()
         {
             if (cmbAPList.SelectedIndex == -1 && cmbAPList.Items.Count == 1)
@@ -431,10 +418,13 @@ namespace Visualisator
             
         }
 
+        //=====================================================================
         private void cmdLogsUpdate_Click(object sender, EventArgs e)
         {
             txtErrorsLogFromCode.Text = _sta._LOG.ToString();
         }
+
+        //=====================================================================
         private void SelctFileToSend(object sender, EventArgs e)
         {
             try
@@ -443,58 +433,68 @@ namespace Visualisator
 
                 if (dr == System.Windows.Forms.DialogResult.OK)
                 {
-                    toolTip1.SetToolTip(cmdSelectFileToSend, openFileToSend.FileName.ToString());
+                    toolTip1.SetToolTip(cmdSelectFileToSend, openFileToSend.FileName.ToString(CultureInfo.InvariantCulture));
                     _sta.FilePachToSend = openFileToSend.FileName;
                 }
             }
             catch (Exception ex2)
             {
-                //AddToErrorLog(ex.Message);
                 MessageBox.Show(ex2.Message);
             }
 
         }
 
+        //=====================================================================
         private void cmbAssociatedDevicesInBSS_MouseClick(object sender, MouseEventArgs e)
         {
             GetDevicesInBSS();
         }
 
+        //=====================================================================
         private void chkbAutoStartTdls_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkbAutoStartTdls.Checked)
-                _sta.TDLSAutoStart = true;
-            else
-            {
-                _sta.TDLSAutoStart = false;
-            }
+            _sta.TDLSAutoStart = chkbAutoStartTdls.Checked;
         }
 
+        //=====================================================================
         private void cmdLogsClear_Click(object sender, EventArgs e)
         {
             _sta.ClearLog();
         }
 
+        //=====================================================================
         private void cmbAPList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
+        //=====================================================================
         private void button5_Click(object sender, EventArgs e)
         {
             _sta.EnableBandwithSupportFor40MHz();
         }
 
+        //=====================================================================
         private void button4_Click_1(object sender, EventArgs e)
         {
             _sta.DisableBandwithSupportFor40MHz();
         }
 
+        //=====================================================================
+        /// <summary>
+        /// Update Statistic Table
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmdUpdateStatisticTable_Click(object sender, EventArgs e)
         {
             ReloadStatistic();
         }
 
+        //=====================================================================
+        /// <summary>
+        /// Build view List for Statistic
+        /// </summary>
         private void BuildListView()
         {
             ColumnHeader header1, header2, header3, header4, header5, header6, header7, header8, header9;//, header10;
@@ -563,6 +563,11 @@ namespace Visualisator
             listView1.Sorting = SortOrder.Ascending;
             listView1.View = View.Details;
         }
+
+        //=====================================================================
+        /// <summary>
+        /// Reload Statistic into form. Called By temer every SLOW seconds
+        /// </summary>
         public void ReloadStatistic()
         {
             listView1.Items.Clear();
@@ -620,31 +625,5 @@ namespace Visualisator
             btnConnectToBSS.Enabled = true;
             btnDisconnect.Enabled = false;
         }
-
-        private void lblStandartNSupport_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblStandartGSupport_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblStandartASupport_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
-        }
-
     }
 }
