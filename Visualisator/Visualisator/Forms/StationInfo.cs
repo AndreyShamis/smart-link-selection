@@ -391,7 +391,7 @@ namespace Visualisator
 
                 slsWindowSize.Value = (int)_sta.SLSWindowSize;
                 toolTip1.SetToolTip(slsWindowSize, caption: _sta.SLSWindowSize.ToString(CultureInfo.InvariantCulture) + " %");
-                slslAmountOfPackets.Text = (int)(_sta.SLSWindowSize * Medium.SlsAmountOfWondowSize / 100) + " of " + Medium.SlsAmountOfWondowSize.ToString(CultureInfo.InvariantCulture);
+                slslAmountOfPackets.Text = (int)(_sta.SLSWindowSize * Medium.slsWinNumOfPackPerSampleCycle / 100) + " of " + Medium.slsWinNumOfPackPerSampleCycle.ToString(CultureInfo.InvariantCulture);
                 UpdateSendDataProgress();
             }
             catch (Exception ex)
