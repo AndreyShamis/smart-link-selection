@@ -871,6 +871,7 @@ namespace Visualisator
             Medium.setMediumObj(_objects);
             SetMedioRatio();
             Medium.Enable();
+            DrowOnBoard();
         }
 
         private void cmdAdd1APforSTA_Click(object sender, EventArgs e)
@@ -911,6 +912,7 @@ namespace Visualisator
             Medium.setMediumObj(_objects);
             SetMedioRatio();
             Medium.Enable();
+            DrowOnBoard();
         }
 
         private void btnSetSLSPeriod_Click(object sender, EventArgs e)
