@@ -125,7 +125,7 @@ namespace Visualisator
             string mac = txtDestination.Text;
             if (mac.Length == 17 && !mac.Equals("00:00:00:00:00:00") && !mac.Equals("FF:FF:FF:FF:FF:FF") && _sta.CheckMacExistance(mac))
             {
-                _sta.rfile(txtDestination.Text);
+                _sta.ReadAndSendFile(txtDestination.Text);
                 txtDestination.BackColor = Color.White;
                 txtTDLSSetupRequestMAC.Text = txtDestination.Text;
                 cmdSendData.Enabled = false;

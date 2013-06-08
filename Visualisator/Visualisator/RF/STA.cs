@@ -866,15 +866,15 @@ namespace Visualisator
         /// Start send file
         /// </summary>
         /// <param name="fileName">Actually Mac Address of Peer</param>
-        public void rfile(string fileName)
+        public void ReadAndSendFile(string fileName)
         {
             try
             {
-                Thread newThread = new Thread(() => ThreadAbleReadFile(fileName));
-                newThread.Name = "ThreadAbleReadFile" + this.getMACAddress();
+                var newThread = new Thread(() => ThreadAbleReadFile(fileName))
+                                    {Name = "ThreadAbleReadFile" + this.getMACAddress()};
                 newThread.Start();
             }
-            catch (Exception ex) { AddToLog("rfile: " + ex.Message); }
+            catch (Exception ex) { AddToLog("ReadAndSendFile: " + ex.Message); }
         }
 
         //=====================================================================
@@ -1014,34 +1014,31 @@ namespace Visualisator
             byte[] buffer;
             bool exit_loop = false;
             Data dataPack = null;
-            Guid streamID = new Guid();
-            streamID = Guid.NewGuid();
+            Guid streamID = Guid.NewGuid();
             int packetCounter = 0;
             short TxRateOnSend;
             TDLSCounterUnSuccessTx = 0;
             long TransferedByte = 0;
             FileStream fsSource = new FileStream(FilePachToSend, FileMode.Open, FileAccess.Read);
-            Statistic stat = new Statistic();
+
+            var stat = new Statistic
+            {
+                DesctinationMAC = DestinationMacAddress,
+                FileName = FilePachToSend,
+                FileSize = fsSource.Length,
+                SourceMAC = this.getMACAddress(),
+                CoordinateX = this.x,
+                CoordinateY = this.y,
+                BSS_BandWith = this.BandWidth.ToString(),
+                BSS_Standart = this.Stand80211.ToString(),
+                PacketsSum = (long)(fsSource.Length / Medium.PACKET_BUFFER_SIZE + (fsSource.Length % Medium.PACKET_BUFFER_SIZE > 0 ? 1 : 0)),
+            };
             StatisticOfSendData.Add(stat);
-            stat.DesctinationMAC = DestinationMacAddress;
-            stat.FileName = FilePachToSend;
-            stat.FileSize = fsSource.Length;
-            stat.SourceMAC = this.getMACAddress();
-            stat.CoordinateX = this.x;
-            stat.CoordinateY = this.y;
-            stat.BSS_BandWith = this.BandWidth.ToString();
-            stat.BSS_Standart = this.Stand80211.ToString();
-            stat.PacketsSum = (long)(stat.FileSize / Medium.PACKET_BUFFER_SIZE + (stat.FileSize % Medium.PACKET_BUFFER_SIZE > 0 ? 1 : 0));
-
             CurrentStatistic = stat;
-            //ThreadPool.QueueUserWorkItem(new WaitCallback((s) => TdlsStarter(DestinationMacAddress)));
-            Thread tdlsStarterThread = new Thread(() => TdlsStarter(DestinationMacAddress));
-
-            tdlsStarterThread.Name = "TDLS StarterThread:" + this.getMACAddress();
+            var tdlsStarterThread = new Thread(() => TdlsStarter(DestinationMacAddress))
+                                           {Name = "TDLS StarterThread:" + this.getMACAddress()};
             tdlsStarterThread.Start();
-
             if ( Medium.SlsAlgorithm== SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(true, false); }
-
             TestTdlsEnable = true;
             try
             {
@@ -1050,12 +1047,12 @@ namespace Visualisator
                 this.Passive = false;
                 int SuccessContinuous = 0;
                 
-                Stopwatch sw = Stopwatch.StartNew();
-                TimeSpan timeWindow = sw.Elapsed;// Do work
+                var sw              = Stopwatch.StartNew();
+                var timeWindow      = sw.Elapsed;// Do work
                 if (!_RFpeers.Contains(DestinationMacAddress))  
                     this.UpdateRFPeers();
 
-                RFpeer workPeer     = (RFpeer)_RFpeers[DestinationMacAddress];
+                var workPeer        = (RFpeer)_RFpeers[DestinationMacAddress];
                 MACOfAnotherPeer    = DestinationMacAddress;
                 while (!exit_loop)
                 {
@@ -1063,24 +1060,19 @@ namespace Visualisator
                         return;
                     buffer = new byte[buf_size];
 
-                    if (Medium.SlsAlgorithm == SLSAlgType.WindowBased)
-                    {
-                        if (AutoStartSLS)
-                        {
-                            if (selectedLink == SelectedLink.TDLS)
-                                ForceTxInBss = false;
-                            else
-                                ForceTxInBss = true;
-                        }
-                    }
-                    dataPack = new Data(CreatePacket(DestinationMacAddress));
+                    if (Medium.SlsAlgorithm == SLSAlgType.WindowBased && AutoStartSLS)
+                            ForceTxInBss = selectedLink != SelectedLink.TDLS;
+
+                    dataPack = new Data(CreatePacket(DestinationMacAddress))
+                                   {
+                                       streamID = streamID,
+                                       PacketID = packetCounter,
+                                   };
                     if ((numOfReadBytes = fsSource.Read(buffer, 0, buf_size)) == 0){
                         exit_loop = true;
                         dataPack.streamStatus = StreamingStatus.Ended;
                     }
-                    dataPack.PacketID   = packetCounter;
                     dataPack.FrameSize  = numOfReadBytes;
-                    dataPack.streamID   = streamID;
                     dataPack._data      = buffer;
                     TxRateOnSend = GetTXRate(dataPack.Destination);
                     dataPack.setTransmitRate(TxRateOnSend);
@@ -1100,13 +1092,10 @@ namespace Visualisator
                     WaitingForAck       = true;
                     packetCounter++;
 
-                    //if (sw.Elapsed.Seconds > 0)
-                    //{
-                        speed = TransferedByte/(sw.Elapsed.Seconds+0.0001);
-
-                        stat.Speed = Math.Round(speed,1);
-                    //}
+                    speed = TransferedByte/(sw.Elapsed.Seconds+0.0001);
+                    stat.Speed = Math.Round(speed,1);
                     stat.Time = sw.Elapsed.TotalSeconds;
+
                     int retrCounter = Medium.WaitBeforeRetransmit;
                     int loops = 1;
 
@@ -1119,7 +1108,6 @@ namespace Visualisator
                     bool ThePacketWasRetransmited = false;
                     while (!_ackReceived)
                     {
-
                         retrCounter --;
                         Thread.Sleep(1);
                         if (retrCounter < 0)
@@ -1146,17 +1134,12 @@ namespace Visualisator
                         if (maxRetrays == 0)
                         {
                             if (TDLSisWork)
-                            {
                                 TearDownTdlsOnFailToSend(DestinationMacAddress);
-                            }
                             else
-                            {
                                 TDLSCounterUnSuccessTx = 0;
-                            }
 
                             break;
                         }
-
                     }
                     if (Medium.SlsAlgorithm == SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(false, false); }
 
@@ -1180,8 +1163,8 @@ namespace Visualisator
 
                 this.Passive = true;
                 sw.Stop();
-                TimeSpan elapsedTime = sw.Elapsed;
-                LastTransmitTIme = elapsedTime.TotalSeconds.ToString();
+                var elapsedTime = sw.Elapsed;
+                LastTransmitTIme = elapsedTime.TotalSeconds.ToString(CultureInfo.InvariantCulture);
                 stat.Time = elapsedTime.TotalSeconds;
             }
             catch (Exception ex) { AddToLog("ThreadAbleReadFile: " + ex.Message); }
