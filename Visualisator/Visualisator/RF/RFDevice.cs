@@ -104,6 +104,8 @@ namespace Visualisator
         /// </summary>
         public void UpdateRFPeers()
         {
+            if (Medium._objects == null)
+                return;
             try
             {
                 double dist = 0;
