@@ -962,7 +962,7 @@ namespace Visualisator
                 {
                     if (slsWinSampleSelectedLink == SelectedLink.BSS) // if sampled selected link is BSS
                     {
-                        if (sampleSpeedAverage.TotalMilliseconds < ((RegulareSpeedAverage.TotalMilliseconds / 100) * SLSWindowSize))
+                        if (sampleSpeedAverage.TotalMilliseconds * (100 / (100-SLSWindowSize)) < ((RegulareSpeedAverage.TotalMilliseconds / 100) * (100 / SLSWindowSize)))
                         {
                             SLSWindow_SwitchToBss();    // make BSS link to main link and TDLS link to sampeled link
                             IncreaseSLSWindow();
@@ -975,7 +975,7 @@ namespace Visualisator
                     }
                     else // if sample selected link is TDLS
                     {
-                        if (sampleSpeedAverage.TotalMilliseconds < ((RegulareSpeedAverage.TotalMilliseconds / 100) * SLSWindowSize))
+                        if (sampleSpeedAverage.TotalMilliseconds * (100 / (100 - SLSWindowSize)) < ((RegulareSpeedAverage.TotalMilliseconds / 100) * (100 / SLSWindowSize)))
                         {
                             SLSWindow_SwitchToTdls();   // make TDLS link to main link and BSS link to sampeled link
                             IncreaseSLSWindow();
@@ -1127,9 +1127,7 @@ namespace Visualisator
                     WaitingForAck       = true;
                     packetCounter++;
 
-                    speed = TransferedByte/(sw.Elapsed.Seconds+0.0001);
-                    stat.Speed = Math.Round(speed,1);
-                    stat.Time = sw.Elapsed.TotalSeconds;
+
 
                     int retrCounter = Medium.WaitBeforeRetransmit;
                     int loops = 1;
@@ -1191,6 +1189,14 @@ namespace Visualisator
                     }
 
                     WaitingForAck = false;
+                    if (sw.Elapsed.Seconds >0)
+                        speed = (int)TransferedByte / (sw.Elapsed.Seconds );
+                    else
+                    {
+                        speed = (int)1000 * TransferedByte / (sw.Elapsed.Milliseconds);
+                    }
+                    stat.Speed = speed;
+                    stat.Time = sw.Elapsed.TotalSeconds;
                     _statisticRetransmitTime = loops * 60 - retrCounter;
                 }
 

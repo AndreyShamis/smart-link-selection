@@ -37,12 +37,12 @@ namespace Visualisator.Simulator
 
         public static double ConvertBytesToKilobytes(long bytes)
         {
-            return Math.Round(bytes / 1024f,1);
+            return  Math.Round((bytes / 1024f),1);
         }
 
         public static double ConvertBytesToMegabytes(long bytes)
         {
-            return Math.Round ((bytes / 1024f) / 1024f,1);
+            return  Math.Round(((bytes / 1024f) / 1024f),1);
         }
 
         public static float ConvertKilobytesToMegabytes(long kilobytes)
@@ -53,19 +53,18 @@ namespace Visualisator.Simulator
         public string getSpeedInHumanRead()
         {
             string ret;
-            double m_speed = this.Speed;
 
-            if(m_speed <1000)
+            if (Speed < 1024f)
             {
-                ret = m_speed + " bs";
+                ret = Speed + " bs";
             }
-            else if(m_speed < 1000000)
+            else if (Speed < 1048567f)
             {
-                ret = ConvertBytesToKilobytes((long)m_speed).ToString(CultureInfo.InvariantCulture) + " Kbs";
+                ret = ConvertBytesToKilobytes((long)Speed).ToString(CultureInfo.InvariantCulture) + " Kbs";
             }
             else
             {
-                ret = ConvertBytesToMegabytes((long)m_speed).ToString(CultureInfo.InvariantCulture) + " Mbs";
+                ret = ConvertBytesToMegabytes((long)Speed).ToString(CultureInfo.InvariantCulture) + " Mbs";
             }
 
             return ret;
