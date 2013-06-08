@@ -26,7 +26,21 @@ namespace Visualisator.Simulator
         public string   TDLS_Standart   { set; get; }
         public long     PacketsSum      { set; get; }
         public long     TransferetBytes { set; get; }
-        public double   CurrentSpeed    { set; get; }
+        private double _CurrentSpeed;
+        public double   CurrentSpeed    { 
+            set 
+            {
+                _CurrentSpeed = value;
+                minSpeed = Math.Min(_CurrentSpeed, minSpeed);
+                maxSpeed = Math.Max(_CurrentSpeed, maxSpeed);
+            }
+            get
+            {
+                return   _CurrentSpeed; 
+            } 
+        }
+        public double   minSpeed        { set; get; }
+        public double   maxSpeed        { set; get; }
         public Statistic()
         {
                 
