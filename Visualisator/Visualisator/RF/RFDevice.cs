@@ -483,7 +483,7 @@ namespace Visualisator
         //=====================================================================
         protected bool RF_Ready()
         {
-            return RF_STATUS.Equals("NONE");
+            return RF_STATUS.Equals(RFStatus.None);
         }
 
         //=====================================================================
