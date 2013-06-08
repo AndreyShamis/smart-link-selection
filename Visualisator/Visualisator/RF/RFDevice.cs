@@ -902,14 +902,12 @@ namespace Visualisator
         //*********************************************************************
         protected void CreateFolder()
         {
-            // Specify a name for your top-level folder. 
-            string folderName = @"C:\simulator";
 
             // To create a string that specifies the path to a subfolder under your  
             // top-level folder, add a name for the subfolder to folderName. 
             String mac = this.getMACAddress();
             mac = mac.Replace(":", "-");
-            string pathString = System.IO.Path.Combine(folderName, mac);
+            string pathString = System.IO.Path.Combine(Medium.VisualisatorWorkDir, mac);
             DOCpath = pathString;
             System.IO.Directory.CreateDirectory(pathString);
         }

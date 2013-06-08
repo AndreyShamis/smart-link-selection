@@ -126,6 +126,7 @@ namespace Visualisator
         private static ArrayList _B = new ArrayList();
         private static StringBuilder _LOG = new StringBuilder();
 
+        public static string VisualisatorWorkDir = @"C:\simulator";
 
         //=====================================================================
         static Medium()
