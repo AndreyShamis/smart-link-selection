@@ -773,8 +773,8 @@ namespace Visualisator
                     else if (_peer.BandWidth == Bandwidth._40Mhz)
                         retVale = getRateOn2_4RSSI40M(_peer.RSSI);
                 }
-                if (_peer.BandWidth == Bandwidth._40Mhz)
-                    retVale*=2;
+                //if (_peer.BandWidth == Bandwidth._40Mhz)
+                //    retVale*=2;
             }  
             return retVale;
         }
