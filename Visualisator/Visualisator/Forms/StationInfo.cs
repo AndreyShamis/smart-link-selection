@@ -361,7 +361,8 @@ namespace Visualisator
                 lblRetransmited.Text        = _sta.DataRetransmited.ToString(CultureInfo.InvariantCulture);
                 lblDataAckRetransmited.Text = _sta.DataAckRetransmitted.ToString(CultureInfo.InvariantCulture);
                 lblLastTransmitRate.Text    = _sta.MACLastTrnsmitRate.ToString(CultureInfo.InvariantCulture);
-                lblSpeed.Text               = ConvertBytesToKilobytes((long)_sta.speed).ToString(CultureInfo.InvariantCulture) + "Kbps";
+                if (_sta.CurrentStatistic != null)
+                    lblSpeed.Text               = ConvertBytesToKilobytes((long)_sta.CurrentStatistic.CurrentSpeed).ToString(CultureInfo.InvariantCulture) + "Kbps" + " / " + ConvertBytesToKilobytes((long)_sta.speed).ToString(CultureInfo.InvariantCulture) + "Kbps";
                 lblCounterToretransmit.Text = _sta.StatisticRetransmitTime.ToString(CultureInfo.InvariantCulture);// +" | " + //     lblCounterToretransmit.Text.Substring(0, 2);
                 lblLastTransmitTime.Text    = _sta.LastTransmitTIme;
                 lblRetransmittionRate.Text  = _sta.getRetransmitionRate().ToString(CultureInfo.InvariantCulture);

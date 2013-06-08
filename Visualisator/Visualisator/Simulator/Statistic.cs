@@ -25,6 +25,8 @@ namespace Visualisator.Simulator
         public string   TDLS_BandWith   { set; get; }
         public string   TDLS_Standart   { set; get; }
         public long     PacketsSum      { set; get; }
+        public long     TransferetBytes { set; get; }
+        public double   CurrentSpeed    { set; get; }
         public Statistic()
         {
                 

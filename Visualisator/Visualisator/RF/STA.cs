@@ -80,6 +80,7 @@ namespace Visualisator
         public string               LastMacAddressOfTdlsDevice  { set; get; }
 
         private bool                ForceStopTdlsStarter;
+        private bool                ForceStoppeedCounter;
         private bool                TestTdlsEnable;
         public int                  slsWin_GlobalDataPacketCounter = 0;
         public int                  slsWin_BSSDataPacketCounter  = 0;
@@ -1137,6 +1138,8 @@ namespace Visualisator
             var tdlsStarterThread = new Thread(() => TdlsStarter(DestinationMacAddress))
                                            {Name = "TDLS StarterThread:" + this.getMACAddress()};
             tdlsStarterThread.Start();
+            var currentSpeedThread = new Thread(() => currentSpeedCalculation()) { Name = "TDLS currentSpeedThread:" + this.getMACAddress() };
+            currentSpeedThread.Start();
             if ( Medium.SlsAlgorithm== SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(true, false); }
             TestTdlsEnable = true;
             try
@@ -1260,6 +1263,7 @@ namespace Visualisator
                     {
                         speed = (int)1000 * TransferedByte / (sw.Elapsed.TotalMilliseconds);
                     }
+                    stat.TransferetBytes = TransferedByte;
                     stat.Speed = speed;
                     stat.Time = sw.Elapsed.TotalSeconds;
                     _statisticRetransmitTime = loops * 60 - retrCounter;
@@ -1278,7 +1282,9 @@ namespace Visualisator
                 fsSource.Close();
                 Passive = true;
                 StopTdlsStarter();
+                ForceStoppeedCounter = true;
                 tdlsStarterThread.Join();
+                currentSpeedThread.Join();
                 TestTdlsEnable = false;
 
             }
@@ -1302,7 +1308,22 @@ namespace Visualisator
                 Thread.Sleep(Medium.TdlsStarterDelay);
             }
         }
-
+        //=====================================================================
+        /// <summary>
+        /// calculation of current speed of file transmission
+        /// </summary>
+        private void currentSpeedCalculation()
+        {
+            ForceStoppeedCounter = false;
+            long prevPack = 0;
+            while (!ForceStoppeedCounter &&_Enabled)
+            {
+                long sent = CurrentStatistic.TransferetBytes - prevPack;
+                CurrentStatistic.CurrentSpeed = sent;
+                prevPack = CurrentStatistic.TransferetBytes;
+                Thread.Sleep(1001);
+            }
+        }
         private void StopTdlsStarter()
         {
             ForceStopTdlsStarter = true;
