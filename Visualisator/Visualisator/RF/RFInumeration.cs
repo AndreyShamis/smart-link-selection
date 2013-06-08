@@ -17,6 +17,15 @@ namespace Visualisator
         _2400GHz,
         _5200GHz,
     };
+
+    [Serializable()]
+    internal enum RFStatus
+    {
+        None,
+        Tx,
+        Rx,
+    };
+
     [Serializable()]
     internal enum Standart80211
     {

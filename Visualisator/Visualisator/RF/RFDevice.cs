@@ -12,7 +12,8 @@ namespace Visualisator
     [Serializable()]
     class RFDevice: ISerializable,IRFDevice
     { 
-        public  String RF_STATUS = "NONE";
+        public  RFStatus RF_STATUS = RFStatus.None;
+        private string RfSync = "";
         protected String DOCpath = "";
         protected Hashtable     _RFpeers = new Hashtable(new ByteArrayComparer());
         protected Boolean       _Enabled = true;
@@ -302,7 +303,7 @@ namespace Visualisator
         /// <returns>True if device not busy</returns>
         public bool RFWorking()
         {
-            if (!RF_STATUS.Equals("NONE"))
+            if (!RF_STATUS.Equals(RFStatus.None))
                 return true;
                 
             return false;
@@ -526,9 +527,10 @@ namespace Visualisator
             CheckScanConditionOnSend();
             int Rate = pack.getTransmitRate();
             int sleep = (int)(600 / Rate);
-            lock (RF_STATUS){
+            lock (RfSync)
+            {
                 try{
-                    RF_STATUS = "TX";
+                    RF_STATUS = RFStatus.Tx;
                     short OperateChannel = this.getOperateChannel();
                     int try_counter = 0;
                     while (!Medium.Registration(this.Freq, OperateChannel, this.x, this.y, sleep))
@@ -545,7 +547,7 @@ namespace Visualisator
                     MessageBox.Show("SendData :" + ex.Message);
                 }
 
-                RF_STATUS = "NONE";
+                RF_STATUS = RFStatus.None;
             }
             if (pack.GetType() == typeof(Data)){
                 _DataSent++;
@@ -678,11 +680,11 @@ namespace Visualisator
                 prev_guid = new Guid();
                 SimulatorPacket pack = null;
 
-                lock (RF_STATUS)
+                lock (RfSync)
                 {
-                    RF_STATUS = "RX";
+                    RF_STATUS = RFStatus.Rx;
                     pack = Medium.ReceiveData(this);
-                    RF_STATUS = "NONE";
+                    RF_STATUS = RFStatus.None;
                 }
                 if (pack == null){ }
                 else //if (pack != null )//&& (prev_guid != pack.GuidD || pack.IsRetransmit))

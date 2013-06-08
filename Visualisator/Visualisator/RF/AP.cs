@@ -140,7 +140,7 @@ namespace Visualisator
             KeepAliveReceived = 0;
             base.Enable();
             
-            RF_STATUS = "NONE";
+            RF_STATUS = RFStatus.None;
 
             Thread beaconThread = new Thread(SendBeacon)
                     {
