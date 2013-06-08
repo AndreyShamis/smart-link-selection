@@ -1231,7 +1231,7 @@ namespace Visualisator
                         }
                         if (maxRetrays == 0)
                         {
-                            if (TDLSisWork)
+                            if (TDLSisWork && !ForceTxInBss)
                                 TearDownTdlsOnFailToSend(DestinationMacAddress);
                             else
                                 TDLSCounterUnSuccessTx = 0;

@@ -400,7 +400,7 @@ namespace Visualisator
                             }
                         }
                     }
-                    SaveDumpToFile();
+                    //SaveDumpToFile();
                 }
                 catch (Exception ex)
                 {

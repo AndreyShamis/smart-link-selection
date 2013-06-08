@@ -293,27 +293,34 @@ namespace Visualisator
         /// <param name="pack">Received packet</param>
         private void DataRoutine(Data pack)
         {
-            var temporaryQ = (Queue<Data>)_packet_queues[pack.Reciver];
             bool add = true, receive = true;
-            try
+            Queue<Data> temporaryQ;
+
+            lock (Sync)
             {
-                if (temporaryQ != null)
+                temporaryQ = (Queue<Data>)_packet_queues[pack.Reciver];
+                
+                try
                 {
-                    if (temporaryQ.Count < MAX_QUEUE_SIZE)
+                    if (temporaryQ != null)
                     {
-                        if (temporaryQ.Any(value => value.GuidD.Equals(pack.GuidD)))
+                        if (temporaryQ.Count < MAX_QUEUE_SIZE)
+                        {
+                            if (temporaryQ.Any(value => value.GuidD.Equals(pack.GuidD)))
+                            {
+                                add = false;
+                            }
+                        }
+                        else
                         {
                             add = false;
+                            receive = false;
                         }
                     }
-                    else
-                    {
-                        add = false;
-                        receive = false;
-                    }
                 }
+                catch (Exception ex) { AddToLog("DataRoutine " + ex.Message); }
             }
-            catch (Exception ex) { AddToLog("DataRoutine " + ex.Message); }
+
 
             Data resendedData = null;
 
