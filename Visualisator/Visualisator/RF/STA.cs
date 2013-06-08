@@ -235,7 +235,7 @@ namespace Visualisator
             ListenBeacon            = true;
             this.VColor             = DefaultColor;
             _PointerToAllRfDevices  = rfObjects;
-            SLSWindowSize = 1;
+            SLSWindowSize = 4;
             BandWithSupport.Add(Bandwidth._20MHz);
             BandWithSupport.Add(Bandwidth._40Mhz);
 
@@ -891,8 +891,8 @@ namespace Visualisator
             }
             if (start)
             {
-                slsWinSampleSelectedLink = SelectedLink.BSS;
-                selectedLink = SelectedLink.TDLS;
+                slsWinSampleSelectedLink = SelectedLink.BSS; // always start to sample BSS link 
+                selectedLink = SelectedLink.TDLS; // always start with TDLS link lik as a main link 
                 try { stoper.Stop(); }
                 catch { }
                 sampleSpeedAverage = new TimeSpan();
@@ -900,14 +900,13 @@ namespace Visualisator
                 slsWinGlobalDataPacketCounter = 0;
                 slsWinTDLSDataPacketCounter = 0;
                 slsWinBSSDataPacketCounter = 0;
-                winSizeToNumOfPacket = (int)(Medium.SlsAmountOfWondowSize - ((Medium.SlsAmountOfWondowSize / 100) * SLSWindowSize)); // the oposite of window
                 stoper.Start();
             }
             else
             {
                 slsWinGlobalDataPacketCounter++;
 
-                if (slsWinSampleSelectedLink == SelectedLink.BSS)
+                if (slsWinSampleSelectedLink == SelectedLink.BSS) // if the sampeled link is BSS
                 {
                     if (slsWinTDLSDataPacketCounter < winSizeToNumOfPacket)
                     {
@@ -927,7 +926,7 @@ namespace Visualisator
                         sampleSpeedAverage += stoper.Elapsed;
                     }
                 }
-                else
+                else  // if the sampeled link is TDLS
                 {
                     if (slsWinBSSDataPacketCounter < winSizeToNumOfPacket)
                     {
@@ -954,19 +953,19 @@ namespace Visualisator
                 }
                 else
                 {
-                    if (slsWinSampleSelectedLink == SelectedLink.BSS) // if sample selected link is BSS
+                    if (slsWinSampleSelectedLink == SelectedLink.BSS) // if sampled selected link is BSS
                     {
-                        if (sampleSpeedAverage.TotalMilliseconds < RegulareSpeedAverage.TotalMilliseconds / SLSWindowSize)
-                            SLSWindow_SwitchToBss();
+                        if (sampleSpeedAverage.TotalMilliseconds < ((RegulareSpeedAverage.TotalMilliseconds / 100) * SLSWindowSize))
+                            SLSWindow_SwitchToBss();    // make BSS link to main link and TDLS link to sampeled link
                         else
-                            SLSWindow_SwitchToTdls();
+                            SLSWindow_SwitchToTdls();   // make TDLS link to main link and BSS link to sampeled link
                     }
                     else // if sample selected link is TDLS
                     {
-                        if (sampleSpeedAverage.Ticks > RegulareSpeedAverage.Ticks / SLSWindowSize)    
-                            SLSWindow_SwitchToTdls();
+                        if (sampleSpeedAverage.TotalMilliseconds < ((RegulareSpeedAverage.TotalMilliseconds / 100) * SLSWindowSize))
+                            SLSWindow_SwitchToTdls();   // make TDLS link to main link and BSS link to sampeled link
                         else
-                            SLSWindow_SwitchToBss();
+                            SLSWindow_SwitchToBss();    // make BSS link to main link and TDLS link to sampeled link
                     }
                     stoper.Start();
                     slsWinGlobalDataPacketCounter   = 0;
@@ -974,9 +973,9 @@ namespace Visualisator
                     slsWinBSSDataPacketCounter      = 0;
                     sampleSpeedAverage = new TimeSpan();
                     RegulareSpeedAverage = new TimeSpan();
-                    winSizeToNumOfPacket = (int)(Medium.SlsAmountOfWondowSize - ((Medium.SlsAmountOfWondowSize / 100) * SLSWindowSize)); // the oposite of window
                 }
             }
+            winSizeToNumOfPacket = (int)(Medium.SlsAmountOfWondowSize - ((Medium.SlsAmountOfWondowSize / 100) * SLSWindowSize)); // the oposite of window
         }
 
         //=====================================================================
