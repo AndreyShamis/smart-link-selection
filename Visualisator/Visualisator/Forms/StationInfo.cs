@@ -620,5 +620,21 @@ namespace Visualisator
             btnConnectToBSS.Enabled = true;
             btnDisconnect.Enabled = false;
         }
+
+        private void btnSendTearDown_Click(object sender, EventArgs e)
+        {
+            string txtTDLSSetupRequest;
+            string mac = txtTDLSSetupRequestMAC.Text;
+            if (mac.Length == 17 && !mac.Equals("00:00:00:00:00:00") && !mac.Equals("FF:FF:FF:FF:FF:FF") && _sta.CheckMacExistance(mac))
+            {
+                txtTDLSSetupRequest = txtTDLSSetupRequestMAC.Text;
+                _sta.TDLS_SendTearDown(txtTDLSSetupRequest);
+                txtTDLSSetupRequestMAC.BackColor = Color.YellowGreen;
+            }
+            else
+            {
+                txtTDLSSetupRequestMAC.BackColor = Color.IndianRed;
+            }
+        }
     }
 }

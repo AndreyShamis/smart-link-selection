@@ -127,6 +127,7 @@
             this.cmdLogsClear = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileToSend = new System.Windows.Forms.OpenFileDialog();
+            this.btnSendTearDown = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -521,6 +522,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnSendTearDown);
             this.splitContainer1.Panel1.Controls.Add(this.label17);
             this.splitContainer1.Panel1.Controls.Add(this.lblBadPackets);
             this.splitContainer1.Panel1.Controls.Add(this.txtMAC);
@@ -869,9 +871,10 @@
             // 
             this.button2.Location = new System.Drawing.Point(15, 168);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(133, 19);
+            this.button2.Size = new System.Drawing.Size(102, 19);
             this.button2.TabIndex = 41;
-            this.button2.Text = "TDLS Setup Request";
+            this.button2.Text = "TDLS Setup Req";
+            this.toolTip1.SetToolTip(this.button2, "Send TDLS Setup Request");
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -1259,6 +1262,17 @@
             this.tabPage2.Text = "Object Dump";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btnSendTearDown
+            // 
+            this.btnSendTearDown.Location = new System.Drawing.Point(123, 168);
+            this.btnSendTearDown.Name = "btnSendTearDown";
+            this.btnSendTearDown.Size = new System.Drawing.Size(62, 19);
+            this.btnSendTearDown.TabIndex = 86;
+            this.btnSendTearDown.Text = "TDLS TD";
+            this.toolTip1.SetToolTip(this.btnSendTearDown, "Send TDLS Teardown");
+            this.btnSendTearDown.UseVisualStyleBackColor = true;
+            this.btnSendTearDown.Click += new System.EventHandler(this.btnSendTearDown_Click);
+            // 
             // StationInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1394,5 +1408,6 @@
         private System.Windows.Forms.ProgressBar sendDataProgress;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label lblBadPackets;
+        private System.Windows.Forms.Button btnSendTearDown;
     }
 }
