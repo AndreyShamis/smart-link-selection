@@ -183,14 +183,19 @@ namespace Visualisator
             get { return _waitingForAck; }
             set { _waitingForAck = value; }
         }
-
+        
         /// <summary>
         /// Provide RSSI value
         /// </summary>
         public int Rssi
         {
             get { return _RSSI; }
-            set { _RSSI = value; }
+            set{  _RSSI = value;}
+        }
+
+        public string GetRssi()
+        {
+            return Rssi.ToString(CultureInfo.InvariantCulture);
         }
 
         public int StatisticRetransmitTime
