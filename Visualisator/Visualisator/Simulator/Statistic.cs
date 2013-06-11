@@ -31,7 +31,13 @@ namespace Visualisator.Simulator
             set 
             {
                 _CurrentSpeed = value;
-                minSpeed = Math.Min(_CurrentSpeed, minSpeed);
+                if(minSpeed == 0)
+                    minSpeed = _CurrentSpeed;
+
+                if (_CurrentSpeed != 0)
+                    minSpeed = Math.Min(_CurrentSpeed, minSpeed);
+             
+                    
                 maxSpeed = Math.Max(_CurrentSpeed, maxSpeed);
             }
             get
@@ -43,7 +49,6 @@ namespace Visualisator.Simulator
         public double   maxSpeed        { set; get; }
         public Statistic()
         {
-                
         }
 
         public float getPercentInTdls()
@@ -81,6 +86,26 @@ namespace Visualisator.Simulator
             else
             {
                 ret = ConvertBytesToMegabytes((long)Speed).ToString(CultureInfo.InvariantCulture) + " Mbs";
+            }
+
+            return ret;
+        }
+
+        public static string getSpeedInHumanReadFromInput(double input)
+        {
+            string ret;
+
+            if (input < 1024f)
+            {
+                ret = input + " bs";
+            }
+            else if (input < 1048567f)
+            {
+                ret = ConvertBytesToKilobytes((long)input).ToString(CultureInfo.InvariantCulture) + " Kbs";
+            }
+            else
+            {
+                ret = ConvertBytesToMegabytes((long)input).ToString(CultureInfo.InvariantCulture) + " Mbs";
             }
 
             return ret;

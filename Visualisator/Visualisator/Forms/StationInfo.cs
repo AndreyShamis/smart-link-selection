@@ -501,7 +501,7 @@ namespace Visualisator
         /// </summary>
         private void BuildListView()
         {
-            ColumnHeader header1, header2, header3, header4, header5, header6, header7, header8, header9;//, header10;
+            ColumnHeader header1, header2, header3, header4, header5, header6, header7, header8, header9, MinSpeed, MaxSpeed;
             header1 = new ColumnHeader();
             header2 = new ColumnHeader();
             header3 = new ColumnHeader();
@@ -511,7 +511,8 @@ namespace Visualisator
             header7 = new ColumnHeader();
             header8 = new ColumnHeader();
             header9 = new ColumnHeader();
-            //header10 = new ColumnHeader();
+            MinSpeed = new ColumnHeader();
+            MaxSpeed = new ColumnHeader();
 
             header1.Text = "Dest";
             header1.TextAlign = HorizontalAlignment.Left;
@@ -534,7 +535,7 @@ namespace Visualisator
             header6.Width = 85;
             header7.TextAlign = HorizontalAlignment.Left;
             header7.Text = "Source";
-            header7.Width = 120;
+            header7.Width = 129;
 
             header8.TextAlign = HorizontalAlignment.Left;
             header8.Text = "BSS BandW";
@@ -542,6 +543,14 @@ namespace Visualisator
             header9.TextAlign = HorizontalAlignment.Left;
             header9.Text = "BSS Stand";
             header9.Width = 50;
+
+            MinSpeed.TextAlign = HorizontalAlignment.Left;
+            MinSpeed.Text = "Min Speed";
+            MinSpeed.Width = 60;
+
+            MaxSpeed.TextAlign = HorizontalAlignment.Left;
+            MaxSpeed.Text = "Max Speed";
+            MaxSpeed.Width = 60;
             //header10.TextAlign = HorizontalAlignment.Left;
             //header10.Text = "-";
             //header10.Width = 50;
@@ -556,6 +565,8 @@ namespace Visualisator
             listView1.Columns.Add(header7);
             listView1.Columns.Add(header8);
             listView1.Columns.Add(header9);
+            listView1.Columns.Add(MinSpeed);
+            listView1.Columns.Add(MaxSpeed);
             //listView1.Columns.Add(header10);
             // Specify that each item appears on a separate line 
 
@@ -580,13 +591,15 @@ namespace Visualisator
                 ListViewItem item = new ListViewItem(stat.DesctinationMAC);
 
                 item.SubItems.Add(stat.FileSize.ToString(CultureInfo.InvariantCulture));
-                item.SubItems.Add((stat.FileSize/Medium.PACKET_BUFFER_SIZE +1).ToString() + "/" + stat.Packets.ToString(CultureInfo.InvariantCulture)+"/"+stat.PacketsInTdls.ToString(CultureInfo.InvariantCulture));
+                item.SubItems.Add((stat.FileSize/Medium.PACKET_BUFFER_SIZE +1).ToString(CultureInfo.InvariantCulture) + "/" + stat.Packets.ToString(CultureInfo.InvariantCulture)+"/"+stat.PacketsInTdls.ToString(CultureInfo.InvariantCulture));
                 item.SubItems.Add(stat.getPercentInTdls().ToString(CultureInfo.InvariantCulture));
                 item.SubItems.Add(stat.Time.ToString(CultureInfo.InvariantCulture));
                 item.SubItems.Add(stat.getSpeedInHumanRead());
                 item.SubItems.Add(stat.SourceMAC);
                 item.SubItems.Add(stat.BSS_BandWith);
                 item.SubItems.Add(stat.BSS_Standart);
+                item.SubItems.Add(Statistic.getSpeedInHumanReadFromInput(stat.minSpeed));
+                item.SubItems.Add(Statistic.getSpeedInHumanReadFromInput(stat.maxSpeed));
                 listView1.Items.Add(item);
   
             }

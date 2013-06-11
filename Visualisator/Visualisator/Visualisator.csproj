@@ -142,7 +142,7 @@
     <EmbeddedResource Include="Forms\StationInfo.resx">
       <DependentUpon>StationInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="Packets.cd" />
     <None Include="RfDevices.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

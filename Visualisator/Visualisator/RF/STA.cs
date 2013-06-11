@@ -1363,8 +1363,11 @@ namespace Visualisator
             string ret = "";
             try
             {
-                AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
-                ret = _connecttoAP.SSID;
+                if (_AssociatedWithAPList.Count > 0)
+                {
+                    AP _connecttoAP = GetApbySsid(_AssociatedWithAPList[0].ToString());
+                    ret = _connecttoAP.SSID;
+                }
             }
             catch (Exception ex) { AddToLog("getBSS_SSID:" + ex.Message); }
 
