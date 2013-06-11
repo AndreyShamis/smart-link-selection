@@ -16,7 +16,7 @@ namespace Visualisator
     /// AP device. Access Point RFdevice
     /// </summary>
     [Serializable()]
-    class AP :  RFDevice, IBoardObjects,IRFDevice,ISerializable
+    class AP :  RFDevice, IBoardObjects,IRFDevice
     {
         const int                               _UPDATE_KEEP_ALIVE_PERIOD   = 25; //sec
         private int                             _BeaconPeriod               = 500;
