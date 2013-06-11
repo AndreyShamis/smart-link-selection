@@ -4,7 +4,6 @@ using System.Drawing;
 using Visualisator.Packets;
 using System.Collections;
 using System.Threading;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace Visualisator

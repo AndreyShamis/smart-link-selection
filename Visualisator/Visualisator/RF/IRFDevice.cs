@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Visualisator.Packets;
-
 
 namespace Visualisator
 {
@@ -15,7 +11,7 @@ namespace Visualisator
         void setOperateChannel(short NewChannel);
         short getOperateChannel();
         void AddToLog(String newLogEntry);
-        String DumpAll();
+        string DumpAll();
         void ParseReceivedPacket(SimulatorPacket pack);
     }
 }

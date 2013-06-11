@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using System.Threading;
 using Visualisator.Properties;
-using System.Runtime.Serialization.Formatters.Binary;
 using Visualisator.Simulator;
 
 

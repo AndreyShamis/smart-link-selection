@@ -8,7 +8,6 @@ using Visualisator.Packets;
 using System.Collections;
 using System.Windows.Forms;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace Visualisator
 {
