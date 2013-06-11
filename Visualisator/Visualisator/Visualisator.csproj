@@ -72,8 +72,6 @@
     <Compile Include="Packets\PacketInumiration.cs" />
     <Compile Include="Packets\TDLSChannelSwitchRequest.cs" />
     <Compile Include="Packets\TDLSChannelSwitchResponse.cs" />
-    <Compile Include="Packets\TDLSDiscovery.cs" />
-    <Compile Include="Packets\TDLSResponse.cs" />
     <Compile Include="Packets\TDLSSetupConfirm.cs" />
     <Compile Include="Packets\TDLSSetupRequest.cs" />
     <Compile Include="Packets\TDLSSetupResponse.cs" />
@@ -146,7 +144,7 @@
       <DependentUpon>StationInfo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
+    <None Include="RfDevices.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

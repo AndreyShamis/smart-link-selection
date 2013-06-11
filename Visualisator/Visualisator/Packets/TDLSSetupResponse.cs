@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Reflection;
-using System.Collections;
-
 namespace Visualisator.Packets
 {
     [Serializable()]
-    class TDLSSetupResponse : SimulatorPacket, IPacket, ISerializable
+    class TDLSSetupResponse : SimulatorPacket
     {
         public bool freq5000Support = false;
         private bool _width40Support    = false;
@@ -20,8 +17,6 @@ namespace Visualisator.Packets
             get { return _width40Support; }
             set { _width40Support = value; }
         }
-
-
 
         public TDLSSetupResponse(SimulatorPacket pack)
             : base(pack)

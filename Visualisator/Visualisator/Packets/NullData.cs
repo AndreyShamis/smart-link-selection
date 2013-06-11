@@ -3,7 +3,7 @@
 namespace Visualisator.Packets
 {
     [Serializable()]
-    class NullData : SimulatorPacket, IPacket, ISerializable
+    class NullData : SimulatorPacket
     {
         public NullData(SimulatorPacket pack)
             : base(pack)

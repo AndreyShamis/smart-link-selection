@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Reflection;
-
 namespace Visualisator.Packets
 {
     [Serializable()]
-    class TDLSChannelSwitchRequest : SimulatorPacket, IPacket, ISerializable
+    class TDLSChannelSwitchRequest : SimulatorPacket
     {
-
         public TDLSChannelSwitchRequest(SimulatorPacket pack)
             : base(pack)
         {

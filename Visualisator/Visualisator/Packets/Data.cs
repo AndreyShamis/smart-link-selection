@@ -1,24 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
 
 namespace Visualisator.Packets
 {
     [Serializable()]
-    class Data : SimulatorPacket, IPacket, ISerializable
+    class Data : SimulatorPacket
     {
-                        // TODO check if this work corectlly
-
-
         public int FrameSize { set; get; }
 
         public byte[] _data = new byte[Medium.PACKET_BUFFER_SIZE];
-        //public void setData(String data){
-        //    _data = data;
-        //}
-
         public StreamingStatus streamStatus { set; get; }
         public Guid streamID { set; get; }
 

@@ -8,7 +8,7 @@ using System.Reflection;
 namespace Visualisator.Packets
 {
     [Serializable()]
-    class TDLSTearDown : SimulatorPacket, IPacket, ISerializable
+    class TDLSTearDown : SimulatorPacket
     {
         public TDLSTearDown(SimulatorPacket pack)
             : base(pack)

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Reflection;
-using System.Collections;
-
 namespace Visualisator.Packets
 {
     [Serializable()]
-    class TDLSSetupRequest : SimulatorPacket, IPacket, ISerializable
+    class TDLSSetupRequest : SimulatorPacket
     {
         private bool _bandASupport      = false;
         private bool _width40Support    = false;
