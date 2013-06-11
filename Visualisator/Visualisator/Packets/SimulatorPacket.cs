@@ -5,7 +5,7 @@ using System.Collections;
 namespace Visualisator.Packets
 {
     [Serializable()]
-    class SimulatorPacket:ISerializable,IPacket
+    class SimulatorPacket:ISerializable
     {
         public SimulatorPacket()
         {

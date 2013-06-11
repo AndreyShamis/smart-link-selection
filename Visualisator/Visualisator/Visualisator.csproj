@@ -103,7 +103,6 @@
     <Compile Include="Simulator\Medium.cs" />
     <Compile Include="Simulator\ObjectDumper.cs" />
     <Compile Include="Packets\Beacon.cs" />
-    <Compile Include="Packets\IPacket.cs" />
     <Compile Include="Packets\SimulatorPacket.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
