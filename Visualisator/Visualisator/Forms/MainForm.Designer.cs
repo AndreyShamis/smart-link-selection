@@ -153,9 +153,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(180, 39);
+            this.button2.Location = new System.Drawing.Point(106, 37);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(76, 19);
+            this.button2.Size = new System.Drawing.Size(76, 21);
             this.button2.TabIndex = 6;
             this.button2.Text = "Save";
             this.toolTip1.SetToolTip(this.button2, "Save Simulation to File");
@@ -164,9 +164,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(180, 14);
+            this.button3.Location = new System.Drawing.Point(106, 14);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(77, 19);
+            this.button3.Size = new System.Drawing.Size(77, 22);
             this.button3.TabIndex = 7;
             this.button3.Text = "Load";
             this.toolTip1.SetToolTip(this.button3, "Load Saved Simulation from File");
@@ -190,12 +190,12 @@
             // 
             // btnShowMediumInfo
             // 
-            this.btnShowMediumInfo.Location = new System.Drawing.Point(107, 14);
+            this.btnShowMediumInfo.Location = new System.Drawing.Point(194, 13);
             this.btnShowMediumInfo.Name = "btnShowMediumInfo";
-            this.btnShowMediumInfo.Size = new System.Drawing.Size(67, 44);
+            this.btnShowMediumInfo.Size = new System.Drawing.Size(60, 45);
             this.btnShowMediumInfo.TabIndex = 9;
-            this.btnShowMediumInfo.Text = "Medium Info";
-            this.toolTip1.SetToolTip(this.btnShowMediumInfo, "Show Medium Information Form");
+            this.btnShowMediumInfo.Text = "Medium Debug";
+            this.toolTip1.SetToolTip(this.btnShowMediumInfo, "Show Medium Information Form. Use only for debuging");
             this.btnShowMediumInfo.UseVisualStyleBackColor = true;
             this.btnShowMediumInfo.Click += new System.EventHandler(this.btnShowMediumInfo_Click);
             // 
@@ -386,7 +386,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(286, 301);
+            this.label13.Location = new System.Drawing.Point(308, 301);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(98, 13);
             this.label13.TabIndex = 47;
@@ -399,7 +399,7 @@
             this.txtMediumRunPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMediumRunPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtMediumRunPeriod.ForeColor = System.Drawing.Color.Navy;
-            this.txtMediumRunPeriod.Location = new System.Drawing.Point(412, 299);
+            this.txtMediumRunPeriod.Location = new System.Drawing.Point(434, 299);
             this.txtMediumRunPeriod.Name = "txtMediumRunPeriod";
             this.txtMediumRunPeriod.Size = new System.Drawing.Size(57, 18);
             this.txtMediumRunPeriod.TabIndex = 48;
@@ -410,7 +410,7 @@
             // btnSetMediumRunPerion
             // 
             this.btnSetMediumRunPerion.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetMediumRunPerion.Location = new System.Drawing.Point(475, 299);
+            this.btnSetMediumRunPerion.Location = new System.Drawing.Point(497, 299);
             this.btnSetMediumRunPerion.Name = "btnSetMediumRunPerion";
             this.btnSetMediumRunPerion.Size = new System.Drawing.Size(39, 18);
             this.btnSetMediumRunPerion.TabIndex = 49;
@@ -626,7 +626,7 @@
             this.button6.Enabled = false;
             this.button6.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button6.ForeColor = System.Drawing.Color.Gray;
-            this.button6.Location = new System.Drawing.Point(480, 340);
+            this.button6.Location = new System.Drawing.Point(502, 340);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(40, 18);
             this.button6.TabIndex = 27;
@@ -640,7 +640,7 @@
             this.txtTDLSSendDelayWait.Enabled = false;
             this.txtTDLSSendDelayWait.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtTDLSSendDelayWait.ForeColor = System.Drawing.Color.Gray;
-            this.txtTDLSSendDelayWait.Location = new System.Drawing.Point(417, 340);
+            this.txtTDLSSendDelayWait.Location = new System.Drawing.Point(439, 340);
             this.txtTDLSSendDelayWait.Name = "txtTDLSSendDelayWait";
             this.txtTDLSSendDelayWait.Size = new System.Drawing.Size(57, 18);
             this.txtTDLSSendDelayWait.TabIndex = 26;
@@ -652,7 +652,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.ForeColor = System.Drawing.Color.Gray;
-            this.label5.Location = new System.Drawing.Point(286, 340);
+            this.label5.Location = new System.Drawing.Point(308, 340);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(113, 13);
             this.label5.TabIndex = 25;
@@ -663,7 +663,7 @@
             this.button7.Enabled = false;
             this.button7.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button7.ForeColor = System.Drawing.Color.Gray;
-            this.button7.Location = new System.Drawing.Point(480, 323);
+            this.button7.Location = new System.Drawing.Point(502, 323);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(40, 18);
             this.button7.TabIndex = 24;
@@ -678,7 +678,7 @@
             this.txtBSSSendDelayWait.Enabled = false;
             this.txtBSSSendDelayWait.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtBSSSendDelayWait.ForeColor = System.Drawing.Color.Gray;
-            this.txtBSSSendDelayWait.Location = new System.Drawing.Point(417, 325);
+            this.txtBSSSendDelayWait.Location = new System.Drawing.Point(439, 325);
             this.txtBSSSendDelayWait.Name = "txtBSSSendDelayWait";
             this.txtBSSSendDelayWait.Size = new System.Drawing.Size(57, 18);
             this.txtBSSSendDelayWait.TabIndex = 23;
@@ -690,7 +690,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Gray;
-            this.label6.Location = new System.Drawing.Point(286, 325);
+            this.label6.Location = new System.Drawing.Point(308, 325);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 13);
             this.label6.TabIndex = 22;
@@ -839,9 +839,9 @@
             // 
             this.cmbAlgorithm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.cmbAlgorithm.FormattingEnabled = true;
-            this.cmbAlgorithm.Location = new System.Drawing.Point(6, 32);
+            this.cmbAlgorithm.Location = new System.Drawing.Point(21, 32);
             this.cmbAlgorithm.Name = "cmbAlgorithm";
-            this.cmbAlgorithm.Size = new System.Drawing.Size(284, 21);
+            this.cmbAlgorithm.Size = new System.Drawing.Size(236, 21);
             this.cmbAlgorithm.TabIndex = 50;
             this.cmbAlgorithm.SelectedIndexChanged += new System.EventHandler(this.cmbAlgorithm_SelectedIndexChanged);
             this.cmbAlgorithm.SelectedValueChanged += new System.EventHandler(this.cmbAlgorithm_SelectedValueChanged);
@@ -872,7 +872,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(286, 281);
+            this.label16.Location = new System.Drawing.Point(308, 281);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(125, 13);
             this.label16.TabIndex = 55;
@@ -885,7 +885,7 @@
             this.txtDataBufferSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtDataBufferSize.ForeColor = System.Drawing.Color.Navy;
-            this.txtDataBufferSize.Location = new System.Drawing.Point(412, 279);
+            this.txtDataBufferSize.Location = new System.Drawing.Point(434, 279);
             this.txtDataBufferSize.Name = "txtDataBufferSize";
             this.txtDataBufferSize.Size = new System.Drawing.Size(57, 18);
             this.txtDataBufferSize.TabIndex = 56;
@@ -896,7 +896,7 @@
             // btnSetDataBufferSize
             // 
             this.btnSetDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetDataBufferSize.Location = new System.Drawing.Point(475, 279);
+            this.btnSetDataBufferSize.Location = new System.Drawing.Point(497, 279);
             this.btnSetDataBufferSize.Name = "btnSetDataBufferSize";
             this.btnSetDataBufferSize.Size = new System.Drawing.Size(39, 18);
             this.btnSetDataBufferSize.TabIndex = 57;
@@ -1078,7 +1078,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(283, 254);
+            this.label23.Location = new System.Drawing.Point(305, 254);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(235, 13);
             this.label23.TabIndex = 72;
@@ -1091,9 +1091,9 @@
             this.groupBox3.Controls.Add(this.grpSlsWindowBasedAlgorithm);
             this.groupBox3.Controls.Add(this.groupBox2);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox3.Location = new System.Drawing.Point(263, 14);
+            this.groupBox3.Location = new System.Drawing.Point(285, 14);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(296, 237);
+            this.groupBox3.Size = new System.Drawing.Size(276, 237);
             this.groupBox3.TabIndex = 73;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "SLS Parameters";

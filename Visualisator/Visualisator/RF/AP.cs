@@ -280,7 +280,8 @@ namespace Visualisator
 
             try
             {
-                _packet_queues.Add(sourceMAC, new Queue<Data>(1000)); //TODO : Check 1000?
+                if (!_packet_queues.Contains(sourceMAC))
+                    _packet_queues.Add(sourceMAC, new Queue<Data>(1000)); //TODO : Check 1000?
             }
             catch (Exception ex) { AddToLog("CennectRoutine: " + ex.Message); }
         }
