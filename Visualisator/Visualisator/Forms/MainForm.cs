@@ -818,7 +818,7 @@ namespace Visualisator
             {
                 ret = Convert.ToInt32(txt.Text);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Cannot parse value to int.Please check input");
             }

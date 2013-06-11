@@ -202,7 +202,7 @@ namespace Visualisator
                     ret = 100;
                 return ret;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 //MessageBox.Show("getRetransmitionRate" + ex.Message);
             }
