@@ -104,8 +104,17 @@
             this.label19 = new System.Windows.Forms.Label();
             this.txtSlsAmountStart = new System.Windows.Forms.TextBox();
             this.btnSlsAmountStartSet = new System.Windows.Forms.Button();
+            this.grpSlsWindowBasedAlgorithm = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.grpSlsWindowBasedAlgorithm.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtConsole
@@ -201,7 +210,7 @@
             this.lblUpdateIntervalDescr.AutoSize = true;
             this.lblUpdateIntervalDescr.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUpdateIntervalDescr.ForeColor = System.Drawing.Color.Green;
-            this.lblUpdateIntervalDescr.Location = new System.Drawing.Point(17, 219);
+            this.lblUpdateIntervalDescr.Location = new System.Drawing.Point(17, 149);
             this.lblUpdateIntervalDescr.Name = "lblUpdateIntervalDescr";
             this.lblUpdateIntervalDescr.Size = new System.Drawing.Size(104, 13);
             this.lblUpdateIntervalDescr.TabIndex = 10;
@@ -214,7 +223,7 @@
             this.txtUpdateInterval.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtUpdateInterval.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtUpdateInterval.ForeColor = System.Drawing.Color.Navy;
-            this.txtUpdateInterval.Location = new System.Drawing.Point(152, 220);
+            this.txtUpdateInterval.Location = new System.Drawing.Point(152, 150);
             this.txtUpdateInterval.Name = "txtUpdateInterval";
             this.txtUpdateInterval.Size = new System.Drawing.Size(57, 18);
             this.txtUpdateInterval.TabIndex = 11;
@@ -225,7 +234,7 @@
             // btnSetUpdateInterval
             // 
             this.btnSetUpdateInterval.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetUpdateInterval.Location = new System.Drawing.Point(215, 220);
+            this.btnSetUpdateInterval.Location = new System.Drawing.Point(215, 150);
             this.btnSetUpdateInterval.Name = "btnSetUpdateInterval";
             this.btnSetUpdateInterval.Size = new System.Drawing.Size(39, 18);
             this.btnSetUpdateInterval.TabIndex = 12;
@@ -262,8 +271,8 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.ForeColor = System.Drawing.Color.Navy;
-            this.label9.Location = new System.Drawing.Point(17, 146);
+            this.label9.ForeColor = System.Drawing.Color.Green;
+            this.label9.Location = new System.Drawing.Point(6, 18);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(57, 13);
             this.label9.TabIndex = 36;
@@ -272,11 +281,11 @@
             // 
             // txtSLSPeriod
             // 
-            this.txtSLSPeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSLSPeriod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.txtSLSPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSLSPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtSLSPeriod.ForeColor = System.Drawing.Color.Navy;
-            this.txtSLSPeriod.Location = new System.Drawing.Point(152, 147);
+            this.txtSLSPeriod.Location = new System.Drawing.Point(141, 19);
             this.txtSLSPeriod.Name = "txtSLSPeriod";
             this.txtSLSPeriod.Size = new System.Drawing.Size(57, 18);
             this.txtSLSPeriod.TabIndex = 37;
@@ -287,7 +296,7 @@
             // btnSetSLSPeriod
             // 
             this.btnSetSLSPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetSLSPeriod.Location = new System.Drawing.Point(215, 147);
+            this.btnSetSLSPeriod.Location = new System.Drawing.Point(204, 19);
             this.btnSetSLSPeriod.Name = "btnSetSLSPeriod";
             this.btnSetSLSPeriod.Size = new System.Drawing.Size(39, 18);
             this.btnSetSLSPeriod.TabIndex = 38;
@@ -300,8 +309,8 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.ForeColor = System.Drawing.Color.Navy;
-            this.label10.Location = new System.Drawing.Point(17, 168);
+            this.label10.ForeColor = System.Drawing.Color.Green;
+            this.label10.Location = new System.Drawing.Point(6, 40);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(104, 13);
             this.label10.TabIndex = 39;
@@ -310,11 +319,11 @@
             // 
             // txtSLSPacketsNumber
             // 
-            this.txtSLSPacketsNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSLSPacketsNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.txtSLSPacketsNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSLSPacketsNumber.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtSLSPacketsNumber.ForeColor = System.Drawing.Color.Navy;
-            this.txtSLSPacketsNumber.Location = new System.Drawing.Point(152, 169);
+            this.txtSLSPacketsNumber.Location = new System.Drawing.Point(141, 41);
             this.txtSLSPacketsNumber.Name = "txtSLSPacketsNumber";
             this.txtSLSPacketsNumber.Size = new System.Drawing.Size(57, 18);
             this.txtSLSPacketsNumber.TabIndex = 40;
@@ -325,7 +334,7 @@
             // btmSetNumberPacketsinSls
             // 
             this.btmSetNumberPacketsinSls.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btmSetNumberPacketsinSls.Location = new System.Drawing.Point(215, 169);
+            this.btmSetNumberPacketsinSls.Location = new System.Drawing.Point(204, 41);
             this.btmSetNumberPacketsinSls.Name = "btmSetNumberPacketsinSls";
             this.btmSetNumberPacketsinSls.Size = new System.Drawing.Size(39, 18);
             this.btmSetNumberPacketsinSls.TabIndex = 41;
@@ -338,8 +347,8 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.ForeColor = System.Drawing.Color.Navy;
-            this.label11.Location = new System.Drawing.Point(17, 191);
+            this.label11.ForeColor = System.Drawing.Color.Crimson;
+            this.label11.Location = new System.Drawing.Point(17, 210);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(129, 13);
             this.label11.TabIndex = 42;
@@ -348,11 +357,11 @@
             // 
             // txtTdlsStarterDelay
             // 
-            this.txtTdlsStarterDelay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtTdlsStarterDelay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.txtTdlsStarterDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTdlsStarterDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtTdlsStarterDelay.ForeColor = System.Drawing.Color.Navy;
-            this.txtTdlsStarterDelay.Location = new System.Drawing.Point(152, 191);
+            this.txtTdlsStarterDelay.ForeColor = System.Drawing.Color.Black;
+            this.txtTdlsStarterDelay.Location = new System.Drawing.Point(152, 210);
             this.txtTdlsStarterDelay.Name = "txtTdlsStarterDelay";
             this.txtTdlsStarterDelay.Size = new System.Drawing.Size(57, 18);
             this.txtTdlsStarterDelay.TabIndex = 43;
@@ -363,7 +372,7 @@
             // btnTdlsStarterSetDelay
             // 
             this.btnTdlsStarterSetDelay.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnTdlsStarterSetDelay.Location = new System.Drawing.Point(215, 191);
+            this.btnTdlsStarterSetDelay.Location = new System.Drawing.Point(215, 210);
             this.btnTdlsStarterSetDelay.Name = "btnTdlsStarterSetDelay";
             this.btnTdlsStarterSetDelay.Size = new System.Drawing.Size(39, 18);
             this.btnTdlsStarterSetDelay.TabIndex = 44;
@@ -377,7 +386,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(269, 301);
+            this.label13.Location = new System.Drawing.Point(286, 301);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(98, 13);
             this.label13.TabIndex = 47;
@@ -390,7 +399,7 @@
             this.txtMediumRunPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMediumRunPeriod.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtMediumRunPeriod.ForeColor = System.Drawing.Color.Navy;
-            this.txtMediumRunPeriod.Location = new System.Drawing.Point(395, 299);
+            this.txtMediumRunPeriod.Location = new System.Drawing.Point(412, 299);
             this.txtMediumRunPeriod.Name = "txtMediumRunPeriod";
             this.txtMediumRunPeriod.Size = new System.Drawing.Size(57, 18);
             this.txtMediumRunPeriod.TabIndex = 48;
@@ -401,7 +410,7 @@
             // btnSetMediumRunPerion
             // 
             this.btnSetMediumRunPerion.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetMediumRunPerion.Location = new System.Drawing.Point(458, 299);
+            this.btnSetMediumRunPerion.Location = new System.Drawing.Point(475, 299);
             this.btnSetMediumRunPerion.Name = "btnSetMediumRunPerion";
             this.btnSetMediumRunPerion.Size = new System.Drawing.Size(39, 18);
             this.btnSetMediumRunPerion.TabIndex = 49;
@@ -415,7 +424,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label15.ForeColor = System.Drawing.Color.Navy;
-            this.label15.Location = new System.Drawing.Point(269, 186);
+            this.label15.Location = new System.Drawing.Point(6, 20);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(118, 13);
             this.label15.TabIndex = 52;
@@ -428,7 +437,7 @@
             this.txtAmountWindowSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAmountWindowSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtAmountWindowSize.ForeColor = System.Drawing.Color.Navy;
-            this.txtAmountWindowSize.Location = new System.Drawing.Point(395, 184);
+            this.txtAmountWindowSize.Location = new System.Drawing.Point(132, 18);
             this.txtAmountWindowSize.Name = "txtAmountWindowSize";
             this.txtAmountWindowSize.Size = new System.Drawing.Size(57, 18);
             this.txtAmountWindowSize.TabIndex = 53;
@@ -439,7 +448,7 @@
             // btmSetAmountWindowSize
             // 
             this.btmSetAmountWindowSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btmSetAmountWindowSize.Location = new System.Drawing.Point(458, 184);
+            this.btmSetAmountWindowSize.Location = new System.Drawing.Point(195, 18);
             this.btmSetAmountWindowSize.Name = "btmSetAmountWindowSize";
             this.btmSetAmountWindowSize.Size = new System.Drawing.Size(39, 18);
             this.btmSetAmountWindowSize.TabIndex = 54;
@@ -511,7 +520,7 @@
             // btnSetMediumSendRatio
             // 
             this.btnSetMediumSendRatio.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetMediumSendRatio.Location = new System.Drawing.Point(215, 238);
+            this.btnSetMediumSendRatio.Location = new System.Drawing.Point(215, 174);
             this.btnSetMediumSendRatio.Name = "btnSetMediumSendRatio";
             this.btnSetMediumSendRatio.Size = new System.Drawing.Size(39, 18);
             this.btnSetMediumSendRatio.TabIndex = 15;
@@ -525,7 +534,7 @@
             this.txtMediumSendRatio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMediumSendRatio.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtMediumSendRatio.ForeColor = System.Drawing.Color.Navy;
-            this.txtMediumSendRatio.Location = new System.Drawing.Point(152, 238);
+            this.txtMediumSendRatio.Location = new System.Drawing.Point(152, 174);
             this.txtMediumSendRatio.Name = "txtMediumSendRatio";
             this.txtMediumSendRatio.Size = new System.Drawing.Size(57, 18);
             this.txtMediumSendRatio.TabIndex = 14;
@@ -536,7 +545,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(17, 237);
+            this.label2.Location = new System.Drawing.Point(17, 173);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 13;
@@ -617,7 +626,7 @@
             this.button6.Enabled = false;
             this.button6.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button6.ForeColor = System.Drawing.Color.Gray;
-            this.button6.Location = new System.Drawing.Point(454, 348);
+            this.button6.Location = new System.Drawing.Point(480, 340);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(40, 18);
             this.button6.TabIndex = 27;
@@ -631,7 +640,7 @@
             this.txtTDLSSendDelayWait.Enabled = false;
             this.txtTDLSSendDelayWait.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtTDLSSendDelayWait.ForeColor = System.Drawing.Color.Gray;
-            this.txtTDLSSendDelayWait.Location = new System.Drawing.Point(391, 348);
+            this.txtTDLSSendDelayWait.Location = new System.Drawing.Point(417, 340);
             this.txtTDLSSendDelayWait.Name = "txtTDLSSendDelayWait";
             this.txtTDLSSendDelayWait.Size = new System.Drawing.Size(57, 18);
             this.txtTDLSSendDelayWait.TabIndex = 26;
@@ -643,7 +652,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.ForeColor = System.Drawing.Color.Gray;
-            this.label5.Location = new System.Drawing.Point(260, 348);
+            this.label5.Location = new System.Drawing.Point(286, 340);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(113, 13);
             this.label5.TabIndex = 25;
@@ -654,7 +663,7 @@
             this.button7.Enabled = false;
             this.button7.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button7.ForeColor = System.Drawing.Color.Gray;
-            this.button7.Location = new System.Drawing.Point(454, 331);
+            this.button7.Location = new System.Drawing.Point(480, 323);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(40, 18);
             this.button7.TabIndex = 24;
@@ -669,7 +678,7 @@
             this.txtBSSSendDelayWait.Enabled = false;
             this.txtBSSSendDelayWait.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtBSSSendDelayWait.ForeColor = System.Drawing.Color.Gray;
-            this.txtBSSSendDelayWait.Location = new System.Drawing.Point(391, 333);
+            this.txtBSSSendDelayWait.Location = new System.Drawing.Point(417, 325);
             this.txtBSSSendDelayWait.Name = "txtBSSSendDelayWait";
             this.txtBSSSendDelayWait.Size = new System.Drawing.Size(57, 18);
             this.txtBSSSendDelayWait.TabIndex = 23;
@@ -681,7 +690,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Gray;
-            this.label6.Location = new System.Drawing.Point(260, 333);
+            this.label6.Location = new System.Drawing.Point(286, 325);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 13);
             this.label6.TabIndex = 22;
@@ -759,23 +768,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label19);
-            this.groupBox1.Controls.Add(this.txtSlsAmountStart);
-            this.groupBox1.Controls.Add(this.btnSlsAmountStartSet);
-            this.groupBox1.Controls.Add(this.label18);
-            this.groupBox1.Controls.Add(this.txtSlsAmountMax);
-            this.groupBox1.Controls.Add(this.btnSlsAmountMaxSet);
-            this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Controls.Add(this.txtSlsAmountMin);
-            this.groupBox1.Controls.Add(this.btnSlsAmountMinSet);
+            this.groupBox1.Controls.Add(this.groupBox3);
+            this.groupBox1.Controls.Add(this.label23);
+            this.groupBox1.Controls.Add(this.label21);
+            this.groupBox1.Controls.Add(this.label20);
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.txtDataBufferSize);
             this.groupBox1.Controls.Add(this.btnSetDataBufferSize);
-            this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.txtAmountWindowSize);
-            this.groupBox1.Controls.Add(this.btmSetAmountWindowSize);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.cmbAlgorithm);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.txtMediumRunPeriod);
             this.groupBox1.Controls.Add(this.btnSetMediumRunPerion);
@@ -785,12 +784,6 @@
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.txtTdlsStarterDelay);
             this.groupBox1.Controls.Add(this.btnTdlsStarterSetDelay);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.txtSLSPacketsNumber);
-            this.groupBox1.Controls.Add(this.btmSetNumberPacketsinSls);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.txtSLSPeriod);
-            this.groupBox1.Controls.Add(this.btnSetSLSPeriod);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnUpdateMediumListenDist);
             this.groupBox1.Controls.Add(this.button3);
@@ -835,10 +828,10 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.ForeColor = System.Drawing.Color.Coral;
-            this.label14.Location = new System.Drawing.Point(260, 149);
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label14.Location = new System.Drawing.Point(6, 16);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(140, 13);
+            this.label14.Size = new System.Drawing.Size(167, 13);
             this.label14.TabIndex = 51;
             this.label14.Text = "Select SLS Algorithm to Use";
             // 
@@ -846,9 +839,9 @@
             // 
             this.cmbAlgorithm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.cmbAlgorithm.FormattingEnabled = true;
-            this.cmbAlgorithm.Location = new System.Drawing.Point(406, 146);
+            this.cmbAlgorithm.Location = new System.Drawing.Point(6, 32);
             this.cmbAlgorithm.Name = "cmbAlgorithm";
-            this.cmbAlgorithm.Size = new System.Drawing.Size(91, 21);
+            this.cmbAlgorithm.Size = new System.Drawing.Size(284, 21);
             this.cmbAlgorithm.TabIndex = 50;
             this.cmbAlgorithm.SelectedIndexChanged += new System.EventHandler(this.cmbAlgorithm_SelectedIndexChanged);
             this.cmbAlgorithm.SelectedValueChanged += new System.EventHandler(this.cmbAlgorithm_SelectedValueChanged);
@@ -879,7 +872,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(269, 281);
+            this.label16.Location = new System.Drawing.Point(286, 281);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(125, 13);
             this.label16.TabIndex = 55;
@@ -892,7 +885,7 @@
             this.txtDataBufferSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtDataBufferSize.ForeColor = System.Drawing.Color.Navy;
-            this.txtDataBufferSize.Location = new System.Drawing.Point(395, 279);
+            this.txtDataBufferSize.Location = new System.Drawing.Point(412, 279);
             this.txtDataBufferSize.Name = "txtDataBufferSize";
             this.txtDataBufferSize.Size = new System.Drawing.Size(57, 18);
             this.txtDataBufferSize.TabIndex = 56;
@@ -903,7 +896,7 @@
             // btnSetDataBufferSize
             // 
             this.btnSetDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetDataBufferSize.Location = new System.Drawing.Point(458, 279);
+            this.btnSetDataBufferSize.Location = new System.Drawing.Point(475, 279);
             this.btnSetDataBufferSize.Name = "btnSetDataBufferSize";
             this.btnSetDataBufferSize.Size = new System.Drawing.Size(39, 18);
             this.btnSetDataBufferSize.TabIndex = 57;
@@ -917,7 +910,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label17.ForeColor = System.Drawing.Color.Navy;
-            this.label17.Location = new System.Drawing.Point(269, 231);
+            this.label17.Location = new System.Drawing.Point(6, 65);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(97, 13);
             this.label17.TabIndex = 58;
@@ -930,7 +923,7 @@
             this.txtSlsAmountMin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSlsAmountMin.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtSlsAmountMin.ForeColor = System.Drawing.Color.Navy;
-            this.txtSlsAmountMin.Location = new System.Drawing.Point(395, 229);
+            this.txtSlsAmountMin.Location = new System.Drawing.Point(132, 63);
             this.txtSlsAmountMin.Name = "txtSlsAmountMin";
             this.txtSlsAmountMin.Size = new System.Drawing.Size(57, 18);
             this.txtSlsAmountMin.TabIndex = 59;
@@ -941,7 +934,7 @@
             // btnSlsAmountMinSet
             // 
             this.btnSlsAmountMinSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSlsAmountMinSet.Location = new System.Drawing.Point(458, 229);
+            this.btnSlsAmountMinSet.Location = new System.Drawing.Point(195, 63);
             this.btnSlsAmountMinSet.Name = "btnSlsAmountMinSet";
             this.btnSlsAmountMinSet.Size = new System.Drawing.Size(39, 18);
             this.btnSlsAmountMinSet.TabIndex = 60;
@@ -955,7 +948,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label18.ForeColor = System.Drawing.Color.Navy;
-            this.label18.Location = new System.Drawing.Point(269, 251);
+            this.label18.Location = new System.Drawing.Point(6, 85);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(101, 13);
             this.label18.TabIndex = 61;
@@ -968,7 +961,7 @@
             this.txtSlsAmountMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSlsAmountMax.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtSlsAmountMax.ForeColor = System.Drawing.Color.Navy;
-            this.txtSlsAmountMax.Location = new System.Drawing.Point(395, 249);
+            this.txtSlsAmountMax.Location = new System.Drawing.Point(132, 83);
             this.txtSlsAmountMax.Name = "txtSlsAmountMax";
             this.txtSlsAmountMax.Size = new System.Drawing.Size(57, 18);
             this.txtSlsAmountMax.TabIndex = 62;
@@ -979,7 +972,7 @@
             // btnSlsAmountMaxSet
             // 
             this.btnSlsAmountMaxSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSlsAmountMaxSet.Location = new System.Drawing.Point(458, 249);
+            this.btnSlsAmountMaxSet.Location = new System.Drawing.Point(195, 83);
             this.btnSlsAmountMaxSet.Name = "btnSlsAmountMaxSet";
             this.btnSlsAmountMaxSet.Size = new System.Drawing.Size(39, 18);
             this.btnSlsAmountMaxSet.TabIndex = 63;
@@ -993,7 +986,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label19.ForeColor = System.Drawing.Color.Navy;
-            this.label19.Location = new System.Drawing.Point(269, 209);
+            this.label19.Location = new System.Drawing.Point(6, 43);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(105, 13);
             this.label19.TabIndex = 64;
@@ -1006,7 +999,7 @@
             this.txtSlsAmountStart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSlsAmountStart.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtSlsAmountStart.ForeColor = System.Drawing.Color.Navy;
-            this.txtSlsAmountStart.Location = new System.Drawing.Point(395, 207);
+            this.txtSlsAmountStart.Location = new System.Drawing.Point(132, 41);
             this.txtSlsAmountStart.Name = "txtSlsAmountStart";
             this.txtSlsAmountStart.Size = new System.Drawing.Size(57, 18);
             this.txtSlsAmountStart.TabIndex = 65;
@@ -1017,7 +1010,7 @@
             // btnSlsAmountStartSet
             // 
             this.btnSlsAmountStartSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSlsAmountStartSet.Location = new System.Drawing.Point(458, 207);
+            this.btnSlsAmountStartSet.Location = new System.Drawing.Point(195, 41);
             this.btnSlsAmountStartSet.Name = "btnSlsAmountStartSet";
             this.btnSlsAmountStartSet.Size = new System.Drawing.Size(39, 18);
             this.btnSlsAmountStartSet.TabIndex = 66;
@@ -1025,6 +1018,85 @@
             this.toolTip1.SetToolTip(this.btnSlsAmountStartSet, "SLS Amount of WIndow Size");
             this.btnSlsAmountStartSet.UseVisualStyleBackColor = true;
             this.btnSlsAmountStartSet.Click += new System.EventHandler(this.btnSlsAmountStartSet_Click);
+            // 
+            // grpSlsWindowBasedAlgorithm
+            // 
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.label15);
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.label19);
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.btmSetAmountWindowSize);
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.txtSlsAmountStart);
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.txtAmountWindowSize);
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.btnSlsAmountStartSet);
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.btnSlsAmountMinSet);
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.label18);
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.txtSlsAmountMin);
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.txtSlsAmountMax);
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.label17);
+            this.grpSlsWindowBasedAlgorithm.Controls.Add(this.btnSlsAmountMaxSet);
+            this.grpSlsWindowBasedAlgorithm.ForeColor = System.Drawing.Color.Blue;
+            this.grpSlsWindowBasedAlgorithm.Location = new System.Drawing.Point(12, 128);
+            this.grpSlsWindowBasedAlgorithm.Name = "grpSlsWindowBasedAlgorithm";
+            this.grpSlsWindowBasedAlgorithm.Size = new System.Drawing.Size(249, 103);
+            this.grpSlsWindowBasedAlgorithm.TabIndex = 67;
+            this.grpSlsWindowBasedAlgorithm.TabStop = false;
+            this.grpSlsWindowBasedAlgorithm.Text = "         SLS Window Based Algorithm";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.btnSetSLSPeriod);
+            this.groupBox2.Controls.Add(this.txtSLSPeriod);
+            this.groupBox2.Controls.Add(this.btmSetNumberPacketsinSls);
+            this.groupBox2.Controls.Add(this.txtSLSPacketsNumber);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.ForeColor = System.Drawing.Color.Green;
+            this.groupBox2.Location = new System.Drawing.Point(12, 59);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(249, 63);
+            this.groupBox2.TabIndex = 68;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "  SLS Null Data Packet Based Algorithm";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(19, 195);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(235, 13);
+            this.label20.TabIndex = 69;
+            this.label20.Text = "______________________________________";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(19, 235);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(235, 13);
+            this.label21.TabIndex = 70;
+            this.label21.Text = "______________________________________";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(283, 254);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(235, 13);
+            this.label23.TabIndex = 72;
+            this.label23.Text = "______________________________________";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.cmbAlgorithm);
+            this.groupBox3.Controls.Add(this.grpSlsWindowBasedAlgorithm);
+            this.groupBox3.Controls.Add(this.groupBox2);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox3.Location = new System.Drawing.Point(263, 14);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(296, 237);
+            this.groupBox3.TabIndex = 73;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "SLS Parameters";
             // 
             // MainForm
             // 
@@ -1043,6 +1115,12 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.grpSlsWindowBasedAlgorithm.ResumeLayout(false);
+            this.grpSlsWindowBasedAlgorithm.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1124,6 +1202,12 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtSlsAmountMin;
         private System.Windows.Forms.Button btnSlsAmountMinSet;
+        private System.Windows.Forms.GroupBox grpSlsWindowBasedAlgorithm;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
     }
 }
 
