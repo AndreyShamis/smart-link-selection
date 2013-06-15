@@ -59,6 +59,18 @@
             this.label15 = new System.Windows.Forms.Label();
             this.txtAmountWindowSize = new System.Windows.Forms.TextBox();
             this.btmSetAmountWindowSize = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtDataBufferSize = new System.Windows.Forms.TextBox();
+            this.btnSetDataBufferSize = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txtSlsAmountMin = new System.Windows.Forms.TextBox();
+            this.btnSlsAmountMinSet = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtSlsAmountMax = new System.Windows.Forms.TextBox();
+            this.btnSlsAmountMaxSet = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtSlsAmountStart = new System.Windows.Forms.TextBox();
+            this.btnSlsAmountStartSet = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,33 +100,21 @@
             this.txtMediumReceiveDistance = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
             this.cmbAlgorithm = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.btnShowAllOptions = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtDataBufferSize = new System.Windows.Forms.TextBox();
-            this.btnSetDataBufferSize = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtSlsAmountMin = new System.Windows.Forms.TextBox();
-            this.btnSlsAmountMinSet = new System.Windows.Forms.Button();
-            this.label18 = new System.Windows.Forms.Label();
-            this.txtSlsAmountMax = new System.Windows.Forms.TextBox();
-            this.btnSlsAmountMaxSet = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.txtSlsAmountStart = new System.Windows.Forms.TextBox();
-            this.btnSlsAmountStartSet = new System.Windows.Forms.Button();
             this.grpSlsWindowBasedAlgorithm = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.btnShowAllOptions = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.grpSlsWindowBasedAlgorithm.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtConsole
@@ -197,6 +197,7 @@
             this.btnShowMediumInfo.Text = "Medium Debug";
             this.toolTip1.SetToolTip(this.btnShowMediumInfo, "Show Medium Information Form. Use only for debuging");
             this.btnShowMediumInfo.UseVisualStyleBackColor = true;
+            this.btnShowMediumInfo.Visible = false;
             this.btnShowMediumInfo.Click += new System.EventHandler(this.btnShowMediumInfo_Click);
             // 
             // tmrGUISlow
@@ -456,6 +457,157 @@
             this.toolTip1.SetToolTip(this.btmSetAmountWindowSize, "SLS Amount of WIndow Size");
             this.btmSetAmountWindowSize.UseVisualStyleBackColor = true;
             this.btmSetAmountWindowSize.Click += new System.EventHandler(this.btmSetAmountWindowSize_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label16.Location = new System.Drawing.Point(308, 281);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(125, 13);
+            this.label16.TabIndex = 55;
+            this.label16.Text = "Data BUF size[bytes]";
+            this.toolTip1.SetToolTip(this.label16, "Buffer size in Packet data");
+            // 
+            // txtDataBufferSize
+            // 
+            this.txtDataBufferSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtDataBufferSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtDataBufferSize.ForeColor = System.Drawing.Color.Navy;
+            this.txtDataBufferSize.Location = new System.Drawing.Point(434, 279);
+            this.txtDataBufferSize.Name = "txtDataBufferSize";
+            this.txtDataBufferSize.Size = new System.Drawing.Size(57, 18);
+            this.txtDataBufferSize.TabIndex = 56;
+            this.txtDataBufferSize.Text = "500000";
+            this.txtDataBufferSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtDataBufferSize, "Buffer size in Packet data");
+            // 
+            // btnSetDataBufferSize
+            // 
+            this.btnSetDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSetDataBufferSize.Location = new System.Drawing.Point(497, 279);
+            this.btnSetDataBufferSize.Name = "btnSetDataBufferSize";
+            this.btnSetDataBufferSize.Size = new System.Drawing.Size(39, 18);
+            this.btnSetDataBufferSize.TabIndex = 57;
+            this.btnSetDataBufferSize.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnSetDataBufferSize, "Buffer size in Packet data");
+            this.btnSetDataBufferSize.UseVisualStyleBackColor = true;
+            this.btnSetDataBufferSize.Click += new System.EventHandler(this.btnSetDataBufferSize_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.ForeColor = System.Drawing.Color.Navy;
+            this.label17.Location = new System.Drawing.Point(6, 65);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(97, 13);
+            this.label17.TabIndex = 58;
+            this.label17.Text = "SLS Amount Min %";
+            this.toolTip1.SetToolTip(this.label17, "SLS Amount of WIndow Size");
+            // 
+            // txtSlsAmountMin
+            // 
+            this.txtSlsAmountMin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSlsAmountMin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSlsAmountMin.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtSlsAmountMin.ForeColor = System.Drawing.Color.Navy;
+            this.txtSlsAmountMin.Location = new System.Drawing.Point(132, 63);
+            this.txtSlsAmountMin.Name = "txtSlsAmountMin";
+            this.txtSlsAmountMin.Size = new System.Drawing.Size(57, 18);
+            this.txtSlsAmountMin.TabIndex = 59;
+            this.txtSlsAmountMin.Text = "2";
+            this.txtSlsAmountMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtSlsAmountMin, "SLS Amount of WIndow Size");
+            // 
+            // btnSlsAmountMinSet
+            // 
+            this.btnSlsAmountMinSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSlsAmountMinSet.Location = new System.Drawing.Point(195, 63);
+            this.btnSlsAmountMinSet.Name = "btnSlsAmountMinSet";
+            this.btnSlsAmountMinSet.Size = new System.Drawing.Size(39, 18);
+            this.btnSlsAmountMinSet.TabIndex = 60;
+            this.btnSlsAmountMinSet.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnSlsAmountMinSet, "SLS Amount of WIndow Size");
+            this.btnSlsAmountMinSet.UseVisualStyleBackColor = true;
+            this.btnSlsAmountMinSet.Click += new System.EventHandler(this.btnSlsAmountMinSet_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label18.ForeColor = System.Drawing.Color.Navy;
+            this.label18.Location = new System.Drawing.Point(6, 85);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(101, 13);
+            this.label18.TabIndex = 61;
+            this.label18.Text = "SLS Amount Max %";
+            this.toolTip1.SetToolTip(this.label18, "SLS Amount of WIndow Size");
+            // 
+            // txtSlsAmountMax
+            // 
+            this.txtSlsAmountMax.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSlsAmountMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSlsAmountMax.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtSlsAmountMax.ForeColor = System.Drawing.Color.Navy;
+            this.txtSlsAmountMax.Location = new System.Drawing.Point(132, 83);
+            this.txtSlsAmountMax.Name = "txtSlsAmountMax";
+            this.txtSlsAmountMax.Size = new System.Drawing.Size(57, 18);
+            this.txtSlsAmountMax.TabIndex = 62;
+            this.txtSlsAmountMax.Text = "6";
+            this.txtSlsAmountMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtSlsAmountMax, "SLS Amount of WIndow Size");
+            // 
+            // btnSlsAmountMaxSet
+            // 
+            this.btnSlsAmountMaxSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSlsAmountMaxSet.Location = new System.Drawing.Point(195, 83);
+            this.btnSlsAmountMaxSet.Name = "btnSlsAmountMaxSet";
+            this.btnSlsAmountMaxSet.Size = new System.Drawing.Size(39, 18);
+            this.btnSlsAmountMaxSet.TabIndex = 63;
+            this.btnSlsAmountMaxSet.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnSlsAmountMaxSet, "SLS Amount of WIndow Size");
+            this.btnSlsAmountMaxSet.UseVisualStyleBackColor = true;
+            this.btnSlsAmountMaxSet.Click += new System.EventHandler(this.btnSlsAmountMaxSet_Click);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label19.ForeColor = System.Drawing.Color.Navy;
+            this.label19.Location = new System.Drawing.Point(6, 43);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(105, 13);
+            this.label19.TabIndex = 64;
+            this.label19.Text = "SLS Amount Start %";
+            this.toolTip1.SetToolTip(this.label19, "SLS Amount of WIndow Size");
+            // 
+            // txtSlsAmountStart
+            // 
+            this.txtSlsAmountStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.txtSlsAmountStart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSlsAmountStart.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtSlsAmountStart.ForeColor = System.Drawing.Color.Navy;
+            this.txtSlsAmountStart.Location = new System.Drawing.Point(132, 41);
+            this.txtSlsAmountStart.Name = "txtSlsAmountStart";
+            this.txtSlsAmountStart.Size = new System.Drawing.Size(57, 18);
+            this.txtSlsAmountStart.TabIndex = 65;
+            this.txtSlsAmountStart.Text = "4";
+            this.txtSlsAmountStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.txtSlsAmountStart, "SLS Amount of WIndow Size");
+            // 
+            // btnSlsAmountStartSet
+            // 
+            this.btnSlsAmountStartSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSlsAmountStartSet.Location = new System.Drawing.Point(195, 41);
+            this.btnSlsAmountStartSet.Name = "btnSlsAmountStartSet";
+            this.btnSlsAmountStartSet.Size = new System.Drawing.Size(39, 18);
+            this.btnSlsAmountStartSet.TabIndex = 66;
+            this.btnSlsAmountStartSet.Text = "Set";
+            this.toolTip1.SetToolTip(this.btnSlsAmountStartSet, "SLS Amount of WIndow Size");
+            this.btnSlsAmountStartSet.UseVisualStyleBackColor = true;
+            this.btnSlsAmountStartSet.Click += new System.EventHandler(this.btnSlsAmountStartSet_Click);
             // 
             // contextMenuStrip1
             // 
@@ -825,6 +977,20 @@
             this.groupBox1.Text = "Medium Controll";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.cmbAlgorithm);
+            this.groupBox3.Controls.Add(this.grpSlsWindowBasedAlgorithm);
+            this.groupBox3.Controls.Add(this.groupBox2);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox3.Location = new System.Drawing.Point(285, 14);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(276, 237);
+            this.groupBox3.TabIndex = 73;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "SLS Parameters";
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -846,178 +1012,6 @@
             this.cmbAlgorithm.SelectedIndexChanged += new System.EventHandler(this.cmbAlgorithm_SelectedIndexChanged);
             this.cmbAlgorithm.SelectedValueChanged += new System.EventHandler(this.cmbAlgorithm_SelectedValueChanged);
             this.cmbAlgorithm.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbAlgorithm_MouseClick);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(19, 300);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(235, 13);
-            this.label12.TabIndex = 46;
-            this.label12.Text = "______________________________________";
-            // 
-            // btnShowAllOptions
-            // 
-            this.btnShowAllOptions.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnShowAllOptions.Font = new System.Drawing.Font("Miriam", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.btnShowAllOptions.Location = new System.Drawing.Point(2, 13);
-            this.btnShowAllOptions.Name = "btnShowAllOptions";
-            this.btnShowAllOptions.Size = new System.Drawing.Size(11, 364);
-            this.btnShowAllOptions.TabIndex = 45;
-            this.btnShowAllOptions.Text = "<";
-            this.btnShowAllOptions.UseVisualStyleBackColor = false;
-            this.btnShowAllOptions.Click += new System.EventHandler(this.btnShowAllOptions_Click);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(308, 281);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(125, 13);
-            this.label16.TabIndex = 55;
-            this.label16.Text = "Data BUF size[bytes]";
-            this.toolTip1.SetToolTip(this.label16, "Buffer size in Packet data");
-            // 
-            // txtDataBufferSize
-            // 
-            this.txtDataBufferSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.txtDataBufferSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtDataBufferSize.ForeColor = System.Drawing.Color.Navy;
-            this.txtDataBufferSize.Location = new System.Drawing.Point(434, 279);
-            this.txtDataBufferSize.Name = "txtDataBufferSize";
-            this.txtDataBufferSize.Size = new System.Drawing.Size(57, 18);
-            this.txtDataBufferSize.TabIndex = 56;
-            this.txtDataBufferSize.Text = "500000";
-            this.txtDataBufferSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.txtDataBufferSize, "Buffer size in Packet data");
-            // 
-            // btnSetDataBufferSize
-            // 
-            this.btnSetDataBufferSize.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSetDataBufferSize.Location = new System.Drawing.Point(497, 279);
-            this.btnSetDataBufferSize.Name = "btnSetDataBufferSize";
-            this.btnSetDataBufferSize.Size = new System.Drawing.Size(39, 18);
-            this.btnSetDataBufferSize.TabIndex = 57;
-            this.btnSetDataBufferSize.Text = "Set";
-            this.toolTip1.SetToolTip(this.btnSetDataBufferSize, "Buffer size in Packet data");
-            this.btnSetDataBufferSize.UseVisualStyleBackColor = true;
-            this.btnSetDataBufferSize.Click += new System.EventHandler(this.btnSetDataBufferSize_Click);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label17.ForeColor = System.Drawing.Color.Navy;
-            this.label17.Location = new System.Drawing.Point(6, 65);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(97, 13);
-            this.label17.TabIndex = 58;
-            this.label17.Text = "SLS Amount Min %";
-            this.toolTip1.SetToolTip(this.label17, "SLS Amount of WIndow Size");
-            // 
-            // txtSlsAmountMin
-            // 
-            this.txtSlsAmountMin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.txtSlsAmountMin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSlsAmountMin.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtSlsAmountMin.ForeColor = System.Drawing.Color.Navy;
-            this.txtSlsAmountMin.Location = new System.Drawing.Point(132, 63);
-            this.txtSlsAmountMin.Name = "txtSlsAmountMin";
-            this.txtSlsAmountMin.Size = new System.Drawing.Size(57, 18);
-            this.txtSlsAmountMin.TabIndex = 59;
-            this.txtSlsAmountMin.Text = "2";
-            this.txtSlsAmountMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.txtSlsAmountMin, "SLS Amount of WIndow Size");
-            // 
-            // btnSlsAmountMinSet
-            // 
-            this.btnSlsAmountMinSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSlsAmountMinSet.Location = new System.Drawing.Point(195, 63);
-            this.btnSlsAmountMinSet.Name = "btnSlsAmountMinSet";
-            this.btnSlsAmountMinSet.Size = new System.Drawing.Size(39, 18);
-            this.btnSlsAmountMinSet.TabIndex = 60;
-            this.btnSlsAmountMinSet.Text = "Set";
-            this.toolTip1.SetToolTip(this.btnSlsAmountMinSet, "SLS Amount of WIndow Size");
-            this.btnSlsAmountMinSet.UseVisualStyleBackColor = true;
-            this.btnSlsAmountMinSet.Click += new System.EventHandler(this.btnSlsAmountMinSet_Click);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.ForeColor = System.Drawing.Color.Navy;
-            this.label18.Location = new System.Drawing.Point(6, 85);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(101, 13);
-            this.label18.TabIndex = 61;
-            this.label18.Text = "SLS Amount Max %";
-            this.toolTip1.SetToolTip(this.label18, "SLS Amount of WIndow Size");
-            // 
-            // txtSlsAmountMax
-            // 
-            this.txtSlsAmountMax.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.txtSlsAmountMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSlsAmountMax.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtSlsAmountMax.ForeColor = System.Drawing.Color.Navy;
-            this.txtSlsAmountMax.Location = new System.Drawing.Point(132, 83);
-            this.txtSlsAmountMax.Name = "txtSlsAmountMax";
-            this.txtSlsAmountMax.Size = new System.Drawing.Size(57, 18);
-            this.txtSlsAmountMax.TabIndex = 62;
-            this.txtSlsAmountMax.Text = "6";
-            this.txtSlsAmountMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.txtSlsAmountMax, "SLS Amount of WIndow Size");
-            // 
-            // btnSlsAmountMaxSet
-            // 
-            this.btnSlsAmountMaxSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSlsAmountMaxSet.Location = new System.Drawing.Point(195, 83);
-            this.btnSlsAmountMaxSet.Name = "btnSlsAmountMaxSet";
-            this.btnSlsAmountMaxSet.Size = new System.Drawing.Size(39, 18);
-            this.btnSlsAmountMaxSet.TabIndex = 63;
-            this.btnSlsAmountMaxSet.Text = "Set";
-            this.toolTip1.SetToolTip(this.btnSlsAmountMaxSet, "SLS Amount of WIndow Size");
-            this.btnSlsAmountMaxSet.UseVisualStyleBackColor = true;
-            this.btnSlsAmountMaxSet.Click += new System.EventHandler(this.btnSlsAmountMaxSet_Click);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label19.ForeColor = System.Drawing.Color.Navy;
-            this.label19.Location = new System.Drawing.Point(6, 43);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(105, 13);
-            this.label19.TabIndex = 64;
-            this.label19.Text = "SLS Amount Start %";
-            this.toolTip1.SetToolTip(this.label19, "SLS Amount of WIndow Size");
-            // 
-            // txtSlsAmountStart
-            // 
-            this.txtSlsAmountStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.txtSlsAmountStart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSlsAmountStart.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtSlsAmountStart.ForeColor = System.Drawing.Color.Navy;
-            this.txtSlsAmountStart.Location = new System.Drawing.Point(132, 41);
-            this.txtSlsAmountStart.Name = "txtSlsAmountStart";
-            this.txtSlsAmountStart.Size = new System.Drawing.Size(57, 18);
-            this.txtSlsAmountStart.TabIndex = 65;
-            this.txtSlsAmountStart.Text = "4";
-            this.txtSlsAmountStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.txtSlsAmountStart, "SLS Amount of WIndow Size");
-            // 
-            // btnSlsAmountStartSet
-            // 
-            this.btnSlsAmountStartSet.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSlsAmountStartSet.Location = new System.Drawing.Point(195, 41);
-            this.btnSlsAmountStartSet.Name = "btnSlsAmountStartSet";
-            this.btnSlsAmountStartSet.Size = new System.Drawing.Size(39, 18);
-            this.btnSlsAmountStartSet.TabIndex = 66;
-            this.btnSlsAmountStartSet.Text = "Set";
-            this.toolTip1.SetToolTip(this.btnSlsAmountStartSet, "SLS Amount of WIndow Size");
-            this.btnSlsAmountStartSet.UseVisualStyleBackColor = true;
-            this.btnSlsAmountStartSet.Click += new System.EventHandler(this.btnSlsAmountStartSet_Click);
             // 
             // grpSlsWindowBasedAlgorithm
             // 
@@ -1057,14 +1051,14 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "  SLS Null Data Packet Based Algorithm";
             // 
-            // label20
+            // label23
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(19, 195);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(235, 13);
-            this.label20.TabIndex = 69;
-            this.label20.Text = "______________________________________";
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(305, 254);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(235, 13);
+            this.label23.TabIndex = 72;
+            this.label23.Text = "______________________________________";
             // 
             // label21
             // 
@@ -1075,28 +1069,35 @@
             this.label21.TabIndex = 70;
             this.label21.Text = "______________________________________";
             // 
-            // label23
+            // label20
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(305, 254);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(235, 13);
-            this.label23.TabIndex = 72;
-            this.label23.Text = "______________________________________";
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(19, 195);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(235, 13);
+            this.label20.TabIndex = 69;
+            this.label20.Text = "______________________________________";
             // 
-            // groupBox3
+            // label12
             // 
-            this.groupBox3.Controls.Add(this.label14);
-            this.groupBox3.Controls.Add(this.cmbAlgorithm);
-            this.groupBox3.Controls.Add(this.grpSlsWindowBasedAlgorithm);
-            this.groupBox3.Controls.Add(this.groupBox2);
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox3.Location = new System.Drawing.Point(285, 14);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(276, 237);
-            this.groupBox3.TabIndex = 73;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "SLS Parameters";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(19, 300);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(235, 13);
+            this.label12.TabIndex = 46;
+            this.label12.Text = "______________________________________";
+            // 
+            // btnShowAllOptions
+            // 
+            this.btnShowAllOptions.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnShowAllOptions.Font = new System.Drawing.Font("Miriam", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.btnShowAllOptions.Location = new System.Drawing.Point(2, 13);
+            this.btnShowAllOptions.Name = "btnShowAllOptions";
+            this.btnShowAllOptions.Size = new System.Drawing.Size(11, 364);
+            this.btnShowAllOptions.TabIndex = 45;
+            this.btnShowAllOptions.Text = "<";
+            this.btnShowAllOptions.UseVisualStyleBackColor = false;
+            this.btnShowAllOptions.Click += new System.EventHandler(this.btnShowAllOptions_Click);
             // 
             // MainForm
             // 
@@ -1115,12 +1116,12 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.grpSlsWindowBasedAlgorithm.ResumeLayout(false);
             this.grpSlsWindowBasedAlgorithm.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
