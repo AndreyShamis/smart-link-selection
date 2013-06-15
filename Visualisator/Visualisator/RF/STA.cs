@@ -1625,19 +1625,27 @@ namespace Visualisator
 
                         sw.Stop();
                         TimeSpan elapsedTime2 = sw.Elapsed;
-                        if (elapsedTime1 < elapsedTime2)
+                        if (AutoStartSLS)
                         {
-                            SLSMessage = "BSS better";
-                            ForceTxInBss = true;
+                            if (elapsedTime1 < elapsedTime2)
+                            {
+                                SLSMessage = "BSS better";
+                                ForceTxInBss = true;
+                            }
+                            else
+                            {
+                                SLSMessage = "TDLS better";
+                                ForceTxInBss = false;
+                            }
+                            SLSMessage = SLSMessage + "-" + elapsedTime1.Milliseconds.ToString(CultureInfo.InvariantCulture) + " " +
+                               elapsedTime2.Milliseconds.ToString(CultureInfo.InvariantCulture);
                         }
                         else
                         {
-                            SLSMessage = "TDLS better";
-                            ForceTxInBss = false;
+                            SLSMessage = "TDLS enabled.";
                         }
 
-                        SLSMessage = SLSMessage + "-" + elapsedTime1.Milliseconds.ToString(CultureInfo.InvariantCulture) + " " +
-                               elapsedTime2.Milliseconds.ToString(CultureInfo.InvariantCulture);
+                        
              
                     }
                     else
