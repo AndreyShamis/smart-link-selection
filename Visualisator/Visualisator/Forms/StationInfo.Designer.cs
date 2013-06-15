@@ -154,7 +154,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(625, 305);
+            this.groupBox2.Size = new System.Drawing.Size(651, 265);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Send Data";
@@ -179,7 +179,7 @@
             this.txtDumpAll.Multiline = true;
             this.txtDumpAll.Name = "txtDumpAll";
             this.txtDumpAll.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDumpAll.Size = new System.Drawing.Size(619, 280);
+            this.txtDumpAll.Size = new System.Drawing.Size(645, 240);
             this.txtDumpAll.TabIndex = 0;
             // 
             // tmrGUI

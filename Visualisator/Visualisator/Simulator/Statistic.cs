@@ -22,6 +22,7 @@ namespace Visualisator.Simulator
         public string   TDLS_Standart   { set; get; }
         public long     PacketsSum      { set; get; }
         public long     TransferetBytes { set; get; }
+        public int      Retransmitted   { set; get; }
         private double _CurrentSpeed;
         public double   CurrentSpeed    { 
             set 
@@ -49,7 +50,14 @@ namespace Visualisator.Simulator
 
         public float getPercentInTdls()
         {
-            return (PacketsInTdls*100)/Packets;
+            try
+            {
+                return (PacketsInTdls * 100) / Packets;
+            }
+            catch (Exception)
+            {
+            }
+            return 0;
         }
 
         public static double ConvertBytesToKilobytes(long bytes)

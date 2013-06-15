@@ -1232,6 +1232,7 @@ namespace Visualisator
                             else                Thread.Sleep(DelayInBss + 5);
 
                             DataRetransmited++;
+                            stat.Retransmitted++;
                             loops = loops + 1;
                             if (!_Enabled)  return;
                             maxRetrays--;

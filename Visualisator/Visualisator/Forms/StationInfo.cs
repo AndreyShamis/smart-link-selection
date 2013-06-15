@@ -495,7 +495,7 @@ namespace Visualisator
         /// </summary>
         private void BuildListView()
         {
-            ColumnHeader header1, header2, header3, header4, header5, header6, header7, header8, header9, MinSpeed, MaxSpeed;
+            ColumnHeader header1, header2, header3, header4, header5, header6, header7, header8, header9, MinSpeed, MaxSpeed,RetransmittedHeader;
             header1 = new ColumnHeader();
             header2 = new ColumnHeader();
             header3 = new ColumnHeader();
@@ -507,6 +507,11 @@ namespace Visualisator
             header9 = new ColumnHeader();
             MinSpeed = new ColumnHeader();
             MaxSpeed = new ColumnHeader();
+            RetransmittedHeader = new ColumnHeader();
+
+            RetransmittedHeader.Text = "ReTx";
+            RetransmittedHeader.TextAlign = HorizontalAlignment.Left;
+            RetransmittedHeader.Width = 50;
 
             header1.Text = "Dest";
             header1.TextAlign = HorizontalAlignment.Left;
@@ -516,8 +521,8 @@ namespace Visualisator
             header2.Width = 80;
             header3.TextAlign = HorizontalAlignment.Left;
             header3.Text = "All/Sent/TDLS";
-           
             header3.Width = 100;
+
             header4.TextAlign = HorizontalAlignment.Left;
             header4.Text = "TDLS %";
             header4.Width = 40;
@@ -552,8 +557,11 @@ namespace Visualisator
             // Add the headers to the ListView control.
             listView1.Columns.Add(header1);
             listView1.Columns.Add(header2);
+            
+            
             listView1.Columns.Add(header3);
             listView1.Columns.Add(header4);
+            listView1.Columns.Add(RetransmittedHeader);
             listView1.Columns.Add(header5);
             listView1.Columns.Add(header6);
             listView1.Columns.Add(header7);
@@ -587,6 +595,7 @@ namespace Visualisator
                 item.SubItems.Add(stat.FileSize.ToString(CultureInfo.InvariantCulture));
                 item.SubItems.Add((stat.FileSize/Medium.PACKET_BUFFER_SIZE +1).ToString(CultureInfo.InvariantCulture) + "/" + stat.Packets.ToString(CultureInfo.InvariantCulture)+"/"+stat.PacketsInTdls.ToString(CultureInfo.InvariantCulture));
                 item.SubItems.Add(stat.getPercentInTdls().ToString(CultureInfo.InvariantCulture));
+                item.SubItems.Add(stat.Retransmitted.ToString(CultureInfo.InvariantCulture));
                 item.SubItems.Add(stat.Time.ToString(CultureInfo.InvariantCulture));
                 item.SubItems.Add(stat.getSpeedInHumanRead());
                 item.SubItems.Add(stat.SourceMAC);
