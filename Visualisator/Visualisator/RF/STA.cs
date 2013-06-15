@@ -639,7 +639,10 @@ namespace Visualisator
         public void HandleDataStream(Data packet)
         {
             StreamHandle dstream = null;
-                                
+
+            if (StreamsHash == null)
+                StreamsHash = new Hashtable(new ByteArrayComparer());
+
             lock (StreamsHash)
             {
                 try
