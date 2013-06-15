@@ -1141,6 +1141,7 @@ namespace Visualisator
             var tdlsStarterThread = new Thread(() => TdlsStarter(DestinationMacAddress))
                                            {Name = "TDLS StarterThread:" + this.getMACAddress()};
             tdlsStarterThread.Start();
+            Thread.Sleep(20);           //  Give time to establish connection
             var currentSpeedThread = new Thread(() => currentSpeedCalculation()) { Name = "TDLS currentSpeedThread:" + this.getMACAddress() };
             currentSpeedThread.Start();
             if ( Medium.SlsAlgorithm== SLSAlgType.WindowBased) { WindowBasedSLSAlgorithm(true, false); }
