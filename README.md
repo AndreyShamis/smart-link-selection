@@ -1,5 +1,8 @@
 # SLS
 **Smart Link Selection on TDLS**
+Simulation supports 2 different kind SLS algorithms
+- Null Data Packet Based Algorithm
+- Window Based Algorithm
 
 ![Program view](https://github.com/AndreyShamis/smart-link-selection/raw/master/Results/Board.JPG)
 ![Program Client view](https://github.com/AndreyShamis/smart-link-selection/raw/master/Results/Dev.JPG)
@@ -31,6 +34,10 @@
 4 Run the program
 
 ## Support
+
+### Frame Transfer Transaction
+![Frame Transfer Transaction](https://github.com/AndreyShamis/smart-link-selection/raw/master/Flow%20Charts%20Of%20SLS%20Algorithms/Frame%20Transfer%20Transaction%20v0.2.vsd)
+
 ### Supported Protocols IEEE80211
 - Passive scan
 - Beacon sending
@@ -54,5 +61,5 @@
 A,G,N
 
 ##Authors
-* "Andrey Shamis":https://github.com/AndreyShamis		lolnik@gmail.com
-* "Ilia Gaysinskiy":https://github.com/apalon83		apalon83@gmail.com
+* [Andrey Shamis](https://github.com/AndreyShamis)		lolnik@gmail.com
+* [Ilia Gaysinskiy](https://github.com/apalon83)		apalon83@gmail.com
