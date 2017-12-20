@@ -36,7 +36,7 @@ Simulation supports 2 different kind SLS algorithms
 ## Support
 
 ### Frame Transfer Transaction
-![Frame Transfer Transaction](https://github.com/AndreyShamis/smart-link-selection/raw/master/Flow%20Charts%20Of%20SLS%20Algorithms/Frame%20Transfer%20Transaction%20v0.2.vsd)
+![Frame Transfer Transaction](https://github.com/AndreyShamis/smart-link-selection/raw/master/Results/Frame_Transfer_Transaction_v0.2.png)
 
 ### Supported Protocols IEEE80211
 - Passive scan
